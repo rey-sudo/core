@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: limiter-audits
+  name: rater-store
   labels:
-    role: limiter-audits
+    role: rater-store
 spec:
   ports:
     - name: db
@@ -13,25 +13,25 @@ spec:
       targetPort: 6379
   clusterIP: None
   selector:
-    role: limiter-audits   
+    role: rater-store   
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: limiter-audits
+  name: rater-store
 spec:
-  serviceName: "limiter-audits"
+  serviceName: "rater-store"
   replicas: 1
   selector:
     matchLabels:
-      role: limiter-audits
+      role: rater-store
   template:
     metadata:
       labels:
-        role: limiter-audits
+        role: rater-store
     spec:
       containers:
-        - name: limiter-audits
+        - name: rater-store
           image: redis
           resources:
             limits:

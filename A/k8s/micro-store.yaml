@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-audits
+  name: micro-store
 spec:
   replicas: 1
   selector:
     matchLabels:
-      role: service-audits
+      role: micro-store
   template:
     metadata:
       labels:
-        role: service-audits
+        role: micro-store
     spec:
       containers:
-        - name: service-audits
-          image: microkraph/service-audits
+        - name: micro-store
+          image: alphaicterus/micro-store
           env:
             - name: POD_NAME
               valueFrom:
@@ -23,7 +23,7 @@ spec:
             - name: POD_TIMEOUT
               value: '120000'                    
             - name: MONGO_DB_NAME
-              value: "srv-audits"
+              value: "srv-store"
             - name: MONGO_DB_URI
               valueFrom:
                 configMapKeyRef:
@@ -38,14 +38,14 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: cache-config
-                  key: service-audits          
+                  key: micro-store          
             - name: CACHE_INTERVAL
               value: "5"                           
             - name: LIMITER_STORE
               valueFrom:
                 configMapKeyRef:
-                  name: limiter-config
-                  key: service-audits                 
+                  name: rater-config
+                  key: micro-store                 
             - name: USERS_JWT_KEY
               valueFrom:
                 secretKeyRef:
@@ -76,9 +76,9 @@ spec:
             - name: EXPRESS_TIMEOUT
               value: "180000"
             - name: DRIVER_ROLE
-              value: "driver-audits"
+              value: "publisher-store"
             - name: CORS_DOMAINS
-              value: "https://auditocean.dev,https://center.auditocean.dev,http://localhost:8080"                           
+              value: "https://arkastore.dev,http://localhost:8080"                           
           resources:
             limits:
               memory: "500Mi"
@@ -88,12 +88,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: service-audits
+  name: micro-store
 spec:
   selector:
-    role: service-audits
+    role: micro-store
   ports:
-    - name: service-audits
+    - name: micro-store
       protocol: TCP
       port: 8000
       targetPort: 8000

@@ -1,5 +1,5 @@
 {
-  "name": "micro-store",
+  "name": "publisher-store",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,35 +7,32 @@
     "build": "tsc --build",
     "dev": "ts-node-dev src/index.ts",
     "start": "node dist/index.js",
-    "test": "jest --watchAll --no-cache --detectOpenHandles",
+    "test": "jest --watchAll --no-cache",
     "test:ci": "jest"
   },
   "jest": {
-    "preset": "ts-jest",
     "testEnvironment": "node",
     "setupFilesAfterEnv": [
-      "./src/__test/setup.ts"
+      "./src/test/setup.ts"
     ]
   },
   "keywords": [],
-  "author": "alphaicterus",
+  "author": "",
   "license": "ISC",
   "dependencies": {
-c
-    "ajv": "^8.12.0"
+    "@alphaicterus/global": "^1.0.85"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.11",
-    "@types/compression": "^1.7.2",
     "@babel/preset-typescript": "^7.16.7",
-    "@types/jest": "^28.1.3",
+    "@types/jest": "^27.4.1",
+    "@types/mongodb-memory-server": "^2.3.0",
     "@types/mongoose": "^5.11.97",
     "@types/supertest": "^2.0.12",
     "babel-jest": "^28.0.0",
-    "jest": "^28.1.3",
-    "mongodb-memory-server": "^6.9.6",
-    "supertest": "^6.2.2",
-    "ts-jest": "^28.0.5"
+    "jest": "^28.0.0",
+    "mongodb-memory-server": "^7.6.3",
+    "supertest": "^6.2.2"
   }
 }

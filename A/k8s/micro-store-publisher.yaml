@@ -1,51 +1,51 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: driver-headless
+  name: publisher-headless
   labels:
-    role: driver-audits
+    role: publisher-store
 spec:
   ports:
     - port: 80
       name: web
   clusterIP: None
   selector:
-    role: driver-audits
+    role: publisher-store
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: driver-audits
+  name: publisher-store
 spec:
-  serviceName: "driver-audits"
+  serviceName: "publisher-store"
   replicas: 1 #REPLICAS
   selector:
     matchLabels:
-      role: driver-audits
+      role: publisher-store
   template:
     metadata:
       labels:
-        role: driver-audits
+        role: publisher-store
         replicas: "1" #REPLICAS
     spec:
       containers:
-        - name: driver-audits
-          image: microkraph/driver-audits
+        - name: publisher-store
+          image: alphaicterus/publisher-store
           env:
-            - name: DRIVER_ROLE
+            - name: PUBLISHER_ROLE
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.labels['role']
-            - name: DRIVER_NAME
+            - name: PUBLISHER_NAME
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
-            - name: DRIVER_TOTAL
+            - name: PUBLISHER_TOTAL
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.labels['replicas']
             - name: MONGO_DB_NAME
-              value: "srv-audits"
+              value: "srv-store"
             - name: MONGO_DB_URI
               valueFrom:
                 configMapKeyRef:
@@ -56,7 +56,7 @@ spec:
                 configMapKeyRef:
                   name: streaming-config
                   key: redis
-            - name: DRIVER_TIMEOUT
+            - name: PUBLISHER_TIMEOUT
               value: "10000"
             - name: KILL_TIMEOUT
               value: "3000"

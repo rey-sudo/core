@@ -44,7 +44,7 @@ spec:
             - name: LIMITER_STORE
               valueFrom:
                 configMapKeyRef:
-                  name: limiter-config
+                  name: rater-config
                   key: micro-store                  
             - name: USERS_JWT_KEY
               valueFrom:
