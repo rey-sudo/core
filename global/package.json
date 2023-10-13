@@ -1,5 +1,5 @@
 {
-  "name": "global",
+  "name": "@alphaicterus/global",
   "version": "1.0.82",
   "description": "",
   "main": "./build/index.js",
