@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="visual"
+   viewBox="0 0 960 540"
+   width="960"
+   height="540"
+   version="1.1"
+   sodipodi:docname="background-blow-green.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview912"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="1.3081475"
+     inkscape:cx="855.40812"
+     inkscape:cy="127.66144"
+     inkscape:window-width="1361"
+     inkscape:window-height="839"
+     inkscape:window-x="30"
+     inkscape:window-y="124"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="visual" />
+  <rect
+     x="0"
+     y="0"
+     width="960"
+     height="540"
+     fill="#ffffff"
+     id="rect887"
+     style="fill:none;fill-opacity:1" />
+  <defs
+     id="defs894">
+    <linearGradient
+       id="grad1_0"
+       x1="43.8%"
+       y1="0%"
+       x2="100%"
+       y2="100%">
+      <stop
+         offset="14.444444444444446%"
+         stop-color="#ffffff"
+         stop-opacity="1"
+         id="stop889" />
+      <stop
+         offset="85.55555555555554%"
+         stop-color="#ffffff"
+         stop-opacity="1"
+         id="stop891" />
+    </linearGradient>
+  </defs>
+  <defs
+     id="defs901">
+    <linearGradient
+       id="grad2_0"
+       x1="0%"
+       y1="0%"
+       x2="56.3%"
+       y2="100%">
+      <stop
+         offset="14.444444444444446%"
+         stop-color="#ffffff"
+         stop-opacity="1"
+         id="stop896" />
+      <stop
+         offset="85.55555555555554%"
+         stop-color="#ffffff"
+         stop-opacity="1"
+         id="stop898" />
+    </linearGradient>
+  </defs>
+  <g
+     transform="translate(960, 0)"
+     id="g905">
+    <path
+       d="m 0,243 c -48.1,-3.1 -85.45759,-9.4359 -121.5,-32.6 -44.01154,-28.77579 -38.87677,-72.89135 -43.9,-114.9 C -170.51987,52.683231 -173.80595,-0.14595794 -243,0 H 0 Z"
+       fill="#00ed64"
+       id="path903"
+       sodipodi:nodetypes="ccsccc" />
+  </g>
+  <g
+     transform="translate(0, 540)"
+     id="g909">
+    <path
+       d="m 0,-243 c 43.9,5.6 81.694361,2.90751 121.5,32.6 32.41431,23.33695 57.4,58.7 76,96.4 18.5,37.7 25.31825,57.378618 45.5,114 H 0 Z"
+       fill="#00ed64"
+       id="path907"
+       sodipodi:nodetypes="cccccc" />
+  </g>
+</svg>

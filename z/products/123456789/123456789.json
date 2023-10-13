@@ -1,0 +1,25 @@
+{
+  "pid": "981085739124",
+  "name": "cortadora manual de verduras y frutas para cocina con 7 cuchillas diferentes y recipiente",
+  "logo": "@/pages/store/assets/150x150.webp",
+  "payment_type": "contraentrega",
+  "shipping_tax": false,
+  "shipping_label": "Envio Gratis 🗲",
+  "stock_supply": 99,
+  "price": 89000,
+  "price_diff": 95000,
+  "discount_label": "5% OFF",
+  "discount_color": "#8c99b3",
+  "theme": {
+    "title": "Cortadora manual de verduras y frutas",
+    "subtitle": "¡Utiliza los 7 tipos de corte y el recipiente para preparar lo que quieras!",
+    "price": "Desde $COP 89.000",
+    "background_mask": "../assets/wave-haikei.svg",
+    "background": "../assets/trama.svg",
+    "slider_images": [
+      {
+        "url": "https://arkastore.nyc3.digitaloceanspaces.com/products/123456789/images/123456789-w1200-h1200.webp"
+      }
+    ]
+  }
+}
