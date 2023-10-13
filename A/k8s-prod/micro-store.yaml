@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: micro-store
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: micro-store
+  template:
+    metadata:
+      labels:
+        role: micro-store
+    spec:
+      containers:
+        - name: micro-store
+          image: alphaicterus/micro-store
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_TIMEOUT
+              value: '120000'                    
+            - name: MONGO_DB_NAME
+              value: "srv-audits"
+            - name: MONGO_DB_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: database-config
+                  key: master                
+            - name: EVENT_BUS_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: streaming-config
+                  key: redis 
+            - name: CACHE_STORE
+              valueFrom:
+                configMapKeyRef:
+                  name: cache-config
+                  key: micro-store     
+            - name: CACHE_INTERVAL
+              value: "5"                                
+            - name: LIMITER_STORE
+              valueFrom:
+                configMapKeyRef:
+                  name: limiter-config
+                  key: micro-store                  
+            - name: USERS_JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY                  
+            - name: AUDITS_JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: audits-jwt-secret
+                  key: AUDITS_JWT_KEY
+            - name: ADMIN_JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: admin-jwt-secret
+                  key: ADMIN_JWT_KEY       
+            - name: GENERAL_LIMIT_TIME
+              value: "900"     
+            - name: GENERAL_LIMIT_MAX
+              value: "200"
+            - name: CRITICAL_LIMIT_TIME
+              value: "86400" 
+            - name: CRITICAL_LIMIT_MAX
+              value: "50"                             
+            - name: TOKEN_EXPIRATION_TIME
+              value: 24h
+            - name: EXPRESS_PORT
+              value: "8000"
+            - name: EXPRESS_TIMEOUT
+              value: "180000"
+            - name: DRIVER_ROLE
+              value: "driver-audits"
+            - name: CORS_DOMAINS
+              value: "https://arkastore.com"               
+          resources:
+            limits:
+              memory: "500Mi"
+            requests:
+              memory: "256Mi"       
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: micro-store
+spec:
+  selector:
+    role: micro-store
+  ports:
+    - name: micro-store
+      protocol: TCP
+      port: 8000
+      targetPort: 8000

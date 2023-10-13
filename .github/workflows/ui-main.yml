@@ -1,0 +1,28 @@
+name: ui-main
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'ui-main/**'
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          node-version: 19
+      - uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}    
+      - run: cd ui-main && docker build -t alphaicterus/ui-main .    
+      - run: docker push alphaicterus/ui-main
+      - uses: digitalocean/action-doctl@v2.3.0
+        with:
+          token: ${{ secrets.OCEAN_API_TOKEN }}
+      - run: doctl kubernetes cluster kubeconfig save k8arka
+      - run: kubectl rollout restart deployment ui-main
+

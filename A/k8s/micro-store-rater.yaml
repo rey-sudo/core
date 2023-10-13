@@ -1,0 +1,40 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: limiter-audits
+  labels:
+    role: limiter-audits
+spec:
+  ports:
+    - name: db
+      protocol: TCP
+      port: 6379
+      targetPort: 6379
+  clusterIP: None
+  selector:
+    role: limiter-audits   
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: limiter-audits
+spec:
+  serviceName: "limiter-audits"
+  replicas: 1
+  selector:
+    matchLabels:
+      role: limiter-audits
+  template:
+    metadata:
+      labels:
+        role: limiter-audits
+    spec:
+      containers:
+        - name: limiter-audits
+          image: redis
+          resources:
+            limits:
+              memory: "500Mi"
+            requests:
+              memory: "256Mi"    

@@ -1,6 +1,6 @@
 {
   "name": "@alphaicterus/global",
-  "version": "1.0.84",
+  "version": "1.0.85",
   "description": "",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",

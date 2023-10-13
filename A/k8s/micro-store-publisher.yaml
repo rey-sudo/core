@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: driver-headless
+  labels:
+    role: driver-audits
+spec:
+  ports:
+    - port: 80
+      name: web
+  clusterIP: None
+  selector:
+    role: driver-audits
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: driver-audits
+spec:
+  serviceName: "driver-audits"
+  replicas: 1 #REPLICAS
+  selector:
+    matchLabels:
+      role: driver-audits
+  template:
+    metadata:
+      labels:
+        role: driver-audits
+        replicas: "1" #REPLICAS
+    spec:
+      containers:
+        - name: driver-audits
+          image: microkraph/driver-audits
+          env:
+            - name: DRIVER_ROLE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['role']
+            - name: DRIVER_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: DRIVER_TOTAL
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['replicas']
+            - name: MONGO_DB_NAME
+              value: "srv-audits"
+            - name: MONGO_DB_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: database-config
+                  key: master
+            - name: EVENT_BUS_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: streaming-config
+                  key: redis
+            - name: DRIVER_TIMEOUT
+              value: "10000"
+            - name: KILL_TIMEOUT
+              value: "3000"
+            - name: POD_TIMEOUT
+              value: "120000"
+          resources:
+            limits:
+              memory: "500Mi"
+            requests:
+              memory: "256Mi"    
