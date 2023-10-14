@@ -179,6 +179,20 @@ const main = async () => {
       ROUTES.createProductHandler
     );
 
+    app.get(
+      "/api/store/get-product",
+
+      rateLimit(limiterStore.client, {
+        path: "get-product",
+        windowMs: process.env.GENERAL_LIMIT_TIME,
+        max: process.env.GENERAL_LIMIT_MAX,
+      }),
+
+      ...ROUTES.getProductMiddlewares,
+
+      ROUTES.getProductHandler
+    );
+
     app.all("*", (_req, _res) => {
       throw new NotFoundError();
     });
