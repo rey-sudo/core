@@ -140,6 +140,17 @@ const CREATE_PRODUCT = [
     .isLength({ min: 1, max: 7 })
     .withMessage("max length"),
 
+    body("seller_pid")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 15 })
+    .withMessage("max length"),
+
   body("theme.title")
     .notEmpty()
     .withMessage("must be provided")

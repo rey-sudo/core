@@ -2,76 +2,37 @@ import mongoose, { ClientSession } from "mongoose";
 import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 import { numberPid } from "../utils/nano";
 
-interface Image {
-  small: string;
-  medium: string;
-  large: string;
-}
-
-interface Theme {
-  title: string;
-  subtitle: string;
-  price: string;
-  background: {
-    pageOne: {
-      color: string;
-      mask: string;
-    };
-    pageTwo: {
-      color: string;
-      mask: string;
-    };
-    pageThree: {
-      color: string;
-      mask: string;
-    };
-  };
-  slider_images: [{ url: string }];
-}
-
-interface ProductAttrs {
+interface OrderAttrs {
   name: string;
-  space_url: string;
-  image: Image;
-  payment_type: string;
-  shipping_tax: boolean;
-  shipping_label: string;
-  stock_supply: number;
-  price: number;
-  price_diff: number;
-  discount_label: string;
-  discount_color: string;
-  seller_pid: string;
-  theme: Theme;
+  last_name: string;
+  phone: string;
+  address: string;
+  department: string;
+  city: string;
+  product_pid: string;
 }
 
-interface ProductModel extends mongoose.Model<ProductDocument> {
+interface OrderModel extends mongoose.Model<OrderDocument> {
   build(
-    attrs: ProductAttrs,
+    attrs: OrderAttrs,
     session: ClientSession
-  ): Promise<ProductDocument | any>;
+  ): Promise<OrderDocument | any>;
 }
 
-interface ProductDocument extends mongoose.Document {
+interface OrderDocument extends mongoose.Document {
   pid: string;
   name: string;
-  space_url: string;
-  image: Image;
-  payment_type: string;
-  shipping_tax: boolean;
-  shipping_label: string;
-  stock_supply: number;
-  price: number;
-  price_diff: number;
-  discount_label: string;
-  discount_color: string;
-  seller_pid: string;
-  theme: Theme;
+  last_name: string;
+  phone: string;
+  address: string;
+  department: string;
+  city: string;
+  product_pid: string;
   createdAt: Date;
   updatedAt: Date;
 }
 
-const productSchema = new mongoose.Schema(
+const orderSchema = new mongoose.Schema(
   {
     pid: {
       type: String,
@@ -135,10 +96,7 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    seller_pid: {
-      type: String,
-      required: true,
-    },
+    
     theme: {
       title: { type: String, required: true },
       subtitle: { type: String, required: true },
@@ -174,16 +132,16 @@ const productSchema = new mongoose.Schema(
   }
 );
 
-productSchema.plugin(updateIfCurrentPlugin);
+orderSchema.plugin(updateIfCurrentPlugin);
 
-productSchema.statics.build = (attrs: ProductAttrs, session: ClientSession) => {
-  return Product.create([attrs], { session: session });
+orderSchema.statics.build = (attrs: OrderAttrs, session: ClientSession) => {
+  return Order.create([attrs], { session: session });
 };
 
-const Product = mongoose.model<ProductDocument, ProductModel>(
-  "Product",
-  productSchema,
-  "Product"
+const Order = mongoose.model<OrderDocument, OrderModel>(
+  "Order",
+  orderSchema,
+  "Order"
 );
 
-export { Product, ProductDocument, ProductAttrs };
+export { Order, OrderDocument, OrderAttrs };
