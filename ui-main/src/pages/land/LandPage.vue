@@ -1,25 +1,22 @@
 <template>
   <div id="container" class="container">
-  
     <span class="loader" />
 
     <div class="swiper landPageSwiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
-          <PageOne />
+          <PageOne v-if="isReady" />
         </div>
 
         <div class="swiper-slide">
-          <PageTwo />
+      
         </div>
 
         <div class="swiper-slide">
-          <PageThree/>
+   
         </div>
 
-        <div class="swiper-slide">
-       
-        </div>
+        <div class="swiper-slide"></div>
 
         <div class="swiper-slide"></div>
 
@@ -39,8 +36,6 @@
 import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
 
-
-import { ref } from "vue";
 import PageOne from "@/pages/land/components/PageOne";
 import PageTwo from "@/pages/land/components/PageTwo";
 import PageThree from "@/pages/land/components/PageThree.vue";
@@ -48,6 +43,9 @@ import PageFour from "@/pages/land/components/PageFour.vue";
 import PageFive from "@/pages/land/components/PageFive.vue";
 import PageSix from "@/pages/land/components/PageSix.vue";
 import PageSeven from "@/pages/land/components/PageSeven.vue";
+import landAPI from "@/pages/land/composable/land-api";
+import { useRouter } from "vue-router";
+import { ref } from "vue";
 
 export default {
   components: {
@@ -60,31 +58,64 @@ export default {
     PageSeven,
   },
 
-  mounted() {
-    new Swiper(".landPageSwiper", {
-      effect: "slide",
-      keyboard: {
-        enabled: true,
-        onlyInViewport: false,
-      },
-      grabCursor: false,
-      speed: 400,
-      spaceBetween: 0,
-      mousewheel: {
-        invert: false,
-      },
-      direction: "vertical",
-      loop: false,
-      pagination: {
-        el: ".swiper-pagination",
-        type: "bullets",
-        clickable: true,
-      },
-    });
+  setup() {
+    const router = useRouter();
 
+    const { action__getProductData } = landAPI();
 
+    const isReady = ref(false);
+
+    return { router, action__getProductData, isReady };
+  },
+  created() {
+    this.$watch(
+      () => this.$route.params,
+      (e) => {
+        const params = {
+          pid: e.pid,
+        };
+
+        this.action__getProductData(params)
+          .then((res) => {
+            this.router.replace({
+              params: { name: res.response.name.replace(/\s+/g, "-") },
+            });
+
+            this.isReady = true;
+          })
+          .catch((e) => console.error(e));
+      },
+      { immediate: true }
+    )();
   },
 
+  mounted() {
+    this.setupSwiper();
+  },
+  methods: {
+    setupSwiper() {
+      new Swiper(".landPageSwiper", {
+        effect: "slide",
+        keyboard: {
+          enabled: true,
+          onlyInViewport: false,
+        },
+        grabCursor: false,
+        speed: 400,
+        spaceBetween: 0,
+        mousewheel: {
+          invert: false,
+        },
+        direction: "vertical",
+        loop: false,
+        pagination: {
+          el: ".swiper-pagination",
+          type: "bullets",
+          clickable: true,
+        },
+      });
+    },
+  },
 };
 </script>
 
@@ -94,8 +125,6 @@ export default {
   height: 100vh;
   background: var(--base-a);
 }
-
-
 
 ::v-deep(.swiper-pagination-bullet) {
   background: var(--secondary-a);
@@ -181,6 +210,4 @@ export default {
     opacity: 1;
   }
 }
-
-
 </style>

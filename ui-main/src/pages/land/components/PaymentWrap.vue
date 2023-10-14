@@ -42,7 +42,7 @@
       >
     </div>
 
-    <div class="p-payment-button top" @click="__action__viewPaymentModal(true)">
+    <div class="p-payment-button top" @click="action__viewPaymentModal(true)">
       Pagar contraentrega
     </div>
     <div class="p-payment-button bottom">Con otros medios</div>
@@ -60,13 +60,13 @@ export default {
   setup() {
     const {
       getter__productData,
-      __action__viewPaymentModal,
+      action__viewPaymentModal,
       getter__viewPaymentModal,
     } = landAPI();
 
     return {
       getter__productData,
-      __action__viewPaymentModal,
+      action__viewPaymentModal,
       getter__viewPaymentModal,
     };
   },

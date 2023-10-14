@@ -81,17 +81,17 @@ import landAPI from "@/pages/land/composable/land-api";
 
 export default {
   setup() {
-    const { getter__viewPaymentModal, __action__viewPaymentModal } =
+    const { getter__viewPaymentModal, action__viewPaymentModal } =
       landAPI();
 
     const outsideClick = ref(null);
 
-    onClickOutside(outsideClick, () => __action__viewPaymentModal(false));
+    onClickOutside(outsideClick, () => action__viewPaymentModal(false));
 
     return {
       outsideClick,
       getter__viewPaymentModal,
-      __action__viewPaymentModal,
+      action__viewPaymentModal,
     };
   },
 

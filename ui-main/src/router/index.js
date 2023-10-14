@@ -6,7 +6,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
-      path: "/p",
+      path: "/p/:pid/:name?",
       ...landRoute
     },
     {

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^10.5.0",
+    "axios": "^1.5.1",
     "cobe": "^0.6.3",
     "core-js": "^3.8.3",
     "primeicons": "^6.0.1",

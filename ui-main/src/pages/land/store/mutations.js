@@ -1,6 +1,11 @@
-const __commit__viewPaymentModal = (state, params) => {
-  console.log(params);
-  state.viewPaymentModal = params;
+const commit__viewPaymentModal = (state, data) => {
+  state.viewPaymentModal = data;
 };
 
-export { __commit__viewPaymentModal };
+
+const commit__getProductData = (state, data) => {
+  state.productData = data;
+};
+
+
+export { commit__viewPaymentModal, commit__getProductData };

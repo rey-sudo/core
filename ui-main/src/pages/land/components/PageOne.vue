@@ -3,14 +3,17 @@
     class="p-pageOne"
     id="pageOne"
     :style="{
-      background: getter__productData.theme.background.pageOne.color
+      background: getter__productData.theme.background.pageOne.color,
     }"
   >
-
-  <div class="backgroundMask">
-      <img :src="getter__productData.theme.background.pageOne.mask" />
+    <div class="backgroundMask">
+      <img
+        :src="
+          getter__productData.space_url +
+          getter__productData.theme.background.pageOne.mask
+        "
+      />
     </div>
-
 
     <header class="p-header">
       <div class="p-header-wrap">
@@ -38,7 +41,6 @@
         </div>
       </div>
     </header>
-
 
     <div class="p-pageOne-wrap">
       <div class="p-pageOne-wrap-title">

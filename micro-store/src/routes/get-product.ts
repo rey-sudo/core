@@ -1,9 +1,9 @@
 import { BadRequestError, expressBodyValidator } from "@alphaicterus/global";
 import { Request, Response } from "express";
-import { CREATE_PRODUCT } from "../utils/body-validator";
+import { GET_PRODUCT } from "../utils/body-validator";
 import { Product } from "../models";
 
-const getProductMiddlewares = [CREATE_PRODUCT,  expressBodyValidator];
+const getProductMiddlewares = [GET_PRODUCT,  expressBodyValidator];
 
 /**USER | HANDLER | GET
  * 

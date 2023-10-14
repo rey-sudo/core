@@ -25,7 +25,7 @@
               class="swiper-slide swiper-no-mousewheel"
             >
               <div class="swiper-zoom-container">
-                <img :src="item.url" />
+                <img :src="getter__productData.space_url + item.url" />
               </div>
             </div>
           </div>
@@ -65,7 +65,6 @@ export default {
   mounted() {
     this.slider = new Swiper(".itemSliderSwiper", {
       zoom: true,
-
       mousewheel: false,
       direction: "vertical",
     });
