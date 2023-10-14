@@ -6,6 +6,7 @@
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <PageOne v-if="isReady" />
+          <LoaderWrap v-if="!isReady" />
         </div>
 
         <div class="swiper-slide">
@@ -44,8 +45,10 @@ import PageFive from "@/pages/land/components/PageFive.vue";
 import PageSix from "@/pages/land/components/PageSix.vue";
 import PageSeven from "@/pages/land/components/PageSeven.vue";
 import landAPI from "@/pages/land/composable/land-api";
+import LoaderWrap from "@/components/LoaderWrap.vue";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
+
 
 export default {
   components: {
@@ -56,7 +59,8 @@ export default {
     PageFive,
     PageSix,
     PageSeven,
-  },
+    LoaderWrap
+},
 
   setup() {
     const router = useRouter();
