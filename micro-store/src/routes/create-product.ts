@@ -1,16 +1,13 @@
 import { BadRequestError, expressBodyValidator } from "@alphaicterus/global";
 import { Request, Response } from "express";
-import { Report } from "../models/report";
-import { GET_ALL_REPORTS } from "../utils/body-validator";
-import { Product } from "../models";
+import { CREATE_PRODUCT } from "../utils/body-validator";
 import { createProduct } from "./transactions/create-product";
 
-const createProductMiddlewares = [ expressBodyValidator];
+const createProductMiddlewares = [ CREATE_PRODUCT, expressBodyValidator];
 
 /**ADMIN | HANDLER | POST
- *
  * 
- *
+ * Creates a new product
  */
 const createProductHandler = async (req: Request, res: Response) => {
 

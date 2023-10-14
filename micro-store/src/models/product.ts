@@ -8,10 +8,40 @@ interface Image {
   large: string;
 }
 
+interface Theme {
+  title: string;
+  subtitle: string;
+  price: string;
+  background: {
+    pageOne: {
+      color: string;
+      mask: string;
+    };
+    pageTwo: {
+      color: string;
+      mask: string;
+    };
+    pageThree: {
+      color: string;
+      mask: string;
+    };
+  };
+  slider_images: [{ url: string }];
+}
+
 interface ProductAttrs {
   name: string;
   space_url: string;
   image: Image;
+  payment_type: string;
+  shipping_tax: boolean;
+  shipping_label: string;
+  stock_supply: number;
+  price: number;
+  price_diff: number;
+  discount_label: string;
+  discount_color: string;
+  theme: Theme;
 }
 
 interface ProductModel extends mongoose.Model<ProductDocument> {
@@ -26,6 +56,15 @@ interface ProductDocument extends mongoose.Document {
   name: string;
   space_url: string;
   image: Image;
+  payment_type: string;
+  shipping_tax: boolean;
+  shipping_label: string;
+  stock_supply: number;
+  price: number;
+  price_diff: number;
+  discount_label: string;
+  discount_color: string;
+  theme: Theme;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -51,8 +90,69 @@ const productSchema = new mongoose.Schema(
 
     image: {
       small: { type: String, required: true },
-      medium: { type: String, required: false },
-      large: { type: String, required: false },
+      medium: { type: String, default: "" },
+      large: { type: String, default: "" },
+    },
+
+    payment_type: {
+      type: String,
+      required: true,
+    },
+
+    shipping_tax: {
+      type: Boolean,
+      required: true,
+    },
+
+    shipping_label: {
+      type: String,
+      required: true,
+    },
+
+    stock_supply: {
+      type: Number,
+      required: true,
+    },
+
+    price: {
+      type: Number,
+      required: true,
+    },
+
+    price_diff: {
+      type: Number,
+      required: true,
+    },
+
+    discount_label: {
+      type: String,
+      required: true,
+    },
+
+    discount_color: {
+      type: String,
+      required: true,
+    },
+    
+    theme: {
+      title: { type: String, required: true },
+      subtitle: { type: String, required: true },
+      price: { type: String, required: true },
+      background: {
+        pageOne: {
+          color: { type: String, required: true },
+          mask: { type: String, default: "" },
+        },
+        pageTwo: {
+          color: { type: String, required: true },
+          mask: { type: String, default: "" },
+        },
+        pageThree: {
+          color: { type: String, required: true },
+          mask: { type: String, default: "" },
+        },
+      },
+      slider_images: [{ url: { type: String, required: true } }],
     },
   },
   {

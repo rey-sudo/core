@@ -30,7 +30,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: micro-store
+                name: ui-main
                 port:
                   number: 8000                                        
           - path: /api/store/?(.*)
