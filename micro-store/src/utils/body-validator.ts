@@ -1,6 +1,17 @@
 import { body, check, param } from "express-validator";
 import { validateReportInput } from "./validate-report";
 
+const CREATE_PRODUCT = [
+  body("project_name")
+    .notEmpty()
+    .withMessage("must be provided.")
+    .bail()
+    .isString()
+    .trim()
+    .isLength({ min: 1, max: 100 }),
+];
+
+
 const GET_AUDIT_REPORT = [
   param("report_pid")
     .notEmpty()
@@ -420,6 +431,8 @@ const CREATE_PREVOTE = [
 ];
 
 export {
+  CREATE_PRODUCT,
+  
   CREATE_AUDITOR,
   LOGIN_AUDITOR,
   CREATE_REPORT,

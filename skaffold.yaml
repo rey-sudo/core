@@ -28,3 +28,11 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .              
+    - image: alphaicterus/publisher-store
+      context: publisher-store
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .             

@@ -21,16 +21,16 @@ const main = async () => {
       throw new Error("MONGO_DB_URI must be defined");
     }
 
-    if (!process.env.DRIVER_ROLE) {
-      throw new Error("DRIVER_ROLE must be defined");
+    if (!process.env.PUBLISHER_ROLE) {
+      throw new Error("PUBLISHER_ROLE must be defined");
     }
 
-    if (!process.env.DRIVER_NAME) {
-      throw new Error("DRIVER_NAME must be defined");
+    if (!process.env.PUBLISHER_NAME) {
+      throw new Error("PUBLISHER_NAME must be defined");
     }
 
-    if (!process.env.DRIVER_TOTAL) {
-      throw new Error("DRIVER_TOTAL must be defined");
+    if (!process.env.PUBLISHER_TOTAL) {
+      throw new Error("PUBLISHER_TOTAL must be defined");
     }
     // Event bus controller, client in charge of the connection.
     await eventBus
@@ -60,9 +60,9 @@ const main = async () => {
     // Event driver controller, client in charge of the connection.
     await eventDriver
       .connect(mongoWrapper.client, eventBus.client, {
-        driverRole: process.env.DRIVER_ROLE,
-        driverName: process.env.DRIVER_NAME,
-        driverTotal: process.env.DRIVER_TOTAL,
+        driverRole: process.env.PUBLISHER_ROLE,
+        driverName: process.env.PUBLISHER_NAME,
+        driverTotal: process.env.PUBLISHER_TOTAL,
       })
       .then(() => connHandler("eventDriver"))
       .catch((e) => errorHandler(ERROR.DRIVER100, e));

@@ -1,9 +1,2 @@
-export * from "./round";
-export * from "./auditor";
-export * from "./dao-vote";
-export * from "./group";
-export * from "./pre-vote";
-export * from "./project";
-export * from "./report";
-export * from "./subscription";
-export * from "./review"
+export * from "./product";
+

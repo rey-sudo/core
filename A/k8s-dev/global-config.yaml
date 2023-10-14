@@ -25,4 +25,4 @@ kind: ConfigMap
 metadata:
   name: rater-config
 data:
-  micro-store: redis://cache-store:6379
+  micro-store: redis://rater-store:6379

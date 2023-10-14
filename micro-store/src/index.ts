@@ -1,16 +1,14 @@
 import mongoose from "mongoose";
 import limiterStore from "./limiter/client";
 import compression from "compression";
+import cacheStore from "./cache/client";
+import * as ROUTES from "./routes";
 import { eventBus } from "./event-bus/client/client";
 import { eventDriver } from "./event-driver/driver";
 import { connHandler, errorHandler, setTimeOut } from "./pod/index";
 import { app } from "./app";
 import { NotFoundError, errorMiddleware, rateLimit } from "@alphaicterus/global";
-import cacheStore from "./cache/client";
-import {
-  testMiddlewares,
-  testHandler,
-} from "./routes";
+
 
 const main = async () => {
   try {
@@ -167,18 +165,18 @@ const main = async () => {
 
     ////////////////////////////////////////////////////
 
-    app.get(
-      "/api/store/get-products",
+    app.post(
+      "/api/store/create-product",
 
       rateLimit(limiterStore.client, {
-        path: "get-products",
+        path: "create-product",
         windowMs: process.env.GENERAL_LIMIT_TIME,
         max: process.env.GENERAL_LIMIT_MAX,
       }),
 
-      ...testMiddlewares,
+      ...ROUTES.createProductMiddlewares,
 
-      testHandler
+      ROUTES.createProductHandler
     );
 
     app.all("*", (_req, _res) => {

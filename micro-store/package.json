@@ -21,7 +21,7 @@
   "author": "alphaicterus",
   "license": "ISC",
   "dependencies": {
-c
+    "@alphaicterus/global": "^1.0.85",
     "ajv": "^8.12.0"
   },
   "devDependencies": {
