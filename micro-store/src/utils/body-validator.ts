@@ -2,14 +2,242 @@ import { body, check, param } from "express-validator";
 import { validateReportInput } from "./validate-report";
 
 const CREATE_PRODUCT = [
-  body("project_name")
+  body("name")
     .notEmpty()
-    .withMessage("must be provided.")
+    .withMessage("must be provided")
     .bail()
     .isString()
+    .withMessage("must be string")
+    .bail()
     .trim()
     .isLength({ min: 1, max: 100 }),
+
+  body("space_url")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 300 }),
+
+  body("image.small")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 300 }),
+
+  body("image.medium")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 300 }),
+
+  body("image.large")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 300 }),
+
+
+    body("payment_type")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 100 }),
+
+  body("shipping_tax")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isBoolean()
+    .withMessage("must be boolean")
+    .bail(),
+
+  body("shipping_label")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 100 }),
+
+  body("stock_supply")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .custom((item) => Number.isInteger(item))
+    .withMessage("must be number")
+    .bail()
+    .isInt({ min: 0 })
+    .withMessage("must be natural"),
+
+  body("price")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .custom((item) => Number.isInteger(item))
+    .withMessage("must be number")
+    .bail()
+    .isInt({ min: 0 })
+    .withMessage("must be natural"),
+
+  body("price_diff")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .custom((item) => Number.isInteger(item))
+    .withMessage("must be number")
+    .bail()
+    .isInt({ min: 0 })
+    .withMessage("must be natural"),
+
+  body("discount_label")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 100 }),
+
+  body("discount_color")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 7 }),
+
+  body("theme.title")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 100 }),
+
+  body("theme.subtitle")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 100 }),
+
+  body("theme.price")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 100 }),
+
+  body("theme.background.pageOne.color")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 7 }),
+
+  body("theme.background.pageOne.mask")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 }),
+
+  body("theme.background.pageTwo.color")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 7 }),
+
+  body("theme.background.pageTwo.mask")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 }),
+
+  body("theme.background.pageThree.color")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 7 }),
+
+  body("theme.background.pageThree.mask")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 }),
+
+  body("theme.slider_images")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .custom((value) =>
+      value.every((item: any) => item.url && typeof item.url === "string")
+    )
+    .withMessage("invalid format")
 ];
+
+
+
+
+
+
+
+
 
 
 const GET_AUDIT_REPORT = [
@@ -22,6 +250,7 @@ const GET_AUDIT_REPORT = [
     .bail()
     .trim()
     .isLength({ min: 1, max: 30 }),
+
 ];
 
 const GET_ALL_REPORTS = [
@@ -432,7 +661,6 @@ const CREATE_PREVOTE = [
 
 export {
   CREATE_PRODUCT,
-  
   CREATE_AUDITOR,
   LOGIN_AUDITOR,
   CREATE_REPORT,

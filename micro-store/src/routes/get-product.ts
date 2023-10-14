@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import { CREATE_PRODUCT } from "../utils/body-validator";
 import { Product } from "../models";
 
-const getProductMiddlewares = [ expressBodyValidator];
+const getProductMiddlewares = [CREATE_PRODUCT,  expressBodyValidator];
 
 /**USER | HANDLER | GET
  * 

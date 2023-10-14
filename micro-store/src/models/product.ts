@@ -90,8 +90,8 @@ const productSchema = new mongoose.Schema(
 
     image: {
       small: { type: String, required: true },
-      medium: { type: String, default: "" },
-      large: { type: String, default: "" },
+      medium: { type: String, required: true },
+      large: { type: String, required: true },
     },
 
     payment_type: {
@@ -141,15 +141,15 @@ const productSchema = new mongoose.Schema(
       background: {
         pageOne: {
           color: { type: String, required: true },
-          mask: { type: String, default: "" },
+          mask: { type: String, required: true },
         },
         pageTwo: {
           color: { type: String, required: true },
-          mask: { type: String, default: "" },
+          mask: { type: String, required: true },
         },
         pageThree: {
           color: { type: String, required: true },
-          mask: { type: String, default: "" },
+          mask: { type: String, required: true },
         },
       },
       slider_images: [{ url: { type: String, required: true } }],
