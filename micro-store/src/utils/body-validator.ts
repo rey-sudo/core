@@ -10,7 +10,8 @@ const CREATE_PRODUCT = [
     .withMessage("must be string")
     .bail()
     .trim()
-    .isLength({ min: 1, max: 100 }),
+    .isLength({ min: 1, max: 100 })
+    .withMessage("max length"),
 
   body("space_url")
     .notEmpty()
@@ -20,7 +21,8 @@ const CREATE_PRODUCT = [
     .withMessage("must be string")
     .bail()
     .trim()
-    .isLength({ min: 1, max: 300 }),
+    .isLength({ min: 1, max: 300 })
+    .withMessage("max length"),
 
   body("image.small")
     .notEmpty()
@@ -30,7 +32,8 @@ const CREATE_PRODUCT = [
     .withMessage("must be string")
     .bail()
     .trim()
-    .isLength({ min: 1, max: 300 }),
+    .isLength({ min: 1, max: 300 })
+    .withMessage("max length"),
 
   body("image.medium")
     .notEmpty()
@@ -40,7 +43,8 @@ const CREATE_PRODUCT = [
     .withMessage("must be string")
     .bail()
     .trim()
-    .isLength({ min: 1, max: 300 }),
+    .isLength({ min: 1, max: 300 })
+    .withMessage("max length"),
 
   body("image.large")
     .notEmpty()
@@ -50,7 +54,8 @@ const CREATE_PRODUCT = [
     .withMessage("must be string")
     .bail()
     .trim()
-    .isLength({ min: 1, max: 300 }),
+    .isLength({ min: 1, max: 300 })
+    .withMessage("max length"),
 
 
     body("payment_type")
@@ -61,7 +66,8 @@ const CREATE_PRODUCT = [
     .withMessage("must be string")
     .bail()
     .trim()
-    .isLength({ min: 1, max: 100 }),
+    .isLength({ min: 1, max: 100 })
+    .withMessage("max length"),
 
   body("shipping_tax")
     .notEmpty()
@@ -79,7 +85,8 @@ const CREATE_PRODUCT = [
     .withMessage("must be string")
     .bail()
     .trim()
-    .isLength({ min: 1, max: 100 }),
+    .isLength({ min: 1, max: 100 })
+    .withMessage("max length"),
 
   body("stock_supply")
     .notEmpty()
@@ -119,7 +126,8 @@ const CREATE_PRODUCT = [
     .withMessage("must be string")
     .bail()
     .trim()
-    .isLength({ min: 1, max: 100 }),
+    .isLength({ min: 1, max: 100 })
+    .withMessage("max length"),
 
   body("discount_color")
     .notEmpty()
@@ -129,7 +137,8 @@ const CREATE_PRODUCT = [
     .withMessage("must be string")
     .bail()
     .trim()
-    .isLength({ min: 1, max: 7 }),
+    .isLength({ min: 1, max: 7 })
+    .withMessage("max length"),
 
   body("theme.title")
     .notEmpty()
@@ -139,7 +148,8 @@ const CREATE_PRODUCT = [
     .withMessage("must be string")
     .bail()
     .trim()
-    .isLength({ min: 1, max: 100 }),
+    .isLength({ min: 1, max: 100 })
+    .withMessage("max length"),
 
   body("theme.subtitle")
     .notEmpty()
@@ -149,7 +159,8 @@ const CREATE_PRODUCT = [
     .withMessage("must be string")
     .bail()
     .trim()
-    .isLength({ min: 1, max: 100 }),
+    .isLength({ min: 1, max: 100 })
+    .withMessage("max length"),
 
   body("theme.price")
     .notEmpty()
@@ -159,7 +170,8 @@ const CREATE_PRODUCT = [
     .withMessage("must be string")
     .bail()
     .trim()
-    .isLength({ min: 1, max: 100 }),
+    .isLength({ min: 1, max: 100 })
+    .withMessage("max length"),
 
   body("theme.background.pageOne.color")
     .notEmpty()
@@ -169,7 +181,8 @@ const CREATE_PRODUCT = [
     .withMessage("must be string")
     .bail()
     .trim()
-    .isLength({ min: 1, max: 7 }),
+    .isLength({ min: 1, max: 7 })
+    .withMessage("max length"),
 
   body("theme.background.pageOne.mask")
     .notEmpty()
@@ -179,7 +192,8 @@ const CREATE_PRODUCT = [
     .withMessage("must be string")
     .bail()
     .trim()
-    .isLength({ min: 1, max: 200 }),
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
 
   body("theme.background.pageTwo.color")
     .notEmpty()
@@ -189,7 +203,8 @@ const CREATE_PRODUCT = [
     .withMessage("must be string")
     .bail()
     .trim()
-    .isLength({ min: 1, max: 7 }),
+    .isLength({ min: 1, max: 7 })
+    .withMessage("max length"),
 
   body("theme.background.pageTwo.mask")
     .notEmpty()
@@ -199,7 +214,8 @@ const CREATE_PRODUCT = [
     .withMessage("must be string")
     .bail()
     .trim()
-    .isLength({ min: 1, max: 200 }),
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
 
   body("theme.background.pageThree.color")
     .notEmpty()
@@ -209,7 +225,8 @@ const CREATE_PRODUCT = [
     .withMessage("must be string")
     .bail()
     .trim()
-    .isLength({ min: 1, max: 7 }),
+    .isLength({ min: 1, max: 7 })
+    .withMessage("max length"),
 
   body("theme.background.pageThree.mask")
     .notEmpty()
@@ -219,7 +236,8 @@ const CREATE_PRODUCT = [
     .withMessage("must be string")
     .bail()
     .trim()
-    .isLength({ min: 1, max: 200 }),
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
 
   body("theme.slider_images")
     .notEmpty()
