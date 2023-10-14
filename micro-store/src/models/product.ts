@@ -1,6 +1,6 @@
 import mongoose, { ClientSession } from "mongoose";
 import { updateIfCurrentPlugin } from "mongoose-update-if-current";
-import { nanoid } from "nanoid";
+import { numberPid } from "../utils/nano";
 
 interface Image {
   small: string;
@@ -10,7 +10,7 @@ interface Image {
 
 interface ProductAttrs {
   name: string;
-  base_url: string;
+  space_url: string;
   image: Image;
 }
 
@@ -24,7 +24,7 @@ interface ProductModel extends mongoose.Model<ProductDocument> {
 interface ProductDocument extends mongoose.Document {
   pid: string;
   name: string;
-  base_url: string;
+  space_url: string;
   image: Image;
   createdAt: Date;
   updatedAt: Date;
@@ -36,7 +36,7 @@ const productSchema = new mongoose.Schema(
       type: String,
       unique: true,
       index: true,
-      default: () => nanoid(20),
+      default: () => numberPid(),
     },
 
     name: {
@@ -44,7 +44,7 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
 
-    base_url: {
+    space_url: {
       type: String,
       required: true,
     },
