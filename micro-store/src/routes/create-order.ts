@@ -11,14 +11,14 @@ const createOrderMiddlewares = [ expressBodyValidator];
  */
 const createOrderHandler = async (req: Request, res: Response) => {
 
-  const productCreated = await createOrder(req.body);
+  const orderCreated = await createOrder(req.body);
 
 
-  if (!productCreated.success) {
+  if (!orderCreated.success) {
     throw new BadRequestError("CREATE_ERROR");
   }
 
-  res.status(200).send(productCreated);
+  res.status(200).send(orderCreated);
 };
 
 export { createOrderMiddlewares, createOrderHandler  };

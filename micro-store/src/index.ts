@@ -193,6 +193,21 @@ const main = async () => {
       ROUTES.getProductHandler
     );
 
+
+    app.post(
+      "/api/store/create-order",
+
+      rateLimit(limiterStore.client, {
+        path: "create-order",
+        windowMs: process.env.GENERAL_LIMIT_TIME,
+        max: process.env.GENERAL_LIMIT_MAX,
+      }),
+
+      ...ROUTES.createOrderMiddlewares,
+
+      ROUTES.createOrderHandler
+    );
+
     app.all("*", (_req, _res) => {
       throw new NotFoundError();
     });
