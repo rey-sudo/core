@@ -46,77 +46,35 @@ const orderSchema = new mongoose.Schema(
       required: true,
     },
 
-    space_url: {
+    last_name: {
       type: String,
       required: true,
     },
 
-    image: {
-      small: { type: String, required: true },
-      medium: { type: String, required: true },
-      large: { type: String, required: true },
-    },
-
-    payment_type: {
+    phone: {
       type: String,
       required: true,
     },
 
-    shipping_tax: {
-      type: Boolean,
-      required: true,
-    },
-
-    shipping_label: {
+    address: {
       type: String,
       required: true,
     },
 
-    stock_supply: {
-      type: Number,
-      required: true,
-    },
-
-    price: {
-      type: Number,
-      required: true,
-    },
-
-    price_diff: {
-      type: Number,
-      required: true,
-    },
-
-    discount_label: {
+    department: {
       type: String,
       required: true,
     },
 
-    discount_color: {
+    city: {
       type: String,
       required: true,
     },
     
-    theme: {
-      title: { type: String, required: true },
-      subtitle: { type: String, required: true },
-      price: { type: String, required: true },
-      background: {
-        pageOne: {
-          color: { type: String, required: true },
-          mask: { type: String, required: true },
-        },
-        pageTwo: {
-          color: { type: String, required: true },
-          mask: { type: String, required: true },
-        },
-        pageThree: {
-          color: { type: String, required: true },
-          mask: { type: String, required: true },
-        },
-      },
-      slider_images: [{ url: { type: String, required: true } }],
-    },
+    product_pid: {
+      type: String,
+      required: true,
+    }
   },
   {
     timestamps: true,

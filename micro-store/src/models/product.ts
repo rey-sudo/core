@@ -135,10 +135,12 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+
     seller_pid: {
       type: String,
       required: true,
     },
+    
     theme: {
       title: { type: String, required: true },
       subtitle: { type: String, required: true },

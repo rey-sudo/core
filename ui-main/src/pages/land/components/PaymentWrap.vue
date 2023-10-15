@@ -127,13 +127,13 @@ export default {
 }
 
 .card-body-stock {
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
   text-align: left;
   font-size: var(--text-size-b);
 }
 
 .card-body-shipping {
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
   text-align: left;
   font-size: var(--text-size-b);
   font-weight: 600;
