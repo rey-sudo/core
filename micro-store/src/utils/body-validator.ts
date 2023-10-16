@@ -1,6 +1,85 @@
 import { body, check, param, query } from "express-validator";
 import { validateReportInput } from "./validate-report";
 
+const CREATE_ORDER = [
+  body("name")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 50 })
+    .withMessage("max length"),
+
+  body("last_name")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 50 })
+    .withMessage("max length"),
+
+  body("phone")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 20 })
+    .withMessage("max length"),
+
+  body("address")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 100 })
+    .withMessage("max length"),
+
+  body("department")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 50 })
+    .withMessage("max length"),
+
+  body("city")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 30 })
+    .withMessage("max length"),
+
+  body("product_pid")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 15 })
+    .withMessage("max length"),
+];
+
 const CREATE_PRODUCT = [
   body("name")
     .notEmpty()
@@ -57,8 +136,7 @@ const CREATE_PRODUCT = [
     .isLength({ min: 1, max: 300 })
     .withMessage("max length"),
 
-
-    body("payment_type")
+  body("payment_type")
     .notEmpty()
     .withMessage("must be provided")
     .bail()
@@ -140,7 +218,7 @@ const CREATE_PRODUCT = [
     .isLength({ min: 1, max: 7 })
     .withMessage("max length"),
 
-    body("seller_pid")
+  body("seller_pid")
     .notEmpty()
     .withMessage("must be provided")
     .bail()
@@ -257,11 +335,8 @@ const CREATE_PRODUCT = [
     .custom((value) =>
       value.every((item: any) => item.url && typeof item.url === "string")
     )
-    .withMessage("invalid format")
+    .withMessage("invalid format"),
 ];
-
-
-
 
 const GET_PRODUCT = [
   query("pid")
@@ -274,9 +349,7 @@ const GET_PRODUCT = [
     .trim()
     .isLength({ min: 15, max: 15 })
     .withMessage("max length"),
-]
-
-
+];
 
 //////////////////////
 
@@ -290,7 +363,6 @@ const GET_AUDIT_REPORT = [
     .bail()
     .trim()
     .isLength({ min: 1, max: 30 }),
-
 ];
 
 const GET_ALL_REPORTS = [
@@ -702,7 +774,7 @@ const CREATE_PREVOTE = [
 export {
   CREATE_PRODUCT,
   GET_PRODUCT,
-
+  CREATE_ORDER,
   CREATE_AUDITOR,
   LOGIN_AUDITOR,
   CREATE_REPORT,
