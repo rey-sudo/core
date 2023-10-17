@@ -2,13 +2,11 @@ import { _ } from "../utils/logger";
 
 interface PodCheckList {
   eventBus: boolean;
-  eventDriver: boolean;
   mongoose: boolean;
 }
 
 const checkList: PodCheckList = {
   eventBus: false,
-  eventDriver: false,
   mongoose: false
 };
 
@@ -20,7 +18,7 @@ function connHandler(processName: string) {
   });
 
   if (!checkListChecker(checkList)) {
-    _.info(`service-expiration is ready.`);
+    _.info(`micro-notifications is ready.`);
   }
 }
 

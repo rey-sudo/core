@@ -1,5 +1,5 @@
 import { BaseDriver, EVENT } from "@alphaicterus/global";
-import { AuditActionPublisher } from "../event-bus/publishers/service-audits-publisher";
+import { MicroStorePublisher } from "../event-bus/publishers/micro-store-pub";
 
 export class EventDriver extends BaseDriver {
   async onMessage(data: any) {
@@ -7,8 +7,8 @@ export class EventDriver extends BaseDriver {
       const { event } = data.fullDocument;
 
       switch (event[0]) {
-        case EVENT.service_audits:
-          const response = await new AuditActionPublisher(
+        case EVENT.micro_store:
+          const response = await new MicroStorePublisher(
             this.options.driverName,
             this.busClient
           ).publish(this.changeStream.resumeToken, [event[1], event[2]]);

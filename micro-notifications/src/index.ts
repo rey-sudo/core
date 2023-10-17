@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { eventBus } from "./event-bus/client/client";
-import { MicroStoreListener } from "./event-bus/listeners/service-audits-listener";
+import { MicroStoreListener } from "./event-bus/listeners/micro-store-listener";
 import { connHandler, errorHandler, setTimeOut } from "./pod/index";
 import { _ } from "./utils/logger";
 
@@ -17,15 +17,6 @@ const main = async () => {
     if (!process.env.MONGO_DB_URI) {
       throw new Error("MONGO_DB_URI must be defined");
     }
-
-    if (!process.env.DRIVER_ROLE) {
-      throw new Error("DRIVER_ROLE error");
-    }
-
-    if (!process.env.REDIS_EXPIRATION) {
-      throw new Error("REDIS_EXPIRATION error");
-    }
-    
 
     await eventBus
       .connect({

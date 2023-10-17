@@ -8,7 +8,7 @@ import { ERROR } from "@alphaicterus/global";
 
 const main = async () => {
   try {
-    // verification of the existence of environment variables, defined in the .yaml document
+   
     if (!process.env.EVENT_BUS_URI) {
       throw new Error("EVENT_BUS_URI must be defined");
     }
@@ -32,7 +32,8 @@ const main = async () => {
     if (!process.env.PUBLISHER_TOTAL) {
       throw new Error("PUBLISHER_TOTAL must be defined");
     }
-    // Event bus controller, client in charge of the connection.
+
+
     await eventBus
       .connect({
         url: process.env.EVENT_BUS_URI,
@@ -42,7 +43,7 @@ const main = async () => {
       .then(() => connHandler("eventBus"))
       .catch((e: any) => errorHandler(ERROR.BUS100, e));
 
-    // Mongodb controller, client in charge of the connection.
+
     await mongoWrapper
       .connect(process.env.MONGO_DB_URI, {
         connectTimeoutMS: 100000,
@@ -57,7 +58,7 @@ const main = async () => {
       .then(() => connHandler("mongoWrapper"))
       .catch((e) => errorHandler(ERROR.MONGO100, e));
 
-    // Event driver controller, client in charge of the connection.
+ 
     await eventDriver
       .connect(mongoWrapper.client, eventBus.client, {
         driverRole: process.env.PUBLISHER_ROLE,
@@ -67,7 +68,7 @@ const main = async () => {
       .then(() => connHandler("eventDriver"))
       .catch((e) => errorHandler(ERROR.DRIVER100, e));
 
-    // Error event handling
+
     eventBus.client.on("end", (e: any) => errorHandler(ERROR.BUS101, e));
 
     eventBus.client.on("error", (e: any) => errorHandler(ERROR.BUS102, e, true));

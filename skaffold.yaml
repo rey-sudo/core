@@ -35,4 +35,12 @@ build:
       sync:
         manual:
           - src: 'src/**/*.ts'
-            dest: .             
+            dest: .
+    - image: alphaicterus/micro-notifications
+      context: micro-notifications
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .                             
