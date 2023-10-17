@@ -1,13 +1,15 @@
 <template>
-  <div class="dialog" id="dialog">
-    <div class="dialog-box" ref="outsideClick">
-      <div class="header">Formulario de pago</div>
+  <div class="p-dialog" id="dialog">
+    <div class="p-dialog-wrap" ref="outsideClick">
 
-      <div class="body">
-        <div class="summary">*Pagas cuando el producto llegue a tu casa*</div>
+      <div class="p-dialog-wrap-head">Formulario de pago</div>
+
+      <div class="p-dialog-wrap-body">
+        
+        <div class="p-dialog-wrap-body-label">*Pagas cuando el producto llegue a tu casa*</div>
 
         <form>
-          <div class="form-group">
+          <div class="p-dialog-wrap-body-form">
             <label for="name">
               <i class="pi pi-user" />
               <span>Nombre</span>
@@ -25,7 +27,7 @@
             />
           </div>
 
-          <div class="form-group">
+          <div class="p-dialog-wrap-body-form">
             <label for="lastname">
               <i class="pi pi-user" />
               <span> Apellido</span>
@@ -42,7 +44,7 @@
             />
           </div>
 
-          <div class="form-group">
+          <div class="p-dialog-wrap-body-form">
             <label for="phone">
               <i class="pi pi-phone" />
               <span>Telefono (Whatsapp, Telegram)</span>
@@ -59,7 +61,7 @@
             />
           </div>
 
-          <div class="form-group">
+          <div class="p-dialog-wrap-body-form">
             <label for="address">
               <i class="pi pi-home" />
               <span>Direccion (Conjunto, piso, apartamento)</span>
@@ -76,7 +78,7 @@
             />
           </div>
 
-          <div class="form-group">
+          <div class="p-dialog-wrap-body-form">
             <label for="department">
               <i class="pi pi-map-marker" />
               <span>Departamento</span>
@@ -86,7 +88,7 @@
               id="department"
               name="department"
               required
-              class="styled-dropdown"
+              class="department-dropdown"
             >
               <option value="" disabled selected>Selecciona</option>
               <option v-for="item in departaments" :key="item" :value="item">
@@ -95,7 +97,7 @@
             </select>
           </div>
 
-          <div class="form-group">
+          <div class="p-dialog-wrap-body-form">
             <label for="city">
               <i class="pi pi-map-marker" />
               <span>Ciudad</span>
@@ -113,7 +115,7 @@
           </div>
         </form>
 
-        <div class="bottom">
+        <div class="p-dialog-wrap-body-button">
           <button @click="handleOrder">Listo</button>
         </div>
       </div>
@@ -214,17 +216,11 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.bottom {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 1rem;
-}
-
 i {
   margin-right: 0.5rem;
 }
 
-.styled-dropdown {
+.department-dropdown {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -237,34 +233,18 @@ i {
   border-radius: 8px;
 }
 
-.styled-dropdown:hover {
+.department-dropdown:hover {
   border: 1px solid var(--blue);
 }
 
-.styled-dropdown:focus {
+.department-dropdown:focus {
   border: 1px solid var(--blue);
 }
 
-/* Estilos para las opciones dentro del dropdown */
-.styled-dropdown option {
+
+.department-dropdown option {
   background-color: #fff;
   color: #333;
-}
-
-/* Estilos para el contenedor del dropdown */
-.dropdown {
-  margin: 50px;
-  text-align: center;
-}
-
-.payment-form {
-}
-
-.form-group {
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
 }
 
 label {
@@ -303,26 +283,11 @@ button:hover {
   background: black;
 }
 
-.header {
-  padding: 1rem;
-  font-weight: 600;
-  color: var(--text-a);
-  font-size: var(--text-size-b);
-}
 
-.summary {
-  color: var(--text-b);
-  font-size: var(--text-size-a);
-}
 
-.body {
-  background: var(--base-a);
-  border-radius: 8px;
-  padding: 1rem;
-  box-sizing: border-box;
-}
 
-.dialog {
+
+.p-dialog {
   display: none;
   display: initial;
   position: fixed;
@@ -335,7 +300,7 @@ button:hover {
   background: rgba(0, 0, 0, 0.5);
 }
 
-.dialog-box {
+.p-dialog .p-dialog-wrap {
   background: var(--base-c);
   backdrop-filter: blur(5px);
   margin: 5% auto;
@@ -343,5 +308,41 @@ button:hover {
   padding: 0.75rem;
   max-width: 400px;
   border-radius: 16px;
+}
+
+.p-dialog .p-dialog-wrap .p-dialog-wrap-head {
+  padding: 1rem;
+  font-weight: 600;
+  color: var(--text-a);
+  font-size: var(--text-size-b);
+}
+
+
+.p-dialog .p-dialog-wrap .p-dialog-wrap-body {
+  background: var(--base-a);
+  border-radius: 8px;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.p-dialog .p-dialog-wrap .p-dialog-wrap-body .p-dialog-wrap-body-label {
+  color: var(--text-b);
+  font-size: var(--text-size-a);
+}
+
+
+
+
+.p-dialog .p-dialog-wrap .p-dialog-wrap-body .p-dialog-wrap-body-form {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.p-dialog .p-dialog-wrap .p-dialog-wrap-body .p-dialog-wrap-body-button {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
 }
 </style>
