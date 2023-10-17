@@ -62,7 +62,7 @@
           <div class="form-group">
             <label for="address">
               <i class="pi pi-home" />
-              <span>Direccion completa (Conjunto, piso, apartamento)</span>
+              <span>Direccion (Conjunto, piso, apartamento)</span>
             </label>
             <input
               v-model="orderForm.address"
@@ -114,7 +114,7 @@
         </form>
 
         <div class="bottom">
-          <button @click="handleOrder" >Listo</button>
+          <button @click="handleOrder">Listo</button>
         </div>
       </div>
     </div>
@@ -205,7 +205,9 @@ export default {
 
   methods: {
     handleOrder() {
-      this.action__createOrder(this.orderForm);
+      this.action__createOrder(this.orderForm)
+        .then((res) => console.log(res))
+        .catch((err) => console.error(err));
     },
   },
 };
@@ -215,6 +217,7 @@ export default {
 .bottom {
   display: flex;
   justify-content: flex-end;
+  margin-top: 1rem;
 }
 
 i {
@@ -227,7 +230,7 @@ i {
   -moz-appearance: none;
   background: var(--base-a);
   border: 1px solid var(--border-a);
-  padding: 0.75rem 0.5rem;
+  padding: 0.75rem 1rem;
   font-size: var(--text-size-a);
   outline: none;
   cursor: pointer;
@@ -258,7 +261,7 @@ i {
 }
 
 .form-group {
-  margin-bottom: 0.5rem;
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -266,8 +269,6 @@ i {
 
 label {
   font-weight: 600;
-  margin-bottom: 0.75rem;
-  margin-top: 1rem;
   color: var(--text-a);
   font-size: var(--text-size-a);
   display: flex;
@@ -276,6 +277,7 @@ label {
   padding: 0.5rem;
   border: 1px solid var(--border-a);
   border-radius: 8px;
+  margin-bottom: 0.5rem;
 }
 
 input[type="text"] {
