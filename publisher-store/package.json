@@ -20,7 +20,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@alphaicterus/global": "^1.0.85"
+    "@alphaicterus/global": "^1.0.86"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",

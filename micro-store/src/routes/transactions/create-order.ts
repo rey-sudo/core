@@ -21,7 +21,7 @@ export const createOrder = async (params: OrderAttrs) => {
         const createEvent = await Pub.build(
           {
             event: [
-              EVENT.service_email,
+              EVENT.micro_store,
               "order-created",
               orderCreated[0],
             ],
