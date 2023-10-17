@@ -1,3 +1,4 @@
+import { bot } from "../telegram";
 import { _ } from "../utils/logger";
 
 interface PodCheckList {
@@ -35,6 +36,10 @@ function setTimeOut() {
 
 function errorHandler(msg?: any, err?: any, bypass?: boolean) {
   _.error(`[POD-EXIT]:${msg} | ${err}`);
+
+  bot.stop("SIGINT");
+
+  bot.stop("SIGTERM");
 
   if (bypass) return;
 

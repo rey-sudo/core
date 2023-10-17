@@ -3,6 +3,7 @@ import { eventBus } from "./event-bus/client/client";
 import { MicroStoreListener } from "./event-bus/listeners/micro-store-listener";
 import { connHandler, errorHandler, setTimeOut } from "./pod/index";
 import { _ } from "./utils/logger";
+import { bot } from "./telegram";
 
 const main = async () => {
   try {
@@ -44,6 +45,8 @@ const main = async () => {
 
     mongoose.set("strictQuery", true);
 
+    bot.launch();
+    
     new MicroStoreListener(eventBus.client)
       .listen()
       .then((e: any) =>
