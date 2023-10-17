@@ -1,5 +1,5 @@
 <template>
-  <div  class="dialog" id="dialog">
+  <div class="dialog" id="dialog">
     <div class="dialog-box" ref="outsideClick">
       <div class="header">Formulario de pago</div>
 
@@ -10,41 +10,79 @@
           <div class="form-group">
             <label for="name">
               <i class="pi pi-user" />
-              Nombre</label
-            >
-            <input type="text" id="name" name="name" required />
+              <span>Nombre</span>
+            </label>
+            <input
+              v-model="orderForm.name"
+              type="text"
+              id="name"
+              name="name"
+              required
+              minlength="1"
+              maxlength="50"
+              placeholder="Escribe tu nombre"
+              autofocus
+            />
           </div>
 
           <div class="form-group">
             <label for="lastname">
               <i class="pi pi-user" />
-              Apellido</label
-            >
-            <input type="text" id="lastname" name="lastname" required />
+              <span> Apellido</span>
+            </label>
+            <input
+              v-model="orderForm.last_name"
+              type="text"
+              id="lastname"
+              name="lastname"
+              required
+              minlength="1"
+              maxlength="50"
+              placeholder="Escribe tu apellido"
+            />
           </div>
 
           <div class="form-group">
-            <label for="card-number">
+            <label for="phone">
               <i class="pi pi-phone" />
-              Telefono (Whatsapp, Telegram)</label
-            >
-            <input type="text" id="card-number" name="card-number" required />
+              <span>Telefono (Whatsapp, Telegram)</span>
+            </label>
+            <input
+              v-model="orderForm.phone"
+              type="text"
+              id="phone"
+              name="phone"
+              required
+              minlength="1"
+              maxlength="20"
+              placeholder="Numero de contacto"
+            />
           </div>
 
           <div class="form-group">
-            <label for="lastname">
+            <label for="address">
               <i class="pi pi-home" />
-              Direccion completa ( Conjunto, piso, apartamento )</label
-            >
-            <input type="text" id="lastname" name="lastname" required />
+              <span>Direccion completa (Conjunto, piso, apartamento)</span>
+            </label>
+            <input
+              v-model="orderForm.address"
+              type="text"
+              id="address"
+              name="address"
+              required
+              minlength="1"
+              maxlength="100"
+              placeholder="Ej. Calle 4A #43-54 Barrio cundinamarca"
+            />
           </div>
 
           <div class="form-group">
             <label for="department">
               <i class="pi pi-map-marker" />
-              Departamento</label
-            >
+              <span>Departamento</span>
+            </label>
             <select
+              v-model="orderForm.department"
               id="department"
               name="department"
               required
@@ -58,17 +96,26 @@
           </div>
 
           <div class="form-group">
-            <label for="ciudad">
+            <label for="city">
               <i class="pi pi-map-marker" />
-              Ciudad</label
-            >
-            <input type="text" id="ciudad" name="ciudad" required />
-          </div>
-
-          <div class="bottom">
-            <button type="submit">Listo</button>
+              <span>Ciudad</span>
+            </label>
+            <input
+              v-model="orderForm.city"
+              type="text"
+              id="city"
+              name="city"
+              required
+              minlength="1"
+              maxlength="30"
+              placeholder="Ej. Bogota"
+            />
           </div>
         </form>
+
+        <div class="bottom">
+          <button @click="handleOrder" >Listo</button>
+        </div>
       </div>
     </div>
   </div>
@@ -81,8 +128,12 @@ import landAPI from "@/pages/land/composable/land-api";
 
 export default {
   setup() {
-    const { getter__viewPaymentModal, action__viewPaymentModal } =
-      landAPI();
+    const {
+      getter__viewPaymentModal,
+      action__viewPaymentModal,
+      getter__productData,
+      action__createOrder,
+    } = landAPI();
 
     const outsideClick = ref(null);
 
@@ -92,11 +143,22 @@ export default {
       outsideClick,
       getter__viewPaymentModal,
       action__viewPaymentModal,
+      getter__productData,
+      action__createOrder,
     };
   },
 
   data() {
     return {
+      orderForm: {
+        name: "",
+        last_name: "",
+        phone: "",
+        address: "",
+        department: "",
+        city: "",
+        product_pid: this.getter__productData.pid,
+      },
       departaments: [
         "Amazonas",
         "Antioquia",
@@ -135,10 +197,16 @@ export default {
   },
   mounted() {
     if (this.getter__viewPaymentModal) {
-        const dialog = document.getElementById("dialog");
+      const dialog = document.getElementById("dialog");
 
-        document.body.appendChild(dialog);
-      }
+      document.body.appendChild(dialog);
+    }
+  },
+
+  methods: {
+    handleOrder() {
+      this.action__createOrder(this.orderForm);
+    },
   },
 };
 </script>
@@ -150,7 +218,7 @@ export default {
 }
 
 i {
-  margin-right: 0.25rem;
+  margin-right: 0.5rem;
 }
 
 .styled-dropdown {
@@ -161,11 +229,9 @@ i {
   border: 1px solid var(--border-a);
   padding: 0.75rem 0.5rem;
   font-size: var(--text-size-a);
-  width: 250px;
   outline: none;
   cursor: pointer;
-  border-radius: 6px;
-  margin-top: 0.5rem;
+  border-radius: 8px;
 }
 
 .styled-dropdown:hover {
@@ -192,25 +258,31 @@ i {
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 label {
-  display: block;
   font-weight: 600;
-  margin-bottom: 5px;
+  margin-bottom: 0.75rem;
   margin-top: 1rem;
   color: var(--text-a);
   font-size: var(--text-size-a);
+  display: flex;
+  align-items: center;
+  background: var(--base-d);
+  padding: 0.5rem;
+  border: 1px solid var(--border-a);
+  border-radius: 8px;
 }
 
 input[type="text"] {
-  width: 350px;
-  padding: 0.75rem 0.5rem;
-  border: 1px solid transparent;
+  padding: 0.75rem 1rem;
   font-size: var(--text-size-a);
   border: 1px solid var(--border-a);
-  border-radius: 6px;
+  border-radius: 8px;
   outline: none;
 }
 
@@ -237,7 +309,6 @@ button:hover {
 }
 
 .summary {
-  margin-bottom: 2rem;
   color: var(--text-b);
   font-size: var(--text-size-a);
 }
@@ -267,8 +338,7 @@ button:hover {
   backdrop-filter: blur(5px);
   margin: 5% auto;
   width: 100%;
-  padding: 0 0.75rem;
-  padding-bottom: 0.75rem;
+  padding: 0.75rem;
   max-width: 400px;
   border-radius: 16px;
 }

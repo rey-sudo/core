@@ -10,6 +10,9 @@ const landAPI = () => {
   const action__getProductData = async (params) =>
     await store.dispatch("land/action__getProductData", params);
 
+  const action__createOrder = async (params) =>
+    await store.dispatch("land/action__createOrder", params);
+
   const sleep = (timeInMs) =>
     new Promise((resolve) => setTimeout(() => resolve(false), timeInMs));
 
@@ -22,6 +25,7 @@ const landAPI = () => {
     ),
     action__viewPaymentModal,
     action__getProductData,
+    action__createOrder,
     sleep,
   };
 };

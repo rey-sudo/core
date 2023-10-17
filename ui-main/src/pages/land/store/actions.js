@@ -5,7 +5,6 @@ const action__viewPaymentModal = async ({ commit }, params) => {
 };
 
 
-
 const action__getProductData = async ({ commit }, params) => {
   try {
     const response = await axiosApi.get("/api/store/get-product", { params: params });
@@ -18,5 +17,17 @@ const action__getProductData = async ({ commit }, params) => {
   }
 };
 
+const action__createOrder = async ({ commit }, params) => {
+  try {
+    const response = await axiosApi.post("/api/store/create-order", params);
 
-export { action__viewPaymentModal, action__getProductData };
+    commit("commit__createOrder", response.data);
+
+    return { ok: true, response: response.data };
+  } catch (error) {
+    throw { ok: false, response: error.response.data };
+  }
+};
+
+
+export { action__viewPaymentModal, action__getProductData, action__createOrder };
