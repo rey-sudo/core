@@ -47,7 +47,7 @@
           <div class="p-dialog-wrap-body-form">
             <label for="phone">
               <i class="pi pi-phone" />
-              <span>Telefono (Whatsapp, Telegram)</span>
+              <span>Teléfono (Whatsapp, Telegram)</span>
             </label>
             <input
               v-model="orderForm.phone"
@@ -64,7 +64,7 @@
           <div class="p-dialog-wrap-body-form">
             <label for="address">
               <i class="pi pi-home" />
-              <span>Direccion (Conjunto, piso, apartamento)</span>
+              <span>Dirección (Conjunto, piso, apartamento)</span>
             </label>
             <input
               v-model="orderForm.address"

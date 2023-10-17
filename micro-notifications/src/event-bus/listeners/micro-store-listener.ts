@@ -1,6 +1,8 @@
 import { EVENT, Listener } from "@alphaicterus/global";
+import { S1_CHATID, bot } from "../../telegram";
+import { getTemplate } from "../../telegram/templates";
 import { _ } from "../../utils/logger";
-import { BOT_1_CHATID, bot } from "../../telegram";
+
 
 interface MicroStoreEvent {
   streamName: string;
@@ -29,18 +31,15 @@ export class MicroStoreListener extends Listener<MicroStoreEvent> {
     }
 
     ////////////////////////////////////////////////
-    
+
     if (event_action === "order-created") {
-      console.log("COMPLETEDEEDEDEDEDE", BOT_1_CHATID);
-
-      if(BOT_1_CHATID){
-        await bot.telegram.sendMessage(BOT_1_CHATID, event_payload)
+      if (S1_CHATID) {
+        await bot.telegram.sendMessage(S1_CHATID, getTemplate(payload));
       }
-
     }
 
-    ////////////////////////////////////////////////
-
     await this.ack(id, version);
+
+    ////////////////////////////////////////////////
   }
 }
