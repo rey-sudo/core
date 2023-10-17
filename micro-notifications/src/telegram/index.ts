@@ -3,38 +3,56 @@ import { message } from "telegraf/filters";
 
 const bot = new Telegraf("6508873772:AAEG1DR3D6_wvREhsHYToXnEBIhlT9w9Iig");
 
-const S1_KEY = "bot-de-magia";
-const S2_KEY = "bot-de-paco";
+interface SLAVE {
+  active: boolean;
+  user: string;
+  key: string;
+  chat_id: number | undefined;
+  interval: NodeJS.Timeout | undefined;
+  interval_duration: number | undefined;
+}
 
-let S1_CHATID: number | undefined;
+let S1: SLAVE = {
+  active: false,
+  user: "magia",
+  key: "password1",
+  chat_id: undefined,
+  interval: undefined,
+  interval_duration: 10000,
+};
+//////////////
 
-const S1_DELAY = 20000;
-const S2_DELAY = 20000;
+bot.hears(S1.user + ":" + S1.key, (ctx) => {
+  if (S1.active === false) {
+    ctx.reply("Escuchando ordenes");
 
-let S1_TIMEOUT: NodeJS.Timeout | undefined;
-let S2_TIMEOUT: NodeJS.Timeout | undefined;
+    S1.chat_id = ctx.message.chat.id;
+
+    S1.interval = setInterval(
+      () => ctx.reply("En linea 🟢"),
+      S1.interval_duration
+    );
+
+    S1.active = true;
+  }
+});
+
+bot.hears(S1.user + ":" + "stop", (ctx) => {
+  if (S1.active) {
+    S1.active = false;
+    S1.chat_id = undefined;
+    clearInterval(S1.interval);
+
+    ctx.reply("Bot detenido");
+  }
+});
+
+//////////////
 
 bot.start((ctx) => {
   ctx.reply("Welcome");
 });
 
-const startCommand = S1_KEY + ":" + "start";
-
-bot.hears(startCommand, (ctx) => {
-  ctx.reply("Escuchando ordenes");
-
-  S1_CHATID = ctx.message.chat.id;
-
-  S1_TIMEOUT = setInterval(() => ctx.reply("En linea 🟢"), S1_DELAY);
-});
-
-const stopCommand = S1_KEY + ":" + "detener";
-
-bot.hears(stopCommand, (ctx) => {
-  ctx.reply("Bot detenido");
-  clearInterval(S1_TIMEOUT);
-});
-
 bot.help((ctx) => ctx.reply("Send me a sticker"));
 
-export { bot, S1_CHATID };
+export { bot, S1 };
