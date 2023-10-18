@@ -99,11 +99,11 @@ export default {
   grid-gap: 2rem;
   z-index: 100;
   padding: 0 4rem;
-  margin: auto 0;
+  margin-top: 2rem;
 }
 
 .p-store-banner-item {
-  border-radius: 0px;
+  border-radius: 12px;
   background: var(--base-a);
   height: 300px;
   gap: 2rem;
@@ -208,4 +208,5 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 </style>

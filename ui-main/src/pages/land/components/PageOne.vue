@@ -151,14 +151,14 @@ h1 {
   font-weight: 600;
   color: var(--text-a);
   letter-spacing: -0.015em;
-  background: var(--base-a);
+  background: inherit;
 }
 
 h2 {
   font-size: var(--text-size-d);
   font-weight: 600;
   color: var(--text-a);
-  background: var(--base-a);
+  background: inherit;
 }
 
 .backgroundMask {
@@ -221,4 +221,36 @@ h2 {
 .p-pageOne .p-pageOne-wrap .p-pageOne-wrap-subtitle {
   line-height: 0px;
 }
+
+
+@media screen and (max-width: 767px) {
+  .p-header .p-header-wrap .p-header-wrap-nav {
+    display: none;
+
+  }
+  .p-header .p-header-wrap{
+    border: initial;
+  }
+  .p-pageOne .p-pageOne-wrap{
+    width: 100%;
+  }
+
+  .p-pageOne .p-pageOne-wrap .p-pageOne-wrap-subtitle{
+  line-height: initial;
+  padding: 0 1rem;
+  }
+  .p-pageOne {
+    background: var(--base-b) !important;
+  }
+
+  h1{
+    font-size: var(--text-size-e);
+  }
+
+  h2{
+    font-size: var(--text-size-b);
+    font-weight: initial;
+  }
+}
+
 </style>
