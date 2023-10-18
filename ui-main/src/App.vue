@@ -58,6 +58,7 @@ body {
   --base-d: #fafafa;
 
   --blue: #0071e3;
+  --green: #00ed64;
 
   --secondary-a: #131722;
   --secondary-b: #2d313c;

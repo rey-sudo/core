@@ -54,22 +54,19 @@
         </h2>
       </div>
 
-      <LandSlider />
-      <LandSliderMobile />
+      <LandSlider/>
     </div>
   </div>
 </template>
 
 <script>
 import LandSlider from "@/pages/land/components/LandSlider.vue";
-import LandSliderMobile from "@/pages/land/components/mobile/LandSliderMobile.vue";
 import landAPI from "@/pages/land/composable/land-api";
 import { useRouter } from "vue-router";
 
 export default {
   components: {
-    LandSlider,
-    LandSliderMobile,
+    LandSlider
   },
   setup() {
     const router = useRouter();

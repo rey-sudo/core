@@ -105,6 +105,7 @@ export default {
           onlyInViewport: false,
         },
         grabCursor: false,
+        resistance: false,
         speed: 400,
         spaceBetween: 0,
         mousewheel: {

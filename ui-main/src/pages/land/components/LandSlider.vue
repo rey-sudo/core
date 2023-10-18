@@ -66,6 +66,8 @@ export default {
     this.slider = new Swiper(".itemSliderSwiper", {
       zoom: true,
       mousewheel: false,
+      autoplay: true,
+      loop: true,
       direction: "vertical",
     });
   },
@@ -169,9 +171,8 @@ export default {
   bottom: -2rem;
 }
 
-
 @media screen and (max-width: 767px) {
-  .p-slider{
+  .p-slider {
     display: none;
   }
 }
