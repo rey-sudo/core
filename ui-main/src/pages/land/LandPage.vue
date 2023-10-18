@@ -215,4 +215,16 @@ export default {
     opacity: 1;
   }
 }
+
+
+@media screen and (max-width: 767px) {
+  .loader{
+    display: none;
+  }
+
+  .swiper-pagination{
+    display: none;
+  }
+}
+
 </style>

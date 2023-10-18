@@ -2,13 +2,7 @@
   <div class="p-slider">
     <div class="p-slider-grid">
       <div class="p-slider-grid-item left">
-        <div class="navigation-button prev" @click="slidePrev(index)">
-          <i class="pi pi-angle-up" />
-        </div>
 
-        <div class="navigation-button next" @click="slideNext(index)">
-          <i class="pi pi-angle-down" />
-        </div>
 
         <!--SLIDER-->
         <div
@@ -61,17 +55,11 @@ export default {
       zoom: true,
       mousewheel: false,
       direction: "vertical",
+      autoplay: true,
+      freeMode: true,
+      loop: true
     });
-  },
-  methods: {
-    slidePrev() {
-      this.slider.slidePrev();
-    },
-
-    slideNext() {
-      this.slider.slideNext();
-    },
-  },
+  }
 };
 </script>
 
@@ -122,39 +110,6 @@ export default {
   height: 0.75rem;
   border-radius: 0px;
 }
-
-.navigation-button {
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  z-index: 100;
-  border-radius: 6px;
-  font-size: var(--text-size-d);
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-  background: rgba(255, 255, 255, 0.5);
-  color: var(--text-a);
-  transition: var(--button-transition-a);
-}
-
-.navigation-button:hover {
-  background: var(--base-a);
-  box-shadow: var(--shadow-c);
-  color: var(--text-a);
-}
-
-.navigation-button.prev {
-  left: 4rem;
-  bottom: -2rem;
-}
-
-.navigation-button.next {
-  left: 8rem;
-  bottom: -2rem;
-}
-
 
 @media screen and (max-width: 767px) {
   .p-slider{
