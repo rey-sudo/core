@@ -55,18 +55,21 @@
       </div>
 
       <LandSlider />
+      <LandSliderMobile />
     </div>
   </div>
 </template>
 
 <script>
 import LandSlider from "@/pages/land/components/LandSlider.vue";
+import LandSliderMobile from "@/pages/land/components/mobile/LandSliderMobile.vue";
 import landAPI from "@/pages/land/composable/land-api";
 import { useRouter } from "vue-router";
 
 export default {
   components: {
     LandSlider,
+    LandSliderMobile,
   },
   setup() {
     const router = useRouter();
@@ -222,35 +225,35 @@ h2 {
   line-height: 0px;
 }
 
-
 @media screen and (max-width: 767px) {
   .p-header .p-header-wrap .p-header-wrap-nav {
     display: none;
-
   }
-  .p-header .p-header-wrap{
+  .p-header .p-header-wrap {
     border: initial;
   }
-  .p-pageOne .p-pageOne-wrap{
+  .p-pageOne .p-pageOne-wrap {
     width: 100%;
+    height:  100%;
+    min-height:  100%;
+    max-height:  100%;
   }
 
-  .p-pageOne .p-pageOne-wrap .p-pageOne-wrap-subtitle{
-  line-height: initial;
-  padding: 0 1rem;
+  .p-pageOne .p-pageOne-wrap .p-pageOne-wrap-subtitle {
+    line-height: initial;
+    padding: 0 1rem;
   }
   .p-pageOne {
     background: var(--base-b) !important;
   }
 
-  h1{
+  h1 {
     font-size: var(--text-size-e);
   }
 
-  h2{
+  h2 {
     font-size: var(--text-size-b);
     font-weight: initial;
   }
 }
-
 </style>
