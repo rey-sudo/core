@@ -168,4 +168,11 @@ export default {
   left: 8rem;
   bottom: -2rem;
 }
+
+
+@media screen and (max-width: 767px) {
+  .p-slider{
+    display: none;
+  }
+}
 </style>

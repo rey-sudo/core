@@ -132,8 +132,9 @@ export default {
 
 ::v-deep(.swiper-pagination-bullet) {
   background: var(--secondary-a);
-  width: 0.5rem;
+  width: 0.25rem;
   height: 0.5rem;
+  border-radius: initial;
 }
 
 .container {
