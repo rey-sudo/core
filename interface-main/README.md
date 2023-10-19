@@ -1,4 +1,4 @@
-# ui-main
+# interface-main
 
 ## Project setup
 ```

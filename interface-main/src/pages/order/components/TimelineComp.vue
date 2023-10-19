@@ -49,13 +49,15 @@
   justify-content: center
 .li
   transition: all 200ms ease-in
+  width: 240px
+  transition: all 200ms ease-in
 
 span
   margin-bottom: 0.5rem
 
 .date
   color: var(--text-b)
-  
+
 .timestamp
   margin-bottom: 1rem
   padding: 0px 40px

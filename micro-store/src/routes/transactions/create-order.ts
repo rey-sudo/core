@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { EVENT, Pub } from "@alphaicterus/global";
-import { Order, OrderAttrs } from "../../models";
+import { Order, OrderAttrs, OrderDocument } from "../../models";
 import { _ } from "../../utils/logger";
 
 
@@ -39,5 +39,5 @@ export const createOrder = async (params: OrderAttrs) => {
     .catch((e) => _.error(e))
     .finally(() => session.endSession());
 
-  return response ? { success: true } : { success: false };
+  return response ? response as OrderDocument : false;
 };

@@ -61,7 +61,7 @@ img{
 }
 
 .p-order-wrap-top {
-  height: 50%;
+  height: 40%;
   background: var(--green);
   display: flex;
   flex-direction: column;
@@ -83,7 +83,7 @@ img{
 }
 
 .p-order-wrap-bottom{
-  height: 50%;
+  height: 60%;
   display: flex;
   align-items: center;
   justify-content: center;

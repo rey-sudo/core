@@ -12,8 +12,8 @@ build:
     push: false
     concurrency: 0
   artifacts:
-    - image: alphaicterus/ui-main
-      context: ui-main
+    - image: alphaicterus/interface-main
+      context: interface-main
       docker:
         dockerfile: Dockerfile
       sync:

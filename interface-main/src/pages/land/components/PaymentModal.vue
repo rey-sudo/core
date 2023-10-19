@@ -1,12 +1,12 @@
 <template>
   <div class="p-dialog" id="dialog">
     <div class="p-dialog-wrap" ref="outsideClick">
-
       <div class="p-dialog-wrap-head">Formulario de pago</div>
 
       <div class="p-dialog-wrap-body">
-        
-        <div class="p-dialog-wrap-body-label">*Pagas cuando el producto llegue a tu casa*</div>
+        <div class="p-dialog-wrap-body-label">
+          *Pagas cuando el producto llegue a tu casa*
+        </div>
 
         <form>
           <div class="p-dialog-wrap-body-form">
@@ -126,6 +126,7 @@
 <script>
 import { ref } from "vue";
 import { onClickOutside } from "@vueuse/core";
+import { useRouter } from "vue-router";
 import landAPI from "@/pages/land/composable/land-api";
 
 export default {
@@ -137,11 +138,14 @@ export default {
       action__createOrder,
     } = landAPI();
 
+    const router = useRouter();
+
     const outsideClick = ref(null);
 
     onClickOutside(outsideClick, () => action__viewPaymentModal(false));
 
     return {
+      router,
       outsideClick,
       getter__viewPaymentModal,
       action__viewPaymentModal,
@@ -208,7 +212,14 @@ export default {
   methods: {
     handleOrder() {
       this.action__createOrder(this.orderForm)
-        .then((res) => console.log(res))
+        .then((res) => {
+          this.action__viewPaymentModal(false);
+
+          this.router.push({
+            name: "order",
+            params: { pid: res.response.pid },
+          });
+        })
         .catch((err) => console.error(err));
     },
   },
@@ -240,7 +251,6 @@ i {
 .department-dropdown:focus {
   border: 1px solid var(--blue);
 }
-
 
 .department-dropdown option {
   background-color: #fff;
@@ -283,10 +293,6 @@ button:hover {
   background: black;
 }
 
-
-
-
-
 .p-dialog {
   display: none;
   display: initial;
@@ -317,7 +323,6 @@ button:hover {
   font-size: var(--text-size-b);
 }
 
-
 .p-dialog .p-dialog-wrap .p-dialog-wrap-body {
   background: var(--base-a);
   border-radius: 8px;
@@ -329,9 +334,6 @@ button:hover {
   color: var(--text-b);
   font-size: var(--text-size-a);
 }
-
-
-
 
 .p-dialog .p-dialog-wrap .p-dialog-wrap-body .p-dialog-wrap-body-form {
   margin-top: 2rem;

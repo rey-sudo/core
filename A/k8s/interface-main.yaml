@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ui-main
+  name: interface-main
 spec:
   replicas: 1
   selector:
     matchLabels:
-      role: ui-main
+      role: interface-main
   template:
     metadata:
       labels:
-        role: ui-main
+        role: interface-main
     spec:
       containers:
-        - name: ui-main
-          image: alphaicterus/ui-main
+        - name: interface-main
+          image: alphaicterus/interface-main
           resources:
             limits:
               memory: "500Mi"
@@ -24,12 +24,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ui-main
+  name: interface-main
 spec:
   selector:
-    role: ui-main
+    role: interface-main
   ports:
-    - name: ui-main
+    - name: interface-main
       protocol: TCP
       port: 8000
       targetPort: 80

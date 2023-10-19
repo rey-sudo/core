@@ -14,7 +14,7 @@ const createOrderHandler = async (req: Request, res: Response) => {
   const orderCreated = await createOrder(req.body);
 
 
-  if (!orderCreated.success) {
+  if (!orderCreated) {
     throw new BadRequestError("CREATE_ERROR");
   }
 

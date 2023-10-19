@@ -32,7 +32,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: ui-main
+                name: interface-main
                 port:
                   number: 8000
           - path: /api/store/?(.*)
