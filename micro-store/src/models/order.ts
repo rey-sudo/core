@@ -113,19 +113,19 @@ const orderSchema = new mongoose.Schema(
       dispatch: {
         status: { type: Boolean, default: false },
         date: { type: Date, default: new Date() },
-        text: { type: String, default: "..." },
+        text: { type: String, default: "En espera" },
       },
 
       shipping: {
         status: { type: Boolean, default: false },
         date: { type: Date, default: new Date() },
-        text: { type: String, default: "..." },
+        text: { type: String, default: "En espera" },
       },
 
       delivery: {
         status: { type: Boolean, default: false },
         date: { type: Date, default: new Date() },
-        text: { type: String, default: "..." },
+        text: { type: String, default: "En espera" },
       },
     },
   },

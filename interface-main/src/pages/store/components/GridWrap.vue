@@ -61,7 +61,10 @@
                       gray: item.shipping_tax,
                     }"
                   >
-                    <span v-if="!shipping_tax"> {{ item.shipping_label }}</span>
+                    <span v-if="!shipping_tax">
+                      <span> {{ item.shipping_label }} </span>
+                      <i class="pi pi-bolt" />
+                    </span>
                   </div>
                 </div>
 
@@ -143,7 +146,6 @@ export default {
   grid-auto-rows: minmax(100px, auto);
   gap: 20px;
   padding: 0 4rem;
-  background: var(--base-b);
 }
 
 .dollar {
@@ -259,7 +261,6 @@ export default {
   font-size: var(--text-size-a);
   font-weight: 600;
 }
-
 
 .card:hover {
   box-shadow: var(--shadow-d);
