@@ -214,6 +214,7 @@ export default {
       this.action__createOrder(this.orderForm)
         .then((res) => {
           this.action__viewPaymentModal(false);
+          console.log(res.response);
 
           this.router.push({
             name: "order",

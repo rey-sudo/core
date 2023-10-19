@@ -2,18 +2,24 @@
   <div class="p-order">
     <div class="p-order-wrap">
       <div class="p-order-wrap-top">
-        <img src="./assets/drawing.svg" alt="" />
-        <div class="p-order-wrap-top-title">
-          <span>¡Listo! Tu paquete va en camino</span>
-        </div>
+        <div class="image">
+          <img src="./assets/drawing.svg" alt="" />
+          <div class="p-order-wrap-top-title">
+            <span>¡Listo! Tu paquete va en camino</span>
+          </div>
 
-        <div class="p-order-wrap-top-subtitle">
-          <span>Orden: 8HHD73HZJC</span>
+          <div class="p-order-wrap-top-subtitle">
+            <span>Orden: 8HHD73HZJC</span>
+          </div>
+          <div class="p-order-wrap-top-timeline">
+            <TimelineComp />
+          </div>
+        
         </div>
       </div>
 
       <div class="p-order-wrap-bottom">
-        <TimelineComp />
+   
       </div>
     </div>
   </div>
@@ -30,12 +36,16 @@ export default {
 </script>
 
 <style lang="css" scoped>
-img{
+img {
   animation: bounce 2s ease-in-out infinite;
 }
 
 @keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
     transform: translateY(0) rotate(0deg);
   }
   40% {
@@ -44,6 +54,19 @@ img{
   60% {
     transform: translateY(-10px) rotate(5deg);
   }
+}
+.p-order-wrap-top-timeline{
+  position: fixed;
+  top: 48%;
+}
+.image {
+  width: 1000px;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .p-order {
@@ -61,7 +84,7 @@ img{
 }
 
 .p-order-wrap-top {
-  height: 40%;
+  height: 50%;
   background: var(--green);
   display: flex;
   flex-direction: column;
@@ -76,14 +99,14 @@ img{
   margin-top: 2rem;
 }
 
-.p-order-wrap-top-subtitle{
+.p-order-wrap-top-subtitle {
   color: var(--text-w);
   font-size: var(--text-size-c);
   margin-top: 1rem;
 }
 
-.p-order-wrap-bottom{
-  height: 60%;
+.p-order-wrap-bottom {
+  height: 50%;
   display: flex;
   align-items: center;
   justify-content: center;

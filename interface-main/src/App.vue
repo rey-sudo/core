@@ -82,7 +82,7 @@ body {
     ),
     rgba(138, 151, 255, 0.24);
 
-  --shadow-a: 0 5px 40px rgba(138, 151, 255, 0.3);
+  --shadow-a: 0 5px 40px rgba(0, 0, 0, 0.1);
   --shadow-b: 0 2px 3px -1px rgba(0, 0, 0, 0.2), 0 0 1px 0 rgba(0, 0, 0, 0.14),
     0 1px 3px 0 rgba(0, 0, 0, 0.12);
   --shadow-c: rgba(0, 0, 0, 0.08) 0px 4px 16px;
@@ -114,5 +114,8 @@ body {
 
 .gray {
   color: gray;
+}
+ul{
+  margin: initial;
 }
 </style>

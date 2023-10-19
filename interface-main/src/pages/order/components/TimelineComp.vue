@@ -6,7 +6,7 @@
         <span class="date">14/12/2023</span>
       </div>
       <div class="status">
-        <h4>Compra</h4>
+        <label>Compra</label>
       </div>
     </li>
     <li class="li complete">
@@ -15,7 +15,7 @@
         <span class="date">17/12/2023</span>
       </div>
       <div class="status">
-        <h4>Despacho</h4>
+        <label>Despacho</label>
       </div>
     </li>
     <li class="li complete">
@@ -24,7 +24,7 @@
         <span class="date">18/12/2023</span>
       </div>
       <div class="status">
-        <h4>Transporte</h4>
+        <label>Transporte</label>
       </div>
     </li>
     <li class="li">
@@ -33,7 +33,7 @@
         <span class="date">21/12/2023</span>
       </div>
       <div class="status">
-        <h4>Entrega</h4>
+        <label>Entrega</label>
       </div>
     </li>
   </ul>
@@ -47,6 +47,10 @@
   display: flex
   align-items: center
   justify-content: center
+  background: var(--base-a)
+  padding: 1rem
+  border-radius: 12px
+  box-shadow: var(--shadow-a)
 .li
   transition: all 200ms ease-in
   width: 240px
@@ -60,20 +64,23 @@ span
 
 .timestamp
   margin-bottom: 1rem
-  padding: 0px 40px
   display: flex
   flex-direction: column
-  align-items: center
   font-weight: 100
+  justify-content: center
+  align-items: center
+  text-align: center
 .status
-  padding: 0px 40px
   display: flex
   justify-content: center
+  align-items: center
   border-top: 2px solid var(--border-a)
   position: relative
   transition: all 200ms ease-in
-  h4
+  label
     font-weight: 600
+    margin-top: 18px
+    margin-right: 9px
     color: var(--text-b)
   &:before
     content: ''
@@ -99,7 +106,7 @@ span
       background: var(--green)
       border: 1px solid transparent
       transition: all 200ms ease-in
-    h4
+    label
       color: var(--green)
 
 @media (min-device-width: 320px) and (max-device-width: 700px)
