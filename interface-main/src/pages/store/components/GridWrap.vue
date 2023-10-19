@@ -4,7 +4,12 @@
       <div class="title">{{ row.title }}</div>
 
       <div class="p-grid-row">
-        <div class="card" v-for="item in row.items" :key="item">
+        <div
+          class="card"
+          v-for="item in row.items"
+          :key="item"
+          @click="handleClick(item.pid)"
+        >
           <div class="card-header">
             <div class="card-image">
               <img src="@/pages/store/assets/150x150.webp" alt="" />
@@ -77,6 +82,10 @@ export default {
     return { router, getter__allProducts };
   },
   methods: {
+    handleClick(pid) {
+      this.router.push({ name: "land", params: { pid: pid } });
+    },
+    
     formatPrice(num) {
       const price = num || 0;
 
@@ -203,7 +212,7 @@ export default {
   align-items: center;
 }
 
-.card-body-shipping i{
+.card-body-shipping i {
   margin-left: 0.25rem;
 }
 .card-header {
@@ -235,7 +244,6 @@ export default {
   font-size: var(--text-size-a);
   text-transform: capitalize;
   text-align: left;
-  font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: center;

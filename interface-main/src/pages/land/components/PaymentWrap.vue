@@ -2,7 +2,7 @@
   <div class="p-payment">
     <PaymentModal v-if="getter__viewPaymentModal" />
     <div class="p-discount">
-      {{ getter__productData.discount_label }}
+      {{ getter__productData.discount }}{{ getter__productData.discount_label }}
     </div>
 
     <div class="card-body-diff">
@@ -38,7 +38,7 @@
       }"
     >
       <span v-if="!shipping_tax">
-        {{ getter__productData.shipping_label }} <i class="pi pi-bolt"/> </span
+        {{ getter__productData.shipping_label }} <i :class="getter__productData.shipping_icon"/> </span
       >
     </div>
 
