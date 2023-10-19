@@ -1,5 +1,5 @@
 import App from './App.vue'
-import { store } from "./store";
+import { stores } from "./store";
 import { router } from "./router";
 import { createApp } from 'vue';
 import 'primeicons/primeicons.css';
@@ -7,7 +7,7 @@ import 'primeicons/primeicons.css';
 const app = createApp(App)
 
 
-app.use(store);
+app.use(stores);
 
 app.use(router);
 

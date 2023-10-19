@@ -1,6 +1,7 @@
 <template>
   <div class="p-grid">
-    <div class="p-grid-item" v-for="(row, index) of dataList" :key="row">
+   
+    <div class="p-grid-item" v-for="(row, index) of getter__allProducts" :key="row">
       <div class="title">{{ row.title }}</div>
 
       <div class="p-grid-row">
@@ -88,18 +89,25 @@
 <script>
 import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
-
-import { dataList } from "../utils/queryData";
+import storeAPI from '@/pages/store/composable/store-api';
+import { useRouter } from "vue-router";
 
 export default {
+  setup() {
+    const router = useRouter();
+
+    const { getter__allProducts } = storeAPI();
+
+    return { router, getter__allProducts };
+  },
+
   data() {
     return {
-      dataList: dataList,
       sliderList: [],
     };
   },
   mounted() {
-    for (let index = 0; index < dataList.length; index++) {
+    for (let index = 0; index < this.getter__allProducts?.length; index++) {
       let prov = "." + "swiperInstance" + index;
 
       const slicer = new Swiper(prov, {

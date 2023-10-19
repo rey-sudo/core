@@ -41,6 +41,8 @@
 import MainHeader from "@/components/MainHeader.vue";
 import GridWrap from "@/pages/store/components/GridWrap.vue";
 import FilterWrap from "@/pages/store/components/FilterWrap.vue";
+import storeAPI from "@/pages/store/composable/store-api";
+import { useRouter } from "vue-router";
 
 export default {
   components: {
@@ -48,6 +50,17 @@ export default {
     GridWrap,
     FilterWrap,
   },
+
+  setup() {
+    const router = useRouter();
+
+    const { action__getAllProducts } = storeAPI();
+
+    action__getAllProducts().catch((err) => console.error(err));
+
+    return { router, action__getAllProducts };
+  },
+
   data() {
     return {
       selectedTab: "all",
@@ -208,5 +221,4 @@ export default {
   align-items: center;
   justify-content: center;
 }
-
 </style>

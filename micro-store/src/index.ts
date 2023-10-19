@@ -7,8 +7,11 @@ import { eventBus } from "./event-bus/client/client";
 import { eventDriver } from "./event-driver/driver";
 import { connHandler, errorHandler, setTimeOut } from "./pod/index";
 import { app } from "./app";
-import { NotFoundError, errorMiddleware, rateLimit } from "@alphaicterus/global";
-
+import {
+  NotFoundError,
+  errorMiddleware,
+  rateLimit,
+} from "@alphaicterus/global";
 
 const main = async () => {
   try {
@@ -105,7 +108,7 @@ const main = async () => {
         autoIndex: false,
         ssl: true,
         sslValidate: false,
-        sslCA: `${__dirname}/cert.pem`
+        sslCA: `${__dirname}/cert.pem`,
       })
       .then(() => connHandler("mongoose"))
       .catch((e) => errorHandler("MONGO_CONN", e));
@@ -194,6 +197,18 @@ const main = async () => {
     );
 
     app.get(
+      "/api/store/get-all-products",
+
+      rateLimit(limiterStore.client, {
+        path: "get-all-products",
+        windowMs: process.env.GENERAL_LIMIT_TIME,
+        max: process.env.GENERAL_LIMIT_MAX,
+      }),
+
+      ROUTES.getAllProductsHandler
+    );
+
+    app.get(
       "/api/store/get-order",
 
       rateLimit(limiterStore.client, {
@@ -206,7 +221,6 @@ const main = async () => {
 
       ROUTES.getOrderHandler
     );
-
 
     app.post(
       "/api/store/create-order",
