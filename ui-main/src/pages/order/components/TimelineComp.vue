@@ -3,7 +3,7 @@
     <li class="li complete">
       <div class="timestamp">
         <span class="author">Confirmación</span>
-        <span class="date">11 sep 2023</span>
+        <span class="date">14/12/2023</span>
       </div>
       <div class="status">
         <h4>Compra</h4>
@@ -12,7 +12,7 @@
     <li class="li complete">
       <div class="timestamp">
         <span class="author">Preparación</span>
-        <span class="date">14 sep 2023</span>
+        <span class="date">17/12/2023</span>
       </div>
       <div class="status">
         <h4>Despacho</h4>
@@ -20,8 +20,8 @@
     </li>
     <li class="li complete">
       <div class="timestamp">
-        <span class="author">Guia #85495845</span>
-        <span class="date">17 sep 2023</span>
+        <span class="author">Envia #85495845</span>
+        <span class="date">18/12/2023</span>
       </div>
       <div class="status">
         <h4>Transporte</h4>
@@ -30,7 +30,7 @@
     <li class="li">
       <div class="timestamp">
         <span class="author">LLegando a casa</span>
-        <span class="date">18 sep 2023</span>
+        <span class="date">21/12/2023</span>
       </div>
       <div class="status">
         <h4>Entrega</h4>
@@ -50,8 +50,14 @@
 .li
   transition: all 200ms ease-in
 
+span
+  margin-bottom: 0.5rem
+
+.date
+  color: var(--text-b)
+  
 .timestamp
-  margin-bottom: 20px
+  margin-bottom: 1rem
   padding: 0px 40px
   display: flex
   flex-direction: column
@@ -61,7 +67,7 @@
   padding: 0px 40px
   display: flex
   justify-content: center
-  border-top: 2px solid #D6DCE0
+  border-top: 2px solid var(--border-a)
   position: relative
   transition: all 200ms ease-in
   h4
@@ -71,22 +77,28 @@
     content: ''
     width: 25px
     height: 25px
-    background-color: white
+    place-items: center
+    background: white
     border-radius: 25px
-    border: 1px solid #ddd
+    line-height: initial
+    color: var(--green)
+    text-align: center
+    vertical-align: middle
+    display: inline-block
+    border: 1px solid var(--border-a)
     position: absolute
     top: -15px
     left: 42%
     transition: all 200ms ease-in
 .li.complete
   .status
-    border-top: 2px solid #66DC71
+    border-top: 2px solid var(--green)
     &:before
-      background-color: #66DC71
-      border: none
+      background: var(--green)
+      border: 1px solid transparent
       transition: all 200ms ease-in
     h4
-      color: #66DC71
+      color: var(--green)
 
 @media (min-device-width: 320px) and (max-device-width: 700px)
   .timeline

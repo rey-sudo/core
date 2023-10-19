@@ -58,7 +58,7 @@ body {
   --base-d: #fafafa;
 
   --blue: #0071e3;
-  --green: #00ed64;
+  --green: #27b46a;
 
   --secondary-a: #131722;
   --secondary-b: #2d313c;
@@ -101,7 +101,7 @@ body {
 }
 
 .green {
-  color: mediumseagreen;
+  color: #27b46a;
 }
 
 .blue {
