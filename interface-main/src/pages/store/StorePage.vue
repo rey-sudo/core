@@ -70,8 +70,8 @@ export default {
           badgeLabel: "",
         },
         {
-          label: "Ultimo",
-          value: "latest",
+          label: "Nuevo",
+          value: "new",
           badge: false,
           badgeLabel: "",
         },

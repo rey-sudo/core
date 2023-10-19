@@ -116,7 +116,6 @@ header {
 .p-header .p-header-logo {
   cursor: pointer;
   height: var(--text-size-e);
-  opacity: 0;
 }
 
 .p-header-divider {
