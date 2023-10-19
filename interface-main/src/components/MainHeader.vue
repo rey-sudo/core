@@ -30,16 +30,13 @@
     </div>
 
     <div class="p-header-column right">
-      <div class="p-header-wallet" :class="{ scrolled: isScrolled }">
-        <div><i class="pi pi-wallet" /></div>
-
-        <div class="p-header-divider" :class="{ scrolled: isScrolled }" />
-
-        <span>{{ labels.walletLabel }}</span>
+      <div class="p-header-button" :class="{ scrolled: isScrolled }">
+        <i class="pi pi-shopping-cart" />
+        <span></span>
       </div>
 
-      <div class="p-header-config" :class="{ scrolled: isScrolled }">
-        <i class="pi pi-cog" />
+      <div class="p-header-button" :class="{ scrolled: isScrolled }">
+        <i class="pi pi-wallet" />
       </div>
     </div>
   </header>
@@ -101,43 +98,25 @@ header {
   background: var(--border-a);
 }
 
-.p-header-wallet.scrolled {
-  background: inherit;
-  border: 1px solid var(--border-a);
-}
-
-.p-header-wallet.scrolled:hover {
-  border: 1px solid var(--secondary-d);
-}
-
-.p-header-config.scrolled {
-  background: inherit;
-  border: 1px solid var(--border-a);
-}
-
-.p-header-config.scrolled:hover {
-  border: 1px solid var(--secondary-d);
-}
-
 .p-header-search.scrolled {
   border: 1px solid var(--border-a);
   color: var(--text-b);
-  padding: 0.5rem;
 }
 
 .p-header-search.scrolled:focus-within {
-  border: 1px solid var(--secondary-d);
+  border: 1px solid var(--blue);
   color: var(--text-b);
 }
 
 .p-header-search.scrolled:hover {
-  border: 1px solid var(--secondary-d);
+  border: 1px solid var(--blue);
   color: var(--text-b);
 }
 
 .p-header .p-header-logo {
   cursor: pointer;
   height: var(--text-size-e);
+  opacity: 0;
 }
 
 .p-header-divider {
@@ -189,45 +168,21 @@ header {
   opacity: 0.7;
 }
 
-.p-header-wallet {
+.p-header-button {
   font-weight: 600;
-  font-size: var(--text-size-a);
-  border-radius: 999px;
-  padding: 0.75rem 1rem;
+  font-size: var(--text-size-c);
+  padding: 1rem;
   display: flex;
   align-items: center;
   white-space: nowrap;
   cursor: pointer;
-  border: 1px solid transparent;
-  transition: var(--button-transition-a);
-}
-
-.p-header-config {
-  font-weight: 600;
-  font-size: var(--text-size-a);
-  border-radius: 999px;
-  padding: 0.75rem 1rem;
-  background: var(--secondary-b);
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  cursor: pointer;
-  border: transparent;
   border: 1px solid transparent;
   transition: var(--button-transition-a);
   margin-left: 1rem;
 }
 
-.p-header-config:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-.p-header-wallet:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
 .p-header-search {
-  line-height: 26px;
-  border: 3px solid transparent;
+  border: 1px solid transparent;
   background: var(--base-a);
   transition: var(--button-transition-a);
   cursor: text;
@@ -235,28 +190,27 @@ header {
   align-items: center;
   border-radius: 999px;
   width: 100%;
-  color: inherit;
   color: var(--text-a);
   font-size: var(--text-size-a);
-  padding: calc(0.5rem - 2px);
+  padding: 0.25rem;
 }
 
 .p-header-search:hover {
-  border: 3px solid var(--secondary-d);
+  border: 1px solid var(-blue);
 }
 
 .p-header-search:focus-within {
-  border: 3px solid var(--secondary-d);
+  border: 1px solid var(--blue);
 }
 
 .p-header-search div {
-  height: 28px;
   background: black;
-  color: white;
+  color: var(--text-w);
+  font-size: var(--text-size-b);
   border-radius: 999px;
   display: flex;
   align-items: center;
-  padding: 0 1rem;
+  padding: 1rem;
   cursor: pointer;
 }
 
@@ -270,8 +224,6 @@ header {
   outline: none;
   width: 100%;
   font-size: var(--text-size-a);
-  line-height: 26px;
-  min-height: 26px;
   color: inherit;
   margin: 0 1rem;
 }

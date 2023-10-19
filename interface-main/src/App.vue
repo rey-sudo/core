@@ -113,7 +113,7 @@ body {
 }
 
 .gray {
-  color: gray;
+  color: var(--text-b);
 }
 ul{
   margin: initial;

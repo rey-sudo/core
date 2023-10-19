@@ -40,15 +40,13 @@
 <script>
 import MainHeader from "@/components/MainHeader.vue";
 import GridWrap from "@/pages/store/components/GridWrap.vue";
-import FilterWrap from "@/pages/store/components/FilterWrap.vue";
 import storeAPI from "@/pages/store/composable/store-api";
 import { useRouter } from "vue-router";
 
 export default {
   components: {
     MainHeader,
-    GridWrap,
-    FilterWrap,
+    GridWrap
   },
 
   setup() {
@@ -106,6 +104,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
 .p-store-banner {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -117,7 +116,7 @@ export default {
 
 .p-store-banner-item {
   border-radius: 12px;
-  background: var(--base-a);
+  background: var(--base-b);
   height: 300px;
   gap: 2rem;
   flex: 1;
@@ -147,10 +146,6 @@ export default {
   flex-direction: column;
 }
 
-.active {
-  background: var(--secondary-b);
-}
-
 .p-store-top {
   width: inherit;
   height: 600px;
@@ -171,16 +166,16 @@ export default {
   position: absolute;
   backdrop-filter: blur(0px);
   background: linear-gradient(180deg, var(--secondary-c) 80%, transparent 100%);
+  background: var(--base-a);
 }
 
 .p-store-submenu {
-  padding: 1rem;
   padding-left: 4rem;
-  margin-top: 78px;
+  margin-top: 74px;
   z-index: 100;
   display: flex;
   align-items: center;
-  background: var(--secondary-a);
+  background: var(--secondary-b);
 }
 
 .p-store-submenu-nav {
@@ -191,12 +186,14 @@ export default {
   font-size: var(--text-size-a);
   white-space: nowrap;
   cursor: pointer;
-  padding: 0.75rem;
-  border-radius: 999px;
-  margin-right: 0.5rem;
+  padding: 1rem 0;
+  margin-right: 2rem;
   color: var(--text-w);
 }
 
+.p-store-submenu-nav div:hover{
+  color: var(--blue);
+}
 .p-header-column {
   flex-basis: 33.33%;
 }

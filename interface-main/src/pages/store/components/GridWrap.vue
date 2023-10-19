@@ -1,83 +1,61 @@
 <template>
   <div class="p-grid">
-   
-    <div class="p-grid-item" v-for="(row, index) of getter__allProducts" :key="row">
+    <div class="p-grid-item" v-for="row of getter__allProducts" :key="row">
       <div class="title">{{ row.title }}</div>
 
       <div class="p-grid-row">
-        <div class="p-grid-row-slider prev" @click="slidePrev(index)">
-          <i class="pi pi-angle-left" />
-        </div>
+        <div class="card" v-for="item in row.items" :key="item">
+          <div class="card-header">
+            <div class="card-image">
+              <img src="@/pages/store/assets/150x150.webp" alt="" />
+            </div>
+          </div>
 
-        <div class="p-grid-row-slider next" @click="slideNext(index)">
-          <i class="pi pi-angle-right" />
-        </div>
+          <div class="card-body">
+            <div class="card-body-name">
+              <span> {{ item.name }}</span>
+            </div>
 
-        <div :class="customClass(index)">
-          <div class="swiper-wrapper">
+            <div class="card-body-diff">
+              <span> {{ formatPrice(item.price_diff) }} </span>
+            </div>
+
+            <div class="card-body-price">
+              <span class="dollar">$ </span>
+              <span> {{ formatPrice(item.price) }} </span>
+            </div>
+
+            <div class="card-body-upon">
+              {{ item.payment_type }}
+            </div>
+
             <div
-              class="swiper-slide card"
-              v-for="item in row.items"
-              :key="item"
+              class="card-body-stock"
+              :class="{
+                gray: item.stock_supply,
+                red: !item.stock_supply,
+              }"
             >
-              <div class="card">
-                <div class="card-header">
-                  <div class="card-image">
-                    <img src="@/pages/store/assets/150x150.webp" alt="" />
-                  </div>
-                </div>
+              <span> {{ item.stock_supply }} Disponible</span>
+            </div>
 
-                <div class="card-body">
-                  <div class="card-body-name">
-                    <span> {{ item.name }}</span>
-                  </div>
+            <div
+              class="card-body-shipping"
+              :class="{
+                green: !item.shipping_tax,
+                gray: item.shipping_tax,
+              }"
+            >
+              <span v-if="!shipping_tax">
+                <span> {{ item.shipping_label }} </span>
+                <i class="pi pi-bolt" />
+              </span>
+            </div>
+          </div>
 
-                  <div class="card-body-diff">
-                    <span> {{ formatPrice(item.price_diff) }} </span>
-                  </div>
-
-                  <div class="card-body-price">
-                    <span class="dollar">$ </span>
-                    <span> {{ formatPrice(item.price) }} </span>
-                  </div>
-
-                  <div class="card-body-upon">
-                    {{ item.payment_type }}
-                  </div>
-
-                  <div
-                    class="card-body-stock"
-                    :class="{
-                      blue: item.stock_supply,
-                      red: !item.stock_supply,
-                    }"
-                  >
-                    <span> {{ item.stock_supply }} Disponible</span>
-                  </div>
-
-                  <div
-                    class="card-body-shipping"
-                    :class="{
-                      green: !item.shipping_tax,
-                      gray: item.shipping_tax,
-                    }"
-                  >
-                    <span v-if="!shipping_tax">
-                      <span> {{ item.shipping_label }} </span>
-                      <i class="pi pi-bolt" />
-                    </span>
-                  </div>
-                </div>
-
-                <div class="card-bottom">
-                  <div
-                    class="card-badge"
-                    :style="{ color: item.discount_color }"
-                  >
-                    <span>{{ item.discount_label }}</span>
-                  </div>
-                </div>
-              </div>
+          <div class="card-bottom">
+            <div class="card-badge" :style="{ color: item.discount_color }">
+              <span>{{ item.discount_label }}</span>
             </div>
           </div>
         </div>
@@ -87,9 +65,7 @@
 </template>
 
 <script>
-import Swiper from "swiper/bundle";
-import "swiper/css/bundle";
-import storeAPI from '@/pages/store/composable/store-api';
+import storeAPI from "@/pages/store/composable/store-api";
 import { useRouter } from "vue-router";
 
 export default {
@@ -100,39 +76,7 @@ export default {
 
     return { router, getter__allProducts };
   },
-
-  data() {
-    return {
-      sliderList: [],
-    };
-  },
-  mounted() {
-    for (let index = 0; index < this.getter__allProducts?.length; index++) {
-      let prov = "." + "swiperInstance" + index;
-
-      const slicer = new Swiper(prov, {
-        effect: "slide",
-        loop: false,
-        slidesPerView: "auto",
-        spaceBetween: 20,
-        resistanceRatio: 0.5,
-        centeredSlidesBounds: true,
-        direction: "horizontal",
-      });
-
-      this.sliderList.push(slicer);
-    }
-  },
   methods: {
-    customClass(index) {
-      return `swiper swiperInstance${index}`;
-    },
-    slideNext(index) {
-      this.sliderList[index].slideNext();
-    },
-    slidePrev(index) {
-      this.sliderList[index].slidePrev();
-    },
     formatPrice(num) {
       const price = num || 0;
 
@@ -153,7 +97,7 @@ export default {
   grid-template-columns: 1fr;
   grid-auto-rows: minmax(100px, auto);
   gap: 20px;
-  padding: 0 4rem;
+  padding: 0 3rem;
 }
 
 .dollar {
@@ -175,23 +119,25 @@ export default {
 .card-body-diff {
   font-weight: 400;
   text-align: left;
-  margin-top: 2rem;
+  margin-top: 1rem;
   font-size: var(--text-size-a);
   text-decoration: line-through;
   color: var(--text-b);
 }
 
 .title {
-  font-size: var(--text-size-c);
+  font-size: var(--text-size-e);
   font-weight: 600;
   text-align: start;
   line-height: 82px;
   color: var(--text--a);
+  padding-left: 1rem;
 }
 
 .p-grid-row {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
 }
 
 .p-grid-row-slider {
@@ -224,35 +170,21 @@ export default {
   right: 1rem;
 }
 
-.swiper {
-  padding: 1rem 0;
-}
-
-.swiper-wrapper {
-  width: calc(100vw - 8rem);
-  display: flex;
-  align-items: center;
-  position: initial;
-}
-
-::v-deep(.swiper-slide) {
-  width: 300px !important;
-}
-
-.swiper-slide:hover {
-  transform: translateY(-5px);
-}
-
 .card {
-  width: 300px;
+  width: calc(300px - 2rem);
   height: 600px;
-  background: var(--base-a);
   border-radius: 12px;
   transition: box-shadow 0.25s ease-in-out 0s, transform 0.25s ease 0s;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   cursor: pointer;
+  padding: 0 1rem;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-a);
+  transform: translateY(-1rem);
 }
 
 .card-body-stock {
@@ -260,7 +192,6 @@ export default {
   text-align: left;
   font-size: var(--text-b);
   font-size: var(--text-size-a);
-  font-weight: 600;
 }
 
 .card-body-shipping {
@@ -270,15 +201,9 @@ export default {
   font-weight: 600;
 }
 
-.card:hover {
-  box-shadow: var(--shadow-d);
-}
 .card-header {
-  flex-basis: 45%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position-y: 50%;
-  padding: 1rem;
+  flex-basis: 50%;
+  overflow: hidden;
 }
 
 .card-image {
@@ -286,22 +211,24 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
+ 
 }
 
 .card-image img {
-  width: 150px;
-  height: 150px;
+  width: calc(300px - 2rem);
+  height: calc(300px - 2rem);
+  min-width: calc(300px - 2rem);
+  max-width: calc(300px - 2rem);
+  border-radius: 12px;
 }
 
 .card-body {
   flex-basis: 45%;
-  padding: 0rem 1rem;
 }
 
 .card-body-name {
   color: var(--text-a);
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
   text-transform: capitalize;
   text-align: left;
   font-weight: 500;
@@ -315,12 +242,12 @@ export default {
   font-size: var(--text-size-a);
   text-align: left;
   font-weight: initial;
-  margin-top: 2rem;
+  margin-top: 1rem;
   text-transform: capitalize;
 }
 
 .card-bottom {
-  flex-basis: auto;
+  flex-basis: 5%;
 }
 .card-badge {
   font-size: var(--text-size-a);

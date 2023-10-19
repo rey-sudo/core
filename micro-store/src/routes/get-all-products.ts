@@ -11,6 +11,18 @@ const getAllProductsHandler = async (req: Request, res: Response) => {
       page: 1,
       items: findProducts,
     },
+    {
+      category: "ultimos",
+      title: "Lo más comprado",
+      page: 1,
+      items: findProducts,
+    },
+    {
+      category: "buscado",
+      title: "Lo más buscado semanal",
+      page: 1,
+      items: findProducts,
+    },
   ];
 
   res.status(200).send(scheme);
