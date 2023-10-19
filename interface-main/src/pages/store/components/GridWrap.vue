@@ -47,15 +47,15 @@
               }"
             >
               <span v-if="!shipping_tax">
-                <span> {{ item.shipping_label }} </span>
-                <i class="pi pi-bolt" />
+                <span> {{ item.shipping_label }}</span>
+                <i :class="item.shipping_icon" />
               </span>
             </div>
           </div>
 
           <div class="card-bottom">
             <div class="card-badge" :style="{ color: item.discount_color }">
-              <span>{{ item.discount_label }}</span>
+              <span>{{ item.discount }}{{ item.discount_label }}</span>
             </div>
           </div>
         </div>
@@ -199,8 +199,13 @@ export default {
   text-align: left;
   font-size: var(--text-size-a);
   font-weight: 600;
+  display: flex;
+  align-items: center;
 }
 
+.card-body-shipping i{
+  margin-left: 0.25rem;
+}
 .card-header {
   flex-basis: 50%;
   overflow: hidden;
@@ -211,7 +216,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
- 
 }
 
 .card-image img {

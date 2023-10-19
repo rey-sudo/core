@@ -137,6 +137,7 @@ export default {
   object-position: top;
   width: 100%;
   object-position: 40%;
+  opacity: 0;
 }
 
 .p-store {

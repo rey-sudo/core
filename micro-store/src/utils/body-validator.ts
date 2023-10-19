@@ -166,6 +166,17 @@ const CREATE_PRODUCT = [
     .isLength({ min: 1, max: 100 })
     .withMessage("max length"),
 
+    body("shipping_icon")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 30 })
+    .withMessage("max length"),
+
   body("stock_supply")
     .notEmpty()
     .withMessage("must be provided")
@@ -187,6 +198,16 @@ const CREATE_PRODUCT = [
     .withMessage("must be natural"),
 
   body("price_diff")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .custom((item) => Number.isInteger(item))
+    .withMessage("must be number")
+    .bail()
+    .isInt({ min: 0 })
+    .withMessage("must be natural"),
+
+    body("discount")
     .notEmpty()
     .withMessage("must be provided")
     .bail()

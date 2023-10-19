@@ -36,9 +36,11 @@ interface ProductAttrs {
   payment_type: string;
   shipping_tax: boolean;
   shipping_label: string;
+  shipping_icon: string;
   stock_supply: number;
   price: number;
   price_diff: number;
+  discount: number;
   discount_label: string;
   discount_color: string;
   seller_pid: string;
@@ -60,9 +62,11 @@ interface ProductDocument extends mongoose.Document {
   payment_type: string;
   shipping_tax: boolean;
   shipping_label: string;
+  shipping_icon: string;
   stock_supply: number;
   price: number;
   price_diff: number;
+  discount: number;
   discount_label: string;
   discount_color: string;
   seller_pid: string;
@@ -111,6 +115,11 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
 
+    shipping_icon: {
+      type: String,
+      required: true,
+    },
+
     stock_supply: {
       type: Number,
       required: true,
@@ -122,6 +131,11 @@ const productSchema = new mongoose.Schema(
     },
 
     price_diff: {
+      type: Number,
+      required: true,
+    },
+
+    discount: {
       type: Number,
       required: true,
     },

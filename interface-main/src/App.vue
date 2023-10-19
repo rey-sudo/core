@@ -115,7 +115,8 @@ body {
 .gray {
   color: var(--text-b);
 }
-ul{
+
+ul {
   margin: initial;
 }
 </style>

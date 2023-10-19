@@ -48,8 +48,8 @@ export default {
     return {
       isScrolled: false,
       labels: {
-        sellLabel: "Vender",
-        helpLabel: "Soporte",
+        sellLabel: "",
+        helpLabel: "",
         walletLabel: "Billetera",
       },
     };
