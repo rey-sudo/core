@@ -1,6 +1,6 @@
 import mongoose, { ClientSession } from "mongoose";
 import { updateIfCurrentPlugin } from "mongoose-update-if-current";
-import { numberPid } from "../utils/nano";
+import { generatePid } from "../utils/nano";
 
 interface OrderAttrs {
   name: string;
@@ -38,7 +38,7 @@ const orderSchema = new mongoose.Schema(
       type: String,
       unique: true,
       index: true,
-      default: () => numberPid(),
+      default: () => generatePid('UAN', 15),
     },
 
     name: {

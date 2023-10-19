@@ -1,6 +1,6 @@
 import mongoose, { ClientSession } from "mongoose";
 import { updateIfCurrentPlugin } from "mongoose-update-if-current";
-import { numberPid } from "../utils/nano";
+import { generatePid } from "../utils/nano";
 
 interface Image {
   small: string;
@@ -77,7 +77,7 @@ const productSchema = new mongoose.Schema(
       type: String,
       unique: true,
       index: true,
-      default: () => numberPid(),
+      default: () => generatePid('N', 15),
     },
 
     name: {
