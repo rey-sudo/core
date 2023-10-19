@@ -193,6 +193,20 @@ const main = async () => {
       ROUTES.getProductHandler
     );
 
+    app.get(
+      "/api/store/get-order",
+
+      rateLimit(limiterStore.client, {
+        path: "get-order",
+        windowMs: process.env.GENERAL_LIMIT_TIME,
+        max: process.env.GENERAL_LIMIT_MAX,
+      }),
+
+      ...ROUTES.getOrderMiddlewares,
+
+      ROUTES.getOrderHandler
+    );
+
 
     app.post(
       "/api/store/create-order",

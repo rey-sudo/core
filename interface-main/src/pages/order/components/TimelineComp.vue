@@ -1,36 +1,50 @@
 <template>
   <ul class="timeline" id="timeline">
-    <li class="li complete">
+    <li class="li" :class="{ complete: getter__orderData.timeline.purchase.status }">
       <div class="timestamp">
         <span class="author">Confirmación</span>
-        <span class="date">14/12/2023</span>
+        <span class="date">{{
+          formatDate(getter__orderData.timeline.purchase.date)
+        }}</span>
       </div>
       <div class="status">
         <label>Compra</label>
       </div>
     </li>
-    <li class="li complete">
+    <li class="li" :class="{ complete: getter__orderData.timeline.dispatch.status }">
       <div class="timestamp">
-        <span class="author">Preparación</span>
-        <span class="date">17/12/2023</span>
+        <span class="author">
+          {{ getter__orderData.timeline.dispatch.text }}
+        </span>
+        <span class="date">{{
+          formatDate(getter__orderData.timeline.dispatch.date)
+        }}</span>
       </div>
       <div class="status">
         <label>Despacho</label>
       </div>
     </li>
-    <li class="li complete">
+    <li class="li" :class="{ complete: getter__orderData.timeline.shipping.status }">
       <div class="timestamp">
-        <span class="author">Envia #85495845</span>
-        <span class="date">18/12/2023</span>
+        <span class="author">
+          {{ getter__orderData.timeline.shipping.text }}
+        </span>
+        <span class="date">{{
+          formatDate(getter__orderData.timeline.shipping.date)
+        }}</span>
       </div>
       <div class="status">
         <label>Transporte</label>
       </div>
     </li>
-    <li class="li">
+    <li class="li" :class="{ complete: getter__orderData.timeline.delivery.status }">
       <div class="timestamp">
-        <span class="author">LLegando a casa</span>
-        <span class="date">21/12/2023</span>
+        <span class="author">{{
+          getter__orderData.timeline.delivery.text
+        }}</span>
+        <span class="date">{{
+          formatDate(getter__orderData.timeline.delivery.date)
+        }}</span>
       </div>
       <div class="status">
         <label>Entrega</label>
@@ -39,7 +53,28 @@
   </ul>
 </template>
 
-<script setup></script>
+<script>
+import orderAPI from "@/pages/order/composable/order-api";
+
+export default {
+  setup() {
+    const { getter__orderData } = orderAPI();
+
+    return { getter__orderData };
+  },
+  methods: {
+    formatDate(data) {
+      const date = new Date(data);
+
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+
+      return `${month}/${day}/${year}`;
+    },
+  },
+};
+</script>
 
 <style lang="sass" scoped>
 .timeline
@@ -79,8 +114,8 @@ span
   transition: all 200ms ease-in
   label
     font-weight: 600
-    margin-top: 18px
-    margin-right: 9px
+    margin-top: 2rem
+    margin-left: 5px
     color: var(--text-b)
   &:before
     content: ''
@@ -97,7 +132,7 @@ span
     border: 1px solid var(--border-a)
     position: absolute
     top: -15px
-    left: 42%
+    left: 45%
     transition: all 200ms ease-in
 .li.complete
   .status

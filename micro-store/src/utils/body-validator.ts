@@ -351,6 +351,19 @@ const GET_PRODUCT = [
     .withMessage("max length"),
 ];
 
+const GET_ORDER = [
+  query("pid")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 15, max: 15 })
+    .withMessage("max length"),
+];
+
 //////////////////////
 
 const GET_AUDIT_REPORT = [
@@ -774,6 +787,7 @@ const CREATE_PREVOTE = [
 export {
   CREATE_PRODUCT,
   GET_PRODUCT,
+  GET_ORDER,
   CREATE_ORDER,
   CREATE_AUDITOR,
   LOGIN_AUDITOR,

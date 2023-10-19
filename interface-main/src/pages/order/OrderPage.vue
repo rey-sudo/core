@@ -1,6 +1,6 @@
 <template>
   <div class="p-order">
-    <div class="p-order-wrap">
+    <div v-if="isReady" class="p-order-wrap">
       <div class="p-order-wrap-top">
         <div class="image">
           <img src="./assets/drawing.svg" alt="" />
@@ -9,28 +9,63 @@
           </div>
 
           <div class="p-order-wrap-top-subtitle">
-            <span>Orden: 8HHD73HZJC</span>
+            <span>ID: {{ this.getter__orderData.pid }}</span>
           </div>
           <div class="p-order-wrap-top-timeline">
             <TimelineComp />
           </div>
-        
         </div>
       </div>
-
-      <div class="p-order-wrap-bottom">
-   
-      </div>
+      <div class="p-order-wrap-bottom"></div>
     </div>
+
+    <LoaderWrap v-if="!isReady" />
   </div>
 </template>
 
 <script>
 import TimelineComp from "@/pages/order/components/TimelineComp.vue";
+import orderAPI from "@/pages/order/composable/order-api";
+import LoaderWrap from "@/components/LoaderWrap.vue";
+import { useRouter } from "vue-router";
+import { ref } from "vue";
 
 export default {
   components: {
     TimelineComp,
+    LoaderWrap,
+  },
+  setup() {
+    const router = useRouter();
+
+    const { action__getOrderData, getter__orderData } = orderAPI();
+
+    const isReady = ref(false);
+
+    return { router, action__getOrderData, isReady, getter__orderData };
+  },
+  created() {
+    this.$watch(
+      () => this.$route.params,
+      (e) => {
+        const params = {
+          pid: e.pid,
+        };
+
+        this.action__getOrderData(params)
+          .then(() => {
+            this.router.replace({
+              params: {
+                name: this.getter__orderData.product[0].name.replace(/\s+/g, "-"),
+              },
+            });
+
+            this.isReady = true;
+          })
+          .catch((e) => console.error(e));
+      },
+      { immediate: true }
+    )();
   },
 };
 </script>
@@ -55,7 +90,7 @@ img {
     transform: translateY(-10px) rotate(5deg);
   }
 }
-.p-order-wrap-top-timeline{
+.p-order-wrap-top-timeline {
   position: fixed;
   top: 48%;
 }

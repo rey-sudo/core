@@ -19,6 +19,32 @@ interface OrderModel extends mongoose.Model<OrderDocument> {
   ): Promise<OrderDocument | any>;
 }
 
+interface Timeline {
+  purchase: {
+    status: boolean;
+    date: Date;
+    text: string;
+  };
+
+  dispatch: {
+    status: boolean;
+    date: Date;
+    text: string;
+  };
+
+  shipping: {
+    status: boolean;
+    date: Date;
+    text: string;
+  };
+
+  delivery: {
+    status: boolean;
+    date: Date;
+    text: string;
+  };
+}
+
 interface OrderDocument extends mongoose.Document {
   pid: string;
   name: string;
@@ -28,6 +54,7 @@ interface OrderDocument extends mongoose.Document {
   department: string;
   city: string;
   product_pid: string;
+  timeline: Timeline;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -38,7 +65,7 @@ const orderSchema = new mongoose.Schema(
       type: String,
       unique: true,
       index: true,
-      default: () => generatePid('UAN', 15),
+      default: () => generatePid("UAN", 15),
     },
 
     name: {
@@ -70,11 +97,37 @@ const orderSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    
+
     product_pid: {
       type: String,
       required: true,
-    }
+    },
+
+    timeline: {
+      purchase: {
+        status: { type: Boolean, default: true },
+        date: { type: Date, default: new Date() },
+        text: { type: String, default: "Confirmación" },
+      },
+
+      dispatch: {
+        status: { type: Boolean, default: false },
+        date: { type: Date, default: new Date() },
+        text: { type: String, default: "..." },
+      },
+
+      shipping: {
+        status: { type: Boolean, default: false },
+        date: { type: Date, default: new Date() },
+        text: { type: String, default: "..." },
+      },
+
+      delivery: {
+        status: { type: Boolean, default: false },
+        date: { type: Date, default: new Date() },
+        text: { type: String, default: "..." },
+      },
+    },
   },
   {
     timestamps: true,
@@ -89,6 +142,12 @@ const orderSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+
+orderSchema.virtual('product', {
+  ref: 'Product',
+  localField: 'product_pid',
+  foreignField: 'pid'
+});
 
 orderSchema.plugin(updateIfCurrentPlugin);
 
