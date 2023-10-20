@@ -11,6 +11,9 @@ const commit__getProductData = (state, data) => {
       large: "empty",
     },
     theme: {
+      title: "Cortadora manual de verduras y frutas",
+      subtitle:
+        "¡Utiliza los 7 tipos de corte y el recipiente para preparar lo que quieras!",
       config: {
         page_1: {
           background_color: "initial",
@@ -45,10 +48,6 @@ const commit__getProductData = (state, data) => {
           mask: "/backgrounds/background-blow-green.svg",
         },
       },
-      title: "Cortadora manual de verduras y frutas",
-      subtitle:
-        "¡Utiliza los 7 tipos de corte y el recipiente para preparar lo que quieras!",
-      price: "Desde $COP 89.000",
     },
     name: "cortadora manual de verduras y frutas para cocina con 7 cuchillas diferentes y recipiente",
     space_url: "https://arkastore.nyc3.digitaloceanspaces.com",
@@ -64,8 +63,6 @@ const commit__getProductData = (state, data) => {
     discount_color: "#8c99b3",
     seller_pid: "adriana",
     pid: "980760079186818",
-    createdAt: "2023-10-19T21:29:02.611Z",
-    updatedAt: "2023-10-19T21:29:02.611Z",
   };
   state.productData = datum;
 };
