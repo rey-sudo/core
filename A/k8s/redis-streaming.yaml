@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-streaming
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-streaming
+  template:
+    metadata:
+      labels:
+        app: redis-streaming
+    spec:
+      containers:
+        - name: redis-streaming
+          image: redis
+          resources:
+            limits:
+              memory: "500Mi"
+            requests:
+              memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-streaming-srv
+spec:
+  selector:
+    app: redis-streaming
+  ports:
+    - name: db
+      protocol: TCP
+      port: 6379
+      targetPort: 6379

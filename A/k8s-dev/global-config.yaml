@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: database-config
+data:
+  master: mongodb+srv://doadmin:n1Uc306OG92ba78g@master-aabc494a.mongo.ondigitalocean.com/admin?tls=true&authSource=admin
+  slave: mongodb+srv://doadmin:n1Uc306OG92ba78g@master-aabc494a.mongo.ondigitalocean.com/admin?tls=true&authSource=admin
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: streaming-config
+data:
+  redis: redis://redis-streaming-srv:6379
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cache-config
+data:
+  micro-store: redis://cache-store:6379
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rater-config
+data:
+  micro-store: redis://rater-store:6379

@@ -1,0 +1,40 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cache-store
+  labels:
+    role: cache-store
+spec:
+  ports:
+    - name: db
+      protocol: TCP
+      port: 6379
+      targetPort: 6379
+  clusterIP: None
+  selector:
+    role: cache-store   
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: cache-store
+spec:
+  serviceName: "cache-store"
+  replicas: 1
+  selector:
+    matchLabels:
+      role: cache-store
+  template:
+    metadata:
+      labels:
+        role: cache-store
+    spec:
+      containers:
+        - name: cache-store
+          image: redis
+          resources:
+            limits:
+              memory: "500Mi"
+            requests:
+              memory: "256Mi"    

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tls-main
+  namespace: ingress-nginx
+data:
+  tls.crt: xxx
+  tls.key: xxx
+type: kubernetes.io/tls
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tls-main
+  namespace: default
+data:
+  tls.crt: xxx
+  tls.key: xxx
+type: kubernetes.io/tls

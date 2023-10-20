@@ -1,0 +1,46 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  statusCheckDeadlineSeconds: 300
+  kubectl:
+    manifests:
+      - ./A/k8s/*
+      - ./A/k8s-dev/*         
+build:
+  local:
+    useDockerCLI: true
+    push: false
+    concurrency: 0
+  artifacts:
+    - image: alphaicterus/interface-main
+      context: interface-main
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .  
+    - image: alphaicterus/micro-store
+      context: micro-store
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .              
+    - image: alphaicterus/publisher-store
+      context: publisher-store
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: alphaicterus/micro-notifications
+      context: micro-notifications
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .                             
