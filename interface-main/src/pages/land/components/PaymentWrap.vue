@@ -38,8 +38,10 @@
       }"
     >
       <span v-if="!shipping_tax">
-        {{ getter__productData.shipping_label }} <i :class="getter__productData.shipping_icon"/> </span
-      >
+        {{ getter__productData.shipping_label }}
+      </span>
+
+      <i :class="getter__productData.shipping_icon" />
     </div>
 
     <div class="p-payment-button top" @click="action__viewPaymentModal(true)">
@@ -137,6 +139,12 @@ export default {
   text-align: left;
   font-size: var(--text-size-b);
   font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.card-body-shipping i {
+  margin-left: 0.25rem;
 }
 
 .p-payment-button {

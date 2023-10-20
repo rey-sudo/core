@@ -6,16 +6,15 @@
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <PageOne v-if="isReady" />
-          <LoaderWrap v-if="!isReady" />
+          <LoaderWrap v-else />
         </div>
 
         <div class="swiper-slide">
-      
+          <PageTwo v-if="isReady" />
+          <LoaderWrap v-else />
         </div>
 
-        <div class="swiper-slide">
-   
-        </div>
+        <div class="swiper-slide"></div>
 
         <div class="swiper-slide"></div>
 
@@ -49,7 +48,6 @@ import LoaderWrap from "@/components/LoaderWrap.vue";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 
-
 export default {
   components: {
     PageOne,
@@ -59,8 +57,8 @@ export default {
     PageFive,
     PageSix,
     PageSeven,
-    LoaderWrap
-},
+    LoaderWrap,
+  },
 
   setup() {
     const router = useRouter();
@@ -109,7 +107,7 @@ export default {
         speed: 400,
         spaceBetween: 0,
         mousewheel: {
-          invert: false,
+          invert: true,
         },
         direction: "vertical",
         loop: false,
@@ -133,9 +131,8 @@ export default {
 
 ::v-deep(.swiper-pagination-bullet) {
   background: var(--secondary-a);
-  width: 0.25rem;
+  width: 0.5rem;
   height: 0.5rem;
-  border-radius: initial;
 }
 
 .container {
@@ -217,15 +214,13 @@ export default {
   }
 }
 
-
 @media screen and (max-width: 767px) {
-  .loader{
+  .loader {
     display: none;
   }
 
-  .swiper-pagination{
+  .swiper-pagination {
     display: none;
   }
 }
-
 </style>

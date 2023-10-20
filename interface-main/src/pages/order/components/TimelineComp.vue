@@ -82,10 +82,10 @@ export default {
   display: flex
   align-items: center
   justify-content: center
-  background: var(--base-a)
+  background: var(--base-b)
   padding: 1rem
   border-radius: 12px
-  box-shadow: var(--shadow-a)
+ 
 .li
   transition: all 200ms ease-in
   width: 240px
