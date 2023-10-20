@@ -1,7 +1,7 @@
 <template>
   <div
-    class="p-pageOne"
-    id="pageOne"
+    class="p-page1"
+    id="page1"
     :style="{
       background: getter__productData.theme.config.page_1.background_color,
     }"
@@ -42,31 +42,34 @@
       </div>
     </header>
 
-    <div class="p-pageOne-wrap">
-      <div class="p-pageOne-wrap-title">
+    <div class="p-page1-wrap">
+      <div class="p-page1-wrap-title">
         <h1>
           {{ getter__productData.theme.title }}
         </h1>
       </div>
-      <div class="p-pageOne-wrap-subtitle">
+      <div class="p-page1-wrap-subtitle">
         <h2>
           {{ getter__productData.theme.subtitle }}
         </h2>
       </div>
 
-      <LandSlider/>
+      <ImageSwiper/>
+      <ImageMobile/>
     </div>
   </div>
 </template>
 
 <script>
-import LandSlider from "@/pages/land/components/LandSlider.vue";
+import ImageSwiper from "@/pages/land/components/ImageSwiper.vue";
+import ImageMobile from "@/pages/land/components/mobile/ImageMobile.vue";
 import landAPI from "@/pages/land/composable/land-api";
 import { useRouter } from "vue-router";
 
 export default {
   components: {
-    LandSlider
+    ImageSwiper,
+    ImageMobile
   },
   setup() {
     const router = useRouter();
@@ -174,7 +177,7 @@ h2 {
   object-position: bottom;
 }
 
-.p-pageOne {
+.p-page1 {
   display: flex;
   justify-content: center;
   width: inherit;
@@ -184,7 +187,7 @@ h2 {
   background-repeat: repeat;
 }
 
-.p-pageOne .p-pageOne-wrap {
+.p-page1 .p-page1-wrap {
   top: 10%;
   position: relative;
   display: flex;
@@ -214,11 +217,11 @@ h2 {
   }
 }
 
-.p-pageOne .p-pageOne-wrap .p-pageOne-wrap-title {
+.p-page1 .p-page1-wrap .p-page1-wrap-title {
   max-width: 100%;
 }
 
-.p-pageOne .p-pageOne-wrap .p-pageOne-wrap-subtitle {
+.p-page1 .p-page1-wrap .p-page1-wrap-subtitle {
   line-height: 0px;
 }
 
@@ -229,18 +232,18 @@ h2 {
   .p-header .p-header-wrap {
     border: initial;
   }
-  .p-pageOne .p-pageOne-wrap {
+  .p-page1 .p-page1-wrap {
     width: 100%;
     height:  100%;
     min-height:  100%;
     max-height:  100%;
   }
 
-  .p-pageOne .p-pageOne-wrap .p-pageOne-wrap-subtitle {
+  .p-page1 .p-page1-wrap .p-page1-wrap-subtitle {
     line-height: initial;
     padding: 0 1rem;
   }
-  .p-pageOne {
+  .p-page1 {
     background: var(--base-b) !important;
   }
 
@@ -249,8 +252,8 @@ h2 {
   }
 
   h2 {
-    font-size: var(--text-size-b);
-    font-weight: initial;
+    font-size: var(--text-size-c);
+    font-weight: 500;
   }
 }
 </style>

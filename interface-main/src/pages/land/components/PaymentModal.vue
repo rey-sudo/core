@@ -314,7 +314,7 @@ button:hover {
   width: 100%;
   padding: 0.75rem;
   max-width: 400px;
-  border-radius: 16px;
+  border-radius: 12px;
 }
 
 .p-dialog .p-dialog-wrap .p-dialog-wrap-head {
@@ -326,7 +326,7 @@ button:hover {
 
 .p-dialog .p-dialog-wrap .p-dialog-wrap-body {
   background: var(--base-a);
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 1rem;
   box-sizing: border-box;
 }

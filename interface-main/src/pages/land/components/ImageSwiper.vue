@@ -66,7 +66,7 @@ export default {
     this.slider = new Swiper(".itemSliderSwiper", {
       zoom: true,
       mousewheel: false,
-      autoplay: true,
+      autoplay: false,
       loop: true,
       direction: "vertical",
     });

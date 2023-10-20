@@ -92,7 +92,7 @@ export default {
 .p-payment {
   display: flex;
   flex-direction: column;
-  width: 75%;
+  width: 77%;
 }
 
 .card-body-price {
