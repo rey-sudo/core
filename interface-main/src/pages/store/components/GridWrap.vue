@@ -136,7 +136,7 @@ export default {
 
 .title {
   font-size: var(--text-size-e);
-  font-weight: 600;
+  font-weight: 700;
   text-align: start;
   line-height: 82px;
   color: var(--text--a);

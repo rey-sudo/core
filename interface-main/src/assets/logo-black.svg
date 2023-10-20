@@ -25,12 +25,12 @@
      inkscape:document-units="px"
      showgrid="false"
      inkscape:zoom="5.6568545"
-     inkscape:cx="51.883958"
+     inkscape:cx="70.268733"
      inkscape:cy="24.041629"
      inkscape:window-width="1504"
      inkscape:window-height="749"
      inkscape:window-x="594"
-     inkscape:window-y="187"
+     inkscape:window-y="159"
      inkscape:window-maximized="0"
      inkscape:current-layer="text368"
      inkscape:pageshadow="2" />
@@ -60,11 +60,17 @@
          id="text20649"><tspan
            sodipodi:role="line"
            id="tspan20647" /></text>
-      <path
-         style="font-size:18.6667px;font-family:Unbounded;-inkscape-font-specification:'Unbounded Semi-Bold';stroke-width:0.25;stroke-linecap:round;stroke-linejoin:round"
-         d="M 4.2630925,18.15474 V 15.298735 H 13.932443 V 18.15474 Z M 11.468439,6.9733863 17.927117,20.973412 H 14.17511 L 8.6311004,8.4480556 H 9.713769 L 4.1884257,20.973412 H 0.41775224 L 6.8950973,6.9733863 Z m 9.472665,6.1600107 h 5.245342 q 0.989336,0 1.568003,-0.448 0.578668,-0.466668 0.578668,-1.288003 0,-0.821335 -0.578668,-1.269335 Q 27.175782,9.6613911 26.186446,9.6613911 H 20.437103 L 22.023772,7.925388 V 20.973412 H 18.495766 V 6.9733863 h 8.157348 q 1.568003,0 2.744005,0.560001 1.176002,0.560001 1.829337,1.5493361 0.653334,0.9893356 0.653334,2.3146706 0,1.306669 -0.653334,2.296004 -0.653335,0.989336 -1.829337,1.549337 -1.176002,0.560001 -2.744005,0.560001 h -5.71201 z m 2.25867,1.288003 h 3.976008 l 5.152009,6.552012 h -4.088008 z m 10.125988,6.552012 V 6.9733863 h 3.50934 V 18.136073 L 35.8831,17.426738 44.171115,6.9733863 h 3.73334 L 36.499101,20.973412 Z m 6.701345,-6.776013 2.538672,-2.184004 5.525343,8.960017 h -3.994674 z m 11.022,3.957341 v -2.856005 h 9.669351 V 18.15474 Z M 58.254453,6.9733863 64.713132,20.973412 H 60.961125 L 55.417115,8.4480556 h 1.082669 L 50.97444,20.973412 H 47.203767 L 53.681112,6.9733863 Z"
-         id="text1"
-         aria-label="ARKA" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:18.6667px;line-height:0;font-family:Unbounded;-inkscape-font-specification:'Unbounded Medium';letter-spacing:0.5px;fill:#b3b3b3;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round"
+         x="0.43641892"
+         y="20.973412"
+         id="text1"><tspan
+           sodipodi:role="line"
+           id="tspan1"
+           x="0.43641892"
+           y="20.973412"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:18.6667px;line-height:0;font-family:Unbounded;-inkscape-font-specification:'Unbounded Medium';letter-spacing:0.5px;fill:#000000">arka</tspan></text>
     </g>
   </g>
 </svg>
