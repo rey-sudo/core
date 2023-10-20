@@ -271,7 +271,6 @@ export default {
 }
 
 .card-badge span {
-  z-index: 100;
   position: relative;
   text-transform: capitalize;
   height: 30px;
@@ -311,6 +310,7 @@ export default {
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
   border-right: transparent;
+  z-index: -1;
 }
 
 @media (max-width: 768px) {
