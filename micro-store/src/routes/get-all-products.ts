@@ -7,7 +7,7 @@ const getAllProductsHandler = async (req: Request, res: Response) => {
   const scheme = [
     {
       category: "trending",
-      title: "Mira las ultimas tendencias",
+      title: "Mira las últimas tendencias",
       page: 1,
       items: findProducts,
     },
