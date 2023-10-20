@@ -2,12 +2,12 @@
   <div
     class="p-pageTwo"
     :style="{
-      background: getter__productData.theme.background.pageTwo.color,
+      background: getter__productData.theme.config.page_2.background_color,
     }"
   >
 
   <div class="backgroundMask">
-      <img :src="getter__productData.theme.background.pageTwo.mask" />
+      <img :src="getter__productData.theme.config.page_2.mask" />
     </div>
 
 

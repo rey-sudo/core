@@ -20,7 +20,7 @@
         >
           <div class="swiper-wrapper">
             <div
-              v-for="item in getter__productData.theme.slider_images"
+              v-for="item in getter__productData.theme.config.page_1.slider_images"
               :key="item"
               class="swiper-slide swiper-no-mousewheel"
             >

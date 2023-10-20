@@ -250,7 +250,7 @@ export default {
 }
 
 .card-body-upon {
-  color: var(--text-b);
+  color: var(--blue);
   font-size: var(--text-size-a);
   text-align: left;
   font-weight: initial;

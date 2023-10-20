@@ -25,12 +25,12 @@
      inkscape:document-units="px"
      showgrid="false"
      inkscape:zoom="5.6568545"
-     inkscape:cx="70.268733"
+     inkscape:cx="55.949822"
      inkscape:cy="24.041629"
      inkscape:window-width="1504"
      inkscape:window-height="749"
      inkscape:window-x="594"
-     inkscape:window-y="159"
+     inkscape:window-y="130"
      inkscape:window-maximized="0"
      inkscape:current-layer="text368"
      inkscape:pageshadow="2" />
@@ -62,15 +62,15 @@
            id="tspan20647" /></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:18.6667px;line-height:0;font-family:Unbounded;-inkscape-font-specification:'Unbounded Medium';letter-spacing:0.5px;fill:#b3b3b3;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round"
-         x="0.43641892"
-         y="20.973412"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:18.6667px;line-height:0;font-family:Unbounded;-inkscape-font-specification:'Unbounded Medium';letter-spacing:-0.5px;fill:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round"
+         x="-0.32891577"
+         y="19.946743"
          id="text1"><tspan
            sodipodi:role="line"
            id="tspan1"
-           x="0.43641892"
-           y="20.973412"
-           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:18.6667px;line-height:0;font-family:Unbounded;-inkscape-font-specification:'Unbounded Medium';letter-spacing:0.5px;fill:#000000">arka</tspan></text>
+           x="-0.32891577"
+           y="19.946743"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:18.6667px;line-height:0;font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro Semi-Bold';letter-spacing:-0.5px;fill:#000000">arkastore</tspan></text>
     </g>
   </g>
 </svg>

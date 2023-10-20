@@ -3,14 +3,14 @@
     class="p-pageOne"
     id="pageOne"
     :style="{
-      background: getter__productData.theme.background.pageOne.color,
+      background: getter__productData.theme.config.page_1.background_color,
     }"
   >
     <div class="backgroundMask">
       <img
         :src="
           getter__productData.space_url +
-          getter__productData.theme.background.pageOne.mask
+          getter__productData.theme.config.page_1.mask
         "
       />
     </div>
