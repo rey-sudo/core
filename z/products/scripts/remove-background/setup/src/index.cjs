@@ -41,11 +41,17 @@ async function prepareImage(filePath, file) {
 }
 
 async function processImage(filePath, name) {
-  const blob = await removeBackground(filePath, { debug: false });
+  const blob = await removeBackground(filePath, {
+    debug: false,
+    model: "large",
+  });
   const buffer = await blob.arrayBuffer();
   try {
     await fs.promises.mkdir("output", { recursive: true });
-    await fs.promises.writeFile(`output/${name}-transparent.png`, Buffer.from(buffer));
+    await fs.promises.writeFile(
+      `output/${name}-transparent.png`,
+      Buffer.from(buffer)
+    );
   } catch (error) {
     console.error(error);
   }
