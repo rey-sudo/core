@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-pageTwo"
+    class="p-page2"
     :style="{
       background: getter__productData.theme.config.page_2.background_color,
     }"
@@ -11,27 +11,27 @@
     </div>
 
 
-    <div class="p-pageTwo-wrap">
-      <div class="p-pageTwo-wrap-grid">
-        <div class="p-pageTwo-wrap-grid-item">
+    <div class="p-page2-wrap">
+      <div class="p-page2-wrap-grid">
+        <div class="p-page2-wrap-grid-item">
           <div><img src="@/pages/land/assets/certification.svg" alt="" /></div>
           <div>Certification</div>
           <div>Three different levels of audit depth with certification</div>
           <span />
         </div>
-        <div class="p-pageTwo-wrap-grid-item">
+        <div class="p-page2-wrap-grid-item">
           <div><img src="@/pages/land/assets/sandbox.svg" alt="" /></div>
           <div>Sandbox</div>
           <div>Multipurpose test environment for auditing</div>
           <span />
         </div>
-        <div class="p-pageTwo-wrap-grid-item">
+        <div class="p-page2-wrap-grid-item">
           <div><img src="@/pages/land/assets/governance.svg" alt="" /></div>
           <div>Governance</div>
           <div>The community makes fundamental decisions</div>
           <span />
         </div>
-        <div class="p-pageTwo-wrap-grid-item">
+        <div class="p-page2-wrap-grid-item">
           <div><img src="@/pages/land/assets/formal.svg" alt="" /></div>
           <div>Formal methods</div>
           <div>Specification and verification of smart contracts</div>
@@ -70,14 +70,14 @@ export default {
   object-position: bottom;
 }
 
-.p-pageTwo {
+.p-page2 {
   display: flex;
   justify-content: center;
   height: 100%;
   background: var(--base-a);
 }
 
-.p-pageTwo-wrap {
+.p-page2-wrap {
   width: 90%;
   height: 100%;
   border-bottom: none;
@@ -86,13 +86,13 @@ export default {
   align-items: center;
 }
 
-.p-pageTwo .p-pageTwo-wrap .p-pageTwo-wrap-grid {
+.p-page2 .p-page2-wrap .p-page2-wrap-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 1rem;
 }
 
-.p-pageTwo .p-pageTwo-wrap .p-pageTwo-wrap-grid .p-pageTwo-wrap-grid-item {
+.p-page2 .p-page2-wrap .p-page2-wrap-grid .p-page2-wrap-grid-item {
   padding: 1.75rem;
   width: 600px;
   text-align: center;
@@ -108,14 +108,14 @@ export default {
   position: relative;
   line-height: 24px;
   background: var(--base-d);
-  border-radius: 12px;
+  border-radius: 0px;
 }
 
-.p-pageTwo .p-pageTwo-wrap .p-pageTwo-wrap-grid .p-pageTwo-wrap-grid-item img {
+.p-page2 .p-page2-wrap .p-page2-wrap-grid .p-page2-wrap-grid-item img {
   width: 42px;
 }
 
-.p-pageTwo .p-pageTwo-wrap .p-pageTwo-wrap-grid .p-pageTwo-wrap-grid-item span {
+.p-page2 .p-page2-wrap .p-page2-wrap-grid .p-page2-wrap-grid-item span {
   width: 20px;
   height: inherit;
   position: absolute;
@@ -126,30 +126,30 @@ export default {
   border-bottom: 1px solid var(--border-b);
 }
 
-.p-pageTwo
-  .p-pageTwo-wrap
-  .p-pageTwo-wrap-grid
-  .p-pageTwo-wrap-grid-item
+.p-page2
+  .p-page2-wrap
+  .p-page2-wrap-grid
+  .p-page2-wrap-grid-item
   div:nth-child(1) {
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
 
-.p-pageTwo
-  .p-pageTwo-wrap
-  .p-pageTwo-wrap-grid
-  .p-pageTwo-wrap-grid-item
+.p-page2
+  .p-page2-wrap
+  .p-page2-wrap-grid
+  .p-page2-wrap-grid-item
   div:nth-child(2) {
   color: var(--text-a);
   font-weight: 500;
   margin-top: 1rem;
 }
 
-.p-pageTwo
-  .p-pageTwo-wrap
-  .p-pageTwo-wrap-grid
-  .p-pageTwo-wrap-grid-item
+.p-page2
+  .p-page2-wrap
+  .p-page2-wrap-grid
+  .p-page2-wrap-grid-item
   div:nth-child(3) {
   color: var(--text-b);
   margin-top: 1rem;

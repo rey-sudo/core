@@ -1,0 +1,12 @@
+{
+  "name": "setup",
+  "private": true,
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node src/index.cjs"
+  },
+  "dependencies": {
+    "@imgly/background-removal-node": "file:../node"
+  },
+  "version": "1.1.5"
+}
