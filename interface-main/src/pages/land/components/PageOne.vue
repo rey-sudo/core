@@ -153,7 +153,7 @@ h1 {
   text-align: center;
   font-weight: 600;
   color: var(--text-a);
-  letter-spacing: -0.015em;
+  letter-spacing: -0.04em;
   background: inherit;
 }
 

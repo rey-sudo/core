@@ -29,7 +29,12 @@
           <div>
             {{ getter__productData.theme.config.page_2.box.content.title }}
           </div>
-          <div>Multipurpose test environment for auditing</div>
+          <div>
+            <p>
+              Ahorra tiempo en la cocina cortando todos los alimentos de diversas
+              formas en un solo lugar.
+            </p>
+          </div>
           <span />
         </div>
       </div>
@@ -101,9 +106,15 @@ export default {
   box-sizing: border-box;
   position: relative;
   line-height: 24px;
-  background: var(--base-d);
-  border-radius: 0px;
+  background: var(--base-c);
+  border-radius: 34px;
   overflow: hidden;
+  color: var(--text-a);
+  align-items: center;
+}
+
+.p2 .p2-wrap .p2-wrap-grid .p2-wrap-grid-item p {
+  text-align: center;
 }
 
 .p2 .p2-wrap .p2-wrap-grid .p2-wrap-grid-item img {
@@ -124,16 +135,18 @@ export default {
 }
 
 .p2 .p2-wrap .p2-wrap-grid .p2-wrap-grid-item div:nth-child(1) {
-  font-size: var(--text-size-d);
-  color: var(--text-a);
-  font-weight: 500;
+  font-size: var(--text-size-e);
+  font-weight: 600;
   text-align: center;
+  letter-spacing: -0.03em;
 }
 
 .p2 .p2-wrap .p2-wrap-grid .p2-wrap-grid-item div:nth-child(2) {
   font-size: var(--text-size-b);
   margin-top: 1rem;
   text-align: center;
+  max-width: 60%;
+  font-weight: 500;
 }
 
 @media only screen and (max-width: 768px) {

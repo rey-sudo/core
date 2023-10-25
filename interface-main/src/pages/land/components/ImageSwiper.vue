@@ -88,9 +88,9 @@ export default {
   width: 1200px;
   height: 600px;
   min-height: 600px;
-  margin-top: 2rem;
+  margin-top: 3rem;
   background: var(--base-a);
-  border-radius: 12px;
+  border-radius: 34px;
   overflow: hidden;
 }
 

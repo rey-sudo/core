@@ -37,12 +37,13 @@ const commit__getProductData = (state, data) => {
           ],
         },
         page_2: {
-          background_color: "#27b46a",
+          background_color: "initial",
           mask: "/backgrounds/empty.png",
           box: {
-            image: "/products/123456789/images/p123456789-a2-w1200-h1200.webp",
+            image: "/products/123456789/images/web/1080x1080-3.webp",
             content: {
-              title: "Beneficios",
+              title: "No pierdas tiempo",
+              text: ""
             },
           },
         },
