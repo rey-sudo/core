@@ -5,7 +5,7 @@
       background: getter__productData.theme.config.page_2.background_color,
     }"
   >
-    <div class="backgroundMask">
+    <div class="mask">
       <img
         :src="
           getter__productData.space_url +
@@ -31,8 +31,7 @@
           </div>
           <div>
             <p>
-              Ahorra tiempo en la cocina cortando todos los alimentos de diversas
-              formas en un solo lugar.
+              {{ getter__productData.theme.config.page_2.box.content.text }}
             </p>
           </div>
           <span />
@@ -57,13 +56,13 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.backgroundMask {
+.mask {
   position: absolute;
   width: inherit;
   height: inherit;
 }
 
-.backgroundMask img {
+.mask img {
   width: inherit;
   height: inherit;
   object-fit: cover;
@@ -142,10 +141,10 @@ export default {
 }
 
 .p2 .p2-wrap .p2-wrap-grid .p2-wrap-grid-item div:nth-child(2) {
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-c);
   margin-top: 1rem;
   text-align: center;
-  max-width: 60%;
+  max-width: 80%;
   font-weight: 500;
 }
 
@@ -160,7 +159,6 @@ export default {
   .p2 .p2-wrap .p2-wrap-grid .p2-wrap-grid-item {
     width: 100%;
     height: 300px;
-    padding: 1rem;
   }
 }
 </style>

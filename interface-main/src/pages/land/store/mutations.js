@@ -43,7 +43,7 @@ const commit__getProductData = (state, data) => {
             image: "/products/123456789/images/web/1080x1080-3.webp",
             content: {
               title: "No pierdas tiempo",
-              text: ""
+              text: "Ahorra tiempo en la cocina cortando todos los alimentos de diversas formas en un solo recipiente.",
             },
           },
         },
