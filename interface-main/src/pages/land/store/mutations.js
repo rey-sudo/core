@@ -39,7 +39,7 @@ const commit__getProductData = (state, data) => {
         page_2: {
           background_color: "initial",
           mask: "/backgrounds/empty.png",
-          box: {
+          section: {
             image: "/products/123456789/images/web/1080x1080-3.webp",
             content: {
               title: "No pierdas tiempo",
@@ -49,7 +49,14 @@ const commit__getProductData = (state, data) => {
         },
         page_3: {
           background_color: "initial",
-          mask: "/backgrounds/background-blow-green.svg",
+          mask: "/backgrounds/empty.png",
+          section: {
+            image: "/products/123456789/images/web/1080x1080-1.webp",
+            content: {
+              title: "Sin límites",
+              text: "Transforma tus ideas en deliciosos platos y diviértete con las miles de posibilidades de combinación.",
+            },
+          },
         },
       },
     },

@@ -1,15 +1,43 @@
 <template>
-  <div class="p-pageThree"
-  :style="{ background: getter__productData.theme.background.pageThree.color }"
-  
+  <div
+    class="p3"
+    :style="{
+      background: getter__productData.theme.config.page_3.background_color,
+    }"
   >
-    <div class="backgroundMask">
-      <img :src="getter__productData.theme.background.pageThree.mask" />
+    <div class="mask">
+      <img
+        :src="
+          getter__productData.space_url +
+          getter__productData.theme.config.page_3.mask
+        "
+      />
     </div>
 
-    <div class="p-pageThree-wrap">
-      <div class="overlay">
-        <video autoplay src="../assets/video2.mp4" />
+    <div class="p3-wrap">
+      <div class="p3-wrap-grid">
+
+        <div class="p3-wrap-grid-item">
+          <div>
+            {{ getter__productData.theme.config.page_3.section.content.title }}
+          </div>
+          <div>
+            <p>
+              {{ getter__productData.theme.config.page_3.section.content.text }}
+            </p>
+          </div>
+          <span />
+        </div>
+
+        <div class="p3-wrap-grid-item">
+          <img
+            :src="
+              getter__productData.space_url +
+              getter__productData.theme.config.page_3.section.image
+            "
+            alt=""
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -19,65 +47,120 @@
 import landAPI from "@/pages/land/composable/land-api";
 
 export default {
-  setup(){
+  setup() {
     const { getter__productData } = landAPI();
-    
-    return{
-      getter__productData 
-    }
-  }
 
+    return {
+      getter__productData,
+    };
+  },
 };
 </script>
 
 <style lang="css" scoped>
-.backgroundMask {
+.mask {
   position: absolute;
   width: inherit;
   height: inherit;
 }
 
-.backgroundMask img {
+.mask img {
   width: inherit;
   height: inherit;
   object-fit: cover;
   object-position: bottom;
 }
 
-video {
-  width: 100%;
-  height: auto;
-  max-width: 680px;
-  max-height: 600px;
-}
-.p-pageThree {
+.p3 {
   display: flex;
   justify-content: center;
-  width: inherit;
-  height: inherit;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url("../assets/background-blow-green.svg");
-}
-
-.p-pageThree .p-pageThree-wrap {
-  width: 90%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  background: var(--base-a);
 }
 
-.overlay {
-  position: absolute;
+.p3-wrap {
+  width: 100%;
+  height: 100%;
+  border-bottom: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.p3 .p3-wrap .p3-wrap-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1rem;
+}
+
+.p3 .p3-wrap .p3-wrap-grid .p3-wrap-grid-item {
+  width: 600px;
+  text-align: center;
+  height: 600px;
+  background-clip: content-box;
+  border-top: transparent;
+  border-bottom: transparent;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  text-align: start;
   justify-content: center;
-  background: var(--base-d);
-  height: 600px;
-  width: 1200px;
-  border-radius: 12px;
+  box-sizing: border-box;
+  position: relative;
+  line-height: 24px;
+  background: var(--base-c);
+  border-radius: 34px;
+  overflow: hidden;
+  color: var(--text-a);
+  align-items: center;
+}
+
+.p3 .p3-wrap .p3-wrap-grid .p3-wrap-grid-item p {
+  text-align: center;
+}
+
+.p3 .p3-wrap .p3-wrap-grid .p3-wrap-grid-item img {
+  width: inherit;
+  object-fit: cover;
+  position: relative;
+}
+
+.p3 .p3-wrap .p3-wrap-grid .p3-wrap-grid-item span {
+  width: 20px;
+  height: inherit;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: calc(50% - 10px);
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid var(--border-b);
+}
+
+.p3 .p3-wrap .p3-wrap-grid .p3-wrap-grid-item div:nth-child(1) {
+  font-size: var(--text-size-e);
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: -0.03em;
+}
+
+.p3 .p3-wrap .p3-wrap-grid .p3-wrap-grid-item div:nth-child(2) {
+  font-size: var(--text-size-c);
+  margin-top: 1rem;
+  text-align: center;
+  max-width: 80%;
+  font-weight: 400;
+}
+
+@media only screen and (max-width: 768px) {
+  .p3 .p3-wrap .p3-wrap-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 1rem;
+    padding: 1rem;
+  }
+
+  .p3 .p3-wrap .p3-wrap-grid .p3-wrap-grid-item {
+    width: 100%;
+    height: 300px;
+  }
 }
 </style>

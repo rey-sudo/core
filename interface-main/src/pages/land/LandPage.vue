@@ -15,8 +15,11 @@
           <PageTwo v-if="isReady" />
           <LoaderWrap v-else />
         </div>
-
-        <div class="swiper-slide"></div>
+  
+        <div class="swiper-slide">
+          <PageThree v-if="isReady" />
+          <LoaderWrap v-else /> 
+        </div>
 
         <div class="swiper-slide"></div>
 

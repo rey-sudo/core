@@ -20,18 +20,18 @@
           <img
             :src="
               getter__productData.space_url +
-              getter__productData.theme.config.page_2.box.image
+              getter__productData.theme.config.page_2.section.image
             "
             alt=""
           />
         </div>
         <div class="p2-wrap-grid-item">
           <div>
-            {{ getter__productData.theme.config.page_2.box.content.title }}
+            {{ getter__productData.theme.config.page_2.section.content.title }}
           </div>
           <div>
             <p>
-              {{ getter__productData.theme.config.page_2.box.content.text }}
+              {{ getter__productData.theme.config.page_2.section.content.text }}
             </p>
           </div>
           <span />
