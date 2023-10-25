@@ -145,7 +145,7 @@ export default {
   margin-top: 1rem;
   text-align: center;
   max-width: 80%;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 @media only screen and (max-width: 768px) {

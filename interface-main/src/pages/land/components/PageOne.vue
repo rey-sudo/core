@@ -253,7 +253,7 @@ h2 {
 
   h2 {
     font-size: var(--text-size-c);
-    font-weight: 500;
+    font-weight: 400;
   }
 }
 </style>
