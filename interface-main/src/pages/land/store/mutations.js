@@ -17,8 +17,8 @@ const commit__getProductData = (state, data) => {
       config: {
         page_1: {
           background_color: "initial",
-          mask: "/backgrounds/background-wave-green.svg",
-          slider_images: [
+          mask: "/backgrounds/background-wave-darkgreen.svg",
+          images: [
             {
               url: "/products/123456789/images/p123456789-a1-w1200-h1200.webp",
             },
@@ -37,10 +37,13 @@ const commit__getProductData = (state, data) => {
           ],
         },
         page_2: {
-          background_color: "#00ed64",
-          mask: "empty",
-          description: {
-            d1: "",
+          background_color: "#27b46a",
+          mask: "/backgrounds/empty.png",
+          box: {
+            image: "/products/123456789/images/p123456789-a2-w1200-h1200.webp",
+            content: {
+              title: "Beneficios",
+            },
           },
         },
         page_3: {

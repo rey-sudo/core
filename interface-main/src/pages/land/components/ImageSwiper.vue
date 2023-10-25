@@ -20,7 +20,7 @@
         >
           <div class="swiper-wrapper">
             <div
-              v-for="item in getter__productData.theme.config.page_1.slider_images"
+              v-for="item in getter__productData.theme.config.page_1.images"
               :key="item"
               class="swiper-slide swiper-no-mousewheel"
             >
@@ -88,7 +88,7 @@ export default {
   width: 1200px;
   height: 600px;
   min-height: 600px;
-  margin-top: 2rem;
+  margin-top: 4rem;
   background: var(--base-a);
   border-radius: 12px;
   overflow: hidden;

@@ -4,6 +4,8 @@
 
     <div class="swiper landPageSwiper">
       <div class="swiper-wrapper">
+
+     
         <div class="swiper-slide">
           <PageOne v-if="isReady" />
           <LoaderWrap v-else />
