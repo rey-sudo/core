@@ -149,7 +149,7 @@ export default {
 }
 
 h1 {
-  font-size: var(--text-size-h);
+  font-size: var(--text-size-g);
   text-align: center;
   font-weight: 600;
   color: var(--text-a);

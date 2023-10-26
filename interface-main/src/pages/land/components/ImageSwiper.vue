@@ -163,12 +163,12 @@ export default {
 
 .navigation-button.prev {
   left: 4rem;
-  bottom: -2rem;
+  bottom: 0rem;
 }
 
 .navigation-button.next {
   left: 8rem;
-  bottom: -2rem;
+  bottom: 0rem;
 }
 
 @media screen and (max-width: 767px) {
