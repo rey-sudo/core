@@ -54,8 +54,8 @@
         </h2>
       </div>
 
-      <ImageSwiper/>
-      <ImageMobile/>
+      <ImageSwiper />
+      <ImageMobile />
     </div>
   </div>
 </template>
@@ -69,7 +69,7 @@ import { useRouter } from "vue-router";
 export default {
   components: {
     ImageSwiper,
-    ImageMobile
+    ImageMobile,
   },
   setup() {
     const router = useRouter();
@@ -162,6 +162,7 @@ h2 {
   font-weight: 600;
   color: var(--text-a);
   background: inherit;
+
 }
 
 .backgroundMask {
@@ -222,7 +223,7 @@ h2 {
 }
 
 .p-page1 .p-page1-wrap .p-page1-wrap-subtitle {
-  line-height: 0px;
+  line-height: 0;
 }
 
 @media screen and (max-width: 767px) {
@@ -234,9 +235,9 @@ h2 {
   }
   .p-page1 .p-page1-wrap {
     width: 100%;
-    height:  100%;
-    min-height:  100%;
-    max-height:  100%;
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
   }
 
   .p-page1 .p-page1-wrap .p-page1-wrap-subtitle {

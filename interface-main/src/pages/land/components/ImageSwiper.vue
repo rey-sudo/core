@@ -85,7 +85,7 @@ export default {
 
 <style lang="css" scoped>
 .p-slider {
-  width: 1200px;
+  width: calc(1200px + 1rem);
   height: 600px;
   min-height: 600px;
   margin-top: 3rem;
@@ -97,7 +97,7 @@ export default {
 .p-slider-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-  gap: 0px;
+  gap: 1rem;
   justify-content: center;
   padding: 0;
   height: inherit;
