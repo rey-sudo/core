@@ -119,7 +119,7 @@ export default {
 }
 
 .p4 .p4-wrap .p4-wrap-container .p4-wrap-container-top {
-  font-size: var(--text-size-f);
+  font-size: var(--text-size-e);
   font-weight: 400;
   align-items: center;
   border-radius: 50%;
@@ -138,7 +138,6 @@ export default {
 .p4 .p4-wrap .p4-wrap-container .p4-wrap-container-subtitle {
   font-size: var(--text-size-c);
   font-weight: 400;
-  color: var(--text-b);
   max-width: 50%;
 }
 
@@ -146,7 +145,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 2rem;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .p4
@@ -244,6 +243,7 @@ export default {
     font-weight: 600;
     text-align: center;
     letter-spacing: -0.03em;
+   
   }
 
   .p4 .p4-wrap .p4-wrap-container .p4-wrap-container-top {
@@ -268,6 +268,8 @@ export default {
     .p4-wrap-container-grid
     .p4-wrap-container-grid-item {
     border-radius: initial;
+    width: 300px;
+    height: 400px;
  
   }
 }
