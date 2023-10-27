@@ -17,7 +17,7 @@
           <div
             class="p4-wrap-grid-item"
             :style="{
-              backgroundImage: `url(https://arkastore.nyc3.digitaloceanspaces.com/products/123456789/images/p123456789-a1-w1200-h1200.webp)`,
+              backgroundImage: `url(https://arkastore.nyc3.digitaloceanspaces.com/test/1200x1200-1.webp)`,
             }"
           >
             <div class="content">
@@ -29,7 +29,7 @@
           <div
             class="p4-wrap-grid-item"
             :style="{
-              backgroundImage: `url(https://arkastore.nyc3.digitaloceanspaces.com/products/123456789/images/p123456789-a1-w1200-h1200.webp)`,
+              backgroundImage: `url(https://arkastore.nyc3.digitaloceanspaces.com/test/1200x1200-10.webp)`,
             }"
           >
             <div class="content">
@@ -41,7 +41,7 @@
           <div
             class="p4-wrap-grid-item"
             :style="{
-              backgroundImage: `url(https://arkastore.nyc3.digitaloceanspaces.com/products/123456789/images/p123456789-a1-w1200-h1200.webp)`,
+              backgroundImage: `url(https://arkastore.nyc3.digitaloceanspaces.com/test/1200x1200-14.webp)`,
             }"
           >
             <div class="content">
@@ -114,13 +114,14 @@ export default {};
   );
   color: transparent;
   letter-spacing: -0.03em;
+  margin: 12px auto 0;
 }
 
 .p4 .p4-wrap .p4-wrap-subtitle {
   font-size: var(--text-size-b);
   font-weight: 400;
   color: var(--text-b);
-  margin: 12px auto 0;
+
   max-width: 50%;
   line-height: 24px;
 }
@@ -134,7 +135,7 @@ export default {};
 
 .p4 .p4-wrap .p4-wrap-grid .p4-wrap-grid-item {
   width: 400px;
-  height: 500px;
+  height: 600px;
   background: var(--base-a);
   transition: 0.2s;
   background-clip: content-box;
@@ -150,6 +151,12 @@ export default {};
   overflow: hidden;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: 50%;
+
+}
+
+.p4 .p4-wrap .p4-wrap-grid .p4-wrap-grid-item:hover {
+  padding: 1rem;
 }
 
 .gradient {
