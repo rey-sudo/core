@@ -218,6 +218,7 @@ h2 {
 
 .p-page1 .p-page1-wrap .p-page1-wrap-title {
   max-width: 100%;
+  padding: 0 1rem;
 }
 
 .p-page1 .p-page1-wrap .p-page1-wrap-subtitle {
@@ -241,9 +242,6 @@ h2 {
   .p-page1 .p-page1-wrap .p-page1-wrap-subtitle {
     line-height: initial;
     padding: 0 1rem;
-  }
-  .p-page1 {
-    background: var(--base-b) !important;
   }
 
   h1 {

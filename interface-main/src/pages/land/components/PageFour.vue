@@ -11,9 +11,7 @@
         </div>
 
         <div class="p4-wrap-container-subtitle">
-          <p>
-            {{ getter__productData.theme.config.page_4.subtitle }}
-          </p>
+          {{ getter__productData.theme.config.page_4.subtitle }}
         </div>
 
         <div class="p4-wrap-container-grid">
@@ -141,7 +139,6 @@ export default {
   font-size: var(--text-size-c);
   font-weight: 400;
   color: var(--text-b);
-  max-width: 50%;
 }
 
 .p4 .p4-wrap .p4-wrap-container .p4-wrap-container-grid {
@@ -235,5 +232,41 @@ export default {
   font-weight: 400;
   letter-spacing: -0.03em;
   margin-top: 1rem;
+}
+
+@media screen and (max-width: 767px) {
+  .p4 .p4-wrap {
+    width: 100%;
+  }
+  .p4 .p4-wrap .p4-wrap-container .p4-wrap-container-title {
+    font-size: var(--text-size-e);
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: -0.03em;
+  }
+
+  .p4 .p4-wrap .p4-wrap-container .p4-wrap-container-top {
+    font-size: var(--text-size-d);
+  }
+
+  .p4 .p4-wrap .p4-wrap-container .p4-wrap-container-subtitle {
+    font-size: var(--text-size-b);
+    padding: 0 1rem;
+  }
+
+  .p4 .p4-wrap .p4-wrap-container .p4-wrap-container-grid {
+    width: 100vw;
+    overflow-y: hidden;
+    overflow-x: scroll;
+  }
+
+  .p4
+    .p4-wrap
+    .p4-wrap-container
+    .p4-wrap-container-grid
+    .p4-wrap-container-grid-item {
+    border-radius: initial;
+ 
+  }
 }
 </style>
