@@ -25,11 +25,10 @@
           <LoaderWrap v-else />
         </div>
 
-        <div class="swiper-slide"></div>
-
-        <div class="swiper-slide"></div>
-
-        <div class="swiper-slide"></div>
+        <div class="swiper-slide">
+          <PageFive v-if="isReady" />
+          <LoaderWrap v-else />
+        </div>
       </div>
 
       <div class="swiper-pagination" />
@@ -48,8 +47,6 @@ import PageTwo from "@/pages/land/components/PageTwo";
 import PageThree from "@/pages/land/components/PageThree.vue";
 import PageFour from "@/pages/land/components/PageFour.vue";
 import PageFive from "@/pages/land/components/PageFive.vue";
-import PageSix from "@/pages/land/components/PageSix.vue";
-import PageSeven from "@/pages/land/components/PageSeven.vue";
 import landAPI from "@/pages/land/composable/land-api";
 import LoaderWrap from "@/components/LoaderWrap.vue";
 import { useRouter } from "vue-router";
@@ -62,8 +59,6 @@ export default {
     PageThree,
     PageFour,
     PageFive,
-    PageSix,
-    PageSeven,
     LoaderWrap,
   },
 
