@@ -7,8 +7,7 @@
         <div class="p5-wrap-container-title">Envíos gratis a toda Colombia</div>
 
         <div class="p5-wrap-container-subtitle">
-          Enviamos a todas las ciudades de Colombia: ¡Tu destino está a solo un
-          clic de distancia! Realizamos entregas rápidas y seguras a cada rincón
+          Enviamos a todas las ciudades de Colombia: Realizamos entregas rápidas y seguras a cada rincón
           del país. ¡Haz tu pedido ahora y paga en casa!
         </div>
       </div>
@@ -108,7 +107,6 @@ export default {
 .p5 .p5-wrap .p5-wrap-container-title {
   font-size: var(--text-size-f);
   font-weight: 600;
-  line-height: 82px;
   color: var(--text-a);
   letter-spacing: -0.03em;
   color: var(--text-w);
@@ -119,5 +117,18 @@ export default {
   font-weight: 400;
   max-width: 50%;
   color: var(--text-w);
+  margin-top: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .p5 .p5-wrap .p5-wrap-container-title {
+    font-size: var(--text-size-e);
+  }
+
+  .p5 .p5-wrap .p5-wrap-container-subtitle {
+    font-size: var(--text-size-b);
+    padding: 0 1rem;
+    max-width: initial;
+  }
 }
 </style>
