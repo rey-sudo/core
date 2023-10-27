@@ -85,6 +85,12 @@ const commit__getProductData = (state, data) => {
             },
           },
         },
+        page_5: {
+          emoji: "🇨🇴",
+          title: "Envíos gratis a toda Colombia",
+          subtitle:
+            "Enviamos a todas las ciudades de Colombia: Realizamos entregas rápidas y seguras a cada rincón del país. ¡Haz tu pedido ahora y paga en casa!",
+        },
       },
     },
     name: "cortadora manual de verduras y frutas para cocina con 7 cuchillas diferentes y recipiente",

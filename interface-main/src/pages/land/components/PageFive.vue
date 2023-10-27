@@ -2,13 +2,16 @@
   <div class="p5" ref="observed5">
     <div class="p5-wrap">
       <div class="p5-wrap-container">
-        <div class="p5-wrap-container-top">🇨🇴</div>
+        <div class="p5-wrap-container-top">
+          {{ getter__productData.theme.config.page_5.emoji }}
+        </div>
 
-        <div class="p5-wrap-container-title">Envíos gratis a toda Colombia</div>
+        <div class="p5-wrap-container-title">
+          {{ getter__productData.theme.config.page_5.title }}
+        </div>
 
         <div class="p5-wrap-container-subtitle">
-          Enviamos a todas las ciudades de Colombia: Realizamos entregas rápidas y seguras a cada rincón
-          del país. ¡Haz tu pedido ahora y paga en casa!
+          {{ getter__productData.theme.config.page_5.subtitle }}
         </div>
       </div>
 
@@ -20,8 +23,16 @@
 <script>
 import createGlobe from "cobe";
 import locations from "@/pages/land/utils/locations";
+import landAPI from "@/pages/land/composable/land-api";
 
 export default {
+  setup() {
+    const { getter__productData } = landAPI();
+
+    return {
+      getter__productData,
+    };
+  },
   mounted() {
     let phi = 0;
 
