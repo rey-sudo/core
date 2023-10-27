@@ -1,24 +1,24 @@
 <template>
   <div class="p4">
     <div class="p4-wrap">
-      <div class="overlay">
-        <div class="p4-wrap-top">
+      <div class="p4-wrap-container">
+        <div class="p4-wrap-container-top">
           {{ getter__productData.theme.config.page_4.emoji }}
         </div>
 
-        <div class="p4-wrap-title">
+        <div class="p4-wrap-container-title">
           {{ getter__productData.theme.config.page_4.title }}
         </div>
 
-        <div class="p4-wrap-subtitle">
+        <div class="p4-wrap-container-subtitle">
           <p>
             {{ getter__productData.theme.config.page_4.subtitle }}
           </p>
         </div>
 
-        <div class="p4-wrap-grid">
+        <div class="p4-wrap-container-grid">
           <div
-            class="p4-wrap-grid-item"
+            class="p4-wrap-container-grid-item"
             :style="{
               backgroundImage: `url(${getter__productData.space_url}${getter__productData.theme.config.page_4.section.left.image})`,
             }"
@@ -36,7 +36,7 @@
             <span class="gradient" />
           </div>
           <div
-            class="p4-wrap-grid-item"
+            class="p4-wrap-container-grid-item"
             :style="{
               backgroundImage: `url(${getter__productData.space_url}${getter__productData.theme.config.page_4.section.center.image})`,
             }"
@@ -57,7 +57,7 @@
             <span class="gradient" />
           </div>
           <div
-            class="p4-wrap-grid-item"
+            class="p4-wrap-container-grid-item"
             :style="{
               backgroundImage: `url(${getter__productData.space_url}${getter__productData.theme.config.page_4.section.right.image})`,
             }"
@@ -112,7 +112,7 @@ export default {
   flex-direction: column;
 }
 
-.overlay {
+.p4 .p4-wrap .p4-wrap-container {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -120,7 +120,7 @@ export default {
   justify-content: center;
 }
 
-.p4 .p4-wrap .p4-wrap-top {
+.p4 .p4-wrap .p4-wrap-container .p4-wrap-container-top {
   font-size: var(--text-size-f);
   font-weight: 400;
   align-items: center;
@@ -129,7 +129,7 @@ export default {
   display: flex;
 }
 
-.p4 .p4-wrap .p4-wrap-title {
+.p4 .p4-wrap .p4-wrap-container .p4-wrap-container-title {
   font-size: var(--text-size-f);
   font-weight: 600;
   line-height: 82px;
@@ -137,21 +137,25 @@ export default {
   letter-spacing: -0.03em;
 }
 
-.p4 .p4-wrap .p4-wrap-subtitle {
+.p4 .p4-wrap .p4-wrap-container .p4-wrap-container-subtitle {
   font-size: var(--text-size-c);
   font-weight: 400;
   color: var(--text-b);
   max-width: 50%;
 }
 
-.p4 .p4-wrap .p4-wrap-grid {
+.p4 .p4-wrap .p4-wrap-container .p4-wrap-container-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 2rem;
   margin-top: 1rem;
 }
 
-.p4 .p4-wrap .p4-wrap-grid .p4-wrap-grid-item {
+.p4
+  .p4-wrap
+  .p4-wrap-container
+  .p4-wrap-container-grid
+  .p4-wrap-container-grid-item {
   width: 400px;
   height: 600px;
   background: var(--base-a);
@@ -173,7 +177,15 @@ export default {
   border-radius: 17px;
 }
 
-.p4 .p4-wrap .p4-wrap-grid .p4-wrap-grid-item:hover {
+.p4 .p4-wrap .p4-wrap-container-grid .p4-wrap-container-grid-item div {
+  color: var(--text-w);
+}
+
+.p4
+  .p4-wrap
+  .p4-wrap-container
+  .p4-wrap-container-grid
+  .p4-wrap-container-grid-item:hover {
   animation: slideAnimation 4s infinite linear;
 }
 
@@ -198,10 +210,6 @@ export default {
     rgba(51, 51, 51, 1) 0%,
     rgba(0, 0, 0, 0) 100%
   );
-}
-
-.p4 .p4-wrap .p4-wrap-grid .p4-wrap-grid-item div {
-  color: var(--text-w);
 }
 
 .content {

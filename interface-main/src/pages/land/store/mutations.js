@@ -20,10 +20,11 @@ const commit__getProductData = (state, data) => {
           mask: "/backgrounds/background-wave-darkgreen.svg",
           images: [
             {
-              url: "/products/123456789/images/p123456789-a2-w1200-h1200.webp",
-            },
-            {
               url: "/products/123456789/images/p123456789-a1-w1200-h1200.webp",
+            },
+
+            {
+              url: "/products/123456789/images/p123456789-a2-w1200-h1200.webp",
             },
 
             {
