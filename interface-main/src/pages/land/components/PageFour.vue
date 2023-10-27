@@ -139,6 +139,7 @@ export default {
   font-size: var(--text-size-c);
   font-weight: 400;
   color: var(--text-b);
+  max-width: 50%;
 }
 
 .p4 .p4-wrap .p4-wrap-container .p4-wrap-container-grid {
@@ -252,6 +253,7 @@ export default {
   .p4 .p4-wrap .p4-wrap-container .p4-wrap-container-subtitle {
     font-size: var(--text-size-b);
     padding: 0 1rem;
+    max-width: initial;
   }
 
   .p4 .p4-wrap .p4-wrap-container .p4-wrap-container-grid {
