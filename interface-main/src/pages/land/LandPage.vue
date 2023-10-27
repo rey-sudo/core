@@ -4,8 +4,7 @@
 
     <div class="swiper landPageSwiper">
       <div class="swiper-wrapper">
-
-     
+        <!--  
         <div class="swiper-slide">
           <PageOne v-if="isReady" />
           <LoaderWrap v-else />
@@ -15,13 +14,16 @@
           <PageTwo v-if="isReady" />
           <LoaderWrap v-else />
         </div>
-  
+
         <div class="swiper-slide">
           <PageThree v-if="isReady" />
           <LoaderWrap v-else /> 
         </div>
-
-        <div class="swiper-slide"></div>
+ -->
+        <div class="swiper-slide">
+          <PageFour v-if="isReady" />
+          <LoaderWrap v-else />
+        </div>
 
         <div class="swiper-slide"></div>
 

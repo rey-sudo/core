@@ -6,7 +6,7 @@
       background: getter__productData.theme.config.page_1.background_color,
     }"
   >
-    <div class="backgroundMask">
+    <div class="mask">
       <img
         :src="
           getter__productData.space_url +
@@ -149,10 +149,9 @@ export default {
 }
 
 h1 {
-  font-size: var(--text-size-g);
+  font-size: var(--text-size-h);
   text-align: center;
   font-weight: 600;
-  color: var(--text-a);
   letter-spacing: -0.03em;
   background: inherit;
 }
@@ -160,18 +159,17 @@ h1 {
 h2 {
   font-size: var(--text-size-d);
   font-weight: 600;
-  color: var(--text-a);
   background: inherit;
 
 }
 
-.backgroundMask {
+.mask {
   position: absolute;
   width: inherit;
   height: inherit;
 }
 
-.backgroundMask img {
+.mask img {
   width: inherit;
   height: inherit;
   object-fit: cover;
@@ -250,11 +248,13 @@ h2 {
 
   h1 {
     font-size: var(--text-size-e);
+    color: var(--text-a);
   }
 
   h2 {
     font-size: var(--text-size-c);
     font-weight: 400;
+    color: var(--text-a);
   }
 }
 </style>
