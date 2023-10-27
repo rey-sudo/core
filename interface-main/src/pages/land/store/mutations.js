@@ -20,11 +20,12 @@ const commit__getProductData = (state, data) => {
           mask: "/backgrounds/background-wave-darkgreen.svg",
           images: [
             {
-              url: "/products/123456789/images/p123456789-a1-w1200-h1200.webp",
-            },
-            {
               url: "/products/123456789/images/p123456789-a2-w1200-h1200.webp",
             },
+            {
+              url: "/products/123456789/images/p123456789-a1-w1200-h1200.webp",
+            },
+
             {
               url: "/products/123456789/images/p123456789-a3-w1200-h1200.webp",
             },
@@ -55,6 +56,31 @@ const commit__getProductData = (state, data) => {
             content: {
               title: "Sin límites",
               text: "Transforma tus ideas en deliciosos platos y diviértete con las miles de posibilidades de combinación.",
+            },
+          },
+        },
+        page_4: {
+          emoji: "🤯",
+          title: "¡Multiples beneficios!",
+          subtitle:
+            " ¿Por qué perder más tiempo cortando manualmente cuando puedes hacerlo de manera rápida y precisa con nuestro picador?",
+          section: {
+            left: {
+              image: "/test/1200x1200-1.webp",
+              title: "Seguridad",
+              subtitle:
+                "Superficie de corte con rieles y sujetador de mano para más seguridad.",
+            },
+            center: {
+              image: "/test/1200x1200-10.webp",
+              title: "Eficiencia",
+              subtitle: "Los cortes se realizan en menos de un segundo.",
+            },
+            right: {
+              image: "/test/1200x1200-14.webp",
+              title: "Versatilidad",
+              subtitle:
+                "Las 7 cuchillas de corte permiten gran variedad de resultados.",
             },
           },
         },

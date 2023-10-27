@@ -2,14 +2,17 @@
   <div class="p4">
     <div class="p4-wrap">
       <div class="overlay">
-        <div class="p4-wrap-top">🤯</div>
+        <div class="p4-wrap-top">
+          {{ getter__productData.theme.config.page_4.emoji }}
+        </div>
 
-        <div class="p4-wrap-title">¡Multiples beneficios!</div>
+        <div class="p4-wrap-title">
+          {{ getter__productData.theme.config.page_4.title }}
+        </div>
 
         <div class="p4-wrap-subtitle">
           <p>
-            ¿Por qué perder más tiempo cortando manualmente cuando puedes
-            hacerlo de manera rápida y precisa con nuestro picador?
+            {{ getter__productData.theme.config.page_4.subtitle }}
           </p>
         </div>
 
@@ -17,14 +20,17 @@
           <div
             class="p4-wrap-grid-item"
             :style="{
-              backgroundImage: `url(https://arkastore.nyc3.digitaloceanspaces.com/test/1200x1200-1.webp)`,
+              backgroundImage: `url(${getter__productData.space_url}${getter__productData.theme.config.page_4.section.left.image})`,
             }"
           >
             <div class="content">
-              <div>Seguridad</div>
               <div>
-                Superficie de corte con rieles y sujetador de mano para más
-                seguridad.
+                {{ getter__productData.theme.config.page_4.section.left.title }}
+              </div>
+              <div>
+                {{
+                  getter__productData.theme.config.page_4.section.left.subtitle
+                }}
               </div>
             </div>
             <span class="gradient" />
@@ -32,25 +38,40 @@
           <div
             class="p4-wrap-grid-item"
             :style="{
-              backgroundImage: `url(https://arkastore.nyc3.digitaloceanspaces.com/test/1200x1200-10.webp)`,
+              backgroundImage: `url(${getter__productData.space_url}${getter__productData.theme.config.page_4.section.center.image})`,
             }"
           >
             <div class="content">
-              <div>Eficiencia</div>
-              <div>Los cortes se realizan en menos de un segundo.</div>
+              <div>
+                {{
+                  getter__productData.theme.config.page_4.section.center.title
+                }}
+              </div>
+              <div>
+                {{
+                  getter__productData.theme.config.page_4.section.center
+                    .subtitle
+                }}
+              </div>
             </div>
             <span class="gradient" />
           </div>
           <div
             class="p4-wrap-grid-item"
             :style="{
-              backgroundImage: `url(https://arkastore.nyc3.digitaloceanspaces.com/test/1200x1200-14.webp)`,
+              backgroundImage: `url(${getter__productData.space_url}${getter__productData.theme.config.page_4.section.right.image})`,
             }"
           >
             <div class="content">
-              <div>Versatilidad</div>
               <div>
-                Las 7 cuchillas de corte permiten gran variedad de resultados.
+                {{
+                  getter__productData.theme.config.page_4.section.right.title
+                }}
+              </div>
+              <div>
+                {{
+                  getter__productData.theme.config.page_4.section.right.subtitle
+                }}
               </div>
             </div>
             <span class="gradient" />
@@ -62,7 +83,17 @@
 </template>
 
 <script>
-export default {};
+import landAPI from "@/pages/land/composable/land-api";
+
+export default {
+  setup() {
+    const { getter__productData } = landAPI();
+
+    return {
+      getter__productData,
+    };
+  },
+};
 </script>
 
 <style lang="css" scoped>
@@ -90,7 +121,7 @@ export default {};
 }
 
 .p4 .p4-wrap .p4-wrap-top {
-  font-size: var(--text-size-g);
+  font-size: var(--text-size-f);
   font-weight: 400;
   align-items: center;
   border-radius: 50%;
@@ -107,12 +138,10 @@ export default {};
 }
 
 .p4 .p4-wrap .p4-wrap-subtitle {
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-c);
   font-weight: 400;
   color: var(--text-b);
-
   max-width: 50%;
-  line-height: 24px;
 }
 
 .p4 .p4-wrap .p4-wrap-grid {
