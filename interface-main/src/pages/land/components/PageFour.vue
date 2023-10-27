@@ -182,7 +182,7 @@ export default {};
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  font-size: var(--text-size-e);
+  font-size: var(--text-size-d);
   font-weight: 500;
   letter-spacing: -0.03em;
 }
