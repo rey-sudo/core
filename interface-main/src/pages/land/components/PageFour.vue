@@ -8,8 +8,8 @@
 
         <div class="p4-wrap-subtitle">
           <p>
-            The community can easily identify in the dapp store which projects
-            are the most secure according to 3 levels of audit.
+            ¿Por qué perder más tiempo cortando manualmente cuando puedes
+            hacerlo de manera rápida y precisa con nuestro picador?
           </p>
         </div>
 
@@ -22,7 +22,10 @@
           >
             <div class="content">
               <div>Seguridad</div>
-              <div>In-depth analysis of the fundamental aspects</div>
+              <div>
+                Superficie de corte con rieles y sujetador de mano para más
+                seguridad.
+              </div>
             </div>
             <span class="gradient" />
           </div>
@@ -34,7 +37,7 @@
           >
             <div class="content">
               <div>Eficiencia</div>
-              <div>In-depth analysis of the fundamental aspects</div>
+              <div>Los cortes se realizan en menos de un segundo.</div>
             </div>
             <span class="gradient" />
           </div>
@@ -46,7 +49,9 @@
           >
             <div class="content">
               <div>Versatilidad</div>
-              <div>In-depth analysis of the fundamental aspects</div>
+              <div>
+                Las 7 cuchillas de corte permiten gran variedad de resultados.
+              </div>
             </div>
             <span class="gradient" />
           </div>
@@ -65,7 +70,6 @@ export default {};
   display: flex;
   justify-content: center;
   height: 100%;
-  background: var(--base-c);
 }
 
 .p4 .p4-wrap {
@@ -86,35 +90,20 @@ export default {};
 }
 
 .p4 .p4-wrap .p4-wrap-top {
-  font-size: var(--text-size-c);
+  font-size: var(--text-size-g);
   font-weight: 400;
   align-items: center;
   border-radius: 50%;
-  box-shadow: var(--button-shadow);
-  width: 45px;
-  height: 45px;
   justify-content: center;
   display: flex;
 }
 
 .p4 .p4-wrap .p4-wrap-title {
-  font-size: var(--text-size-g);
-  font-weight: 500;
+  font-size: var(--text-size-f);
+  font-weight: 600;
   line-height: 82px;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-image: linear-gradient(
-    90deg,
-    #1e3791 0%,
-    #2948b1 40%,
-    #3153c6 55%,
-    #385fda 60%
-  );
-  color: transparent;
+  color: var(--text-a);
   letter-spacing: -0.03em;
-  margin: 12px auto 0;
 }
 
 .p4 .p4-wrap .p4-wrap-subtitle {
@@ -151,12 +140,21 @@ export default {};
   overflow: hidden;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: 50%;
-
+  background-position: center;
+  border-radius: 17px;
 }
 
 .p4 .p4-wrap .p4-wrap-grid .p4-wrap-grid-item:hover {
-  padding: 1rem;
+  animation: slideAnimation 4s infinite linear;
+}
+
+@keyframes slideAnimation {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
 }
 
 .gradient {
@@ -184,6 +182,7 @@ export default {};
   justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
+  padding: 1rem;
 }
 .content div:nth-child(1) {
   display: flex;

@@ -11,7 +11,7 @@ const commit__getProductData = (state, data) => {
       large: "empty",
     },
     theme: {
-      title: "Cortadora manual de verduras y frutas",
+      title: "Cortadora multifuncional de frutas y verduras",
       subtitle:
         "¡Utiliza los 7 tipos de corte y el recipiente para preparar lo que quieras!",
       config: {
