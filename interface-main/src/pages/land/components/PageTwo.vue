@@ -69,6 +69,7 @@ export default {
   position: absolute;
   width: inherit;
   height: inherit;
+  min-height: inherit;
 }
 
 .mask img {
@@ -107,7 +108,6 @@ export default {
   box-sizing: border-box;
   position: relative;
   background: var(--base-c);
- 
   border-radius: 34px;
   overflow: hidden;
   color: var(--text-a);
@@ -146,6 +146,7 @@ export default {
   font-size: var(--text-size-c);
   margin-top: 1rem;
   text-align: center;
+  letter-spacing: -0.01em;
   max-width: 80%;
   font-weight: 400;
 }

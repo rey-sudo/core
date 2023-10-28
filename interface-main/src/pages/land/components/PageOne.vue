@@ -141,7 +141,8 @@ h1 {
 
 h2 {
   font-size: var(--text-size-d);
-  font-weight: 600;
+  font-weight: 500;
+  letter-spacing: -0.01em;
   background: inherit;
 }
 
@@ -149,6 +150,7 @@ h2 {
   position: absolute;
   width: inherit;
   height: inherit;
+  min-height: inherit;
 }
 
 .mask img {
