@@ -6,7 +6,7 @@
       background: getter__productData.theme.config.page_1.background_color,
     }"
   >
-    <div class="backgroundMask">
+    <div class="mask">
       <img
         :src="
           getter__productData.space_url +
@@ -54,8 +54,8 @@
         </h2>
       </div>
 
-      <ImageSwiper/>
-      <ImageMobile/>
+      <ImageSwiper />
+      <ImageMobile />
     </div>
   </div>
 </template>
@@ -69,7 +69,7 @@ import { useRouter } from "vue-router";
 export default {
   components: {
     ImageSwiper,
-    ImageMobile
+    ImageMobile,
   },
   setup() {
     const router = useRouter();
@@ -149,28 +149,27 @@ export default {
 }
 
 h1 {
-  font-size: var(--text-size-h);
+  font-size: var(--text-size-g);
   text-align: center;
   font-weight: 600;
-  color: var(--text-a);
-  letter-spacing: -0.015em;
+  letter-spacing: -0.03em;
   background: inherit;
 }
 
 h2 {
   font-size: var(--text-size-d);
   font-weight: 600;
-  color: var(--text-a);
   background: inherit;
+
 }
 
-.backgroundMask {
+.mask {
   position: absolute;
   width: inherit;
   height: inherit;
 }
 
-.backgroundMask img {
+.mask img {
   width: inherit;
   height: inherit;
   object-fit: cover;
@@ -219,10 +218,11 @@ h2 {
 
 .p-page1 .p-page1-wrap .p-page1-wrap-title {
   max-width: 100%;
+  padding: 0 1rem;
 }
 
 .p-page1 .p-page1-wrap .p-page1-wrap-subtitle {
-  line-height: 0px;
+  line-height: 0;
 }
 
 @media screen and (max-width: 767px) {
@@ -234,26 +234,25 @@ h2 {
   }
   .p-page1 .p-page1-wrap {
     width: 100%;
-    height:  100%;
-    min-height:  100%;
-    max-height:  100%;
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
   }
 
   .p-page1 .p-page1-wrap .p-page1-wrap-subtitle {
     line-height: initial;
     padding: 0 1rem;
   }
-  .p-page1 {
-    background: var(--base-b) !important;
-  }
 
   h1 {
     font-size: var(--text-size-e);
+    color: var(--text-a);
   }
 
   h2 {
     font-size: var(--text-size-c);
-    font-weight: 500;
+    font-weight: 400;
+    color: var(--text-a);
   }
 }
 </style>

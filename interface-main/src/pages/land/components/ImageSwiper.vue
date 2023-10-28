@@ -20,7 +20,7 @@
         >
           <div class="swiper-wrapper">
             <div
-              v-for="item in getter__productData.theme.config.page_1.slider_images"
+              v-for="item in getter__productData.theme.config.page_1.images"
               :key="item"
               class="swiper-slide swiper-no-mousewheel"
             >
@@ -85,19 +85,19 @@ export default {
 
 <style lang="css" scoped>
 .p-slider {
-  width: 1200px;
+  width: calc(1200px + 1rem);
   height: 600px;
   min-height: 600px;
-  margin-top: 2rem;
+  margin-top: 3rem;
   background: var(--base-a);
-  border-radius: 12px;
+  border-radius: 34px;
   overflow: hidden;
 }
 
 .p-slider-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-  gap: 0px;
+  gap: 1rem;
   justify-content: center;
   padding: 0;
   height: inherit;
@@ -163,12 +163,12 @@ export default {
 
 .navigation-button.prev {
   left: 4rem;
-  bottom: -2rem;
+  bottom: 0rem;
 }
 
 .navigation-button.next {
   left: 8rem;
-  bottom: -2rem;
+  bottom: 0rem;
 }
 
 @media screen and (max-width: 767px) {

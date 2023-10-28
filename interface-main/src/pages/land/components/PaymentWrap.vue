@@ -23,7 +23,7 @@
     <div
       class="card-body-stock"
       :class="{
-        blue: getter__productData.stock_supply,
+        gray: getter__productData.stock_supply,
         red: !getter__productData.stock_supply,
       }"
     >
@@ -131,6 +131,7 @@ export default {
 .card-body-stock {
   margin-top: 0.5rem;
   text-align: left;
+  font-weight: 500;
   font-size: var(--text-size-b);
 }
 
@@ -138,7 +139,7 @@ export default {
   margin-top: 0.5rem;
   text-align: left;
   font-size: var(--text-size-b);
-  font-weight: 600;
+  font-weight: 500;
   display: flex;
   align-items: center;
 }

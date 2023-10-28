@@ -176,7 +176,7 @@ export default {
   z-index: 100;
   display: flex;
   align-items: center;
-  background: var(--secondary-b);
+  background: var(--secondary-a);
 }
 
 .p-store-submenu-nav {
