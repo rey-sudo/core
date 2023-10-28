@@ -102,10 +102,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  position: fixed;
-  backdrop-filter: blur(12px);
-  z-index: 1000;
+  width: inherit;
 }
 
 .p-header .p-header-wrap {
@@ -117,20 +114,6 @@ export default {
   position: relative;
   background: var(--base-a);
   border-bottom: 1px solid var(--border-a);
-}
-
-.p-header .p-header-wrap .p-header-wrap:before {
-  background: radial-gradient(
-    62.87% 100% at 50% 100%,
-    rgba(255, 255, 255, 0.12) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  bottom: 0;
-  content: "";
-  height: 1px;
-  left: 0;
-  position: absolute;
-  width: 100%;
 }
 
 .p-header .p-header-wrap .p-header-wrap-nav {
@@ -160,7 +143,6 @@ h2 {
   font-size: var(--text-size-d);
   font-weight: 600;
   background: inherit;
-
 }
 
 .mask {
@@ -178,10 +160,11 @@ h2 {
 
 .p-page1 {
   display: flex;
-  justify-content: center;
-  width: inherit;
-  height: inherit;
-  max-width: 100%;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
   background-size: contain;
   background-repeat: repeat;
 }

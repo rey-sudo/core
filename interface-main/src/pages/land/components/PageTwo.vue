@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p2"
+    class="page2"
     :style="{
       background: getter__productData.theme.config.page_2.background_color,
     }"
@@ -14,9 +14,9 @@
       />
     </div>
 
-    <div class="p2-wrap">
-      <div class="p2-wrap-grid">
-        <div class="p2-wrap-grid-item">
+    <div class="page2-wrap">
+      <div class="page2-wrap-grid">
+        <div class="page2-wrap-grid-item">
           <img
             :src="
               getter__productData.space_url +
@@ -25,7 +25,7 @@
             alt=""
           />
         </div>
-        <div class="p2-wrap-grid-item">
+        <div class="page2-wrap-grid-item">
           <div>
             {{ getter__productData.theme.config.page_2.section.content.title }}
           </div>
@@ -56,6 +56,15 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.page2 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  min-height: 100vh;
+  background: var(--base-a);
+}
+
 .mask {
   position: absolute;
   width: inherit;
@@ -69,15 +78,8 @@ export default {
   object-position: bottom;
 }
 
-.p2 {
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  background: var(--base-a);
-}
-
-.p2-wrap {
-  width: 100%;
+.page2-wrap {
+  width: inherit;
   height: 100%;
   border-bottom: none;
   display: flex;
@@ -85,13 +87,13 @@ export default {
   align-items: center;
 }
 
-.p2 .p2-wrap .p2-wrap-grid {
+.page2 .page2-wrap .page2-wrap-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 1rem;
 }
 
-.p2 .p2-wrap .p2-wrap-grid .p2-wrap-grid-item {
+.page2 .page2-wrap .page2-wrap-grid .page2-wrap-grid-item {
   width: 600px;
   text-align: center;
   height: 600px;
@@ -112,17 +114,17 @@ export default {
   align-items: center;
 }
 
-.p2 .p2-wrap .p2-wrap-grid .p2-wrap-grid-item p {
+.page2 .page2-wrap .page2-wrap-grid .page2-wrap-grid-item p {
   text-align: center;
 }
 
-.p2 .p2-wrap .p2-wrap-grid .p2-wrap-grid-item img {
+.page2 .page2-wrap .page2-wrap-grid .page2-wrap-grid-item img {
   width: inherit;
   object-fit: cover;
   position: relative;
 }
 
-.p2 .p2-wrap .p2-wrap-grid .p2-wrap-grid-item span {
+.page2 .page2-wrap .page2-wrap-grid .page2-wrap-grid-item span {
   width: 20px;
   height: inherit;
   position: absolute;
@@ -133,14 +135,14 @@ export default {
   border-bottom: 1px solid var(--border-b);
 }
 
-.p2 .p2-wrap .p2-wrap-grid .p2-wrap-grid-item div:nth-child(1) {
+.page2 .page2-wrap .page2-wrap-grid .page2-wrap-grid-item div:nth-child(1) {
   font-size: var(--text-size-e);
   font-weight: 600;
   text-align: center;
   letter-spacing: -0.03em;
 }
 
-.p2 .p2-wrap .p2-wrap-grid .p2-wrap-grid-item div:nth-child(2) {
+.page2 .page2-wrap .page2-wrap-grid .page2-wrap-grid-item div:nth-child(2) {
   font-size: var(--text-size-c);
   margin-top: 1rem;
   text-align: center;
@@ -149,14 +151,14 @@ export default {
 }
 
 @media only screen and (max-width: 768px) {
-  .p2 .p2-wrap .p2-wrap-grid {
+  .page2 .page2-wrap .page2-wrap-grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 1rem;
     padding: 1rem;
   }
 
-  .p2 .p2-wrap .p2-wrap-grid .p2-wrap-grid-item {
+  .page2 .page2-wrap .page2-wrap-grid .page2-wrap-grid-item {
     width: 100%;
     height: 300px;
   }

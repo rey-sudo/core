@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <span class="loader" />
-    <!--   -->
+
     <section>
       <PageOne v-if="isReady" />
       <LoaderWrap v-else />
@@ -9,30 +9,26 @@
 
     <section>
       <PageTwo v-if="isReady" />
-      <LoaderWrap v-else />
     </section>
 
     <section>
       <PageThree v-if="isReady" />
-      <LoaderWrap v-else />
     </section>
 
     <section>
       <PageFour v-if="isReady" />
-      <LoaderWrap v-else />
     </section>
 
     <section>
       <PageFive v-if="isReady" />
-      <LoaderWrap v-else />
     </section>
+
+    <!--  -->
   </div>
 </template>
 
 <script>
-import Swiper from "swiper/bundle";
-import "swiper/css/bundle";
-
+/* eslint-disable */
 import PageOne from "@/pages/land/components/PageOne";
 import PageTwo from "@/pages/land/components/PageTwo";
 import PageThree from "@/pages/land/components/PageThree.vue";
@@ -83,46 +79,10 @@ export default {
       { immediate: true }
     )();
   },
-
-  mounted() {
-    this.setupSwiper();
-  },
-  methods: {
-    setupSwiper() {
-      new Swiper(".landPageSwiper", {
-        effect: "slide",
-        keyboard: {
-          enabled: true,
-          onlyInViewport: false,
-        },
-        grabCursor: false,
-        resistance: false,
-        speed: 400,
-        spaceBetween: 0,
-        mousewheel: {
-          invert: true,
-        },
-        direction: "vertical",
-        loop: false,
-        pagination: {
-          el: ".swiper-pagination",
-          type: "bullets",
-          clickable: true,
-        },
-      });
-    },
-  },
 };
 </script>
 
 <style lang="css" scoped>
-section {
-  width: 100%;
-  height: 100vh;
-  background: var(--base-a);
-
-}
-
 .container {
   display: block;
 }
