@@ -3,11 +3,11 @@
     <div class="p-slider-grid">
       <div class="p-slider-grid-item left">
         <div class="navigation-button prev" @click="slidePrev(index)">
-          <i class="pi pi-angle-up" />
+          <i class="pi pi-angle-left" />
         </div>
 
         <div class="navigation-button next" @click="slideNext(index)">
-          <i class="pi pi-angle-down" />
+          <i class="pi pi-angle-right" />
         </div>
 
         <!--SLIDER-->
@@ -66,9 +66,9 @@ export default {
     this.slider = new Swiper(".itemSliderSwiper", {
       zoom: true,
       mousewheel: false,
-      autoplay: false,
+      autoplay: true,
       loop: true,
-      direction: "vertical",
+      direction: "horizontal",
     });
   },
   methods: {
@@ -163,12 +163,12 @@ export default {
 
 .navigation-button.prev {
   left: 4rem;
-  bottom: 0rem;
+  bottom: -1rem;
 }
 
 .navigation-button.next {
   left: 8rem;
-  bottom: 0rem;
+  bottom: -1rem;
 }
 
 @media screen and (max-width: 767px) {

@@ -11,16 +11,16 @@ export default {
 </script>
 
 <style>
-* {
-  font-family: Inter, sans-serif;
-}
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: var(--text-a);
-  background: #ffffff;
+  background: var(--base-a);
+  font-family: Inter, sans-serif;
+  text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
 }
+
 i {
   line-height: 0 !important;
 }

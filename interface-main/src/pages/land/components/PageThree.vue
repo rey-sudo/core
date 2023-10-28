@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p3"
+    class="page3"
     :style="{
       background: getter__productData.theme.config.page_3.background_color,
     }"
@@ -14,10 +14,9 @@
       />
     </div>
 
-    <div class="p3-wrap">
-      <div class="p3-wrap-grid">
-
-        <div class="p3-wrap-grid-item">
+    <div class="page3-wrap">
+      <div class="page3-wrap-grid">
+        <div class="page3-wrap-grid-item">
           <div>
             {{ getter__productData.theme.config.page_3.section.content.title }}
           </div>
@@ -29,7 +28,7 @@
           <span />
         </div>
 
-        <div class="p3-wrap-grid-item">
+        <div class="page3-wrap-grid-item">
           <img
             :src="
               getter__productData.space_url +
@@ -58,6 +57,15 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.page3 {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  background: var(--base-a);
+}
+
 .mask {
   position: absolute;
   width: inherit;
@@ -71,14 +79,7 @@ export default {
   object-position: bottom;
 }
 
-.p3 {
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  background: var(--base-a);
-}
-
-.p3-wrap {
+.page3-wrap {
   width: 100%;
   height: 100%;
   border-bottom: none;
@@ -87,13 +88,13 @@ export default {
   align-items: center;
 }
 
-.p3 .p3-wrap .p3-wrap-grid {
+.page3 .page3-wrap .page3-wrap-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 1rem;
 }
 
-.p3 .p3-wrap .p3-wrap-grid .p3-wrap-grid-item {
+.page3 .page3-wrap .page3-wrap-grid .page3-wrap-grid-item {
   width: 600px;
   text-align: center;
   height: 600px;
@@ -114,17 +115,17 @@ export default {
   align-items: center;
 }
 
-.p3 .p3-wrap .p3-wrap-grid .p3-wrap-grid-item p {
+.page3 .page3-wrap .page3-wrap-grid .page3-wrap-grid-item p {
   text-align: center;
 }
 
-.p3 .p3-wrap .p3-wrap-grid .p3-wrap-grid-item img {
+.page3 .page3-wrap .page3-wrap-grid .page3-wrap-grid-item img {
   width: inherit;
   object-fit: cover;
   position: relative;
 }
 
-.p3 .p3-wrap .p3-wrap-grid .p3-wrap-grid-item span {
+.page3 .page3-wrap .page3-wrap-grid .page3-wrap-grid-item span {
   width: 20px;
   height: inherit;
   position: absolute;
@@ -135,14 +136,14 @@ export default {
   border-bottom: 1px solid var(--border-b);
 }
 
-.p3 .p3-wrap .p3-wrap-grid .p3-wrap-grid-item div:nth-child(1) {
+.page3 .page3-wrap .page3-wrap-grid .page3-wrap-grid-item div:nth-child(1) {
   font-size: var(--text-size-e);
   font-weight: 600;
   text-align: center;
   letter-spacing: -0.03em;
 }
 
-.p3 .p3-wrap .p3-wrap-grid .p3-wrap-grid-item div:nth-child(2) {
+.page3 .page3-wrap .page3-wrap-grid .page3-wrap-grid-item div:nth-child(2) {
   font-size: var(--text-size-c);
   margin-top: 1rem;
   text-align: center;
@@ -151,14 +152,14 @@ export default {
 }
 
 @media only screen and (max-width: 768px) {
-  .p3 .p3-wrap .p3-wrap-grid {
+  .page3 .page3-wrap .page3-wrap-grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 1rem;
     padding: 1rem;
   }
 
-  .p3 .p3-wrap .p3-wrap-grid .p3-wrap-grid-item {
+  .page3 .page3-wrap .page3-wrap-grid .page3-wrap-grid-item {
     width: 100%;
     height: 300px;
   }

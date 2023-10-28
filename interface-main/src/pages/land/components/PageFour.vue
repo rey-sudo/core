@@ -1,22 +1,22 @@
 <template>
-  <div class="p4">
-    <div class="p4-wrap">
-      <div class="p4-wrap-container">
-        <div class="p4-wrap-container-top">
+  <div class="page4">
+    <div class="page4-wrap">
+      <div class="page4-wrap-container">
+        <div class="page4-wrap-container-top">
           {{ getter__productData.theme.config.page_4.emoji }}
         </div>
 
-        <div class="p4-wrap-container-title">
+        <div class="page4-wrap-container-title">
           {{ getter__productData.theme.config.page_4.title }}
         </div>
 
-        <div class="p4-wrap-container-subtitle">
+        <div class="page4-wrap-container-subtitle">
           {{ getter__productData.theme.config.page_4.subtitle }}
         </div>
 
-        <div class="p4-wrap-container-grid">
+        <div class="page4-wrap-container-grid">
           <div
-            class="p4-wrap-container-grid-item"
+            class="page4-wrap-container-grid-item"
             :style="{
               backgroundImage: `url(${getter__productData.space_url}${getter__productData.theme.config.page_4.section.left.image})`,
             }"
@@ -34,7 +34,7 @@
             <span class="gradient" />
           </div>
           <div
-            class="p4-wrap-container-grid-item"
+            class="page4-wrap-container-grid-item"
             :style="{
               backgroundImage: `url(${getter__productData.space_url}${getter__productData.theme.config.page_4.section.center.image})`,
             }"
@@ -55,7 +55,7 @@
             <span class="gradient" />
           </div>
           <div
-            class="p4-wrap-container-grid-item"
+            class="page4-wrap-container-grid-item"
             :style="{
               backgroundImage: `url(${getter__productData.space_url}${getter__productData.theme.config.page_4.section.right.image})`,
             }"
@@ -95,14 +95,16 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.p4 {
+.page4 {
   display: flex;
   justify-content: center;
+  width: 100%;
   height: 100%;
+  min-height: 100vh;
 }
 
-.p4 .p4-wrap {
-  width: 90%;
+.page4 .page4-wrap {
+  width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -110,15 +112,14 @@ export default {
   flex-direction: column;
 }
 
-.p4 .p4-wrap .p4-wrap-container {
-  position: absolute;
+.page4 .page4-wrap .page4-wrap-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.p4 .p4-wrap .p4-wrap-container .p4-wrap-container-top {
+.page4 .page4-wrap .page4-wrap-container .page4-wrap-container-top {
   font-size: var(--text-size-e);
   font-weight: 400;
   align-items: center;
@@ -127,7 +128,7 @@ export default {
   display: flex;
 }
 
-.p4 .p4-wrap .p4-wrap-container .p4-wrap-container-title {
+.page4 .page4-wrap .page4-wrap-container .page4-wrap-container-title {
   font-size: var(--text-size-f);
   font-weight: 600;
   line-height: 82px;
@@ -135,24 +136,24 @@ export default {
   letter-spacing: -0.03em;
 }
 
-.p4 .p4-wrap .p4-wrap-container .p4-wrap-container-subtitle {
+.page4 .page4-wrap .page4-wrap-container .page4-wrap-container-subtitle {
   font-size: var(--text-size-c);
   font-weight: 400;
   max-width: 50%;
 }
 
-.p4 .p4-wrap .p4-wrap-container .p4-wrap-container-grid {
+.page4 .page4-wrap .page4-wrap-container .page4-wrap-container-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 2rem;
   margin-top: 2rem;
 }
 
-.p4
-  .p4-wrap
-  .p4-wrap-container
-  .p4-wrap-container-grid
-  .p4-wrap-container-grid-item {
+.page4
+  .page4-wrap
+  .page4-wrap-container
+  .page4-wrap-container-grid
+  .page4-wrap-container-grid-item {
   width: 400px;
   height: 600px;
   background: var(--base-a);
@@ -174,15 +175,19 @@ export default {
   border-radius: 17px;
 }
 
-.p4 .p4-wrap .p4-wrap-container-grid .p4-wrap-container-grid-item div {
+.page4
+  .page4-wrap
+  .page4-wrap-container-grid
+  .page4-wrap-container-grid-item
+  div {
   color: var(--text-w);
 }
 
-.p4
-  .p4-wrap
-  .p4-wrap-container
-  .p4-wrap-container-grid
-  .p4-wrap-container-grid-item:hover {
+.page4
+  .page4-wrap
+  .page4-wrap-container
+  .page4-wrap-container-grid
+  .page4-wrap-container-grid-item:hover {
   animation: slideAnimation 4s infinite linear;
 }
 
@@ -235,42 +240,34 @@ export default {
 }
 
 @media screen and (max-width: 767px) {
-  .p4 .p4-wrap {
-    width: 100%;
-  }
-  .p4 .p4-wrap .p4-wrap-container .p4-wrap-container-title {
+  .page4 .page4-wrap .page4-wrap-container .page4-wrap-container-title {
     font-size: var(--text-size-e);
     font-weight: 600;
     text-align: center;
     letter-spacing: -0.03em;
-   
   }
 
-  .p4 .p4-wrap .p4-wrap-container .p4-wrap-container-top {
+  .page4 .page4-wrap .page4-wrap-container .page4-wrap-container-top {
     font-size: var(--text-size-d);
   }
 
-  .p4 .p4-wrap .p4-wrap-container .p4-wrap-container-subtitle {
+  .page4 .page4-wrap .page4-wrap-container .page4-wrap-container-subtitle {
     font-size: var(--text-size-b);
     padding: 0 1rem;
     max-width: initial;
   }
 
-  .p4 .p4-wrap .p4-wrap-container .p4-wrap-container-grid {
-    width: 100vw;
-    overflow-y: hidden;
-    overflow-x: scroll;
+  .page4 .page4-wrap .page4-wrap-container .page4-wrap-container-grid {
+    grid-template-columns: repeat(1, 1fr);
+    padding: 1rem;
   }
 
-  .p4
-    .p4-wrap
-    .p4-wrap-container
-    .p4-wrap-container-grid
-    .p4-wrap-container-grid-item {
-    border-radius: initial;
-    width: 300px;
-    height: 400px;
- 
+  .page4
+    .page4-wrap
+    .page4-wrap-container
+    .page4-wrap-container-grid
+    .page4-wrap-container-grid-item {
+    width: 100%;
   }
 }
 </style>

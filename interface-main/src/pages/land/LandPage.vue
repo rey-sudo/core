@@ -1,47 +1,34 @@
 <template>
-  <div id="container" class="container">
+  <div class="container">
     <span class="loader" />
 
-    <div class="swiper landPageSwiper">
-      <div class="swiper-wrapper">
-        <!--   -->
-        <div class="swiper-slide">
-          <PageOne v-if="isReady" />
-          <LoaderWrap v-else />
-        </div>
+    <section>
+      <PageOne v-if="isReady" />
+      <LoaderWrap v-else />
+    </section>
 
-        <div class="swiper-slide">
-          <PageTwo v-if="isReady" />
-          <LoaderWrap v-else />
-        </div>
+    <section>
+      <PageTwo v-if="isReady" />
+    </section>
 
-        <div class="swiper-slide">
-          <PageThree v-if="isReady" />
-          <LoaderWrap v-else /> 
-        </div>
+    <section>
+      <PageThree v-if="isReady" />
+    </section>
 
-        <div class="swiper-slide">
-          <PageFour v-if="isReady" />
-          <LoaderWrap v-else />
-        </div>
+    <section>
+      <PageFour v-if="isReady" />
+    </section>
 
-        <div class="swiper-slide">
-          <PageFive v-if="isReady" />
-          <LoaderWrap v-else />
-        </div>
-      </div>
+    <section>
+      <PageFive v-if="isReady" />
+    </section>
 
-      <div class="swiper-pagination" />
-    </div>
+    <!--  -->
   </div>
 </template>
 
 <script>
 /* eslint-disable */
-
-import Swiper from "swiper/bundle";
-import "swiper/css/bundle";
-
 import PageOne from "@/pages/land/components/PageOne";
 import PageTwo from "@/pages/land/components/PageTwo";
 import PageThree from "@/pages/land/components/PageThree.vue";
@@ -92,53 +79,12 @@ export default {
       { immediate: true }
     )();
   },
-
-  mounted() {
-    this.setupSwiper();
-  },
-  methods: {
-    setupSwiper() {
-      new Swiper(".landPageSwiper", {
-        effect: "slide",
-        keyboard: {
-          enabled: true,
-          onlyInViewport: false,
-        },
-        grabCursor: false,
-        resistance: false,
-        speed: 400,
-        spaceBetween: 0,
-        mousewheel: {
-          invert: true,
-        },
-        direction: "vertical",
-        loop: false,
-        pagination: {
-          el: ".swiper-pagination",
-          type: "bullets",
-          clickable: true,
-        },
-      });
-    },
-  },
 };
 </script>
 
 <style lang="css" scoped>
-.swiper {
-  width: 100%;
-  height: 100vh;
-  background: var(--base-a);
-}
-
-::v-deep(.swiper-pagination-bullet) {
-  background: var(--secondary-a);
-  width: 0.5rem;
-  height: 0.5rem;
-}
-
 .container {
-  background-size: contain;
+  display: block;
 }
 
 .loader {
@@ -218,10 +164,6 @@ export default {
 
 @media screen and (max-width: 767px) {
   .loader {
-    display: none;
-  }
-
-  .swiper-pagination {
     display: none;
   }
 }
