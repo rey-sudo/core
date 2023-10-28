@@ -85,6 +85,7 @@ export default {
   max-width: 50%;
   color: var(--text-w);
   margin-top: 1rem;
+  letter-spacing: -0.01em;
 }
 
 @media only screen and (max-width: 768px) {

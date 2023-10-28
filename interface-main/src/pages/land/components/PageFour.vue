@@ -140,7 +140,7 @@ export default {
   font-size: var(--text-size-c);
   font-weight: 400;
   max-width: 50%;
-
+  letter-spacing: -0.01em;
 }
 
 .page4 .page4-wrap .page4-wrap-container .page4-wrap-container-grid {
@@ -236,7 +236,7 @@ export default {
 .content div:nth-child(2) {
   font-size: var(--text-size-b);
   font-weight: 400;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.01em;
   margin-top: 1rem;
 }
 

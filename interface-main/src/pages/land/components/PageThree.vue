@@ -70,6 +70,7 @@ export default {
   position: absolute;
   width: inherit;
   height: inherit;
+  min-height: inherit;
 }
 
 .mask img {
@@ -148,6 +149,7 @@ export default {
   text-align: center;
   max-width: 80%;
   font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
 @media only screen and (max-width: 768px) {
