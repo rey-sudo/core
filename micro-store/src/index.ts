@@ -51,8 +51,8 @@ const main = async () => {
       throw new Error("EXPRESS_TIMEOUT error");
     }
 
-    if (!process.env.DRIVER_ROLE) {
-      throw new Error("DRIVER_ROLE error");
+    if (!process.env.PUBLISHER_ROLE) {
+      throw new Error("PUBLISHER_ROLE error");
     }
 
     if (!process.env.GENERAL_LIMIT_TIME) {
@@ -114,7 +114,7 @@ const main = async () => {
       .catch((e) => errorHandler("MONGO_CONN", e));
 
     await eventDriver
-      .subscribe(eventBus.client, process.env.DRIVER_ROLE)
+      .subscribe(eventBus.client, process.env.PUBLISHER_ROLE)
       .then(() => connHandler("eventDriver"))
       .catch((e) => errorHandler("DRIVER_CONN", e));
 
