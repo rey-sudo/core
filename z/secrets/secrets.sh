@@ -4,7 +4,7 @@ kubectl create secret generic audits-jwt-secret --from-literal=AUDITS_JWT_KEY=fi
 
 kubectl create secret generic admin-jwt-secret --from-literal=ADMIN_JWT_KEY=yahoo-usually-write-cat-onto
 
-kubectl create secret generic mailjet-secret --from-literal=MAILJET_SKEY=8a8c88b8cd8a8sd8acs8d8ca8s
+kubectl create secret generic mailjet-secret --from-literal=MAILJET_SKEY=8a8c88b8cd8a8sd8ac8s8d8ca8s
 
 kubectl create secret generic encrypto-secret --from-literal=ENCRYPTO_KEY=KCciKXIAKkciSKixAIASD
 

@@ -1,7 +1,7 @@
 import { Telegraf } from "telegraf";
 import { message } from "telegraf/filters";
 
-const bot = new Telegraf("6508873772:AAEG1DR3D6_wvREhsHYToXnEBIhlT9w9Iig");
+const bot = new Telegraf(process.env.TELEGRAM_API!);
 
 interface SLAVE {
   active: boolean;
@@ -20,6 +20,7 @@ let S1: SLAVE = {
   interval: undefined,
   interval_duration: 10000,
 };
+
 //////////////
 
 bot.hears(S1.user + ":" + S1.key, (ctx) => {
