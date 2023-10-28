@@ -1,4 +1,4 @@
-const env = "prod"; 
+const env = "dev"; 
 
 const baseURL = {
   dev: "https://arkastore.dev",

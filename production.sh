@@ -1,0 +1,1 @@
+kubectl config use-context do-nyc1-k8arka
