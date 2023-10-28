@@ -22,4 +22,4 @@ jobs:
         with:
           token: ${{ secrets.OCEAN_API_TOKEN }}
       - run: doctl kubernetes cluster kubeconfig save k8arka
-      - run: kubectl rollout restart sts micro-notifications
+      - run: kubectl rollout restart deployment micro-notifications
