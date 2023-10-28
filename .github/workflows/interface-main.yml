@@ -1,11 +1,11 @@
-name: ui-main
+name: interface-main
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'ui-main/**'
+      - 'interface-main/**'
       
 jobs:
   build:
@@ -18,11 +18,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}    
-      - run: cd ui-main && docker build -t alphaicterus/ui-main .    
-      - run: docker push alphaicterus/ui-main
+      - run: cd interface-main && docker build -t alphaicterus/interface-main .    
+      - run: docker push alphaicterus/interface-main
       - uses: digitalocean/action-doctl@v2.3.0
         with:
           token: ${{ secrets.OCEAN_API_TOKEN }}
       - run: doctl kubernetes cluster kubeconfig save k8arka
-      - run: kubectl rollout restart deployment ui-main
+      - run: kubectl rollout restart deployment interface-main
 
