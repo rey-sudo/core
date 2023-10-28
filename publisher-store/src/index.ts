@@ -5,7 +5,6 @@ import { eventDriver } from "./event-driver/driver";
 import { errorHandler, connHandler, setTimeOut } from "./pod/index";
 import { _ } from "./utils/logger";
 import { ERROR } from "@alphaicterus/global";
-//
 
 const main = async () => {
   try {

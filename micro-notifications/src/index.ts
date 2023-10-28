@@ -4,7 +4,6 @@ import { MicroStoreListener } from "./event-bus/listeners/micro-store-listener";
 import { connHandler, errorHandler, setTimeOut } from "./pod/index";
 import { _ } from "./utils/logger";
 import { bot } from "./telegram";
-//
 
 const main = async () => {
   try {
