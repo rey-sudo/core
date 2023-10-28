@@ -102,7 +102,7 @@ export default {
 }
 
 .p4 .p4-wrap {
-  width: 90%;
+  width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -111,7 +111,6 @@ export default {
 }
 
 .p4 .p4-wrap .p4-wrap-container {
-  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -235,9 +234,7 @@ export default {
 }
 
 @media screen and (max-width: 767px) {
-  .p4 .p4-wrap {
-    width: 100%;
-  }
+
   .p4 .p4-wrap .p4-wrap-container .p4-wrap-container-title {
     font-size: var(--text-size-e);
     font-weight: 600;
@@ -257,20 +254,10 @@ export default {
   }
 
   .p4 .p4-wrap .p4-wrap-container .p4-wrap-container-grid {
-    width: 100vw;
-    overflow-y: hidden;
-    overflow-x: scroll;
+    grid-template-columns: repeat(1, 1fr);
+    padding: 1rem;
   }
 
-  .p4
-    .p4-wrap
-    .p4-wrap-container
-    .p4-wrap-container-grid
-    .p4-wrap-container-grid-item {
-    border-radius: initial;
-    width: 300px;
-    height: 400px;
- 
-  }
+
 }
 </style>
