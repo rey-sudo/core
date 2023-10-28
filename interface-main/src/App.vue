@@ -90,14 +90,6 @@ body {
 
   --border-a: rgba(210, 210, 215, 1);
   --border-b: rgba(210, 210, 215, 0.3);
-
-  --text-w-a: red;
-  --text-w-b: red;
-  --base-w-a: red;
-  --base-w-b: red;
-
-  --border-w-a: red;
-  --border-w-b: red;
 }
 
 .green {

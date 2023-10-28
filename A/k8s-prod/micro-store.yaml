@@ -23,29 +23,29 @@ spec:
             - name: POD_TIMEOUT
               value: '120000'                    
             - name: MONGO_DB_NAME
-              value: "srv-audits"
+              value: "srv-store"
             - name: MONGO_DB_URI
               valueFrom:
                 configMapKeyRef:
                   name: database-config
-                  key: master                
+                  key: master                                   
             - name: EVENT_BUS_URI
               valueFrom:
                 configMapKeyRef:
                   name: streaming-config
-                  key: redis 
+                  key: redis
             - name: CACHE_STORE
               valueFrom:
                 configMapKeyRef:
                   name: cache-config
-                  key: micro-store     
+                  key: micro-store          
             - name: CACHE_INTERVAL
-              value: "5"                                
+              value: "5"                           
             - name: LIMITER_STORE
               valueFrom:
                 configMapKeyRef:
                   name: rater-config
-                  key: micro-store                  
+                  key: micro-store                 
             - name: USERS_JWT_KEY
               valueFrom:
                 secretKeyRef:
@@ -60,25 +60,25 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: admin-jwt-secret
-                  key: ADMIN_JWT_KEY       
+                  key: ADMIN_JWT_KEY   
             - name: GENERAL_LIMIT_TIME
-              value: "900"     
+              value: "9000"     
             - name: GENERAL_LIMIT_MAX
-              value: "200"
+              value: "15000"
             - name: CRITICAL_LIMIT_TIME
               value: "86400" 
             - name: CRITICAL_LIMIT_MAX
-              value: "50"                             
+              value: "2000"                                                                     
             - name: TOKEN_EXPIRATION_TIME
-              value: 24h
+              value: 2h
             - name: EXPRESS_PORT
               value: "8000"
             - name: EXPRESS_TIMEOUT
               value: "180000"
             - name: DRIVER_ROLE
-              value: "driver-audits"
+              value: "publisher-store"
             - name: CORS_DOMAINS
-              value: "https://arkastore.com"               
+              value: "https://arkastore.co"                           
           resources:
             limits:
               memory: "500Mi"

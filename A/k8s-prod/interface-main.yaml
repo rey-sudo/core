@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-platform
+  name: interface-main
 spec:
   replicas: 1
   selector:
     matchLabels:
-      role: frontend-platform
+      role: interface-main
   template:
     metadata:
       labels:
-        role: frontend-platform
+        role: interface-main
     spec:
       containers:
-        - name: frontend-platform
-          image: microkraph/frontend-platform
+        - name: interface-main
+          image: alphaicterus/interface-main
           resources:
             limits:
               memory: "500Mi"
@@ -24,12 +24,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend-platform
+  name: interface-main
 spec:
   selector:
-    role: frontend-platform
+    role: interface-main
   ports:
-    - name: frontend-platform
+    - name: interface-main
       protocol: TCP
       port: 8000
       targetPort: 80
