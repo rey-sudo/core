@@ -62,7 +62,7 @@ const commit__getProductData = (state, data) => {
         },
         page_4: {
           emoji: "🤯",
-          title: "¡Multiples beneficios!",
+          title: "¡Más beneficios!",
           subtitle:
             " ¿Por qué perder más tiempo cortando manualmente cuando puedes hacerlo de manera rápida y precisa con nuestro picador?",
           section: {

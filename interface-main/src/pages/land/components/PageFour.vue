@@ -140,6 +140,7 @@ export default {
   font-size: var(--text-size-c);
   font-weight: 400;
   max-width: 50%;
+
 }
 
 .page4 .page4-wrap .page4-wrap-container .page4-wrap-container-grid {
@@ -255,6 +256,7 @@ export default {
     font-size: var(--text-size-b);
     padding: 0 1rem;
     max-width: initial;
+    line-height: 24px;
   }
 
   .page4 .page4-wrap .page4-wrap-container .page4-wrap-container-grid {

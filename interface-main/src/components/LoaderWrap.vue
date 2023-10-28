@@ -1,6 +1,6 @@
 <template>
-  <div class="p-loader">
-   <div class="p-loader-wrap">
+  <div class="p-loading">
+   <div class="p-loading-wrap">
     <span class="bars"></span>
    </div>
   </div>
@@ -11,15 +11,17 @@ export default {};
 </script>
 
 <style lang="css" scoped>
-.p-loader{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.p-loading{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  position: absolute;
 }
 
-.p-loader-wrap{
+.p-loading-wrap{
     width: 100px;
     height: 100px;
     display: flex;

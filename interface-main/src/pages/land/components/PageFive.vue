@@ -96,6 +96,7 @@ export default {
     font-size: var(--text-size-b);
     padding: 0 1rem;
     max-width: initial;
+    line-height: 24px;
   }
 }
 </style>
