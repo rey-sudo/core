@@ -107,7 +107,6 @@ export default {
   justify-content: center;
   box-sizing: border-box;
   position: relative;
-  line-height: 24px;
   background: var(--base-c);
   border-radius: 34px;
   overflow: hidden;

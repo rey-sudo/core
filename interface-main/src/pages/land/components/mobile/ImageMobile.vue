@@ -35,8 +35,6 @@ export default {
   width: calc(100% - 2rem);
   height: 300px;
   border-radius: 34px;
-  -o-object-fit: cover;
-  object-fit: cover;
 }
 
 @media only screen and (max-width: 768px) {
