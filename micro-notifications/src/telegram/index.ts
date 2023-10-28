@@ -18,19 +18,19 @@ let S1: SLAVE = {
   key: "password1",
   chat_id: undefined,
   interval: undefined,
-  interval_duration: 10000,
+  interval_duration: 3600000,
 };
 
 //////////////
 
 bot.hears(S1.user + ":" + S1.key, (ctx) => {
   if (S1.active === false) {
-    ctx.reply("Escuchando ordenes");
+    ctx.reply("LISTENING");
 
     S1.chat_id = ctx.message.chat.id;
 
     S1.interval = setInterval(
-      () => ctx.reply("En linea 🟢"),
+      () => ctx.reply("Live 🟢"),
       S1.interval_duration
     );
 
@@ -43,12 +43,11 @@ bot.hears(S1.user + ":" + "stop", (ctx) => {
     S1.active = false;
     S1.chat_id = undefined;
     clearInterval(S1.interval);
-
-    ctx.reply("Bot detenido");
+    ctx.reply("BOT STOPPED");
   }
 });
 
-//////////////
+
 
 bot.start((ctx) => {
   ctx.reply("Welcome");
