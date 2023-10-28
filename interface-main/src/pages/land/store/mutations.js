@@ -39,7 +39,7 @@ const commit__getProductData = (state, data) => {
           ],
         },
         page_2: {
-          background_color: "initial",
+          background_color: "#27b46a",
           mask: "/backgrounds/empty.png",
           section: {
             image: "/products/123456789/images/web/1080x1080-3.webp",

@@ -35,37 +35,61 @@ export default {
   },
   mounted() {
     let phi = 0;
+    let color = [0.4, 0.4, 1];
 
-    let canvas = document.createElement("canvas");
-    canvas.id = "cobeCanvas";
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            let canvas = document.createElement("canvas");
+            canvas.id = "cobeCanvas";
+            canvas.width = 1000;
+            canvas.height = 1000;
+            canvas.style.width = "1000px";
+            canvas.style.height = "1000px";
 
-    canvas.style.width = "1000px";
-    canvas.style.height = "1000px";
+            const cobeWrap = document.getElementById("cobeWrap");
 
-    const cobeWrap = document.getElementById("cobeWrap");
+            cobeWrap.appendChild(canvas);
 
-    cobeWrap.appendChild(canvas);
+            this.T1 = setTimeout(
+              () =>
+                createGlobe(canvas, {
+                  devicePixelRatio: 2,
+                  width: 1000 * 2,
+                  height: 1000 * 2,
+                  phi: 0,
+                  theta: 0,
+                  dark: 1,
+                  diffuse: 4,
+                  mapSamples: 16000,
+                  mapBrightness: 1,
+                  baseColor: color,
+                  markerColor: color,
+                  glowColor: color,
+                  opacity: 0,
+                  markers: locations,
+                  onRender: (state) => {
+                    state.phi = phi;
+                    phi += 0.001;
+                  },
+                }),
+              600
+            );
+          } else {
+            clearTimeout(this.T1);
 
-    createGlobe(canvas, {
-      devicePixelRatio: 2,
-      width: 1000 * 2,
-      height: 1000 * 2,
-      phi: 0,
-      theta: 0,
-      dark: 1,
-      diffuse: 1.2,
-      mapSamples: 16000,
-      mapBrightness: 1,
-      baseColor: [0.4, 0.4, 1],
-      markerColor: [0.4, 0.4, 1],
-      glowColor: [0.4, 0.4, 1],
-      opacity: 1,
-      markers: locations,
-      onRender: (state) => {
-        state.phi = phi;
-        phi += 0.001;
+            let canvas = document.getElementById("cobeWrap");
+            if (canvas.firstChild) {
+              canvas.firstChild.remove();
+            }
+          }
+        });
       },
-    });
+      { root: null, rootMargin: "0px", threshold: 0.5 }
+    );
+
+    observer.observe(this.$refs.observed5);
   },
 };
 </script>
