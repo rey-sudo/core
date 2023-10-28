@@ -19,6 +19,12 @@ const main = async () => {
       throw new Error("MONGO_DB_URI must be defined");
     }
 
+    if (!process.env.TELEGRAM_API) {
+      throw new Error("TELEGRAM_API must be defined");
+    }
+
+  
+
     await eventBus
       .connect({
         url: process.env.EVENT_BUS_URI,
@@ -45,7 +51,7 @@ const main = async () => {
 
     mongoose.set("strictQuery", true);
 
-    bot.launch();
+    await bot.launch();
     
     new MicroStoreListener(eventBus.client)
       .listen()
