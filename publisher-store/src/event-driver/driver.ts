@@ -5,7 +5,7 @@ export class EventDriver extends BaseDriver {
   async onMessage(data: any) {
     try {
       const { event } = data.fullDocument;
-
+      
       switch (event[0]) {
         case EVENT.micro_store:
           const response = await new MicroStorePublisher(

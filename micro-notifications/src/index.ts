@@ -23,8 +23,6 @@ const main = async () => {
       throw new Error("TELEGRAM_API must be defined");
     }
 
-  
-
     await eventBus
       .connect({
         url: process.env.EVENT_BUS_URI,
@@ -44,20 +42,20 @@ const main = async () => {
         autoIndex: false,
         ssl: true,
         sslValidate: false,
-        sslCA: `${__dirname}/cert.pem`
+        sslCA: `${__dirname}/cert.pem`,
       })
       .then(() => connHandler("mongoose"))
       .catch((e) => errorHandler("ERR_MONGO_CONN", e));
 
     mongoose.set("strictQuery", true);
 
-    await bot.launch();
-    
     new MicroStoreListener(eventBus.client)
       .listen()
       .then((e: any) =>
         e.on("error", (e: any) => errorHandler("ERR_LISTENER_CONN", e))
       );
+
+    bot.launch();
 
     eventBus.client.on("end", (e: any) => errorHandler("ERROR_BUS_END", e));
 
@@ -67,7 +65,9 @@ const main = async () => {
 
     mongoose.connection.on("error", (e) => errorHandler("ERROR_MONGO_ERR", e));
 
-    mongoose.connection.on("close", (e) => errorHandler("ERROR_MONGO_CLOSE", e));
+    mongoose.connection.on("close", (e) =>
+      errorHandler("ERROR_MONGO_CLOSE", e)
+    );
 
     process.on("exit", (e) => errorHandler(e));
 
