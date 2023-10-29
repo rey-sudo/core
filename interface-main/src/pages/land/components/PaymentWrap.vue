@@ -64,26 +64,15 @@ export default {
       getter__productData,
       action__viewPaymentModal,
       getter__viewPaymentModal,
+      formatPrice
     } = landAPI();
 
     return {
       getter__productData,
+      formatPrice, 
       action__viewPaymentModal,
       getter__viewPaymentModal,
     };
-  },
-
-  methods: {
-    formatPrice(num) {
-      const price = num || 0;
-
-      const formattedPrice = price.toLocaleString("en-US", {
-        style: "currency",
-        currency: "COP",
-      });
-
-      return formattedPrice;
-    },
   },
 };
 </script>

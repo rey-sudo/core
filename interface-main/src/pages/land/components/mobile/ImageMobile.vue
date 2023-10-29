@@ -29,6 +29,7 @@ export default {
   width: inherit;
   height: 300px;
   display: none;
+  margin-top: 1rem;
 }
 
 .p-mobile img {

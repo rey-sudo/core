@@ -15,32 +15,7 @@
       />
     </div>
 
-    <header class="p-header">
-      <div class="p-header-wrap">
-        <img
-          class="p-header-wrap-logo"
-          @click="handleRoute('store')"
-          src="@/assets/logo-black.svg"
-          alt=""
-        />
-
-        <div class="p-header-wrap-nav">
-          <a @click="handleRoute('store')"> Todo </a>
-          <a href="https://www.scatdao.com/team" target="_blank"> Ultimo </a>
-          <a
-            href="https://scatdao.gitbook.io/dao/platform/introduction"
-            target="_blank"
-            >Ofertas</a
-          >
-          <a href="https://linktr.ee/scatdao" target="_blank">Categoría</a>
-          <a
-            href="file:///home/debian/Documents/GitHub/Arka/z/latex/arka.pdf"
-            target="_blank"
-            >Tecnología</a
-          >
-        </div>
-      </div>
-    </header>
+    <PaymentWrapMobile/>
 
     <div class="p-page1-wrap">
       <div class="p-page1-wrap-title">
@@ -65,12 +40,14 @@ import ImageSwiper from "@/pages/land/components/ImageSwiper.vue";
 import ImageMobile from "@/pages/land/components/mobile/ImageMobile.vue";
 import landAPI from "@/pages/land/composable/land-api";
 import { useRouter } from "vue-router";
+import PaymentWrapMobile from "@/pages/land/components/mobile/PaymentWrapMobile.vue";
 
 export default {
   components: {
     ImageSwiper,
     ImageMobile,
-  },
+    PaymentWrapMobile
+},
   setup() {
     const router = useRouter();
 
@@ -94,42 +71,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.p-header-wrap-logo {
-  cursor: pointer;
-}
 
-.p-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: inherit;
-}
-
-.p-header .p-header-wrap {
-  display: flex;
-  width: inherit;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 1rem;
-  position: relative;
-  background: var(--base-a);
-  border-bottom: 1px solid var(--border-a);
-}
-
-.p-header .p-header-wrap .p-header-wrap-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  white-space: nowrap;
-  font-size: var(--text-size-b);
-}
-
-.p-header .p-header-wrap .p-header-wrap-nav a {
-  color: var(--text-a);
-  margin: 0 12px;
-  font-size: var(--text-size-a);
-  cursor: pointer;
-}
 
 h1 {
   font-size: var(--text-size-g);
@@ -137,6 +79,7 @@ h1 {
   font-weight: 600;
   letter-spacing: -0.03em;
   background: inherit;
+  margin: 1rem 0;
 }
 
 h2 {
@@ -211,12 +154,7 @@ h2 {
 }
 
 @media screen and (max-width: 767px) {
-  .p-header .p-header-wrap .p-header-wrap-nav {
-    display: none;
-  }
-  .p-header .p-header-wrap {
-    border: initial;
-  }
+
   .p-page1 .p-page1-wrap {
     width: 100%;
     height: 100%;
