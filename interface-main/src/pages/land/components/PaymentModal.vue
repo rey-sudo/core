@@ -301,7 +301,7 @@ button:hover {
   top: 0rem;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
   background: rgba(0, 0, 0, 0.5);
 }
 
@@ -313,6 +313,8 @@ button:hover {
   padding: 0.75rem;
   max-width: 400px;
   border-radius: 12px;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 .p-dialog .p-dialog-wrap .p-dialog-wrap-head {
