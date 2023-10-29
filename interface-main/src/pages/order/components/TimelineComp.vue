@@ -1,6 +1,9 @@
 <template>
   <ul class="timeline" id="timeline">
-    <li class="li" :class="{ complete: getter__orderData.timeline.purchase.status }">
+    <li
+      class="li"
+      :class="{ complete: getter__orderData.timeline.purchase.status }"
+    >
       <div class="timestamp">
         <span class="author">Confirmación</span>
         <span class="date">{{
@@ -11,7 +14,10 @@
         <label>Compra</label>
       </div>
     </li>
-    <li class="li" :class="{ complete: getter__orderData.timeline.dispatch.status }">
+    <li
+      class="li"
+      :class="{ complete: getter__orderData.timeline.dispatch.status }"
+    >
       <div class="timestamp">
         <span class="author">
           {{ getter__orderData.timeline.dispatch.text }}
@@ -24,7 +30,10 @@
         <label>Despacho</label>
       </div>
     </li>
-    <li class="li" :class="{ complete: getter__orderData.timeline.shipping.status }">
+    <li
+      class="li"
+      :class="{ complete: getter__orderData.timeline.shipping.status }"
+    >
       <div class="timestamp">
         <span class="author">
           {{ getter__orderData.timeline.shipping.text }}
@@ -37,7 +46,10 @@
         <label>Transporte</label>
       </div>
     </li>
-    <li class="li" :class="{ complete: getter__orderData.timeline.delivery.status }">
+    <li
+      class="li"
+      :class="{ complete: getter__orderData.timeline.delivery.status }"
+    >
       <div class="timestamp">
         <span class="author">{{
           getter__orderData.timeline.delivery.text
@@ -85,7 +97,7 @@ export default {
   background: var(--base-b)
   padding: 1rem
   border-radius: 12px
- 
+
 .li
   transition: all 200ms ease-in
   width: 240px
@@ -113,7 +125,7 @@ span
   position: relative
   transition: all 200ms ease-in
   label
-    font-weight: 600
+    font-weight: 500
     margin-top: 2rem
     margin-left: 5px
     color: var(--text-b)
@@ -147,16 +159,49 @@ span
 @media (min-device-width: 320px) and (max-device-width: 700px)
   .timeline
     list-style-type: none
-    display: block
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    width: 100%
+    background: initial
+
   .li
     transition: all 200ms ease-in
     display: flex
-    width: inherit
+    justify-content: center
+    width: 100%
   .timestamp
     width: 100px
+    margin-right: 0.5rem
+    font-size: var(--text-size-a)
+    margin-top: 1rem
+    align-items: flex-start
+
+  .status
+    border-left: 2px solid var(--border-a)
+    width: 100px
+    margin-left: 1rem
+    flex-direction: column
+    border-top: initial
+    align-items: flex-start
+
+  .li.complete
+    .status
+      border-left: 2px solid var(--green)
+      border-top: initial
+      &:before
+        background: var(--green)
+        border: 1px solid transparent
+        transition: all 200ms ease-in
+  .status
+    label
+      margin-top: initial
+      margin-left: 2rem
+
   .status
     &:before
-      left: -8%
+      left: -15%
       top: 30%
       transition: all 200ms ease-in
 </style>
