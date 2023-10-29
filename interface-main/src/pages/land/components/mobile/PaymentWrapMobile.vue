@@ -47,7 +47,7 @@ export default {
 }
 
 .price {
-  font-weight: 600;
+  font-weight: 500;
   text-align: left;
   font-size: var(--text-size-c);
   margin: 0.5rem 1rem;

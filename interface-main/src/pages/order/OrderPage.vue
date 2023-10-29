@@ -1,6 +1,6 @@
 <template>
   <div class="p-order">
-    <div v-if="isReady" class="p-order-wrap">
+    <div class="p-order-wrap" v-if="isReady">
       <div class="p-order-wrap-top">
         <div class="image">
           <img src="./assets/drawing.svg" alt="" />
@@ -9,14 +9,13 @@
           </div>
 
           <div class="p-order-wrap-top-subtitle">
-            <span>ID: {{ this.getter__orderData.pid }}</span>
-          </div>
-          <div class="p-order-wrap-top-timeline">
-            <TimelineComp />
+            <span>ID: {{ getter__orderData.pid }}</span>
           </div>
         </div>
       </div>
-      <div class="p-order-wrap-bottom"></div>
+      <div class="p-order-wrap-bottom">
+        <TimelineComp class="p-order-wrap-top-timeline" />
+      </div>
     </div>
 
     <LoaderWrap v-if="!isReady" />
@@ -56,13 +55,16 @@ export default {
           .then(() => {
             this.router.replace({
               params: {
-                name: this.getter__orderData.product[0].name.replace(/\s+/g, "-"),
+                name: this.getter__orderData.product[0].name.replace(
+                  /\s+/g,
+                  "-"
+                ),
               },
             });
 
             this.isReady = true;
           })
-          .catch((e) => console.error(e));
+          .catch((err) => console.error(err));
       },
       { immediate: true }
     )();
@@ -130,7 +132,7 @@ img {
 .p-order-wrap-top-title {
   color: var(--text-w);
   font-size: var(--text-size-d);
-  font-weight: 600;
+  font-weight: 500;
   margin-top: 2rem;
 }
 
@@ -145,5 +147,21 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media screen and (max-width: 767px) {
+  .image {
+    width: 100%;
+  }
+
+  .p-order-wrap-top-timeline {
+    top: initial;
+    position: initial;
+  }
+
+  img {
+    width: 100px;
+    height: 100px;
+  }
 }
 </style>
