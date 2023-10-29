@@ -15,6 +15,8 @@
       />
     </div>
 
+    <PaymentWrapMobile/>
+
     <div class="p-page1-wrap">
       <div class="p-page1-wrap-title">
         <h1>
@@ -38,12 +40,14 @@ import ImageSwiper from "@/pages/land/components/ImageSwiper.vue";
 import ImageMobile from "@/pages/land/components/mobile/ImageMobile.vue";
 import landAPI from "@/pages/land/composable/land-api";
 import { useRouter } from "vue-router";
+import PaymentWrapMobile from "@/pages/land/components/mobile/PaymentWrapMobile.vue";
 
 export default {
   components: {
     ImageSwiper,
     ImageMobile,
-  },
+    PaymentWrapMobile
+},
   setup() {
     const router = useRouter();
 

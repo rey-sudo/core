@@ -2,6 +2,10 @@ const commit__viewPaymentModal = (state, data) => {
   state.viewPaymentModal = data;
 };
 
+const commit__viewPaymentModalMobile = (state, data) => {
+  state.viewPaymentModalMobile = data;
+};
+
 const commit__getProductData = (state, data) => {
   console.log(data);
   const datum = {
@@ -119,4 +123,5 @@ export {
   commit__viewPaymentModal,
   commit__getProductData,
   commit__createOrder,
+  commit__viewPaymentModalMobile
 };

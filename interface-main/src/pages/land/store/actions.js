@@ -4,10 +4,15 @@ const action__viewPaymentModal = async ({ commit }, params) => {
   commit("commit__viewPaymentModal", params);
 };
 
+const action__viewPaymentModalMobile = async ({ commit }, params) => {
+  commit("commit__viewPaymentModalMobile", params);
+};
 
 const action__getProductData = async ({ commit }, params) => {
   try {
-    const response = await axiosApi.get("/api/store/get-product", { params: params });
+    const response = await axiosApi.get("/api/store/get-product", {
+      params: params,
+    });
 
     commit("commit__getProductData", response.data);
 
@@ -29,5 +34,9 @@ const action__createOrder = async ({ commit }, params) => {
   }
 };
 
-
-export { action__viewPaymentModal, action__getProductData, action__createOrder };
+export {
+  action__viewPaymentModal,
+  action__getProductData,
+  action__createOrder,
+  action__viewPaymentModalMobile,
+};

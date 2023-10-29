@@ -132,8 +132,8 @@ import landAPI from "@/pages/land/composable/land-api";
 export default {
   setup() {
     const {
-      getter__viewPaymentModal,
-      action__viewPaymentModal,
+      getter__viewPaymentModalMobile,
+      action__viewPaymentModalMobile,
       getter__productData,
       action__createOrder,
     } = landAPI();
@@ -142,13 +142,13 @@ export default {
 
     const outsideClick = ref(null);
 
-    onClickOutside(outsideClick, () => action__viewPaymentModal(false));
+    onClickOutside(outsideClick, () => action__viewPaymentModalMobile(false));
 
     return {
       router,
       outsideClick,
-      getter__viewPaymentModal,
-      action__viewPaymentModal,
+      getter__viewPaymentModalMobile,
+      action__viewPaymentModalMobile,
       getter__productData,
       action__createOrder,
     };
@@ -202,7 +202,7 @@ export default {
     };
   },
   mounted() {
-    if (this.getter__viewPaymentModal) {
+    if (this.getter__viewPaymentModalMobile) {
       const dialog = document.getElementById("dialog");
 
       document.body.appendChild(dialog);
@@ -213,7 +213,7 @@ export default {
     handleOrder() {
       this.action__createOrder(this.orderForm)
         .then((res) => {
-          this.action__viewPaymentModal(false);
+          this.action__viewPaymentModalMobile(false);
           this.router.push({
             name: "order",
             params: { pid: res.response.pid },
@@ -296,23 +296,22 @@ button:hover {
   display: none;
   display: initial;
   position: fixed;
-  z-index: 1;
+  z-index: 1000;
   left: 0;
   top: 0rem;
   width: 100%;
   height: 100%;
   overflow: auto;
   background: rgba(0, 0, 0, 0.5);
+
 }
 
 .p-dialog .p-dialog-wrap {
   background: var(--base-c);
-  backdrop-filter: blur(5px);
-  margin: 5% auto;
   width: 100%;
-  padding: 0.75rem;
-  max-width: 400px;
-  border-radius: 12px;
+  padding: initial;
+  margin: initial;
+  border-radius: initial;
 }
 
 .p-dialog .p-dialog-wrap .p-dialog-wrap-head {
@@ -346,4 +345,5 @@ button:hover {
   justify-content: flex-end;
   margin-top: 1rem;
 }
+
 </style>
