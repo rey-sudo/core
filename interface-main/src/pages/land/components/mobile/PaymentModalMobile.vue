@@ -303,7 +303,7 @@ button:hover {
   top: 0rem;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow: scroll;
   background: rgba(0, 0, 0, 0.5);
 }
 
@@ -313,6 +313,7 @@ button:hover {
   padding: initial;
   margin: initial;
   border-radius: initial;
+  padding-bottom: 50px;
 }
 
 .p-dialog .p-dialog-wrap .p-dialog-wrap-head {
@@ -336,8 +337,6 @@ button:hover {
 .p-dialog .p-dialog-wrap .p-dialog-wrap-body {
   background: var(--base-a);
   border-radius: 24px;
-  border-bottom-left-radius: initial;
-  border-bottom-right-radius: initial;
   padding: 1rem;
   box-sizing: border-box;
 }
