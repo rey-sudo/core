@@ -137,6 +137,7 @@ h1 {
   font-weight: 600;
   letter-spacing: -0.03em;
   background: inherit;
+  margin: 1rem 0;
 }
 
 h2 {
