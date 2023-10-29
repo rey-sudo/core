@@ -1,7 +1,13 @@
 <template>
   <div class="p-dialog" id="dialog">
     <div class="p-dialog-wrap" ref="outsideClick">
-      <div class="p-dialog-wrap-head">Formulario de pago</div>
+      <div class="p-dialog-wrap-head">
+        <div @click="action__viewPaymentModalMobile(false)">
+          <i class="pi pi-arrow-left" />
+        </div>
+
+        <span>Formulario de pago</span>
+      </div>
 
       <div class="p-dialog-wrap-body">
         <div class="p-dialog-wrap-body-label">
@@ -226,10 +232,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-i {
-  margin-right: 0.5rem;
-}
-
 .department-dropdown {
   appearance: none;
   -webkit-appearance: none;
@@ -303,7 +305,6 @@ button:hover {
   height: 100%;
   overflow: auto;
   background: rgba(0, 0, 0, 0.5);
-
 }
 
 .p-dialog .p-dialog-wrap {
@@ -315,15 +316,28 @@ button:hover {
 }
 
 .p-dialog .p-dialog-wrap .p-dialog-wrap-head {
-  padding: 1rem;
+  padding: 0.5rem 0;
   font-weight: 600;
   color: var(--text-a);
   font-size: var(--text-size-b);
+  display: flex;
+  align-items: center;
 }
 
+.p-dialog .p-dialog-wrap .p-dialog-wrap-head div {
+  cursor: pointer;
+  width: 47px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
 .p-dialog .p-dialog-wrap .p-dialog-wrap-body {
   background: var(--base-a);
-  border-radius: 12px;
+  border-radius: 24px;
+  border-bottom-left-radius: initial;
+  border-bottom-right-radius: initial;
   padding: 1rem;
   box-sizing: border-box;
 }
@@ -340,10 +354,13 @@ button:hover {
   width: 100%;
 }
 
+.p-dialog .p-dialog-wrap .p-dialog-wrap-body .p-dialog-wrap-body-form i {
+  margin-right: 0.5rem;
+}
+
 .p-dialog .p-dialog-wrap .p-dialog-wrap-body .p-dialog-wrap-body-button {
   display: flex;
   justify-content: flex-end;
   margin-top: 1rem;
 }
-
 </style>

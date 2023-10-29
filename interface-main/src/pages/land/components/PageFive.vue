@@ -13,6 +13,10 @@
         <div class="page5-wrap-container-subtitle">
           {{ getter__productData.theme.config.page_5.subtitle }}
         </div>
+
+        <div class="page5-button" @click="action__viewPaymentModalMobile(true)">
+          <span> Pagar Contraentrega</span>
+        </div>
       </div>
     </div>
   </div>
@@ -23,17 +27,22 @@ import landAPI from "@/pages/land/composable/land-api";
 
 export default {
   setup() {
-    const { getter__productData } = landAPI();
+    const {
+      getter__productData,
+      action__viewPaymentModalMobile,
+      getter__viewPaymentModalMobile,
+    } = landAPI();
+
     return {
       getter__productData,
+      action__viewPaymentModalMobile,
+      getter__viewPaymentModalMobile,
     };
   },
 };
 </script>
 
 <style lang="css" scoped>
-
-
 .page5 {
   display: flex;
   justify-content: center;
@@ -88,6 +97,10 @@ export default {
   letter-spacing: -0.01em;
 }
 
+.page5-button {
+  display: none;
+}
+
 @media only screen and (max-width: 768px) {
   .page5 .page5-wrap .page5-wrap-container-title {
     font-size: var(--text-size-e);
@@ -98,6 +111,25 @@ export default {
     padding: 0 1rem;
     max-width: initial;
     line-height: 24px;
+  }
+
+  .page5-button {
+    padding: 0.5rem;
+    background: var(--blue);
+    color: var(--text-w);
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    font-weight: 400;
+    letter-spacing: -0.022em;
+    min-width: 28px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-radius: 980px;
+    margin-top: 1rem;
   }
 }
 </style>
