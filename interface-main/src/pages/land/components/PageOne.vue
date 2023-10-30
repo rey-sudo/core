@@ -10,7 +10,7 @@
       <img
         :src="
           getter__productData.space_url +
-          getter__productData.theme.config.page_1.mask
+          getter__productData.theme.config.page_1.mask_url
         "
       />
     </div>

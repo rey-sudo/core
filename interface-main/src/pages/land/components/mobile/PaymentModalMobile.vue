@@ -313,7 +313,8 @@ button:hover {
   padding: initial;
   margin: initial;
   border-radius: initial;
-  padding-bottom: 50px;
+  height: max-content;
+  padding-bottom: 1rem;
 }
 
 .p-dialog .p-dialog-wrap .p-dialog-wrap-head {

@@ -166,7 +166,7 @@ const CREATE_PRODUCT = [
     .isLength({ min: 1, max: 100 })
     .withMessage("max length"),
 
-    body("shipping_icon")
+  body("shipping_icon")
     .notEmpty()
     .withMessage("must be provided")
     .bail()
@@ -207,7 +207,7 @@ const CREATE_PRODUCT = [
     .isInt({ min: 0 })
     .withMessage("must be natural"),
 
-    body("discount")
+  body("discount")
     .notEmpty()
     .withMessage("must be provided")
     .bail()
@@ -250,6 +250,17 @@ const CREATE_PRODUCT = [
     .isLength({ min: 1, max: 15 })
     .withMessage("max length"),
 
+  body("seller_whatsapp")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 100 })
+    .withMessage("max length"),
+
   body("theme.title")
     .notEmpty()
     .withMessage("must be provided")
@@ -272,18 +283,7 @@ const CREATE_PRODUCT = [
     .isLength({ min: 1, max: 100 })
     .withMessage("max length"),
 
-  body("theme.price")
-    .notEmpty()
-    .withMessage("must be provided")
-    .bail()
-    .isString()
-    .withMessage("must be string")
-    .bail()
-    .trim()
-    .isLength({ min: 1, max: 100 })
-    .withMessage("max length"),
-
-  body("theme.background.pageOne.color")
+  body("theme.config.page_1.background_color")
     .notEmpty()
     .withMessage("must be provided")
     .bail()
@@ -294,7 +294,7 @@ const CREATE_PRODUCT = [
     .isLength({ min: 1, max: 7 })
     .withMessage("max length"),
 
-  body("theme.background.pageOne.mask")
+  body("theme.config.page_1.mask_url")
     .notEmpty()
     .withMessage("must be provided")
     .bail()
@@ -305,58 +305,291 @@ const CREATE_PRODUCT = [
     .isLength({ min: 1, max: 200 })
     .withMessage("max length"),
 
-  body("theme.background.pageTwo.color")
-    .notEmpty()
-    .withMessage("must be provided")
-    .bail()
-    .isString()
-    .withMessage("must be string")
-    .bail()
-    .trim()
-    .isLength({ min: 1, max: 7 })
-    .withMessage("max length"),
-
-  body("theme.background.pageTwo.mask")
-    .notEmpty()
-    .withMessage("must be provided")
-    .bail()
-    .isString()
-    .withMessage("must be string")
-    .bail()
-    .trim()
-    .isLength({ min: 1, max: 200 })
-    .withMessage("max length"),
-
-  body("theme.background.pageThree.color")
-    .notEmpty()
-    .withMessage("must be provided")
-    .bail()
-    .isString()
-    .withMessage("must be string")
-    .bail()
-    .trim()
-    .isLength({ min: 1, max: 7 })
-    .withMessage("max length"),
-
-  body("theme.background.pageThree.mask")
-    .notEmpty()
-    .withMessage("must be provided")
-    .bail()
-    .isString()
-    .withMessage("must be string")
-    .bail()
-    .trim()
-    .isLength({ min: 1, max: 200 })
-    .withMessage("max length"),
-
-  body("theme.slider_images")
+  body("theme.config.page_1.images")
     .notEmpty()
     .withMessage("must be provided")
     .bail()
     .custom((value) =>
-      value.every((item: any) => item.url && typeof item.url === "string")
+      value.every(
+        (item: any) => item.url.length < 200 && typeof item.url === "string"
+      )
     )
     .withMessage("invalid format"),
+
+  body("theme.config.page_2.background_color")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 7 })
+    .withMessage("max length"),
+
+  body("theme.config.page_2.mask_url")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_2.section.image_url")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_2.section.content.title")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_2.section.content.subtitle")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_3.background_color")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 7 })
+    .withMessage("max length"),
+
+  body("theme.config.page_3.mask_url")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_3.section.image_url")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_3.section.content.title")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_3.section.content.subtitle")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_4.emoji")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_4.title")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_4.subtitle")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_4.section.left.image_url")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_4.section.left.title")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_4.section.left.subtitle")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_4.section.center.image_url")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_4.section.center.title")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_4.section.center.subtitle")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_4.section.right.image_url")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_4.section.right.title")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_4.section.right.subtitle")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_5.emoji")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_5.title")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
+
+  body("theme.config.page_5.subtitle")
+    .notEmpty()
+    .withMessage("must be provided")
+    .bail()
+    .isString()
+    .withMessage("must be string")
+    .bail()
+    .trim()
+    .isLength({ min: 1, max: 200 })
+    .withMessage("max length"),
 ];
 
 const GET_PRODUCT = [

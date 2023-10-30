@@ -17,6 +17,14 @@
         <div class="page5-button" @click="action__viewPaymentModalMobile(true)">
           <span> Pagar Contraentrega</span>
         </div>
+        <a
+          class="page5-button outline"
+          :href="getter__productData.seller_whatsapp"
+          target="_blank"
+        >
+          <i class="pi pi-whatsapp" />
+          <span>Otros medios de pago</span>
+        </a>
       </div>
     </div>
   </div>
@@ -97,9 +105,22 @@ export default {
   letter-spacing: -0.01em;
 }
 
+.page5-button i{
+  margin-right: 0.5rem;
+}
+
+.page5-button.outline{
+ background: white;
+ color: var(--text-a);
+}
+
 .page5-button {
   display: none;
+
+
 }
+
+
 
 @media only screen and (max-width: 768px) {
   .page5 .page5-wrap .page5-wrap-container-title {
@@ -130,6 +151,8 @@ export default {
     padding-bottom: 8px;
     border-radius: 980px;
     margin-top: 1rem;
+    align-items: center;
+    justify-content: center;
   }
 }
 </style>

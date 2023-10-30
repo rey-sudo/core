@@ -18,7 +18,7 @@
           <div
             class="page4-wrap-container-grid-item"
             :style="{
-              backgroundImage: `url(${getter__productData.space_url}${getter__productData.theme.config.page_4.section.left.image})`,
+              backgroundImage: `url(${getter__productData.space_url}${getter__productData.theme.config.page_4.section.left.image_url})`,
             }"
           >
             <div class="content">
@@ -36,7 +36,7 @@
           <div
             class="page4-wrap-container-grid-item"
             :style="{
-              backgroundImage: `url(${getter__productData.space_url}${getter__productData.theme.config.page_4.section.center.image})`,
+              backgroundImage: `url(${getter__productData.space_url}${getter__productData.theme.config.page_4.section.center.image_url})`,
             }"
           >
             <div class="content">
@@ -57,7 +57,7 @@
           <div
             class="page4-wrap-container-grid-item"
             :style="{
-              backgroundImage: `url(${getter__productData.space_url}${getter__productData.theme.config.page_4.section.right.image})`,
+              backgroundImage: `url(${getter__productData.space_url}${getter__productData.theme.config.page_4.section.right.image_url })`,
             }"
           >
             <div class="content">
