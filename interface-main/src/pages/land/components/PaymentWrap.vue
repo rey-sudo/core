@@ -37,7 +37,7 @@
         gray: getter__productData.shipping_tax,
       }"
     >
-      <span v-if="!shipping_tax">
+      <span v-if="!getter__productData.shipping_tax">
         {{ getter__productData.shipping_label }}
       </span>
 
@@ -50,7 +50,7 @@
 
     <a
       class="p-payment-button bottom"
-      href="https://wa.me/message/OPDNS3VCQYN2A1"
+      :href="getter__productData.seller_whatsapp"
       target="_blank"
     >
       <i class="pi pi-whatsapp" />

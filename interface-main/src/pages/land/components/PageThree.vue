@@ -9,7 +9,7 @@
       <img
         :src="
           getter__productData.space_url +
-          getter__productData.theme.config.page_3.mask
+          getter__productData.theme.config.page_3.mask_url
         "
       />
     </div>
@@ -22,7 +22,9 @@
           </div>
           <div>
             <p>
-              {{ getter__productData.theme.config.page_3.section.content.text }}
+              {{
+                getter__productData.theme.config.page_3.section.content.subtitle
+              }}
             </p>
           </div>
           <span />
@@ -32,7 +34,7 @@
           <img
             :src="
               getter__productData.space_url +
-              getter__productData.theme.config.page_3.section.image
+              getter__productData.theme.config.page_3.section.image_url
             "
             alt=""
           />

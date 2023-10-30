@@ -2,6 +2,53 @@ import mongoose, { ClientSession } from "mongoose";
 import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 import { generatePid } from "../utils/nano";
 
+interface FooterComponent {
+  emoji: string;
+  title: string;
+  subtitle: string;
+}
+
+interface SliderComponent {
+  background_color: string;
+  mask_url: string;
+  images: [{ url: string }];
+}
+
+interface TwoBoxComponent {
+  background_color: string;
+  mask_url: string;
+  section: {
+    image_url: string;
+    content: {
+      title: string;
+      subtitle: string;
+    };
+  };
+}
+
+interface ThreeBoxComponent {
+  emoji: string;
+  title: string;
+  subtitle: string;
+  section: {
+    left: {
+      image_url: string;
+      title: string;
+      subtitle: string;
+    };
+    center: {
+      image_url: string;
+      title: string;
+      subtitle: string;
+    };
+    right: {
+      image_url: string;
+      title: string;
+      subtitle: string;
+    };
+  };
+}
+
 interface Image {
   small: string;
   medium: string;
@@ -11,22 +58,13 @@ interface Image {
 interface Theme {
   title: string;
   subtitle: string;
-  price: string;
-  background: {
-    pageOne: {
-      color: string;
-      mask: string;
-    };
-    pageTwo: {
-      color: string;
-      mask: string;
-    };
-    pageThree: {
-      color: string;
-      mask: string;
-    };
+  config: {
+    page_1: SliderComponent;
+    page_2: TwoBoxComponent;
+    page_3: TwoBoxComponent;
+    page_4: ThreeBoxComponent;
+    page_5: FooterComponent;
   };
-  slider_images: [{ url: string }];
 }
 
 interface ProductAttrs {
@@ -44,6 +82,7 @@ interface ProductAttrs {
   discount_label: string;
   discount_color: string;
   seller_pid: string;
+  seller_whatsapp: string;
   theme: Theme;
 }
 
@@ -70,6 +109,7 @@ interface ProductDocument extends mongoose.Document {
   discount_label: string;
   discount_color: string;
   seller_pid: string;
+  seller_whatsapp: string;
   theme: Theme;
   createdAt: Date;
   updatedAt: Date;
@@ -81,7 +121,7 @@ const productSchema = new mongoose.Schema(
       type: String,
       unique: true,
       index: true,
-      default: () => generatePid('N', 15),
+      default: () => generatePid("N", 15),
     },
 
     name: {
@@ -154,26 +194,75 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    
+
+    seller_whatsapp: {
+      type: String,
+      required: true,
+    },
+
     theme: {
       title: { type: String, required: true },
       subtitle: { type: String, required: true },
-      price: { type: String, required: true },
-      background: {
-        pageOne: {
-          color: { type: String, required: true },
-          mask: { type: String, required: true },
+      config: {
+        page_1: {
+          background_color: { type: String, required: true },
+          mask_url: { type: String, required: true },
+          images: [{ url: { type: String, required: true } }],
         },
-        pageTwo: {
-          color: { type: String, required: true },
-          mask: { type: String, required: true },
+
+        page_2: {
+          background_color: { type: String, required: true },
+          mask_url: { type: String, required: true },
+          section: {
+            image_url: { type: String, required: true },
+            content: {
+              title: { type: String, required: true },
+              subtitle: { type: String, required: true },
+            },
+          },
         },
-        pageThree: {
-          color: { type: String, required: true },
-          mask: { type: String, required: true },
+
+        page_3: {
+          background_color: { type: String, required: true },
+          mask_url: { type: String, required: true },
+          section: {
+            image_url: { type: String, required: true },
+            content: {
+              title: { type: String, required: true },
+              subtitle: { type: String, required: true },
+            },
+          },
+        },
+
+        page_4: {
+          emoji: { type: String, required: true },
+          title: { type: String, required: true },
+          subtitle: { type: String, required: true },
+          section: {
+            left: {
+              image_url: { type: String, required: true },
+              title: { type: String, required: true },
+              subtitle: { type: String, required: true },
+            },
+            center: {
+              image_url: { type: String, required: true },
+              title: { type: String, required: true },
+              subtitle: { type: String, required: true },
+            },
+            right: {
+              image_url: { type: String, required: true },
+              title: { type: String, required: true },
+              subtitle: { type: String, required: true },
+            },
+          },
+        },
+
+        page_5: {
+          emoji: { type: String, required: true },
+          title: { type: String, required: true },
+          subtitle: { type: String, required: true },
         },
       },
-      slider_images: [{ url: { type: String, required: true } }],
     },
   },
   {

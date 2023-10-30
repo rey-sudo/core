@@ -46,7 +46,7 @@ import { useRouter } from "vue-router";
 export default {
   components: {
     MainHeader,
-    GridWrap
+    GridWrap,
   },
 
   setup() {
@@ -58,7 +58,12 @@ export default {
 
     return { router, action__getAllProducts };
   },
-
+  mounted() {
+    this.router.push({
+      name: "land",
+      params: { pid: "567900022583300" },
+    });
+  },
   data() {
     return {
       selectedTab: "all",
@@ -104,7 +109,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-
 .p-store-banner {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -192,7 +196,7 @@ export default {
   color: var(--text-w);
 }
 
-.p-store-submenu-nav div:hover{
+.p-store-submenu-nav div:hover {
   color: var(--blue);
 }
 .p-header-column {

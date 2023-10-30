@@ -19,7 +19,7 @@
         </div>
         <a
           class="page5-button outline"
-          href="https://wa.me/message/OPDNS3VCQYN2A1"
+          :href="getter__productData.seller_whatsapp"
           target="_blank"
         >
           <i class="pi pi-whatsapp" />
