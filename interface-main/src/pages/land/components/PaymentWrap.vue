@@ -47,7 +47,15 @@
     <div class="p-payment-button top" @click="action__viewPaymentModal(true)">
       Pagar contraentrega
     </div>
-    <div class="p-payment-button bottom">Con otros medios</div>
+
+    <a
+      class="p-payment-button bottom"
+      href="https://wa.me/message/OPDNS3VCQYN2A1"
+      target="_blank"
+    >
+      <i class="pi pi-whatsapp" />
+      <span>Otros medios de pago</span>
+    </a>
   </div>
 </template>
 
@@ -64,12 +72,12 @@ export default {
       getter__productData,
       action__viewPaymentModal,
       getter__viewPaymentModal,
-      formatPrice
+      formatPrice,
     } = landAPI();
 
     return {
       getter__productData,
-      formatPrice, 
+      formatPrice,
       action__viewPaymentModal,
       getter__viewPaymentModal,
     };
@@ -143,7 +151,15 @@ export default {
   font-weight: 500;
   cursor: pointer;
   margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.p-payment-button i {
+  margin-right: 0.5rem;
+}
+
 .p-payment-button.top {
   background: var(--blue);
   color: var(--text-w);
