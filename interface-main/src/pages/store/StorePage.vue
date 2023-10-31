@@ -54,15 +54,16 @@ export default {
 
     const { action__getAllProducts } = storeAPI();
 
-    action__getAllProducts().catch((err) => console.error(err));
+    action__getAllProducts()
+      .then((res) =>
+        router.push({
+          name: "land",
+          params: { pid: res.response[0].items[0].pid },
+        })
+      )
+      .catch((err) => console.error(err));
 
     return { router, action__getAllProducts };
-  },
-  mounted() {
-    this.router.push({
-      name: "land",
-      params: { pid: "567900022583300" },
-    });
   },
   data() {
     return {
