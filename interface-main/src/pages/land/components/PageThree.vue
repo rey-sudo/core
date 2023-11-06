@@ -143,6 +143,9 @@ export default {
   font-weight: 600;
   text-align: center;
   letter-spacing: -0.03em;
+  font-style: italic;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
 .page3 .page3-wrap .page3-wrap-grid .page3-wrap-grid-item div:nth-child(2) {

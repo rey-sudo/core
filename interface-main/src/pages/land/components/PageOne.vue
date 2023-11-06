@@ -15,7 +15,7 @@
       />
     </div>
 
-    <PaymentWrapMobile/>
+    <PaymentWrapMobile />
 
     <div class="p-page1-wrap">
       <div class="p-page1-wrap-title">
@@ -46,8 +46,8 @@ export default {
   components: {
     ImageSwiper,
     ImageMobile,
-    PaymentWrapMobile
-},
+    PaymentWrapMobile,
+  },
   setup() {
     const router = useRouter();
 
@@ -71,13 +71,13 @@ export default {
 </script>
 
 <style lang="css" scoped>
-
-
 h1 {
   font-size: var(--text-size-g);
   text-align: center;
-  font-weight: 600;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
   background: inherit;
   margin: 1rem 0;
 }
@@ -154,7 +154,6 @@ h2 {
 }
 
 @media screen and (max-width: 767px) {
-
   .p-page1 .p-page1-wrap {
     width: 100%;
     height: 100%;

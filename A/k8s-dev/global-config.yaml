@@ -3,8 +3,8 @@ kind: ConfigMap
 metadata:
   name: database-config
 data:
-  master: mongodb+srv://doadmin:n1Uc306OG92ba78g@master-aabc494a.mongo.ondigitalocean.com/admin?tls=true&authSource=admin
-  slave: mongodb+srv://doadmin:n1Uc306OG92ba78g@master-aabc494a.mongo.ondigitalocean.com/admin?tls=true&authSource=admin
+  master: mongodb+srv://doadmin:d5ft714ls90K2TB8@testing-18bbc3f1.mongo.ondigitalocean.com/admin?tls=true&authSource=admin
+  slave: mongodb+srv://doadmin:d5ft714ls90K2TB8@testing-18bbc3f1.mongo.ondigitalocean.com/admin?tls=true&authSource=admin
 ---
 apiVersion: v1
 kind: ConfigMap
