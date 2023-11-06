@@ -66,7 +66,7 @@ export default {
     this.slider = new Swiper(".itemSliderSwiper", {
       zoom: true,
       mousewheel: false,
-      autoplay: true,
+      autoplay: false,
       loop: true,
       direction: "horizontal",
     });
@@ -163,12 +163,12 @@ export default {
 
 .navigation-button.prev {
   left: 4rem;
-  bottom: 2rem;
+  bottom: -1rem;
 }
 
 .navigation-button.next {
   left: 8rem;
-  bottom: 2rem;
+  bottom: -1rem;
 }
 
 @media screen and (max-width: 767px) {

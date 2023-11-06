@@ -128,7 +128,7 @@ export default {
 .card-body-stock {
   margin-top: 0.5rem;
   text-align: left;
-  font-weight: 500;
+  font-weight: 400;
   font-size: var(--text-size-b);
 }
 
@@ -136,7 +136,7 @@ export default {
   margin-top: 0.5rem;
   text-align: left;
   font-size: var(--text-size-b);
-  font-weight: 500;
+  font-weight: 400;
   display: flex;
   align-items: center;
 }

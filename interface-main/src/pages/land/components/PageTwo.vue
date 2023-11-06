@@ -137,7 +137,9 @@ export default {
 
 .page2 .page2-wrap .page2-wrap-grid .page2-wrap-grid-item div:nth-child(1) {
   font-size: var(--text-size-e);
-  font-weight: 600;
+  text-transform: uppercase;
+  font-style: italic;
+  font-weight: 700;
   text-align: center;
   letter-spacing: -0.03em;
 }

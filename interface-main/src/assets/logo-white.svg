@@ -25,12 +25,12 @@
      inkscape:document-units="px"
      showgrid="false"
      inkscape:zoom="5.6568545"
-     inkscape:cx="70.268733"
+     inkscape:cx="51.265239"
      inkscape:cy="24.041629"
      inkscape:window-width="1504"
      inkscape:window-height="749"
      inkscape:window-x="594"
-     inkscape:window-y="131"
+     inkscape:window-y="298"
      inkscape:window-maximized="0"
      inkscape:current-layer="text368"
      inkscape:pageshadow="2" />
@@ -70,7 +70,7 @@
            id="tspan1"
            x="-0.32891577"
            y="19.946743"
-           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:18.6667px;line-height:0;font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro Semi-Bold';letter-spacing:-0.5px;fill:#ffffff">arkastore</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:18.6667px;line-height:0;font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro Medium';letter-spacing:-0.5px;fill:#ffffff">arkastore</tspan></text>
     </g>
   </g>
 </svg>
