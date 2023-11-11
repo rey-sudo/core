@@ -8,7 +8,7 @@
    version="1.1"
    id="SVGRoot"
    sodipodi:docname="logo-black.svg"
-   inkscape:version="1.3 (0e150ed, 2023-07-21)"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -29,8 +29,8 @@
      inkscape:cy="24.041629"
      inkscape:window-width="1504"
      inkscape:window-height="749"
-     inkscape:window-x="594"
-     inkscape:window-y="130"
+     inkscape:window-x="206"
+     inkscape:window-y="253"
      inkscape:window-maximized="0"
      inkscape:current-layer="text368"
      inkscape:pageshadow="2" />
@@ -70,7 +70,7 @@
            id="tspan1"
            x="-0.32891577"
            y="19.946743"
-           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:18.6667px;line-height:0;font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro Semi-Bold';letter-spacing:-0.5px;fill:#000000">arkastore</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.6667px;line-height:0;font-family:'Maven Pro';-inkscape-font-specification:'Maven Pro Bold';letter-spacing:-0.5px;fill:#000000">pairfy</tspan></text>
     </g>
   </g>
 </svg>

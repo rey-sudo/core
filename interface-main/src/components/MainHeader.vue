@@ -8,7 +8,6 @@
         src="@/assets/logo-white.svg"
         alt=""
       />
-      <div class="p-header-divider" :class="{ scrolled: isScrolled }" />
 
       <div class="p-header-nav">
         <div>{{ labels.sellLabel }}</div>
@@ -68,7 +67,7 @@ export default {
 
 <style lang="css" scoped>
 header {
-  padding: 1rem;
+  padding: 1rem 1rem;
   padding-left: 4rem;
   padding-right: 4rem;
   display: flex;
@@ -94,9 +93,7 @@ header {
   filter: invert(1);
 }
 
-.p-header-divider.scrolled {
-  background: var(--border-a);
-}
+
 
 .p-header-search.scrolled {
   border: 1px solid var(--border-a);
@@ -118,12 +115,6 @@ header {
   height: var(--text-size-e);
 }
 
-.p-header-divider {
-  height: 20px;
-  width: 1px;
-  margin: 0 1rem;
-  background: rgba(255, 255, 255, 0.25);
-}
 
 .p-header-column {
   flex-basis: 33.33%;

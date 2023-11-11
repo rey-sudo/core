@@ -70,32 +70,32 @@ export default {
       selectedTab: "all",
       navTabs: [
         {
-          label: "Todo",
+          label: "All",
           value: "all",
           badge: false,
           badgeLabel: "",
         },
         {
-          label: "Nuevo",
+          label: "New",
           value: "new",
           badge: false,
           badgeLabel: "",
         },
         {
-          label: "Ofertas",
+          label: "Offers",
           value: "offers",
           badge: false,
           badgeLabel: "",
         },
         {
-          label: "Categorías",
+          label: "Categories",
           value: "categories",
           badge: false,
           badgeLabel: "",
         },
         {
-          label: "Tecnología",
-          value: "tech",
+          label: "Technology",
+          value: "technology",
           badge: false,
           badgeLabel: "",
         },
@@ -189,7 +189,7 @@ export default {
   align-items: center;
 }
 .p-store-submenu-nav div {
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b); 
   white-space: nowrap;
   cursor: pointer;
   padding: 1rem 0;
