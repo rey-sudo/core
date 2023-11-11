@@ -60,10 +60,10 @@ body {
   --base-c: #f2f2f2;
   --base-d: #fafafa;
 
-  --blue: #0071e3;
+  --blue: #0069f5;
   --green: #27b46a;
 
-  --secondary-a: #131722;
+  --secondary-a: #191919;
   --secondary-b: #2d313c;
   --secondary-c: #e3f1ff;
   --secondary-d: #c7e3ff;

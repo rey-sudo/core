@@ -177,7 +177,7 @@ export default {
 
 .p-store-submenu {
   padding-left: 4rem;
-  margin-top: 74px;
+  margin-top: 90px;
   z-index: 100;
   display: flex;
   align-items: center;
@@ -193,6 +193,7 @@ export default {
   white-space: nowrap;
   cursor: pointer;
   padding: 1rem 0;
+  font-weight: 100;
   margin-right: 2rem;
   color: var(--text-w);
 }

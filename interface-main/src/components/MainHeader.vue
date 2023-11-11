@@ -67,7 +67,7 @@ export default {
 
 <style lang="css" scoped>
 header {
-  padding: 1rem 1rem;
+  padding: 1.5rem 1rem;
   padding-left: 4rem;
   padding-right: 4rem;
   display: flex;
