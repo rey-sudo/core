@@ -192,6 +192,7 @@ export default {
 
 .store-top-menu-button {
   cursor: pointer;
+  margin-right: 0.5rem;
 }
 
 .store-top-menu-button img {
