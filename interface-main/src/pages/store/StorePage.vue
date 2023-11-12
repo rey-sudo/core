@@ -1,28 +1,31 @@
 <template>
-  <div class="p-store">
-    <div class="p-store-top">
+  <div class="store">
+    <div class="store-top">
       <MainHeader />
+      <div class="store-top-mask" />
 
-      <div class="p-store-top-mask" />
+      <div class="store-top-menu">
+        <div class="store-top-menu-col left">
+          <div class="store-top-menu-button">
+            <img src="@/assets/menu.svg" alt="">
+          </div>
 
-      <div class="p-store-submenu">
-        <div class="p-header-column left">
-          <div class="p-store-submenu-nav">
+          <div class="store-top-menu-nav">
             <div v-for="item in navTabs" :key="item" :class="{ active: selectedTab === item.value }">
               {{ item.label }}
             </div>
           </div>
         </div>
-        <div class="p-header-column center"></div>
 
-        <div class="p-header-column right"></div>
+        <div class="store-top-menu-col center"></div>
+        <div class="store-top-menu-col right"></div>
       </div>
 
-      <div class="p-store-banner">
-        <div class="p-store-banner-item">
+      <div class="store-top-banner">
+        <div class="store-top-banner-item">
           <img :src="banner1" />
         </div>
-        <div class="p-store-banner-item">
+        <div class="store-top-banner-item">
           <img :src="banner2" />
         </div>
       </div>
@@ -106,7 +109,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.p-store-banner {
+.store-top-banner {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 2rem;
@@ -115,7 +118,7 @@ export default {
   margin-top: 2rem;
 }
 
-.p-store-banner-item {
+.store-top-banner-item {
   border-radius: 12px;
   background: var(--base-b);
   height: 300px;
@@ -131,7 +134,7 @@ export default {
   justify-content: center;
 }
 
-.p-store-banner-item img {
+.store-top-banner-item img {
   display: block;
   height: 100%;
   object-fit: cover;
@@ -141,14 +144,14 @@ export default {
   opacity: 0;
 }
 
-.p-store {
+.store {
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-.p-store-top {
+.store-top {
   width: inherit;
   height: 600px;
   min-height: 600px;
@@ -161,7 +164,7 @@ export default {
   flex-direction: column;
 }
 
-.p-store-top-mask {
+.store-top-mask {
   width: inherit;
   height: inherit;
   z-index: 2;
@@ -171,7 +174,7 @@ export default {
   background: var(--base-a);
 }
 
-.p-store-submenu {
+.store-top-menu {
   padding-left: 4rem;
   margin-top: 74px;
   z-index: 100;
@@ -181,48 +184,56 @@ export default {
   border-top: 1px solid rgb(255, 255, 255, 0.1);
 }
 
-.p-store-submenu-nav {
+.store-top-menu-nav {
   display: flex;
   align-items: center;
   padding: 0.25rem;
 }
 
-.p-store-submenu-nav div {
+.store-top-menu-button {
+  cursor: pointer;
+}
+
+.store-top-menu-button img {
+  width: var(--text-size-d);
+}
+
+.store-top-menu-nav div {
   font-size: var(--text-size-a);
   white-space: nowrap;
   cursor: pointer;
   padding: 0 1rem;
   line-height: 40px;
   font-weight: 100;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
   color: var(--text-w);
   background: transparent;
   border-radius: 999px;
 }
 
-.p-store-submenu-nav div:hover {
+.store-top-menu-nav div:hover {
   color: var(--text-w);
   background: rgba(255, 255, 255, 0.1);
 }
 
-.p-header-column {
+.store-top-menu-col {
   flex-basis: 33.33%;
 }
 
-.p-header-column.left {
+.store-top-menu-col.left {
   flex-basis: 33.33%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.p-header-column.right {
+.store-top-menu-col.right {
   flex-basis: 33.33%;
   display: flex;
   justify-content: center;
 }
 
-.p-header-column.center {
+.store-top-menu-col.center {
   flex-basis: 66.66%;
   width: auto;
   display: flex;

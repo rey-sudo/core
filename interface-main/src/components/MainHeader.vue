@@ -4,9 +4,12 @@
       <img class="p-header-logo" :class="{ scrolled: isScrolled }" @click="reloadPage" src="@/assets/logo-white.svg"
         alt="" />
 
-      <div class="p-header-nav">
-        <div>{{ labels.sellLabel }}</div>
-        <div>{{ labels.helpLabel }}</div>
+      <div class="p-header-button" :class="{ scrolled: isScrolled }">
+        <label>🇨🇴</label>
+        <div>
+          <span>ES</span>
+          <span>COL</span>
+        </div>
       </div>
     </div>
 
@@ -32,7 +35,7 @@
         <img src="@/assets/wallet.svg" alt="">
         <div>
           <span>Connect</span>
-          <span>wallet</span>
+          <span>Wallet</span>
         </div>
       </div>
     </div>
@@ -168,6 +171,7 @@ header {
   transition: var(--button-transition-a);
   margin-left: 2rem;
 }
+
 .p-header-button div {
   display: flex;
   flex-direction: column;
@@ -177,15 +181,15 @@ header {
 .p-header-button span {
   font-size: var(--text-size-a);
   line-height: 1.25rem;
+  text-align: left;
 }
+
 .p-header-button span:nth-child(1) {
   font-weight: 400;
 }
-.p-header-button span:nth-child(2) {
-  
-}
 
-.p-header-button img {
+.p-header-button img,
+label {
   width: var(--text-size-e);
 }
 
@@ -193,7 +197,7 @@ header {
   background: rgba(255, 255, 255, 1);
   color: var(--text-a);
   border-radius: 99px;
-  text-align: center;
+  text-align: center !important;
   font-size: 12px !important;
 }
 
