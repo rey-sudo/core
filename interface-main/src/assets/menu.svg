@@ -19,13 +19,13 @@
      inkscape:pagecheckerboard="0"
      showgrid="false"
      inkscape:zoom="13.109375"
-     inkscape:cx="24.524434"
-     inkscape:cy="28.071514"
-     inkscape:window-width="1920"
-     inkscape:window-height="1011"
-     inkscape:window-x="0"
-     inkscape:window-y="32"
-     inkscape:window-maximized="1"
+     inkscape:cx="24.562574"
+     inkscape:cy="15.866508"
+     inkscape:window-width="1495"
+     inkscape:window-height="773"
+     inkscape:window-x="39"
+     inkscape:window-y="268"
+     inkscape:window-maximized="0"
      inkscape:current-layer="icon" />
   <defs
      id="defs4">
@@ -35,40 +35,27 @@
   <title
      id="title6">query-queue</title>
   <rect
-     x="-22"
-     y="6"
-     width="18"
-     height="2"
+     x="-25.624569"
+     y="9"
+     width="23.999996"
+     height="2.6666665"
      id="rect8"
-     style="fill:#ffffff"
+     style="fill:#ffffff;stroke-width:1.33334"
      transform="scale(-1,1)" />
   <rect
-     x="-22"
-     y="12.000002"
-     width="18"
-     height="2"
+     x="-25.624569"
+     y="17.000011"
+     width="23.999996"
+     height="2.6666665"
      id="rect10"
-     style="fill:#ffffff"
+     style="fill:#ffffff;stroke-width:1.33334"
      transform="scale(-1,1)" />
   <rect
-     x="-17"
-     y="18.000002"
-     width="13"
-     height="2"
+     x="-18.957901"
+     y="25.000015"
+     width="17.333332"
+     height="2.6666665"
      id="rect12"
-     style="fill:#ffffff"
+     style="fill:#ffffff;stroke-width:1.33334"
      transform="scale(-1,1)" />
-  <rect
-     x="-22"
-     y="24.000002"
-     width="18"
-     height="2"
-     id="rect14"
-     style="fill:#ffffff"
-     transform="scale(-1,1)" />
-  <polygon
-     points="4,14 11,19 4,24 "
-     id="polygon16"
-     style="fill:#ffffff"
-     transform="matrix(-1,0,0,1,32,0)" />
 </svg>
