@@ -5,10 +5,10 @@
         alt="" />
 
       <div class="p-header-button" :class="{ scrolled: isScrolled }">
-        <label>🇨🇴</label>
+        <label>🇺🇸</label>
         <div>
-          <span>ES /</span>
-          <span>COL</span>
+          <span>EN /</span>
+          <span>USA</span>
         </div>
       </div>
     </div>
