@@ -1,13 +1,8 @@
 <template>
   <header class="p-header" :class="{ scrolled: isScrolled }">
     <div class="p-header-column left">
-      <img
-        class="p-header-logo"
-        :class="{ scrolled: isScrolled }"
-        @click="reloadPage"
-        src="@/assets/logo-white.svg"
-        alt=""
-      />
+      <img class="p-header-logo" :class="{ scrolled: isScrolled }" @click="reloadPage" src="@/assets/logo-white.svg"
+        alt="" />
 
       <div class="p-header-nav">
         <div>{{ labels.sellLabel }}</div>
@@ -17,12 +12,8 @@
 
     <div class="p-header-column center">
       <div class="p-header-search" :class="{ scrolled: isScrolled }">
-        <input
-          :class="{ scrolled: isScrolled }"
-          type="text"
-          maxlength="200"
-          placeholder="Buscar productos, marcas y más..."
-        />
+        <input :class="{ scrolled: isScrolled }" type="text" maxlength="200"
+          placeholder="Buscar productos, marcas y más..." />
 
         <div><i class="pi pi-search" /></div>
       </div>
@@ -30,12 +21,19 @@
 
     <div class="p-header-column right">
       <div class="p-header-button" :class="{ scrolled: isScrolled }">
-        <i class="pi pi-shopping-cart" />
-        <span></span>
+        <img src="@/assets/car.svg" alt="">
+        <div>
+          <span class="counter">0</span>
+          <span>Items</span>
+        </div>
       </div>
 
       <div class="p-header-button" :class="{ scrolled: isScrolled }">
-        <i class="pi pi-wallet" />
+        <img src="@/assets/wallet.svg" alt="">
+        <div>
+          <span>Connect</span>
+          <span>wallet</span>
+        </div>
       </div>
     </div>
   </header>
@@ -67,7 +65,7 @@ export default {
 
 <style lang="css" scoped>
 header {
-  padding: 1.5rem 1rem;
+  padding: 1rem;
   padding-left: 4rem;
   padding-right: 4rem;
   display: flex;
@@ -140,12 +138,14 @@ header {
   align-items: center;
   justify-content: center;
 }
+
 .p-header-nav {
   display: flex;
   align-items: center;
   width: 100%;
   justify-content: center;
 }
+
 .p-header-nav div {
   padding: 0 1rem;
   font-weight: 600;
@@ -161,14 +161,40 @@ header {
 .p-header-button {
   font-weight: 600;
   font-size: var(--text-size-c);
-  padding: 1rem;
   display: flex;
   align-items: center;
   white-space: nowrap;
   cursor: pointer;
-  border: 1px solid transparent;
   transition: var(--button-transition-a);
+  margin-left: 2rem;
+}
+.p-header-button div {
+  display: flex;
+  flex-direction: column;
   margin-left: 1rem;
+}
+
+.p-header-button span {
+  font-size: var(--text-size-a);
+  line-height: 1.25rem;
+}
+.p-header-button span:nth-child(1) {
+  font-weight: 400;
+}
+.p-header-button span:nth-child(2) {
+  
+}
+
+.p-header-button img {
+  width: var(--text-size-e);
+}
+
+.counter {
+  background: rgba(255, 255, 255, 1);
+  color: var(--text-a);
+  border-radius: 99px;
+  text-align: center;
+  font-size: 12px !important;
 }
 
 .p-header-search {

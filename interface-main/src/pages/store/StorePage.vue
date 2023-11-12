@@ -8,11 +8,7 @@
       <div class="p-store-submenu">
         <div class="p-header-column left">
           <div class="p-store-submenu-nav">
-            <div
-              v-for="item in navTabs"
-              :key="item"
-              :class="{ active: selectedTab === item.value }"
-            >
+            <div v-for="item in navTabs" :key="item" :class="{ active: selectedTab === item.value }">
               {{ item.label }}
             </div>
           </div>
@@ -177,30 +173,38 @@ export default {
 
 .p-store-submenu {
   padding-left: 4rem;
-  margin-top: 90px;
+  margin-top: 74px;
   z-index: 100;
   display: flex;
   align-items: center;
   background: var(--secondary-a);
+  border-top: 1px solid rgb(255, 255, 255, 0.1);
 }
 
 .p-store-submenu-nav {
   display: flex;
   align-items: center;
+  padding: 0.25rem;
 }
+
 .p-store-submenu-nav div {
-  font-size: var(--text-size-b); 
+  font-size: var(--text-size-a);
   white-space: nowrap;
   cursor: pointer;
-  padding: 1rem 0;
+  padding: 0 1rem;
+  line-height: 40px;
   font-weight: 100;
-  margin-right: 2rem;
+  margin-right: 1rem;
   color: var(--text-w);
+  background: transparent;
+  border-radius: 999px;
 }
 
 .p-store-submenu-nav div:hover {
-  color: var(--blue);
+  color: var(--text-w);
+  background: rgba(255, 255, 255, 0.1);
 }
+
 .p-header-column {
   flex-basis: 33.33%;
 }

@@ -28,9 +28,14 @@ i {
   line-height: 0 !important;
 }
 
+p {
+  line-height: 0;
+}
+
 a {
   text-decoration: none;
 }
+
 
 body {
   margin: 0;
@@ -78,11 +83,9 @@ body {
 
   --button-shadow: inset 0 0 12px rgba(138, 151, 255, 0.5);
 
-  --button-background: linear-gradient(
-      180deg,
+  --button-background: linear-gradient(180deg,
       rgba(79, 11, 168, 0) 0%,
-      rgba(138, 151, 255, 0.24) 100%
-    ),
+      rgba(138, 151, 255, 0.24) 100%),
     rgba(138, 151, 255, 0.24);
 
   --shadow-a: 0 5px 40px rgba(0, 0, 0, 0.1);
