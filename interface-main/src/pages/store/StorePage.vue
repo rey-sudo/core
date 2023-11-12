@@ -204,7 +204,7 @@ export default {
   cursor: pointer;
   padding: 0 1rem;
   line-height: 40px;
-  font-weight: 100;
+  font-weight: 400;
   margin-right: 0.5rem;
   color: var(--text-w);
   background: transparent;

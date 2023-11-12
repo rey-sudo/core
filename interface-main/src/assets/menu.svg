@@ -23,8 +23,8 @@
      inkscape:cy="15.866508"
      inkscape:window-width="1495"
      inkscape:window-height="773"
-     inkscape:window-x="39"
-     inkscape:window-y="268"
+     inkscape:window-x="20"
+     inkscape:window-y="211"
      inkscape:window-maximized="0"
      inkscape:current-layer="icon" />
   <defs
@@ -35,27 +35,27 @@
   <title
      id="title6">query-queue</title>
   <rect
-     x="-25.624569"
+     x="-25.6"
      y="9"
      width="23.999996"
-     height="2.6666665"
+     height="2.8571403"
      id="rect8"
-     style="fill:#ffffff;stroke-width:1.33334"
+     style="fill:#ffffff;stroke-width:1.38014"
      transform="scale(-1,1)" />
   <rect
-     x="-25.624569"
-     y="17.000011"
+     x="-25.6"
+     y="17.571438"
      width="23.999996"
-     height="2.6666665"
+     height="2.8571403"
      id="rect10"
-     style="fill:#ffffff;stroke-width:1.33334"
+     style="fill:#ffffff;stroke-width:1.38014"
      transform="scale(-1,1)" />
   <rect
-     x="-18.957901"
-     y="25.000015"
+     x="-18.933332"
+     y="26.142864"
      width="17.333332"
-     height="2.6666665"
+     height="2.8571403"
      id="rect12"
-     style="fill:#ffffff;stroke-width:1.33334"
+     style="fill:#ffffff;stroke-width:1.38014"
      transform="scale(-1,1)" />
 </svg>

@@ -7,7 +7,7 @@
       <div class="p-header-button" :class="{ scrolled: isScrolled }">
         <label>🇨🇴</label>
         <div>
-          <span>ES</span>
+          <span>ES /</span>
           <span>COL</span>
         </div>
       </div>
