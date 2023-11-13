@@ -1,20 +1,29 @@
 <template>
-  <header class="p-header" :class="{ scrolled: isScrolled }">
-    <div class="p-header-column left">
-      <img class="p-header-logo" :class="{ scrolled: isScrolled }" @click="reloadPage" src="@/assets/logo-white.svg"
+  <header class="header" :class="{ scrolled: isScrolled }">
+    <div class="header-column left">
+      <img class="header-logo" :class="{ scrolled: isScrolled }" @click="reloadPage" src="@/assets/logo-white.svg"
         alt="" />
 
-      <div class="p-header-button" :class="{ scrolled: isScrolled }">
+      <div class="header-box left" :class="{ scrolled: isScrolled }">
         <label>🇺🇸</label>
         <div>
           <span>EN /</span>
           <span>USA</span>
         </div>
       </div>
+
+      <div class="header-box left" :class="{ scrolled: isScrolled }">
+        <label></label>
+        <div>
+          <span>Hi, Sell</span>
+          <span>Products</span>
+        </div>
+      </div>
+
     </div>
 
-    <div class="p-header-column center">
-      <div class="p-header-search" :class="{ scrolled: isScrolled }">
+    <div class="header-column center">
+      <div class="header-search" :class="{ scrolled: isScrolled }">
         <input :class="{ scrolled: isScrolled }" type="text" maxlength="200"
           placeholder="Buscar productos, marcas y más..." />
 
@@ -22,8 +31,16 @@
       </div>
     </div>
 
-    <div class="p-header-column right">
-      <div class="p-header-button" :class="{ scrolled: isScrolled }">
+    <div class="header-column right">
+      <div class="header-box right" :class="{ scrolled: isScrolled }">
+        <label></label>
+        <div>
+          <span>Or, Audit</span>
+          <span>Products</span>
+        </div>
+      </div>
+
+      <div class="header-box right" :class="{ scrolled: isScrolled }">
         <img src="@/assets/car.svg" alt="">
         <div>
           <span class="counter">0</span>
@@ -31,7 +48,7 @@
         </div>
       </div>
 
-      <div class="p-header-button" :class="{ scrolled: isScrolled }">
+      <div class="header-box right" :class="{ scrolled: isScrolled }">
         <img src="@/assets/wallet.svg" alt="">
         <div>
           <span>Connect</span>
@@ -84,57 +101,57 @@ header {
   background: var(--secondary-a);
 }
 
-.p-header.scrolled {
+.header.scrolled {
   background: var(--base-a);
   border-bottom: 1px solid var(--border-a);
   color: var(--text-a);
 }
 
-.p-header-logo.scrolled {
+.header-logo.scrolled {
   filter: invert(1);
 }
 
 
 
-.p-header-search.scrolled {
+.header-search.scrolled {
   border: 1px solid var(--border-a);
   color: var(--text-b);
 }
 
-.p-header-search.scrolled:focus-within {
+.header-search.scrolled:focus-within {
   border: 1px solid var(--blue);
   color: var(--text-b);
 }
 
-.p-header-search.scrolled:hover {
+.header-search.scrolled:hover {
   border: 1px solid var(--blue);
   color: var(--text-b);
 }
 
-.p-header .p-header-logo {
+.header .header-logo {
   cursor: pointer;
   height: var(--text-size-e);
 }
 
 
-.p-header-column {
+.header-column {
   flex-basis: 33.33%;
 }
 
-.p-header-column.left {
+.header-column.left {
   flex-basis: 33.33%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.p-header-column.right {
+.header-column.right {
   flex-basis: 33.33%;
   display: flex;
   justify-content: flex-end;
 }
 
-.p-header-column.center {
+.header-column.center {
   flex-basis: 66.66%;
   width: auto;
   display: flex;
@@ -142,14 +159,14 @@ header {
   justify-content: center;
 }
 
-.p-header-nav {
+.header-nav {
   display: flex;
   align-items: center;
   width: 100%;
   justify-content: center;
 }
 
-.p-header-nav div {
+.header-nav div {
   padding: 0 1rem;
   font-weight: 600;
   font-size: var(--text-size-a);
@@ -157,11 +174,11 @@ header {
   transition: var(--button-transition-a);
 }
 
-.p-header-nav div:hover {
+.header-nav div:hover {
   opacity: 0.7;
 }
 
-.p-header-button {
+.header-box {
   font-weight: 600;
   font-size: var(--text-size-c);
   display: flex;
@@ -169,26 +186,34 @@ header {
   white-space: nowrap;
   cursor: pointer;
   transition: var(--button-transition-a);
-  margin-left: 2rem;
+
 }
 
-.p-header-button div {
+.header-box.left {
+  margin: 0 auto;
+}
+
+.header-box.right {
+  margin: 0 auto;
+}
+
+.header-box div {
   display: flex;
   flex-direction: column;
   margin-left: 1rem;
 }
 
-.p-header-button span {
+.header-box span {
   font-size: var(--text-size-a);
   line-height: 1.25rem;
   text-align: left;
 }
 
-.p-header-button span:nth-child(1) {
+.header-box span:nth-child(1) {
   font-weight: 400;
 }
 
-.p-header-button img,
+.header-box img,
 label {
   width: var(--text-size-e);
 }
@@ -201,7 +226,7 @@ label {
   font-size: 12px !important;
 }
 
-.p-header-search {
+.header-search {
   border: 1px solid transparent;
   background: var(--base-a);
   transition: var(--button-transition-a);
@@ -215,15 +240,15 @@ label {
   padding: 0.25rem;
 }
 
-.p-header-search:hover {
+.header-search:hover {
   border: 1px solid var(-blue);
 }
 
-.p-header-search:focus-within {
+.header-search:focus-within {
   border: 1px solid var(--blue);
 }
 
-.p-header-search div {
+.header-search div {
   background: black;
   color: var(--text-w);
   font-size: var(--text-size-b);
@@ -234,11 +259,11 @@ label {
   cursor: pointer;
 }
 
-.p-header-search div i {
+.header-search div i {
   font-weight: bold !important;
 }
 
-.p-header-search input {
+.header-search input {
   background-color: transparent;
   border: none;
   outline: none;
@@ -248,7 +273,7 @@ label {
   margin: 0 1rem;
 }
 
-.p-header-search input::placeholder {
+.header-search input::placeholder {
   color: inherit;
   font-weight: 400;
   opacity: 0.6;
