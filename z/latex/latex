@@ -1,0 +1,29 @@
+<mxfile host="app.diagrams.net" modified="2023-05-31T08:11:28.690Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36" etag="nqos-aAs_bwsf7e-pKQ0" version="21.3.6" type="device">
+  <diagram name="Page-1" id="T-1F3Llvs9wQT2gkMlcd">
+    <mxGraphModel dx="2058" dy="751" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="UChqLANiT0z6oB_IzRKD-1" value="&lt;b&gt;CONTRACT&lt;br&gt;INTEGRATION&lt;br&gt;&lt;/b&gt;" style="whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;rounded=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="480" y="360" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="UChqLANiT0z6oB_IzRKD-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="UChqLANiT0z6oB_IzRKD-8">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="470" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UChqLANiT0z6oB_IzRKD-8" value="&lt;b&gt;VOTE&lt;/b&gt;" style="shape=step;perimeter=stepPerimeter;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="280" y="380" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="UChqLANiT0z6oB_IzRKD-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="UChqLANiT0z6oB_IzRKD-16">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="270" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UChqLANiT0z6oB_IzRKD-16" value="&lt;b&gt;WALLET&lt;/b&gt;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="120" y="360" width="80" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -5,14 +5,6 @@
         alt="" />
 
       <div class="header-box left" :class="{ scrolled: isScrolled }">
-        <label>🇺🇸</label>
-        <div>
-          <span>EN /</span>
-          <span>USA</span>
-        </div>
-      </div>
-
-      <div class="header-box left" :class="{ scrolled: isScrolled }">
         <label></label>
         <div>
           <span>Hi, Sell</span>
@@ -20,6 +12,13 @@
         </div>
       </div>
 
+      <div class="header-box left" :class="{ scrolled: isScrolled }">
+        <label></label>
+        <div>
+          <span>Or, Audit</span>
+          <span>Products</span>
+        </div>
+      </div>
     </div>
 
     <div class="header-column center">
@@ -32,11 +31,12 @@
     </div>
 
     <div class="header-column right">
+
       <div class="header-box right" :class="{ scrolled: isScrolled }">
-        <label></label>
+        <label>🇺🇸</label>
         <div>
-          <span>Or, Audit</span>
-          <span>Products</span>
+          <span>EN /</span>
+          <span>USA</span>
         </div>
       </div>
 
@@ -111,8 +111,6 @@ header {
   filter: invert(1);
 }
 
-
-
 .header-search.scrolled {
   border: 1px solid var(--border-a);
   color: var(--text-b);
@@ -133,7 +131,9 @@ header {
   height: var(--text-size-e);
 }
 
-
+/*
+-------------------------------------
+*/
 .header-column {
   flex-basis: 33.33%;
 }
@@ -186,11 +186,10 @@ header {
   white-space: nowrap;
   cursor: pointer;
   transition: var(--button-transition-a);
-
 }
 
 .header-box.left {
-  margin: 0 auto;
+  margin-right: 2rem;
 }
 
 .header-box.right {
