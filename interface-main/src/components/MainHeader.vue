@@ -5,6 +5,15 @@
         alt="" />
 
       <div class="header-box left" :class="{ scrolled: isScrolled }">
+        <label>🇺🇸</label>
+        <div>
+          <span>EN /</span>
+          <span>USA</span>
+        </div>
+      </div>
+
+
+      <div class="header-box left" :class="{ scrolled: isScrolled }">
         <label></label>
         <div>
           <span>Hi, Sell</span>
@@ -12,13 +21,6 @@
         </div>
       </div>
 
-      <div class="header-box left" :class="{ scrolled: isScrolled }">
-        <label></label>
-        <div>
-          <span>Or, Audit</span>
-          <span>Products</span>
-        </div>
-      </div>
     </div>
 
     <div class="header-column center">
@@ -33,10 +35,10 @@
     <div class="header-column right">
 
       <div class="header-box right" :class="{ scrolled: isScrolled }">
-        <label>🇺🇸</label>
+        <label></label>
         <div>
-          <span>EN /</span>
-          <span>USA</span>
+          <span>Or, Audit</span>
+          <span>Products</span>
         </div>
       </div>
 

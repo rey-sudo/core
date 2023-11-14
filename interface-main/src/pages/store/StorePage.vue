@@ -87,14 +87,15 @@ export default {
           badgeLabel: "",
         },
         {
-          label: "Categories",
-          value: "categories",
+          label: "Docs",
+          value: "docs",
           badge: false,
           badgeLabel: "",
         },
+
         {
-          label: "Technology",
-          value: "technology",
+          label: "Support",
+          value: "support",
           badge: false,
           badgeLabel: "",
         },
