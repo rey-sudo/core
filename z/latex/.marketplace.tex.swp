@@ -103,7 +103,7 @@ In the blockchain individual scripts are deployed for each activated slot waitin
   \centering
   \includesvg[width=0.86\textwidth]{locking.svg}
   \caption{Session locked}
-  \label{fig:mi_imagen}
+  \label{fig:locking}
 \end{figure}
 
 
@@ -113,8 +113,22 @@ Blocking funds allows participants to begin meeting their obligations.
 The seller's obligation is to deliver the correct product with the correct specifications. The buyer's obligation is to receive the product and pay the price.
 It is important to clarify that the buyer's obligation to pay the price is guaranteed when he occupies a slot since the amount in ADA of the product price is a necessary condition to occupy a slot.
 
+From this point the seller can begin the context with questions such as: What is the delivery point? Description of the delivery point? Any questions necessary to ensure effective delivery of the product.
+
+All information provided by both actors in the user interface is contained within a websocket instance and can only be observed by the blind peers in case of a dispute.
+The websocket server does not store any type of information about the negotiation session once legal security is declared about the business between the parties.
+
+
 
 \subsubsection { Delivery }
+
+
+\begin{figure}[ht]
+  \centering
+  \includesvg[width=0.86\textwidth]{delivery.svg}
+  \caption{Session locked}
+  \label{fig:delivered}
+\end{figure}
 
 
 

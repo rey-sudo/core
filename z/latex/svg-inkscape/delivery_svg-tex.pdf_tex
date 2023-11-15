@@ -1,6 +1,6 @@
 %% Creator: Inkscape 1.1.2 (0a00cf5339, 2022-02-04), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'locking_svg-tex.pdf' (pdf, eps, ps)
+%% Accompanies image file 'delivery_svg-tex.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -50,20 +50,20 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.62635851)%
+  \begin{picture}(1,0.65624974)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{locking_svg-tex.pdf}}%
-    \put(0.70652249,0.45380461){\color[rgb]{0.2,0.2,0.2}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Locking\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{locking_svg-tex.pdf}}%
-    \put(0.16304563,0.31793539){\color[rgb]{0.2,0.2,0.2}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Buyer\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=3]{locking_svg-tex.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{delivery_svg-tex.pdf}}%
+    \put(0.70652249,0.45380461){\color[rgb]{0.2,0.2,0.2}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Delivery\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{delivery_svg-tex.pdf}}%
+    \put(0.16304563,0.31793539){\color[rgb]{0.2,0.2,0.2}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Seller\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{delivery_svg-tex.pdf}}%
     \put(0.70652249,0.31793539){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Script\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=4]{locking_svg-tex.pdf}}%
-    \put(0.16304563,0.18206617){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}-100ADA\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=5]{locking_svg-tex.pdf}}%
-    \put(0.70652249,0.04619696){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}+100 ADA\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=6]{locking_svg-tex.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{delivery_svg-tex.pdf}}%
+    \put(0.16304563,0.18206617){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}@delivered\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{delivery_svg-tex.pdf}}%
+    \put(0.70652249,0.04619696){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}100 ADA\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{delivery_svg-tex.pdf}}%
     \put(0.70652249,0.18206617){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}50 ADA\end{tabular}}}}%
   \end{picture}%
 \endgroup%
