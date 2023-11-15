@@ -7,6 +7,7 @@
 \usepackage{color}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{svg}
 
 \usepackage[most]{tcolorbox}
 \textheight = 20 cm
@@ -47,11 +48,10 @@
 \abstract{
 \textbf{Abstract.} Pairfy is an electronic commerce protocol that uses smart contracts to decentralize functional requirements necessary for the process of selling and acquiring a physical product.
 Any member of the community can post a product for sale and any member of the community can express an intention to purchase that product.
-If the stock of the product is 15, only the 15 fastest people who express their intention to buy will be able to occupy a socket and secure a negotiation session.
-The socket of a product is equal to the stock of a product, it is a concept that represents availability to open a trading session.
-A trading session is defined as the process of trading a product for a limited time, the buyer and seller generate the negotiation context by engaging in bilateral communication.
-If the stock is 0 a trading session cannot be opened because there is no socket. A socket can be released if the buyer or seller cancels the session.
-
+If the stock of the product is 15, only the 15 fastest people who express their intention to buy will be able to occupy a slot and secure a negotiation session. The slot of a product is a concept that represents the availability to open a negotiation session similar to a sell order on a DEX.
+A slot can be released if the buyer or seller cancels the session. 
+A negotiation session is defined as the process of negotiation a product for a limited time.
+The buyer and seller generate the negotiation context by engaging in bilateral communication.
 }
 
 
@@ -59,10 +59,10 @@ If the stock is 0 a trading session cannot be opened because there is no socket.
 
 Pairfy is an electronic commerce protocol that uses smart contracts to decentralize functional requirements necessary for the process of selling and acquiring a physical product.
 Any member of the community can post a product for sale and any member of the community can express an intention to purchase that product.
-If the stock of the product is 15, only the 15 fastest people who express their intention to buy will be able to occupy a socket and secure a negotiation session.
-The socket of a product is equal to the stock of a product, it is a concept that represents availability to open a trading session.
-A trading session is defined as the process of trading a product for a limited time, the buyer and seller generate the negotiation context by engaging in bilateral communication.
-If the stock is 0 a trading session cannot be opened because there is no socket. A socket can be released if the buyer or seller cancels the session.
+If the stock of the product is 15, only the 15 fastest people who express their intention to buy will be able to occupy a slot and secure a negotiation session.
+The slot of a product is a concept that represents the availability to open a negotiation session similar to a sell order on a DEX. A slot can be released if the buyer or seller cancels the session.
+A negotiation session is defined as the process of trading a product for a limited time. The buyer and seller generate the negotiation context by engaging in bilateral communication.
+
 
 
 \section{ Functional requirements }
@@ -73,18 +73,53 @@ The functional requirements to perform audit rounds are: Negotiation session.
 
 The negotiation session is a 4-stage synchronous process \emph{Waiting}, \emph{Locking}, \emph{Delivery}, \emph{Payment}. A stage cannot start if the previous stage has not finished, the transitions are sequential not parallel.
 
-
+\subsubsection { Waiting }
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.86\textwidth]{round.png}
-  \caption{Audit round}
+  \includesvg[width=0.86\textwidth]{waiting.svg}
+  \caption{Script deployment}
   \label{fig:mi_imagen}
 \end{figure}
 
 
+When a seller offers a product to the public a small plutus script with a state machine is deployed on the blockchain.
+The seller must lock an amount greater than 0 ADA as collateral. 
+If the seller acts in bad faith during the negotiation session the seller will lose the collateral.
+If the seller is a good agent during the negotiation session the collateral will return to him.
+Collateral guarantees that the seller behaves honestly.
+This mechanism of coercion allows to generate trust in potential buyers. 
+It also allows the seller to increase their trust rating.
+Example. A seller publishes a book with 20 units of stock.
+He activates only 10 slots (sell orders) each with a collateral of 20 ADA.
+Fortunately, in the first few hours 7 books are sold. Now there are only 3 slots left.
+The seller decides to activate the 10 remaining slots due to demand.
+
+In the blockchain individual scripts are deployed for each activated slot waiting for a buyer to occupy it and start a trading session.
+
+\subsubsection { Locking }
+
+\begin{figure}[ht]
+  \centering
+  \includesvg[width=0.86\textwidth]{locking.svg}
+  \caption{Session locked}
+  \label{fig:mi_imagen}
+\end{figure}
+
+
+In Figure 2 you can see the collateral of 50 ADA given by the seller and the price of the product 100 ADA given by the buyer. The current state of the script is Locking.
+
+
+
+
+
+
+
 
 In computer science the concepts of state and machine of states are common. A state machine it is a mathematical model to describe the behavior of the different states of a system and their transitions based on conditions, events or triggers. Each state in a state machine represents a specific configuration of the system. It has an initial state that can transition to other states following the rules of the system. Each state within a state machine can execute actions, change variables and produce outputs according to the conditions specifically established for it. There are two types of state machines, the deterministic ones that for a given combination of state and input there is only one possible transition to the next state. And the non-deterministic ones that there can be multiple possible transitions from a given state for a particular input. Fig. 2 shows the deterministic state machine concepts applied to the stages of an audit round. The initial stage is a passive state that does not execute any logic necessary for the audit round in order for the initial state to transition to the first state a trigger is needed. Contracts in Cardano's EUTXO model need at least one initial transaction to trigger their design logic and configure its initial state. In this case the operational wallet interacts with a smart contract endpoint called \emph{startRound}  that receives the necessary parameters so that a round can start. 
+
+
+
 
 \begin{figure}[ht]
   \centering
