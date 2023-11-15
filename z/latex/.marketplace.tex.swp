@@ -111,9 +111,11 @@ In Figure 2 you can see the collateral of 50 ADA given by the seller and the pri
 When the buyer presses the buy button a slot is occupied and the state of the script transitions from \emph{Waiting} to \emph{Locking}.
 Blocking funds allows participants to begin meeting their obligations.
 The seller's obligation is to deliver the correct product with the correct specifications. The buyer's obligation is to receive the product and pay the price.
+It is important to clarify that the buyer's obligation to pay the price is guaranteed when he occupies a slot since the amount in ADA of the product price is a necessary condition to occupy a slot.
 
 
 \subsubsection { Delivery }
+
 
 
 
