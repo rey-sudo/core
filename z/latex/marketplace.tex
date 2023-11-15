@@ -126,11 +126,20 @@ The websocket server does not store any type of information about the negotiatio
 \begin{figure}[ht]
   \centering
   \includesvg[width=0.86\textwidth]{delivery.svg}
-  \caption{Session locked}
+  \caption{Delivery confirmed by seller}  
   \label{fig:delivered}
 \end{figure}
 
 
+When the shipping company confirms the existence of the address and the effective delivery of the product the seller can invoke the @delivered endpoint.
+The script transitions to the \emph{Delivery} state which indicates that the seller has fulfilled its delivery obligation.
+
+\begin{figure}[ht]
+  \centering
+  \includesvg[width=0.86\textwidth]{finish.svg}
+  \caption{Delivery confirmed by buyer}
+  \label{fig:delivered}
+\end{figure}
 
 
 In computer science the concepts of state and machine of states are common. A state machine it is a mathematical model to describe the behavior of the different states of a system and their transitions based on conditions, events or triggers. Each state in a state machine represents a specific configuration of the system. It has an initial state that can transition to other states following the rules of the system. Each state within a state machine can execute actions, change variables and produce outputs according to the conditions specifically established for it. There are two types of state machines, the deterministic ones that for a given combination of state and input there is only one possible transition to the next state. And the non-deterministic ones that there can be multiple possible transitions from a given state for a particular input. Fig. 2 shows the deterministic state machine concepts applied to the stages of an audit round. The initial stage is a passive state that does not execute any logic necessary for the audit round in order for the initial state to transition to the first state a trigger is needed. Contracts in Cardano's EUTXO model need at least one initial transaction to trigger their design logic and configure its initial state. In this case the operational wallet interacts with a smart contract endpoint called \emph{startRound}  that receives the necessary parameters so that a round can start. 
