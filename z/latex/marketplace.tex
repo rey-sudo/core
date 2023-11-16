@@ -149,18 +149,17 @@ Finally, the buyer confirms whether he received the product by invoking the @rec
 
 \subsection { State machine }
 
+In computer science the concepts of state and machine of states are common. A state machine it is a mathematical model to describe the behavior of the different states of a system and their transitions based on conditions, events or triggers. Each state in a state machine represents a specific configuration of the system. It has an initial state that can transition to other states following the rules of the system. Each state within a state machine can execute actions, change variables and produce outputs according to the conditions specifically established for it. There are two types of state machines, the deterministic ones that for a given combination of state and input there is only one possible transition to the next state. And the non-deterministic ones that there can be multiple possible transitions from a given state for a particular input. 
+
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.85\textwidth]{machine.png}
-  \caption{States}
+  \caption{Session states}
   \label{fig:States}
-\end{figure} 
+\end{figure}
 
-In computer science the concepts of state and machine of states are common. A state machine it is a mathematical model to describe the behavior of the different states of a system and their transitions based on conditions, events or triggers. Each state in a state machine represents a specific configuration of the system. It has an initial state that can transition to other states following the rules of the system. Each state within a state machine can execute actions, change variables and produce outputs according to the conditions specifically established for it. There are two types of state machines, the deterministic ones that for a given combination of state and input there is only one possible transition to the next state. And the non-deterministic ones that there can be multiple possible transitions from a given state for a particular input. Fig. 5 shows the deterministic state machine concepts applied to the stages of a negotiation session. Contracts in Cardano's EUTXO model need at least one initial transaction to trigger their design logic and configure its initial state. When the seller activates a slot his wallet deploys a plutus script that receives the collateral in ADA and necessary parameters for the session. 
+Fig. 5 shows the deterministic state machine concepts applied to the stages of a negotiation session. Contracts in Cardano's EUTXO model need at least one initial transaction to trigger their design logic and configure its initial state. When the seller activates a slot his wallet deploys a plutus script that receives the collateral in ADA and necessary parameters for the session. 
 \\
-
-
-
 
 \begin{tabular}{lr}
 \textbf{sessionState} \emph{:: SessionState}\\
@@ -175,7 +174,7 @@ In computer science the concepts of state and machine of states are common. A st
 \end{tabular}
 \\
 
- \emph{sessionState} represents the initial state of the plutus script. These variables will remain in the default state indefinitely until the buyer's wallet interacts with the script taking the slot.
+ The data type \emph{sessionState} represents the initial state of the plutus script once deployed by the seller. These variables will remain in the default state indefinitely until the buyer's wallet interacts with the script taking the slot.
 \\
 
 \begin{tabular}{lr}
@@ -191,7 +190,8 @@ In computer science the concepts of state and machine of states are common. A st
 \end{tabular}
 \\
 
- \emph{cSlot} represents the variable that indicates whether the script has been occupied by a buyer. This means that the current state (cState) of the script is now \emph{Locking}. 
+ \emph{cSlot} represents the variable that indicates whether the script has been occupied by a buyer. The boolean value True means that the slot has been occupied by a buyer which makes the script transition from \emph{Waiting} to \emph{Locking}.
+\\
 
 \begin{tabular}{lr}
 \textbf{sessionState} \emph{:: SessionState}\\
@@ -206,8 +206,8 @@ In computer science the concepts of state and machine of states are common. A st
 \end{tabular}
 \\
 
-\emph{pDelivered} is a variable of type Boolean that represents the delivery of the product or not. 
-At this point the seller has invoked the @delivered endpoint stating that he has fulfilled his obligation to deliver the product. This action transitions the script from \emph{Locking} to \emph{Delivery}
+\emph{pDelivered} is a variable of type boolean that represents the delivery of the product or not. 
+At this point the seller has invoked the @delivered endpoint stating that he has fulfilled his obligation to deliver the product. This action makes the script transition from \emph{Locking} to \emph{Delivery}
 \\
 
 \begin{tabular}{lr}
@@ -223,7 +223,7 @@ At this point the seller has invoked the @delivered endpoint stating that he has
 \end{tabular}
 \\
 
-\emph{pReceived} is a Boolean variable that represents whether the buyer confirms receipt of the product or not. This variable is modified only by the buyer using the @received endpoint.
+\emph{pReceived} is a boolean variable that represents whether the buyer confirms receipt of the product or not. This variable is modified only by the buyer using the @received endpoint.
 By doing this, the script transitions to its final state \emph{Finish} which releases the funds to the seller.
  
  
