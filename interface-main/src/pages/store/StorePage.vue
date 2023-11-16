@@ -193,7 +193,7 @@ export default {
 
 .store-top-menu-button {
   cursor: pointer;
-  margin-right: 0.5rem;
+  margin-right: 1rem;
 }
 
 .store-top-menu-button img {
@@ -207,7 +207,7 @@ export default {
   padding: 0 1rem;
   line-height: 40px;
   font-weight: 400;
-  margin-right: 0.5rem;
+  margin-right: 1rem;
   color: var(--text-w);
   background: transparent;
   border-radius: 999px;

@@ -7,7 +7,7 @@
       <div class="header-box left" :class="{ scrolled: isScrolled }">
         <label>🇺🇸</label>
         <div>
-          <span>EN /</span>
+          <span>EN</span>
           <span>USA</span>
         </div>
       </div>
