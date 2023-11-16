@@ -149,10 +149,6 @@ Finally, the buyer confirms whether he received the product by invoking the @rec
 
 \subsection { State machine }
 
-In computer science the concepts of state and machine of states are common. A state machine it is a mathematical model to describe the behavior of the different states of a system and their transitions based on conditions, events or triggers. Each state in a state machine represents a specific configuration of the system. It has an initial state that can transition to other states following the rules of the system. Each state within a state machine can execute actions, change variables and produce outputs according to the conditions specifically established for it. There are two types of state machines, the deterministic ones that for a given combination of state and input there is only one possible transition to the next state. And the non-deterministic ones that there can be multiple possible transitions from a given state for a particular input. Fig. 5 shows the deterministic state machine concepts applied to the stages of a negotiation session. Contracts in Cardano's EUTXO model need at least one initial transaction to trigger their design logic and configure its initial state. In this case the seller's wallet deploys a plutus script that receives the collateral in ADA and necessary parameters for the session. 
-
-
-
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.85\textwidth]{machine.png}
@@ -160,6 +156,8 @@ In computer science the concepts of state and machine of states are common. A st
   \label{fig:States}
 \end{figure} 
 
+In computer science the concepts of state and machine of states are common. A state machine it is a mathematical model to describe the behavior of the different states of a system and their transitions based on conditions, events or triggers. Each state in a state machine represents a specific configuration of the system. It has an initial state that can transition to other states following the rules of the system. Each state within a state machine can execute actions, change variables and produce outputs according to the conditions specifically established for it. There are two types of state machines, the deterministic ones that for a given combination of state and input there is only one possible transition to the next state. And the non-deterministic ones that there can be multiple possible transitions from a given state for a particular input. Fig. 5 shows the deterministic state machine concepts applied to the stages of a negotiation session. Contracts in Cardano's EUTXO model need at least one initial transaction to trigger their design logic and configure its initial state. When the seller activates a slot his wallet deploys a plutus script that receives the collateral in ADA and necessary parameters for the session. 
+\\
 
 
 
