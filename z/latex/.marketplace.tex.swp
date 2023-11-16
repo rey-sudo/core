@@ -48,7 +48,7 @@
 \abstract{
 \textbf{Abstract.} Pairfy is an electronic commerce protocol that uses smart contracts to decentralize functional requirements necessary for the process of selling and acquiring a physical product.
 Any member of the community can post a product for sale and any member of the community can express an intention to purchase that product.
-If the stock of the product is 15, only the 15 fastest people who express their intention to buy will be able to occupy a slot and secure a negotiation session. The slot of a product is a concept that represents the availability to open a negotiation session similar to a sell order on a DEX.
+If the stock of a product is 15, only the 15 fastest people who express their intention to buy will be able to occupy a slot and secure a negotiation session. The slot of a product is a concept that represents the availability to open a negotiation session similar to a sell order on a DEX.
 A slot can be released if the buyer or seller cancels the session. 
 A negotiation session is defined as the process of negotiation a product for a limited time.
 The buyer and seller generate the negotiation context by engaging in bilateral communication.
@@ -71,7 +71,7 @@ The functional requirements to perform audit rounds are: Negotiation session.
 
 \subsection { Negotiation session }
 
-The negotiation session is a 4-stage synchronous process \emph{Waiting}, \emph{Locking}, \emph{Delivery}, \emph{Payment}. A stage cannot start if the previous stage has not finished, the transitions are sequential not parallel.
+The negotiation session is a 4-stage synchronous process \emph{Waiting}, \emph{Locking}, \emph{Delivery}, \emph{Finish}. A stage cannot start if the previous stage has not finished, the transitions are sequential not parallel.
 
 \subsubsection { Waiting }
 
@@ -92,11 +92,9 @@ This mechanism of coercion allows to generate trust in potential buyers.
 It also allows the seller to increase their trust rating.
 Example. A seller publishes a book with 20 units of stock.
 He activates only 10 slots (sell orders) each with a collateral of 20 ADA.
-Fortunately, in the first few hours 7 books are sold. Now there are only 3 slots left.
+In the first few hours 7 books were sold and now there are only 3 slots left.
 The seller decides to activate the 10 remaining slots due to demand.
-
-In the blockchain individual scripts are deployed for each activated slot waiting for a buyer to occupy it and start a trading session.
-
+In the background, for each activated slot individual scripts are deployed on the blockchain waiting to be occupied by buyers and start the respective trading sessions.
 \subsubsection { Locking }
 
 \begin{figure}[ht]
@@ -113,7 +111,7 @@ Blocking funds allows participants to begin meeting their obligations.
 The seller's obligation is to deliver the correct product with the correct specifications. The buyer's obligation is to receive the product and pay the price.
 It is important to clarify that the buyer's obligation to pay the price is guaranteed when he occupies a slot since the amount in ADA of the product price is a necessary condition to occupy a slot.
 
-From this point the seller can begin the context with questions such as: What is the delivery point? Description of the delivery point? Any questions necessary to ensure effective delivery of the product.
+From this point the seller can start with questions such as: What is the delivery point? Description of delivery point? Any questions necessary to guarantee the effective delivery of the product.
 
 All information provided by both actors in the user interface is contained within a websocket instance and can only be observed by the blind peers in case of a dispute.
 The websocket server does not store any type of information about the negotiation session once legal security is declared about the business between the parties.
@@ -133,6 +131,8 @@ The websocket server does not store any type of information about the negotiatio
 
 When the shipping company confirms the existence of the address and the effective delivery of the product the seller can invoke the @delivered endpoint.
 The script transitions to the \emph{Delivery} state which indicates that the seller has fulfilled its delivery obligation.
+Finally, the buyer confirms whether he received the product by invoking the @received endpoint. By doing so, the script transitions to the last state \emph{Finish} which releases the funds to the seller's wallet.
+\subsubsection { Finish }
 
 \begin{figure}[ht]
   \centering
@@ -140,6 +140,10 @@ The script transitions to the \emph{Delivery} state which indicates that the sel
   \caption{Delivery confirmed by buyer}
   \label{fig:delivered}
 \end{figure}
+
+
+
+
 
 
 In computer science the concepts of state and machine of states are common. A state machine it is a mathematical model to describe the behavior of the different states of a system and their transitions based on conditions, events or triggers. Each state in a state machine represents a specific configuration of the system. It has an initial state that can transition to other states following the rules of the system. Each state within a state machine can execute actions, change variables and produce outputs according to the conditions specifically established for it. There are two types of state machines, the deterministic ones that for a given combination of state and input there is only one possible transition to the next state. And the non-deterministic ones that there can be multiple possible transitions from a given state for a particular input. Fig. 2 shows the deterministic state machine concepts applied to the stages of an audit round. The initial stage is a passive state that does not execute any logic necessary for the audit round in order for the initial state to transition to the first state a trigger is needed. Contracts in Cardano's EUTXO model need at least one initial transaction to trigger their design logic and configure its initial state. In this case the operational wallet interacts with a smart contract endpoint called \emph{startRound}  that receives the necessary parameters so that a round can start. 
