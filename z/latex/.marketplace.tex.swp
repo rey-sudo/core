@@ -173,8 +173,7 @@ In computer science the concepts of state and machine of states are common. A st
 \\ \hspace{55mm}pReceived = False
 \\\hspace{51mm}\textbraceright{} 
 \end{tabular}
-
-
+\\
 
  \emph{sessionState} represents the initial state of the plutus script. These variables will remain in the default state indefinitely until the buyer's wallet interacts with the script taking the slot.
 \\
@@ -190,6 +189,7 @@ In computer science the concepts of state and machine of states are common. A st
 \\ \hspace{55mm}pReceived = False
 \\\hspace{51mm}\textbraceright{} 
 \end{tabular}
+\\
 
  \emph{cSlot} represents the variable that indicates whether the script has been occupied by a buyer. This means that the current state (cState) of the script is now \emph{Locking}. 
 
@@ -204,9 +204,10 @@ In computer science the concepts of state and machine of states are common. A st
 \\ \hspace{55mm}pReceived = False
 \\\hspace{51mm}\textbraceright{} 
 \end{tabular}
+\\
 
 \emph{pDelivered} is a variable of type Boolean that represents the delivery of the product or not. 
-At this point the seller has invoked the @delivered endpoint stating that he has fulfilled his obligation to deliver the product.
+At this point the seller has invoked the @delivered endpoint stating that he has fulfilled his obligation to deliver the product. This action transitions the script from \emph{Locking} to \emph{Delivery}
 \\
 
 \begin{tabular}{lr}
@@ -220,6 +221,7 @@ At this point the seller has invoked the @delivered endpoint stating that he has
 \\ \hspace{55mm}pReceived = True
 \\\hspace{51mm}\textbraceright{} 
 \end{tabular}
+\\
 
 \emph{pReceived} is a Boolean variable that represents whether the buyer confirms receipt of the product or not. This variable is modified only by the buyer using the @received endpoint.
 By doing this, the script transitions to its final state \emph{Finish} which releases the funds to the seller.
