@@ -169,7 +169,8 @@ In computer science the concepts of state and machine of states are common. A st
 \textbf{sessionState}  = SessionState  \textbraceleft{}
 \\ \hspace{55mm}cState = 0
 \\ \hspace{55mm}sLabel = ``waiting"
-\\ \hspace{55mm}tDuration = 0
+\\ \hspace{55mm}tDuration = 100
+\\ \hspace{55mm}cSlot = False
 \\ \hspace{55mm}pDelivered = False
 \\ \hspace{55mm}pReceived = False
 \\\hspace{51mm}\textbraceright{} 
@@ -177,25 +178,55 @@ In computer science the concepts of state and machine of states are common. A st
 
 
 
- \emph{roundState} represents the initial state of the smart contract. These variables will remain in the default state indefinitely until the operational wallet interacts with the \emph{startRound} endpoint which initiates an audit round. This is the trigger that makes the contract transition to the first state, that is, the \emph{Voting} stage.
- Once the operational wallet has interacted with the \emph{startRound} endpoint the contract will transition to the first state by assigning the new parameters to the contract variables.
+ \emph{sessionState} represents the initial state of the plutus script. These variables will remain in the default state indefinitely until the buyer's wallet interacts with the script taking the slot.
 \\
 
 \begin{tabular}{lr}
-\textbf{roundState} \emph{:: RoundState}\\
-\textbf{roundState}  = RoundState  \textbraceleft{}
-\\ \hspace{55mm}mState = 1,
-\\ \hspace{55mm}mLabel = ``voting"
-\\ \hspace{55mm}vDuration = 100
-\\ \hspace{55mm}aDuration = 100
-\\ \hspace{55mm}tProjects = 1032
-\\\hspace{50mm}\textbraceright{} 
+\textbf{sessionState} \emph{:: SessionState}\\
+\textbf{sessionState}  = SessionState  \textbraceleft{}
+\\ \hspace{55mm}cState = 1
+\\ \hspace{55mm}sLabel = ``locking"
+\\ \hspace{55mm}tDuration = 100
+\\ \hspace{55mm}cSlot = True
+\\ \hspace{55mm}pDelivered = False
+\\ \hspace{55mm}pReceived = False
+\\\hspace{51mm}\textbraceright{} 
 \end{tabular}
 
+ \emph{cSlot} represents the variable that indicates whether the script has been occupied by a buyer. This means that the current state (cState) of the script is now \emph{Locking}. 
 
- The duration parameters represent the time measured in Slots on the blockchain. The Plutus.Contract module has functions for dealing with time such as waiting for a certain amount of Slots to pass before proceeding with the execution of the contract. It is commonly used when implementing time-based behaviors or waiting for a specific deadline to be reached. It is possible to create a time-based trigger to transition to the second state and also to transition to the initial state without the need for external intervention managed by the time Slots of the blockchain.
+\begin{tabular}{lr}
+\textbf{sessionState} \emph{:: SessionState}\\
+\textbf{sessionState}  = SessionState  \textbraceleft{}
+\\ \hspace{55mm}cState = 2
+\\ \hspace{55mm}sLabel = ``delivery"
+\\ \hspace{55mm}tDuration = 100
+\\ \hspace{55mm}cSlot = True
+\\ \hspace{55mm}pDelivered = True
+\\ \hspace{55mm}pReceived = False
+\\\hspace{51mm}\textbraceright{} 
+\end{tabular}
 
+\emph{pDelivered} is a variable of type Boolean that represents the delivery of the product or not. 
+At this point the seller has invoked the @delivered endpoint stating that he has fulfilled his obligation to deliver the product.
+\\
 
+\begin{tabular}{lr}
+\textbf{sessionState} \emph{:: SessionState}\\
+\textbf{sessionState}  = SessionState  \textbraceleft{}
+\\ \hspace{55mm}cState = 3
+\\ \hspace{55mm}sLabel = ``finish"
+\\ \hspace{55mm}tDuration = 100
+\\ \hspace{55mm}cSlot = True
+\\ \hspace{55mm}pDelivered = True
+\\ \hspace{55mm}pReceived = True
+\\\hspace{51mm}\textbraceright{} 
+\end{tabular}
+
+\emph{pReceived} is a Boolean variable that represents whether the buyer confirms receipt of the product or not. This variable is modified only by the buyer using the @received endpoint.
+By doing this, the script transitions to its final state \emph{Finish} which releases the funds to the seller.
+ 
+ 
 \subsection { Voting system } 
 
 
