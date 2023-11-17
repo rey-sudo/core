@@ -8,14 +8,20 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{svg}
-
+\usepackage{pagecolor}
 \usepackage[most]{tcolorbox}
+
 \textheight = 20 cm
 
+\definecolor{blueColor}{HTML}{0069f5}
 
 
 
 \begin{document}
+
+\newpage
+
+\pagecolor{blueColor}
 
 \begin{titlepage}
     \centering
@@ -24,6 +30,9 @@
     
 \end{titlepage}
 
+\newpage
+
+\pagecolor{white}
 
 \renewenvironment{abstract}
  {\small

@@ -8,14 +8,20 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{svg}
-
+\usepackage{pagecolor}
 \usepackage[most]{tcolorbox}
+
 \textheight = 20 cm
 
+\definecolor{blueColor}{HTML}{0069f5}
 
 
 
 \begin{document}
+
+\newpage
+
+\pagecolor{blueColor}
 
 \begin{titlepage}
     \centering
@@ -23,7 +29,9 @@
      \includegraphics[width=0.88\textwidth, keepaspectratio]{arka-cover.png}
     
 \end{titlepage}
+\newpage
 
+\pagecolor{white}
 
 \renewenvironment{abstract}
  {\small
