@@ -78,7 +78,7 @@ A negotiation session is defined as the process of trading a product for a limit
 
 \section{ Requirements }
 
-The functional requirements to perform audit rounds are: Negotiation session.
+The functional requirements for the operation of the protocol are: Negotiation session, State machine, Blind pairs.
 
 \subsection { Negotiation session }
 
@@ -101,7 +101,7 @@ If the seller is a good agent during the negotiation session the collateral will
 Collateral guarantees that the seller behaves honestly.
 This mechanism of coercion allows to generate trust in potential buyers. 
 It also allows the seller to increase their trust rating. Example. Alice publishes a book with 20 units of stock.
-She activates only 10 slots (sell orders) each with a collateral of 20 ADA.
+She activates only 10 slots (sale orders) each with a collateral of 20 ADA.
 In the first few hours 7 books were sold and now there are only 3 slots left.
 Alice decides to activate the 10 remaining slots due to demand.
 Bob sells the same product with the same stock but offers collateral of 5 ADA. The community prefers to buy the books from Alice since she is more committed to fulfilling her obligation by offering 20 ADA collateral.
@@ -144,7 +144,7 @@ Legal security is declared by the blind peers and refers to the absence of reaso
 
 
 When the shipping company confirms the effective delivery of the product the seller can invoke the @delivered endpoint.
-The script transitions to the \emph{Delivery} state which indicates that the seller has fulfilled its delivery obligation.
+The script transitions from \emph{Locking} to the \emph{Delivery} state which indicates that the seller has fulfilled its delivery obligation.
 Finally, the buyer confirms whether he received the product by invoking the @received endpoint. By doing so, the script transitions to the last state \emph{Finish} which releases the funds to the seller's wallet.
 \subsubsection { Finish }
 
@@ -160,7 +160,9 @@ Finally, the buyer confirms whether he received the product by invoking the @rec
 
 \subsection { State machine }
 
-In computer science the concepts of state and machine of states are common. A state machine it is a mathematical model to describe the behavior of the different states of a system and their transitions based on conditions, events or triggers. Each state in a state machine represents a specific configuration of the system. It has an initial state that can transition to other states following the rules of the system. Each state within a state machine can execute actions, change variables and produce outputs according to the conditions specifically established for it. There are two types of state machines, the deterministic ones that for a given combination of state and input there is only one possible transition to the next state. And the non-deterministic ones that there can be multiple possible transitions from a given state for a particular input. 
+A state machine also known as a finite state machine (FSM), is a mathematical model used to describe the behavior of a system or process that can exist in a limited number of distinct states. The system transitions from one state to another in response to specific events or input conditions, and these transitions are defined by a set of rules or conditions known as transitions.
+
+A deterministic finite state machine (DFSM) is a specific type of state machine that exhibits deterministic behavior, meaning that for any given state and input, there is a unique and unambiguous next state. In a deterministic state machine, the transition from one state to another is uniquely determined by the current state and the input with no ambiguity or randomness involved.
 
 \begin{figure}[ht]
   \centering
@@ -169,7 +171,7 @@ In computer science the concepts of state and machine of states are common. A st
   \label{fig:States}
 \end{figure}
 
-Fig. 5 shows the deterministic state machine concepts applied to the stages of a negotiation session. Contracts in Cardano's EUTXO model need at least one initial transaction to trigger their design logic and configure its initial state. When the seller activates a slot his wallet deploys a plutus script that receives the collateral in ADA and necessary parameters for the session. 
+Figure 5 shows the deterministic state machine concepts applied to the steps of a negotiation session. Contracts in Cardano's EUTXO model need at least one initial transaction to trigger their design logic and configure its initial state. When the seller activates a slot his wallet deploys a plutus script that receives the collateral in ADA and necessary parameters for the session. 
 \\
 
 \begin{tabular}{lr}
