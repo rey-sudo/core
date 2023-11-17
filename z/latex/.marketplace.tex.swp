@@ -166,7 +166,7 @@ A deterministic finite state machine (DFSM) is a specific type of state machine 
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.85\textwidth]{machine.png}
+  \includegraphics[width=0.95\textwidth]{machine.png}
   \caption{Session states}
   \label{fig:States}
 \end{figure}
