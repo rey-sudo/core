@@ -256,6 +256,7 @@ The system maintains confidentiality to prevent biases, ensuring a rigorous and 
 A system of blind peers trained in conflict resolution can decide on a dispute in a negotiation session in the event that the buyer or seller fails to comply with their obligations or another problem arises that does not allow the natural conclusion of the session.
 A blind peer system can decide on a disputed trading session.
 
+
 \subsubsection { Appeal } 
 
 \emph{Peer-to-Peer} cryptocurrency exchange services such as localbitcoins or binance P2P have proven to be systems that work for secure trades. These systems are based on trust ratings and involve real-world action on the part of the buyer such as making a transaction to the bank account provided by the seller. In Binance P2P disputes between buyers and sellers can be addressed through an appeal process. Common reasons for initiating an appeal involves problems with payment confirmation, disagreements over payment quality, or disputes regarding trade terms. To protect the cryptocurrency involved in the trade an escrow system locks the funds.
