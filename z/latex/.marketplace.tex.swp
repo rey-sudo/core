@@ -127,8 +127,8 @@ It is important to clarify that the buyer's obligation to pay the price is guara
 From this point the seller can start with questions such as: What is the delivery point? Description of delivery point? Any questions necessary to guarantee the effective delivery of the product.
 
 All information provided by both actors in the user interface is contained within a websocket instance and can only be observed by the blind peers in case of a dispute.
-The websocket server does not store any type of information about the negotiation session once legal security is declared about the business between the parties.
-Legal security is declared by the blind peers and refers to the absence of reasonable doubt in the fulfillment of the obligations corresponding to the buyer and the seller.
+The websocket server does not store any type of information about the negotiation session once legal certainty is declared about the business between the parties.
+Legal certainty is declared by the blind peers and refers to the absence of reasonable doubt regarding compliance with the obligations that correspond to the buyer and the seller.
 
 
 \subsubsection { Delivery }
@@ -160,9 +160,9 @@ Finally, the buyer confirms whether he received the product by invoking the @rec
 
 \subsection { State machine }
 
-A state machine also known as a finite state machine (FSM), is a mathematical model used to describe the behavior of a system or process that can exist in a limited number of distinct states. The system transitions from one state to another in response to specific events or input conditions, and these transitions are defined by a set of rules or conditions known as transitions.
+A state machine also known as a finite state machine (FSM), is a mathematical model used to describe the behavior of a system or process that can exist in a limited number of distinct states. The system transitions from one state to another in response to specific events or input conditions and these transitions are defined by a set of rules or conditions known as transitions.
 
-A deterministic finite state machine (DFSM) is a specific type of state machine that exhibits deterministic behavior, meaning that for any given state and input, there is a unique and unambiguous next state. In a deterministic state machine, the transition from one state to another is uniquely determined by the current state and the input with no ambiguity or randomness involved.
+A deterministic finite state machine (DFSM) is a specific type of state machine that exhibits deterministic behavior, meaning that for any given state and input there is a unique and unambiguous next state. In a deterministic state machine, the transition from one state to another is uniquely determined by the current state and the input with no ambiguity or randomness involved.
 
 \begin{figure}[ht]
   \centering
@@ -171,7 +171,9 @@ A deterministic finite state machine (DFSM) is a specific type of state machine 
   \label{fig:States}
 \end{figure}
 
-Figure 5 shows the deterministic state machine concepts applied to the steps of a negotiation session. Contracts in Cardano's EUTXO model need at least one initial transaction to trigger their design logic and configure its initial state. When the seller activates a slot his wallet deploys a plutus script that receives the collateral in ADA and necessary parameters for the session. 
+Figure 5 shows the deterministic state machine concepts applied to the steps of a negotiation session. 
+In Cardano's EUTXO model contracts need an initial transaction to activate their design logic and establish the starting state.
+When the seller activates a slot his wallet deploys a plutus script that receives the collateral in ADA and necessary parameters for the session. 
 \\
 
 \begin{tabular}{lr}
@@ -242,7 +244,7 @@ By doing this, the script transitions to its final state \emph{Finish} which rel
  
 \subsection { Blind peers }  
 
-Connecting the blockchain to the real world is an expensive challenge at least for physical product trading.
+Connecting the blockchain to the real world is an expensive challenge at least for trading physical products.
 Shipping companies would have to connect their vehicles to supervised oracles and the products must have an infallible tracker to check if were delivered.
 A lot of infrastructure deployed around the world is necessary to achieve a fully decentralized ecommerce protocol.
 Clearly this represents a very difficult challenge to achieve in contrast to another option which is to use the human brain as a source of truth.
@@ -250,17 +252,16 @@ With the right conditions the human brain can make logical reasoning about facts
 For example, the peer review system in the academic world allows a research paper to be reviewed by randomly assigned experts.
 A blind reviewer does not know who is the author of the paper he is reviewing.
 The author also does not know who the reviewers are.
-The system maintains confidentiality to prevent biases, ensuring a rigorous and impartial assessment. Serving as a crucial quality control mechanism, it identifies errors, provides constructive feedback to authors, and contributes to the overall accuracy and reliability of published work. 
+The system maintains confidentiality to prevent biases, ensuring a rigorous and impartial assessment. Serving as a crucial quality control mechanism, it identifies errors, provides constructive feedback to authors and contributes to the overall accuracy and reliability of published work. 
 A system of blind peers trained in conflict resolution can decide on a dispute in a negotiation session in the event that the buyer or seller fails to comply with their obligations or another problem arises that does not allow the natural conclusion of the session.
 A blind peer system can decide on a disputed trading session.
 
 \subsubsection { Appeal } 
 
-\emph{Peer-to-Peer} cryptocurrency exchange services such as localbitcoins or binance P2P have proven to be systems that work for secure trades. These systems are based on trust ratings and involve real-world action on the part of the buyer such as making a transaction to the bank account provided by the seller.
-
-In Binance P2P, disputes between buyers and sellers can be addressed through an appeal process. Common reasons for initiating an appeal involves problems with payment confirmation, disagreements over payment quality, or disputes regarding trade terms. To protect the cryptocurrency involved in the trade an escrow system locks the funds.
+\emph{Peer-to-Peer} cryptocurrency exchange services such as localbitcoins or binance P2P have proven to be systems that work for secure trades. These systems are based on trust ratings and involve real-world action on the part of the buyer such as making a transaction to the bank account provided by the seller. In Binance P2P disputes between buyers and sellers can be addressed through an appeal process. Common reasons for initiating an appeal involves problems with payment confirmation, disagreements over payment quality, or disputes regarding trade terms. To protect the cryptocurrency involved in the trade an escrow system locks the funds.
 
 Both the buyer and seller are afforded the opportunity to present evidence or explanations supporting their case during the appeal. A mediation team at Binance reviews the appeal carefully considering the evidence and arguments put forth by both parties. Subsequently, Binance reaches a decision which may involve upholding the original trade agreement, releasing funds from escrow to the appropriate party, or taking other actions based on the specific circumstances of the dispute.
+
 
 
 
