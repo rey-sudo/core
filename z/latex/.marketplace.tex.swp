@@ -79,8 +79,6 @@ A negotiation session is defined as the process of trading a product for a limit
 
 \section{ Requirements }
 
-The functional requirements for the operation of the protocol are: Negotiation session, State machine, Blind peers.
-
 \subsection { Negotiation session }
 
 The negotiation session is a 4-stage synchronous process \emph{Waiting}, \emph{Locking}, \emph{Delivery}, \emph{Finish}. A stage cannot start if the previous stage has not finished, the transitions are sequential not parallel.
