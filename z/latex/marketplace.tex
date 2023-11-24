@@ -51,8 +51,8 @@
  
 
 \title{\textbf{Pairfy,\\A P2P ecommerce protocol based on trust rating and blind peers. }}
-\author{Juan C. Rey\footnote{@pairfy  website: \url{www.pairfy.io} - \emph{This personal project was born in 2019 as a proposal presented in Y Combinator.} }\\}
 
+\author{Juan C. Rey\footnote{@pairfy  website: \url{www.pairfy.io} - This project was born as a proposal to Y Combinator in 2019.  }\\}
 
 \maketitle
 
@@ -240,7 +240,6 @@ At this point the seller has invoked the @delivered endpoint stating that he has
 \emph{pReceived} is a boolean variable that represents whether the buyer confirms receipt of the product or not. This variable is modified only by the buyer using the @received endpoint.
 By doing this, the script transitions to its final state \emph{Finish} which releases the funds to the seller.
  
- 
 \subsection { Blind peers }  
 
 Connecting the blockchain to the real world is an expensive challenge at least for trading physical products.
@@ -280,10 +279,10 @@ It is not convenient for the seller to use the @delivered endpoint if he has not
 
 If the buyer does not comply with his obligation to receive the product, the seller can initiate the appeal. If the intention of abuse is proven, then the buyer loses the equivalent of the collateral proposed by the seller. Both parties can resort to appeal in case of dispute, a group of blind mediators can take action on a case-by-case basis.
 
-According to the principle of least cardinality which states that one-to-many relationships such as between the author and the $N + \infty$ of posts he has published, the identifier that relates them should be stored on the ``many" side. In other words, when data modeling is designed posts should store the author identifier, authors should not store identifiers about their posts. As long as the author has a small number of published posts there are no problems with storing and consulting the information. The problem arises when the author has a large number of published posts, the storage of post identifiers in one of the author variables represents a scaling problem and the query time can be affected.
+\subsubsection { Assignment } 
 
-
-
+According to the principle of least cardinality in data modeling which states that one-to-many relationships such as between the author and the $N$ of published posts, the identifier that relates them should be stored on the ``many" side. In other words, when data modeling is designed posts should store the author identifier, authors should not store identifiers about their posts. As long as the author has a small number of published posts there are no problems with storing and consulting the information. The problem arises when the author has a large number of published posts, the storage of post identifiers in one of the author variables represents a scaling problem and the query time can be affected. Applying this principle in the protocol architecture allows for high horizontal scalability.
+Pairfy uses a master-slave pattern in which the master is a primary contract in charge of protocol coordination and the pool of mediators. Slaves are the individual scripts that are in charge of the trading sessions. For each activated slot of a product a script is deployed waiting to be occupied by a buyer.
 
 
 
@@ -415,6 +414,7 @@ The auditor pool is a unique list of official \emph{ARKA} auditors. An auditor h
 
 
 \section { Tokenomics }
+
 
 
 
