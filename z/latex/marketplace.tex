@@ -279,7 +279,7 @@ It is not convenient for the seller to use the @delivered endpoint if he has not
 
 If the buyer does not comply with his obligation to receive the product, the seller can initiate the appeal. If the intention of abuse is proven, then the buyer loses the equivalent of the collateral proposed by the seller. Both parties can resort to appeal in case of dispute, a group of blind mediators can take action on a case-by-case basis.
 
-\subsubsection { Assignment } 
+\subsubsection { Pool } 
 
 According to the principle of least cardinality in data modeling which states that one-to-many relationships such as between the author and the $N$ of published posts, the identifier that relates them should be stored on the ``many" side. In other words, when data modeling is designed posts should store the author identifier, authors should not store identifiers about their posts. As long as the author has a small number of published posts there are no problems with storing and consulting the information. The problem arises when the author has a large number of published posts, the storage of post identifiers in one of the author variables represents a scaling problem and the query time can be affected. Applying this principle in the protocol architecture allows for high horizontal scalability.
 Pairfy uses a master-slave pattern in which the master is a primary contract in charge of protocol coordination and the pool of mediators. Slaves are the individual scripts that are in charge of the trading sessions. For each activated slot of a product a script is deployed waiting to be occupied by a buyer.
@@ -298,12 +298,13 @@ When a seller enables a product slot a slave script with state machine logic is 
 Each slave script has by default the \emph{PubKeyHash} of the master contract in its datum.
 A slave cannot interact with another contract other than its master.
 
-Master contracts do not have any information about their slaves, their function is to provide mediation service in case of a dispute during a negotiation session by enabling an endpoint called @appeal.
+Master contracts do not have any information about their slaves, their function is to provide mediation service in case of a dispute during a negotiation session by enabling an endpoint called @appeal. The endpoint is designed to be used by slave scripts and requires an ADA fee to prevent abuse.
 
 
+The mediator pool is basically a set of \emph{PubKeyHash} each corresponding to the wallet of a certified and active mediator. 
+When @appeal is triggered by a slave the master contract mint an NFT and within the NFT datum the contract adds (2) \emph{PubKeyHash} contained in the pool of mediators, subsequently the contract removes those two \emph{PubKeyHash} from the pool queue. The slave receives the NFT and if the transaction is successful, the slave adds to its own datum the (2) \emph{PubKeyHash} that are within the NFT datum.
 
-
-
+After this process the slave has exact information about the mediators authorized to decide on the current dispute. Mediators are the only ones who can activate special @endpoints of the slave to decide the dispute.
 
 
 
