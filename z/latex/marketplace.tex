@@ -10,6 +10,10 @@
 \usepackage{svg}
 \usepackage{pagecolor}
 \usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usepackage{pgf-pie}
+\usepackage{xcolor}
+
 
 \textheight = 20 cm
 
@@ -50,9 +54,9 @@
  {\endlist}
  
 
-\title{\textbf{Pairfy,\\A P2P ecommerce protocol based on trust rating and blind peers. }}
+\title{\textbf{Pairfy,\\A P2P ecommerce protocol based on trust rating and blind peers }}
 
-\author{Juan C. Rey\footnote{@pairfy  website: \url{www.pairfy.io} - This project was born as a proposal to Y Combinator in 2019.  }\\}
+\author{Juan C. Rey\footnote{@pairfy  website: \url{www.pairfy.io} - Plutus pioneer first cohort. This personal project was born as a proposal to Y Combinator in 2019 and has been activated for contribution to the open source community.  }\\}
 
 \maketitle
 
@@ -157,7 +161,7 @@ Finally, the buyer confirms whether he received the product by invoking the @rec
 
 
 
-\subsection { State machine }
+\subsubsection { State machine }
 
 A state machine also known as a finite state machine (FSM), is a mathematical model used to describe the behavior of a system or process that can exist in a limited number of distinct states. The system transitions from one state to another in response to specific events or input conditions and these transitions are defined by a set of rules or conditions known as transitions.
 
@@ -275,14 +279,16 @@ Both the buyer and seller are afforded the opportunity to present evidence or ex
 
 In the case of Pairfy the seller is the party that has control over the terms of the negotiation. The UI view of a published product contains the product description, seller name, seniority, trust rating, number of successful sales, number of total sales, and the terms that any buyer must meet to be able to negotiate with the seller. These terms must be clear, enumerated and determined. Any buyer who accepts the seller's terms must comply with them.
 
-It is not convenient for the seller to use the @delivered endpoint if he has not fulfilled his obligation, since he has to prove it to a level of certainty at the risk of losing his collateral. The seller also cannot use the endpoint by mistake since the user interface would have mechanisms to prevent this. It is also not convenient for the buyer to use the @received endpoint without having received the product since he would lose the funds corresponding to the price. He also cannot do it by mistake since the UI does not allow it.
+It is not convenient for the seller to use the @delivered endpoint if he has not fulfilled his obligation since he has to prove it to a level of certainty at the risk of losing his collateral. The seller also cannot use the endpoint by mistake since the user interface would have mechanisms to prevent this. It is also not convenient for the buyer to use the @received endpoint without having received the product since he would lose the funds corresponding to the price. He also cannot do it by mistake since the UI does not allow it.
 
 If the buyer does not comply with his obligation to receive the product, the seller can initiate the appeal. If the intention of abuse is proven, then the buyer loses the equivalent of the collateral proposed by the seller. Both parties can resort to appeal in case of dispute, a group of blind mediators can take action on a case-by-case basis.
 
 \subsubsection { Pool } 
 
-According to the principle of least cardinality in data modeling which states that one-to-many relationships such as between the author and the $N$ of published posts, the identifier that relates them should be stored on the ``many" side. In other words, when data modeling is designed posts should store the author identifier, authors should not store identifiers about their posts. As long as the author has a small number of published posts there are no problems with storing and consulting the information. The problem arises when the author has a large number of published posts, the storage of post identifiers in one of the author variables represents a scaling problem and the query time can be affected. Applying this principle in the protocol architecture allows for high horizontal scalability.
-Pairfy uses a master-slave pattern in which the master is a primary contract in charge of protocol coordination and the pool of mediators. Slaves are the individual scripts that are in charge of the trading sessions. For each activated slot of a product a script is deployed waiting to be occupied by a buyer.
+According to the principle of least cardinality in data modeling which states that one-to-many relationships such as between the author and the $N$ of published posts, the identifier that relates them should be stored on the ``many" side. In other words, when data modeling is designed posts should store the author identifier, authors should not store identifiers about their posts. As long as the author has a small number of published posts there are no problems with storing and consulting the information. The problem arises when the author has a large number of published posts, the storage of post identifiers in one of the author variables represents a scaling problem and the query time can be affected.
+The application of this principle in the protocol architecture allows high horizontal scalability.
+Pairfy uses a master-slave pattern in which the master is the main contract of the protocol which manages the pool of mediators.
+Slaves are the individual scripts that are in charge of the trading sessions. For each activated slot of a product a script is deployed waiting to be occupied by a buyer.
 
 
 \begin{figure}[ht]
@@ -294,7 +300,7 @@ Pairfy uses a master-slave pattern in which the master is a primary contract in 
 
 
 Figure 6 shows a grouping of consecutive contracts representing horizontal scaling to ensure high concurrency and availability of the Pairfy service.
-When a seller enables a product slot a slave script with state machine logic is deployed in the blockchian waiting for a buyer to occupy it to start a negotiation session.
+When a seller enables a product slot a slave script with state machine logic is deployed in the blockchain waiting for a buyer to occupy it to start a negotiation session.
 Each slave script has by default the \emph{PubKeyHash} of the master contract in its datum.
 A slave cannot interact with another contract other than its master.
 
@@ -302,133 +308,20 @@ Master contracts do not have any information about their slaves, their function 
 
 
 The mediator pool is basically a set of \emph{PubKeyHash} each corresponding to the wallet of a certified and active mediator. 
-When @appeal is triggered by a slave the master contract mint an NFT and within the NFT datum the contract adds (2) \emph{PubKeyHash} contained in the pool of mediators, subsequently the contract removes those two \emph{PubKeyHash} from the pool queue. The slave receives the NFT and if the transaction is successful, the slave adds to its own datum the (2) \emph{PubKeyHash} that are within the NFT datum.
+When @appeal is triggered by a slave the master contract mint an NFT and within the NFT datum the contract adds three (3) \emph{PubKeyHash} contained in the pool of mediators.
+Subsequently the contract removes those three \emph{PubKeyHash} from the pool queue.
 
-After this process the slave has exact information about the mediators authorized to decide on the current dispute. Mediators are the only ones who can activate special @endpoints of the slave to decide the dispute.
-
-
-
+The slave receives the NFT and adds to its own datum the three \emph{PubKeyHash} that are within the NFT datum. After this process the slave has exact information about the mediators authorized to decide on the current dispute. Mediators are the only ones who can activate special @endpoints of the slave to decide the dispute.
 
 
-In the blockchain industry new projects are created daily and the auditable list of projects will inevitably grow over time. It is possible for the community to add 1000 or 10000 projects if they wish. The consequence of this is the large number of indexes in the database. Managing such a number of indexes in a smart contract can be challenging because the limit of Kb per Tx is limited and it is not scalable. However, we can simplify the notion of long-length indices such as those used in databases by using consecutive natural numbers.
+\subsubsection { Designation } 
 
-A 32-bit unsigned integer can be represented as 0 to 2147483647. A positive integer can be assigned as a unique index to each project added by the community in ARKA. In this way a smart contract could reference a large number of projects using only 32 Bits. For example, an user wants to vote for the project called Minswap which has the index 742 assigned, no other project has this index. The user connects their wallet containing the ARKA utility token to the UI and performs the vote. The request goes to the backend and contract integration calling the endpoint \emph{createVote} that receives a 32-bit positive integer as a parameter. The contract verifies if the parameter is valid and if the UTxO associated with that wallet address contains the ARKA token. The contract finally checks if the index given as a parameter is less than or equal to \emph{tProjects} variable of the contract which refer to the total number of projects in the auditable list. If these conditions are correct the contract validates the Tx and adds a small mark in the metadata.
+The community using governance can change the policies and parameters of the protocol. The community can also decide who meets the characteristics to be a mediator or not.
+Mediators can have two states: active and inactive.
+Only active mediators can enter the pool.
 
+\subsubsection { Rewards } 
 
-Once the \emph{Voting} stage is finished a snapshot is taken at the exact moment or Slot in which the stage ends. By making a query to the blockchain API it is possible to get the transactions associated with the address of the contract to validate the status of the transactions, verify if the transactions have been validated by the contract and verify the metadata of the transaction that provides the context resulting from the interaction with the contract. The metadata can help in identifying the purpose and status of the transaction. The information about the snapshot and governance stage is displayed in the platform UI for all users.
-
-This configuration for the voting system guarantees speed, minimum computing time and the ability to validate millions of indexes using a simple condition:
-
-$\emph{indexParam} \leq \emph{tProjects}$  $\Rightarrow$ \text{True}. Where \emph{indexParam} is the parameter sent by the user and \emph{tProjects} is the total number of projects on the auditable list.
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.85\textwidth]{vote.png}
-  \caption{Voting
-  }
-  \label{fig:mi_imagen}
-\end{figure}
-
-The parameter \emph{tProjects} can be added by the operational wallet when calling the \emph{startRound} endpoint. This parameter within the smart contract corresponds to a positive integer number. For example, in case there are 1032 projects listed by the community \emph{tProjects} will be 1032. In the initial state of the contract this variable value is 0. At the end of the governance stage this variable will also be 0.
-
-In the hypothetical case that the contract itself was designed to store the project indices in the form of assets or NFTs to later be consulted in the governance stage, this would add more logic to the contract and therefore computation time. For this reason it is a disadvantage to use the contract as a form of storage.
-
-However, it is possible to assign a simple time-locked plutus script that allows to store the indices with project names in the form of small metadata using assets (1 asset per project) or simply stamping valid transactions without using assets. The operational wallet is the only one that will be able to interact with this plutus script. The address of the script on the blockchain will need to be included in the metadata when deploying the ARKA contract for the first time for auditability. This solution is scalable since multiple scripts can be used for this purpose. In this way there is complete audability with respect to the indices. Another form of index auditability is public code repositories like Github or distributed storage systems like IPFS. In future iterations of the V1 contract it is possible to add a new stage where the community can add projects to the auditable list using voting.
-
-\subsection { Random assignment }
-   
-Assigning auditors to auditable projects can be a point of low auditability if it is done centrally on private servers. For that reason the best option is a decentralized assignment algorithm. There is not much complexity in the logic required for an equal assignment for all auditors. The main requirements are randomness and uniform distribution of the probability of being chosen as an auditor of a project. The fisher-yates algorithm is a great candidate because it ensures that each element has an equal probability of being placed in any position of the resulting permutation. This is useful since it can shuffle a finite list of indices. For example, \emph {A = [0...50]} where \emph {A} is the list of indices from auditor 0 to auditor 50. Each index represent a specific auditor and they are ordered consecutively [0,1,2,3,4...50]. When the algorithm is applied to the list the positions of the indices will change randomly. If ARKA needs 12 auditors for an audit round the first 12 indices from the shuffled list will be selected.\\
-
-1. \emph {auditorPool } = [0,1,2,3,4...50] \\
-2. \emph {auditorPoolShuffled } = [30, 13, 10, 19, 21, 45, 23, 47, 31, 50,  4, 28, ... 34]\\
-3. \emph {selectedAuditors} = [30, 13, 10, 19, 21, 45, 23, 47, 31, 50,  4, 28]\\
-4. \emph {auditorGroups } = [ [30, 13], [10, 19], [21, 45], [23, 47], [31, 50],  [4, 28] ]\\
-
-The auditors are randomly selected using the Fisher-Yates algorithm and finally grouped. ARKA requires 2 auditors per project so in this example there are 6 groups for the first 6 projects chosen by the community through voting. The permutations occur on all indexes so there is no need to perform new permutations for role assignment or grouping.
-
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=1\textwidth]{haskell-matrix.png}
-  \caption{Haskell
-  }
-  \label{fig:haskell-matrix}
-\end{figure}
-
-
-\begin{tcolorbox}[title=Haskell Code]
-\begin{verbatim}
-
-{-# LANGUAGE OverloadedStrings #-}
-import System.Random (randomRIO)
-
-
-shuffle :: [Int] -> IO [Int]
-shuffle [] = return []
-shuffle xs = do
-  let m = length xs - 1
-  random <- randomRIO (0, m)
-  let (left, (chosen:right)) = splitAt random xs
-  shuffledRight <- shuffle (left ++ right)
-  return (chosen : shuffledRight)
-
-
-\end{verbatim}
-\end{tcolorbox}
-
-
-This Fisher-Yates haskell version can be used as a reference to create a plutus implementation. The code inside a plutus contract is deterministic it is necessary to use an oracle that generates a random number for the \emph {random} variable or use a pseudo random number generator (PRNG) that takes the hash of the last block generated by the blockchain as a seed of entropy.
-
-\subsection { Report Minting }
-
-The auditor report and its respective review are two different but necessarily related resources they make up a complete audit report. To ensure the immutability of its content it is necessary mint them as non-fungible assets. This can be done automatically from the backend integration at the end of the \emph{Auditing} stage. 
-The latest version of the .json documents sent by the auditor and the reviewer will be hashed to subsequently mint 3 copies. 1 NFT will be sent to the wallet provided by the auditor. Another will be sent to the reviewer's wallet and another will be stored in a wallet of the DAO. They will be stored in IFPS and Github.
-
-This mechanism can be implemented in the smart contract for its operation during the \emph{Auditing} stage. For example, supplying the contract with the list of wallets that have authorization to mint and some status variables to indicate if they have already minted their report or not. Or use identity tokens as a form of authorization to mint. However this will be the subject of investigation for future versions of the smart contract.
-
-
-\section{ Levels of certification }
-
-
-\subsection { Fundamental }
-
-
-\subsection { Tested }
-
-
-\subsection { Formal verification }
-
-
-\section{ Auditors }
-
-The auditors are in charge of creating and reviewing the reports in the \emph{Auditing} stage. They are elected by the community using governance. They have the ability and experience to generate high-quality reports.
-
-\subsection { Sandbox }
-
-It is a practice environment for potential auditors and amateur researchers. It is a 1:1 workspace used by auditors in audit rounds. Users can conduct research according to the question scheme and generate high-quality reports with the tools provided by LaTeX. The purpose of the sandbox is multiple, train future auditors and provide reports to the community. Anyone can use this environment.
-
-
-\subsection { Designation }
-
-The community is in charge of choosing the auditors using the \emph{ARKA} governance token. Anyone can apply if they have previously made 3 reports in the sandbox. The election is completely decentralized.
- 
-
-\subsection { Pool }
-
-The auditor pool is a unique list of official \emph{ARKA} auditors. An auditor has 2 states, available and not available. Available auditors are those who have expressed interest in participating in the current audit round. Only auditors that have been declared as available can be assigned to auditable projects depending on the random assignment algorithm of the smart contract. A function of the algorithm randomly selects the available auditors and creates groups. \emph{Group = [ auditor, reviewer ]}. The groups are assigned to the projects previously voted on in \emph{Voting} stage. After this process, everything is ready for the \emph{Auditing} stage to start. 
-
-
-\section { Tokenomics }
-
-
-
-
-
-
-
-
-
-
-
+To avoid bias and inactivity, mediators are rewarded every 30 days with utility token. The amount will be decided by community governance. Only active days in the pool can be rewarded.
 
 \end{document}
