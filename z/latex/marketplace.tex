@@ -285,16 +285,20 @@ According to the principle of least cardinality in data modeling which states th
 Pairfy uses a master-slave pattern in which the master is a primary contract in charge of protocol coordination and the pool of mediators. Slaves are the individual scripts that are in charge of the trading sessions. For each activated slot of a product a script is deployed waiting to be occupied by a buyer.
 
 
+\begin{figure}[ht]
+  \centering
+  \includesvg[width=0.86\textwidth]{contract.svg}
+  \caption{Pairfy instances}
+  \label{fig:delivered}
+\end{figure}
 
 
+Figure 6 shows a grouping of consecutive contracts representing horizontal scaling to ensure high concurrency and availability of the Pairfy service.
+When a seller enables a product slot a slave script with state machine logic is deployed in the blockchian waiting for a buyer to occupy it to start a negotiation session.
+Each slave script has by default the \emph{PubKeyHash} of the master contract in its datum.
+A slave cannot interact with another contract other than its master.
 
-
-
-
-
-
-
-
+Master contracts do not have any information about their slaves, their function is to provide mediation service in case of a dispute during a negotiation session by enabling an endpoint called @appeal.
 
 
 
