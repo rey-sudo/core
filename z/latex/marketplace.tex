@@ -1,13 +1,12 @@
 \documentclass[12pt]{article}
-%Gummi|065|=)
 
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{svg}
 \usepackage{amsmath}
 \usepackage{amsfonts} 
 \usepackage{hyperref}
 \usepackage{color}
-\usepackage{graphicx}
-\usepackage{float}
-\usepackage{svg}
 \usepackage{pagecolor}
 \usepackage[most]{tcolorbox}
 \usepackage{tikz}
@@ -18,8 +17,6 @@
 \textheight = 20 cm
 
 \definecolor{blueColor}{HTML}{0069f5}
-
-
 
 \begin{document}
 
@@ -38,18 +35,15 @@
 
 \pagecolor{white}
 
-
-
-
 \renewenvironment{abstract}
  {\small
   \begin{center}
   \bfseries \abstractname\vspace{-.5em}\vspace{0pt}
   \end{center}
   \list{}{
-    \setlength{\leftmargin}{.5cm}%
-    \setlength{\rightmargin}{\leftmargin}%
-  }%
+    \setlength{\leftmargin}{.5cm}
+    \setlength{\rightmargin}{\leftmargin}
+  }
   \item\relax}
  {\endlist}
  
@@ -61,6 +55,7 @@
 \maketitle
 
 \renewcommand*\abstractname{\textbf{}\hfill}
+
 \abstract{
 \textbf{Abstract.} Pairfy is an electronic commerce protocol that uses smart contracts to decentralize functional requirements necessary for the processes of selling and buying a physical product.
 Any member of the community can post a product for sale and any member of the community can express an intention to purchase that product.
@@ -162,16 +157,16 @@ The seller receives 50 ADA of collateral and 100 ADA equivalent to the price of 
 
 \subsubsection { State machine }
 
-A state machine also known as a finite state machine (FSM), is a mathematical model used to describe the behavior of a system or process that can exist in a limited number of distinct states. The system transitions from one state to another in response to specific events or input conditions and these transitions are defined by a set of rules or conditions known as transitions.
-
-A deterministic finite state machine (DFSM) is a specific type of state machine that exhibits deterministic behavior, meaning that for any given state and input there is a unique and unambiguous next state. In a deterministic state machine, the transition from one state to another is uniquely determined by the current state and the input with no ambiguity or randomness involved.
-
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.95\textwidth]{machine.png}
   \caption{Session states}
   \label{fig:States}
 \end{figure}
+
+A state machine also known as a finite state machine (FSM), is a mathematical model used to describe the behavior of a system or process that can exist in a limited number of distinct states. The system transitions from one state to another in response to specific events or input conditions and these transitions are defined by a set of rules or conditions known as transitions.
+
+A deterministic finite state machine (DFSM) is a specific type of state machine that exhibits deterministic behavior, meaning that for any given state and input there is a unique and unambiguous next state. In a deterministic state machine, the transition from one state to another is uniquely determined by the current state and the input with no ambiguity or randomness involved.
 
 Figure 5 shows the deterministic state machine concepts applied to the steps of a negotiation session. 
 The EUTXO model of the Cardano blockchain implies that smart contracts need an initial transaction for their logic to be activated and establish their initial state.
@@ -361,11 +356,7 @@ When a buyer presses the buy button on a product publication the website redirec
 
 \subsubsection { Mediators } 
 
-
-
-
-
-
+Mediators assigned to a disputed negotiation session will have a special section in the live chat to communicate with the buyer and the seller at the same time. The mediators have no knowledge about the seller and the buyer because they are shown as anonymous digital entities. Mediators cannot be identified by their wallet addresses because they are dynamic addresses changed by the backend.
 
 
 \end{document}
