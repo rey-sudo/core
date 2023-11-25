@@ -85,7 +85,7 @@ A negotiation session is defined as the process of trading a product for a limit
 
 \subsection { Negotiation session }
 
-The negotiation session is a 4-stage synchronous process \emph{Waiting}, \emph{Locking}, \emph{Delivery}, \emph{Finish}. A stage cannot start if the previous stage has not finished, the transitions are sequential not parallel.
+The negotiation session is a 4-stage synchronous process \emph{Waiting}, \emph{Locking}, \emph{Delivery}, \emph{Finish}. The stages of the session are sequential and not parallel.
 
 \subsubsection { Waiting }
 
@@ -158,8 +158,7 @@ Finally, the buyer confirms whether he received the product by invoking the @rec
   \label{fig:delivered}
 \end{figure}
 
-
-
+The seller receives 50 ADA of collateral and 100 ADA equivalent to the price of the product he sold to the buyer.
 
 \subsubsection { State machine }
 
@@ -175,7 +174,7 @@ A deterministic finite state machine (DFSM) is a specific type of state machine 
 \end{figure}
 
 Figure 5 shows the deterministic state machine concepts applied to the steps of a negotiation session. 
-In Cardano's EUTXO model contracts need an initial transaction to activate their design logic and establish the starting state.
+The EUTXO model of the Cardano blockchain implies that smart contracts need an initial transaction for their logic to be activated and establish their initial state.
 When the seller activates a slot his wallet deploys a plutus script that receives the collateral in ADA and necessary parameters for the session. 
 \\
 
@@ -185,7 +184,7 @@ When the seller activates a slot his wallet deploys a plutus script that receive
 \\ \hspace{55mm}cState = 0
 \\ \hspace{55mm}sLabel = ``waiting"
 \\ \hspace{55mm}tDuration = 100
-\\ \hspace{55mm}cSlot = False
+\\ \hspace{55mm}bSlot = False
 \\ \hspace{55mm}pDelivered = False
 \\ \hspace{55mm}pReceived = False
 \\\hspace{51mm}\textbraceright{} 
@@ -201,14 +200,14 @@ When the seller activates a slot his wallet deploys a plutus script that receive
 \\ \hspace{55mm}cState = 1
 \\ \hspace{55mm}sLabel = ``locking"
 \\ \hspace{55mm}tDuration = 100
-\\ \hspace{55mm}cSlot = True
+\\ \hspace{55mm}bSlot = True
 \\ \hspace{55mm}pDelivered = False
 \\ \hspace{55mm}pReceived = False
 \\\hspace{51mm}\textbraceright{} 
 \end{tabular}
 \\
 
- \emph{cSlot} represents the variable that indicates whether the script has been occupied by a buyer. The boolean value True means that the slot has been occupied by a buyer which makes the script transition from \emph{Waiting} to \emph{Locking}.
+ \emph{bSlot} represents the variable that indicates whether the script has been occupied by a buyer. The boolean value True means that the slot has been occupied by a buyer which makes the script transition from \emph{Waiting} to \emph{Locking}.
 \\
 
 \begin{tabular}{lr}
@@ -217,7 +216,7 @@ When the seller activates a slot his wallet deploys a plutus script that receive
 \\ \hspace{55mm}cState = 2
 \\ \hspace{55mm}sLabel = ``delivery"
 \\ \hspace{55mm}tDuration = 100
-\\ \hspace{55mm}cSlot = True
+\\ \hspace{55mm}bSlot = True
 \\ \hspace{55mm}pDelivered = True
 \\ \hspace{55mm}pReceived = False
 \\\hspace{51mm}\textbraceright{} 
@@ -234,7 +233,7 @@ At this point the seller has invoked the @delivered endpoint stating that he has
 \\ \hspace{55mm}cState = 3
 \\ \hspace{55mm}sLabel = ``finish"
 \\ \hspace{55mm}tDuration = 100
-\\ \hspace{55mm}cSlot = True
+\\ \hspace{55mm}bSlot = True
 \\ \hspace{55mm}pDelivered = True
 \\ \hspace{55mm}pReceived = True
 \\\hspace{51mm}\textbraceright{} 
@@ -259,7 +258,7 @@ A blind peer system can decide on a disputed trading session.
 
 Some characteristics of the profile of a mediator are:
 
-1. Mediators must stay neutral and impartial to ensure a fair and unbiased assessment of disputes, fostering trust in the mediation process for all parties involved.
+1. Mediators must stay neutral and impartial to ensure a fair and unbiased assessment of disputes fostering trust in the mediation process for all parties involved.
 
 2. Effective communication is vital for mediators, involving active listening, skillful facilitation of discussions and clear conveyance of information to aid parties in mutual understanding and resolution.
 
@@ -308,10 +307,10 @@ Master contracts do not have any information about their slaves, their function 
 
 
 The mediator pool is basically a set of \emph{PubKeyHash} each corresponding to the wallet of a certified and active mediator. 
-When @appeal is triggered by a slave the master contract mint an NFT and within the NFT datum the contract adds three (3) \emph{PubKeyHash} contained in the pool of mediators.
+When @appeal is triggered by a slave the master contract mint an NFT and within the NFTdatum the contract adds three (3) \emph{PubKeyHash} contained in the pool of mediators.
 Subsequently the contract removes those three \emph{PubKeyHash} from the pool queue.
 
-The slave receives the NFT and adds to its own datum the three \emph{PubKeyHash} that are within the NFT datum. After this process the slave has exact information about the mediators authorized to decide on the current dispute. Mediators are the only ones who can activate special @endpoints of the slave to decide the dispute.
+The slave receives the NFT and adds to its own datum the three \emph{PubKeyHash} that are within the NFTdatum. After this process the slave has exact information about the mediators authorized to decide on the current dispute. Mediators are the only ones who can activate special @endpoints of the slave to decide the dispute.
 
 
 \subsubsection { Designation } 
@@ -322,6 +321,11 @@ Only active mediators can enter the pool.
 
 \subsubsection { Rewards } 
 
-To avoid bias and inactivity, mediators are rewarded every 30 days with utility token. The amount will be decided by community governance. Only active days in the pool can be rewarded.
+To avoid bias and inactivity mediators are rewarded every 30 days with utility token. The amount will be decided by community governance. Only active days in the pool can be rewarded.
+
+\subsubsection { Penalties } 
+
+To avoid bias and inactivity mediators are rewarded every 30 days with utility token. The amount will be decided by community governance. Only active days in the pool can be rewarded.
+
 
 \end{document}
