@@ -360,4 +360,6 @@ When a buyer presses the buy button on a product publication the website redirec
 Mediators assigned to a disputed negotiation session will have a special section in the live chat to communicate with the buyer and the seller at the same time. The mediators have no knowledge about the seller and the buyer because they are shown as anonymous digital entities. Mediators cannot be identified by their wallet addresses because they are dynamic addresses changed by the backend.
 
 
+
+
 \end{document}
