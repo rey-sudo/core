@@ -25,7 +25,7 @@
      inkscape:document-units="px"
      showgrid="false"
      inkscape:zoom="8.5956232"
-     inkscape:cx="84.694266"
+     inkscape:cx="59.565198"
      inkscape:cy="10.063261"
      inkscape:window-width="1809"
      inkscape:window-height="790"
@@ -98,11 +98,5 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="triangle"
-     style="display:inline">
-    <path
-       id="rect3702-6"
-       style="font-weight:600;font-size:21.3333px;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans Semi-Bold';letter-spacing:-0.85px;display:inline;fill:none;fill-opacity:1;stroke-width:0.0000000509117;stroke-linecap:square"
-       d="M 88.040111,15.937477 106.04013,2.4374771 88.040111,20.437478 l -9,-9.000001 v 0 z"
-       sodipodi:nodetypes="cccccc" />
-  </g>
+     style="display:inline" />
 </svg>

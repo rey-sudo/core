@@ -3,7 +3,6 @@ import { baseURL, env } from './index.js';
 
 axios.defaults.withCredentials = true;
 
-
 const axiosApi = axios.create({
   baseURL: baseURL[env],
   timeout: 60000,

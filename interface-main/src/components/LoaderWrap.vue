@@ -1,7 +1,7 @@
 <template>
   <div class="p-loading">
    <div class="p-loading-wrap">
-    <span class="bars"></span>
+    <span class="bars"/>
    </div>
   </div>
 </template>

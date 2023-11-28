@@ -26,7 +26,7 @@
     <div class="header-column center">
       <div class="header-search" :class="{ scrolled: isScrolled }">
         <input :class="{ scrolled: isScrolled }" type="text" maxlength="200"
-          placeholder="Buscar productos, marcas y más..." />
+          placeholder="Search products, brands and more..." />
 
         <div><i class="pi pi-search" /></div>
       </div>

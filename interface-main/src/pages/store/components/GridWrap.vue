@@ -85,7 +85,7 @@ export default {
     handleClick(pid) {
       this.router.push({ name: "land", params: { pid: pid } });
     },
-    
+
     formatPrice(num) {
       const price = num || 0;
 
@@ -107,6 +107,9 @@ export default {
   grid-auto-rows: minmax(100px, auto);
   gap: 20px;
   padding: 0 3rem;
+  min-height: 100vh;
+  border-radius: 24px;
+  background: var(--base-a);
 }
 
 .dollar {

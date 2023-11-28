@@ -1,8 +1,8 @@
 const env = "prod"; 
 
 const baseURL = {
-  dev: "https://arkastore.dev",
-  prod: "https://arkastore.co",
+  dev: "https://pairfy.dev",
+  prod: "https://pairfy.io",
 };
 
 

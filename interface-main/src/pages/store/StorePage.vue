@@ -7,11 +7,15 @@
       <div class="store-top-menu">
         <div class="store-top-menu-col left">
           <div class="store-top-menu-button">
-            <img src="@/assets/menu.svg" alt="">
+            <img src="@/assets/menu.svg" alt="" />
           </div>
 
           <div class="store-top-menu-nav">
-            <div v-for="item in navTabs" :key="item" :class="{ active: selectedTab === item.value }">
+            <div
+              v-for="item in navTabs"
+              :key="item"
+              :class="{ active: selectedTab === item.value }"
+            >
               {{ item.label }}
             </div>
           </div>
@@ -21,17 +25,9 @@
         <div class="store-top-menu-col right"></div>
       </div>
 
-      <div class="store-top-banner">
-        <div class="store-top-banner-item">
-          <img :src="banner1" />
-        </div>
-        <div class="store-top-banner-item">
-          <img :src="banner2" />
-        </div>
-      </div>
+      <div class="store-top-banner"></div>
     </div>
 
-    <FilterWrap />
     <GridWrap />
   </div>
 </template>
@@ -54,12 +50,7 @@ export default {
     const { action__getAllProducts } = storeAPI();
 
     action__getAllProducts()
-      .then((res) =>
-        router.push({
-          name: "land",
-          params: { pid: res.response[0].items[0].pid },
-        })
-      )
+      .then(() => {})
       .catch((err) => console.error(err));
 
     return { router, action__getAllProducts };
@@ -100,56 +91,20 @@ export default {
           badgeLabel: "",
         },
       ],
-      banner1:
-        "https://http2.mlstatic.com/D_NQ_612942-MLA71945575734_092023-OO.webp",
-      banner2:
-        "https://http2.mlstatic.com/D_NQ_662196-MLA72063692845_102023-OO.webp",
     };
   },
 };
 </script>
 
 <style lang="css" scoped>
-.store-top-banner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 2rem;
-  z-index: 100;
-  padding: 0 4rem;
-  margin-top: 2rem;
-}
 
-.store-top-banner-item {
-  border-radius: 12px;
-  background: var(--base-b);
-  height: 300px;
-  gap: 2rem;
-  flex: 1;
-  min-width: 50%;
-  max-width: 100%;
-  padding: 0;
-  box-sizing: border-box;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.store-top-banner-item img {
-  display: block;
-  height: 100%;
-  object-fit: cover;
-  object-position: top;
-  width: 100%;
-  object-position: 40%;
-  opacity: 0;
-}
 
 .store {
   width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--secondary-b);
 }
 
 .store-top {
@@ -165,6 +120,15 @@ export default {
   flex-direction: column;
 }
 
+.store-top-banner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2rem;
+  z-index: 100;
+  padding: 0 4rem;
+  margin-top: 2rem;
+}
+
 .store-top-mask {
   width: inherit;
   height: inherit;
@@ -172,7 +136,7 @@ export default {
   position: absolute;
   backdrop-filter: blur(0px);
   background: linear-gradient(180deg, var(--secondary-c) 80%, transparent 100%);
-  background: var(--base-a);
+  background: var(--secondary-b);
 }
 
 .store-top-menu {
