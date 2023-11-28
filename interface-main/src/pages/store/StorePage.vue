@@ -130,7 +130,7 @@ export default {
 
 .store .store-top .store-top-menu {
   padding-left: 4rem;
-  margin-top: 74px;
+  margin-top: 82px;
   z-index: 100;
   display: flex;
   align-items: center;
