@@ -22,10 +22,6 @@
               <span> {{ item.name }}</span>
             </div>
 
-            <div class="card-body-diff">
-              <span> {{ formatPrice(item.price_diff) }} </span>
-            </div>
-
             <div class="card-body-price">
               <span> {{ formatPrice(item.price) }} </span>
             </div>
@@ -142,15 +138,6 @@ export default {
   margin-bottom: 1rem;
 }
 
-.card-body-diff {
-  font-weight: 400;
-  text-align: left;
-  margin-bottom: 0.25rem;
-  font-size: var(--text-size-a);
-  text-decoration: line-through;
-  color: var(--text-b);
-}
-
 .grid-item-title {
   font-size: var(--text-size-e);
   font-weight: 700;
@@ -167,35 +154,6 @@ export default {
   gap: 3rem;
 }
 
-.grid-row-slider {
-  width: 60px;
-  height: 60px;
-  position: absolute;
-  z-index: 100;
-  border-radius: 50%;
-  font-size: var(--text-size-d);
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-  background: transparent;
-  color: transparent;
-  transition: var(--button-transition-a);
-}
-
-.grid-row-slider:hover {
-  background: var(--base-w-a);
-  box-shadow: var(--shadow-c);
-  color: var(--text-w-a);
-}
-
-.grid-row-slider.prev {
-  left: 1rem;
-}
-
-.grid-row-slider.next {
-  right: 1rem;
-}
 
 .card {
   width: calc(300px - 2rem);
@@ -207,11 +165,12 @@ export default {
   overflow: hidden;
   cursor: pointer;
   padding: 0 1rem;
+  background: var(--base-c);
 }
 
 .card:hover {
   box-shadow: var(--shadow-c);
-  transform: translateY(-1rem);
+  transform: translateY(-0.5rem);
 }
 
 .card-body-stock {
@@ -315,7 +274,6 @@ export default {
   top: 0;
   width: 50%;
   height: 30px;
- 
 }
 
 .card-badge::before {
@@ -327,7 +285,7 @@ export default {
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
   border-right: transparent;
-  background: var(--base-c);
+  background: var(--base-a);
 }
 
 .card-badge::after {
@@ -340,7 +298,7 @@ export default {
   border-bottom-right-radius: 0px;
   border-right: transparent;
   z-index: 1;
-  background: var(--base-c);
+  background: var(--base-a);
 }
 
 @media (max-width: 768px) {

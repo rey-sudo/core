@@ -105,7 +105,6 @@ export default {
   background: black;
 }
 
-
 .store .store-top {
   width: inherit;
   height: 600px;
