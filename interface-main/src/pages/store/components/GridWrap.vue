@@ -1,9 +1,10 @@
 <template>
-  <div class="p-grid">
-    <div class="p-grid-item" v-for="row of getter__allProducts" :key="row">
-      <div class="title">{{ row.title }}</div>
+  <div class="grid">
+    <div class="grid-item" v-for="row of getter__allProducts" :key="row">
+      <div class="grid-item-title">{{ row.title }}</div>
 
-      <div class="p-grid-row">
+      <div class="grid-row">
+        <!---->
         <div
           class="card"
           v-for="item in row.items"
@@ -12,7 +13,7 @@
         >
           <div class="card-header">
             <div class="card-image">
-              <img src="@/pages/store/assets/150x150.webp" alt="" />
+              <img :src="item.image" alt="" />
             </div>
           </div>
 
@@ -26,7 +27,6 @@
             </div>
 
             <div class="card-body-price">
-              <span class="dollar">$ </span>
               <span> {{ formatPrice(item.price) }} </span>
             </div>
 
@@ -41,7 +41,7 @@
                 red: !item.stock_supply,
               }"
             >
-              <span> {{ item.stock_supply }} Disponible</span>
+              <span> {{ item.stock_supply }} Stock</span>
             </div>
 
             <div
@@ -60,10 +60,28 @@
 
           <div class="card-bottom">
             <div class="card-badge" :style="{ color: item.discount_color }">
-              <span>{{ item.discount }}{{ item.discount_label }}</span>
+              <span>{{ item.discount_label }}</span>
+              <span>
+                <svg
+                  viewBox="0 0 22 22"
+                  aria-label="badge"
+                  class="badge"
+                  width="1rem"
+                  height="1rem"
+                  role="img"
+                  fill="rgba(29,155,240,1.00)"
+                >
+                  <g>
+                    <path
+                      d="M20.396 11c-.018-.646-.215-1.275-.57-1.816-.354-.54-.852-.972-1.438-1.246.223-.607.27-1.264.14-1.897-.131-.634-.437-1.218-.882-1.687-.47-.445-1.053-.75-1.687-.882-.633-.13-1.29-.083-1.897.14-.273-.587-.704-1.086-1.245-1.44S11.647 1.62 11 1.604c-.646.017-1.273.213-1.813.568s-.969.854-1.24 1.44c-.608-.223-1.267-.272-1.902-.14-.635.13-1.22.436-1.69.882-.445.47-.749 1.055-.878 1.688-.13.633-.08 1.29.144 1.896-.587.274-1.087.705-1.443 1.245-.356.54-.555 1.17-.574 1.817.02.647.218 1.276.574 1.817.356.54.856.972 1.443 1.245-.224.606-.274 1.263-.144 1.896.13.634.433 1.218.877 1.688.47.443 1.054.747 1.687.878.633.132 1.29.084 1.897-.136.274.586.705 1.084 1.246 1.439.54.354 1.17.551 1.816.569.647-.016 1.276-.213 1.817-.567s.972-.854 1.245-1.44c.604.239 1.266.296 1.903.164.636-.132 1.22-.447 1.68-.907.46-.46.776-1.044.908-1.681s.075-1.299-.165-1.903c.586-.274 1.084-.705 1.439-1.246.354-.54.551-1.17.569-1.816zM9.662 14.85l-3.429-3.428 1.293-1.302 2.072 2.072 4.4-4.794 1.347 1.246z"
+                    ></path>
+                  </g>
+                </svg>
+              </span>
             </div>
           </div>
         </div>
+        <!---->
       </div>
     </div>
   </div>
@@ -91,7 +109,7 @@ export default {
 
       const formattedPrice = price.toLocaleString("en-US", {
         style: "currency",
-        currency: "COP",
+        currency: "ADA",
       });
 
       return formattedPrice;
@@ -101,7 +119,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.p-grid {
+.grid {
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-rows: minmax(100px, auto);
@@ -112,12 +130,7 @@ export default {
   background: var(--base-a);
 }
 
-.dollar {
-  font-size: var(--text-size-a);
-  vertical-align: top;
-}
-
-.p-grid-item {
+.grid-item {
   display: flex;
   flex-direction: column;
 }
@@ -126,33 +139,35 @@ export default {
   font-weight: 600;
   text-align: left;
   font-size: var(--text-size-c);
+  margin-bottom: 1rem;
 }
 
 .card-body-diff {
   font-weight: 400;
   text-align: left;
-  margin-top: 1rem;
+  margin-bottom: 0.25rem;
   font-size: var(--text-size-a);
   text-decoration: line-through;
   color: var(--text-b);
 }
 
-.title {
+.grid-item-title {
   font-size: var(--text-size-e);
   font-weight: 700;
   text-align: start;
-  line-height: 82px;
-  color: var(--text--a);
+  line-height: 100px;
+  color: var(--text-a);
   padding-left: 1rem;
+  letter-spacing: -0.02em;
 }
 
-.p-grid-row {
+.grid-row {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(calc(300px - 2rem), 1fr));
+  gap: 3rem;
 }
 
-.p-grid-row-slider {
+.grid-row-slider {
   width: 60px;
   height: 60px;
   position: absolute;
@@ -168,17 +183,17 @@ export default {
   transition: var(--button-transition-a);
 }
 
-.p-grid-row-slider:hover {
+.grid-row-slider:hover {
   background: var(--base-w-a);
   box-shadow: var(--shadow-c);
   color: var(--text-w-a);
 }
 
-.p-grid-row-slider.prev {
+.grid-row-slider.prev {
   left: 1rem;
 }
 
-.p-grid-row-slider.next {
+.grid-row-slider.next {
   right: 1rem;
 }
 
@@ -195,19 +210,19 @@ export default {
 }
 
 .card:hover {
-  box-shadow: var(--shadow-a);
+  box-shadow: var(--shadow-c);
   transform: translateY(-1rem);
 }
 
 .card-body-stock {
-  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   text-align: left;
   font-size: var(--text-b);
   font-size: var(--text-size-a);
 }
 
 .card-body-shipping {
-  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   text-align: left;
   font-size: var(--text-size-a);
   font-weight: 600;
@@ -244,12 +259,13 @@ export default {
 
 .card-body-name {
   color: var(--text-a);
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   text-transform: capitalize;
   text-align: left;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 1rem;
 }
 
 .card-body-upon {
@@ -257,20 +273,28 @@ export default {
   font-size: var(--text-size-a);
   text-align: left;
   font-weight: initial;
-  margin-top: 1rem;
+  margin-bottom: 0.5rem;
   text-transform: capitalize;
 }
 
 .card-bottom {
   flex-basis: 5%;
 }
+
+.badge {
+  margin-left: 0.5rem;
+}
+
 .card-badge {
   font-size: var(--text-size-a);
   height: 30px;
   position: relative;
-  color: var(--text-a);
-  font-weight: 600;
+  color: var(--text-b);
+  font-weight: 400;
   margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-badge span {
@@ -281,6 +305,7 @@ export default {
   text-align: center;
   align-items: center;
   justify-content: center;
+  z-index: 2;
 }
 
 .card-badge::before,
@@ -290,7 +315,7 @@ export default {
   top: 0;
   width: 50%;
   height: 30px;
-  background: var(--base-b);
+ 
 }
 
 .card-badge::before {
@@ -302,6 +327,7 @@ export default {
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
   border-right: transparent;
+  background: var(--base-c);
 }
 
 .card-badge::after {
@@ -313,11 +339,12 @@ export default {
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
   border-right: transparent;
-  z-index: -1;
+  z-index: 1;
+  background: var(--base-c);
 }
 
 @media (max-width: 768px) {
-  .p-grid {
+  .grid {
     grid-template-columns: 1fr;
   }
 }
