@@ -4,11 +4,11 @@ WORKDIR /interface-main
 
 COPY package.json ./
 
-RUN npm config set fetch-timeout 3600000
+RUN npm config set fetch-timeout 2900000
 
-RUN npm config set fetch-retry-maxtimeout 3600000
+RUN npm config set fetch-retry-maxtimeout 2900000
 
-RUN npm config set fetch-retry-mintimeout 3600000
+RUN npm config set fetch-retry-mintimeout 2900000
 
 RUN npm install --verbose
 
