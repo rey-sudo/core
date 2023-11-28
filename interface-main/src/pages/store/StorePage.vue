@@ -102,7 +102,7 @@ export default {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: black;
+  background: var(--secondary-b);
 }
 
 .store .store-top {
@@ -125,7 +125,7 @@ export default {
   position: absolute;
   backdrop-filter: blur(0px);
   background: linear-gradient(180deg, var(--secondary-c) 80%, transparent 100%);
-  background: black;
+  background: var(--secondary-b);
 }
 
 .store .store-top .store-top-menu {
