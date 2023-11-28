@@ -170,7 +170,7 @@ export default {
 
 .card:hover {
   box-shadow: var(--shadow-c);
-  transform: translateY(-0.5rem);
+  transform: translateY(-1rem);
 }
 
 .card-body-stock {
