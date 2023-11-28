@@ -121,10 +121,10 @@ img.scrolled {
   color: var(--text-a);
 }
 .counter.scrolled {
-  background: black;
+  background: var(--base-c);
 }
 .counter.scrolled {
-  color: var(--text-w);
+  color: var(--text-a);
 }
 
 .header-logo.scrolled {
@@ -240,6 +240,7 @@ label {
 .counter {
   background: var(--base-a);
   color: var(--text-a);
+  font-weight: 600;
   border-radius: 99px;
   text-align: center !important;
   font-size: 12px !important;

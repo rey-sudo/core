@@ -102,7 +102,7 @@ export default {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--secondary-b);
+  background: black;
 }
 
 .store .store-top {
