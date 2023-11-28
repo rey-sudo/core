@@ -1,8 +1,13 @@
 <template>
   <header class="header" :class="{ scrolled: isScrolled }">
     <div class="header-column left">
-      <img class="header-logo" :class="{ scrolled: isScrolled }" @click="reloadPage" src="@/assets/logo-white.svg"
-        alt="" />
+      <img
+        class="header-logo"
+        :class="{ scrolled: isScrolled }"
+        @click="reloadPage"
+        src="@/assets/logo-white.svg"
+        alt=""
+      />
 
       <div class="header-box left" :class="{ scrolled: isScrolled }">
         <label>🇺🇸</label>
@@ -12,7 +17,6 @@
         </div>
       </div>
 
-
       <div class="header-box left" :class="{ scrolled: isScrolled }">
         <label></label>
         <div>
@@ -20,20 +24,22 @@
           <span>Products</span>
         </div>
       </div>
-
     </div>
 
     <div class="header-column center">
       <div class="header-search" :class="{ scrolled: isScrolled }">
-        <input :class="{ scrolled: isScrolled }" type="text" maxlength="200"
-          placeholder="Search products, brands and more..." />
+        <input
+          :class="{ scrolled: isScrolled }"
+          type="text"
+          maxlength="200"
+          placeholder="Search products, brands and more..."
+        />
 
         <div><i class="pi pi-search" /></div>
       </div>
     </div>
 
     <div class="header-column right">
-
       <div class="header-box right" :class="{ scrolled: isScrolled }">
         <label></label>
         <div>
@@ -43,15 +49,15 @@
       </div>
 
       <div class="header-box right" :class="{ scrolled: isScrolled }">
-        <img src="@/assets/car.svg" alt="">
+        <img src="@/assets/car.svg" :class="{ scrolled: isScrolled }" alt="" />
         <div>
-          <span class="counter">0</span>
+          <span class="counter" :class="{ scrolled: isScrolled }">0</span>
           <span>Items</span>
         </div>
       </div>
 
       <div class="header-box right" :class="{ scrolled: isScrolled }">
-        <img src="@/assets/wallet.svg" alt="">
+        <img src="@/assets/wallet.svg" :class="{ scrolled: isScrolled }" alt="" />
         <div>
           <span>Connect</span>
           <span>Wallet</span>
@@ -102,13 +108,17 @@ header {
   color: var(--text-w);
   background: var(--secondary-a);
 }
-
+img.scrolled{
+  filter: invert(1);
+}
 .header.scrolled {
   background: var(--base-a);
   border-bottom: 1px solid var(--border-a);
   color: var(--text-a);
 }
-
+.counter.scrolled {
+  background: var(--base-c);
+}
 .header-logo.scrolled {
   filter: invert(1);
 }
@@ -127,15 +137,16 @@ header {
   border: 1px solid var(--blue);
   color: var(--text-b);
 }
+/*
+-------------------------------------
+*/
 
 .header .header-logo {
   cursor: pointer;
   height: var(--text-size-e);
 }
 
-/*
--------------------------------------
-*/
+
 .header-column {
   flex-basis: 33.33%;
 }
