@@ -121,8 +121,12 @@ img.scrolled {
   color: var(--text-a);
 }
 .counter.scrolled {
-  background: var(--base-c);
+  background: black;
 }
+.counter.scrolled {
+  color: var(--text-w);
+}
+
 .header-logo.scrolled {
   filter: invert(1);
 }
@@ -234,7 +238,7 @@ label {
 }
 
 .counter {
-  background: rgba(255, 255, 255, 1);
+  background: var(--base-a);
   color: var(--text-a);
   border-radius: 99px;
   text-align: center !important;
@@ -295,7 +299,7 @@ label {
 }
 
 @media only screen and (max-width: 600px) {
-  header{
+  header {
     padding-left: 1rem;
     padding-right: 1rem;
   }
@@ -303,7 +307,7 @@ label {
     display: none !important;
   }
 
-  .header-column.left{
+  .header-column.left {
     justify-content: space-between;
   }
 }
