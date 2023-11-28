@@ -204,4 +204,10 @@ export default {
   padding: 0 4rem;
   margin-top: 2rem;
 }
+
+@media only screen and (max-width: 600px) {
+  .store-top-menu {
+    display: none !important;
+  }
+}
 </style>

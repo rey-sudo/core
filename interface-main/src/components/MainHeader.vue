@@ -9,7 +9,7 @@
         alt=""
       />
 
-      <div class="header-box left" :class="{ scrolled: isScrolled }">
+      <div class="header-box left hide" :class="{ scrolled: isScrolled }">
         <label>🇺🇸</label>
         <div>
           <span>EN</span>
@@ -17,7 +17,7 @@
         </div>
       </div>
 
-      <div class="header-box left" :class="{ scrolled: isScrolled }">
+      <div class="header-box left hide" :class="{ scrolled: isScrolled }">
         <label></label>
         <div>
           <span>Hi, Sell</span>
@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <div class="header-column center">
+    <div class="header-column center hide">
       <div class="header-search" :class="{ scrolled: isScrolled }">
         <input
           :class="{ scrolled: isScrolled }"
@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <div class="header-column right">
+    <div class="header-column right hide">
       <div class="header-box right" :class="{ scrolled: isScrolled }">
         <label></label>
         <div>
@@ -57,7 +57,11 @@
       </div>
 
       <div class="header-box right" :class="{ scrolled: isScrolled }">
-        <img src="@/assets/wallet.svg" :class="{ scrolled: isScrolled }" alt="" />
+        <img
+          src="@/assets/wallet.svg"
+          :class="{ scrolled: isScrolled }"
+          alt=""
+        />
         <div>
           <span>Connect</span>
           <span>Wallet</span>
@@ -108,7 +112,7 @@ header {
   color: var(--text-w);
   background: var(--secondary-a);
 }
-img.scrolled{
+img.scrolled {
   filter: invert(1);
 }
 .header.scrolled {
@@ -145,7 +149,6 @@ img.scrolled{
   cursor: pointer;
   height: var(--text-size-e);
 }
-
 
 .header-column {
   flex-basis: 33.33%;
@@ -289,5 +292,19 @@ label {
   color: inherit;
   font-weight: 400;
   opacity: 0.6;
+}
+
+@media only screen and (max-width: 600px) {
+  header{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .hide {
+    display: none !important;
+  }
+
+  .header-column.left{
+    justify-content: space-between;
+  }
 }
 </style>
