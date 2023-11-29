@@ -201,6 +201,7 @@ export default {
   display: flex;
   align-items: center;
   color: var(--text-w);
+  font-weight: 600;
 }
 
 .card-body-shipping i {
@@ -247,7 +248,7 @@ export default {
   text-align: left;
   font-weight: initial;
   margin-bottom: 0.5rem;
-  font-weight: 600;
+
   text-transform: capitalize;
 }
 
