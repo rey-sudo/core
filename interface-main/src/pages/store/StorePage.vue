@@ -99,7 +99,7 @@ export default {
 <style lang="css" scoped>
 .store {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   background: black;
@@ -129,7 +129,7 @@ export default {
 }
 
 .store .store-top .store-top-menu {
-  padding-left: 4rem;
+  padding-left: 3rem;
   margin-top: 82px;
   z-index: 100;
   display: flex;

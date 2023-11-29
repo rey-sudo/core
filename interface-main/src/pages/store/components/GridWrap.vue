@@ -26,7 +26,7 @@
               <span> {{ formatPrice(item.price) }} </span>
             </div>
 
-            <div class="card-body-upon">
+            <div class="card-body-slot">
               {{ item.payment_type }}
             </div>
 
@@ -120,7 +120,7 @@ export default {
   grid-template-columns: 1fr;
   grid-auto-rows: minmax(100px, auto);
   gap: 20px;
-  padding: 0 3rem;
+  padding: 0 2rem;
   min-height: 100vh;
   border-radius: 32px;
   background: var(--base-a);
@@ -150,8 +150,8 @@ export default {
 
 .grid-row {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(calc(300px - 2rem), 1fr));
-  gap: 3rem;
+  grid-template-columns: repeat(auto-fill, minmax(calc(300px), 1fr));
+  gap: 2rem;
 }
 
 
@@ -164,8 +164,10 @@ export default {
   flex-direction: column;
   overflow: hidden;
   cursor: pointer;
-  padding: 0 1rem;
+  padding: 0 1.25rem;
+  margin: auto;
   background: var(--base-c);
+  background: linear-gradient(0deg, rgba(0,91,255,1) 0%, rgba(255,255,255,1) 80%);
 }
 
 .card:hover {
@@ -227,12 +229,13 @@ export default {
   margin-bottom: 1rem;
 }
 
-.card-body-upon {
-  color: var(--blue);
+.card-body-slot {
+  color: var(--text-a);
   font-size: var(--text-size-a);
   text-align: left;
   font-weight: initial;
   margin-bottom: 0.5rem;
+  font-weight: 600;
   text-transform: capitalize;
 }
 

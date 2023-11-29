@@ -12,7 +12,7 @@
       <div class="header-box left hide" :class="{ scrolled: isScrolled }">
         <label>🇺🇸</label>
         <div>
-          <span>EN</span>
+          <span>EN /</span>
           <span>USA</span>
         </div>
       </div>
@@ -98,8 +98,8 @@ export default {
 <style lang="css" scoped>
 header {
   padding: 1.25rem;
-  padding-left: 4rem;
-  padding-right: 4rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -121,10 +121,10 @@ img.scrolled {
   color: var(--text-a);
 }
 .counter.scrolled {
-  background: var(--base-c);
+  background: var(--secondary-b);
 }
 .counter.scrolled {
-  color: var(--text-a);
+  color: var(--text-w);
 }
 
 .header-logo.scrolled {

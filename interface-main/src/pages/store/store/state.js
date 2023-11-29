@@ -35,6 +35,79 @@ export default () => ({
           discount: 50,
           discount_label: "TheRock77",
         },
+
+        {
+          pid: "pid1",
+          name: "Waterproof hooded jacket four colors",
+          price_diff: 200,
+          price: 100,
+          image:
+            "https://ae04.alicdn.com/kf/Se7fe002864764a32a1bd005ef4bcec793/Men-Windbreaker-Military-Field-Jackets-Outerwear-Mens-Tactical-Waterproof-Pilot-Coat-Hoodie-Men-Hunting-Army-Clothes.jpg_220x220xz.jpg_.webp",
+          payment_type: "10 Slots",
+          stock_supply: 20,
+          shipping_tax: false,
+          shipping_label: "Free shipping",
+          shipping_icon: "pi user",
+          discount_color: "var(--text-b)",
+          discount: 50,
+          discount_label: "TheRock77",
+        },
+
+        {
+          pid: "pid1",
+          name: "Waterproof hooded jacket four colors",
+          price_diff: 200,
+          price: 100,
+          image:
+            "https://ae04.alicdn.com/kf/Se7fe002864764a32a1bd005ef4bcec793/Men-Windbreaker-Military-Field-Jackets-Outerwear-Mens-Tactical-Waterproof-Pilot-Coat-Hoodie-Men-Hunting-Army-Clothes.jpg_220x220xz.jpg_.webp",
+          payment_type: "10 Slots",
+          stock_supply: 20,
+          shipping_tax: false,
+          shipping_label: "Free shipping",
+          shipping_icon: "pi user",
+          discount_color: "var(--text-b)",
+          discount: 50,
+          discount_label: "TheRock77",
+        },
+
+
+
+        {
+          pid: "pid1",
+          name: "Waterproof hooded jacket four colors",
+          price_diff: 200,
+          price: 100,
+          image:
+            "https://ae04.alicdn.com/kf/Se7fe002864764a32a1bd005ef4bcec793/Men-Windbreaker-Military-Field-Jackets-Outerwear-Mens-Tactical-Waterproof-Pilot-Coat-Hoodie-Men-Hunting-Army-Clothes.jpg_220x220xz.jpg_.webp",
+          payment_type: "10 Slots",
+          stock_supply: 20,
+          shipping_tax: false,
+          shipping_label: "Free shipping",
+          shipping_icon: "pi user",
+          discount_color: "var(--text-b)",
+          discount: 50,
+          discount_label: "TheRock77",
+        },
+
+
+
+        {
+          pid: "pid1",
+          name: "Waterproof hooded jacket four colors",
+          price_diff: 200,
+          price: 100,
+          image:
+            "https://ae04.alicdn.com/kf/Se7fe002864764a32a1bd005ef4bcec793/Men-Windbreaker-Military-Field-Jackets-Outerwear-Mens-Tactical-Waterproof-Pilot-Coat-Hoodie-Men-Hunting-Army-Clothes.jpg_220x220xz.jpg_.webp",
+          payment_type: "10 Slots",
+          stock_supply: 20,
+          shipping_tax: false,
+          shipping_label: "Free shipping",
+          shipping_icon: "pi user",
+          discount_color: "var(--text-b)",
+          discount: 50,
+          discount_label: "TheRock77",
+        },
+        
       ],
     },
   ],
