@@ -134,14 +134,14 @@ export default {
   text-align: left;
   font-size: var(--text-size-c);
   margin-bottom: 1rem;
-  color: var(--text-w);
+  color: var(--text-a);
 }
 
 .grid-item-title {
   font-size: var(--text-size-e);
   font-weight: 700;
   text-align: start;
-  line-height: 100px;
+  line-height: 125px;
   color: var(--text-a);
   padding-left: 1rem;
   letter-spacing: -0.02em;
@@ -149,8 +149,8 @@ export default {
 
 .grid-row {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(calc(300px), 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
 }
 
 .card {
@@ -164,11 +164,10 @@ export default {
   cursor: pointer;
   padding: 0 1.25rem;
   margin: auto;
-  background: var(--base-c);
   background: linear-gradient(
     0deg,
-    rgba(0, 91, 255, 1) 0%,
-    rgba(255, 255, 255, 1) 80%
+    var(--base-c) 0%,
+    rgba(255, 255, 255, 1) 50%
   );
 }
 
@@ -180,7 +179,7 @@ export default {
 .card-body-stock {
   margin-bottom: 0.5rem;
   text-align: left;
-  font-size: var(--text-b);
+  color: var(--text-a);
   font-size: var(--text-size-a);
 }
 
@@ -188,10 +187,10 @@ export default {
   margin-top: 1rem;
   text-align: left;
   font-size: var(--text-size-b);
-  font-weight: 600;
+  font-weight: 100;
   display: flex;
   align-items: center;
-  color: var(--text-w);
+  color: var(--text-a);
 }
 
 .card-body-shipping {
@@ -200,7 +199,7 @@ export default {
   font-size: var(--text-size-a);
   display: flex;
   align-items: center;
-  color: var(--text-w);
+  color: var(--text-a);
   font-weight: 600;
 }
 
@@ -232,7 +231,7 @@ export default {
 }
 
 .card-body-name {
-  color: var(--text-w);
+  color: var(--text-a);
   font-size: var(--text-size-b);
   text-transform: capitalize;
   text-align: left;
@@ -243,12 +242,11 @@ export default {
 }
 
 .card-body-slot {
-  color: var(--text-w);
+  color: var(--text-a);
   font-size: var(--text-size-a);
   text-align: left;
   font-weight: initial;
   margin-bottom: 0.5rem;
-
   text-transform: capitalize;
 }
 
