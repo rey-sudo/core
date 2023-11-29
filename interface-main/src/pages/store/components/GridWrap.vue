@@ -33,24 +33,22 @@
             <div
               class="card-body-stock"
               :class="{
-                gray: item.stock_supply,
+                white: item.stock_supply,
                 red: !item.stock_supply,
               }"
             >
               <span> {{ item.stock_supply }} Stock</span>
             </div>
 
-            <div
-              class="card-body-shipping"
-              :class="{
-                green: !item.shipping_tax,
-                gray: item.shipping_tax,
-              }"
-            >
+            <div class="card-body-shipping">
               <span v-if="!shipping_tax">
                 <span> {{ item.shipping_label }}</span>
                 <i :class="item.shipping_icon" />
               </span>
+            </div>
+
+            <div class="card-body-collateral">
+              <span> {{ item.collateral }} ADA Collateral</span>
             </div>
           </div>
 
@@ -136,6 +134,7 @@ export default {
   text-align: left;
   font-size: var(--text-size-c);
   margin-bottom: 1rem;
+  color: var(--text-w);
 }
 
 .grid-item-title {
@@ -154,7 +153,6 @@ export default {
   gap: 2rem;
 }
 
-
 .card {
   width: calc(300px - 2rem);
   height: 600px;
@@ -167,7 +165,11 @@ export default {
   padding: 0 1.25rem;
   margin: auto;
   background: var(--base-c);
-  background: linear-gradient(0deg, rgba(0,91,255,1) 0%, rgba(255,255,255,1) 80%);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 91, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 80%
+  );
 }
 
 .card:hover {
@@ -182,13 +184,23 @@ export default {
   font-size: var(--text-size-a);
 }
 
+.card-body-collateral {
+  margin-top: 1rem;
+  text-align: left;
+  font-size: var(--text-size-b);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  color: var(--text-w);
+}
+
 .card-body-shipping {
   margin-bottom: 0.5rem;
   text-align: left;
   font-size: var(--text-size-a);
-  font-weight: 600;
   display: flex;
   align-items: center;
+  color: var(--text-w);
 }
 
 .card-body-shipping i {
@@ -219,7 +231,7 @@ export default {
 }
 
 .card-body-name {
-  color: var(--text-a);
+  color: var(--text-w);
   font-size: var(--text-size-b);
   text-transform: capitalize;
   text-align: left;
@@ -230,7 +242,7 @@ export default {
 }
 
 .card-body-slot {
-  color: var(--text-a);
+  color: var(--text-w);
   font-size: var(--text-size-a);
   text-align: left;
   font-weight: initial;

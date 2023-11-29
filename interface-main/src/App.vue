@@ -114,6 +114,10 @@ body {
   color: var(--text-b);
 }
 
+.white {
+  color: var(--text-w);
+}
+
 ul {
   margin: initial;
 }

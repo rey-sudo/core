@@ -117,14 +117,13 @@ img.scrolled {
 }
 .header.scrolled {
   background: var(--base-a);
-  border-bottom: 1px solid var(--border-a);
   color: var(--text-a);
 }
 .counter.scrolled {
-  background: var(--secondary-b);
+  background: var(--base-c);
 }
 .counter.scrolled {
-  color: var(--text-w);
+  color: var(--text-a);
 }
 
 .header-logo.scrolled {
