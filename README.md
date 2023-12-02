@@ -1,8 +1,11 @@
 # Pairfy marketplace
 
-🚀Star us on GitHub — Everyone can modify and use it.
+🚀 Star us on GitHub — Everyone can modify and use it.
 
-Pairfy is an electronic commerce protocol that uses smart contracts to decentralize functional requirements necessary for the processes of selling and buying a physical product. 
+Pairfy is an electronic commerce protocol that uses smart contracts to decentralize functional requirements necessary for the processes of selling and buying a physical product.
+
+
+![image](z/docs/home.png)
 
 ### Introduction
 
@@ -23,8 +26,6 @@ Peer-to-Peer cryptocurrency exchange services such as localbitcoins or binance P
 Both the buyer and seller are afforded the opportunity to present evidence or explanations supporting their case during the appeal. A mediation team at Binance reviews the appeal carefully considering the evidence and arguments put forth by both parties. Subsequently, Binance reaches a decision which may involve upholding the original trade agreement, releasing funds from escrow to the appropriate party, or taking other actions based on the specific circumstances of the dispute.
 
 The fundamental idea of Pairfy is to avoid using expensive infrastructure and oracles as a source of truth. Instead, use mediators as a source of truth in a disputed negotiation session.
-
-![image](z/docs/home.png)
 
 ## Table Of Content
 
