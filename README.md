@@ -2,7 +2,7 @@
 
 🚀 Star us on GitHub — Everyone can modify and use it.
 
-Pairfy is an electronic commerce protocol that uses smart contracts to decentralize functional requirements necessary for the processes of selling and buying a physical product.
+Pairfy is an electronic commerce protocol that uses smart contracts to decentralize functional requirements necessary for the processes of selling and buying physical products in Cardano using ADA cryptocurrency.
 
 
 ![image](z/docs/home.png)
