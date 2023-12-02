@@ -4,7 +4,6 @@
 
 Pairfy is an electronic commerce protocol that uses smart contracts to decentralize functional requirements necessary for the processes of selling and buying physical products in Cardano using ADA cryptocurrency.
 
-
 ![image](z/docs/home.png)
 
 ### Introduction
@@ -15,9 +14,9 @@ In a successful P2P negotiation the seller delivers the product and the buyer pa
 
 Pairfy aims to allow the community to sell physical products and be purchased with ADA by the same community using a **plutus P2P exchange system** based on blind mediators and trust rating.
 
-For example, the peer review system in the academic world allows a research paper to be reviewed by randomly assigned experts. A blind reviewer does not know who is the author of the paper he is reviewing and the author also does not know who the reviewers are. The system maintains confidentiality to prevent biases, ensuring a rigorous and impartial assessment. Serving as a crucial quality control mechanism, it identifies errors, provides constructive feedback to authors and contributes to the overall accuracy and reliability of research paper.
+The peer review system in the academic world allows a research paper to be reviewed by randomly assigned experts. A blind reviewer does not know who is the author of the paper he is reviewing and the author also does not know who the reviewers are. The system maintains confidentiality to prevent biases ensuring an impartial assessment. The system acts as a quality control mechanism identifying errors and providing arguments based on scientific knowledge to ensure the greatest precision and reliability of the research paper.
 
-A system of blind reviewers trained in conflict resolution can decide on a dispute in a negotiation session in the event that the buyer or seller defaults on their obligations or another problem arises that does not allow the natural conclusion of the negotiation session.
+A system of blind reviewers trained in conflict resolution can decide on a disputed negotiation session in the event that the buyer or seller defaults on their obligations or another problem arises that does not allow the natural conclusion of the negotiation session.
 
 ### P2P trading
 
