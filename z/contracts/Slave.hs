@@ -21,6 +21,10 @@ module Plutus.Contracts.Slave(
     SlaveError(..),
     SlaveSchema,
     Params(..),
+    StartParams(..),
+    LockingParams(..),
+    DeliveredParams(..),
+    ReceivedParams(..),
     contract
     ) where
 
@@ -32,6 +36,7 @@ import Data.Text (Text)
 import GHC.Generics (Generic)
 import Ledger (PaymentPubKeyHash)
 import Ledger.Tx.Constraints (TxConstraints)
+import Ledger.Tx.Constraints qualified as Constraints
 import Ledger.Typed.Scripts qualified as Scripts
 import Plutus.Contract
 import Plutus.Contract.StateMachine (AsSMContractError (..), OnChainState, State (..), Void)
@@ -46,30 +51,65 @@ import PlutusTx.Prelude hiding (Applicative (..), check)
 import Prelude qualified as Haskell
 
 data SlaveState = SlaveState
-    { cState     :: Integer
-    , sLabel     :: BuiltinByteString
-    , pDelivered :: Bool
-    , pReceived  :: Bool
-    , sWallet    :: PaymentPubKeyHash
-    , opToken    :: SM.ThreadToken
-    , pIndex     :: Integer
-    } | Finished
+    { cState      :: Integer
+    , sLabel      :: BuiltinByteString
+    , bSlot       :: Bool
+    , pDelivered  :: Bool
+    , pReceived   :: Bool
+    , sWallet     :: PaymentPubKeyHash
+    , bWallet     :: PaymentPubKeyHash
+    , pPrice      :: Ada.Ada
+    , sCollateral :: Ada.Ada
+    , mToken      :: SM.ThreadToken
+    } | Appeal | Finished
     deriving stock (Haskell.Eq, Haskell.Show, Generic)
     deriving anyclass (ToJSON, FromJSON)
 
 data Params = Params
-    { pIndex' :: Integer }
-
-
-data Input = StartSession | Locking | Delivered | Finish
+    { bWallet'     :: PaymentPubKeyHash
+    , pPrice'      :: Ada.Ada
+    , sCollateral' :: Ada.Ada
+    }
     deriving stock (Haskell.Show, Generic)
     deriving anyclass (ToJSON, FromJSON)
 
+data Input = Locking | Delivered | Received
+    deriving stock (Haskell.Show, Generic)
+    deriving anyclass (ToJSON, FromJSON)
+
+-- | Arguments for the @"start"@ endpoint
+data StartParams =
+    StartParams
+        { params :: Params
+        } deriving stock (Haskell.Show, Generic)
+          deriving anyclass (ToJSON, FromJSON)
+
+-- | Arguments for the @"locking"@ endpoint
+data LockingParams =
+    LockingParams
+        { lockingParams :: Params
+        } deriving stock (Haskell.Show, Generic)
+          deriving anyclass (ToJSON, FromJSON)
+
+-- | Arguments for the @"delivered"@ endpoint
+data DeliveredParams =
+    DeliveredParams
+        { deliveredParams :: Params
+        } deriving stock (Haskell.Show, Generic)
+          deriving anyclass (ToJSON, FromJSON)
+
+-- | Arguments for the @"received"@ endpoint
+data ReceivedParams =
+    ReceivedParams
+        { receivedParams :: Params
+        } deriving stock (Haskell.Show, Generic)
+          deriving anyclass (ToJSON, FromJSON)
+
 type SlaveSchema =
-        Endpoint "start" ()
-        .\/ Endpoint "locking" ()
-        .\/ Endpoint "delivered" ()
-        .\/ Endpoint "received" ()
+        Endpoint "start" StartParams
+        .\/ Endpoint "locking" LockingParams
+        .\/ Endpoint "delivered" DeliveredParams
+        .\/ Endpoint "received" ReceivedParams
 
 data SlaveError =
     SlaveContractError ContractError
@@ -88,20 +128,27 @@ instance AsContractError SlaveError where
 
 {-# INLINABLE transition #-}
 transition :: Params -> State SlaveState -> Input -> Maybe (TxConstraints Void Void, State SlaveState)
-transition params State{ stateData = oldData, stateValue } input = case (oldData, input) of
-    (SlaveState{sWallet, opToken, cState, pIndex}, Locking) | cState == 0                               -> Just (mempty,
-                                                                                                           State{ stateData = SlaveState { sWallet, opToken, cState = 1, pIndex }, stateValue })
+transition params State{ stateData = oldData, stateValue = oldStateValue } input = case (oldData, input) of
+    (SlaveState{cState, bWallet, pPrice}, Locking)      | cState == 0                           -> let constraints = Constraints.mustBeSignedBy bWallet
+                                                                                                       newValue   =  oldStateValue + (Ada.toValue pPrice)
+                                                                                                   in Just (constraints,
+                                                                                                      State{stateData = oldData { cState = 1
+                                                                                                                                , sLabel = "locking"
+                                                                                                                                , bSlot  = True
+                                                                                                                                }, stateValue = newValue })
 
+    (SlaveState{cState, sWallet}, Delivered)    | cState == 1                           -> let constraints = Constraints.mustBeSignedBy sWallet in
+                                                                                           Just (constraints,
+                                                                                           State{ stateData = oldData { cState = 2
+                                                                                                                      , sLabel = "delivered"
+                                                                                                                      , pDelivered = True
+                                                                                                                      }, stateValue = oldStateValue })
 
-    (SlaveState{sWallet, opToken, cState, pIndex}, Delivered) | cState == 1                             -> Just (mempty,
-                                                                                                           State{ stateData = SlaveState { sWallet, opToken, cState = 2, pIndex }, stateValue })
+    (SlaveState{cState, bWallet}, Received)     | cState == 2                           -> let constraints = Constraints.mustBeSignedBy bWallet in
+                                                                                           Just (constraints,
+                                                                                           State{ stateData = Finished, stateValue = mempty })
 
-
-    (_,      Finish)                                                                                    -> Just (mempty,
-                                                                                                           State{ stateData = Finished, stateValue = mempty })
-
-
-    _                                                                                                   -> Nothing
+    _                                                                                   -> Nothing
 
 {-# INLINABLE machine #-}
 machine :: Params -> SM.StateMachine SlaveState Input
@@ -123,30 +170,40 @@ typedValidator = V2.mkTypedValidatorParam @(SM.StateMachine SlaveState Input)
 client :: Params -> SM.StateMachineClient SlaveState Input
 client params = SM.mkStateMachineClient $ SM.StateMachineInstance (machine params) (typedValidator params)
 
-contract :: Params -> Contract () SlaveSchema SlaveError ()
-contract params = forever endpoints where
-        theClient = client params
-        endpoints = selectList [start, locking, delivered, finish]
-        start =  endpoint @"start" $ \() -> do
+initialState :: Params -> PaymentPubKeyHash -> SM.ThreadToken -> SlaveState
+initialState params pkh tt = SlaveState { cState = 0
+                                        , sLabel = "waiting"
+                                        , bSlot  = False
+                                        , pDelivered = False
+                                        , pReceived = False
+                                        , sWallet = pkh
+                                        , bWallet = bWallet' params
+                                        , pPrice = pPrice' params
+                                        , sCollateral = sCollateral' params
+                                        , mToken = tt
+                                        }
+
+contract :: Contract () SlaveSchema SlaveError ()
+contract  = forever endpoints where
+        endpoints = selectList [start, locking, delivered, received]
+        start =  endpoint @"start" $ \(StartParams{ params }) -> do
                                             pkh <- ownFirstPaymentPubKeyHash
                                             tt  <- SM.getThreadToken
-                                            let initialState = SlaveState
-                                                            { cState = 0
-                                                            , sLabel = "waiting"
-                                                            , pDelivered = False
-                                                            , pReceived = False
-                                                            , sWallet = pkh
-                                                            , opToken = tt
-                                                            , pIndex = 0
-                                                            }
-                                            void $ SM.runInitialise theClient initialState (Ada.lovelaceValueOf 1)
-                                            logInfo @Text "INITIAL STATE"
+                                            let theClient = client params
+                                            void $ SM.runInitialise theClient (initialState params pkh tt) (Ada.toValue (sCollateral' params))
+                                            logInfo @Text "[SELLER]=> @start"
 
-        locking = endpoint @"locking" $ \() -> void (SM.runStep theClient Locking)
+        locking      = endpoint @"locking" $ \(LockingParams{ lockingParams }) -> do
+                                              void (SM.runStep (client lockingParams) Locking)
+                                              logInfo @Text "[BUYER]=> @locking"
 
-        delivered = endpoint @"delivered" $ \() -> void (SM.runStep theClient Delivered)
+        delivered    = endpoint @"delivered" $ \(DeliveredParams{ deliveredParams }) -> do
+                                                void (SM.runStep (client deliveredParams) Delivered)
+                                                logInfo @Text "[SELLER] => @delivered"
 
-        finish = endpoint @"received" $ \() -> void (SM.runStep theClient Finish)
+        received     = endpoint @"received" $ \(ReceivedParams{ receivedParams }) -> do
+                                                void (SM.runStep (client receivedParams) Received)
+                                                logInfo @Text "[BUYER] => @received"
 
 
 
