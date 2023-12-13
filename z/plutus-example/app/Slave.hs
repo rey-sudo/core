@@ -190,6 +190,9 @@ initialState params pkh tt = SlaveState { cState = 0
                                         , mToken = tt
                                         }
 
+
+
+
 contract :: Params -> Contract () SlaveSchema SlaveError ()
 contract params = forever endpoints where
         theClient = client params
