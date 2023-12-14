@@ -56,15 +56,15 @@ writeSlavePlutus = writeTypedValidator "./output/slave.plutus" (S.typedValidator
 writeDatumInit :: IO ()
 writeDatumInit = 
     let initialState = S.SlaveState { cState = 0
-                              , sLabel = "waiting"
-                              , bSlot  = False
-                              , pDelivered = False
-                              , pReceived = False
-                              , sWallet = sellerWallet
-                              , bWallet = bWallet' params
-                              , pPrice = pPrice' params
-                              , sCollateral = sCollateral' params
-                           --   , mToken = tt
+                                    , sLabel = "waiting"
+                                    , bSlot  = False
+                                    , pDelivered = False
+                                    , pReceived = False
+                                    , sWallet = sellerWallet
+                                    , bWallet = bWallet' params
+                                    , pPrice = pPrice' params
+                                    , sCollateral = sCollateral' params
+                               --   , mToken = tt
                               }
     in 
         writeDataToFile "./output/slave.datum" initialState

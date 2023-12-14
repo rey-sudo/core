@@ -142,11 +142,11 @@ transition params State{ stateData = oldData, stateValue = oldStateValue } input
     (SlaveState{cState, bWallet, pPrice}, Locking)                          | cState == 0           -> let constraints = Constraints.mustBeSignedBy bWallet
                                                                                                            newValue   =  oldStateValue + (Ada.toValue pPrice)
                                                                                                        in Just (constraints,
-                                                                                                       State{stateData = oldData { cState = 1
-                                                                                                                                 , sLabel = "locking"
-                                                                                                                                 , bSlot  = True
-                                                                                                                                 }
-                                                                                                                                 , stateValue = newValue })
+                                                                                                          State{stateData = oldData { cState = 1
+                                                                                                                                    , sLabel = "locking"
+                                                                                                                                    , bSlot  = True
+                                                                                                                                    }
+                                                                                                                                    , stateValue = newValue })
 
 
     (SlaveState{cState, sWallet}, Delivered)                                | cState == 1           -> let constraints = Constraints.mustBeSignedBy sWallet
