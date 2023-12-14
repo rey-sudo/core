@@ -38,9 +38,14 @@ common maybe-Win32
 
 library
   import:          common-definitions
-  hs-source-dirs:     app
+  hs-source-dirs:     src
   exposed-modules:
     Slave
+    Deploy
+    Utilities
+    Utilities.Conversions
+    Utilities.PlutusTx
+    Utilities.Serialise    
   default-extensions:
     DeriveFoldable
     DeriveFunctor
@@ -104,6 +109,9 @@ library
     , semigroups
     , streaming
     , template-haskell
+    , time
+    , base16-bytestring
+    , cardano-crypto-class
 
   if flag(defer-plugin-errors)
     ghc-options: -fplugin-opt PlutusTx.Plugin:defer-errors
@@ -118,10 +126,10 @@ library
 
 
 
-executable plutus-example-simulate
-  main-is: Simulate.hs
+executable plutus-example-deploy
+  main-is: MainSlave.hs
   hs-source-dirs: app
-  other-modules: Contracts
+ --other-modules: Deploy.hs
   default-extensions:
     DeriveFoldable
     DeriveFunctor
@@ -211,6 +219,7 @@ executable plutus-example-simulate
     , directory
     , filepath
     , unordered-containers
+    , optparse-applicative-fork
 
   ghc-options:
     -Wall -Wnoncanonical-monad-instances -Wincomplete-uni-patterns

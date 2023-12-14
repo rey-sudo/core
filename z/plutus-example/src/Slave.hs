@@ -25,7 +25,8 @@ module Slave(
     LockingParams(..),
     DeliveredParams(..),
     ReceivedParams(..),
-    contract
+    contract,
+    typedValidator
     ) where
 
 import Control.Lens
@@ -65,6 +66,9 @@ data SlaveState = SlaveState
     deriving stock (Haskell.Eq, Haskell.Show, Generic)
     deriving anyclass (ToJSON, FromJSON)
 
+PlutusTx.unstableMakeIsData ''SlaveState
+PlutusTx.makeLift ''SlaveState
+
 data Params = Params
     { bWallet'     :: PaymentPubKeyHash
     , pPrice'      :: Ada.Ada
@@ -73,9 +77,18 @@ data Params = Params
     deriving stock (Haskell.Show, Generic)
     deriving anyclass (ToJSON, FromJSON)
 
+PlutusTx.unstableMakeIsData ''Params
+PlutusTx.makeLift ''Params
+
 data Input = Locking | Delivered | Received
     deriving stock (Haskell.Show, Generic)
     deriving anyclass (ToJSON, FromJSON)
+
+PlutusTx.unstableMakeIsData ''Input
+PlutusTx.makeLift ''Input
+
+
+
 
 -- | Arguments for the @"start"@ endpoint
 data StartParams =
@@ -174,6 +187,12 @@ typedValidator = V2.mkTypedValidatorParam @(SM.StateMachine SlaveState Input)
     where
         wrap = Scripts.mkUntypedValidator @ScriptContextV2 @SlaveState @Input
 
+
+---------------------
+
+---------------------
+
+
 client :: Params -> SM.StateMachineClient SlaveState Input
 client params = SM.mkStateMachineClient $ SM.StateMachineInstance (machine params) (typedValidator params)
 
@@ -189,9 +208,6 @@ initialState params pkh tt = SlaveState { cState = 0
                                         , sCollateral = sCollateral' params
                                         , mToken = tt
                                         }
-
-
-
 
 contract :: Params -> Contract () SlaveSchema SlaveError ()
 contract params = forever endpoints where
@@ -233,12 +249,8 @@ contract params = forever endpoints where
 
 
 
-PlutusTx.unstableMakeIsData ''SlaveState
-PlutusTx.makeLift ''SlaveState
 
-PlutusTx.unstableMakeIsData ''Params
-PlutusTx.makeLift ''Params
 
-PlutusTx.unstableMakeIsData ''Input
-PlutusTx.makeLift ''Input
+
+
 
