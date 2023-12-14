@@ -94,3 +94,5 @@ writeDataToFile filePath x = do
   writeFileJSON filePath v >>= \case
    Left err -> print $ displayError err
    Right () -> printf "Wrote data to: %s\n%s\n" filePath $ BS8.unpack $ prettyPrintJSON v
+
+

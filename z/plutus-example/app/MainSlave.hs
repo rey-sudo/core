@@ -10,4 +10,5 @@ main :: IO ()
 main = do
      _ <- writeSlavePlutus
      writeDatumInit
+     writeRedeemerLocking
      return ()

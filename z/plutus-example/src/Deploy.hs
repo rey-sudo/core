@@ -26,6 +26,8 @@ import qualified Data.ByteString.Lazy  as LBS
 import qualified Data.ByteString.Short as SBS
 import qualified Ledger      
 import qualified PlutusTx.Prelude as PlutusPrelude 
+import           Ledger.Scripts as Scripts
+import           Data.Aeson                         (encode)
 
 
 bWalletBS :: B.ByteString
@@ -65,13 +67,15 @@ writeDatumInit =
                                     , pPrice = pPrice' params
                                     , sCollateral = sCollateral' params
                                --   , mToken = tt
-                              }
-    in 
-        writeDataToFile "./output/slave.datum" initialState
+                              }                  
+    in writeDataToFile "./output/slave.datum" initialState 
 
 
 
+writeRedeemerLocking :: IO ()
+writeRedeemerLocking = writeDataToFile "./output/locking.redeemer" S.Locking
 
+        
 
 -- | Decode from hex base 16 to a base 10 bytestring is needed because
 --   that is how it is stored in the ledger onchain
