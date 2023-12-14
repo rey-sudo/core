@@ -49,7 +49,6 @@ params = S.Params { S.bWallet'     = buyerWallet
                   }
 
 
-
 writeSlavePlutus :: IO ()
 writeSlavePlutus = writeTypedValidator "./output/slave.plutus" (S.typedValidator params)
 
