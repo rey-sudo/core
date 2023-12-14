@@ -5,7 +5,7 @@ module Utilities.Serialise
   , policyToScript
   , codeToScript
   , writeCodeToFile
-  , writeValidatorToFile
+  , writeTypedValidator
   , writeScriptToFile
   , writePolicyToFile
   , writeStakeValidatorToFile
@@ -41,9 +41,7 @@ serializableToScript = PlutusScriptSerialised . BSS.toShort . BSL.toStrict . ser
 codeToScript :: CompiledCode a -> PlutusScript PlutusScriptV2
 codeToScript = serializableToScript . PlutusV2.fromCompiledCode
 
--- Serialize validator
-validatorToScript :: PlutusV2.Validator -> PlutusScript PlutusScriptV2
-validatorToScript = serializableToScript
+
 
 -- Serialize minting policy
 policyToScript :: PlutusV2.MintingPolicy -> PlutusScript PlutusScriptV2
@@ -66,10 +64,12 @@ writeCodeToFile filePath = writeScriptToFile filePath . codeToScript
 
 
 
--- Create file with compiled Plutus validator
-writeValidatorToFile :: FilePath ->  V2.TypedValidator (SM.StateMachine S.SlaveState S.Input) -> IO ()
-writeValidatorToFile filePath = writeScriptToFile filePath . validatorToScript . validatorScript
+validatorToScript :: PlutusV2.Validator -> PlutusScript PlutusScriptV2
+validatorToScript = serializableToScript
 
+
+writeTypedValidator :: FilePath ->  V2.TypedValidator a -> IO ()
+writeTypedValidator filePath = writeScriptToFile filePath . validatorToScript . validatorScript
 
 
 

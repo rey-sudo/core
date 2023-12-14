@@ -8,5 +8,5 @@ import Deploy
 
 main :: IO ()
 main = do
-     _ <- serializedScript
+     _ <- writeSlavePlutus
      return ()

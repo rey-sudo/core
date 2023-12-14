@@ -14,7 +14,7 @@ import           PlutusTx             (BuiltinData, compile, unstableMakeIsData)
 import           PlutusTx.Prelude     (Bool, Eq ((==)), Integer, traceIfFalse,
                                        ($))
 import           Prelude              (IO)
-import           Utilities            (wrapValidator, writeValidatorToFile)
+import           Utilities            (wrapValidator, writeTypedValidator)
 import           Slave                as S
 import Plutus.Script.Utils.Ada qualified as Ada
 import Wallet.Emulator.Wallet as Wallet
@@ -36,7 +36,5 @@ params = S.Params { S.bWallet'     = defaultWalletPaymentPubKeyHash
 
 
 
-
-
-serializedScript :: IO ()
-serializedScript = writeValidatorToFile "./output/slave.plutus" (S.typedValidator params)
+writeSlavePlutus :: IO ()
+writeSlavePlutus = writeTypedValidator "./output/slave.plutus" (S.typedValidator params)
