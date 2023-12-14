@@ -87,9 +87,6 @@ data Input = Locking | Delivered | Received
 PlutusTx.unstableMakeIsData ''Input
 PlutusTx.makeLift ''Input
 
-
-
-
 -- | Arguments for the @"start"@ endpoint
 data StartParams =
     StartParams
@@ -188,9 +185,7 @@ typedValidator = V2.mkTypedValidatorParam @(SM.StateMachine SlaveState Input)
         wrap = Scripts.mkUntypedValidator @ScriptContextV2 @SlaveState @Input
 
 
----------------------
-
----------------------
+-- //////////////////////////////////////////////////////////////////////////
 
 
 client :: Params -> SM.StateMachineClient SlaveState Input
