@@ -9,4 +9,5 @@ import Deploy
 main :: IO ()
 main = do
      _ <- writeSlavePlutus
+     writeDatumInit
      return ()

@@ -61,7 +61,7 @@ data SlaveState = SlaveState
     , bWallet     :: PaymentPubKeyHash
     , pPrice      :: Ada.Ada
     , sCollateral :: Ada.Ada
-    , mToken      :: SM.ThreadToken
+    --, mToken      :: SM.ThreadToken
     } | Appeal | Finished
     deriving stock (Haskell.Eq, Haskell.Show, Generic)
     deriving anyclass (ToJSON, FromJSON)
@@ -201,7 +201,7 @@ initialState params pkh tt = SlaveState { cState = 0
                                         , bWallet = bWallet' params
                                         , pPrice = pPrice' params
                                         , sCollateral = sCollateral' params
-                                        , mToken = tt
+                                       -- , mToken = tt
                                         }
 
 contract :: Params -> Contract () SlaveSchema SlaveError ()
