@@ -38,27 +38,25 @@ import           Utilities            (wrapValidator, writeTypedValidator, write
 import qualified Data.ByteString.Char8 as B
 import qualified Ledger  
 
+sellerWallet :: Wallet
+sellerWallet = knownWallet 1
 
-bWalletBS :: B.ByteString
-bWalletBS = "3f2ec097f77e4254df012d5d4d4b45e48459c6ec5795e92df30f2dbc"
+sellerWalletPPKH :: PaymentPubKeyHash
+sellerWalletPPKH = CW.paymentPubKeyHash (CW.fromWalletNumber $ CW.WalletNumber 1)
 
-sWalletBS :: B.ByteString
-sWalletBS = "484ebc54b4112e54e1f7524dbdc6bb42635648a06c297e584592e80b"
+buyerWallet :: Wallet
+buyerWallet = knownWallet 2
 
-buyerWallet :: Ledger.PaymentPubKeyHash
-buyerWallet = Ledger.PaymentPubKeyHash (Ledger.PubKeyHash $ decodeHex bWalletBS)
+buyerWalletPPKH :: PaymentPubKeyHash
+buyerWalletPPKH = CW.paymentPubKeyHash (CW.fromWalletNumber $ CW.WalletNumber 2)
 
-sellerWallet :: Ledger.PaymentPubKeyHash
-sellerWallet = Ledger.PaymentPubKeyHash (Ledger.PubKeyHash $ decodeHex sWalletBS)
-
-sellerWallet' :: Wallet
-sellerWallet' = knownWallet 1
 
 defaultParams :: S.Params
-defaultParams = S.Params { S.bWallet'     = buyerWallet
+defaultParams = S.Params { S.bWallet'     = buyerWalletPPKH
                          , S.pPrice'      = Ada.lovelaceOf 10_000_000
                          , S.sCollateral' = Ada.lovelaceOf 5_000_000
                          }
+
 
 main :: IO ()
 main = void $ Simulator.runSimulationWith handlers $ do
@@ -67,13 +65,36 @@ main = void $ Simulator.runSimulationWith handlers $ do
     shutdown <- PAB.Server.startServerDebug
     Simulator.logString @(Builtin MarketplaceContracts) "********* PAB Server is running *********"
     void $ liftIO getLine
-    cID <- Simulator.activateContract sellerWallet' SlaveContract
-    Simulator.logString @(Builtin MarketplaceContracts) $ "wallet = " ++ show sellerWallet' ++ " CID: " ++ show cID
+
+    sellerCID <- Simulator.activateContract sellerWallet SlaveContract
+    Simulator.logString @(Builtin MarketplaceContracts) $ "wallet = " ++ show sellerWallet ++ " CID: " ++ show sellerCID
 
     let sp  = S.StartParams { S.startParams = defaultParams }
    
-    void $ Simulator.callEndpointOnInstance cID "start" sp
+    void $ Simulator.callEndpointOnInstance sellerCID "start" sp
     Simulator.waitNSlots 2
+
+    buyerCID <- Simulator.activateContract buyerWallet SlaveContract
+    Simulator.logString @(Builtin MarketplaceContracts) $ "wallet = " ++ show buyerWallet ++ " CID: " ++ show buyerCID
+    Simulator.waitNSlots 2
+    
+    let lockingInput  = S.LockingParams { S.lockingParams = defaultParams }
+
+    void $ Simulator.callEndpointOnInstance buyerCID "locking" lockingInput
+    Simulator.waitNSlots 2
+
+    Simulator.logString @(Builtin MarketplaceContracts) "//////////////////////////////////////"
+
+    
+    let deliveredInput  = S.DeliveredParams { S.deliveredParams = defaultParams }
+
+
+    void $ Simulator.callEndpointOnInstance sellerCID "delivered" deliveredInput
+    Simulator.waitNSlots 2
+
+    shutdown
+
+
     
 
 
