@@ -67,14 +67,15 @@ main = void $ Simulator.runSimulationWith handlers $ do
     shutdown <- PAB.Server.startServerDebug
     Simulator.logString @(Builtin MarketplaceContracts) "********* PAB Server is running *********"
     void $ liftIO getLine
-    cidInit <- Simulator.activateContract sellerWallet' SlaveContract
-    Simulator.logString @(Builtin MarketplaceContracts) $ "wallet = " ++ show sellerWallet'
-    
+    cID <- Simulator.activateContract sellerWallet' SlaveContract
+    Simulator.logString @(Builtin MarketplaceContracts) $ "wallet = " ++ show sellerWallet' ++ " CID: " ++ show cID
+
     let sp  = S.StartParams { S.startParams = defaultParams }
    
-    void $ Simulator.callEndpointOnInstance cidInit "start" sp
+    void $ Simulator.callEndpointOnInstance cID "start" sp
     Simulator.waitNSlots 2
     
+
 
 
 
