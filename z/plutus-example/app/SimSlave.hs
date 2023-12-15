@@ -45,13 +45,11 @@ bWalletBS = "3f2ec097f77e4254df012d5d4d4b45e48459c6ec5795e92df30f2dbc"
 sWalletBS :: B.ByteString
 sWalletBS = "484ebc54b4112e54e1f7524dbdc6bb42635648a06c297e584592e80b"
 
-
 buyerWallet :: Ledger.PaymentPubKeyHash
 buyerWallet = Ledger.PaymentPubKeyHash (Ledger.PubKeyHash $ decodeHex bWalletBS)
 
 sellerWallet :: Ledger.PaymentPubKeyHash
 sellerWallet = Ledger.PaymentPubKeyHash (Ledger.PubKeyHash $ decodeHex sWalletBS)
-
 
 sellerWallet' :: Wallet
 sellerWallet' = knownWallet 1
@@ -76,7 +74,7 @@ main = void $ Simulator.runSimulationWith handlers $ do
    
     void $ Simulator.callEndpointOnInstance cidInit "start" sp
     Simulator.waitNSlots 2
-
+    
 
 
 

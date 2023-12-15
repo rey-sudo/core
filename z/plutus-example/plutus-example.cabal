@@ -127,7 +127,7 @@ library
 
 
 executable plutus-example-deploy
-  main-is: MainSlave.hs
+  main-is: RunSlave.hs
   hs-source-dirs: app
  --other-modules: Deploy.hs
   default-extensions:
