@@ -173,11 +173,11 @@ executable plutus-example-deploy
     , plutus-example
     , plutus-contract-model    >=1.1.0    
     , plutus-contract-certification  >=1.1.0    
-    , freer-extras                   >=1.1.0
     , quickcheck-contractmodel     >=0.1.4.0
     , quickcheck-dynamic           >=3.0.2    
     , plutus-script-utils >=1.2.0
     , plutus-pab
+      
     
   if !(impl(ghcjs) || os(ghcjs))
     build-depends: plutus-tx-plugin >=1.0.0
@@ -194,7 +194,6 @@ executable plutus-example-deploy
     , text
     , transformers
     , transformers-except
-    , freer-simple
     , hashable
     , lens
     , openapi3
@@ -220,6 +219,10 @@ executable plutus-example-deploy
     , filepath
     , unordered-containers
     , optparse-applicative-fork
+    , req ^>= 3.9.0
+    , freer-extras                   >=1.1.0
+    , freer-simple
+
 
   ghc-options:
     -Wall -Wnoncanonical-monad-instances -Wincomplete-uni-patterns
