@@ -32,14 +32,35 @@ import qualified Plutus.PAB.Simulator                as Simulator
 import qualified Plutus.PAB.Webserver.Server         as PAB.Server
 import           Wallet.Emulator.Wallet              (Wallet, knownWallet)
 import           Contracts                           (MarketplaceContracts(..))
-import           Deploy                              as D
-import           Slave                as S
-import Plutus.Script.Utils.Ada qualified as Ada
+import           Slave                               as S
+import           Plutus.Script.Utils.Ada qualified as Ada
+import           Utilities            (wrapValidator, writeTypedValidator, writeDataToFile, decodeHex)
+import qualified Data.ByteString.Char8 as B
+import qualified Ledger  
+
+
+bWalletBS :: B.ByteString
+bWalletBS = "3f2ec097f77e4254df012d5d4d4b45e48459c6ec5795e92df30f2dbc"
+
+sWalletBS :: B.ByteString
+sWalletBS = "484ebc54b4112e54e1f7524dbdc6bb42635648a06c297e584592e80b"
+
+
+buyerWallet :: Ledger.PaymentPubKeyHash
+buyerWallet = Ledger.PaymentPubKeyHash (Ledger.PubKeyHash $ decodeHex bWalletBS)
+
+sellerWallet :: Ledger.PaymentPubKeyHash
+sellerWallet = Ledger.PaymentPubKeyHash (Ledger.PubKeyHash $ decodeHex sWalletBS)
 
 
 sellerWallet' :: Wallet
 sellerWallet' = knownWallet 1
 
+defaultParams :: S.Params
+defaultParams = S.Params { S.bWallet'     = buyerWallet
+                         , S.pPrice'      = Ada.lovelaceOf 10_000_000
+                         , S.sCollateral' = Ada.lovelaceOf 5_000_000
+                         }
 
 main :: IO ()
 main = void $ Simulator.runSimulationWith handlers $ do
@@ -51,10 +72,35 @@ main = void $ Simulator.runSimulationWith handlers $ do
     cidInit <- Simulator.activateContract sellerWallet' SlaveContract
     Simulator.logString @(Builtin MarketplaceContracts) $ "wallet = " ++ show sellerWallet'
     
-    let sp  = S.StartParams { S.startParams = D.params }
+    let sp  = S.StartParams { S.startParams = defaultParams }
    
     void $ Simulator.callEndpointOnInstance cidInit "start" sp
     Simulator.waitNSlots 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 handlers :: SimulatorEffectHandlers (Builtin MarketplaceContracts)

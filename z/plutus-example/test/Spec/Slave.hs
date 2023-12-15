@@ -25,7 +25,7 @@ params = Slave.Params { Slave.bWallet'     = mockWalletPaymentPubKeyHash w2
 
 theContract :: Contract () SlaveSchema SlaveError ()
 theContract = do
-            void $ Slave.contract params
+            void $ Slave.contract
 
 startParams :: Slave.StartParams
 startParams = Slave.StartParams { Slave.startParams = params }

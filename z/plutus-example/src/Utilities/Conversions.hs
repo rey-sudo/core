@@ -12,6 +12,7 @@ module Utilities.Conversions
   , bytesFromHex
   , bytesToHex
   , tryReadAddress
+  , decodeHex
   ) where
 
 import qualified Cardano.Api                 as Api
@@ -40,6 +41,12 @@ import qualified Plutus.V2.Ledger.Api        as Plutus
 import           PlutusTx.Builtins           (toBuiltin)
 import           PlutusTx.Builtins.Internal  (BuiltinByteString (..))
 import           Utilities.Serialise         (policyToScript, validatorToScript)
+import qualified Data.ByteString.Char8 as B
+import qualified Data.ByteString.Base16 as B16
+import qualified Data.ByteString.Lazy  as LBS
+import qualified Data.ByteString.Short as SBS
+import qualified PlutusTx.Prelude as PlutusPrelude 
+
 
 hashScript :: Api.PlutusScript Api.PlutusScriptV2 -> Api.ScriptHash
 hashScript = Api.hashScript . Api.PlutusScript Api.PlutusScriptV2
@@ -103,3 +110,15 @@ tryReadAddress x = case Api.deserialiseAddress Api.AsAddressAny $ pack x of
         , Plutus.addressStakingCredential = stakeReferenceLedgerToPlutus s
         }
 
+-- | Decode from hex base 16 to a base 10 bytestring is needed because
+--   that is how it is stored in the ledger onchain
+decodeHex :: B.ByteString -> PlutusPrelude.BuiltinByteString
+decodeHex hexBS =    
+         case getTx of
+            Right decHex -> do
+                PlutusPrelude.toBuiltin(decHex)  
+            Left _ -> do
+                PlutusPrelude.emptyByteString 
+                
+        where        
+            getTx :: Either String B.ByteString = B16.decode hexBS

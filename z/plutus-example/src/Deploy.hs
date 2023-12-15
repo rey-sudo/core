@@ -13,7 +13,7 @@ import           PlutusTx                           (Data (..))
 import qualified PlutusTx
 import qualified PlutusTx.AssocMap as AssocMap
 import qualified PlutusTx.Prelude as PlutusPrelude 
-import           Utilities            (wrapValidator, writeTypedValidator, writeDataToFile)
+import           Utilities            (wrapValidator, writeTypedValidator, writeDataToFile, decodeHex)
 import           Slave                as S
 import Plutus.Script.Utils.Ada qualified as Ada
 import Wallet.Emulator.Wallet as Wallet
@@ -95,15 +95,3 @@ writeDatumLocking =
     in writeDataToFile "./output/locking.datum" lockingState
        
 
--- | Decode from hex base 16 to a base 10 bytestring is needed because
---   that is how it is stored in the ledger onchain
-decodeHex :: B.ByteString -> PlutusPrelude.BuiltinByteString
-decodeHex hexBS =    
-         case getTx of
-            Right decHex -> do
-                PlutusPrelude.toBuiltin(decHex)  
-            Left _ -> do
-                PlutusPrelude.emptyByteString 
-                
-        where        
-            getTx :: Either String B.ByteString = B16.decode hexBS
