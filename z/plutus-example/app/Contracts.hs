@@ -19,7 +19,7 @@ import           Data.Aeson                             (FromJSON (..), ToJSON (
 import qualified Data.OpenApi                           as OpenApi
 import           GHC.Generics                           (Generic)
 import           Prettyprinter                          (Pretty (..), viaShow)
-import           Slave                                  as SlaveContract
+import           Slave                                  as S
 import qualified Plutus.PAB.Effects.Contract.Builtin    as Builtin
 import           Prelude                                hiding (init)
 
@@ -39,6 +39,6 @@ instance Builtin.HasDefinitions MarketplaceContracts where
     getDefinitions = [ SlaveContract, MasterContract ]
    
     getContract = \case
-        SlaveContract    -> Builtin.SomeBuiltin SlaveContract.contract
+        SlaveContract    -> Builtin.SomeBuiltin S.contract
      
      

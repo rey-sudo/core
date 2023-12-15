@@ -11,4 +11,5 @@ main = do
      _ <- writeSlavePlutus
      writeDatumInit
      writeRedeemerLocking
+     writeDatumLocking
      return ()

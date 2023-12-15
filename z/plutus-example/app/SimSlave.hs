@@ -23,16 +23,13 @@ import           Data.Default                        (def)
 import qualified Data.Monoid                         as Monoid
 import           Ledger.Address                      (Address, PaymentPubKeyHash, pubKeyHashAddress)
 import           Ledger.CardanoWallet   qualified as CW
-import           OffChain
-import qualified Ledger.TimeSlot                     as TimeSlot
-import           Contracts                       (MarketplaceContracts(..))
 import           Plutus.PAB.Effects.Contract.Builtin (Builtin, BuiltinHandler(contractHandler))
 import qualified Plutus.PAB.Effects.Contract.Builtin as Builtin
 import           Plutus.PAB.Simulator                (SimulatorEffectHandlers)
 import qualified Plutus.PAB.Simulator                as Simulator
 import qualified Plutus.PAB.Webserver.Server         as PAB.Server
-import qualified Plutus.V1.Ledger.Slot               as Slot 
 import           Wallet.Emulator.Wallet              (Wallet, knownWallet)
+import           Contracts                       (MarketplaceContracts(..))
 
 
 defaultWallet :: Wallet
@@ -45,6 +42,8 @@ main = void $ Simulator.runSimulationWith handlers $ do
     shutdown <- PAB.Server.startServerDebug
     Simulator.logString @(Builtin MarketplaceContracts) "********* PAB Server is running *********"
 
-handlers :: SimulatorEffectHandlers (Builtin MarketplaceContracts)
-handlers = Simulator.mkSimulatorHandlers def def $ interpret (contractHandler Builtin.handleBuiltin)    
 
+handlers :: SimulatorEffectHandlers (Builtin MarketplaceContracts)
+handlers =
+    Simulator.mkSimulatorHandlers def
+    $ interpret (contractHandler Builtin.handleBuiltin)

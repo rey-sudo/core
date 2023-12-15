@@ -323,3 +323,102 @@ test-suite plutus-example-test
     , cardano-cli:cardano-cli                >=1.35
     , cardano-node:cardano-node              >=1.35
     , cardano-submit-api:cardano-submit-api  >=1.35
+
+
+
+
+executable plutus-example-simulate-slave
+  import:             common-definitions
+  hs-source-dirs:     app
+  main-is:            SimSlave.hs
+  type:               exitcode-stdio-1.0
+  default-extensions: ImportQualifiedPost
+
+  --------------------------
+  -- IOG dependencies
+  --------------------------
+  build-depends:
+    , cardano-api              >=1.35
+    , cardano-cli              >=1.35
+    , cardano-binary    
+    , cardano-ledger-alonzo
+    , cardano-prelude
+    , hedgehog-extras
+    , cardano-ledger-babbage
+    , cardano-ledger-core
+    , cardano-ledger-shelley
+    , cardano-ledger-shelley-ma    
+    , cardano-slotting
+    , ouroboros-consensus
+    , ouroboros-consensus-cardano    
+    , ouroboros-network
+    , plutus-ledger-api        >=1.0.0
+    , plutus-tx                >=1.0.0
+    , plutus-tx-plugin         >=1.0.0
+    , cardano-node-emulator    >=1.2.0
+    , plutus-chain-index-core  >=1.2.0
+    , plutus-contract          >=1.2.0
+    , plutus-ledger            >=1.2.0
+    , plutus-script-utils      >=1.2.0
+    , plutus-tx-constraints    >=1.2.0  
+    , plutus-core              >=1.0.0   
+    , plutus-example
+    , plutus-contract-model    >=1.1.0    
+    , plutus-contract-certification  >=1.1.0    
+    , freer-extras                   >=1.1.0
+    , quickcheck-contractmodel     >=0.1.4.0
+    , quickcheck-dynamic           >=3.0.2    
+    , plutus-script-utils >=1.2.0
+    , plutus-pab
+
+  if !(impl(ghcjs) || os(ghcjs))
+    build-depends: plutus-tx-plugin >=1.0.0
+  ------------------------
+  -- Non-IOG dependencies
+  ------------------------
+  build-depends:
+    , aeson
+    , bytestring
+    , base16-bytestring    
+    , containers
+    , serialise
+    , strict-containers
+    , text
+    , transformers
+    , transformers-except
+    , freer-simple
+    , hashable
+    , lens
+    , openapi3
+    , prettyprinter
+    , semigroups
+    , streaming
+    , template-haskell
+    , base               >=4.9     && <5
+    , data-default
+    , foldl
+    , mmorph
+    , mtl
+    , pretty
+    , QuickCheck
+    , tasty
+    , tasty-golden
+    , hedgehog
+    , tasty-hedgehog     >=0.2.0.0
+    , tasty-hunit
+    , tasty-quickcheck
+    , time
+    , directory
+    , filepath
+    , unordered-containers
+
+  ghc-options:
+    -Wall -Wnoncanonical-monad-instances -Wincomplete-uni-patterns
+    -Wincomplete-record-updates -Wredundant-constraints -Widentities
+    -rtsopts -fobject-code -fno-ignore-interface-pragmas
+    -fno-omit-interface-pragmas 
+
+  build-tool-depends:
+    , cardano-cli:cardano-cli                >=1.35
+    , cardano-node:cardano-node              >=1.35
+    , cardano-submit-api:cardano-submit-api  >=1.35

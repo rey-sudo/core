@@ -204,26 +204,26 @@ initialState params pkh tt = SlaveState { cState = 0
                                        -- , mToken = tt
                                         }
 
-contract :: Params -> Contract () SlaveSchema SlaveError ()
-contract params = forever endpoints where
-        theClient = client params
-        endpoints = selectList [start, locking, delivered, received]
-        start =  endpoint @"start" $ \(StartParams{ startParams }) -> do
+contract :: Contract () SlaveSchema SlaveError ()
+contract = forever endpoints where
+        endpoints      = selectList [start, locking, delivered, received]
+        start          = endpoint @"start" $ \(StartParams{ startParams }) -> do
                                             pkh <- ownFirstPaymentPubKeyHash
                                             tt  <- SM.getThreadToken
-                                            void $ SM.runInitialise theClient (initialState params pkh tt) (Ada.toValue (sCollateral' params))
+                                            let theClient = client startParams
+                                            void $ SM.runInitialise theClient (initialState startParams pkh tt)  (Ada.toValue (sCollateral' startParams))
                                             logInfo @Text "Seller:start"
 
-        locking      = endpoint @"locking" $ \(LockingParams{ lockingParams }) -> do
-                                                    void (SM.runStep theClient Locking)
+        locking        = endpoint @"locking" $ \(LockingParams{ lockingParams }) -> do
+                                                    void (SM.runStep (client lockingParams) Locking)
                                                     logInfo @Text "Buyer:locking"
 
-        delivered    = endpoint @"delivered" $ \(DeliveredParams{ deliveredParams }) -> do
-                                                    void (SM.runStep theClient Delivered)
+        delivered      = endpoint @"delivered" $ \(DeliveredParams{ deliveredParams }) -> do
+                                                    void (SM.runStep (client deliveredParams) Delivered)
                                                     logInfo @Text "Seller:delivered"
 
-        received     = endpoint @"received" $ \(ReceivedParams{ receivedParams }) -> do
-                                                    void (SM.runStep theClient Received)
+        received       = endpoint @"received" $ \(ReceivedParams{ receivedParams }) -> do
+                                                    void (SM.runStep (client receivedParams) Received)
                                                     logInfo @Text "Buyer:received"
 
 

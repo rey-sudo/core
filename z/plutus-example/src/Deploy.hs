@@ -67,7 +67,8 @@ writeDatumInit =
                                     , pPrice = pPrice' params
                                     , sCollateral = sCollateral' params
                                --   , mToken = tt
-                              }                  
+                              }     
+                                           
     in writeDataToFile "./output/slave.datum" initialState 
 
 
@@ -75,7 +76,24 @@ writeDatumInit =
 writeRedeemerLocking :: IO ()
 writeRedeemerLocking = writeDataToFile "./output/locking.redeemer" S.Locking
 
-        
+
+
+writeDatumLocking :: IO ()
+writeDatumLocking = 
+    let lockingState = S.SlaveState { cState = 1
+                                    , sLabel = "locking"
+                                    , bSlot  = True
+                                    , pDelivered = False
+                                    , pReceived = False
+                                    , sWallet = sellerWallet
+                                    , bWallet = bWallet' params
+                                    , pPrice = pPrice' params
+                                    , sCollateral = sCollateral' params
+                               --   , mToken = tt
+                              }  
+
+    in writeDataToFile "./output/locking.datum" lockingState
+       
 
 -- | Decode from hex base 16 to a base 10 bytestring is needed because
 --   that is how it is stored in the ledger onchain
