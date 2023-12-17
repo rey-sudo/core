@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 cardano-node run \
-    --config testnet/testnet-config.json \
-    --topology testnet/testnet-topology.json \
+    --config testnet/config.json \
+    --topology testnet/topology.json \
     --database-path testnet/db \
     --socket-path testnet/node.sock \
-    --port 3003
+    --port 9082

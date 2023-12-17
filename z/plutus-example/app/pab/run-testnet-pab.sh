@@ -2,6 +2,7 @@
 
 
 #cabal exec plutus-example-deploy -- --config app/pab/testnet/pab-config.yml migrate
+#root path
 cabal exec plutus-example-deploy -- --config app/pab/testnet/pab-config.yml webserver --log-config app/pab/loggin.yaml
 
 
