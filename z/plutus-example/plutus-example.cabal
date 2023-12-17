@@ -129,7 +129,7 @@ library
 executable plutus-example-deploy
   main-is: RunSlave.hs
   hs-source-dirs: app
- --other-modules: Deploy.hs
+  other-modules: Contracts
   default-extensions:
     DeriveFoldable
     DeriveFunctor
@@ -177,8 +177,8 @@ executable plutus-example-deploy
     , quickcheck-dynamic           >=3.0.2    
     , plutus-script-utils >=1.2.0
     , plutus-pab
+
       
-    
   if !(impl(ghcjs) || os(ghcjs))
     build-depends: plutus-tx-plugin >=1.0.0
   ------------------------
@@ -229,7 +229,11 @@ executable plutus-example-deploy
     -Wincomplete-record-updates -Wredundant-constraints -Widentities
     -rtsopts -fobject-code -fno-ignore-interface-pragmas
     -fno-omit-interface-pragmas 
-
+    
+  build-tool-depends:
+    , cardano-cli:cardano-cli                >=1.35
+    , cardano-node:cardano-node              >=1.35
+    , cardano-submit-api:cardano-submit-api  >=1.35
 
 
 test-suite plutus-example-test
