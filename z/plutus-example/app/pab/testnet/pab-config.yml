@@ -15,7 +15,7 @@ sqliteDB:
 
 pabWebserverConfig:
   baseUrl: http://localhost:9080
-  staticDir: plutus-pab-client/dist
+  staticDir: .
   permissiveCorsPolicy: False
   # Optional timeout (in seconds) for calls to endpoints that are not currently
   # available. If this is not set, calls to unavailable endpoints fail
@@ -41,7 +41,7 @@ nodeServerConfig:
     nscBaseUrl: http://localhost:9082
     nscSocketPath: app/pab/testnet/node.sock
     nscKeptBlocks: 100000
-    nscNetworkId: 1097911063
+    nscNetworkId: 2
     nscSlotConfig:
       scSlotZeroTime: 1596059091000 # Wednesday, July 29, 2020 21:44:51 - shelley launch time in milliseconds
       scSlotLength: 1000 # In milliseconds
