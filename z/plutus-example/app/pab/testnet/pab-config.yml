@@ -1,6 +1,6 @@
 # Configuration for an SQLite file
 sqliteDB:
-  dbConfigFile: app/pab/testnet/sqlite/pabtestnet.db
+  dbConfigFile: pabtestnet.db
   dbConfigPoolSize: 20
 
 
@@ -40,7 +40,7 @@ nodeServerConfig:
   pscNodeServerConfig:
     nscBaseUrl: http://localhost:9082
     nscSocketPath: app/pab/testnet/node.sock
-    nscKeptBlocks: 100000
+    nscKeptBlocks: 2160
     nscNetworkId: 2
     nscSlotConfig:
       scSlotZeroTime: 1596059091000 # Wednesday, July 29, 2020 21:44:51 - shelley launch time in milliseconds
@@ -91,5 +91,5 @@ developmentOptions:
 
 # Optional EKG Server Config
 # ----
-# monitoringConfig:
-#   monitoringPort: 9090
+monitoringConfig:
+  monitoringPort: 9090
