@@ -81,11 +81,11 @@ metadataServerConfig:
   mdBaseUrl: http://localhost:9085
 
 developmentOptions:
-  pabRollbackHistory: null
+  pabRollbackHistory: 1
   pabResumeFrom:
     { "tag" : "Point"
-    , "pointBlockId" : "3d7f60b6043c1d639330d15d17dd6b93deb8fc49ac5d73eaadf979f468144954"
-    , "pointSlot" : { "getSlot" : 36305087 }
+    , "pointBlockId" : "3bca118d811d628c22f0b2372b004d39756a5e142cfd204aa5d76289b2c2d438"
+    , "pointSlot" : { "getSlot" : 36351879 }
     }
 
 
