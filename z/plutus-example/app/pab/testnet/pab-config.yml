@@ -1,17 +1,17 @@
 # Configuration for an SQLite file
-sqliteDB:
-  dbConfigFile: pabtestnet.db
+#sqliteDB:
+#  dbConfigFile: pabtestnet.db
+#  dbConfigPoolSize: 20
+
+
+postgresDB:
+  dbConfigUser: postgres
+  dbConfigPass: pairfymarketplace
+  dbConfigHost: 127.0.0.1
+  dbConfigPort: 5432
+  dbConfigDatabase: pabtestnet
   dbConfigPoolSize: 20
-
-
-#postgresDB:
- # dbConfigUser: debian
- # dbConfigPass: pairfy-marketplace
- # dbConfigHost: 127.0.0.1
-  #dbConfigPort: 5432
-  #dbConfigDatabase: pabtestnet
- # dbConfigPoolSize: 20
- # dbConfigMarconiFile: marconi.sqlite
+  dbConfigMarconiFile: marconi.sqlite
 
 pabWebserverConfig:
   baseUrl: http://localhost:9080
@@ -40,7 +40,7 @@ nodeServerConfig:
   pscNodeServerConfig:
     nscBaseUrl: http://localhost:9082
     nscSocketPath: app/pab/testnet/node.sock
-    nscKeptBlocks: 2160
+    nscKeptBlocks: 1
     nscNetworkId: 2
     nscSlotConfig:
       scSlotZeroTime: 1596059091000 # Wednesday, July 29, 2020 21:44:51 - shelley launch time in milliseconds
@@ -83,13 +83,16 @@ metadataServerConfig:
 developmentOptions:
   pabRollbackHistory: null
   pabResumeFrom:
-    { "tag" : "PointAtGenesis" }
-    # { "tag" : "Point"
-    # , "pointBlockId" : "613d23b8df670e3692f4e4ab59b179778519de15999ee1a51077fcc02a48abaa"
-    # , "pointSlot" : { "getSlot" : 45656608 }
-    # }
+    { "tag" : "Point"
+    , "pointBlockId" : "3d7f60b6043c1d639330d15d17dd6b93deb8fc49ac5d73eaadf979f468144954"
+    , "pointSlot" : { "getSlot" : 36305087 }
+    }
+
 
 # Optional EKG Server Config
 # ----
+#  { "tag" : "PointAtGenesis" }
+
+
 monitoringConfig:
   monitoringPort: 9090

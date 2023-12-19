@@ -7,12 +7,21 @@ cabal exec plutus-example-deploy -- --verbose \
 
 
 #root path
+
+
+
 cabal exec plutus-example-deploy -- --verbose \
     --config app/pab/testnet/pab-config.yml \
     --log-config app/pab/loggin.yaml \
-    --ekg \
     webserver
  
+
+
+
+
+
 #    --memory \
 
+#     --ekg \
 
+#    --rollback-history 1000 \

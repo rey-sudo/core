@@ -228,7 +228,7 @@ executable plutus-example-deploy
     -Wall -Wnoncanonical-monad-instances -Wincomplete-uni-patterns
     -Wincomplete-record-updates -Wredundant-constraints -Widentities
     -rtsopts -fobject-code -fno-ignore-interface-pragmas
-    -fno-omit-interface-pragmas 
+    -fno-omit-interface-pragmas -threaded
     
   build-tool-depends:
     , cardano-cli:cardano-cli                >=1.35
