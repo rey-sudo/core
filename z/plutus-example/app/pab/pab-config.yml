@@ -38,10 +38,10 @@ walletServerConfig:
 nodeServerConfig:
   pscNodeMode: AlonzoNode
   pscNodeServerConfig:
-    nscBaseUrl: http://localhost:9082
-    nscSocketPath: app/pab/testnet/node.sock
+    nscBaseUrl: http://localhost:3003
+    nscSocketPath: app/pab/devnet/private-testnet/node-bft1/node.sock
     nscKeptBlocks: 1
-    nscNetworkId: 2
+    nscNetworkId: 42
     nscSlotConfig:
       scSlotZeroTime: 1596059091000 # Wednesday, July 29, 2020 21:44:51 - shelley launch time in milliseconds
       scSlotLength: 1000 # In milliseconds
@@ -83,10 +83,11 @@ metadataServerConfig:
 developmentOptions:
   pabRollbackHistory: 1
   pabResumeFrom:
-    { "tag" : "Point"
-    , "pointBlockId" : "3bca118d811d628c22f0b2372b004d39756a5e142cfd204aa5d76289b2c2d438"
-    , "pointSlot" : { "getSlot" : 36351879 }
-    }
+    { "tag" : "PointAtGenesis" }  
+#    { "tag" : "Point"
+#    , "pointBlockId" : "3bca118d811d628c22f0b2372b004d39756a5e142cfd204aa5d76289b2c2d438"
+#    , "pointSlot" : { "getSlot" : 36351879 }
+#    }
 
 
 # Optional EKG Server Config
