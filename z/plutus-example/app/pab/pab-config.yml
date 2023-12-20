@@ -50,12 +50,7 @@ nodeServerConfig:
       - getWallet: 2
       - getWallet: 3
       - getWallet: 4
-      - getWallet: 5
-      - getWallet: 6
-      - getWallet: 7
-      - getWallet: 8
-      - getWallet: 9
-      - getWallet: 10
+
 
 
   # Which cardano-node to use
