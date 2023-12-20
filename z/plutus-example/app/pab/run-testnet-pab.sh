@@ -12,7 +12,7 @@ cabal exec plutus-example-deploy -- --verbose \
 
 cabal exec plutus-example-deploy -- --verbose \
     --config app/pab/pab-config.yml \
-    --log-config app/pab/loggin.yaml \
+    --log-config app/pab/log-config.yaml \
     webserver
  
 
