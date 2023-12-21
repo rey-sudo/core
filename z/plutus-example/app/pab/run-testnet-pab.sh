@@ -2,7 +2,7 @@
 
 
 cabal exec plutus-example-deploy -- --verbose \
-    --config app/pab/testnet/pab-config.yml \
+    --config app/pab/pab-config.yml \
     migrate  
 
 

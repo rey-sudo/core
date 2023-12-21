@@ -9,7 +9,7 @@ postgresDB:
   dbConfigPass: pairfymarketplace
   dbConfigHost: 127.0.0.1
   dbConfigPort: 5432
-  dbConfigDatabase: pabtestnet
+  dbConfigDatabase: pabdevnet
   dbConfigPoolSize: 20
   dbConfigMarconiFile: marconi.sqlite
 

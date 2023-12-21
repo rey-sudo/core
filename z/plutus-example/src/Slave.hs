@@ -238,7 +238,7 @@ contract = forever endpoints where
 
 
 startEndpoint :: Promise () SlaveSchema SlaveError ()
-startEndpoint = endpoint @"start" $ \(StartParams{ sWalletParam, bWalletParam, pPriceParam, sCollateralParam }) -> do                     
+startEndpoint = endpoint @"start" $ \(StartParams{sWalletParam, bWalletParam, pPriceParam, sCollateralParam}) -> do                     
               pkh <- ownFirstPaymentPubKeyHash
               tt  <- SM.getThreadToken
               txOutRef <- Wallet.getUnspentOutput
