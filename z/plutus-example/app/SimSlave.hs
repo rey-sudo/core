@@ -57,6 +57,9 @@ defaultParams = S.Params { S.bWallet'     = buyerWalletPPKH
                          , S.sCollateral' = Ada.lovelaceOf 5_000_000
                          }
 
+bWalletBS :: String
+bWalletBS = "3f2ec097f77e4254df012d5d4d4b45e48459c6ec5795e92df30f2dbc"
+
 
 main :: IO ()
 main = void $ Simulator.runSimulationWith handlers $ do
@@ -69,9 +72,13 @@ main = void $ Simulator.runSimulationWith handlers $ do
     sellerCID <- Simulator.activateContract sellerWallet SlaveContract
     Simulator.logString @(Builtin MarketplaceContracts) $ "wallet = " ++ show sellerWallet ++ " CID: " ++ show sellerCID
 
-    let sp  = S.StartParams { S.startParams = defaultParams }
+    let sp  = S.StartParams{ bWalletParam     = bWalletBS
+                           , pPriceParam      = 10_000_000
+                           , sCollateralParam = 5_000_000
+                           }
    
     void $ Simulator.callEndpointOnInstance sellerCID "start" sp
+    Simulator.logString @(Builtin MarketplaceContracts) $ "Params = " ++ show sp
     Simulator.waitNSlots 2
 
     buyerCID <- Simulator.activateContract buyerWallet SlaveContract

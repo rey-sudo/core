@@ -32,7 +32,7 @@ import           PlutusTx              (CompiledCode)
 import           Text.Printf           (printf)
 import Plutus.Contract.StateMachine (AsSMContractError (..), OnChainState, State (..), Void)
 import Plutus.Contract.StateMachine qualified as SM
-import Slave as S
+
 
 serializableToScript :: Serialise a => a -> PlutusScript PlutusScriptV2
 serializableToScript = PlutusScriptSerialised . BSS.toShort . BSL.toStrict . serialise

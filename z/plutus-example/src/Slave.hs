@@ -48,7 +48,12 @@ import Plutus.Script.Utils.V2.Typed.Scripts qualified as V2
 import Plutus.Script.Utils.Value (AssetClass, TokenName, Value)
 import PlutusTx qualified
 import PlutusTx.Prelude hiding (Applicative (..), check)
-
+--------
+import qualified Data.ByteString.Char8 as B
+import qualified Ledger  
+import Utilities
+import Plutus.Contract.Request as Wallet                         (getUnspentOutput)
+--------
 import Prelude qualified as Haskell
 
 data SlaveState = SlaveState
@@ -61,7 +66,7 @@ data SlaveState = SlaveState
     , bWallet     :: PaymentPubKeyHash
     , pPrice      :: Ada.Ada
     , sCollateral :: Ada.Ada
-    --, mToken      :: SM.ThreadToken
+    , mToken      :: SM.ThreadToken
     } | Appeal | Finished
     deriving stock (Haskell.Eq, Haskell.Show, Generic)
     deriving anyclass (ToJSON, FromJSON)
@@ -90,7 +95,9 @@ PlutusTx.makeLift ''Input
 -- | Arguments for the @"start"@ endpoint
 data StartParams =
     StartParams
-        { startParams :: Params
+        {  bWalletParam       :: Haskell.String
+        ,  pPriceParam        :: Integer
+        ,  sCollateralParam   :: Integer
         } deriving stock (Haskell.Show, Generic)
           deriving anyclass (ToJSON, FromJSON)
 
@@ -201,18 +208,12 @@ initialState params pkh tt = SlaveState { cState = 0
                                         , bWallet = bWallet' params
                                         , pPrice = pPrice' params
                                         , sCollateral = sCollateral' params
-                                       -- , mToken = tt
+                                        , mToken = tt
                                         }
 
 contract :: Contract () SlaveSchema SlaveError ()
 contract = forever endpoints where
-        endpoints      = selectList [start, locking, delivered, received]
-        start          = endpoint @"start" $ \(StartParams{ startParams }) -> do
-                                            pkh <- ownFirstPaymentPubKeyHash
-                                            tt  <- SM.getThreadToken
-                                            let theClient = client startParams
-                                            void $ SM.runInitialise theClient (initialState startParams pkh tt)  (Ada.toValue (sCollateral' startParams))
-                                            logInfo @Text "Seller:start"
+        endpoints      = selectList [startEndpoint, locking, delivered, received]
 
         locking        = endpoint @"locking" $ \(LockingParams{ lockingParams }) -> do
                                                     void (SM.runStep (client lockingParams) Locking)
@@ -227,16 +228,26 @@ contract = forever endpoints where
                                                     logInfo @Text "Buyer:received"
 
 
+startEndpoint :: Promise () SlaveSchema SlaveError ()
+startEndpoint = endpoint @"start" $ \(StartParams{ bWalletParam, pPriceParam, sCollateralParam }) -> do            
+              let startParams = Params { bWallet'     = byteStringtoPKH bWalletParam
+                                       , pPrice'      = Ada.lovelaceOf pPriceParam
+                                       , sCollateral' = Ada.lovelaceOf sCollateralParam
+                                       }
+                                         
+                  theClient   = client startParams            
+              pkh <- ownFirstPaymentPubKeyHash
+              tt  <- SM.getThreadToken
+              txOutRef <- Wallet.getUnspentOutput
+     
+              logInfo (Haskell.show txOutRef)                                        
+              void $ SM.runInitialise theClient (initialState startParams pkh tt)  (Ada.toValue (sCollateral' startParams))
+              logInfo @Text "Seller@start"
 
 
 
-
-
-
-
-
-
-
+byteStringtoPKH :: Haskell.String -> Ledger.PaymentPubKeyHash
+byteStringtoPKH bs = Ledger.PaymentPubKeyHash (Ledger.PubKeyHash $ decodeHex (B.pack bs))
 
 
 
