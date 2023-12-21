@@ -251,8 +251,7 @@ startEndpoint = endpoint @"start" $ \(StartParams{sWalletParam, bWalletParam, pP
                               }
                                          
                   theClient       = client sp 
-                  theConstraints  = Constraints.mustValidateInTimeRange deadlineRange
-                                     Haskell.<> Constraints.mustBeSignedBy (sWallet' sp)
+                  theConstraints  = mempty --Constraints.mustBeSignedBy (sWallet' sp)
 
                   theLookups      = Constraints.typedValidatorLookups (typedValidator sp)
                   thePrice        = Ada.toValue (sCollateral' sp)
