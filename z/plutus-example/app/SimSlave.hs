@@ -57,6 +57,10 @@ defaultParams = S.Params { S.bWallet'     = buyerWalletPPKH
                          , S.sCollateral' = Ada.lovelaceOf 5_000_000
                          }
 
+sWalletBS :: String
+sWalletBS = "484ebc54b4112e54e1f7524dbdc6bb42635648a06c297e584592e80b"
+
+
 bWalletBS :: String
 bWalletBS = "3f2ec097f77e4254df012d5d4d4b45e48459c6ec5795e92df30f2dbc"
 
@@ -72,7 +76,8 @@ main = void $ Simulator.runSimulationWith handlers $ do
     sellerCID <- Simulator.activateContract sellerWallet SlaveContract
     Simulator.logString @(Builtin MarketplaceContracts) $ "wallet = " ++ show sellerWallet ++ " CID: " ++ show sellerCID
 
-    let sp  = S.StartParams{ bWalletParam     = bWalletBS
+    let sp  = S.StartParams{ sWalletParam     = sWalletBS
+                           , bWalletParam     = bWalletBS
                            , pPriceParam      = 10_000_000
                            , sCollateralParam = 5_000_000
                            }
@@ -80,22 +85,22 @@ main = void $ Simulator.runSimulationWith handlers $ do
     void $ Simulator.callEndpointOnInstance sellerCID "start" sp
     Simulator.logString @(Builtin MarketplaceContracts) $ "Params = " ++ show sp
     Simulator.waitNSlots 2
-
+    
     buyerCID <- Simulator.activateContract buyerWallet SlaveContract
     Simulator.logString @(Builtin MarketplaceContracts) $ "wallet = " ++ show buyerWallet ++ " CID: " ++ show buyerCID
     Simulator.waitNSlots 2
     
-    let lockingInput  = S.LockingParams { S.lockingParams = defaultParams }
+    void $ liftIO getLine
 
+    let lockingInput  = S.LockingParams { S.lockingParams = defaultParams }
     void $ Simulator.callEndpointOnInstance buyerCID "locking" lockingInput
     Simulator.waitNSlots 2
 
     Simulator.logString @(Builtin MarketplaceContracts) "//////////////////////////////////////"
 
-    
+    void $ liftIO getLine
+
     let deliveredInput  = S.DeliveredParams { S.deliveredParams = defaultParams }
-
-
     void $ Simulator.callEndpointOnInstance sellerCID "delivered" deliveredInput
     Simulator.waitNSlots 2
 

@@ -52,7 +52,14 @@ import PlutusTx.Prelude hiding (Applicative (..), check)
 import qualified Data.ByteString.Char8 as B
 import qualified Ledger  
 import Utilities
-import Plutus.Contract.Request as Wallet                         (getUnspentOutput)
+import Plutus.Contract.Request as Wallet (getUnspentOutput)
+import Ledger.Tx.Constraints.ValidityInterval as VI
+import Plutus.V2.Ledger.Api qualified as V2
+import Plutus.V2.Ledger.Contexts qualified as V2
+import Cardano.Node.Emulator.Internal.Node.TimeSlot as TimeSlot
+import           Ledger                     (Slot (..))  
+import Data.Default               (def)
+
 --------
 import Prelude qualified as Haskell
 
@@ -75,7 +82,8 @@ PlutusTx.unstableMakeIsData ''SlaveState
 PlutusTx.makeLift ''SlaveState
 
 data Params = Params
-    { bWallet'     :: PaymentPubKeyHash
+    { sWallet'     :: PaymentPubKeyHash
+    , bWallet'     :: PaymentPubKeyHash
     , pPrice'      :: Ada.Ada
     , sCollateral' :: Ada.Ada
     }
@@ -95,7 +103,8 @@ PlutusTx.makeLift ''Input
 -- | Arguments for the @"start"@ endpoint
 data StartParams =
     StartParams
-        {  bWalletParam       :: Haskell.String
+        {  sWalletParam       :: Haskell.String
+        ,  bWalletParam       :: Haskell.String
         ,  pPriceParam        :: Integer
         ,  sCollateralParam   :: Integer
         } deriving stock (Haskell.Show, Generic)
@@ -198,18 +207,18 @@ typedValidator = V2.mkTypedValidatorParam @(SM.StateMachine SlaveState Input)
 client :: Params -> SM.StateMachineClient SlaveState Input
 client params = SM.mkStateMachineClient $ SM.StateMachineInstance (machine params) (typedValidator params)
 
-initialState :: Params -> PaymentPubKeyHash -> SM.ThreadToken -> SlaveState
-initialState params pkh tt = SlaveState { cState = 0
-                                        , sLabel = "waiting"
-                                        , bSlot  = False
-                                        , pDelivered = False
-                                        , pReceived = False
-                                        , sWallet = pkh
-                                        , bWallet = bWallet' params
-                                        , pPrice = pPrice' params
-                                        , sCollateral = sCollateral' params
-                                        , mToken = tt
-                                        }
+initialState :: Params -> SM.ThreadToken -> SlaveState
+initialState params tt = SlaveState { cState = 0
+                                    , sLabel = "waiting"
+                                    , bSlot  = False
+                                    , pDelivered = False
+                                    , pReceived = False
+                                    , sWallet = sWallet' params
+                                    , bWallet = bWallet' params
+                                    , pPrice = pPrice' params
+                                    , sCollateral = sCollateral' params
+                                    , mToken = tt
+                                    }
 
 contract :: Contract () SlaveSchema SlaveError ()
 contract = forever endpoints where
@@ -229,29 +238,42 @@ contract = forever endpoints where
 
 
 startEndpoint :: Promise () SlaveSchema SlaveError ()
-startEndpoint = endpoint @"start" $ \(StartParams{ bWalletParam, pPriceParam, sCollateralParam }) -> do            
-              let startParams = Params { bWallet'     = byteStringtoPKH bWalletParam
-                                       , pPrice'      = Ada.lovelaceOf pPriceParam
-                                       , sCollateral' = Ada.lovelaceOf sCollateralParam
-                                       }
-                                         
-                  theClient   = client startParams            
+startEndpoint = endpoint @"start" $ \(StartParams{ sWalletParam, bWalletParam, pPriceParam, sCollateralParam }) -> do                     
               pkh <- ownFirstPaymentPubKeyHash
               tt  <- SM.getThreadToken
               txOutRef <- Wallet.getUnspentOutput
-     
-              logInfo (Haskell.show txOutRef)                                        
-              void $ SM.runInitialise theClient (initialState startParams pkh tt)  (Ada.toValue (sCollateral' startParams))
-              logInfo @Text "Seller@start"
+              logInfo (Haskell.show txOutRef)  
 
+              let sp = Params { sWallet'     = byteStringtoPKH sWalletParam     
+                              , bWallet'     = byteStringtoPKH bWalletParam
+                              , pPrice'      = Ada.lovelaceOf pPriceParam
+                              , sCollateral' = Ada.lovelaceOf sCollateralParam
+                              }
+                                         
+                  theClient       = client sp 
+                  theConstraints  = Constraints.mustValidateInTimeRange deadlineRange
+                                     Haskell.<> Constraints.mustBeSignedBy (sWallet' sp)
+
+                  theLookups      = Constraints.typedValidatorLookups (typedValidator sp)
+                  thePrice        = Ada.toValue (sCollateral' sp)
+                  theInitialState = initialState sp tt
+
+              result <- SM.runInitialiseWith theLookups theConstraints theClient theInitialState thePrice
+              void $ logInfo @Text "START_ENDPOINT"
+              logInfo (Haskell.show result) 
 
 
 byteStringtoPKH :: Haskell.String -> Ledger.PaymentPubKeyHash
 byteStringtoPKH bs = Ledger.PaymentPubKeyHash (Ledger.PubKeyHash $ decodeHex (B.pack bs))
 
+slotCfg :: SlotConfig
+slotCfg = def
 
+timer :: V2.POSIXTime
+timer = TimeSlot.slotToEndPOSIXTime slotCfg (Slot 50)
 
-
+deadlineRange :: VI.ValidityInterval V2.POSIXTime
+deadlineRange = VI.from timer
 
 
 

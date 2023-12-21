@@ -104,6 +104,7 @@ library
     , freer-simple
     , hashable
     , lens
+    , data-default
     , openapi3
     , prettyprinter
     , semigroups
@@ -402,12 +403,12 @@ executable plutus-example-simulate-slave
     , streaming
     , template-haskell
     , base               >=4.9     && <5
-    , data-default
     , foldl
     , mmorph
     , mtl
     , pretty
     , QuickCheck
+    , data-default
     , tasty
     , tasty-golden
     , hedgehog
