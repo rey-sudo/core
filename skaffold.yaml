@@ -20,20 +20,4 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .  
-    - image: pairfy/service-store
-      context: service-store
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: 'src/**/*.ts'
-            dest: .              
-    - image: pairfy/publisher-store
-      context: publisher-store
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: 'src/**/*.ts'
-            dest: .
                           

@@ -10,7 +10,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
     nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
     nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "arkastore.co"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "pairfy.io"
     nginx.ingress.kubernetes.io/cors-expose-headers: "Set-Cookie"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
@@ -25,7 +25,7 @@ metadata:
 
 spec:
   rules:
-    - host: arkastore.co
+    - host: pairfy.io
       http:
         paths:
           - path: /?(.*)
@@ -33,12 +33,5 @@ spec:
             backend:
               service:
                 name: frontend-main
-                port:
-                  number: 8000
-          - path: /api/store/?(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: micro-store
                 port:
                   number: 8000
