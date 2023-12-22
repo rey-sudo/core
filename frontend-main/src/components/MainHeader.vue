@@ -43,8 +43,8 @@
       <div class="header-box right" :class="{ scrolled: isScrolled }">
         <label></label>
         <div>
-          <span>Or, Audit</span>
-          <span>Products</span>
+          <span>Or, Be a</span>
+          <span>Mediator</span>
         </div>
       </div>
 

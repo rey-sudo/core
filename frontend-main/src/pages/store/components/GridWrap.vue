@@ -40,13 +40,6 @@
               <span> {{ item.stock_supply }} Stock</span>
             </div>
 
-            <div class="card-body-shipping">
-              <span v-if="!shipping_tax">
-                <span> {{ item.shipping_label }}</span>
-                <i :class="item.shipping_icon" />
-              </span>
-            </div>
-
             <div class="card-body-collateral">
               <span> {{ item.collateral }} ADA Collateral</span>
             </div>
@@ -132,7 +125,7 @@ export default {
 .card-body-price {
   font-weight: 600;
   text-align: left;
-  font-size: var(--text-size-c);
+  font-size: var(--text-size-b);
   margin-bottom: 1rem;
   color: var(--text-a);
 }
@@ -167,13 +160,13 @@ export default {
   background: linear-gradient(
     0deg,
     var(--base-c) 0%,
-    rgba(255, 255, 255, 1) 50%
+    rgba(255, 255, 255, 1) 20%
   );
 }
 
 .card:hover {
   box-shadow: var(--shadow-c);
-  transform: translateY(-1rem);
+  transform: translateY(-0.25rem);
 }
 
 .card-body-stock {
@@ -184,28 +177,14 @@ export default {
 }
 
 .card-body-collateral {
-  margin-top: 1rem;
-  text-align: left;
-  font-size: var(--text-size-b);
-  font-weight: 100;
-  display: flex;
-  align-items: center;
-  color: var(--text-a);
-}
-
-.card-body-shipping {
-  margin-bottom: 0.5rem;
   text-align: left;
   font-size: var(--text-size-a);
   display: flex;
   align-items: center;
-  color: var(--text-a);
-  font-weight: 600;
+  color: var(--text-b);
 }
 
-.card-body-shipping i {
-  margin-left: 0.25rem;
-}
+
 .card-header {
   flex-basis: 50%;
   overflow: hidden;
@@ -223,7 +202,7 @@ export default {
   height: calc(300px - 2rem);
   min-width: calc(300px - 2rem);
   max-width: calc(300px - 2rem);
-  border-radius: 12px;
+  border-radius: 24px;
 }
 
 .card-body {
