@@ -35,9 +35,7 @@ The fundamental idea of Pairfy is to avoid using expensive infrastructure and or
 
 ### Installation
 
-Installation
-
-- A
+Install minikube  [https://minikube.sigs.k8s.io/docs/start/](https://minikube.sigs.k8s.io/docs/start/) 
 
 Command
 

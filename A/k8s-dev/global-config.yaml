@@ -23,6 +23,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: rater-config
+  name: limiter-config
 data:
-  micro-store: redis://rater-store:6379
+  micro-store: redis://limiter-store:6379

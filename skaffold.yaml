@@ -12,23 +12,23 @@ build:
     push: false
     concurrency: 0
   artifacts:
-    - image: alphaicterus/interface-main
-      context: interface-main
+    - image: pairfy/frontend-main
+      context: frontend-main
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
           - src: 'src/**/*.ts'
             dest: .  
-    - image: alphaicterus/micro-store
-      context: micro-store
+    - image: pairfy/service-store
+      context: service-store
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
           - src: 'src/**/*.ts'
             dest: .              
-    - image: alphaicterus/publisher-store
+    - image: pairfy/publisher-store
       context: publisher-store
       docker:
         dockerfile: Dockerfile
@@ -36,11 +36,4 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: alphaicterus/micro-notifications
-      context: micro-notifications
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: 'src/**/*.ts'
-            dest: .                             
+                          
