@@ -149,24 +149,26 @@ export default {
 .card {
   width: calc(300px - 2rem);
   height: 600px;
-  border-radius: 12px;
+  border-radius: calc(1rem + 16px);
   transition: box-shadow 0.25s ease-in-out 0s, transform 0.25s ease 0s;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   cursor: pointer;
-  padding: 0 1.25rem;
+  padding: 1.25rem;
+  padding-bottom: 0;
   margin: auto;
+  border: 1px solid var(--border-b);
   background: linear-gradient(
     0deg,
     var(--base-c) 0%,
-    rgba(255, 255, 255, 1) 20%
+    rgba(255, 255, 255, 1) 15%
   );
 }
 
 .card:hover {
-  box-shadow: var(--shadow-c);
   transform: translateY(-0.25rem);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .card-body-stock {
@@ -193,7 +195,6 @@ export default {
 .card-image {
   height: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
@@ -202,7 +203,7 @@ export default {
   height: calc(300px - 2rem);
   min-width: calc(300px - 2rem);
   max-width: calc(300px - 2rem);
-  border-radius: 24px;
+  border-radius: 16px;
 }
 
 .card-body {
