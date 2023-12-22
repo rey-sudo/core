@@ -8,6 +8,7 @@ cabal exec plutus-example-deploy -- --verbose \
 
 #root path
 
+#export SHELLEY_TEST_DATA=/home/debian/plutus-apps/plutus-pab/local-cluster/cluster-data/cardano-node-shelley/
 
 
 cabal exec plutus-example-deploy -- --verbose \

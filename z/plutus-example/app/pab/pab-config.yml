@@ -9,7 +9,7 @@ postgresDB:
   dbConfigPass: pairfymarketplace
   dbConfigHost: 127.0.0.1
   dbConfigPort: 5432
-  dbConfigDatabase: pabdevnet
+  dbConfigDatabase: pabtestnet
   dbConfigPoolSize: 20
   dbConfigMarconiFile: marconi.sqlite
 
@@ -39,7 +39,7 @@ nodeServerConfig:
   pscNodeMode: AlonzoNode
   pscNodeServerConfig:
     nscBaseUrl: http://localhost:3003
-    nscSocketPath: app/pab/devnet/private-testnet/node-bft1/node.sock
+    nscSocketPath: app/pab/devnet/private-testnet/node-pool1/node.sock
     nscKeptBlocks: 1
     nscNetworkId: 42
     nscSlotConfig:
