@@ -118,6 +118,7 @@ img.scrolled {
 .header.scrolled {
   background: var(--base-a);
   color: var(--text-a);
+  border-bottom: 1px solid var(--border-a)
 }
 .counter.scrolled {
   background: var(--base-c);
