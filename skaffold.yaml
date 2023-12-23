@@ -20,4 +20,11 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .  
-                          
+    - image: pairfy/service-node
+      context: service-node
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .                         

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: service-node
+  template:
+    metadata:
+      labels:
+        role: service-node
+    spec:             
+      containers:
+      - name: service-node
+        image: pairfy/service-node
+        volumeMounts:
+        - name: volume-service-node
+          mountPath: /app/data
+      volumes:
+        - name: volume-service-node
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-node
+spec:
+  selector:
+    role: service-node
+  ports:
+    - name: service-node
+      protocol: TCP
+      port: 3001
+      targetPort: 30
