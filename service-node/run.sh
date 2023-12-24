@@ -52,11 +52,13 @@ fi
 
 wait
 
+
+
 cardano-node run \
-      --config $node_config_path/config.json \
-      --database-path $node_config_path/db/ \
-      --socket-path $node_config_path/db/node.socket \
-      --host-addr 0.0.0.0 \
-      --port 3001 \
-      --topology $node_config_path/topology.json
+    --config $node_config_path/config.json \
+    --database-path $node_config_path/db/ \
+    --socket-path $node_config_path/db/node.socket \
+    --host-addr 0.0.0.0 \
+    --port 3001 \
+    --topology $node_config_path/topology.json \
 
