@@ -257,9 +257,9 @@ startEndpoint = endpoint @"start" $ \(StartParams{sWalletParam, bWalletParam, pP
                   thePrice        = Ada.toValue (sCollateral' sp)
                   theInitialState = initialState sp tt
 
-              result <- SM.runInitialiseWith theLookups theConstraints theClient theInitialState thePrice
+              SM.runInitialiseWithUnbalanced theLookups theConstraints theClient theInitialState thePrice
               void $ logInfo @Text "START_ENDPOINT"
-              logInfo (Haskell.show result) 
+
 
 
 byteStringtoPKH :: Haskell.String -> Ledger.PaymentPubKeyHash
