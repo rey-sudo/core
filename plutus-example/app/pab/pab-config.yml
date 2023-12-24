@@ -1,17 +1,17 @@
 # Configuration for an SQLite file
-#sqliteDB:
-#  dbConfigFile: pabtestnet.db
-#  dbConfigPoolSize: 20
-
-
-postgresDB:
-  dbConfigUser: postgres
-  dbConfigPass: pairfymarketplace
-  dbConfigHost: 127.0.0.1
-  dbConfigPort: 5432
-  dbConfigDatabase: pabtestnet
+sqliteDB:
+  dbConfigFile: /app/pab/preview/dbpreview.db
   dbConfigPoolSize: 20
-  dbConfigMarconiFile: marconi.sqlite
+
+
+#postgresDB:
+#  dbConfigUser: postgres
+#  dbConfigPass: pairfymarketplace
+#  dbConfigHost: 127.0.0.1
+#  dbConfigPort: 5432
+#  dbConfigDatabase: dbpreview
+#  dbConfigPoolSize: 20
+#  dbConfigMarconiFile: marconi.sqlite
 
 pabWebserverConfig:
   baseUrl: http://localhost:9080
@@ -31,17 +31,17 @@ pabWebserverConfig:
   # keyPath: host.key
 
 walletServerConfig:
-  tag: LocalWalletConfig
-  walletSettings:
-    baseUrl: http://localhost:9081
+  tag: RemoteWalletConfig
+#  walletSettings:
+#   baseUrl: http://localhost:9081
 
 nodeServerConfig:
   pscNodeMode: AlonzoNode
   pscNodeServerConfig:
-    nscBaseUrl: http://localhost:3003
-    nscSocketPath: app/pab/devnet/private-testnet/node-pool1/node.sock
+    nscBaseUrl: http://localhost:3001
+    nscSocketPath: /home/debian/Documents/GitHub/marketplace/service-node/bin/configuration/preview/db/node.socket
     nscKeptBlocks: 1
-    nscNetworkId: 42
+    nscNetworkId: 2
     nscSlotConfig:
       scSlotZeroTime: 1596059091000 # Wednesday, July 29, 2020 21:44:51 - shelley launch time in milliseconds
       scSlotLength: 1000 # In milliseconds
