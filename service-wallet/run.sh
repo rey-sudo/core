@@ -37,4 +37,12 @@ cardano-wallet serve \
       --node-socket $node_config_path/db/node.socket \
       --database ./wallet-db
 
+
+
+
+
+
+
+
+
       
