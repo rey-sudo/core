@@ -4,12 +4,30 @@ network=preview
 cardano_node_path="$WORKDIR/bin/"
 node_config_path="$WORKDIR/bin/configuration/$network/"
 source="https://book.world.dev.cardano.org"
+node_binary_url="https://github.com/IntersectMBO/cardano-node/releases/download/8.7.1-pre/cardano-node-8.7.1-linux.tar.gz"
+
 
 echo "Output: $cardano_node_path"
 
 export PATH=$PATH:$cardano_node_path
 
 echo "Output: $PATH"
+
+
+
+
+if [ ! -d "$cardano_node_path" ]; then
+
+    mkdir -p "$cardano_node_path"
+    
+    curl -L $node_binary_url | tar -xz -C ./bin --strip-components=1
+
+    echo "Directory created: $cardano_node_path"
+else
+    echo "Directory already exists: $cardano_node_path"
+fi
+
+
 
 if [ ! -d "$node_config_path" ]; then
 
