@@ -1,6 +1,6 @@
 # Configuration for an SQLite file
 sqliteDB:
-  dbConfigFile: /app/pab/preview/dbpreview.db
+  dbConfigFile: ./app/pab/preview/dbpreview.db
   dbConfigPoolSize: 20
 
 
@@ -78,11 +78,11 @@ metadataServerConfig:
 developmentOptions:
   pabRollbackHistory: 1
   pabResumeFrom:
-    { "tag" : "PointAtGenesis" }  
-#    { "tag" : "Point"
-#    , "pointBlockId" : "3bca118d811d628c22f0b2372b004d39756a5e142cfd204aa5d76289b2c2d438"
-#    , "pointSlot" : { "getSlot" : 36351879 }
-#    }
+#    { "tag" : "PointAtGenesis" }  
+    { "tag" : "Point"
+    , "pointBlockId" : "563793a4d290a0b9a8f69453a17ac9a371dde77519988518a0e738ba24766ad4"
+    , "pointSlot" : { "getSlot" : 36747387 }
+    }
 
 
 # Optional EKG Server Config
