@@ -1,0 +1,30 @@
+{
+    "name": "PAB testing wallet",
+    "mnemonic_sentence": [
+        "adult",
+        "ability",
+        "general",
+        "ready",
+        "raw",
+        "pupil",
+        "item",
+        "hidden",
+        "expect",
+        "boat",
+        "extend",
+        "life",
+        "dutch",
+        "critic",
+        "light",
+        "noble",
+        "duck",
+        "chuckle",
+        "scene",
+        "noodle",
+        "bike",
+        "indoor",
+        "fresh",
+        "crucial"
+    ],
+    "passphrase": "pab123456789"
+}
