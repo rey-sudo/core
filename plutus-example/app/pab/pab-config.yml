@@ -88,8 +88,8 @@ developmentOptions:
 # ----
 #  { "tag" : "PointAtGenesis" }
 
-blockfrostConfig:
-  bfTokenPath: ./preview/blockfrost.json
+#blockfrostConfig:
+#  bfTokenPath: ./preview/blockfrost.json
 
 
 monitoringConfig:

@@ -35,7 +35,7 @@ import Data.Aeson (FromJSON, ToJSON)
 import Data.Monoid (Last (..))
 import Data.Text (Text)
 import GHC.Generics (Generic)
-import Ledger (PaymentPubKeyHash, pubKeyHashAddress, CardanoAddress(..))
+import Ledger (PaymentPubKeyHash, toPlutusAddress, pubKeyHashAddress, CardanoAddress(..))
 import Ledger.Tx.Constraints (TxConstraints)
 import Ledger.Tx.Constraints qualified as Constraints
 import Ledger.Typed.Scripts qualified as Scripts
@@ -59,9 +59,11 @@ import Plutus.V2.Ledger.Contexts qualified as V2
 import Cardano.Node.Emulator.Internal.Node.TimeSlot as TimeSlot
 import           Ledger                     (Slot (..))  
 import Data.Default               (def)
-import Ledger.Tx.CardanoAPI.Internal
-import Cardano.Node.Emulator.Internal.Node.Params (testnet)
+import Cardano.Node.Emulator.Internal.Node (pNetworkId)
 import Data.Either (fromRight)
+import Ledger.Tx.CardanoAPI
+import Plutus.ChainIndex.Config
+import Cardano.Node.Emulator.Internal.Node.Params qualified  as Nparams
 --------
 import Prelude qualified as Haskell
 
@@ -248,7 +250,7 @@ startEndpoint = endpoint @"start" $ \(StartParams{sWalletParam, bWalletParam, pP
               tt  <- SM.getThreadToken
 
               let sp = Params { sWallet'     = byteStringtoPKH sWalletParam 
-                              , sAddress'    = pkhToCardanoAddress (byteStringtoPKH sWalletParam)
+                              , sAddress'    = pkhToAddress (byteStringtoPKH sWalletParam) 
                               , bWallet'     = byteStringtoPKH bWalletParam
                               , pPrice'      = Ada.lovelaceOf pPriceParam
                               , sCollateral' = Ada.lovelaceOf sCollateralParam
@@ -266,16 +268,13 @@ startEndpoint = endpoint @"start" $ \(StartParams{sWalletParam, bWalletParam, pP
               void $ logInfo @Text "START_ENDPOINT"
 
 
-
-
-pkhToCardanoAddress :: PaymentPubKeyHash -> Ledger.CardanoAddress
-pkhToCardanoAddress =  fromRight logError "asd"
-                            . toCardanoAddressInEra testnet
-                            . plutusAddress
-                       where 
-                       plutusAddress pkh = pubKeyHashAddress pkh Nothing
-
-
+pkhToAddress :: PaymentPubKeyHash -> Ledger.CardanoAddress
+pkhToAddress pkh = do
+                   cNetwork <- Nparams.pNetworkId <$> getParams
+                   resu  <- fromRight (error "can't build address") $ toCardanoAddressInEra cNetwork (pubKeyHashAddress pkh Nothing)
+                   let resux = resu
+                   return resux
+                             
 
 
 
