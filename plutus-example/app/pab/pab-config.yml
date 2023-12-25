@@ -33,12 +33,12 @@ pabWebserverConfig:
 walletServerConfig:
   tag: RemoteWalletConfig
 #  walletSettings:
-#   baseUrl: http://localhost:9081
+#    baseUrl: http://localhost:8090
 
 nodeServerConfig:
   pscNodeMode: AlonzoNode
   pscNodeServerConfig:
-    nscBaseUrl: http://localhost:3001
+    nscBaseUrl: http://0.0.0.0:3001
     nscSocketPath: /home/debian/Documents/GitHub/marketplace/service-node/bin/configuration/preview/db/node.socket
     nscKeptBlocks: 1
     nscNetworkId: 2
@@ -49,7 +49,6 @@ nodeServerConfig:
       - getWallet: 1
       - getWallet: 2
       - getWallet: 3
-      - getWallet: 4
 
 
 
@@ -76,7 +75,7 @@ metadataServerConfig:
   mdBaseUrl: http://localhost:9085
 
 developmentOptions:
-  pabRollbackHistory: 1
+  pabRollbackHistory: null
   pabResumeFrom:
 #    { "tag" : "PointAtGenesis" }  
     { "tag" : "Point"
@@ -88,6 +87,9 @@ developmentOptions:
 # Optional EKG Server Config
 # ----
 #  { "tag" : "PointAtGenesis" }
+
+blockfrostConfig:
+  bfTokenPath: ./preview/blockfrost.json
 
 
 monitoringConfig:

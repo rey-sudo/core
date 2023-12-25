@@ -3,7 +3,7 @@ WORKDIR=$(pwd)
 network=preview
 config_url="https://book.world.dev.cardano.org"
 node_path="$WORKDIR/bin/"
-node_config_path="$WORKDIR/bin/configuration/$network/"
+node_config_path="$WORKDIR/bin/configuration/$network"
 node_bin_url="https://github.com/IntersectMBO/cardano-node/releases/download/8.7.1-pre/cardano-node-8.7.1-linux.tar.gz"
 
 

@@ -35,7 +35,7 @@ import Data.Aeson (FromJSON, ToJSON)
 import Data.Monoid (Last (..))
 import Data.Text (Text)
 import GHC.Generics (Generic)
-import Ledger (PaymentPubKeyHash, pubKeyHashAddress)
+import Ledger (PaymentPubKeyHash, pubKeyHashAddress, CardanoAddress(..))
 import Ledger.Tx.Constraints (TxConstraints)
 import Ledger.Tx.Constraints qualified as Constraints
 import Ledger.Typed.Scripts qualified as Scripts
@@ -59,7 +59,9 @@ import Plutus.V2.Ledger.Contexts qualified as V2
 import Cardano.Node.Emulator.Internal.Node.TimeSlot as TimeSlot
 import           Ledger                     (Slot (..))  
 import Data.Default               (def)
-
+import Ledger.Tx.CardanoAPI.Internal
+import Cardano.Node.Emulator.Internal.Node.Params (testnet)
+import Data.Either (fromRight)
 --------
 import Prelude qualified as Haskell
 
@@ -70,6 +72,7 @@ data SlaveState = SlaveState
     , pDelivered  :: Bool
     , pReceived   :: Bool
     , sWallet     :: PaymentPubKeyHash
+    , sAddress    :: Ledger.CardanoAddress    
     , bWallet     :: PaymentPubKeyHash
     , pPrice      :: Ada.Ada
     , sCollateral :: Ada.Ada
@@ -83,6 +86,7 @@ PlutusTx.makeLift ''SlaveState
 
 data Params = Params
     { sWallet'     :: PaymentPubKeyHash
+    , sAddress'    :: Ledger.CardanoAddress
     , bWallet'     :: PaymentPubKeyHash
     , pPrice'      :: Ada.Ada
     , sCollateral' :: Ada.Ada
@@ -214,6 +218,7 @@ initialState params tt = SlaveState { cState = 0
                                     , pDelivered = False
                                     , pReceived = False
                                     , sWallet = sWallet' params
+                                    , sAddress = sAddress' params
                                     , bWallet = bWallet' params
                                     , pPrice = pPrice' params
                                     , sCollateral = sCollateral' params
@@ -241,24 +246,39 @@ startEndpoint :: Promise () SlaveSchema SlaveError ()
 startEndpoint = endpoint @"start" $ \(StartParams{sWalletParam, bWalletParam, pPriceParam, sCollateralParam}) -> do                     
               pkh <- ownFirstPaymentPubKeyHash
               tt  <- SM.getThreadToken
-              txOutRef <- Wallet.getUnspentOutput
-              logInfo (Haskell.show txOutRef)  
 
-              let sp = Params { sWallet'     = byteStringtoPKH sWalletParam     
+              let sp = Params { sWallet'     = byteStringtoPKH sWalletParam 
+                              , sAddress'    = pkhToCardanoAddress (byteStringtoPKH sWalletParam)
                               , bWallet'     = byteStringtoPKH bWalletParam
                               , pPrice'      = Ada.lovelaceOf pPriceParam
                               , sCollateral' = Ada.lovelaceOf sCollateralParam
                               }
                                          
                   theClient       = client sp 
-                  theConstraints  = mempty --Constraints.mustBeSignedBy (sWallet' sp)
+                  theCollateral   = Ada.toValue (sCollateral' sp)
+                  theConstraints  = Constraints.mustBeSignedBy (sWallet' sp)
 
                   theLookups      = Constraints.typedValidatorLookups (typedValidator sp)
-                  thePrice        = Ada.toValue (sCollateral' sp)
+                  theAddress      = (sAddress' sp)
                   theInitialState = initialState sp tt
 
-              SM.runInitialiseWithUnbalanced theLookups theConstraints theClient theInitialState thePrice
+              SM.runInitialiseWithUnbalanced theLookups theConstraints theClient theInitialState theCollateral theAddress
               void $ logInfo @Text "START_ENDPOINT"
+
+
+
+
+pkhToCardanoAddress :: PaymentPubKeyHash -> Ledger.CardanoAddress
+pkhToCardanoAddress =  fromRight logError "asd"
+                            . toCardanoAddressInEra testnet
+                            . plutusAddress
+                       where 
+                       plutusAddress pkh = pubKeyHashAddress pkh Nothing
+
+
+
+
+
 
 
 

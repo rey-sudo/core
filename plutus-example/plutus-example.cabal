@@ -87,7 +87,7 @@ library
     , plutus-script-utils      >=1.2.0
     , plutus-tx-constraints    >=1.2.0  
     , plutus-core        >=1.0.0   
-
+    , plutus-chain-index
   ------------------------
   -- Non-IOG dependencies
   ------------------------

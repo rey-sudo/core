@@ -120,7 +120,7 @@ package cardano-wallet-core-integration
 source-repository-package
   type: git
   location: https://github.com/AlphaIcterus/plutus-apps.git
-  tag: 2c9901d0f92e402c72fc7827f364c82ad778faea
+  tag: b8eefedeb702fdcbeb5ab0e1796776d80d5b0dbc
   subdir:
     cardano-node-emulator
     cardano-node-socket-emulator
@@ -138,7 +138,7 @@ source-repository-package
     plutus-script-utils
     plutus-tx-constraints
     plutus-use-cases
-    pab-blockfrost
+
 
 -- Direct dependency.
 -- Compared to others, cardano-wallet doesn't bump dependencies very often.

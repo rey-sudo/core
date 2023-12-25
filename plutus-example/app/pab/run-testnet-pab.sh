@@ -14,6 +14,7 @@ cabal exec plutus-example-deploy -- --verbose \
 cabal exec plutus-example-deploy -- --verbose \
     --config app/pab/pab-config.yml \
     --log-config app/pab/log-config.yaml \
+    --passphrase pab123456789 \
     webserver
  
 
