@@ -35,7 +35,7 @@ import Data.Aeson (FromJSON, ToJSON)
 import Data.Monoid (Last (..))
 import Data.Text (Text)
 import GHC.Generics (Generic)
-import Ledger (PaymentPubKeyHash, toPlutusAddress, pubKeyHashAddress, CardanoAddress(..))
+import Ledger (PaymentPubKeyHash, toPlutusAddress, pubKeyHashAddress, txOutAddress, toPubKeyHash, pubKeyHashTxOut, CardanoAddress(..))
 import Ledger.Tx.Constraints (TxConstraints)
 import Ledger.Tx.Constraints qualified as Constraints
 import Ledger.Typed.Scripts qualified as Scripts
@@ -269,14 +269,15 @@ startEndpoint = endpoint @"start" $ \(StartParams{sWalletParam, bWalletParam, pP
 
 
 pkhToAddress :: PaymentPubKeyHash -> Ledger.CardanoAddress
-pkhToAddress pkh = do
-                   cNetwork <- Nparams.pNetworkId <$> getParams
-                   resu  <- fromRight (error "can't build address") $ toCardanoAddressInEra cNetwork (pubKeyHashAddress pkh Nothing)
-                   let resux = resu
-                   return resux
+pkhToAddress ppkh = do   
+                   addr  <- (pubKeyHashAddress ppkh Nothing)
+                   pkh <- toPubKeyHash addr
+                   val <- Ada.lovelaceOf 10
+                   utxo <- pubKeyHashTxOut (Ada.toValue val) pkh
+                   txOutAddress utxo 
                              
 
-
+                         
 
 
 

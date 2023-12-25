@@ -120,7 +120,7 @@ package cardano-wallet-core-integration
 source-repository-package
   type: git
   location: https://github.com/AlphaIcterus/plutus-apps.git
-  tag: 979b85d47169568520646d9a3b77a3b10be951c1
+  tag: 961f90d36901c62024c2e5ccb3722021d54840a5
   subdir:
     cardano-node-emulator
     cardano-node-socket-emulator
