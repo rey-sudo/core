@@ -35,7 +35,8 @@ import Data.Aeson (FromJSON, ToJSON)
 import Data.Monoid (Last (..))
 import Data.Text (Text)
 import GHC.Generics (Generic)
-import Ledger (PaymentPubKeyHash, toPlutusAddress, pubKeyHashAddress, txOutAddress, toPubKeyHash, pubKeyHashTxOut, CardanoAddress(..))
+import Ledger (toPlutusAddress, toPubKeyHash, pubKeyHashAddress, txOutAddress, pubKeyHashTxOut, stakingCredential)
+import Ledger.Address qualified as Address (CardanoAddress(..),PaymentPubKeyHash(..))
 import Ledger.Tx.Constraints (TxConstraints)
 import Ledger.Tx.Constraints qualified as Constraints
 import Ledger.Typed.Scripts qualified as Scripts
@@ -59,11 +60,15 @@ import Plutus.V2.Ledger.Contexts qualified as V2
 import Cardano.Node.Emulator.Internal.Node.TimeSlot as TimeSlot
 import           Ledger                     (Slot (..))  
 import Data.Default               (def)
-import Cardano.Node.Emulator.Internal.Node (pNetworkId)
+
 import Data.Either (fromRight)
 import Ledger.Tx.CardanoAPI
 import Plutus.ChainIndex.Config
-import Cardano.Node.Emulator.Internal.Node.Params qualified  as Nparams
+import Cardano.Node.Emulator.Internal.Node.Params qualified as Nparams
+import Utilities qualified as U (toCardanoAddress, CardanoAddress(..) )
+import Cardano.Api qualified as C
+import Cardano.Api.Byron qualified as C
+import Cardano.Api.Shelley qualified as C
 --------
 import Prelude qualified as Haskell
 
@@ -73,9 +78,9 @@ data SlaveState = SlaveState
     , bSlot       :: Bool
     , pDelivered  :: Bool
     , pReceived   :: Bool
-    , sWallet     :: PaymentPubKeyHash
+    , sWallet     :: Address.PaymentPubKeyHash
     , sAddress    :: Ledger.CardanoAddress    
-    , bWallet     :: PaymentPubKeyHash
+    , bWallet     :: Address.PaymentPubKeyHash
     , pPrice      :: Ada.Ada
     , sCollateral :: Ada.Ada
     , mToken      :: SM.ThreadToken
@@ -87,9 +92,9 @@ PlutusTx.unstableMakeIsData ''SlaveState
 PlutusTx.makeLift ''SlaveState
 
 data Params = Params
-    { sWallet'     :: PaymentPubKeyHash
+    { sWallet'     :: Address.PaymentPubKeyHash
     , sAddress'    :: Ledger.CardanoAddress
-    , bWallet'     :: PaymentPubKeyHash
+    , bWallet'     :: Address.PaymentPubKeyHash
     , pPrice'      :: Ada.Ada
     , sCollateral' :: Ada.Ada
     }
@@ -267,14 +272,26 @@ startEndpoint = endpoint @"start" $ \(StartParams{sWalletParam, bWalletParam, pP
               SM.runInitialiseWithUnbalanced theLookups theConstraints theClient theInitialState theCollateral theAddress
               void $ logInfo @Text "START_ENDPOINT"
 
+pkhToAddress :: Address.PaymentPubKeyHash -> C.AddressInEra C.BabbageEra
+pkhToAddress ppkh = do
+        addr  <- (pubKeyHashAddress ppkh Nothing)
+        staki <- stakingCredential addr
+        addres <- (pubKeyHashAddress ppkh staki)
+        che   <- fromRight (error "asdasdsd") $ U.toCardanoAddress Nparams.testnet addres
+        let resu = che
+        resu
+        
 
-pkhToAddress :: PaymentPubKeyHash -> Ledger.CardanoAddress
-pkhToAddress ppkh = do   
-                   addr  <- (pubKeyHashAddress ppkh Nothing)
-                   pkh <- toPubKeyHash addr
-                   val <- Ada.lovelaceOf 10
-                   utxo <- pubKeyHashTxOut (Ada.toValue val) pkh
-                   txOutAddress utxo 
+
+
+
+--pkhToAddress :: PaymentPubKeyHash -> Ledger.CardanoAddress
+--pkhToAddress ppkh = do   
+--                   addr  <- (pubKeyHashAddress ppkh Nothing)
+--                   pkh <- toPubKeyHash addr
+--                   val <- Ada.lovelaceOf 10
+--                   utxo <- pubKeyHashTxOut (Ada.toValue val) pkh
+--                   Tx.txOutAddress utxo 
                              
 
                          
@@ -282,8 +299,8 @@ pkhToAddress ppkh = do
 
 
 
-byteStringtoPKH :: Haskell.String -> Ledger.PaymentPubKeyHash
-byteStringtoPKH bs = Ledger.PaymentPubKeyHash (Ledger.PubKeyHash $ decodeHex (B.pack bs))
+byteStringtoPKH :: Haskell.String -> Address.PaymentPubKeyHash
+byteStringtoPKH bs = Address.PaymentPubKeyHash (Ledger.PubKeyHash $ decodeHex (B.pack bs))
 
 slotCfg :: SlotConfig
 slotCfg = def
