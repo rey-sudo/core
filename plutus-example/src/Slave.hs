@@ -35,12 +35,13 @@ import Data.Aeson (FromJSON, ToJSON)
 import Data.Monoid (Last (..))
 import Data.Text (Text)
 import GHC.Generics (Generic)
-import Ledger (toPlutusAddress, toPubKeyHash, pubKeyHashAddress, txOutAddress, pubKeyHashTxOut, stakingCredential)
-import Ledger.Address (CardanoAddress, PaymentPrivateKey (PaymentPrivateKey, unPaymentPrivateKey),
+import Ledger (PubKeyHash(..), toPlutusAddress, toPubKeyHash, pubKeyHashAddress, txOutAddress, pubKeyHashTxOut, stakingCredential)
+import Ledger.Address (CardanoAddress(..), PaymentPrivateKey (PaymentPrivateKey, unPaymentPrivateKey),
                        PaymentPubKey (PaymentPubKey, unPaymentPubKey),
                        PaymentPubKeyHash (PaymentPubKeyHash, unPaymentPubKeyHash),
                        StakePubKey (StakePubKey, unStakePubKey), StakePubKeyHash (StakePubKeyHash, unStakePubKeyHash),
                        stakePubKeyHashCredential)
+
 import Ledger.Tx.Constraints (TxConstraints)
 import Ledger.Tx.Constraints qualified as Constraints
 import Ledger.Typed.Scripts qualified as Scripts
@@ -55,7 +56,7 @@ import PlutusTx qualified
 import PlutusTx.Prelude hiding (Applicative (..), check)
 --------
 import qualified Data.ByteString.Char8 as B
-import qualified Ledger  
+
 import Utilities
 import Plutus.Contract.Request as Wallet (getUnspentOutput)
 import Ledger.Tx.Constraints.ValidityInterval as VI
@@ -69,12 +70,10 @@ import Data.Either (fromRight)
 import Ledger.Tx.CardanoAPI
 import Plutus.ChainIndex.Config
 import Cardano.Node.Emulator.Internal.Node.Params qualified as Nparams
-import Utilities qualified as U (toCardanoAddress, CardanoAddress(..) )
+import Ledger.Tx.CardanoAPI.Internal qualified as Tx
 import Cardano.Api qualified as C
 import Cardano.Api.Byron qualified as C
 import Cardano.Api.Shelley qualified as C
-import Ledger.Tx.CardanoAPI.Internal qualified as Tx
-
 import Plutus.V1.Ledger.Api (Address (Address), Credential (PubKeyCredential), StakingCredential (StakingHash))
 --------
 import Prelude qualified as Haskell
@@ -86,7 +85,7 @@ data SlaveState = SlaveState
     , pDelivered  :: Bool
     , pReceived   :: Bool
     , sWallet     :: PaymentPubKeyHash
-    , sAddress    :: Ledger.CardanoAddress    
+    , sAddress    :: CardanoAddress    
     , bWallet     :: PaymentPubKeyHash
     , pPrice      :: Ada.Ada
     , sCollateral :: Ada.Ada
@@ -100,7 +99,7 @@ PlutusTx.makeLift ''SlaveState
 
 data Params = Params
     { sWallet'     :: PaymentPubKeyHash
-    , sAddress'    :: Ledger.CardanoAddress
+    , sAddress'    :: CardanoAddress
     , bWallet'     :: PaymentPubKeyHash
     , pPrice'      :: Ada.Ada
     , sCollateral' :: Ada.Ada
@@ -261,9 +260,9 @@ startEndpoint = endpoint @"start" $ \(StartParams{sWalletParam, bWalletParam, pP
               pkh <- ownFirstPaymentPubKeyHash
               tt  <- SM.getThreadToken
 
-              let sp = Params { sWallet'     = byteStringtoPKH sWalletParam 
-                              , sAddress'    = pkhToAddress (byteStringtoPKH sWalletParam) 
-                              , bWallet'     = byteStringtoPKH bWalletParam
+              let sp = Params { sWallet'     = bStoPPKH sWalletParam 
+                              , bWallet'     = bStoPPKH bWalletParam
+                              , sAddress'    = pkhToAddress (bStoPPKH sWalletParam) (bStoSPKH sWalletParam)
                               , pPrice'      = Ada.lovelaceOf pPriceParam
                               , sCollateral' = Ada.lovelaceOf sCollateralParam
                               }
@@ -280,27 +279,44 @@ startEndpoint = endpoint @"start" $ \(StartParams{sWalletParam, bWalletParam, pP
               void $ logInfo @Text "START_ENDPOINT"
 
 
+
+
+
         
-pkhToAddress :: PaymentPubKeyHash -> Ledger.CardanoAddress
-pkhToAddress =
+pkhToAddress :: PaymentPubKeyHash -> StakePubKeyHash -> CardanoAddress 
+pkhToAddress ppkh spkh =
     fromRight (error "mock wallet is invalid")
-       . Tx.toCardanoAddressInEra Nparams.testnet
-       . plutusAddress
+        . Tx.toCardanoAddressInEra Nparams.testnet
+        . plutusAddress         
     where
-    plutusAddress ppkh =
+    plutusAddress =
         Address (PubKeyCredential $ unPaymentPubKeyHash $ ppkh)
-                (StakingHash . PubKeyCredential . unStakePubKeyHash <$> Just ppkh)
+                (StakingHash . PubKeyCredential . unStakePubKeyHash <$> Just spkh)
 
 
 
 
-                         
---stakePubKeyHash 
+
+        
+bStoPPKH :: Haskell.String -> PaymentPubKeyHash
+bStoPPKH bs = PaymentPubKeyHash (PubKeyHash $ decodeHex (B.pack bs))
+
+bStoSPKH :: Haskell.String -> StakePubKeyHash
+bStoSPKH bs = StakePubKeyHash (PubKeyHash $ decodeHex (B.pack bs))
 
 
 
-byteStringtoPKH :: Haskell.String -> PaymentPubKeyHash
-byteStringtoPKH bs = PaymentPubKeyHash (Ledger.PubKeyHash $ decodeHex (B.pack bs))
+
+
+
+
+
+
+
+
+
+
+
 
 slotCfg :: SlotConfig
 slotCfg = def
