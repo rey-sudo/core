@@ -316,19 +316,17 @@ bStoSPKH bs = StakePubKeyHash (PubKeyHash $ decodeHex (B.pack bs))
 
 
 
-slotCfg :: SlotConfig
-slotCfg = def
+--slotCfg :: SlotConfig
+--slotCfg = def
 
-timer :: V2.POSIXTime
-timer = TimeSlot.slotToEndPOSIXTime slotCfg (Slot 50)
+--timer :: V2.POSIXTime
+--timer = TimeSlot.slotToEndPOSIXTime slotCfg (Slot 50)
 
-deadlineRange :: VI.ValidityInterval V2.POSIXTime
-deadlineRange = VI.from timer
+--deadlineRange :: VI.ValidityInterval V2.POSIXTime
+--deadlineRange = VI.from timer
 
-
-
-
-
-
+--      logInfo @String $ "runInitialiseWithUnbalanced " <> show utx
+--      adjustUnbalancedTx utx >>= yieldUnbalancedTx
+--      pure initialState
 
 
