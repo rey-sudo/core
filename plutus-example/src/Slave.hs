@@ -290,8 +290,8 @@ pkhToAddress ppkh spkh =
         . plutusAddress         
     where
     plutusAddress =
-        Address (PubKeyCredential $ unPaymentPubKeyHash $ ppkh)
-                (StakingHash . PubKeyCredential . unStakePubKeyHash <$> Just spkh)
+        Address (PubKeyCredential $ unPaymentPubKeyHash ppkh)
+                (Just (StakingHash (PubKeyCredential $ unStakePubKeyHash spkh)))
 
 
 
