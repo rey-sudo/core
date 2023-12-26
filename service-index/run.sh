@@ -32,3 +32,7 @@ cd service-index
 plutus-chain-index --socket-path $node_config_path/db/node.socket \
     --db-path ./index.db \
     --network-id $network_id start-index
+
+
+
+    
