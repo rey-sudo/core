@@ -285,9 +285,7 @@ startEndpoint = endpoint @"start" $ \(StartParams{sWalletParam, bWalletParam, pP
         
 pkhToAddress :: PaymentPubKeyHash -> StakePubKeyHash -> CardanoAddress 
 pkhToAddress ppkh spkh =
-    fromRight (error "mock wallet is invalid")
-        . Tx.toCardanoAddressInEra Nparams.testnet
-        . plutusAddress         
+    fromRight (error "mock wallet is invalid") (Tx.toCardanoAddressInEra Nparams.testnet plutusAddress)
     where
     plutusAddress =
         Address (PubKeyCredential $ unPaymentPubKeyHash ppkh)
