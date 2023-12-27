@@ -85,7 +85,6 @@ data SlaveState = SlaveState
     , pDelivered  :: Bool
     , pReceived   :: Bool
     , sWallet     :: PaymentPubKeyHash
-    , sAddress    :: CardanoAddress    
     , bWallet     :: PaymentPubKeyHash
     , pPrice      :: Ada.Ada
     , sCollateral :: Ada.Ada
@@ -99,7 +98,6 @@ PlutusTx.makeLift ''SlaveState
 
 data Params = Params
     { sWallet'     :: PaymentPubKeyHash
-    , sAddress'    :: CardanoAddress
     , bWallet'     :: PaymentPubKeyHash
     , pPrice'      :: Ada.Ada
     , sCollateral' :: Ada.Ada
@@ -231,7 +229,6 @@ initialState params tt = SlaveState { cState = 0
                                     , pDelivered = False
                                     , pReceived = False
                                     , sWallet = sWallet' params
-                                    , sAddress = sAddress' params
                                     , bWallet = bWallet' params
                                     , pPrice = pPrice' params
                                     , sCollateral = sCollateral' params
@@ -262,7 +259,6 @@ startEndpoint = endpoint @"start" $ \(StartParams{sWalletParam, bWalletParam, pP
 
               let sp = Params { sWallet'     = bStoPPKH sWalletParam 
                               , bWallet'     = bStoPPKH bWalletParam
-                              , sAddress'    = pkhToAddress (bStoPPKH sWalletParam) (bStoSPKH sWalletParam)
                               , pPrice'      = Ada.lovelaceOf pPriceParam
                               , sCollateral' = Ada.lovelaceOf sCollateralParam
                               }
@@ -272,30 +268,21 @@ startEndpoint = endpoint @"start" $ \(StartParams{sWalletParam, bWalletParam, pP
                   theConstraints  = Constraints.mustBeSignedBy (sWallet' sp)
 
                   theLookups      = Constraints.typedValidatorLookups (typedValidator sp)
-                  theAddress      = (sAddress' sp)
+                  theAddress      = pkhToAddress (bStoPPKH sWalletParam) (bStoSPKH sWalletParam)
                   theInitialState = initialState sp tt
 
               SM.runInitialiseWithUnbalanced theLookups theConstraints theClient theInitialState theCollateral theAddress
               void $ logInfo @Text "START_ENDPOINT"
 
 
-
-
-
-        
 pkhToAddress :: PaymentPubKeyHash -> StakePubKeyHash -> CardanoAddress 
-pkhToAddress ppkh spkh =
-    fromRight (error "mock wallet is invalid") (Tx.toCardanoAddressInEra Nparams.testnet plutusAddress)
-    where
+pkhToAddress ppkh spkh = fromRight (error "asdas") (Tx.toCardanoAddressInEra Nparams.testnet plutusAddress)
+    where    
     plutusAddress =
         Address (PubKeyCredential $ unPaymentPubKeyHash ppkh)
                 (Just (StakingHash (PubKeyCredential $ unStakePubKeyHash spkh)))
 
 
-
-
-
-        
 bStoPPKH :: Haskell.String -> PaymentPubKeyHash
 bStoPPKH bs = PaymentPubKeyHash (PubKeyHash $ decodeHex (B.pack bs))
 
