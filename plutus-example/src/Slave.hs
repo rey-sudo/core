@@ -273,7 +273,7 @@ startEndpoint = endpoint @"start" $ \(StartParams{sWalletParam, bWalletParam, pP
                   theCollateral   = Ada.toValue (sCollateral' sp)
                   theConstraints  = Constraints.mustBeSignedBy (sWallet' sp)
 
-                  theLookups      = Constraints.typedValidatorLookups (typedValidator sp)
+                  theLookups      = Constraints.paymentPubKeyHash (sWallet' sp)
                   theInitialState = initialState sp tt
                   theAddress      = pkhToAddress RawSellerAddr { ppkh = bStoPPKH sWalletParam
                                                                , spkh = bStoSPKH sWalletParam
@@ -298,8 +298,9 @@ pkhToAddress =
     where    
     plutusAddress w =
         Address (PubKeyCredential $ unPaymentPubKeyHash $ ppkh w)
-                (Just (StakingHash (PubKeyCredential $ unStakePubKeyHash $ spkh  w)))
+                (Nothing)
 
+--(Just (StakingHash (PubKeyCredential $ unStakePubKeyHash $ spkh  w)))
 
 bStoPPKH :: Haskell.String -> PaymentPubKeyHash
 bStoPPKH bs = PaymentPubKeyHash (PubKeyHash $ decodeHex (B.pack bs))

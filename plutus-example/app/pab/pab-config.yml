@@ -63,13 +63,18 @@ chainIndexConfig:
   ciBaseUrl: http://localhost:9083
   ciWatchedAddresses: []
 
+
+#blockfrostConfig:
+#  bfTokenPath: ./preview/blockfrost.json
+
+
 requestProcessingConfig:
   requestProcessingInterval: 1
 
-signingProcessConfig:
-  spBaseUrl: http://localhost:9084
-  spWallet:
-    getWallet: 1
+#signingProcessConfig:
+#  spBaseUrl: http://localhost:8090
+#  spWallet:
+#    getWallet: 1
 
 metadataServerConfig:
   mdBaseUrl: http://localhost:9085
@@ -88,8 +93,6 @@ developmentOptions:
 # ----
 #  { "tag" : "PointAtGenesis" }
 
-#blockfrostConfig:
-#  bfTokenPath: ./preview/blockfrost.json
 
 
 monitoringConfig:

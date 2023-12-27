@@ -98,6 +98,7 @@ library
     , serialise
     , strict-containers
     , text
+    , mtl
     , transformers
     , transformers-except
     , base
