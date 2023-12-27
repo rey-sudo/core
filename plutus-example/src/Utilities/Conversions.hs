@@ -13,6 +13,7 @@ module Utilities.Conversions
   , bytesToHex
   , tryReadAddress
   , decodeHex
+  , pkhToPubKeyHash
   ) where
 
 import qualified Cardano.Api                 as Api
@@ -46,6 +47,9 @@ import qualified Data.ByteString.Base16 as B16
 import qualified Data.ByteString.Lazy  as LBS
 import qualified Data.ByteString.Short as SBS
 import qualified PlutusTx.Prelude as PlutusPrelude 
+import qualified Plutus.V1.Ledger.Api                            as LedgerApiV1
+import qualified Ledger.Bytes                                    as LedgerBytes
+import qualified Data.String                                     as DataString
 
 
 hashScript :: Api.PlutusScript Api.PlutusScriptV2 -> Api.ScriptHash
@@ -122,3 +126,15 @@ decodeHex hexBS =
                 
         where        
             getTx :: Either String B.ByteString = B16.decode hexBS
+
+
+
+
+pkhToPubKeyHash :: String -> LedgerApiV1.PubKeyHash
+pkhToPubKeyHash s =
+    case LedgerBytes.fromHex (DataString.fromString s) of
+        Right (LedgerBytes.LedgerBytes bytes) -> LedgerApiV1.PubKeyHash bytes
+        Left msg                              -> error $ "Could not convert from hex to bytes: " ++ show msg
+
+
+

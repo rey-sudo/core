@@ -77,10 +77,9 @@ import Cardano.Api.Shelley qualified as C
 import Plutus.V1.Ledger.Api (Address (Address), Credential (PubKeyCredential), StakingCredential (StakingHash))
 import Control.Monad.Error.Lens (throwing)
 import Data.Either (fromRight, either)
+
 --------
 import Prelude qualified as Haskell
-import qualified Prelude as P
-
 
 data SlaveState = SlaveState
     { cState      :: Integer
@@ -288,9 +287,9 @@ data RawSellerAddr = RawSellerAddr
         } deriving stock (Haskell.Show, Generic)
           deriving anyclass (ToJSON, FromJSON)
 
-getRight :: P.Either a b -> b
-getRight (P.Right x) = x
-getRight (P.Left _)  = P.error "getRight: Left"
+getRight :: Haskell.Either a b -> b
+getRight (Haskell.Right x) = x
+getRight (Haskell.Left _)  = Haskell.error "getRight: Left"
 
 pkhToAddress :: RawSellerAddr -> CardanoAddress 
 pkhToAddress = 
@@ -303,7 +302,7 @@ pkhToAddress =
 --(Just (StakingHash (PubKeyCredential $ unStakePubKeyHash $ spkh  w)))
 
 bStoPPKH :: Haskell.String -> PaymentPubKeyHash
-bStoPPKH bs = PaymentPubKeyHash (PubKeyHash $ decodeHex (B.pack bs))
+bStoPPKH bs = PaymentPubKeyHash $ pkhToPubKeyHash bs
 
 bStoSPKH :: Haskell.String -> StakePubKeyHash
 bStoSPKH bs = StakePubKeyHash (PubKeyHash $ decodeHex (B.pack bs))
@@ -313,7 +312,7 @@ bStoSPKH bs = StakePubKeyHash (PubKeyHash $ decodeHex (B.pack bs))
 
 
 
-
+              
 
 
 
