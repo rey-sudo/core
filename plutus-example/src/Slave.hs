@@ -79,6 +79,8 @@ import Control.Monad.Error.Lens (throwing)
 import Data.Either (fromRight, either)
 --------
 import Prelude qualified as Haskell
+import qualified Prelude as P
+
 
 data SlaveState = SlaveState
     { cState      :: Integer
@@ -286,12 +288,13 @@ data RawSellerAddr = RawSellerAddr
         } deriving stock (Haskell.Show, Generic)
           deriving anyclass (ToJSON, FromJSON)
 
+getRight :: P.Either a b -> b
+getRight (P.Right x) = x
+getRight (P.Left _)  = P.error "getRight: Left"
 
 pkhToAddress :: RawSellerAddr -> CardanoAddress 
 pkhToAddress = 
-    fromRight (throwing _SlaveContractError "something went wrong")
-            . Tx.toCardanoAddressInEra Nparams.testnet
-            . plutusAddress 
+    getRight . Tx.toCardanoAddressInEra Nparams.testnet . plutusAddress 
     where    
     plutusAddress w =
         Address (PubKeyCredential $ unPaymentPubKeyHash $ ppkh w)
