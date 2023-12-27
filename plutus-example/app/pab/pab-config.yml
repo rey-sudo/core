@@ -1,7 +1,7 @@
 # Configuration for an SQLite file
 sqliteDB:
   dbConfigFile: ./app/pab/preview/dbpreview.db
-  dbConfigPoolSize: 1
+  dbConfigPoolSize: 2
 
 #postgresDB:
 #  dbConfigUser: postgres
@@ -79,8 +79,8 @@ developmentOptions:
     #    { "tag" : "PointAtGenesis" }
     {
       "tag": "Point",
-      "pointBlockId": "894e3f8b09a8fa1d181f5e847568e219a8088bc02b7ea1182d4883eaf16e59ef",
-      "pointSlot": { "getSlot": 2802124 },
+      "pointBlockId": "893dd999b26a34cc827904366396c838c099db59aded45dc36bb2f2c76fd7168",
+      "pointSlot": { "getSlot": 37053296 },
     }
 
 # Optional EKG Server Config
