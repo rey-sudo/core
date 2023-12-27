@@ -66,7 +66,7 @@ import Cardano.Node.Emulator.Internal.Node.TimeSlot as TimeSlot
 import           Ledger                     (Slot (..))  
 import Data.Default               (def)
 
-import Data.Either (fromRight)
+
 import Ledger.Tx.CardanoAPI
 import Plutus.ChainIndex.Config
 import Cardano.Node.Emulator.Internal.Node.Params qualified as Nparams
@@ -75,6 +75,8 @@ import Cardano.Api qualified as C
 import Cardano.Api.Byron qualified as C
 import Cardano.Api.Shelley qualified as C
 import Plutus.V1.Ledger.Api (Address (Address), Credential (PubKeyCredential), StakingCredential (StakingHash))
+import Control.Monad.Error.Lens (throwing)
+import Data.Either (fromRight, either)
 --------
 import Prelude qualified as Haskell
 
@@ -256,31 +258,44 @@ startEndpoint :: Promise () SlaveSchema SlaveError ()
 startEndpoint = endpoint @"start" $ \(StartParams{sWalletParam, bWalletParam, pPriceParam, sCollateralParam}) -> do                     
               pkh <- ownFirstPaymentPubKeyHash
               tt  <- SM.getThreadToken
+              
 
               let sp = Params { sWallet'     = bStoPPKH sWalletParam 
                               , bWallet'     = bStoPPKH bWalletParam
                               , pPrice'      = Ada.lovelaceOf pPriceParam
                               , sCollateral' = Ada.lovelaceOf sCollateralParam
                               }
-                                         
+
+                                      
                   theClient       = client sp 
                   theCollateral   = Ada.toValue (sCollateral' sp)
                   theConstraints  = Constraints.mustBeSignedBy (sWallet' sp)
 
                   theLookups      = Constraints.typedValidatorLookups (typedValidator sp)
-                  theAddress      = pkhToAddress (bStoPPKH sWalletParam) (bStoSPKH sWalletParam)
                   theInitialState = initialState sp tt
-
+                  theAddress      = pkhToAddress RawSellerAddr { ppkh = bStoPPKH sWalletParam
+                                                               , spkh = bStoSPKH sWalletParam
+                                                               }
+              
               SM.runInitialiseWithUnbalanced theLookups theConstraints theClient theInitialState theCollateral theAddress
               void $ logInfo @Text "START_ENDPOINT"
 
+data RawSellerAddr = RawSellerAddr
+        { ppkh  :: PaymentPubKeyHash
+        , spkh :: StakePubKeyHash
+        } deriving stock (Haskell.Show, Generic)
+          deriving anyclass (ToJSON, FromJSON)
 
-pkhToAddress :: PaymentPubKeyHash -> StakePubKeyHash -> CardanoAddress 
-pkhToAddress ppkh spkh = fromRight (error "asdas") (Tx.toCardanoAddressInEra Nparams.testnet plutusAddress)
+
+pkhToAddress :: RawSellerAddr -> CardanoAddress 
+pkhToAddress = 
+    fromRight (throwing _SlaveContractError "something went wrong")
+            . Tx.toCardanoAddressInEra Nparams.testnet
+            . plutusAddress 
     where    
-    plutusAddress =
-        Address (PubKeyCredential $ unPaymentPubKeyHash ppkh)
-                (Just (StakingHash (PubKeyCredential $ unStakePubKeyHash spkh)))
+    plutusAddress w =
+        Address (PubKeyCredential $ unPaymentPubKeyHash $ ppkh w)
+                (Just (StakingHash (PubKeyCredential $ unStakePubKeyHash $ spkh  w)))
 
 
 bStoPPKH :: Haskell.String -> PaymentPubKeyHash
