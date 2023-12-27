@@ -1,8 +1,7 @@
 # Configuration for an SQLite file
 sqliteDB:
   dbConfigFile: ./app/pab/preview/dbpreview.db
-  dbConfigPoolSize: 20
-
+  dbConfigPoolSize: 1
 
 #postgresDB:
 #  dbConfigUser: postgres
@@ -40,7 +39,7 @@ nodeServerConfig:
   pscNodeServerConfig:
     nscBaseUrl: http://0.0.0.0:3001
     nscSocketPath: /home/debian/Documents/GitHub/marketplace/service-node/bin/configuration/preview/db/node.socket
-    nscKeptBlocks: 1
+    nscKeptBlocks: 50
     nscNetworkId: 2
     nscSlotConfig:
       scSlotZeroTime: 1596059091000 # Wednesday, July 29, 2020 21:44:51 - shelley launch time in milliseconds
@@ -50,31 +49,26 @@ nodeServerConfig:
       - getWallet: 2
       - getWallet: 3
 
-
-
   # Which cardano-node to use
   # Options are
   # - MockNode          (plutus-apps internal mock version of the node)
   # - AlonzoNode        (cardano-node via socket connection)
   # - NoChainSyncEvents (no node for chain sync events)
 
-
 chainIndexConfig:
   ciBaseUrl: http://localhost:9083
   ciWatchedAddresses: []
 
-
 #blockfrostConfig:
 #  bfTokenPath: ./preview/blockfrost.json
-
 
 requestProcessingConfig:
   requestProcessingInterval: 1
 
-#signingProcessConfig:
-#  spBaseUrl: http://localhost:8090
-#  spWallet:
-#    getWallet: 1
+signingProcessConfig:
+  spBaseUrl: http://localhost:9084
+  spWallet:
+    getWallet: 1
 
 metadataServerConfig:
   mdBaseUrl: http://localhost:9085
@@ -82,18 +76,16 @@ metadataServerConfig:
 developmentOptions:
   pabRollbackHistory: null
   pabResumeFrom:
-#    { "tag" : "PointAtGenesis" }  
-    { "tag" : "Point"
-    , "pointBlockId" : "563793a4d290a0b9a8f69453a17ac9a371dde77519988518a0e738ba24766ad4"
-    , "pointSlot" : { "getSlot" : 36747387 }
+    #    { "tag" : "PointAtGenesis" }
+    {
+      "tag": "Point",
+      "pointBlockId": "894e3f8b09a8fa1d181f5e847568e219a8088bc02b7ea1182d4883eaf16e59ef",
+      "pointSlot": { "getSlot": 2802124 },
     }
-
 
 # Optional EKG Server Config
 # ----
 #  { "tag" : "PointAtGenesis" }
-
-
 
 monitoringConfig:
   monitoringPort: 9090

@@ -2,7 +2,7 @@
 WORKDIR=$(pwd)
 network=$1
 cardano_node_path="$WORKDIR/bin/"
-node_config_path="$WORKDIR/bin/configuration/$network/"
+node_config_path="$WORKDIR/bin/configuration/$network"
 source="https://book.world.dev.cardano.org"
 
 echo "Output: $cardano_node_path"
