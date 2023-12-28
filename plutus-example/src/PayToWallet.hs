@@ -33,7 +33,7 @@ import Data.Aeson (FromJSON, ToJSON)
 import Data.Void (Void)
 import GHC.Generics (Generic)
 
-import Plutus.Contract (ContractError, type (.\/), Endpoint, Contract, Promise, AsContractError(..), endpoint, logInfo, logWarn, ownFirstPaymentPubKeyHash, utxosAt, selectList)
+
 import Ledger (PaymentPubKeyHash (PaymentPubKeyHash, unPaymentPubKeyHash),)
 import Ledger.Address (CardanoAddress(..), PaymentPrivateKey (PaymentPrivateKey, unPaymentPrivateKey),
                        PaymentPubKey (PaymentPubKey, unPaymentPubKey),
@@ -42,6 +42,7 @@ import Ledger.Address (CardanoAddress(..), PaymentPrivateKey (PaymentPrivateKey,
                        stakePubKeyHashCredential)
 
 import Ledger.Tx.Constraints (mustPayToPubKey)
+import Plutus.Contract (ContractError, type (.\/), Endpoint, Contract, Promise, AsContractError(..), endpoint, logInfo, logWarn, ownFirstPaymentPubKeyHash, utxosAt, selectList)
 import Plutus.Contract (mapError, ownUtxos, ContractError, Endpoint, Promise, adjustUnbalancedTx, endpoint, logInfo, mkTxConstraints,
                         yieldUnbalancedTx)
 import Plutus.Contract.Request (utxosAt)                        
@@ -94,11 +95,12 @@ startEndpoint = endpoint @"Start" $ \StartParams{pPriceParam, sWalletParam} ->
     let price = Ada.toValue $ Ada.lovelaceOf pPriceParam
         ppkh  = bStoPPKH sWalletParam
         constraints = (mustPayToPubKey ppkh price)
+        lookups = (Constraints.unspentOutputs utxos)
     
 
     logInfo @Haskell.String "testi"
 
-    utx <- mkTxConstraints @Void Haskell.mempty constraints
+    utx <- mkTxConstraints @Void lookups constraints
     logInfo @Haskell.String $ "Yielding the unbalanced transaction " <> Haskell.show utx
     adjustUnbalancedTx utx >>= yieldUnbalancedTx
 
