@@ -44,4 +44,4 @@ instance Builtin.HasDefinitions MarketplaceContracts where
     getContract = \case
         SlaveContract      -> Builtin.SomeBuiltin S.contract
         IntegrationTest    -> Builtin.SomeBuiltin IT.run
-        PayToWallet        -> Builtin.SomeBuiltin PW.payToWallet
+        PayToWallet        -> Builtin.SomeBuiltin PW.startEndpoint
