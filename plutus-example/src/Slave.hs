@@ -94,7 +94,6 @@ data SlaveState = SlaveState
     , bWallet     :: PaymentPubKeyHash
     , pPrice      :: Ada.Ada
     , sCollateral :: Ada.Ada
-    , mToken      :: SM.ThreadToken
     } | Appeal | Finished
     deriving stock (Haskell.Eq, Haskell.Show, Generic)
     deriving anyclass (ToJSON, FromJSON)
@@ -226,18 +225,17 @@ typedValidator = V2.mkTypedValidatorParam @(SM.StateMachine SlaveState Input)
 client :: Params -> SM.StateMachineClient SlaveState Input
 client params = SM.mkStateMachineClient $ SM.StateMachineInstance (machine params) (typedValidator params)
 
-initialState :: Params -> SM.ThreadToken -> SlaveState
-initialState params tt = SlaveState { cState = 0
-                                    , sLabel = "waiting"
-                                    , bSlot  = False
-                                    , pDelivered = False
-                                    , pReceived = False
-                                    , sWallet = sWallet' params
-                                    , bWallet = bWallet' params
-                                    , pPrice = pPrice' params
-                                    , sCollateral = sCollateral' params
-                                    , mToken = tt
-                                    }
+initialState :: Params -> SlaveState
+initialState params = SlaveState { cState = 0
+                                       , sLabel = "waiting"
+                                       , bSlot  = False
+                                       , pDelivered = False
+                                       , pReceived = False
+                                       , sWallet = sWallet' params
+                                       , bWallet = bWallet' params
+                                       , pPrice = pPrice' params
+                                       , sCollateral = sCollateral' params
+                                       }
 
 contract :: Contract () SlaveSchema SlaveError ()
 contract = forever endpoints where
@@ -258,9 +256,12 @@ contract = forever endpoints where
 
 startEndpoint :: Promise () SlaveSchema SlaveError ()
 startEndpoint = endpoint @"Start" $ \StartParams{sWalletParam, bWalletParam, pPriceParam, sCollateralParam} -> do                     
-              tt  <- SM.getThreadToken
-              utxos <- utxosAt $ ppkhToAddress $ bStoPPKH sWalletParam
-              
+              logInfo @Haskell.String "1"
+
+              utxos <- utxosAt $ ppkhToAddress (bStoPPKH sWalletParam)
+
+              logInfo @Haskell.String "2"
+
               let params = Params { sWallet'     = bStoPPKH sWalletParam 
                                   , bWallet'     = bStoPPKH bWalletParam
                                   , pPrice'      = Ada.lovelaceOf pPriceParam
@@ -269,10 +270,11 @@ startEndpoint = endpoint @"Start" $ \StartParams{sWalletParam, bWalletParam, pPr
 
                   theClient       = client params 
                   theCollateral   = Ada.toValue (sCollateral' params)
-                  theConstraints  = mempty
-                  theLookups      = Constraints.unspentOutputs utxos
-                  theInitialState = initialState params tt
-
+                  theConstraints  = Haskell.mempty
+                  theLookups      = (Constraints.unspentOutputs utxos)
+                  theInitialState = initialState params
+                  
+              logInfo @Haskell.String "3"
               logInfo @Text "START_ENDPOINT"
               
               SM.runInitialiseWithUnbalanced theLookups theConstraints theClient theInitialState theCollateral

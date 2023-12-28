@@ -487,7 +487,6 @@ runInitialiseWithUnbalanced ::
     -> Contract w schema e ()
 runInitialiseWithUnbalanced customLookups customConstraints StateMachineClient{scInstance} initialState initialValue =
     mapError (review _SMContractError) $ do
-      utxo <- ownUtxos
       let StateMachineInstance{stateMachine, typedValidator} = scInstance
           constraints =
               mustPayToTheScriptWithInlineDatum
@@ -501,7 +500,6 @@ runInitialiseWithUnbalanced customLookups customConstraints StateMachineClient{s
               <> mustSpendPubKeyOutput ttOutRef
           lookups = Constraints.typedValidatorLookups typedValidator
               <> foldMap (plutusV2MintingPolicy . curPolicy . ttOutRef) (smThreadToken stateMachine)
-              <> Constraints.unspentOutputs utxo
               <> customLookups
       utx <- mkTxConstraints lookups constraints
       logInfo @String $ "runInitialiseWithUnbalanced " <> show utx
