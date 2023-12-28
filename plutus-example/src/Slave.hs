@@ -14,7 +14,9 @@
 {-# LANGUAGE ViewPatterns          #-}
 {-# OPTIONS_GHC -fno-ignore-interface-pragmas #-}
 {-# OPTIONS_GHC -fplugin-opt PlutusTx.Plugin:debug-context #-}
--- | A state machine with two states and two roles that take turns.
+
+
+
 module Slave(
     SlaveState(..),
     Input(..),
@@ -259,6 +261,7 @@ startEndpoint :: Promise () SlaveSchema SlaveError ()
 startEndpoint = endpoint @"start" $ \(StartParams{sWalletParam, bWalletParam, pPriceParam, sCollateralParam}) -> do                     
               pkh <- ownFirstPaymentPubKeyHash
               tt  <- SM.getThreadToken
+              utxos <- utxosAt $ ppkhToAddress $ bStoPPKH sWalletParam
               
 
               let sp = Params { sWallet'     = bStoPPKH sWalletParam 
@@ -270,33 +273,30 @@ startEndpoint = endpoint @"start" $ \(StartParams{sWalletParam, bWalletParam, pP
                                       
                   theClient       = client sp 
                   theCollateral   = Ada.toValue (sCollateral' sp)
-                  theConstraints  = Constraints.mustBeSignedBy (sWallet' sp)
-
-                  theLookups      = Constraints.paymentPubKeyHash (sWallet' sp)
+                  theConstraints  = mempty
+                  theLookups      = Constraints.unspentOutputs utxos
                   theInitialState = initialState sp tt
-                  theAddress      = pkhToAddress RawSellerAddr { ppkh = bStoPPKH sWalletParam
-                                                               , spkh = bStoSPKH sWalletParam
-                                                               }
-              
-              SM.runInitialiseWithUnbalanced theLookups theConstraints theClient theInitialState theCollateral theAddress
-              void $ logInfo @Text "START_ENDPOINT"
 
-data RawSellerAddr = RawSellerAddr
-        { ppkh  :: PaymentPubKeyHash
-        , spkh :: StakePubKeyHash
-        } deriving stock (Haskell.Show, Generic)
-          deriving anyclass (ToJSON, FromJSON)
+              void $ logInfo @Text "START_ENDPOINT"
+              
+              SM.runInitialiseWithUnbalanced theLookups theConstraints theClient theInitialState theCollateral
+
+              
+
+
+
+
 
 getRight :: Haskell.Either a b -> b
 getRight (Haskell.Right x) = x
 getRight (Haskell.Left _)  = Haskell.error "getRight: Left"
 
-pkhToAddress :: RawSellerAddr -> CardanoAddress 
-pkhToAddress = 
+ppkhToAddress :: PaymentPubKeyHash -> CardanoAddress 
+ppkhToAddress = 
     getRight . Tx.toCardanoAddressInEra Nparams.testnet . plutusAddress 
     where    
-    plutusAddress w =
-        Address (PubKeyCredential $ unPaymentPubKeyHash $ ppkh w)
+    plutusAddress ppkh =
+        Address (PubKeyCredential $ unPaymentPubKeyHash ppkh)
                 (Nothing)
 
 --(Just (StakingHash (PubKeyCredential $ unStakePubKeyHash $ spkh  w)))
