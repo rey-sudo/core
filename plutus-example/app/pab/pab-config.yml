@@ -55,12 +55,12 @@ nodeServerConfig:
   # - AlonzoNode        (cardano-node via socket connection)
   # - NoChainSyncEvents (no node for chain sync events)
 
-#chainIndexConfig:
-#  ciBaseUrl: http://localhost:9083
-#  ciWatchedAddresses: []
+chainIndexConfig:
+  ciBaseUrl: http://localhost:9083
+  ciWatchedAddresses: []
 
-blockfrostConfig:
-  bfTokenPath: ./preview/blockfrost.json
+#blockfrostConfig:
+#  bfTokenPath: ./preview/blockfrost.json
 
 requestProcessingConfig:
   requestProcessingInterval: 1
