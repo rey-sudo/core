@@ -29,7 +29,7 @@ common common-definitions
     -Wall -Wcompat -Wincomplete-record-updates
     -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints
     -Wunused-packages -fobject-code -fno-ignore-interface-pragmas
-    -fno-omit-interface-pragmas
+    -fno-omit-interface-pragmas 
 
   if flag(defer-plugin-errors)
     ghc-options: -fplugin-opt PlutusTx.Plugin:defer-errors
@@ -41,6 +41,7 @@ library
   hs-source-dirs:     src
   exposed-modules:
     Slave
+    IntegrationTest
     Deploy
     Utilities
     Utilities.Conversions
@@ -88,6 +89,7 @@ library
     , plutus-tx-constraints    >=1.2.0  
     , plutus-core        >=1.0.0   
     , plutus-chain-index
+    , plutus-use-cases
   ------------------------
   -- Non-IOG dependencies
   ------------------------

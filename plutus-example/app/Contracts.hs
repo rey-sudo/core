@@ -22,10 +22,11 @@ import           Prettyprinter                          (Pretty (..), viaShow)
 import           Slave                                  as S
 import qualified Plutus.PAB.Effects.Contract.Builtin    as Builtin
 import           Prelude                                hiding (init)
-
+import           IntegrationTest                        as IT
 
 data MarketplaceContracts = SlaveContract
                           | MasterContract
+                          | IntegrationTest
                           deriving (Eq, Ord, Show, Generic)
                           deriving anyclass OpenApi.ToSchema
                           deriving anyclass (FromJSON, ToJSON)
@@ -36,9 +37,9 @@ instance Pretty MarketplaceContracts where
  
 
 instance Builtin.HasDefinitions MarketplaceContracts where
-    getDefinitions = [ SlaveContract, MasterContract ]
+    getDefinitions = [ SlaveContract, MasterContract, IntegrationTest ]
    
     getContract = \case
         SlaveContract    -> Builtin.SomeBuiltin S.contract
-     
+        IntegrationTest    -> Builtin.SomeBuiltin IT.run
      
