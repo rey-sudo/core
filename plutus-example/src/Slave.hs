@@ -47,7 +47,7 @@ import Ledger.Address (CardanoAddress(..), PaymentPrivateKey (PaymentPrivateKey,
 import Ledger.Tx.Constraints (TxConstraints)
 import Ledger.Tx.Constraints qualified as Constraints
 import Ledger.Typed.Scripts qualified as Scripts
-import Plutus.Contract
+import Plutus.Contract (ContractError, type (.\/), Endpoint, Contract, Promise, AsContractError(..), endpoint, logInfo, logWarn, ownFirstPaymentPubKeyHash, utxosAt, selectList)
 import Plutus.Contract.StateMachine (AsSMContractError (..), OnChainState, State (..), Void)
 import Plutus.Contract.StateMachine qualified as SM
 import Plutus.Script.Utils.Ada qualified as Ada
