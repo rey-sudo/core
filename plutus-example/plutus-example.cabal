@@ -44,6 +44,10 @@ library
     IntegrationTest
     Deploy
     PayToWallet
+    StateMachine
+    StateMachine.MintingPolarity
+    StateMachine.OnChain
+    StateMachine.ThreadToken
     Utilities
     Utilities.Conversions
     Utilities.PlutusTx
