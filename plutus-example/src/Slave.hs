@@ -15,8 +15,6 @@
 {-# OPTIONS_GHC -fno-ignore-interface-pragmas #-}
 {-# OPTIONS_GHC -fplugin-opt PlutusTx.Plugin:debug-context #-}
 
-
-
 module Slave(
     SlaveState(..),
     Input(..),
@@ -44,12 +42,18 @@ import Ledger.Address (CardanoAddress(..), PaymentPrivateKey (PaymentPrivateKey,
                        StakePubKey (StakePubKey, unStakePubKey), StakePubKeyHash (StakePubKeyHash, unStakePubKeyHash),
                        stakePubKeyHashCredential)
 
-import Ledger.Tx.Constraints (TxConstraints)
-import Ledger.Tx.Constraints qualified as Constraints
+import Ledger.Tx.Constraints (TxConstraints, mustPayToAddress, mustBeSignedBy)
+import Ledger.Tx.Constraints.OffChain qualified as Constraints
 import Ledger.Typed.Scripts qualified as Scripts
+import Ledger                     (Slot (..))  
+import Ledger.Tx.CardanoAPI
+
 import Plutus.Contract (ContractError, type (.\/), Endpoint, Contract, Promise, AsContractError(..), endpoint, logInfo, logWarn, ownFirstPaymentPubKeyHash, utxosAt, selectList)
+import Plutus.Contract.Request as Wallet (getUnspentOutput)
+
 import StateMachine (AsSMContractError (..), OnChainState, State (..), Void)
 import StateMachine qualified as SM
+
 import Plutus.Script.Utils.Ada qualified as Ada
 import Plutus.Script.Utils.Typed (ScriptContextV2)
 import Plutus.Script.Utils.V2.Typed.Scripts qualified as V2
@@ -60,16 +64,13 @@ import PlutusTx.Prelude hiding (Applicative (..), check)
 import qualified Data.ByteString.Char8 as B
 
 import Utilities
-import Plutus.Contract.Request as Wallet (getUnspentOutput)
-import Ledger.Tx.Constraints.ValidityInterval as VI
+
 import Plutus.V2.Ledger.Api qualified as V2
 import Plutus.V2.Ledger.Contexts qualified as V2
 import Cardano.Node.Emulator.Internal.Node.TimeSlot as TimeSlot
-import           Ledger                     (Slot (..))  
+
 import Data.Default               (def)
 
-
-import Ledger.Tx.CardanoAPI
 import Plutus.ChainIndex.Config
 import Cardano.Node.Emulator.Internal.Node.Params qualified as Nparams
 import Ledger.Tx.CardanoAPI.Internal qualified as Tx
@@ -175,7 +176,7 @@ instance AsContractError SlaveError where
 {-# INLINABLE transition #-}
 transition :: Params -> State SlaveState -> Input -> Maybe (TxConstraints Void Void, State SlaveState)
 transition params State{ stateData = oldData, stateValue = oldStateValue } input = case (oldData, input) of
-    (SlaveState{cState, bWallet, pPrice}, Locking)                          | cState == 0           -> let constraints = Constraints.mustBeSignedBy bWallet
+    (SlaveState{cState, bWallet, pPrice}, Locking)                          | cState == 0           -> let constraints = mustBeSignedBy bWallet
                                                                                                            newValue   =  oldStateValue + (Ada.toValue pPrice)
                                                                                                        in Just (constraints,
                                                                                                           State{stateData = oldData { cState = 1
@@ -185,7 +186,7 @@ transition params State{ stateData = oldData, stateValue = oldStateValue } input
                                                                                                                                     , stateValue = newValue })
 
 
-    (SlaveState{cState, sWallet}, Delivered)                                | cState == 1           -> let constraints = Constraints.mustBeSignedBy sWallet
+    (SlaveState{cState, sWallet}, Delivered)                                | cState == 1           -> let constraints = mustBeSignedBy sWallet
                                                                                                        in Just (constraints,
                                                                                                           State{ stateData = oldData { cState = 2
                                                                                                                                      , sLabel = "delivered"
@@ -195,8 +196,8 @@ transition params State{ stateData = oldData, stateValue = oldStateValue } input
 
 
     (SlaveState{cState, bWallet, sWallet, sCollateral, pPrice}, Received)   | cState == 2           -> let money = Ada.toValue (sCollateral + pPrice)
-                                                                                                           constraints = Constraints.mustBeSignedBy bWallet
-                                                                                                            <> Constraints.mustPayToAddress (pubKeyHashAddress sWallet Nothing) money
+                                                                                                           constraints = mustBeSignedBy bWallet
+                                                                                                            <> mustPayToAddress (pubKeyHashAddress sWallet Nothing) money
                                                                                                        in Just (constraints,
                                                                                                           State{ stateData = Finished, stateValue = mempty })
 
@@ -220,9 +221,7 @@ typedValidator = V2.mkTypedValidatorParam @(SM.StateMachine SlaveState Input)
     where
         wrap = Scripts.mkUntypedValidator @ScriptContextV2 @SlaveState @Input
 
-
 -- //////////////////////////////////////////////////////////////////////////
-
 
 client :: Params -> SM.StateMachineClient SlaveState Input
 client params = SM.mkStateMachineClient $ SM.StateMachineInstance (machine params) (typedValidator params)
