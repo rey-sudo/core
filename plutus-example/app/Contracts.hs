@@ -23,10 +23,12 @@ import           Slave                                  as S
 import qualified Plutus.PAB.Effects.Contract.Builtin    as Builtin
 import           Prelude                                hiding (init)
 import           IntegrationTest                        as IT
+import           PayToWallet                            as PW
 
 data MarketplaceContracts = SlaveContract
                           | MasterContract
                           | IntegrationTest
+                          | PayToWallet
                           deriving (Eq, Ord, Show, Generic)
                           deriving anyclass OpenApi.ToSchema
                           deriving anyclass (FromJSON, ToJSON)
@@ -37,9 +39,9 @@ instance Pretty MarketplaceContracts where
  
 
 instance Builtin.HasDefinitions MarketplaceContracts where
-    getDefinitions = [ SlaveContract, MasterContract, IntegrationTest ]
+    getDefinitions = [ SlaveContract, MasterContract, IntegrationTest, PayToWallet ]
    
     getContract = \case
-        SlaveContract    -> Builtin.SomeBuiltin S.contract
+        SlaveContract      -> Builtin.SomeBuiltin S.contract
         IntegrationTest    -> Builtin.SomeBuiltin IT.run
-     
+        PayToWallet        -> Builtin.SomeBuiltin PW.payToWallet

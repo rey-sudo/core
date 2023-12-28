@@ -30,9 +30,9 @@ pabWebserverConfig:
   # keyPath: host.key
 
 walletServerConfig:
-  tag: LocalWalletConfig
-  walletSettings:
-    baseUrl: http://localhost:8090
+  tag: RemoteWalletConfig
+#  walletSettings:
+#    baseUrl: http://localhost:8090
 
 nodeServerConfig:
   pscNodeMode: AlonzoNode

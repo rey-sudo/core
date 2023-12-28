@@ -43,6 +43,7 @@ library
     Slave
     IntegrationTest
     Deploy
+    PayToWallet
     Utilities
     Utilities.Conversions
     Utilities.PlutusTx
@@ -133,7 +134,8 @@ library
 executable plutus-example-deploy
   main-is: RunSlave.hs
   hs-source-dirs: app
-  other-modules: Contracts
+  other-modules: 
+    Contracts
   default-extensions:
     DeriveFoldable
     DeriveFunctor
