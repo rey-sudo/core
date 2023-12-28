@@ -79,12 +79,14 @@ import Plutus.Contract (AsContractError (_ContractError), Contract, ContractErro
                         ownUtxos, promiseBind, select, submitTxConfirmed, utxoIsProduced, utxoIsSpent, utxosAt,
                         utxosTxOutTxFromTx, yieldUnbalancedTx)
 import Plutus.Contract.Request (getUnspentOutput, mkTxConstraints)
-import Plutus.Contract.StateMachine.MintingPolarity (MintingPolarity (Burn, Mint))
-import Plutus.Contract.StateMachine.OnChain (State (State, stateData, stateValue),
+
+import StateMachine.MintingPolarity (MintingPolarity (Burn, Mint))
+import StateMachine.OnChain (State (State, stateData, stateValue),
                                              StateMachine (StateMachine, smFinal, smThreadToken, smTransition),
                                              StateMachineInstance (StateMachineInstance, stateMachine, typedValidator))
-import Plutus.Contract.StateMachine.OnChain qualified as SM
-import Plutus.Contract.StateMachine.ThreadToken (ThreadToken (ThreadToken), curPolicy, ttOutRef)
+import StateMachine.OnChain qualified as SM
+import StateMachine.ThreadToken (ThreadToken (ThreadToken), curPolicy, ttOutRef)
+
 import Plutus.Script.Utils.V2.Scripts (scriptCurrencySymbol)
 import Plutus.Script.Utils.V2.Typed.Scripts qualified as Typed
 import Plutus.Script.Utils.Value (Value)
@@ -504,32 +506,6 @@ runInitialiseWithUnbalanced customLookups customConstraints StateMachineClient{s
       utx <- mkTxConstraints lookups constraints
       logInfo @String $ "runInitialiseWithUnbalanced " <> show utx
       adjustUnbalancedTx utx >>= yieldUnbalancedTx
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

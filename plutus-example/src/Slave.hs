@@ -244,30 +244,29 @@ contract :: Contract () SlaveSchema SlaveError ()
 contract = forever endpoints where
         endpoints      = selectList [startEndpoint, locking, delivered, received]
 
-        locking        = endpoint @"locking" $ \(LockingParams{ lockingParams }) -> do
+        locking        = endpoint @"locking" $ \LockingParams{ lockingParams } -> do
                                                     void (SM.runStep (client lockingParams) Locking)
                                                     logInfo @Text "Buyer:locking"
 
-        delivered      = endpoint @"delivered" $ \(DeliveredParams{ deliveredParams }) -> do
+        delivered      = endpoint @"delivered" $ \DeliveredParams{ deliveredParams } -> do
                                                     void (SM.runStep (client deliveredParams) Delivered)
                                                     logInfo @Text "Seller:delivered"
 
-        received       = endpoint @"received" $ \(ReceivedParams{ receivedParams }) -> do
+        received       = endpoint @"received" $ \ReceivedParams{ receivedParams } -> do
                                                     void (SM.runStep (client receivedParams) Received)
                                                     logInfo @Text "Buyer:received"
 
 
 startEndpoint :: Promise () SlaveSchema SlaveError ()
-startEndpoint = endpoint @"Start" $ \(StartParams{sWalletParam, bWalletParam, pPriceParam, sCollateralParam}) -> do                     
-              pkh <- ownFirstPaymentPubKeyHash
+startEndpoint = endpoint @"Start" $ \StartParams{sWalletParam, bWalletParam, pPriceParam, sCollateralParam} -> do                     
               tt  <- SM.getThreadToken
               utxos <- utxosAt $ ppkhToAddress $ bStoPPKH sWalletParam
               
               let params = Params { sWallet'     = bStoPPKH sWalletParam 
-                              , bWallet'     = bStoPPKH bWalletParam
-                              , pPrice'      = Ada.lovelaceOf pPriceParam
-                              , sCollateral' = Ada.lovelaceOf sCollateralParam
-                              }
+                                  , bWallet'     = bStoPPKH bWalletParam
+                                  , pPrice'      = Ada.lovelaceOf pPriceParam
+                                  , sCollateral' = Ada.lovelaceOf sCollateralParam
+                                  }
 
                   theClient       = client params 
                   theCollateral   = Ada.toValue (sCollateral' params)
@@ -275,9 +274,10 @@ startEndpoint = endpoint @"Start" $ \(StartParams{sWalletParam, bWalletParam, pP
                   theLookups      = Constraints.unspentOutputs utxos
                   theInitialState = initialState params tt
 
-              void $ logInfo @Text "START_ENDPOINT"
+              logInfo @Text "START_ENDPOINT"
               
               SM.runInitialiseWithUnbalanced theLookups theConstraints theClient theInitialState theCollateral
+              
 
               
 

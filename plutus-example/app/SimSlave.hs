@@ -82,7 +82,7 @@ main = void $ Simulator.runSimulationWith handlers $ do
                            , sCollateralParam = 5_000_000
                            }
    
-    void $ Simulator.callEndpointOnInstance sellerCID "start" sp
+    void $ Simulator.callEndpointOnInstance sellerCID "Start" sp
     Simulator.logString @(Builtin MarketplaceContracts) $ "Params = " ++ show sp
     Simulator.waitNSlots 2
     

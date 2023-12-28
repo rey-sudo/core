@@ -58,7 +58,7 @@ newSlot = do
     seller <- Trace.activateContractWallet w1 theContract
     buyer <- Trace.activateContractWallet w2 theContract
     _ <- Trace.waitNSlots 5
-    Trace.callEndpoint @"start" seller startParams
+    Trace.callEndpoint @"Start" seller startParams
     void $ Trace.waitNSlots 5
     Trace.callEndpoint @"locking" buyer lockingParams
     void $ Trace.waitNSlots 5
@@ -70,7 +70,7 @@ newSlot = do
 tests :: TestTree
 tests = testGroup "SLAVE"
     [ checkPredicate "activate endpoints"
-        (endpointAvailable @"start" theContract (Trace.walletInstanceTag w1))
+        (endpointAvailable @"Start" theContract (Trace.walletInstanceTag w1))
         newSlot
     ]
 
