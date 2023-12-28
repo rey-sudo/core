@@ -48,8 +48,8 @@ import Ledger.Tx.Constraints (TxConstraints)
 import Ledger.Tx.Constraints qualified as Constraints
 import Ledger.Typed.Scripts qualified as Scripts
 import Plutus.Contract (ContractError, type (.\/), Endpoint, Contract, Promise, AsContractError(..), endpoint, logInfo, logWarn, ownFirstPaymentPubKeyHash, utxosAt, selectList)
-import Plutus.Contract.StateMachine (AsSMContractError (..), OnChainState, State (..), Void)
-import Plutus.Contract.StateMachine qualified as SM
+import StateMachine (AsSMContractError (..), OnChainState, State (..), Void)
+import StateMachine qualified as SM
 import Plutus.Script.Utils.Ada qualified as Ada
 import Plutus.Script.Utils.Typed (ScriptContextV2)
 import Plutus.Script.Utils.V2.Typed.Scripts qualified as V2
@@ -120,7 +120,7 @@ data Input = Locking | Delivered | Received
 PlutusTx.unstableMakeIsData ''Input
 PlutusTx.makeLift ''Input
 
--- | Arguments for the @"start"@ endpoint
+-- | Arguments for the @"Start"@ endpoint
 data StartParams =
     StartParams
         {  sWalletParam       :: Haskell.String
@@ -152,7 +152,7 @@ data ReceivedParams =
           deriving anyclass (ToJSON, FromJSON)
 
 type SlaveSchema =
-        Endpoint "start" StartParams
+        Endpoint "Start" StartParams
         .\/ Endpoint "locking" LockingParams
         .\/ Endpoint "delivered" DeliveredParams
         .\/ Endpoint "received" ReceivedParams
@@ -258,24 +258,22 @@ contract = forever endpoints where
 
 
 startEndpoint :: Promise () SlaveSchema SlaveError ()
-startEndpoint = endpoint @"start" $ \(StartParams{sWalletParam, bWalletParam, pPriceParam, sCollateralParam}) -> do                     
+startEndpoint = endpoint @"Start" $ \(StartParams{sWalletParam, bWalletParam, pPriceParam, sCollateralParam}) -> do                     
               pkh <- ownFirstPaymentPubKeyHash
               tt  <- SM.getThreadToken
               utxos <- utxosAt $ ppkhToAddress $ bStoPPKH sWalletParam
               
-
-              let sp = Params { sWallet'     = bStoPPKH sWalletParam 
+              let params = Params { sWallet'     = bStoPPKH sWalletParam 
                               , bWallet'     = bStoPPKH bWalletParam
                               , pPrice'      = Ada.lovelaceOf pPriceParam
                               , sCollateral' = Ada.lovelaceOf sCollateralParam
                               }
 
-                                      
-                  theClient       = client sp 
-                  theCollateral   = Ada.toValue (sCollateral' sp)
+                  theClient       = client params 
+                  theCollateral   = Ada.toValue (sCollateral' params)
                   theConstraints  = mempty
                   theLookups      = Constraints.unspentOutputs utxos
-                  theInitialState = initialState sp tt
+                  theInitialState = initialState params tt
 
               void $ logInfo @Text "START_ENDPOINT"
               
