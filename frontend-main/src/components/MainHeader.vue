@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     connectWallet() {
-      this.wallet.connect("nami");
+      this.wallet.connect("eternl");
     },
   },
   mounted() {

@@ -49,7 +49,7 @@ const stop = () => {
 };
 
 const connect = async (walletName) => {
-  await Wallet.connect(walletName, "preview", (res) => {
+  await Wallet.connect(walletName, 'testnet', (res) => {
     console.log(res);
     window.cardano.nami.enable()
   });
