@@ -186,7 +186,6 @@ export default {
   color: var(--text-b);
 }
 
-
 .card-header {
   flex-basis: 50%;
   overflow: hidden;
@@ -213,12 +212,14 @@ export default {
 .card-body-name {
   color: var(--text-a);
   font-size: var(--text-size-b);
-  text-transform: capitalize;
   text-align: left;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
+}
+.card-body-name span::first-letter {
+  text-transform: capitalize;
 }
 
 .card-body-slot {
