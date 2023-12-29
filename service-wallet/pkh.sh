@@ -1,4 +1,4 @@
-cardano-cli address key-hash --payment-verification-key-file service-wallet/keys/alice.vkey
+cardano-cli address key-hash --payment-verification-key-file /home/debian/Documents/GitHub/marketplace/service-wallet/keys/bob.vkey
 
 
 
