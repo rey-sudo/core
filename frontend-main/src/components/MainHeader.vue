@@ -18,7 +18,9 @@
       </div>
 
       <div class="header-box left hide" :class="{ scrolled: isScrolled }">
-        <label></label>
+        <label>
+          <i class="pi pi-tag"/>
+        </label>
         <div>
           <span>Hi,Sell</span>
           <span>Product</span>
@@ -41,7 +43,7 @@
 
     <div class="header-column right hide">
       <div class="header-box right" :class="{ scrolled: isScrolled }">
-        <label></label>
+        <label> <i class="pi pi-gift"></i></label>
         <div>
           <span>Be a</span>
           <span>Mediator</span>
@@ -49,7 +51,10 @@
       </div>
 
       <div class="header-box right" :class="{ scrolled: isScrolled }">
-        <img src="@/assets/car.svg" :class="{ scrolled: isScrolled }" alt="" />
+        <label for="">
+          <img src="@/assets/car.svg" :class="{ scrolled: isScrolled }" alt=""
+        /></label>
+
         <div>
           <span class="counter" :class="{ scrolled: isScrolled }">0</span>
           <span>Items</span>
@@ -57,7 +62,7 @@
       </div>
 
       <div class="header-box right" :class="{ scrolled: isScrolled }">
-        <i class="pi pi-wallet" />
+        <label for=""> <i class="pi pi-wallet" /></label>
         <div>
           <span>Connect</span>
           <span>Wallet</span>
@@ -230,15 +235,27 @@ img.scrolled {
   font-weight: 400;
 }
 
-.header-box img,
-label {
-  width: var(--text-size-e);
+.header-box img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.header-box label {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-box i {
+  width: 2rem;
 }
 
 .counter {
-  background: var(--base-a);
-  color: var(--text-a);
-  font-weight: 600;
+  background: var(--blue-a);
+  font-weight: 700 !important;
   border-radius: 99px;
   text-align: center !important;
   font-size: 12px !important;

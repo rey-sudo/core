@@ -113,7 +113,8 @@ export default {
   gap: 20px;
   padding: 0 2rem;
   min-height: 100vh;
-  border-radius: 32px;
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
   background: var(--base-a);
 }
 
