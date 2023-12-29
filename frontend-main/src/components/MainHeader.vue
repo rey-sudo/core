@@ -20,8 +20,8 @@
       <div class="header-box left hide" :class="{ scrolled: isScrolled }">
         <label></label>
         <div>
-          <span>Hi, Sell</span>
-          <span>Products</span>
+          <span>Hi,Sell</span>
+          <span>Product</span>
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@
           :class="{ scrolled: isScrolled }"
           type="text"
           maxlength="200"
-          placeholder="Search products, brands and more..."
+          placeholder="Search products"
         />
 
         <div><i class="pi pi-search" /></div>
@@ -43,7 +43,7 @@
       <div class="header-box right" :class="{ scrolled: isScrolled }">
         <label></label>
         <div>
-          <span>Or, Be a</span>
+          <span>Be a</span>
           <span>Mediator</span>
         </div>
       </div>
@@ -57,11 +57,7 @@
       </div>
 
       <div class="header-box right" :class="{ scrolled: isScrolled }">
-        <img
-          src="@/assets/wallet.svg"
-          :class="{ scrolled: isScrolled }"
-          alt=""
-        />
+        <i class="pi pi-wallet" />
         <div>
           <span>Connect</span>
           <span>Wallet</span>
@@ -110,15 +106,20 @@ header {
   box-sizing: border-box;
   background: initial;
   color: var(--text-w);
-  background: var(--secondary-a);
+  background: var(--blue);
 }
+
+i {
+  line-height: 0;
+}
+
 img.scrolled {
   filter: invert(1);
 }
 .header.scrolled {
   background: var(--base-a);
   color: var(--text-a);
-  border-bottom: 1px solid var(--border-a)
+  border-bottom: 1px solid var(--border-a);
 }
 .counter.scrolled {
   background: var(--base-c);
@@ -145,9 +146,6 @@ img.scrolled {
   border: 1px solid var(--blue);
   color: var(--text-b);
 }
-/*
--------------------------------------
-*/
 
 .header .header-logo {
   cursor: pointer;
@@ -209,7 +207,7 @@ img.scrolled {
 }
 
 .header-box.left {
-  margin-right: 2rem;
+  margin: auto;
 }
 
 .header-box.right {

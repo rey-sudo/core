@@ -1,12 +1,12 @@
 <template>
   <div class="store">
-    <div class="store-top">
+    <div class="top">
       <MainHeader />
-      <div class="store-top-mask" />
+      <div class="top-mask" />
 
-      <div class="store-top-menu">
-        <div class="column left">
-          <div class="submenu">
+      <div class="top-menu">
+        <div class="top-menu-column left">
+          <div class="submenu-button">
             <img src="@/assets/menu.svg" alt="" />
           </div>
 
@@ -21,11 +21,11 @@
           </div>
         </div>
 
-        <div class="column center"></div>
-        <div class="column right"></div>
+        <div class="top-menu-column center"></div>
+        <div class="top-menu-column right"></div>
       </div>
 
-      <div class="store-top-banner"></div>
+      <div class="top-banner"></div>
     </div>
 
     <GridWrap />
@@ -102,10 +102,9 @@ export default {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-
 }
 
-.store .store-top {
+.store .top {
   width: inherit;
   height: 600px;
   min-height: 600px;
@@ -118,7 +117,7 @@ export default {
   flex-direction: column;
 }
 
-.store .store-top .store-top-mask {
+.store .top .top-mask {
   width: inherit;
   height: inherit;
   z-index: 2;
@@ -127,34 +126,34 @@ export default {
   background: linear-gradient(180deg, var(--secondary-c) 80%, transparent 100%);
 }
 
-.store .store-top .store-top-menu {
+.store .top .top-menu {
   padding-left: 3rem;
   margin-top: 82px;
   z-index: 100;
   display: flex;
   align-items: center;
-  background: var(--secondary-a);
-  border-top: 1px solid rgb(255, 255, 255, 0.1);
+  background: var(--blue);
+  border-top: 1px solid var(--border-b);
 }
 
-.store .store-top .store-top-menu .column {
+.store .top .top-menu .top-menu-column {
   flex-basis: 33.33%;
 }
 
-.store .store-top .store-top-menu .column.left {
+.store .top .top-menu .top-menu-column.left {
   flex-basis: 33.33%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.store .store-top .store-top-menu .column.right {
+.store .top .top-menu .top-menu-column.right {
   flex-basis: 33.33%;
   display: flex;
   justify-content: center;
 }
 
-.store .store-top .store-top-menu .column.center {
+.store .top .top-menu .top-menu-column.center {
   flex-basis: 66.66%;
   width: auto;
   display: flex;
@@ -162,22 +161,22 @@ export default {
   justify-content: center;
 }
 
-.store .store-top .store-top-menu .column .submenu-nav {
+.store .top .top-menu .top-menu-column .submenu-nav {
   display: flex;
   align-items: center;
   padding: 0.25rem;
 }
 
-.store .store-top .store-top-menu .column .submenu {
+.store .top .top-menu .top-menu-column .submenu-button {
   cursor: pointer;
   margin-right: 1rem;
 }
 
-.store .store-top .store-top-menu .column .submenu img {
+.store .top .top-menu .top-menu-column .submenu-button img {
   width: var(--text-size-d);
 }
 
-.store .store-top .store-top-menu .column .submenu-nav div {
+.store .top .top-menu .top-menu-column .submenu-nav div {
   font-size: var(--text-size-a);
   white-space: nowrap;
   cursor: pointer;
@@ -190,12 +189,12 @@ export default {
   border-radius: 999px;
 }
 
-.store .store-top .store-top-menu .column .submenu-nav div:hover {
+.store .top .top-menu .top-menu-column .submenu-nav div:hover {
   color: var(--text-w);
   background: rgba(255, 255, 255, 0.1);
 }
 
-.store .store-top .store-top-banner {
+.store .top .top-banner {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 2rem;
@@ -205,7 +204,7 @@ export default {
 }
 
 @media only screen and (max-width: 600px) {
-  .store-top-menu {
+  .top-menu {
     display: none !important;
   }
 }
