@@ -107,8 +107,8 @@ export default {
 
 .store .top {
   width: inherit;
-  height: 600px;
-  min-height: 600px;
+  height: 640px;
+  min-height: 640px;
   z-index: 1;
   position: relative;
   inset: 0px 0px -1px;
@@ -134,7 +134,7 @@ export default {
   align-items: center;
   background: var(--blue-a);
   border-top: 1px solid var(--border-c);
-  border-bottom: 1px solid var(--border-d);
+  background: var(--secondary-a);
 }
 
 .store .top .top-menu .top-menu-column {
