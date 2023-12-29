@@ -106,7 +106,7 @@ header {
   box-sizing: border-box;
   background: initial;
   color: var(--text-w);
-  background: var(--blue);
+  background: var(--blue-b);
 }
 
 i {

@@ -102,13 +102,13 @@ export default {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--blue-a);
 }
 
 .store .top {
   width: inherit;
   height: 600px;
   min-height: 600px;
-  background: var(--base-a);
   z-index: 1;
   position: relative;
   inset: 0px 0px -1px;
@@ -123,7 +123,7 @@ export default {
   z-index: 2;
   position: absolute;
   backdrop-filter: blur(0px);
-  background: linear-gradient(180deg, var(--secondary-c) 80%, transparent 100%);
+  background: linear-gradient(180deg, var(--blue-b) 90%, rgba(0, 0, 0, 0.1) 100%);
 }
 
 .store .top .top-menu {
@@ -132,8 +132,9 @@ export default {
   z-index: 100;
   display: flex;
   align-items: center;
-  background: var(--blue);
-  border-top: 1px solid var(--border-b);
+  background: var(--blue-a);
+  border-top: 1px solid var(--border-c);
+  border-bottom: 1px solid var(--border-d);
 }
 
 .store .top .top-menu .top-menu-column {
