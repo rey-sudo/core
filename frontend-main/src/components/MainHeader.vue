@@ -19,7 +19,7 @@
 
       <div class="header-box left hide" :class="{ scrolled: isScrolled }">
         <label>
-          <i class="pi pi-tag"/>
+          <i class="pi pi-tag" />
         </label>
         <div>
           <span>Hi,Sell</span>
@@ -63,8 +63,8 @@
 
       <div class="header-box right" :class="{ scrolled: isScrolled }">
         <label for=""> <i class="pi pi-wallet" /></label>
-        <div>
-          <span>Connect</span>
+        <div @click="connectWallet">
+          <span>Login</span>
           <span>Wallet</span>
         </div>
       </div>
@@ -73,7 +73,16 @@
 </template>
 
 <script>
+import walletAPI from "@/api/wallet-api";
+
 export default {
+  setup() {
+    const wallet = walletAPI();
+
+    return {
+      wallet,
+    };
+  },
   data() {
     return {
       isScrolled: false,
@@ -83,6 +92,11 @@ export default {
         walletLabel: "Billetera",
       },
     };
+  },
+  methods: {
+    connectWallet() {
+      this.wallet.connect("nami");
+    },
   },
   mounted() {
     window.addEventListener("scroll", () => {
@@ -111,7 +125,7 @@ header {
   box-sizing: border-box;
   background: initial;
   color: var(--text-w);
-  background: var(--blue-b);
+  background: var(--secondary-a);
 }
 
 i {
@@ -225,6 +239,11 @@ img.scrolled {
   margin-left: 1rem;
 }
 
+.header-box div:hover {
+  text-decoration: underline;
+  transition: var(--button-transition-a);
+}
+
 .header-box span {
   font-size: var(--text-size-a);
   line-height: 1.25rem;
@@ -254,11 +273,12 @@ img.scrolled {
 }
 
 .counter {
-  background: var(--blue-a);
+  background: white;
+  color: var(--text-a);
   font-weight: 700 !important;
   border-radius: 99px;
   text-align: center !important;
-  font-size: 12px !important;
+  font-size: var(--text-size-a) !important;
 }
 
 .header-search {
