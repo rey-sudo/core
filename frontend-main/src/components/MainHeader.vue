@@ -280,7 +280,7 @@ img.scrolled {
 }
 
 .header-search:focus-within {
-  border: 1px solid var(--blue);
+  border: 1px solid transparent;
 }
 
 .header-search div {
