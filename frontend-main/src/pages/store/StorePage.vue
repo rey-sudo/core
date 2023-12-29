@@ -133,6 +133,7 @@ export default {
   display: flex;
   align-items: center;
   background: var(--blue-a);
+  border-top: 1px solid var(--border-d);
   border-bottom: 1px solid var(--border-d);
 }
 
