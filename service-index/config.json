@@ -5,8 +5,8 @@
   },
   "cicPort": 9083,
   "cicSecurityParam": 2160,
-  "cicSocketPath": "testnet/node.sock",
-  "cicDbPath": "/tmp/chain-index.db",
+  "cicSocketPath": "/home/debian/Documents/GitHub/marketplace/service-node/bin/configuration/preview/db/node.socket",
+  "cicDbPath": "./index.db",
   "cicNetworkId": {
     "contents": {
       "unNetworkMagic": 2
@@ -14,7 +14,7 @@
     "tag": "Testnet"
   },
   "cicStoreFrom": {
-    "unBlockNo": 0
+    "unBlockNo": 37053296
   },
   "cicAppendTransactionQueueSize": 500
 }
