@@ -3,7 +3,7 @@ import { stores } from "./store";
 import { router } from "./router";
 import { createApp } from 'vue';
 import 'primeicons/primeicons.css';
-import  walletAPI  from '@/api/wallet-api';
+import  { walletAPI }  from '@/api/wallet-api';
 
 
 

@@ -44,7 +44,7 @@
     <div class="header-column right hide">
       <div class="header-box right" :class="{ scrolled: isScrolled }">
         <label> <i class="pi pi-gift"></i></label>
-        <div>
+        <div @click="startTx">
           <span>Be a</span>
           <span>Mediator</span>
         </div>
@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import walletAPI from "@/api/wallet-api";
+import { walletAPI, CardanoWasm } from "@/api/wallet-api";
 
 export default {
   setup() {
@@ -96,6 +96,35 @@ export default {
   methods: {
     connectWallet() {
       this.wallet.connect("eternl");
+    },
+
+    async startTx() {
+      // const tx =
+      //  "84a300800181a300581d7055743d5cfd66af33d0891dc9dba441bce20d632b0fe81b0b6cfe483e011a004c4b40028201d818585cd8799f004777616974696e67d87980d87980d87980581c484ebc54b4112e54e1f7524dbdc6bb42635648a06c297e584592e80b581c3f2ec097f77e4254df012d5d4d4b45e48459c6ec5795e92df30f2dbc1a009896801a004c4b40ff0200a0f5f6";
+
+      const addr = CardanoWasm.Address.from_bech32(
+        "addr_test1qpqx3nnj5rmnapg0rxye5y9c9mznff26dkrquhzjvlw29wfrsvx98a6ugq6gn7hrversz52hf4yft4af5v9dv78p5zwseyadst"
+      );
+
+      const cAddress = CardanoWasm.BaseAddress.from_address(addr)
+        .payment_cred()
+        .to_keyhash();
+
+      //const result = await window.cardano.getUtxos();
+
+      if (cAddress == null) throw new Error();
+
+      const credential = cAddress;
+
+      const pubKeyHash = credential.to_keyhash(credential);
+
+      console.log(Buffer.from(pubKeyHash).toString("hex"));
+    },
+
+    doBalance() {
+      const tx =
+        "84a300800181a300581d7055743d5cfd66af33d0891dc9dba441bce20d632b0fe81b0b6cfe483e011a004c4b40028201d818585cd8799f004777616974696e67d87980d87980d87980581c484ebc54b4112e54e1f7524dbdc6bb42635648a06c297e584592e80b581c3f2ec097f77e4254df012d5d4d4b45e48459c6ec5795e92df30f2dbc1a009896801a004c4b40ff0200a0f5f6";
+      this.balanceTx(tx);
     },
   },
   mounted() {
