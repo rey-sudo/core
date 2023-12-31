@@ -26,7 +26,9 @@ module Slave(
     DeliveredParams(..),
     ReceivedParams(..),
     contract,
-    typedValidator
+    typedValidator,
+    ppkhToCardanoAddress,
+    stringToPPKH
     ) where
 
 import Control.Lens
@@ -256,14 +258,12 @@ contract = forever endpoints where
 
 startEndpoint :: Promise () SlaveSchema SlaveError ()
 startEndpoint = endpoint @"Start" $ \StartParams{sWalletParam, bWalletParam, pPriceParam, sCollateralParam} -> do                     
-              logInfo @Haskell.String "1"
+              utxos <- utxosAt $ ppkhToCardanoAddress (stringToPPKH sWalletParam)
 
-              utxos <- utxosAt $ ppkhToAddress (bStoPPKH sWalletParam)
+              logInfo @Haskell.String  $ "////UTXOS///" <> Haskell.show utxos
 
-              logInfo @Haskell.String "2"
-
-              let params = Params { sWallet'     = bStoPPKH sWalletParam 
-                                  , bWallet'     = bStoPPKH bWalletParam
+              let params = Params { sWallet'     = stringToPPKH sWalletParam 
+                                  , bWallet'     = stringToPPKH bWalletParam
                                   , pPrice'      = Ada.lovelaceOf pPriceParam
                                   , sCollateral' = Ada.lovelaceOf sCollateralParam
                                   }
@@ -274,7 +274,6 @@ startEndpoint = endpoint @"Start" $ \StartParams{sWalletParam, bWalletParam, pPr
                   theLookups      = (Constraints.unspentOutputs utxos)
                   theInitialState = initialState params
                   
-              logInfo @Haskell.String "3"
               logInfo @Text "START_ENDPOINT"
               
               SM.runInitialiseWithUnbalanced theLookups theConstraints theClient theInitialState theCollateral
@@ -290,8 +289,8 @@ getRight :: Haskell.Either a b -> b
 getRight (Haskell.Right x) = x
 getRight (Haskell.Left _)  = Haskell.error "getRight: Left"
 
-ppkhToAddress :: PaymentPubKeyHash -> CardanoAddress 
-ppkhToAddress = 
+ppkhToCardanoAddress :: PaymentPubKeyHash -> CardanoAddress 
+ppkhToCardanoAddress = 
     getRight . Tx.toCardanoAddressInEra Nparams.testnet . plutusAddress 
     where    
     plutusAddress ppkh =
@@ -300,20 +299,14 @@ ppkhToAddress =
 
 --(Just (StakingHash (PubKeyCredential $ unStakePubKeyHash $ spkh  w)))
 
-bStoPPKH :: Haskell.String -> PaymentPubKeyHash
-bStoPPKH bs = PaymentPubKeyHash $ pkhToPubKeyHash bs
+stringToPPKH :: Haskell.String -> PaymentPubKeyHash
+stringToPPKH bs = PaymentPubKeyHash $ pkhToPubKeyHash bs
 
 bStoSPKH :: Haskell.String -> StakePubKeyHash
 bStoSPKH bs = StakePubKeyHash (PubKeyHash $ decodeHex (B.pack bs))
 
 
-
-
-
-
               
-
-
 
 
 
