@@ -258,9 +258,9 @@ contract = forever endpoints where
 
 startEndpoint :: Promise () SlaveSchema SlaveError ()
 startEndpoint = endpoint @"Start" $ \StartParams{sWalletParam, bWalletParam, pPriceParam, sCollateralParam} -> do                     
-              utxos <- utxosAt $ ppkhToCardanoAddress (stringToPPKH sWalletParam)
+            --  utxos <- utxosAt $ ppkhToCardanoAddress (stringToPPKH sWalletParam)
 
-              logInfo @Haskell.String  $ "////UTXOS///" <> Haskell.show utxos
+            --  logInfo @Haskell.String  $ "////UTXOS///" <> Haskell.show utxos
 
               let params = Params { sWallet'     = stringToPPKH sWalletParam 
                                   , bWallet'     = stringToPPKH bWalletParam
@@ -271,7 +271,7 @@ startEndpoint = endpoint @"Start" $ \StartParams{sWalletParam, bWalletParam, pPr
                   theClient       = client params 
                   theCollateral   = Ada.toValue (sCollateral' params)
                   theConstraints  = Haskell.mempty
-                  theLookups      = (Constraints.unspentOutputs utxos)
+                  theLookups      = Haskell.mempty
                   theInitialState = initialState params
                   
               logInfo @Text "START_ENDPOINT"
