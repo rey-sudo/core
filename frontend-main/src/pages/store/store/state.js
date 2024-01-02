@@ -5,7 +5,7 @@ export default () => ({
       items: [
         {
           pid: "pid1",
-          name: "Blue cotton coat with thick collar for the cold cotton coat with thick collar for the cold",
+          name: "tailored comfort in azure cotton, unveiling timeless style and contemporary sophistication for a graceful statement piece in every occasion.",
           price_diff: 200,
           price: 220,
           image:
