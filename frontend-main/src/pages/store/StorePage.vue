@@ -128,7 +128,7 @@ export default {
 
 .store .top .top-menu {
   padding-left: 3rem;
-  margin-top: 82px;
+  margin-top: 73px;
   z-index: 100;
   display: flex;
   align-items: center;
@@ -201,7 +201,6 @@ export default {
   grid-gap: 2rem;
   z-index: 100;
   padding: 0 4rem;
-  margin-top: 2rem;
 }
 
 @media only screen and (max-width: 600px) {

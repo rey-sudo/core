@@ -22,7 +22,7 @@
           <i class="pi pi-tag" />
         </label>
         <div @click="doBalance">
-          <span>Hi,Sell</span>
+          <span>Hi, Sell</span>
           <span>Product</span>
         </div>
       </div>
@@ -142,7 +142,7 @@ export default {
 
 <style lang="css" scoped>
 header {
-  padding: 1.25rem;
+  padding: 1rem;
   padding-left: 3rem;
   padding-right: 3rem;
   display: flex;

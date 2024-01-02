@@ -150,7 +150,7 @@ export default {
 .card {
   width: calc(300px - 2rem);
   height: 600px;
-  border-radius: calc(1rem + 16px);
+  border-radius: calc(1rem + 8px);
   transition: box-shadow 0.25s ease-in-out 0s, transform 0.25s ease 0s;
   display: flex;
   flex-direction: column;
@@ -160,11 +160,7 @@ export default {
   padding-bottom: 0;
   margin: auto;
   border: 1px solid var(--border-b);
-  background: linear-gradient(
-    0deg,
-    var(--base-c) 0%,
-    rgba(255, 255, 255, 1) 15%
-  );
+
 }
 
 .card:hover {
@@ -203,7 +199,7 @@ export default {
   height: calc(300px - 2rem);
   min-width: calc(300px - 2rem);
   max-width: calc(300px - 2rem);
-  border-radius: 16px;
+  border-radius: 8px;
 }
 
 .card-body {
@@ -281,7 +277,7 @@ export default {
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
   border-right: transparent;
-  background: var(--base-a);
+  background: rgb(249 249 249)
 }
 
 .card-badge::after {
@@ -294,7 +290,7 @@ export default {
   border-bottom-right-radius: 0px;
   border-right: transparent;
   z-index: 1;
-  background: var(--base-a);
+  background: rgb(249 249 249)
 }
 
 @media (max-width: 768px) {
