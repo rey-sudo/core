@@ -5,7 +5,7 @@ export default () => ({
       items: [
         {
           pid: "pid1",
-          name: "tailored comfort in azure cotton, unveiling timeless style and contemporary sophistication for a graceful statement piece in every occasion.",
+          name: "Tailored comfort in azure cotton, unveiling timeless style and contemporary sophistication for a graceful",
           price_diff: 200,
           price: 220,
           image:
@@ -21,7 +21,7 @@ export default () => ({
         },
         {
           pid: "pid1",
-          name: "Waterproof hooded jacket four cotton coat with thick collar for the cold",
+          name: "Waterproof hooded jacket four cotton coat with thick collar for the cold with thick collar for the cold",
           price_diff: 200,
           price: 300,
           image:

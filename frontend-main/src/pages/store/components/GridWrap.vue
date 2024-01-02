@@ -22,10 +22,6 @@
               <span> {{ item.name }}</span>
             </div>
 
-            <div class="card-body-slot">
-              {{ item.payment_type }}
-            </div>
-
             <div
               class="card-body-stock"
               :class="{
@@ -151,7 +147,7 @@ export default {
 .card {
   width: calc(300px - 2rem);
   height: 600px;
-  border-radius: calc(1rem + 8px);
+  border-radius: calc(1rem + 12px);
   transition: box-shadow 0.25s ease-in-out 0s, transform 0.25s ease 0s;
   display: flex;
   flex-direction: column;
@@ -173,6 +169,7 @@ export default {
   text-align: left;
   color: var(--text-b);
   font-size: var(--text-size-a);
+ 
 }
 
 .card-body-collateral {
@@ -199,7 +196,7 @@ export default {
   height: calc(300px - 2rem);
   min-width: calc(300px - 2rem);
   max-width: calc(300px - 2rem);
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 .card-body {
@@ -208,13 +205,13 @@ export default {
 
 .card-body-name {
   color: var(--text-a);
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   text-align: left;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 .card-body-name span::first-letter {
   text-transform: capitalize;
