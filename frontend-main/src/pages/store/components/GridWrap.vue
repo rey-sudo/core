@@ -208,12 +208,13 @@ export default {
 
 .card-body-name {
   color: var(--text-a);
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
   text-align: left;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
+  font-weight: 600;
 }
 .card-body-name span::first-letter {
   text-transform: capitalize;

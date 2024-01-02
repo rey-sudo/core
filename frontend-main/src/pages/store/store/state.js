@@ -5,7 +5,7 @@ export default () => ({
       items: [
         {
           pid: "pid1",
-          name: "Blue cotton coat with thick collar for the cold",
+          name: "Blue cotton coat with thick collar for the cold cotton coat with thick collar for the cold",
           price_diff: 200,
           price: 220,
           image:
@@ -21,7 +21,7 @@ export default () => ({
         },
         {
           pid: "pid1",
-          name: "Waterproof hooded jacket four colors",
+          name: "Waterproof hooded jacket four cotton coat with thick collar for the cold",
           price_diff: 200,
           price: 300,
           image:

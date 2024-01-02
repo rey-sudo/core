@@ -128,13 +128,13 @@ export default {
 
 .store .top .top-menu {
   padding-left: 3rem;
-  margin-top: 73px;
+  margin-top: 74px;
   z-index: 100;
   display: flex;
   align-items: center;
   background: var(--blue-a);
   border-top: 1px solid var(--border-c);
-  background: var(--secondary-a);
+  background: black;
 }
 
 .store .top .top-menu .top-menu-column {
