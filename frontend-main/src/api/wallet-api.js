@@ -1,6 +1,6 @@
 import { Wallet } from "@cardano-foundation/cardano-connect-with-wallet-core";
 
-import * as CardanoWasm from "@emurgo/cardano-serialization-lib-asmjs";
+import * as CardanoWasm from "@emurgo/cardano-serialization-lib-browser";
 
 var Buffer = require('buffer/').Buffer
 
