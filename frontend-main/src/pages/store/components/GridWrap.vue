@@ -22,10 +22,6 @@
               <span> {{ item.name }}</span>
             </div>
 
-            <div class="card-body-price">
-              <span> {{ formatPrice(item.price) }} </span>
-            </div>
-
             <div class="card-body-slot">
               {{ item.payment_type }}
             </div>
@@ -42,6 +38,10 @@
 
             <div class="card-body-collateral">
               <span> {{ item.collateral }} ADA Collateral</span>
+            </div>
+
+            <div class="card-body-price">
+              <span> {{ formatPrice(item.price) }}</span>
             </div>
           </div>
 
@@ -94,12 +94,13 @@ export default {
     formatPrice(num) {
       const price = num || 0;
 
-      const formattedPrice = price.toLocaleString("en-US", {
-        style: "currency",
-        currency: "ADA",
-      });
+      const customCurrencySymbol = "₳";
 
-      return formattedPrice;
+      const formattedNumber = `${customCurrencySymbol} ${price.toLocaleString(
+        "en-US"
+      )}`;
+
+      return formattedNumber;
     },
   },
 };
@@ -127,7 +128,7 @@ export default {
   font-weight: 600;
   text-align: left;
   font-size: var(--text-size-b);
-  margin-bottom: 1rem;
+  margin-top: 1rem;
   color: var(--text-a);
 }
 
@@ -160,7 +161,6 @@ export default {
   padding-bottom: 0;
   margin: auto;
   border: 1px solid var(--border-b);
-
 }
 
 .card:hover {
@@ -171,7 +171,7 @@ export default {
 .card-body-stock {
   margin-bottom: 0.5rem;
   text-align: left;
-  color: var(--text-a);
+  color: var(--text-b);
   font-size: var(--text-size-a);
 }
 
@@ -221,7 +221,7 @@ export default {
 }
 
 .card-body-slot {
-  color: var(--text-a);
+  color: var(--text-b);
   font-size: var(--text-size-a);
   text-align: left;
   font-weight: initial;
@@ -278,7 +278,7 @@ export default {
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
   border-right: transparent;
-  background: rgb(249 249 249)
+  background: rgb(249 249 249);
 }
 
 .card-badge::after {
@@ -291,7 +291,7 @@ export default {
   border-bottom-right-radius: 0px;
   border-right: transparent;
   z-index: 1;
-  background: rgb(249 249 249)
+  background: rgb(249 249 249);
 }
 
 @media (max-width: 768px) {
