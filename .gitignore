@@ -2,3 +2,6 @@
 cardano-e2e-example
 pab-nami
 plutus-apps
+service-index/index.db
+service-index/index.db-shm
+service-index/index.db-wal

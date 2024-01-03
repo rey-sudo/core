@@ -1,6 +1,6 @@
 # Configuration for an SQLite file
 sqliteDB:
-  dbConfigFile: ./app/pab/preview/dbpreview.db
+  dbConfigFile: ./pab/preview/dbpreview.db
   dbConfigPoolSize: 2
 
 #postgresDB:

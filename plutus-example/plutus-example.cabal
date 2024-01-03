@@ -38,7 +38,9 @@ common maybe-Win32
 
 library
   import:          common-definitions
-  hs-source-dirs:     src
+  hs-source-dirs:
+    src
+    lib
   exposed-modules:
     Slave
     IntegrationTest
