@@ -38,6 +38,7 @@ module StateMachine(
     , runInitialise
     , runGuardedStepWith
     , runStepWith
+    , runStepWithUnbalanced
     , runInitialiseWith
     , runInitialiseWithUnbalanced
     , getThreadToken
@@ -462,61 +463,6 @@ runInitialiseWith customLookups customConstraints StateMachineClient{scInstance}
       pure initialState
 
 
-
-
-
-
--- | unablanced.
-runInitialiseWithUnbalanced ::
-    forall w e state schema input.
-    ( PlutusTx.FromData state
-    , PlutusTx.ToData state
-    , PlutusTx.ToData input
-    , AsSMContractError e
-    )
-    => ScriptLookups (StateMachine state input)
-    -- ^ Additional lookups
-    -> TxConstraints input state
-    -- ^ Additional constraints
-    -> StateMachineClient state input
-    -- ^ The state machine
-    -> state
-    -- ^ The initial state
-    -> Value
-    -- ^ The value locked by the contract at the beginning
-    -> Contract w schema e ()
-runInitialiseWithUnbalanced customLookups customConstraints StateMachineClient{scInstance} initialState initialValue =
-    mapError (review _SMContractError) $ do
-      let StateMachineInstance{stateMachine, typedValidator} = scInstance
-          constraints =
-              mustPayToTheScriptWithInlineDatum
-                initialState
-                (initialValue <> SM.threadTokenValueOrZero scInstance)
-              <> foldMap ttConstraints (smThreadToken stateMachine)
-              <> customConstraints
-          red = Ledger.Redeemer (PlutusTx.toBuiltinData (Scripts.validatorHash typedValidator, Mint))
-          ttConstraints ThreadToken{ttOutRef} =
-              mustMintValueWithRedeemer red (SM.threadTokenValueOrZero scInstance)
-              <> mustSpendPubKeyOutput ttOutRef
-          lookups = Constraints.typedValidatorLookups typedValidator
-              <> foldMap (plutusV2MintingPolicy . curPolicy . ttOutRef) (smThreadToken stateMachine)
-              <> customLookups
-      utx <- mkTxConstraints lookups constraints
-      logInfo @String $ "runInitialiseWithUnbalanced " <> show utx
-      adjustUnbalancedTx utx >>= yieldUnbalancedTx
-
-
-
-
-
-
-
-
-
-
-
-
-
 -- | Run one step of a state machine, returning the new state. We can supply additional constraints and lookups for transaction.
 runStepWith ::
     forall w e state schema input.
@@ -622,3 +568,71 @@ mkStep client@StateMachineClient{scInstance} input = do
                             , smtLookups = lookups
                             }
                 Nothing -> pure $ Left $ InvalidTransition (Just oldState) input
+
+
+-----------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+
+runInitialiseWithUnbalanced ::
+    forall w e state schema input.
+    ( PlutusTx.FromData state
+    , PlutusTx.ToData state
+    , PlutusTx.ToData input
+    , AsSMContractError e
+    )
+    => ScriptLookups (StateMachine state input)
+    -- ^ Additional lookups
+    -> TxConstraints input state
+    -- ^ Additional constraints
+    -> StateMachineClient state input
+    -- ^ The state machine
+    -> state
+    -- ^ The initial state
+    -> Value
+    -- ^ The value locked by the contract at the beginning
+    -> Contract w schema e ()
+runInitialiseWithUnbalanced customLookups customConstraints StateMachineClient{scInstance} initialState initialValue =
+    mapError (review _SMContractError) $ do
+      let StateMachineInstance{stateMachine, typedValidator} = scInstance
+          constraints =
+              mustPayToTheScriptWithInlineDatum
+                initialState
+                (initialValue <> SM.threadTokenValueOrZero scInstance)
+              <> foldMap ttConstraints (smThreadToken stateMachine)
+              <> customConstraints
+          red = Ledger.Redeemer (PlutusTx.toBuiltinData (Scripts.validatorHash typedValidator, Mint))
+          ttConstraints ThreadToken{ttOutRef} =
+              mustMintValueWithRedeemer red (SM.threadTokenValueOrZero scInstance)
+              <> mustSpendPubKeyOutput ttOutRef
+          lookups = customLookups
+      utx <- mkTxConstraints lookups constraints
+      logInfo @String $ "runInitialiseWithUnbalanced " <> show utx
+      adjustUnbalancedTx utx >>= yieldUnbalancedTx
+
+-----------------------------------------
+
+runStepWithUnbalanced ::
+    forall w a e state schema input.
+    ( AsSMContractError e
+    , PlutusTx.FromData state
+    , PlutusTx.ToData state
+    , PlutusTx.ToData input
+    )
+    => ScriptLookups (StateMachine state input)    -- ^ Additional lookups
+    -> TxConstraints input state                   -- ^ Additional constraints
+    -> StateMachineClient state input              -- ^ The state machine
+    -> input                                       -- ^ The input to apply to the state machine
+    -> Contract w schema e (Either a (TransitionResult state input))
+runStepWithUnbalanced customLookups customConstraints smc input =
+  mapError (review _SMContractError) $ mkStep smc input >>= \case
+    Right StateMachineTransition{smtConstraints,smtOldState=State{stateData=os}, smtNewState=State{stateData=ns}, smtLookups} -> do
+        pk <- ownFirstPaymentPubKeyHash
+        let constraints = smtConstraints <> customConstraints
+            lookups = customLookups          
+        utx <- mkTxConstraints lookups constraints
+        logInfo @String $ "runStepWithUnbalanced " <> show utx
+        adjustUnbalancedTx utx >>= yieldUnbalancedTx
+        pure $ Right $ TransitionSuccess ns
+    Left e -> pure $ Right $ TransitionFailure e
+
+--------------------------------------------------------------------------------------------------------------------------------------------
