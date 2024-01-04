@@ -8,6 +8,7 @@ const routes_1 = require("./routes");
 const index_1 = require("./pod/index");
 const global_1 = require("../global");
 const app_1 = require("./app");
+const client_1 = __importDefault(require("./client"));
 const main = async () => {
     try {
         /*
@@ -24,6 +25,9 @@ const main = async () => {
         }
     
         */
+        client_1.default.connect({
+            projectId: "previewXgODba40jVJAs1QgKTBOAuwhvNFHHMVo",
+        });
         (0, index_1.checkpoint)("ready");
         ///////////////////////////////////////////////////
         process.on("exit", (e) => (0, index_1.errorHandler)(e));
@@ -34,7 +38,7 @@ const main = async () => {
         process.on("unhandledRejection", (e) => (0, index_1.errorHandler)(e));
         ////////////////////////////////////////////////////
         app_1.app.post("/api/audits/create-round", routes_1.createRoundMiddlewares, routes_1.createRoundHandler);
-        app_1.app.get("/api/audits/get-auditor-information", routes_1.auditorInformationMiddlewares, routes_1.auditorInformationHandler);
+        app_1.app.get("/api/frost/get-address-utxos", routes_1.getAddressUtxos, routes_1.getAddressUtxosHandler);
         app_1.app.all("*", (_req, _res) => {
             throw new global_1.NotFoundError();
         });

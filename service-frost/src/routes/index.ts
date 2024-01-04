@@ -1,4 +1,4 @@
-export * from "./get-auditor-information"
+export * from "./get-address-utxos"
 export * from "./create-round"
 
 

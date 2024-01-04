@@ -1,15 +1,14 @@
 import compression from "compression";
 import {
-  auditorInformationHandler,
-  auditorInformationMiddlewares,
+  getAddressUtxosHandler,
+  getAddressUtxos,
   createRoundHandler,
   createRoundMiddlewares,
 } from "./routes";
 import { errorHandler, checkPod, checkpoint } from "./pod/index";
 import { NotFoundError, errorMiddleware } from "../global";
 import { app } from "./app";
-
-
+import blockfrost from "./client";
 
 const main = async () => {
   try {
@@ -27,6 +26,9 @@ const main = async () => {
     }
 
     */
+    blockfrost.connect({
+      projectId: "previewXgODba40jVJAs1QgKTBOAuwhvNFHHMVo",
+    });
 
     checkpoint("ready");
 
@@ -55,11 +57,11 @@ const main = async () => {
     );
 
     app.get(
-      "/api/audits/get-auditor-information",
+      "/api/frost/get-address-utxos",
 
-      auditorInformationMiddlewares,
+      getAddressUtxos,
 
-      auditorInformationHandler
+      getAddressUtxosHandler
     );
 
     app.all("*", (_req, _res) => {
