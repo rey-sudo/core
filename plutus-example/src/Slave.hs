@@ -135,7 +135,10 @@ data StartParams =
 -- | Arguments for the @"locking"@ endpoint
 data LockingParams =
     LockingParams
-        { lockingParams :: Params
+        {  sWalletParaml       :: Haskell.String
+        ,  bWalletParaml       :: Haskell.String
+        ,  pPriceParaml        :: Integer
+        ,  sCollateralParaml  :: Integer
         } deriving stock (Haskell.Show, Generic)
           deriving anyclass (ToJSON, FromJSON)
 
@@ -155,7 +158,7 @@ data ReceivedParams =
 
 type SlaveSchema =
         Endpoint "Start" StartParams
-        .\/ Endpoint "locking" LockingParams
+        .\/ Endpoint "Locking" LockingParams
         .\/ Endpoint "delivered" DeliveredParams
         .\/ Endpoint "received" ReceivedParams
 
@@ -229,23 +232,19 @@ client params = SM.mkStateMachineClient $ SM.StateMachineInstance (machine param
 
 initialState :: Params -> SlaveState
 initialState params = SlaveState { cState = 0
-                                       , sLabel = "waiting"
-                                       , bSlot  = False
-                                       , pDelivered = False
-                                       , pReceived = False
-                                       , sWallet = sWallet' params
-                                       , bWallet = bWallet' params
-                                       , pPrice = pPrice' params
-                                       , sCollateral = sCollateral' params
-                                       }
+                                 , sLabel = "waiting"
+                                 , bSlot  = False
+                                 , pDelivered = False
+                                 , pReceived = False
+                                 , sWallet = sWallet' params
+                                 , bWallet = bWallet' params
+                                 , pPrice = pPrice' params
+                                 , sCollateral = sCollateral' params
+                                 }
 
 contract :: Contract () SlaveSchema SlaveError ()
 contract = forever endpoints where
-        endpoints      = selectList [startEndpoint, locking, delivered, received]
-
-        locking        = endpoint @"locking" $ \LockingParams{ lockingParams } -> do
-                                                    void (SM.runStep (client lockingParams) Locking)
-                                                    logInfo @Text "Buyer:locking"
+        endpoints      = selectList [startEndpoint, lockingEndpoint, delivered, received]
 
         delivered      = endpoint @"delivered" $ \DeliveredParams{ deliveredParams } -> do
                                                     void (SM.runStep (client deliveredParams) Delivered)
@@ -258,9 +257,9 @@ contract = forever endpoints where
 
 startEndpoint :: Promise () SlaveSchema SlaveError ()
 startEndpoint = endpoint @"Start" $ \StartParams{sWalletParam, bWalletParam, pPriceParam, sCollateralParam} -> do                     
-            --  utxos <- utxosAt $ ppkhToCardanoAddress (stringToPPKH sWalletParam)
+              --utxos <- utxosAt $ ppkhToCardanoAddress (stringToPPKH sWalletParam)
 
-            --  logInfo @Haskell.String  $ "////UTXOS///" <> Haskell.show utxos
+              --logInfo @Haskell.String  $ "////UTXOS///" <> Haskell.show utxos
 
               let params = Params { sWallet'     = stringToPPKH sWalletParam 
                                   , bWallet'     = stringToPPKH bWalletParam
@@ -276,11 +275,26 @@ startEndpoint = endpoint @"Start" $ \StartParams{sWalletParam, bWalletParam, pPr
                   
               logInfo @Text "START_ENDPOINT"
               
-              SM.runInitialiseWithUnbalanced theLookups theConstraints theClient theInitialState theCollateral
+              void (SM.runInitialiseWithUnbalanced theLookups theConstraints theClient theInitialState theCollateral)
               
 
               
+lockingEndpoint :: Promise () SlaveSchema SlaveError ()
+lockingEndpoint = endpoint @"Locking" $ \LockingParams{sWalletParaml, bWalletParaml, pPriceParaml, sCollateralParaml} -> do
+                let params = Params { sWallet'     = stringToPPKH sWalletParaml 
+                                    , bWallet'     = stringToPPKH bWalletParaml
+                                    , pPrice'      = Ada.lovelaceOf pPriceParaml
+                                    , sCollateral' = Ada.lovelaceOf sCollateralParaml
+                                    }
 
+                let theClient       = client params
+                    theConstraints  = Haskell.mempty
+                    theLookups      = Haskell.mempty
+                
+                logInfo @Text "LOCKING_ENDPOINT"
+
+                void (SM.runStepWithUnbalanced theLookups theConstraints theClient Locking)
+                
 
 
 

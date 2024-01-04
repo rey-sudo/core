@@ -44,7 +44,11 @@ startParams = Slave.StartParams{ Slave.sWalletParam     = sWalletBS
                                }
 
 lockingParams :: Slave.LockingParams
-lockingParams = Slave.LockingParams { Slave.lockingParams = params }
+lockingParams = Slave.LockingParams { Slave.sWalletParaml     = sWalletBS
+                                    , Slave.bWalletParaml     = bWalletBS
+                                    , Slave.pPriceParaml      = 10_000_000
+                                    , Slave.sCollateralParaml = 5_000_000
+                                    }
 
 deliveredParams :: Slave.DeliveredParams
 deliveredParams = Slave.DeliveredParams { Slave.deliveredParams = params }
@@ -60,7 +64,7 @@ newSlot = do
     _ <- Trace.waitNSlots 5
     Trace.callEndpoint @"Start" seller startParams
     void $ Trace.waitNSlots 5
-    Trace.callEndpoint @"locking" buyer lockingParams
+    Trace.callEndpoint @"Locking" buyer lockingParams
     void $ Trace.waitNSlots 5
     Trace.callEndpoint @"delivered" seller deliveredParams
     void $ Trace.waitNSlots 5

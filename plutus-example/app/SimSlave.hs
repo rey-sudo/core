@@ -92,8 +92,14 @@ main = void $ Simulator.runSimulationWith handlers $ do
     
     void $ liftIO getLine
 
-    let lockingInput  = S.LockingParams { S.lockingParams = defaultParams }
-    void $ Simulator.callEndpointOnInstance buyerCID "locking" lockingInput
+    let lockingInput  = S.LockingParams { sWalletParaml     = sWalletBS
+                                        , bWalletParaml     = bWalletBS
+                                        , pPriceParaml      = 10_000_000
+                                        , sCollateralParaml = 5_000_000
+                                         }
+
+
+    void $ Simulator.callEndpointOnInstance buyerCID "Locking" lockingInput
     Simulator.waitNSlots 2
 
     Simulator.logString @(Builtin MarketplaceContracts) "//////////////////////////////////////"

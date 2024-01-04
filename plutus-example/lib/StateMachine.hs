@@ -38,6 +38,7 @@ module StateMachine(
     , runInitialise
     , runGuardedStepWith
     , runStepWith
+    , runStepWithUnbalanced
     , runInitialiseWith
     , runInitialiseWithUnbalanced
     , getThreadToken
@@ -508,6 +509,31 @@ runInitialiseWithUnbalanced customLookups customConstraints StateMachineClient{s
 
 
 
+-- | unbalanced.
+runStepWithUnbalanced ::
+    forall w a e state schema input.
+    ( AsSMContractError e
+    , PlutusTx.FromData state
+    , PlutusTx.ToData state
+    , PlutusTx.ToData input
+    )
+    => ScriptLookups (StateMachine state input)    -- ^ Additional lookups
+    -> TxConstraints input state                   -- ^ Additional constraints
+    -> StateMachineClient state input              -- ^ The state machine
+    -> input                                       -- ^ The input to apply to the state machine
+    -> Contract w schema e (Either a (TransitionResult state input))
+runStepWithUnbalanced customLookups customConstraints smc input =
+  mapError (review _SMContractError) $ mkStep smc input >>= \case
+    Right StateMachineTransition{smtConstraints,smtOldState=State{stateData=os}, smtNewState=State{stateData=ns}, smtLookups} -> do
+        pk <- ownFirstPaymentPubKeyHash
+        let constraints = smtConstraints <> customConstraints
+            lookups = smtLookups { Constraints.slOwnPaymentPubKeyHash = Just pk } <> customLookups
+        utx <- mkTxConstraints lookups constraints
+        logInfo @String $ "runStepWithUnbalanced " <> show utx
+        adjustUnbalancedTx utx >>= yieldUnbalancedTx
+        pure $ Right $ TransitionSuccess ns
+
+    Left e -> pure $ Right $ TransitionFailure e
 
 
 
@@ -517,6 +543,22 @@ runInitialiseWithUnbalanced customLookups customConstraints StateMachineClient{s
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------
 -- | Run one step of a state machine, returning the new state. We can supply additional constraints and lookups for transaction.
 runStepWith ::
     forall w e state schema input.
