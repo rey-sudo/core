@@ -27,8 +27,8 @@
      inkscape:document-units="px"
      showgrid="false"
      inkscape:zoom="1.2535928"
-     inkscape:cx="295.94937"
-     inkscape:cy="283.18606"
+     inkscape:cx="55.839504"
+     inkscape:cy="203.41534"
      inkscape:window-width="1920"
      inkscape:window-height="1043"
      inkscape:window-x="1920"
@@ -50,13 +50,13 @@
      style="display:inline">
     <path
        id="path1688"
-       style="display:inline;fill:#242527;fill-opacity:1;stroke:#f9f9f9;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       style="display:inline;fill:#0069f5;fill-opacity:1;stroke:#f9f9f9;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
        d="M 199.99999,5e-7 A 199.99999,199.99999 0 0 0 4.9999997e-7,199.99999 199.99999,199.99999 0 0 0 199.99999,399.99998 199.99999,199.99999 0 0 0 399.99998,199.99999 199.99999,199.99999 0 0 0 199.99999,5e-7 Z" />
     <path
-       d="M 278.75495,171.26619 H 200.59309 L 120.87249,97.87523 214.16666,85.14849 Z M 120.85814,339.5 c -168.398376,-262.192043 -84.199179,-131.09603 0,0 z m 0,0 c -168.398376,-262.192043 -84.199179,-131.09603 0,0 z m 0.0144,-241.62477 c -168.407942,-101.108867 -84.203969,-50.554429 0,0 z m 81.78454,102.09687 h 73.37086 L 120.85814,339.5 Z M 120.87249,97.87523 c -168.407942,-101.108867 -84.203969,-50.554429 0,0 z"
+       d="m 278.75495,171.26619 h -78.16186 l -78.2847,-86.116887 91.85827,-8.13e-4 z M 120.85814,339.5 c -168.398376,-262.192043 -84.199179,-131.09603 0,0 z m 81.79894,-139.5279 h 73.37086 L 120.85814,339.5 Z"
        id="path9322"
        style="fill:#ffffff;stroke-width:14.353"
-       sodipodi:nodetypes="ccccccccccccccccc" />
+       sodipodi:nodetypes="ccccccccccc" />
     <rect
        style="fill:#000000;fill-opacity:1;stroke:#00ffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke fill markers;opacity:0"
        id="rect1471"
@@ -72,6 +72,13 @@
        x="6.9012992e-07"
        y="-400.50583"
        transform="rotate(90)" />
+    <rect
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:#0069f5;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       id="rect6634"
+       width="91.858971"
+       height="0.86757916"
+       x="122.30768"
+       y="84.280914" />
   </g>
   <g
      inkscape:groupmode="layer"
