@@ -14,7 +14,7 @@
     "tag": "Testnet"
   },
   "cicStoreFrom": {
-    "unBlockNo": 37371000
+    "unBlockNo": 0
   },
   "cicAppendTransactionQueueSize": 500
 }
