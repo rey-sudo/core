@@ -8,8 +8,9 @@ import { requestIp } from "../global";
 
 const app = express();
 
+const corsOrigin = process.env.CORS_DOMAINS!;
 const corsOptions = {
-  origin: process.env.CORS_DOMAINS!.split(","),
+  origin: corsOrigin?.split(",") || "*",
   methods: ["GET", "POST"],
   credentials: true,
   maxAge: 86400,

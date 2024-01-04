@@ -1,17 +1,19 @@
 import compression from "compression";
-import { errorHandler, setTimeOut } from "./pod/index";
-import { app } from "./app";
-import { NotFoundError, errorMiddleware, rateLimit } from "../global";
 import {
   auditorInformationHandler,
   auditorInformationMiddlewares,
   createRoundHandler,
   createRoundMiddlewares,
 } from "./routes";
+import { errorHandler, checkPod, checkpoint } from "./pod/index";
+import { NotFoundError, errorMiddleware } from "../global";
+import { app } from "./app";
+
+
 
 const main = async () => {
   try {
-    
+    /*
     if (!process.env.EXPRESS_PORT) {
       throw new Error("EXPRESS_PORT error");
     }
@@ -23,6 +25,10 @@ const main = async () => {
     if (!process.env.CORS_DOMAINS) {
       throw new Error("CORS_DOMAINS error");
     }
+
+    */
+
+    checkpoint("ready");
 
     ///////////////////////////////////////////////////
 
@@ -42,7 +48,7 @@ const main = async () => {
 
     app.post(
       "/api/audits/create-round",
-      
+
       createRoundMiddlewares,
 
       createRoundHandler
@@ -50,7 +56,7 @@ const main = async () => {
 
     app.get(
       "/api/audits/get-auditor-information",
-      
+
       auditorInformationMiddlewares,
 
       auditorInformationHandler
@@ -66,7 +72,7 @@ const main = async () => {
   } catch (e) {
     errorHandler(e);
   }
-  setTimeOut();
+  checkPod();
 };
 
 main();

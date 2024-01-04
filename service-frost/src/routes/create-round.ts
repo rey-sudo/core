@@ -1,4 +1,4 @@
-import { BadRequestError, expressBodyValidator } from "../../global";
+import { BadRequestError} from "../../global";
 import { Request, Response } from "express";
 
 const createRoundMiddlewares: any = [
