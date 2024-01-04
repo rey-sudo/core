@@ -44,7 +44,7 @@
     <div class="header-column right hide">
       <div class="header-box right" :class="{ scrolled: isScrolled }">
         <label> <i class="pi pi-gift"></i></label>
-        <div @click="startTx">
+        <div @click="getPubKeyHash">
           <span>Be a</span>
           <span>Mediator</span>
         </div>
@@ -74,6 +74,7 @@
 
 <script>
 import { walletAPI, CardanoWasm, balanceTx } from "@/api/wallet-api";
+//var Buffer = require('buffer/').Buffer
 
 export default {
   setup() {
@@ -98,32 +99,29 @@ export default {
       this.wallet.connect("nami");
     },
 
-    async startTx() {
-      // const tx =
-      //  "84a300800181a300581d7055743d5cfd66af33d0891dc9dba441bce20d632b0fe81b0b6cfe483e011a004c4b40028201d818585cd8799f004777616974696e67d87980d87980d87980581c484ebc54b4112e54e1f7524dbdc6bb42635648a06c297e584592e80b581c3f2ec097f77e4254df012d5d4d4b45e48459c6ec5795e92df30f2dbc1a009896801a004c4b40ff0200a0f5f6";
+    async getPubKeyHash() {
+      const usedAddr = await window.cardano.getUsedAddresses();
 
-      const addr = CardanoWasm.Address.from_bech32(
-        "addr_test1qpqx3nnj5rmnapg0rxye5y9c9mznff26dkrquhzjvlw29wfrsvx98a6ugq6gn7hrversz52hf4yft4af5v9dv78p5zwseyadst"
-      );
+      const addrMap = usedAddr.map((hexAddr) => {
+        let byteAddr = CardanoWasm.Address.from_hex(hexAddr);
+        let pkh = CardanoWasm.BaseAddress.from_address(byteAddr)
+          .payment_cred()
+          .to_keyhash()
+          .to_hex();
 
-      const cAddress = CardanoWasm.BaseAddress.from_address(addr)
-        .payment_cred()
-        .to_keyhash();
+        return {
+          address: byteAddr.to_bech32(),
+          pubkeyhash: pkh,
+          balance: null,
+        };
+      });
 
-      //const result = await window.cardano.getUtxos();
-
-      if (cAddress == null) throw new Error();
-
-      const credential = cAddress;
-
-      const pubKeyHash = credential.to_keyhash(credential);
-
-      console.log(Buffer.from(pubKeyHash).toString("hex"));
+      console.log(addrMap);
     },
 
     async doBalance() {
       const tx =
-        "84a300800181a300581d70814f9750a738594ebcc97becb07b62f3cf5bd9f770ec6ccc152a6f14011a00b71b00028201d818585cd8799f004777616974696e67d87980d87980d87980581c484ebc54b4112e54e1f7524dbdc6bb42635648a06c297e584592e80b581c3f2ec097f77e4254df012d5d4d4b45e48459c6ec5795e92df30f2dbc1a01c9c3801a00b71b00ff0200a0f5f6";
+        "84a400800181a300581d706b8ec1ff572c517e54c5fb62e5f5d8bcc73527057230e964068d4621011a00b71b00028201d818585cd8799f004777616974696e67d87980d87980d87980581c4068ce72a0f73e850f19899a10b82ec534a55a6d860e5c5267dca2b9581c3f2ec097f77e4254df012d5d4d4b45e48459c6ec5795e92df30f2dbc1a01c9c3801a00b71b00ff02000e81581c4068ce72a0f73e850f19899a10b82ec534a55a6d860e5c5267dca2b9a0f5f6";
       const result = await balanceTx(tx);
       console.log(result);
     },

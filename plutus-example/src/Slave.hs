@@ -269,7 +269,7 @@ startEndpoint = endpoint @"Start" $ \StartParams{sWalletParam, bWalletParam, pPr
 
                   theClient       = client params 
                   theCollateral   = Ada.toValue (sCollateral' params)
-                  theConstraints  = Haskell.mempty
+                  theConstraints  = mustBeSignedBy (sWallet' params)
                   theLookups      = Haskell.mempty
                   theInitialState = initialState params
                   
