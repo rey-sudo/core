@@ -16,7 +16,7 @@ class BlockfrostWrap {
       throw new Error("Cannot access the client before connecting");
     }
     
-    return this.client.network();
+    return this._client.network();
   }
 
   connect(options?: any): BlockFrostAPI {

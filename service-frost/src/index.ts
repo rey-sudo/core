@@ -57,7 +57,7 @@ const main = async () => {
     );
 
     app.get(
-      "/api/frost/get-address-utxos",
+      "/api/frost/get-address-utxos/:address",
 
       getAddressUtxos,
 
