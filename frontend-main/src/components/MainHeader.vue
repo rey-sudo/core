@@ -21,7 +21,7 @@
         <label>
           <i class="pi pi-tag" />
         </label>
-        <div @click="doBalance">
+        <div @click="deploy">
           <span>Hi, Sell</span>
           <span>Product</span>
         </div>
@@ -116,10 +116,18 @@ export default {
         };
       });
 
+      //"c78f1b306d10e0699c2286efe7a39f8079da8f5f45ca0aad74ea871c";
+
+      const contractAddr =
+        "addr_test1wpwqkrjsf3yjmm0hu7j5g5pk3dg9wfj3srzqtssedl4tkrcf4qqfg";
+
+      const contractAdd = CardanoWasm.Address.from_bech32(contractAddr);
+
       console.log(JSON.stringify(addrMap));
+      console.log("contractAddr", JSON.stringify(contractAdd.to_bech32()));
     },
 
-    async doBalance() {
+    async deploy() {
       const tx =
         "84a400800181a300581d705c0b0e504c492dedf7e7a54450368b5057265180c405c2196feabb0f011a00b71b00028201d8185841d8799f004777616974696e67d87980d87980d87980581c4068ce72a0f73e850f19899a10b82ec534a55a6d860e5c5267dca2b9d87a801a01c9c3801a00b71b00ff02000e81581c4068ce72a0f73e850f19899a10b82ec534a55a6d860e5c5267dca2b9a0f5f6";
       const result = await balanceTx(tx);
