@@ -239,7 +239,6 @@ getOnChainState StateMachineClient{scInstance, scChooser} = mapError (review _SM
     logInfo @String "////2/" 
     utxoTx <- utxosAt (SM.machineAddress scInstance)
     logInfo @String $ "////3///// " <> show utxoTx
-    logInfo @String $ "////3///// " <> show (Ledger.toPlutusAddress $ SM.machineAddress scInstance) 
     logInfo @String $ "////3///// " <> show (SM.machineAddress scInstance) 
     let states = getStates scInstance utxoTx
     case states of

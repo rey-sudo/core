@@ -52,11 +52,16 @@ buyerWalletPPKH :: Maybe Ledger.PaymentPubKeyHash
 buyerWalletPPKH = Just (CW.paymentPubKeyHash (CW.fromWalletNumber $ CW.WalletNumber 2))
 
 
-defaultParams :: S.Params
-defaultParams = S.Params { S.bWallet'     = buyerWalletPPKH
-                         , S.pPrice'      = Just $ Ada.lovelaceOf 10_000_000
-                         , S.sCollateral' = Just $ Ada.lovelaceOf 5_000_000
-                         }
+defaultParams :: S.DefaultEndpointParams
+defaultParams = S.DefaultEndpointParams { S.sWalletParam      = sWalletBS
+                                        , S.bWalletParam      = bWalletBS
+                                        , S.pPriceParam       = 10000000
+                                        , S.sCollateralParam  = 5000000
+                                        }
+
+
+
+
 
 sWalletBS :: String
 sWalletBS = "484ebc54b4112e54e1f7524dbdc6bb42635648a06c297e584592e80b"
@@ -65,8 +70,8 @@ sWalletBS = "484ebc54b4112e54e1f7524dbdc6bb42635648a06c297e584592e80b"
 bWalletBS :: String
 bWalletBS = "3f2ec097f77e4254df012d5d4d4b45e48459c6ec5795e92df30f2dbc"
 
-stringToPPKH :: String -> Maybe PaymentPubKeyHash
-stringToPPKH bs = Just (Ledger.PaymentPubKeyHash $ pkhToPubKeyHash bs)
+stringToPPKH :: String -> PaymentPubKeyHash
+stringToPPKH bs = Ledger.PaymentPubKeyHash $ pkhToPubKeyHash bs
 
 main :: IO ()
 main = void $ Simulator.runSimulationWith handlers $ do
@@ -79,11 +84,9 @@ main = void $ Simulator.runSimulationWith handlers $ do
     sellerCID <- Simulator.activateContract sellerWallet SlaveContract
     Simulator.logString @(Builtin MarketplaceContracts) $ "wallet = " ++ show sellerWallet ++ " CID: " ++ show sellerCID
 
-    let sp  = S.StartParams{ sWalletParam     = sWalletBS
-                           , pPriceParam      = 10_000_000
-                           , sCollateralParam = 5_000_000
+    let sp  = S.StartParams{ S.startDefault = defaultParams
                            }
-   
+    
     void $ Simulator.callEndpointOnInstance sellerCID "Start" sp
     Simulator.logString @(Builtin MarketplaceContracts) $ "Params = " ++ show sp
     Simulator.waitNSlots 2
@@ -94,8 +97,7 @@ main = void $ Simulator.runSimulationWith handlers $ do
     
     void $ liftIO getLine
 
-    let lockingInput  = S.LockingParams { bWalletParam    = bWalletBS
-                                         }
+    let lockingInput  = S.LockingParams { S.lockingDefault = defaultParams}
 
 
     void $ Simulator.callEndpointOnInstance buyerCID "Locking" lockingInput
@@ -105,8 +107,8 @@ main = void $ Simulator.runSimulationWith handlers $ do
 
     void $ liftIO getLine
 
-    let deliveredInput  = S.DeliveredParams { S.deliveredParams = defaultParams }
-    void $ Simulator.callEndpointOnInstance sellerCID "delivered" deliveredInput
+    let deliveredInput  = S.DeliveredParams { S.deliveredDefault = defaultParams }
+    void $ Simulator.callEndpointOnInstance sellerCID "Delivered" deliveredInput
     Simulator.waitNSlots 2
 
     shutdown

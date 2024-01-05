@@ -24,12 +24,13 @@ bWalletBS :: String
 bWalletBS = "3f2ec097f77e4254df012d5d4d4b45e48459c6ec5795e92df30f2dbc"
 
 
-params :: Slave.Params
-params = Slave.Params { Slave.sWallet'     = Just $ mockWalletPaymentPubKeyHash w1
-                      , Slave.bWallet'     = Just $ mockWalletPaymentPubKeyHash w2
-                      , Slave.pPrice'      = Just $ Ada.lovelaceOf 10_000_000
-                      , Slave.sCollateral' = Just $ Ada.lovelaceOf 5_000_000
-                      }
+params :: Slave.DefaultEndpointParams
+params = Slave.DefaultEndpointParams { Slave.sWalletParam      = sWalletBS
+                                     , Slave.bWalletParam      = bWalletBS
+                                     , Slave.pPriceParam       = 10000000
+                                     , Slave.sCollateralParam  = 5000000
+                                     }
+
 
 theContract :: Contract () SlaveSchema SlaveError ()
 theContract = do
@@ -37,21 +38,18 @@ theContract = do
 
 
 startParams :: Slave.StartParams
-startParams = Slave.StartParams{ Slave.sWalletParam     = sWalletBS
-                               , Slave.pPriceParam      = 10_000_000
-                               , Slave.sCollateralParam = 5_000_000
+startParams = Slave.StartParams{ Slave.startDefault = params
                                }
 
 lockingParams :: Slave.LockingParams
-lockingParams = Slave.LockingParams {   
-                                     Slave.bWalletParam     = bWalletBS
+lockingParams = Slave.LockingParams { Slave.lockingDefault = params
                                     }
 
 deliveredParams :: Slave.DeliveredParams
-deliveredParams = Slave.DeliveredParams { Slave.deliveredParams = params }
+deliveredParams = Slave.DeliveredParams { Slave.deliveredDefault = params }
 
 receivedParams :: Slave.ReceivedParams
-receivedParams = Slave.ReceivedParams { Slave.receivedParams = params }
+receivedParams = Slave.ReceivedParams { Slave.receivedDefault = params }
 
 
 newSlot :: Trace.EmulatorTrace ()
@@ -63,9 +61,9 @@ newSlot = do
     void $ Trace.waitNSlots 5
     Trace.callEndpoint @"Locking" buyer lockingParams
     void $ Trace.waitNSlots 5
-    Trace.callEndpoint @"delivered" seller deliveredParams
+    Trace.callEndpoint @"Delivered" seller deliveredParams
     void $ Trace.waitNSlots 5
-    Trace.callEndpoint @"received" buyer receivedParams
+    Trace.callEndpoint @"Received" buyer receivedParams
     void $ Trace.waitNSlots 5
 
 tests :: TestTree
