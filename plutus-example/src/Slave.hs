@@ -84,7 +84,9 @@ import Plutus.V1.Ledger.Api (Address (Address), Credential (PubKeyCredential), S
 import Control.Monad.Error.Lens (throwing)
 import Data.Either (fromRight, either)
 import Data.Maybe (fromJust)
-
+---
+import Ledger.Typed.Scripts (ValidatorTypes (..))
+import Ledger.Typed.Scripts qualified as Scripts
 --------
 import Prelude qualified as Haskell
 
@@ -270,19 +272,23 @@ contract = forever endpoints where
 
 
 startEndpoint :: Promise () SlaveSchema SlaveError ()
-startEndpoint = endpoint @"Start" $ \StartParams{sWalletParam, pPriceParam, sCollateralParam} -> do                     
-
+startEndpoint = endpoint @"Start" $ \StartParams{sWalletParam, pPriceParam, sCollateralParam} -> do  
+                  
               let params = Params { sWallet'     = stringToPPKH sWalletParam
                                   , bWallet'     = Nothing
                                   , pPrice'      = integerToAda pPriceParam
                                   , sCollateral' = integerToAda sCollateralParam
                                   }
-
+               
                   theClient       = client params
                   theInitialState = initialState params
                   theCollateral   = Ada.toValue $ fromJust (sCollateral' params)
                   theConstraints  = mustBeSignedBy $ fromJust (sWallet' params)
                   theLookups      = Haskell.mempty
+
+              utxos <- utxosAt $ contractAddress params
+
+              logInfo @Haskell.String  $ "////UTXOSx///" <> Haskell.show utxos
                                    
               logInfo @Text "START_ENDPOINT"
               
@@ -291,7 +297,7 @@ startEndpoint = endpoint @"Start" $ \StartParams{sWalletParam, pPriceParam, sCol
              
 lockingEndpoint :: Promise () SlaveSchema SlaveError ()
 lockingEndpoint = endpoint @"Locking" $ \LockingParams{bWalletParam} -> do
-
+   
                 let params = Params { sWallet'     = Nothing
                                     , bWallet'     = stringToPPKH bWalletParam
                                     , pPrice'      = Nothing
@@ -315,13 +321,14 @@ integerToAda :: Integer -> Maybe Ada
 integerToAda amount = Just (Ada.lovelaceOf amount)
 
 
+contractAddress :: Params -> CardanoAddress
+contractAddress = Scripts.validatorCardanoAddress Nparams.testnet . typedValidator
 
 
 
 
-              --utxos <- utxosAt $ ppkhToCardanoAddress (stringToPPKH sWalletParam)
 
-              --logInfo @Haskell.String  $ "////UTXOS///" <> Haskell.show utxos
+
 
 
 
