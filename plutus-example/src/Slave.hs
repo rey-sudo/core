@@ -85,7 +85,6 @@ import Control.Monad.Error.Lens (throwing)
 import Data.Either (fromRight, either)
 import Data.Maybe (fromJust)
 ---
-import Ledger.Typed.Scripts (ValidatorTypes (..))
 import Ledger.Typed.Scripts qualified as Scripts
 --------
 import Prelude qualified as Haskell
