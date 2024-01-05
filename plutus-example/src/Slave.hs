@@ -179,7 +179,9 @@ instance AsContractError SlaveError where
 transition :: Params -> State SlaveState -> Input -> Maybe (TxConstraints Void Void, State SlaveState)
 transition params State{ stateData = oldData, stateValue = oldStateValue } input = case (oldData, input) of
     (SlaveState{cState, pPrice}, Locking)   |   cState == 0     -> let newValue    =  oldStateValue + (Ada.toValue pPrice)
-                                                                       constraints =  mustSpendAtLeast newValue
+                                                                       constraints =  case (bWallet' params) of 
+                                                                            Just b -> mustBeSignedBy b
+                                                                            Nothing -> mempty 
                                                                    in Just (constraints,
                                                                       State{stateData = oldData { cState = 1
                                                                                                 , sLabel = "locking"
