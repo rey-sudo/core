@@ -44,7 +44,6 @@ library
   exposed-modules:
     Slave
     IntegrationTest
-    Deploy
     PayToWallet
     StateMachine
     StateMachine.MintingPolarity

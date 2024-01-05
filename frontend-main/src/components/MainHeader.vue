@@ -116,7 +116,7 @@ export default {
         };
       });
 
-      console.log(addrMap);
+      console.log(JSON.stringify(addrMap));
     },
 
     async doBalance() {

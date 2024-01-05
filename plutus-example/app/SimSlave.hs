@@ -37,6 +37,7 @@ import           Plutus.Script.Utils.Ada qualified as Ada
 import           Utilities            (wrapValidator, writeTypedValidator, writeDataToFile, decodeHex)
 import qualified Data.ByteString.Char8 as B
 import qualified Ledger  
+import Utilities
 
 sellerWallet :: Wallet
 sellerWallet = knownWallet 1
@@ -47,8 +48,8 @@ sellerWalletPPKH = CW.paymentPubKeyHash (CW.fromWalletNumber $ CW.WalletNumber 1
 buyerWallet :: Wallet
 buyerWallet = knownWallet 2
 
-buyerWalletPPKH :: PaymentPubKeyHash
-buyerWalletPPKH = CW.paymentPubKeyHash (CW.fromWalletNumber $ CW.WalletNumber 2)
+buyerWalletPPKH :: Maybe Ledger.PaymentPubKeyHash
+buyerWalletPPKH = Just (CW.paymentPubKeyHash (CW.fromWalletNumber $ CW.WalletNumber 2))
 
 
 defaultParams :: S.Params
@@ -64,6 +65,8 @@ sWalletBS = "484ebc54b4112e54e1f7524dbdc6bb42635648a06c297e584592e80b"
 bWalletBS :: String
 bWalletBS = "3f2ec097f77e4254df012d5d4d4b45e48459c6ec5795e92df30f2dbc"
 
+stringToPPKH :: String -> Maybe PaymentPubKeyHash
+stringToPPKH bs = Just (Ledger.PaymentPubKeyHash $ pkhToPubKeyHash bs)
 
 main :: IO ()
 main = void $ Simulator.runSimulationWith handlers $ do

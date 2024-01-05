@@ -56,6 +56,7 @@ import Plutus.Contract.Request as Wallet (getUnspentOutput)
 import StateMachine (AsSMContractError (..), OnChainState, State (..), Void)
 import StateMachine qualified as SM
 
+import Plutus.Script.Utils.Ada (Ada)
 import Plutus.Script.Utils.Ada qualified as Ada
 import Plutus.Script.Utils.Typed (ScriptContextV2)
 import Plutus.Script.Utils.V2.Typed.Scripts qualified as V2
@@ -82,6 +83,7 @@ import Cardano.Api.Shelley qualified as C
 import Plutus.V1.Ledger.Api (Address (Address), Credential (PubKeyCredential), StakingCredential (StakingHash))
 import Control.Monad.Error.Lens (throwing)
 import Data.Either (fromRight, either)
+import Data.Maybe (fromJust)
 
 --------
 import Prelude qualified as Haskell
@@ -94,8 +96,8 @@ data SlaveState = SlaveState
     , pReceived   :: Bool
     , sWallet     :: PaymentPubKeyHash
     , bWallet     :: PaymentPubKeyHash
-    , pPrice      :: Ada.Ada
-    , sCollateral :: Ada.Ada
+    , pPrice      :: Ada
+    , sCollateral :: Ada
     } | Appeal | Finished
     deriving stock (Haskell.Eq, Haskell.Show, Generic)
     deriving anyclass (ToJSON, FromJSON)
@@ -104,10 +106,10 @@ PlutusTx.unstableMakeIsData ''SlaveState
 PlutusTx.makeLift ''SlaveState
 
 data Params = Params
-    { sWallet'     :: PaymentPubKeyHash
-    , bWallet'     :: PaymentPubKeyHash
-    , pPrice'      :: Ada.Ada
-    , sCollateral' :: Ada.Ada
+    { sWallet'     :: Maybe PaymentPubKeyHash
+    , bWallet'     :: Maybe PaymentPubKeyHash
+    , pPrice'      :: Ada
+    , sCollateral' :: Ada
     }
     deriving stock (Haskell.Show, Generic)
     deriving anyclass (ToJSON, FromJSON)
@@ -236,8 +238,8 @@ initialState params = SlaveState { cState = 0
                                  , bSlot  = False
                                  , pDelivered = False
                                  , pReceived = False
-                                 , sWallet = sWallet' params
-                                 , bWallet = bWallet' params
+                                 , sWallet = fromJust $ sWallet' params
+                                 , bWallet = fromJust $ bWallet' params
                                  , pPrice = pPrice' params
                                  , sCollateral = sCollateral' params
                                  }
@@ -257,9 +259,6 @@ contract = forever endpoints where
 
 startEndpoint :: Promise () SlaveSchema SlaveError ()
 startEndpoint = endpoint @"Start" $ \StartParams{sWalletParam, bWalletParam, pPriceParam, sCollateralParam} -> do                     
-              --utxos <- utxosAt $ ppkhToCardanoAddress (stringToPPKH sWalletParam)
-
-              --logInfo @Haskell.String  $ "////UTXOS///" <> Haskell.show utxos
 
               let params = Params { sWallet'     = stringToPPKH sWalletParam 
                                   , bWallet'     = stringToPPKH bWalletParam
@@ -267,12 +266,13 @@ startEndpoint = endpoint @"Start" $ \StartParams{sWalletParam, bWalletParam, pPr
                                   , sCollateral' = Ada.lovelaceOf sCollateralParam
                                   }
 
-                  theClient       = client params 
-                  theCollateral   = Ada.toValue (sCollateral' params)
-                  theConstraints  = mustBeSignedBy (sWallet' params)
-                  theLookups      = Haskell.mempty
+                  theClient       = client params
                   theInitialState = initialState params
-                  
+                  theSeller       = fromJust $ sWallet' params
+                  theCollateral   = Ada.toValue $ sCollateral' params
+                  theConstraints  = mustBeSignedBy theSeller
+                  theLookups      = Haskell.mempty
+                                   
               logInfo @Text "START_ENDPOINT"
               
               void (SM.runInitialiseWithUnbalanced theLookups theConstraints theClient theInitialState theCollateral)
@@ -313,8 +313,8 @@ ppkhToCardanoAddress =
 
 --(Just (StakingHash (PubKeyCredential $ unStakePubKeyHash $ spkh  w)))
 
-stringToPPKH :: Haskell.String -> PaymentPubKeyHash
-stringToPPKH bs = PaymentPubKeyHash $ pkhToPubKeyHash bs
+stringToPPKH :: Haskell.String -> Maybe PaymentPubKeyHash
+stringToPPKH bs = Just (PaymentPubKeyHash $ pkhToPubKeyHash bs)
 
 bStoSPKH :: Haskell.String -> StakePubKeyHash
 bStoSPKH bs = StakePubKeyHash (PubKeyHash $ decodeHex (B.pack bs))
@@ -325,6 +325,9 @@ bStoSPKH bs = StakePubKeyHash (PubKeyHash $ decodeHex (B.pack bs))
 
 
 
+              --utxos <- utxosAt $ ppkhToCardanoAddress (stringToPPKH sWalletParam)
+
+              --logInfo @Haskell.String  $ "////UTXOS///" <> Haskell.show utxos
 
 
 --slotCfg :: SlotConfig
