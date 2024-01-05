@@ -9,7 +9,7 @@ import Data.Maybe (isNothing)
 import Plutus.Contract
 import Plutus.Contract.StateMachine (OnChainState)
 import Plutus.Contract.Test
-import Slave (Input, Params, SlaveError, SlaveSchema, SlaveState, contract)
+import Slave (SlaveInput, Params, SlaveError, SlaveSchema, SlaveState, contract)
 import Slave qualified as Slave
 import Plutus.Script.Utils.Ada qualified as Ada
 import Plutus.Trace.Emulator qualified as Trace

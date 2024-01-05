@@ -17,7 +17,7 @@
 
 module Slave(
     SlaveState(..),
-    Input(..),
+    SlaveInput(..),
     SlaveError(..),
     SlaveSchema,
     Params(..),
@@ -117,12 +117,12 @@ data Params = Params
 PlutusTx.unstableMakeIsData ''Params
 PlutusTx.makeLift ''Params
 
-data Input = Locking | Delivered | Received
+data SlaveInput = Locking | Delivered | Received
     deriving stock (Haskell.Show, Generic)
     deriving anyclass (ToJSON, FromJSON)
 
-PlutusTx.unstableMakeIsData ''Input
-PlutusTx.makeLift ''Input
+PlutusTx.unstableMakeIsData ''SlaveInput
+PlutusTx.makeLift ''SlaveInput
 
 -- | Arguments for the @"Start"@ endpoint
 data StartParams =
@@ -176,7 +176,7 @@ instance AsContractError SlaveError where
     _ContractError = _SlaveContractError
 
 {-# INLINABLE transition #-}
-transition :: Params -> State SlaveState -> Input -> Maybe (TxConstraints Void Void, State SlaveState)
+transition :: Params -> State SlaveState -> SlaveInput -> Maybe (TxConstraints Void Void, State SlaveState)
 transition params State{ stateData = oldData, stateValue = oldStateValue } input = case (oldData, input) of
     (SlaveState{cState, pPrice}, Locking)   |   cState == 0     -> let newValue    =  oldStateValue + (Ada.toValue pPrice)
                                                                        constraints =  case (bWallet' params) of 
@@ -217,27 +217,29 @@ transition params State{ stateData = oldData, stateValue = oldStateValue } input
     _ -> Nothing
 
 
+type SlaveStateMachine = SM.StateMachine SlaveState SlaveInput
+
 {-# INLINABLE machine #-}
-machine :: Params -> SM.StateMachine SlaveState Input
+machine :: Params -> SlaveStateMachine
 machine params = SM.mkStateMachine Nothing (transition params) isFinal where
     isFinal Finished = True
     isFinal _        = False
 
 
 {-# INLINABLE mkValidator #-}
-mkValidator :: Params -> V2.ValidatorType (SM.StateMachine SlaveState Input)
+mkValidator :: Params -> V2.ValidatorType SlaveStateMachine
 mkValidator params = SM.mkValidator $ machine params
 
 
-typedValidator :: Params -> V2.TypedValidator (SM.StateMachine SlaveState Input)
-typedValidator = V2.mkTypedValidatorParam @(SM.StateMachine SlaveState Input)
+typedValidator :: Params -> V2.TypedValidator SlaveStateMachine
+typedValidator = V2.mkTypedValidatorParam @SlaveStateMachine
     $$(PlutusTx.compile [|| mkValidator ||])
     $$(PlutusTx.compile [|| wrap ||])
     where
-        wrap = Scripts.mkUntypedValidator @ScriptContextV2 @SlaveState @Input
+        wrap = Scripts.mkUntypedValidator
 
 
-client :: Params -> SM.StateMachineClient SlaveState Input
+client :: Params -> SM.StateMachineClient SlaveState SlaveInput
 client params = SM.mkStateMachineClient $ SM.StateMachineInstance (machine params) (typedValidator params)
 
 
@@ -317,7 +319,9 @@ integerToAda amount = Just (Ada.lovelaceOf amount)
 
 
 
+              --utxos <- utxosAt $ ppkhToCardanoAddress (stringToPPKH sWalletParam)
 
+              --logInfo @Haskell.String  $ "////UTXOS///" <> Haskell.show utxos
 
 
 
@@ -354,9 +358,7 @@ ppkhToCardanoAddress =
 
 
 
-              --utxos <- utxosAt $ ppkhToCardanoAddress (stringToPPKH sWalletParam)
 
-              --logInfo @Haskell.String  $ "////UTXOS///" <> Haskell.show utxos
 
 
 --slotCfg :: SlotConfig

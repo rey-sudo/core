@@ -123,8 +123,13 @@ export default {
 
       const contractAdd = CardanoWasm.Address.from_bech32(contractAddr);
 
+      const contractPkh = CardanoWasm.BaseAddress.from_address(contractAdd)
+        .payment_cred()
+        .to_keyhash()
+        .to_hex();
+
       console.log(JSON.stringify(addrMap));
-      console.log("contractAddr", JSON.stringify(contractAdd.to_bech32()));
+      console.log("contractAddr", JSON.stringify(contractPkh));
     },
 
     async deploy() {
