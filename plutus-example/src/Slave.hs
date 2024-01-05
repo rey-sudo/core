@@ -95,7 +95,7 @@ data SlaveState = SlaveState
     , pDelivered  :: Bool
     , pReceived   :: Bool
     , sWallet     :: PaymentPubKeyHash
-    , bWallet     :: PaymentPubKeyHash
+    , bWallet     :: Maybe PaymentPubKeyHash
     , pPrice      :: Ada
     , sCollateral :: Ada
     } | Appeal | Finished
@@ -184,7 +184,8 @@ transition params State{ stateData = oldData, stateValue = oldStateValue } input
                                                                       State{stateData = oldData { cState = 1
                                                                                                 , sLabel = "locking"
                                                                                                 , bSlot  = True
-                                                                                                }, stateValue = newValue })
+                                                                                                }
+                                                                                                , stateValue = newValue })
 
 
     (SlaveState{cState, sWallet}, Delivered)    | cState == 1   -> let constraints = mustBeSignedBy sWallet
@@ -196,14 +197,22 @@ transition params State{ stateData = oldData, stateValue = oldStateValue } input
                                                                                                  , stateValue = oldStateValue })
 
 
-    (SlaveState{cState, bWallet, sWallet, sCollateral, pPrice}, Received)   | cState == 2   -> let money = Ada.toValue (sCollateral + pPrice)
-                                                                                                   constraints = mustBeSignedBy bWallet
-                                                                                                    <> mustPayToAddress (pubKeyHashAddress sWallet Nothing) money
-                                                                                                in Just (constraints,
-                                                                                                   State{ stateData = Finished, stateValue = mempty })
+    (SlaveState cState
+                sLabel
+                bSlot
+                pDelivered
+                pReceived
+                sWallet 
+                (Just bWallet)
+                pPrice
+                sCollateral, Received)   | cState == 2   -> let money = Ada.toValue (sCollateral + pPrice)
+                                                                constraints = mustBeSignedBy bWallet
+                                                                    <> mustPayToAddress (pubKeyHashAddress sWallet Nothing) money
+                                                            in Just (constraints,
+                                                               State{ stateData = Finished, stateValue = mempty })
 
 
-    _                                                                                               -> Nothing
+    _ -> Nothing
 
 
 {-# INLINABLE machine #-}
@@ -237,7 +246,7 @@ initialState params = SlaveState { cState = 0
                                  , pDelivered = False
                                  , pReceived = False
                                  , sWallet = fromJust $ sWallet' params
-                                 , bWallet = fromJust $ bWallet' params
+                                 , bWallet = bWallet' params
                                  , pPrice = fromJust $ pPrice' params
                                  , sCollateral = fromJust $ sCollateral' params
                                  }
@@ -267,9 +276,8 @@ startEndpoint = endpoint @"Start" $ \StartParams{sWalletParam, pPriceParam, sCol
 
                   theClient       = client params
                   theInitialState = initialState params
-                  theSeller       = fromJust $ sWallet' params
                   theCollateral   = Ada.toValue $ fromJust (sCollateral' params)
-                  theConstraints  = mustBeSignedBy theSeller
+                  theConstraints  = mustBeSignedBy $ fromJust (sWallet' params)
                   theLookups      = Haskell.mempty
                                    
               logInfo @Text "START_ENDPOINT"
