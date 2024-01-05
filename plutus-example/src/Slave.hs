@@ -290,12 +290,13 @@ lockingEndpoint = endpoint @"Locking" $ \LockingParams{lockingDefault} -> do
    
                 let params          = generateParams lockingDefault
                     theClient       = client params
+                    theSeller       = sWallet' params
                     theConstraints  = Haskell.mempty
                     theLookups      = Haskell.mempty
                 
                 logInfo @Text "LOCKING_ENDPOINT"
 
-                void (SM.runStepWithUnbalanced theLookups theConstraints theClient Locking)
+                void (SM.runStepWithUnbalanced theLookups theConstraints theClient Locking theSeller)
 
 
 deliveredEndpoint :: Promise () SlaveSchema SlaveError ()

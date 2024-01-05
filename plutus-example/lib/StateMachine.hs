@@ -67,6 +67,7 @@ import Data.Text qualified as Text
 import Data.Void (Void, absurd)
 import GHC.Generics (Generic)
 import Ledger (POSIXTime, Slot, TxOutRef)
+import Ledger.Address(PaymentPubKeyHash)
 import Ledger qualified
 import Ledger.Tx qualified as Tx
 import Ledger.Tx.Constraints (ScriptLookups, TxConstraints (txOwnInputs, txOwnOutputs), UnbalancedTx,
@@ -523,14 +524,14 @@ runStepWithUnbalanced ::
     -> TxConstraints input state                   -- ^ Additional constraints
     -> StateMachineClient state input              -- ^ The state machine
     -> input                                       -- ^ The input to apply to the state machine
+    -> PaymentPubKeyHash                                       -- ^ first own PaymentPubkeyHash 
     -> Contract w schema e (Either a (TransitionResult state input))
-runStepWithUnbalanced customLookups customConstraints smc input =
+runStepWithUnbalanced customLookups customConstraints smc input ppkh =
   mapError (review _SMContractError) $ mkStep smc input >>= \case
     Right StateMachineTransition{smtConstraints,smtOldState=State{stateData=os}, smtNewState=State{stateData=ns}, smtLookups} -> do
-        pk <- ownFirstPaymentPubKeyHash
-        logInfo @String $ "//OJO///x" <> show pk
+        logInfo @String "////6/" 
         let constraints = smtConstraints <> customConstraints
-            lookups = smtLookups { Constraints.slOwnPaymentPubKeyHash = Just pk }
+            lookups = smtLookups { Constraints.slOwnPaymentPubKeyHash = Just ppkh }
         utx <- mkTxConstraints (lookups <> customLookups) constraints
         adjustUnbalancedTx utx >>= yieldUnbalancedTx
         pure $ Right $ TransitionSuccess ns
@@ -635,6 +636,7 @@ mkStep client@StateMachineClient{scInstance} input = do
         Nothing -> pure $ Left $ InvalidTransition Nothing input
         Just (onChainState, utxo) -> do
             logInfo @String "////4/" 
+            logInfo @String $ "//4///utxo" <> show utxo
             let OnChainState{ocsTxOutRef} = onChainState
                 oldState = State
                     { stateData = getStateData onChainState
@@ -642,7 +644,8 @@ mkStep client@StateMachineClient{scInstance} input = do
                     , stateValue = V2.txOutValue (Typed.tyTxOutTxOut $ Typed.tyTxOutRefOut ocsTxOutRef) <> inv (SM.threadTokenValueOrZero scInstance)
                     }
                 inputConstraints = mustSpendOutputFromTheScript (Typed.tyTxOutRefRef ocsTxOutRef) input
-
+            
+            logInfo @String "////5/" 
             case smTransition oldState input of
                 Just (newConstraints, newState)  ->
                     let isFinal = smFinal stateMachine (stateData newState)
