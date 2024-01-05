@@ -54,8 +54,8 @@ buyerWalletPPKH = Just (CW.paymentPubKeyHash (CW.fromWalletNumber $ CW.WalletNum
 
 defaultParams :: S.Params
 defaultParams = S.Params { S.bWallet'     = buyerWalletPPKH
-                         , S.pPrice'      = Ada.lovelaceOf 10_000_000
-                         , S.sCollateral' = Ada.lovelaceOf 5_000_000
+                         , S.pPrice'      = Just $ Ada.lovelaceOf 10_000_000
+                         , S.sCollateral' = Just $ Ada.lovelaceOf 5_000_000
                          }
 
 sWalletBS :: String
@@ -80,7 +80,6 @@ main = void $ Simulator.runSimulationWith handlers $ do
     Simulator.logString @(Builtin MarketplaceContracts) $ "wallet = " ++ show sellerWallet ++ " CID: " ++ show sellerCID
 
     let sp  = S.StartParams{ sWalletParam     = sWalletBS
-                           , bWalletParam     = bWalletBS
                            , pPriceParam      = 10_000_000
                            , sCollateralParam = 5_000_000
                            }
@@ -95,10 +94,7 @@ main = void $ Simulator.runSimulationWith handlers $ do
     
     void $ liftIO getLine
 
-    let lockingInput  = S.LockingParams { sWalletParaml     = sWalletBS
-                                        , bWalletParaml     = bWalletBS
-                                        , pPriceParaml      = 10_000_000
-                                        , sCollateralParaml = 5_000_000
+    let lockingInput  = S.LockingParams { bWalletParam    = bWalletBS
                                          }
 
 

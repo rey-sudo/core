@@ -27,8 +27,8 @@ bWalletBS = "3f2ec097f77e4254df012d5d4d4b45e48459c6ec5795e92df30f2dbc"
 params :: Slave.Params
 params = Slave.Params { Slave.sWallet'     = Just $ mockWalletPaymentPubKeyHash w1
                       , Slave.bWallet'     = Just $ mockWalletPaymentPubKeyHash w2
-                      , Slave.pPrice'      = Ada.lovelaceOf 10_000_000
-                      , Slave.sCollateral' = Ada.lovelaceOf 5_000_000
+                      , Slave.pPrice'      = Just $ Ada.lovelaceOf 10_000_000
+                      , Slave.sCollateral' = Just $ Ada.lovelaceOf 5_000_000
                       }
 
 theContract :: Contract () SlaveSchema SlaveError ()
@@ -38,16 +38,13 @@ theContract = do
 
 startParams :: Slave.StartParams
 startParams = Slave.StartParams{ Slave.sWalletParam     = sWalletBS
-                               , Slave.bWalletParam     = bWalletBS
                                , Slave.pPriceParam      = 10_000_000
                                , Slave.sCollateralParam = 5_000_000
                                }
 
 lockingParams :: Slave.LockingParams
-lockingParams = Slave.LockingParams { Slave.sWalletParaml     = sWalletBS
-                                    , Slave.bWalletParaml     = bWalletBS
-                                    , Slave.pPriceParaml      = 10_000_000
-                                    , Slave.sCollateralParaml = 5_000_000
+lockingParams = Slave.LockingParams {   
+                                     Slave.bWalletParam     = bWalletBS
                                     }
 
 deliveredParams :: Slave.DeliveredParams

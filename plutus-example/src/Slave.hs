@@ -44,7 +44,7 @@ import Ledger.Address (CardanoAddress(..), PaymentPrivateKey (PaymentPrivateKey,
                        StakePubKey (StakePubKey, unStakePubKey), StakePubKeyHash (StakePubKeyHash, unStakePubKeyHash),
                        stakePubKeyHashCredential)
 
-import Ledger.Tx.Constraints (TxConstraints, mustPayToAddress, mustBeSignedBy)
+import Ledger.Tx.Constraints (TxConstraints, mustSpendAtLeast,mustPayToAddress, mustBeSignedBy)
 import Ledger.Tx.Constraints.OffChain qualified as Constraints
 import Ledger.Typed.Scripts qualified as Scripts
 import Ledger                     (Slot (..))  
@@ -108,8 +108,8 @@ PlutusTx.makeLift ''SlaveState
 data Params = Params
     { sWallet'     :: Maybe PaymentPubKeyHash
     , bWallet'     :: Maybe PaymentPubKeyHash
-    , pPrice'      :: Ada
-    , sCollateral' :: Ada
+    , pPrice'      :: Maybe Ada
+    , sCollateral' :: Maybe Ada
     }
     deriving stock (Haskell.Show, Generic)
     deriving anyclass (ToJSON, FromJSON)
@@ -128,7 +128,6 @@ PlutusTx.makeLift ''Input
 data StartParams =
     StartParams
         {  sWalletParam       :: Haskell.String
-        ,  bWalletParam       :: Haskell.String
         ,  pPriceParam        :: Integer
         ,  sCollateralParam   :: Integer
         } deriving stock (Haskell.Show, Generic)
@@ -137,10 +136,7 @@ data StartParams =
 -- | Arguments for the @"locking"@ endpoint
 data LockingParams =
     LockingParams
-        {  sWalletParaml       :: Haskell.String
-        ,  bWalletParaml       :: Haskell.String
-        ,  pPriceParaml        :: Integer
-        ,  sCollateralParaml  :: Integer
+        { bWalletParam       :: Haskell.String
         } deriving stock (Haskell.Show, Generic)
           deriving anyclass (ToJSON, FromJSON)
 
@@ -182,33 +178,33 @@ instance AsContractError SlaveError where
 {-# INLINABLE transition #-}
 transition :: Params -> State SlaveState -> Input -> Maybe (TxConstraints Void Void, State SlaveState)
 transition params State{ stateData = oldData, stateValue = oldStateValue } input = case (oldData, input) of
-    (SlaveState{cState, bWallet, pPrice}, Locking)                          | cState == 0           -> let constraints = mustBeSignedBy bWallet
-                                                                                                           newValue   =  oldStateValue + (Ada.toValue pPrice)
-                                                                                                       in Just (constraints,
-                                                                                                          State{stateData = oldData { cState = 1
-                                                                                                                                    , sLabel = "locking"
-                                                                                                                                    , bSlot  = True
-                                                                                                                                    }
-                                                                                                                                    , stateValue = newValue })
+    (SlaveState{cState, pPrice}, Locking)   |   cState == 0     -> let newValue    =  oldStateValue + (Ada.toValue pPrice)
+                                                                       constraints =  mustSpendAtLeast newValue
+                                                                   in Just (constraints,
+                                                                      State{stateData = oldData { cState = 1
+                                                                                                , sLabel = "locking"
+                                                                                                , bSlot  = True
+                                                                                                }, stateValue = newValue })
 
 
-    (SlaveState{cState, sWallet}, Delivered)                                | cState == 1           -> let constraints = mustBeSignedBy sWallet
-                                                                                                       in Just (constraints,
-                                                                                                          State{ stateData = oldData { cState = 2
-                                                                                                                                     , sLabel = "delivered"
-                                                                                                                                     , pDelivered = True
-                                                                                                                                     }
-                                                                                                                                     , stateValue = oldStateValue })
+    (SlaveState{cState, sWallet}, Delivered)    | cState == 1   -> let constraints = mustBeSignedBy sWallet
+                                                                   in Just (constraints,
+                                                                      State{ stateData = oldData { cState = 2
+                                                                                                 , sLabel = "delivered"
+                                                                                                 , pDelivered = True
+                                                                                                 }
+                                                                                                 , stateValue = oldStateValue })
 
 
-    (SlaveState{cState, bWallet, sWallet, sCollateral, pPrice}, Received)   | cState == 2           -> let money = Ada.toValue (sCollateral + pPrice)
-                                                                                                           constraints = mustBeSignedBy bWallet
-                                                                                                            <> mustPayToAddress (pubKeyHashAddress sWallet Nothing) money
-                                                                                                       in Just (constraints,
-                                                                                                          State{ stateData = Finished, stateValue = mempty })
+    (SlaveState{cState, bWallet, sWallet, sCollateral, pPrice}, Received)   | cState == 2   -> let money = Ada.toValue (sCollateral + pPrice)
+                                                                                                   constraints = mustBeSignedBy bWallet
+                                                                                                    <> mustPayToAddress (pubKeyHashAddress sWallet Nothing) money
+                                                                                                in Just (constraints,
+                                                                                                   State{ stateData = Finished, stateValue = mempty })
 
 
     _                                                                                               -> Nothing
+
 
 {-# INLINABLE machine #-}
 machine :: Params -> SM.StateMachine SlaveState Input
@@ -216,9 +212,11 @@ machine params = SM.mkStateMachine Nothing (transition params) isFinal where
     isFinal Finished = True
     isFinal _        = False
 
+
 {-# INLINABLE mkValidator #-}
 mkValidator :: Params -> V2.ValidatorType (SM.StateMachine SlaveState Input)
 mkValidator params = SM.mkValidator $ machine params
+
 
 typedValidator :: Params -> V2.TypedValidator (SM.StateMachine SlaveState Input)
 typedValidator = V2.mkTypedValidatorParam @(SM.StateMachine SlaveState Input)
@@ -227,10 +225,10 @@ typedValidator = V2.mkTypedValidatorParam @(SM.StateMachine SlaveState Input)
     where
         wrap = Scripts.mkUntypedValidator @ScriptContextV2 @SlaveState @Input
 
--- //////////////////////////////////////////////////////////////////////////
 
 client :: Params -> SM.StateMachineClient SlaveState Input
 client params = SM.mkStateMachineClient $ SM.StateMachineInstance (machine params) (typedValidator params)
+
 
 initialState :: Params -> SlaveState
 initialState params = SlaveState { cState = 0
@@ -240,9 +238,10 @@ initialState params = SlaveState { cState = 0
                                  , pReceived = False
                                  , sWallet = fromJust $ sWallet' params
                                  , bWallet = fromJust $ bWallet' params
-                                 , pPrice = pPrice' params
-                                 , sCollateral = sCollateral' params
+                                 , pPrice = fromJust $ pPrice' params
+                                 , sCollateral = fromJust $ sCollateral' params
                                  }
+
 
 contract :: Contract () SlaveSchema SlaveError ()
 contract = forever endpoints where
@@ -258,18 +257,18 @@ contract = forever endpoints where
 
 
 startEndpoint :: Promise () SlaveSchema SlaveError ()
-startEndpoint = endpoint @"Start" $ \StartParams{sWalletParam, bWalletParam, pPriceParam, sCollateralParam} -> do                     
+startEndpoint = endpoint @"Start" $ \StartParams{sWalletParam, pPriceParam, sCollateralParam} -> do                     
 
-              let params = Params { sWallet'     = stringToPPKH sWalletParam 
-                                  , bWallet'     = stringToPPKH bWalletParam
-                                  , pPrice'      = Ada.lovelaceOf pPriceParam
-                                  , sCollateral' = Ada.lovelaceOf sCollateralParam
+              let params = Params { sWallet'     = stringToPPKH sWalletParam
+                                  , bWallet'     = Nothing
+                                  , pPrice'      = integerToAda pPriceParam
+                                  , sCollateral' = integerToAda sCollateralParam
                                   }
 
                   theClient       = client params
                   theInitialState = initialState params
                   theSeller       = fromJust $ sWallet' params
-                  theCollateral   = Ada.toValue $ sCollateral' params
+                  theCollateral   = Ada.toValue $ fromJust (sCollateral' params)
                   theConstraints  = mustBeSignedBy theSeller
                   theLookups      = Haskell.mempty
                                    
@@ -277,14 +276,14 @@ startEndpoint = endpoint @"Start" $ \StartParams{sWalletParam, bWalletParam, pPr
               
               void (SM.runInitialiseWithUnbalanced theLookups theConstraints theClient theInitialState theCollateral)
               
-
-              
+             
 lockingEndpoint :: Promise () SlaveSchema SlaveError ()
-lockingEndpoint = endpoint @"Locking" $ \LockingParams{sWalletParaml, bWalletParaml, pPriceParaml, sCollateralParaml} -> do
-                let params = Params { sWallet'     = stringToPPKH sWalletParaml 
-                                    , bWallet'     = stringToPPKH bWalletParaml
-                                    , pPrice'      = Ada.lovelaceOf pPriceParaml
-                                    , sCollateral' = Ada.lovelaceOf sCollateralParaml
+lockingEndpoint = endpoint @"Locking" $ \LockingParams{bWalletParam} -> do
+
+                let params = Params { sWallet'     = Nothing
+                                    , bWallet'     = stringToPPKH bWalletParam
+                                    , pPrice'      = Nothing
+                                    , sCollateral' = Nothing
                                     }
 
                 let theClient       = client params
@@ -295,6 +294,24 @@ lockingEndpoint = endpoint @"Locking" $ \LockingParams{sWalletParaml, bWalletPar
 
                 void (SM.runStepWithUnbalanced theLookups theConstraints theClient Locking)
                 
+
+stringToPPKH :: Haskell.String -> Maybe PaymentPubKeyHash
+stringToPPKH bs = Just (PaymentPubKeyHash $ pkhToPubKeyHash bs)
+
+
+integerToAda :: Integer -> Maybe Ada
+integerToAda amount = Just (Ada.lovelaceOf amount)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -313,15 +330,17 @@ ppkhToCardanoAddress =
 
 --(Just (StakingHash (PubKeyCredential $ unStakePubKeyHash $ spkh  w)))
 
-stringToPPKH :: Haskell.String -> Maybe PaymentPubKeyHash
-stringToPPKH bs = Just (PaymentPubKeyHash $ pkhToPubKeyHash bs)
-
-bStoSPKH :: Haskell.String -> StakePubKeyHash
-bStoSPKH bs = StakePubKeyHash (PubKeyHash $ decodeHex (B.pack bs))
 
 
-              
 
+
+
+
+--bStoSPKH :: Haskell.String -> StakePubKeyHash
+--bStoSPKH bs = StakePubKeyHash (PubKeyHash $ decodeHex (B.pack bs))
+
+
+            
 
 
 
