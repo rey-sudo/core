@@ -236,7 +236,11 @@ getOnChainState ::
     => StateMachineClient state i
     -> Contract w schema e (Maybe (OnChainState state i, Map TxOutRef Tx.DecoratedTxOut))
 getOnChainState StateMachineClient{scInstance, scChooser} = mapError (review _SMContractError) $ do
+    logInfo @String "////2/" 
     utxoTx <- utxosAt (SM.machineAddress scInstance)
+    logInfo @String $ "////3///// " <> show utxoTx
+    logInfo @String $ "////3///// " <> show (Ledger.toPlutusAddress $ SM.machineAddress scInstance) 
+    logInfo @String $ "////3///// " <> show (SM.machineAddress scInstance) 
     let states = getStates scInstance utxoTx
     case states of
         [] -> pure Nothing
@@ -503,7 +507,6 @@ runInitialiseWithUnbalanced customLookups customConstraints StateMachineClient{s
               <> foldMap (plutusV2MintingPolicy . curPolicy . ttOutRef) (smThreadToken stateMachine)
               <> customLookups
       utx <- mkTxConstraints lookups constraints
-      logInfo @String $ "runInitialiseWithUnbalanced " <> show utx
       adjustUnbalancedTx utx >>= yieldUnbalancedTx
 
 
@@ -526,10 +529,10 @@ runStepWithUnbalanced customLookups customConstraints smc input =
   mapError (review _SMContractError) $ mkStep smc input >>= \case
     Right StateMachineTransition{smtConstraints,smtOldState=State{stateData=os}, smtNewState=State{stateData=ns}, smtLookups} -> do
         pk <- ownFirstPaymentPubKeyHash
+        logInfo @String $ "//OJO///x" <> show pk
         let constraints = smtConstraints <> customConstraints
-            lookups = smtLookups { Constraints.slOwnPaymentPubKeyHash = Just pk } <> customLookups
-        utx <- mkTxConstraints lookups constraints
-        logInfo @String $ "runStepWithUnbalanced " <> show utx
+            lookups = smtLookups { Constraints.slOwnPaymentPubKeyHash = Just pk }
+        utx <- mkTxConstraints (lookups <> customLookups) constraints
         adjustUnbalancedTx utx >>= yieldUnbalancedTx
         pure $ Right $ TransitionSuccess ns
 
@@ -627,10 +630,12 @@ mkStep ::
 mkStep client@StateMachineClient{scInstance} input = do
     let StateMachineInstance{stateMachine, typedValidator} = scInstance
         StateMachine{smTransition} = stateMachine
+    logInfo @String "////1/"    
     maybeState <- getOnChainState client
     case maybeState of
         Nothing -> pure $ Left $ InvalidTransition Nothing input
         Just (onChainState, utxo) -> do
+            logInfo @String "////4/" 
             let OnChainState{ocsTxOutRef} = onChainState
                 oldState = State
                     { stateData = getStateData onChainState
