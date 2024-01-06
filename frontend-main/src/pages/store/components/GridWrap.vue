@@ -125,11 +125,11 @@ export default {
   text-align: left;
   font-size: var(--text-size-b);
   margin-bottom: 1rem; 
-  color: var(--text-a);
+  color: var(--blue-a);
 }
 
 .grid-item-title {
-  font-size: var(--text-size-d);
+  font-size: var(--text-size-e);
   font-weight: 700;
   text-align: start;
   line-height: 125px;
@@ -147,7 +147,7 @@ export default {
 .card {
   width: calc(300px - 2rem);
   height: 600px;
-  border-radius: calc(1rem + 12px);
+  border-radius: calc(1rem + 16px);
   transition: box-shadow 0.25s ease-in-out 0s, transform 0.25s ease 0s;
   display: flex;
   flex-direction: column;
@@ -156,6 +156,7 @@ export default {
   padding: 1.25rem;
   padding-bottom: 0;
   margin: auto;
+  line-height: 1.5rem;
 }
 
 .card:hover {
@@ -194,7 +195,7 @@ export default {
   height: calc(300px - 2rem);
   min-width: calc(300px - 2rem);
   max-width: calc(300px - 2rem);
-  border-radius: 12px;
+  border-radius: 16px;
 }
 
 .card-body {

@@ -42,7 +42,7 @@ export default () => ({
           price_diff: 330,
           price: 330,
           image:
-            "https://ae04.alicdn.com/kf/S68735fc26f894938a3b29e9a6fc9c581a/White-Casual-Leather-Men-Sneakers-Shoes-Comfortable-Trend-Board-Shoes-for-Men-Breathable-Sneakers-Sports-Shoes.jpg_220x220xz.jpg_.webp",
+            "https://ae01.alicdn.com/kf/Sa820fb5952264ddb85ee55e3d55f5c20u/JONSBO-U4Mini-Case-Black-White-MESH-360-Cold-Row-Position-Support-Back-Plug-Motherboard-MicroATX-Desktop.jpg_350x350xz.jpg_.webp",
           payment_type: "10 Slots",
           stock_supply: 50,
           collateral: 15,

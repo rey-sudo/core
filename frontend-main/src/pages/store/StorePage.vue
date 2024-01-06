@@ -174,7 +174,7 @@ export default {
 }
 
 .store .top .top-menu .top-menu-column .submenu-button img {
-  width: var(--text-size-d);
+  width: var(--text-size-e);
 }
 
 .store .top .top-menu .top-menu-column .submenu-nav div {

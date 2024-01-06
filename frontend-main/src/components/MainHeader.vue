@@ -216,7 +216,7 @@ img.scrolled {
 
 .header .header-logo {
   cursor: pointer;
-  height: var(--text-size-e);
+  height: var(--text-size-h);
 }
 
 .header-column {
@@ -265,7 +265,7 @@ img.scrolled {
 
 .header-box {
   font-weight: 600;
-  font-size: var(--text-size-c);
+  font-size: var(--text-size-d);
   display: flex;
   align-items: center;
   white-space: nowrap;
