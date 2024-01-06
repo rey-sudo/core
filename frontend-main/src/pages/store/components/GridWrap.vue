@@ -204,7 +204,7 @@ export default {
 
 .card-body-name {
   color: var(--text-a);
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   text-align: left;
   display: flex;
   align-items: center;

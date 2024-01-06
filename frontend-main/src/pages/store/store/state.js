@@ -59,7 +59,7 @@ export default () => ({
           price_diff: 200,
           price: 420,
           image:
-            "https://ae04.alicdn.com/kf/Se53fc2005bed478b837aaa6bd66ec59dt/Black-Winter-Warm-Full-Fingers-Waterproof-Cycling-Outdoor-Sports-Running-Motorcycle-Ski-Touch-Screen-Fleece-Gloves.jpg_220x220xz.jpg_.webp",
+            "https://ae01.alicdn.com/kf/Sd8a92c5e8a6b4ef5860314ebb60ef8cd6/All-aluminum-alloy-matx-small-computer-case-atx-desktop-nas-main-box-mini-shell-multi-drawer.jpg_350x350xz.jpg_.webp",
           payment_type: "2 Slots",
           stock_supply: 5,
           collateral: 30,
