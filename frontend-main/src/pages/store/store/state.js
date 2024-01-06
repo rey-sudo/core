@@ -21,7 +21,7 @@ export default () => ({
         },
         {
           pid: "pid1",
-          name: "Waterproof hooded jacket four cotton coat with thick collar for the cold with thick collar for the cold",
+          name: "Tailored comfort in azure cotton, unveiling timeless style and contemporary sophistication for a graceful",
           price_diff: 200,
           price: 300,
           image:
@@ -38,7 +38,7 @@ export default () => ({
 
         {
           pid: "pid1",
-          name: "Cream colored tennis shoes for women",
+          name: "Tailored comfort in azure cotton, unveiling timeless style and contemporary sophistication for a graceful",
           price_diff: 330,
           price: 330,
           image:
@@ -55,7 +55,7 @@ export default () => ({
 
         {
           pid: "pid1",
-          name: "Pair of black airtight sports gloves",
+          name: "Tailored comfort in azure cotton, unveiling timeless style and contemporary sophistication for a graceful",
           price_diff: 200,
           price: 420,
           image:
@@ -72,7 +72,7 @@ export default () => ({
 
         {
           pid: "pid1",
-          name: "Long sleeve blue mountaineering jacket",
+          name:"Tailored comfort in azure cotton, unveiling timeless style and contemporary sophistication for a graceful",
           price_diff: 200,
           price: 220,
           image:
@@ -89,7 +89,7 @@ export default () => ({
 
         {
           pid: "pid1",
-          name: "Waterproof hooded jacket four colorsx",
+          name: "Tailored comfort in azure cotton, unveiling timeless style and contemporary sophistication for a graceful",
           price_diff: 200,
           price: 100,
           image:
@@ -123,7 +123,7 @@ export default () => ({
 
         {
           pid: "pid1",
-          name: "Waterproof hooded jacket four colors",
+          name: "Tailored comfort in azure cotton, unveiling timeless style and contemporary sophistication for a graceful",
           price_diff: 200,
           price: 100,
           image:
@@ -140,7 +140,7 @@ export default () => ({
 
         {
           pid: "pid1",
-          name: "Waterproof hooded jacket four colors",
+          name: "Tailored comfort in azure cotton, unveiling timeless style and contemporary sophistication for a graceful",
           price_diff: 200,
           price: 100,
           image:
@@ -157,7 +157,7 @@ export default () => ({
 
         {
           pid: "pid1",
-          name: "Waterproof hooded jacket four colors",
+          name: "Tailored comfort in azure cotton, unveiling timeless style and contemporary sophistication for a graceful",
           price_diff: 200,
           price: 100,
           image:

@@ -21,7 +21,9 @@
             <div class="card-body-name">
               <span> {{ item.name }}</span>
             </div>
-
+            <div class="card-body-price">
+              <span> {{ formatPrice(item.price) }}</span>
+            </div>
             <div
               class="card-body-stock"
               :class="{
@@ -36,9 +38,7 @@
               <span> {{ item.collateral }} ADA Collateral</span>
             </div>
 
-            <div class="card-body-price">
-              <span> {{ formatPrice(item.price) }}</span>
-            </div>
+
           </div>
 
           <div class="card-bottom">
@@ -124,7 +124,7 @@ export default {
   font-weight: 600;
   text-align: left;
   font-size: var(--text-size-b);
-  margin-top: 1rem;
+  margin-bottom: 1rem; 
   color: var(--text-a);
 }
 
@@ -205,7 +205,7 @@ export default {
 
 .card-body-name {
   color: var(--text-a);
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
   text-align: left;
   display: flex;
   align-items: center;
