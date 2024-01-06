@@ -90,11 +90,11 @@ export default {
     formatPrice(num) {
       const price = num || 0;
 
-      const customCurrencySymbol = "₳";
+      const customCurrencySymbol = "ADA";
 
-      const formattedNumber = `${customCurrencySymbol} ${price.toLocaleString(
+      const formattedNumber = `${price.toLocaleString(
         "en-US"
-      )}`;
+      )} ${customCurrencySymbol}`;
 
       return formattedNumber;
     },
@@ -156,7 +156,6 @@ export default {
   padding: 1.25rem;
   padding-bottom: 0;
   margin: auto;
-  border: 1px solid var(--border-b);
 }
 
 .card:hover {
@@ -169,7 +168,6 @@ export default {
   text-align: left;
   color: var(--text-b);
   font-size: var(--text-size-a);
- 
 }
 
 .card-body-collateral {
