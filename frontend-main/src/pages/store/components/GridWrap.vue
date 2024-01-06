@@ -125,11 +125,11 @@ export default {
   text-align: left;
   font-size: var(--text-size-b);
   margin-bottom: 1rem; 
-  color: var(--blue-a);
+  color: var(--text-a);
 }
 
 .grid-item-title {
-  font-size: var(--text-size-e);
+  font-size: var(--text-size-f);
   font-weight: 700;
   text-align: start;
   line-height: 125px;
@@ -210,7 +210,8 @@ export default {
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-  font-weight: 500;
+  font-weight: 400;
+
 }
 .card-body-name span::first-letter {
   text-transform: capitalize;
