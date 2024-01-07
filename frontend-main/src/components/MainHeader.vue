@@ -190,9 +190,6 @@ img.scrolled {
   border-bottom: 1px solid var(--border-a);
 }
 .counter.scrolled {
-  background: var(--base-c);
-}
-.counter.scrolled {
   color: var(--text-a);
 }
 
