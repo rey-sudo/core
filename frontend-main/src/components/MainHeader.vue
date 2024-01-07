@@ -37,7 +37,9 @@
           placeholder="Search products"
         />
 
-        <div><i class="pi pi-search" /></div>
+        <div class="header-search-icon" :class="{ scrolled: isScrolled }">
+          <i class="pi pi-search" />
+        </div>
       </div>
     </div>
 
@@ -104,6 +106,7 @@ export default {
 
       const addrMap = usedAddr.map((hexAddr) => {
         let byteAddr = CardanoWasm.Address.from_hex(hexAddr);
+        // eslint-disable-next-line
         let pkh = CardanoWasm.BaseAddress.from_address(byteAddr)
           .payment_cred()
           .to_keyhash()
@@ -111,8 +114,6 @@ export default {
 
         return {
           address: byteAddr.to_bech32(),
-          pubkeyhash: pkh,
-          balance: null,
         };
       });
 
@@ -204,16 +205,9 @@ img.scrolled {
   color: var(--text-b);
 }
 
-.header-search.scrolled:focus-within {
-  border: 1px solid var(--blue);
-  color: var(--text-b);
+.header-search-icon.scrolled{
+background: var(--blue-a);
 }
-
-.header-search.scrolled:hover {
-  border: 1px solid var(--blue);
-  color: var(--text-b);
-}
-
 .header .header-logo {
   cursor: pointer;
   height: var(--text-size-h);
@@ -343,15 +337,7 @@ img.scrolled {
   padding: 0.25rem;
 }
 
-.header-search:hover {
-  border: 1px solid var(-blue);
-}
-
-.header-search:focus-within {
-  border: 1px solid transparent;
-}
-
-.header-search div {
+.header-search-icon {
   background: black;
   color: var(--text-w);
   font-size: var(--text-size-b);
@@ -362,7 +348,7 @@ img.scrolled {
   cursor: pointer;
 }
 
-.header-search div i {
+.header-search-icon i {
   font-weight: bold !important;
 }
 
