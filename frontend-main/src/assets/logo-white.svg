@@ -25,13 +25,13 @@
      inkscape:document-units="px"
      showgrid="false"
      inkscape:zoom="8.0000005"
-     inkscape:cx="52.374997"
+     inkscape:cx="52.437497"
      inkscape:cy="12.749999"
-     inkscape:window-width="1920"
-     inkscape:window-height="1043"
-     inkscape:window-x="1920"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
+     inkscape:window-width="1495"
+     inkscape:window-height="749"
+     inkscape:window-x="295"
+     inkscape:window-y="125"
+     inkscape:window-maximized="0"
      inkscape:current-layer="layer1"
      inkscape:pageshadow="2" />
   <defs
@@ -80,7 +80,7 @@
          id="path103278" />
     </g>
     <circle
-       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        id="path20348-4"
        cx="66.442398"
        cy="6.2309294"
