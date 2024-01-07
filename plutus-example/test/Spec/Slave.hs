@@ -26,7 +26,6 @@ bWalletBS = "3f2ec097f77e4254df012d5d4d4b45e48459c6ec5795e92df30f2dbc"
 
 params :: Slave.DefaultEndpointParams
 params = Slave.DefaultEndpointParams { Slave.sWalletParam      = sWalletBS
-                                     , Slave.bWalletParam      = bWalletBS
                                      , Slave.pPriceParam       = 10000000
                                      , Slave.sCollateralParam  = 5000000
                                      }
@@ -42,7 +41,8 @@ startParams = Slave.StartParams{ Slave.startDefault = params
                                }
 
 lockingParams :: Slave.LockingParams
-lockingParams = Slave.LockingParams { Slave.lockingDefault = params
+lockingParams = Slave.LockingParams { Slave.lockingDefault    = params
+                                    , Slave.bWalletParam      = bWalletBS
                                     }
 
 deliveredParams :: Slave.DeliveredParams

@@ -28,7 +28,6 @@ module Slave(
     DefaultEndpointParams(..),
     contract,
     typedValidator,
-    ppkhToCardanoAddress,
     stringToPPKH
     ) where
 
@@ -97,7 +96,7 @@ data SlaveState = SlaveState
     , pDelivered  :: Bool
     , pReceived   :: Bool
     , sWallet     :: PaymentPubKeyHash
-    , bWallet     :: PaymentPubKeyHash
+    , bWallet     :: Maybe PaymentPubKeyHash
     , pPrice      :: Ada
     , sCollateral :: Ada
     } | Appeal | Finished
@@ -107,9 +106,10 @@ data SlaveState = SlaveState
 PlutusTx.unstableMakeIsData ''SlaveState
 PlutusTx.makeLift ''SlaveState
 
+
 data Params = Params
     { sWallet'     :: PaymentPubKeyHash
-    , bWallet'     :: PaymentPubKeyHash
+    , bWallet'     :: Maybe PaymentPubKeyHash
     , pPrice'      :: Ada
     , sCollateral' :: Ada
     }
@@ -119,7 +119,11 @@ data Params = Params
 PlutusTx.unstableMakeIsData ''Params
 PlutusTx.makeLift ''Params
 
-data SlaveInput = Locking | Delivered | Received
+
+data SlaveInput 
+    = Locking PaymentPubKeyHash
+    | Delivered
+    | Received
     deriving stock (Haskell.Show, Generic)
     deriving anyclass (ToJSON, FromJSON)
 
@@ -130,7 +134,6 @@ PlutusTx.makeLift ''SlaveInput
 data DefaultEndpointParams = 
     DefaultEndpointParams
         {  sWalletParam       :: Haskell.String
-        ,  bWalletParam       :: Haskell.String
         ,  pPriceParam        :: Integer
         ,  sCollateralParam   :: Integer
         } deriving stock (Haskell.Show, Generic)
@@ -146,7 +149,8 @@ data StartParams =
 
 -- | @Locking endpoint
 data LockingParams =
-    LockingParams { lockingDefault :: DefaultEndpointParams
+    LockingParams { lockingDefault     :: DefaultEndpointParams
+                  , bWalletParam       :: Haskell.String
                   } deriving stock (Haskell.Show, Generic)
                     deriving anyclass (ToJSON, FromJSON)
 
@@ -171,6 +175,7 @@ type SlaveSchema =
         .\/ Endpoint "Delivered" DeliveredParams
         .\/ Endpoint "Received" ReceivedParams
 
+
 data SlaveError =
     SlaveContractError ContractError
     | SlaveSMError SM.SMContractError
@@ -180,45 +185,58 @@ data SlaveError =
 
 makeClassyPrisms ''SlaveError
 
+
 instance AsSMContractError SlaveError where
     _SMContractError = _SlaveSMError
+
 
 instance AsContractError SlaveError where
     _ContractError = _SlaveContractError
 
+
 {-# INLINABLE transition #-}
 transition :: Params -> State SlaveState -> SlaveInput -> Maybe (TxConstraints Void Void, State SlaveState)
 transition params State{ stateData = oldData, stateValue = oldStateValue } input = case (oldData, input) of
-    (SlaveState{cState, bWallet, pPrice}, Locking)   |   cState == 0    -> let newValue    =  oldStateValue + (Ada.toValue pPrice)
-                                                                               constraints =  mustBeSignedBy bWallet
-                                                                           in Just (constraints,
-                                                                              State{stateData = oldData { cState = 1
-                                                                                                        , sLabel = "locking"
-                                                                                                        , bSlot  = True
-                                                                                                        }
-                                                                                                        , stateValue = newValue })
+    (SlaveState{cState, pPrice}, Locking bWallet)   |   cState == 0   -> let newValue       = oldStateValue + (Ada.toValue pPrice)
+                                                                             constraints    = mustBeSignedBy bWallet
+                                                                         in Just (constraints,
+                                                                            State{stateData = oldData { cState  = 1
+                                                                                                      , sLabel  = "locking"
+                                                                                                      , bWallet = Just bWallet
+                                                                                                      , bSlot   = True
+                                                                                                      }
+                                                                                                      , stateValue = newValue })
 
 
-    (SlaveState{cState, sWallet}, Delivered)    | cState == 1   -> let constraints = mustBeSignedBy sWallet
-                                                                   in Just (constraints,
-                                                                      State{ stateData = oldData { cState = 2
-                                                                                                 , sLabel = "delivered"
-                                                                                                 , pDelivered = True
-                                                                                                 }
-                                                                                                 , stateValue = oldStateValue })
+    (SlaveState{cState, sWallet}, Delivered)   |   cState == 1   -> let constraints = mustBeSignedBy sWallet
+                                                                    in Just (constraints,
+                                                                       State{ stateData = oldData { cState = 2
+                                                                                                  , sLabel = "delivered"
+                                                                                                  , pDelivered = True
+                                                                                                  }
+                                                                                                  , stateValue = oldStateValue })
 
 
-    (SlaveState {cState, sWallet, bWallet, pPrice, sCollateral}, Received)  |   cState == 2     -> let money = Ada.toValue (sCollateral + pPrice)
-                                                                                                       constraints = mustBeSignedBy bWallet
-                                                                                                            <> mustPayToAddress (pubKeyHashAddress sWallet Nothing) money
-                                                                                                    in Just (constraints,
-                                                                                                       State{ stateData = Finished, stateValue = mempty })
+    (SlaveState cState
+                sLabel
+                bSlot
+                pDelivered
+                pReceived
+                sWallet
+                (Just bWallet)
+                pPrice
+                sCollateral, Received)   |   cState == 2   -> let money       = Ada.toValue (sCollateral + pPrice)
+                                                                  constraints = mustBeSignedBy bWallet
+                                                                              <> mustPayToAddress (pubKeyHashAddress sWallet Nothing) money
+                                                              in Just (constraints,
+                                                                 State{ stateData = Finished, stateValue = mempty })
 
 
     _ -> Nothing
 
 
 type SlaveStateMachine = SM.StateMachine SlaveState SlaveInput
+
 
 {-# INLINABLE machine #-}
 machine :: Params -> SlaveStateMachine
@@ -251,7 +269,7 @@ initialState params = SlaveState { cState = 0
                                  , pDelivered = False
                                  , pReceived = False
                                  , sWallet = sWallet' params
-                                 , bWallet = bWallet' params
+                                 , bWallet = Nothing
                                  , pPrice = pPrice' params
                                  , sCollateral = sCollateral' params
                                  }
@@ -264,7 +282,7 @@ contract = forever endpoints where
 
 generateParams :: DefaultEndpointParams -> Params
 generateParams params = Params { sWallet'     = stringToPPKH $ sWalletParam params
-                               , bWallet'     = stringToPPKH $ bWalletParam params
+                               , bWallet'     = Nothing
                                , pPrice'      = integerToAda $ pPriceParam params
                                , sCollateral' = integerToAda $ sCollateralParam params
                                }
@@ -286,17 +304,18 @@ startEndpoint = endpoint @"Start" $ \StartParams{startDefault} -> do
               
              
 lockingEndpoint :: Promise () SlaveSchema SlaveError ()
-lockingEndpoint = endpoint @"Locking" $ \LockingParams{lockingDefault} -> do
+lockingEndpoint = endpoint @"Locking" $ \LockingParams{lockingDefault, bWalletParam} -> do
    
                 let params          = generateParams lockingDefault
                     theClient       = client params
                     theSeller       = sWallet' params
+                    theBuyer        = stringToPPKH bWalletParam
                     theConstraints  = Haskell.mempty
                     theLookups      = Haskell.mempty
                 
                 logInfo @Text "LOCKING_ENDPOINT"
 
-                void (SM.runStepWithUnbalanced theLookups theConstraints theClient Locking theSeller)
+                void (SM.runStepWithUnbalanced theLookups theConstraints theClient (Locking theBuyer) theSeller)
 
 
 deliveredEndpoint :: Promise () SlaveSchema SlaveError ()
@@ -343,17 +362,20 @@ contractAddress = Scripts.validatorCardanoAddress Nparams.testnet . typedValidat
 
 
 
-getRight :: Haskell.Either a b -> b
-getRight (Haskell.Right x) = x
-getRight (Haskell.Left _)  = Haskell.error "getRight: Left"
+--getRight :: Haskell.Either a b -> b
+--getRight (Haskell.Right x) = x
+--getRight (Haskell.Left _)  = Haskell.error "getRight: Left"
 
-ppkhToCardanoAddress :: PaymentPubKeyHash -> CardanoAddress 
-ppkhToCardanoAddress = 
-    getRight . Tx.toCardanoAddressInEra Nparams.testnet . plutusAddress 
-    where    
-    plutusAddress ppkh =
-        Address (PubKeyCredential $ unPaymentPubKeyHash ppkh)
-                (Nothing)
+--ppkhToCardanoAddress :: PaymentPubKeyHash -> CardanoAddress 
+--ppkhToCardanoAddress = 
+--    getRight . Tx.toCardanoAddressInEra Nparams.testnet . plutusAddress 
+--    where    
+--    plutusAddress ppkh =
+--        Address (PubKeyCredential $ unPaymentPubKeyHash ppkh)
+--                (Nothing)
+
+
+
 
 --(Just (StakingHash (PubKeyCredential $ unStakePubKeyHash $ spkh  w)))
 

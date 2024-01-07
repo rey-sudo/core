@@ -54,7 +54,6 @@ buyerWalletPPKH = Just (CW.paymentPubKeyHash (CW.fromWalletNumber $ CW.WalletNum
 
 defaultParams :: S.DefaultEndpointParams
 defaultParams = S.DefaultEndpointParams { S.sWalletParam      = sWalletBS
-                                        , S.bWalletParam      = bWalletBS
                                         , S.pPriceParam       = 10000000
                                         , S.sCollateralParam  = 5000000
                                         }
@@ -97,7 +96,9 @@ main = void $ Simulator.runSimulationWith handlers $ do
     
     void $ liftIO getLine
 
-    let lockingInput  = S.LockingParams { S.lockingDefault = defaultParams}
+    let lockingInput  = S.LockingParams { S.lockingDefault = defaultParams
+                                        , S.bWalletParam      = bWalletBS
+                                        }
 
 
     void $ Simulator.callEndpointOnInstance buyerCID "Locking" lockingInput
