@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-01-06T23:06:05.977Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="dx6qz9pg7IpwfgsROavJ" version="22.1.17" type="device">
+<mxfile host="app.diagrams.net" modified="2024-01-07T00:12:13.269Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="V_5EwjhYJUwtrWizAXZc" version="22.1.17" type="device">
   <diagram name="Page-1" id="IcvIM7nfxtChby0fbi-c">
     <mxGraphModel dx="1195" dy="1785" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
       <root>
@@ -17,7 +17,7 @@
           <mxGeometry x="120" y="-280" width="120" height="40" as="geometry" />
         </mxCell>
         <mxCell id="Nd_HAeP30ztiH6FcUex5-2" value="" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.managed_streaming_for_kafka;" parent="1" vertex="1">
-          <mxGeometry x="320" y="-600" width="40" height="40" as="geometry" />
+          <mxGeometry x="280" y="-600" width="40" height="40" as="geometry" />
         </mxCell>
         <mxCell id="Nd_HAeP30ztiH6FcUex5-3" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="120" y="370" width="120" height="110" as="geometry" />
