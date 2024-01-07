@@ -9,6 +9,7 @@ import { requestIp } from "../global";
 const app = express();
 
 const corsOrigin = process.env.CORS_DOMAINS!;
+
 const corsOptions = {
   origin: corsOrigin?.split(",") || "*",
   methods: ["GET", "POST"],

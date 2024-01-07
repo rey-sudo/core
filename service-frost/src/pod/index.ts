@@ -1,25 +1,25 @@
 import { _ } from "../utils/logger";
 import { app } from "../app";
 
-interface PodCheckList {
+interface Checkpoints {
   ready: boolean;
 }
 
-const checkList: PodCheckList = {
+const checkList: Checkpoints = {
   ready: false,
 };
 
-function checkpoint(processName: string) {
-  _.info(`${processName} connected`);
+const checkpoint = (point: string) => {
+  _.info(`${point} connected`);
 
-  Object.defineProperty(checkList, processName, {
+  Object.defineProperty(checkList, point, {
     value: true,
   });
 
-  if (!checkPodList(checkList)) {
+  if (isReady(checkList)) {
     const port = process.env.EXPRESS_PORT || "8000";
 
-    const timeout = process.env.EXPRESS_TIMEOUT! || "5000";
+    const timeout = process.env.EXPRESS_TIMEOUT || "5000";
 
     const server = app.listen(port, () =>
       _.info(`express server listening in ${port}`)
@@ -27,25 +27,21 @@ function checkpoint(processName: string) {
 
     server.setTimeout(parseInt(timeout));
   }
-}
+};
 
-function checkPodList(checkList: PodCheckList) {
-  return Object.values(checkList).includes(false);
-}
+const isReady = (checkList: Checkpoints) =>
+  !Object.values(checkList).includes(false);
 
-function checkPod() {
-  setTimeout(
-    () => (checkPodList(checkList) ? errorHandler("pod timeout") : false),
-    120000
-  );
-}
+const check = () => {
+  const time = parseInt(process.env.POD_TIMEOUT!) || 120000;
 
-function errorHandler(msg?: any, err?: any, bypass?: boolean) {
-  _.error(`[POD-EXIT]:${msg} | ${err}`);
+  setTimeout(() => isReady(checkList) || catcher("pod:timeout"), time);
+};
 
-  if (bypass) return;
+const catcher = (message?: any, error?: any, bypass?: boolean) => {
+  _.error(`EXIT=${message}-${error}`);
 
-  process.exit(1);
-}
+  return bypass || process.exit(1);
+};
 
-export { checkpoint, errorHandler, checkPod };
+export { checkpoint, catcher, check };

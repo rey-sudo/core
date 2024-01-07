@@ -1,14 +1,9 @@
-import compression from "compression";
-import {
-  getAddressUtxosHandler,
-  getAddressUtxos,
-  createRoundHandler,
-  createRoundMiddlewares,
-} from "./routes";
-import { errorHandler, checkPod, checkpoint } from "./pod/index";
+import * as route from "./routes";
+import { catcher, check, checkpoint } from "./pod/index";
 import { NotFoundError, errorMiddleware } from "../global";
 import { app } from "./app";
 import blockfrost from "./client";
+import compression from "compression";
 
 const main = async () => {
   try {
@@ -25,43 +20,42 @@ const main = async () => {
       throw new Error("CORS_DOMAINS error");
     }
 
-    */
+    if (!process.env.POD_TIMEOUT) {
+      throw new Error("POD_TIMEOUT error");
+    }
+*/
     blockfrost.connect({
       projectId: "previewXgODba40jVJAs1QgKTBOAuwhvNFHHMVo",
     });
 
     checkpoint("ready");
 
-    ///////////////////////////////////////////////////
+    process.on("exit", (e) => catcher(e));
 
-    process.on("exit", (e) => errorHandler(e));
+    process.on("SIGINT", (e) => catcher(e));
 
-    process.on("SIGINT", (e) => errorHandler(e));
+    process.on("SIGTERM", (e) => catcher(e));
 
-    process.on("SIGTERM", (e) => errorHandler(e));
+    process.on("SIGQUIT", (e) => catcher(e));
 
-    process.on("SIGQUIT", (e) => errorHandler(e));
+    process.on("uncaughtException", (e) => catcher(e));
 
-    process.on("uncaughtException", (e) => errorHandler(e));
-
-    process.on("unhandledRejection", (e) => errorHandler(e));
-
-    ////////////////////////////////////////////////////
+    process.on("unhandledRejection", (e) => catcher(e));
 
     app.post(
       "/api/audits/create-round",
 
-      createRoundMiddlewares,
+      route.createRoundMiddlewares,
 
-      createRoundHandler
+      route.createRoundHandler
     );
 
     app.get(
       "/api/frost/get-address-utxos/:address",
 
-      getAddressUtxos,
+      route.getAddressUtxos,
 
-      getAddressUtxosHandler
+      route.getAddressUtxosHandler
     );
 
     app.all("*", (_req, _res) => {
@@ -72,9 +66,9 @@ const main = async () => {
 
     app.use(compression());
   } catch (e) {
-    errorHandler(e);
+    catcher(e);
   }
-  checkPod();
+  check();
 };
 
 main();
