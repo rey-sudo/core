@@ -7,7 +7,10 @@ import compression from "compression";
 
 const main = async () => {
   try {
-    
+    if (!process.env.POD_TIMEOUT) {
+      throw new Error("POD_TIMEOUT error");
+    }
+
     if (!process.env.EXPRESS_PORT) {
       throw new Error("EXPRESS_PORT error");
     }
@@ -18,10 +21,6 @@ const main = async () => {
 
     if (!process.env.CORS_DOMAINS) {
       throw new Error("CORS_DOMAINS error");
-    }
-
-    if (!process.env.POD_TIMEOUT) {
-      throw new Error("POD_TIMEOUT error");
     }
 
     blockfrost.connect({

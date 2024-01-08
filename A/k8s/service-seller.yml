@@ -19,14 +19,7 @@ spec:
             - name: POD_NAME
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.name
-            - name: POD_TIMEOUT
-              value: '120000'                                                       
-            - name: EVENT_BUS_URI
-              valueFrom:
-                configMapKeyRef:
-                  name: streaming-config
-                  key: redis                                                
+                  fieldPath: metadata.name                                       
             - name: USERS_JWT_KEY
               valueFrom:
                 secretKeyRef:
@@ -36,23 +29,20 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: admin-jwt-secret
-                  key: ADMIN_JWT_KEY   
-            - name: GENERAL_LIMIT_TIME
-              value: "9000"     
-            - name: GENERAL_LIMIT_MAX
-              value: "15000"
-            - name: CRITICAL_LIMIT_TIME
-              value: "86400" 
-            - name: CRITICAL_LIMIT_MAX
-              value: "2000"                                                                     
-            - name: TOKEN_EXPIRATION_TIME
-              value: 2h
+                  key: ADMIN_JWT_KEY  
+            - name: POD_TIMEOUT
+              value: '120000'   
             - name: EXPRESS_PORT
               value: "8000"
             - name: EXPRESS_TIMEOUT
-              value: "180000"
-            - name: PUBLISHER_ROLE
-              value: "publisher-store"
+              value: "120000"                                                                  
+            - name: BUS_STREAMING_URI  
+              valueFrom:
+                configMapKeyRef:
+                  name: streaming-config
+                  key: redis                                                                                  
+            - name: TOKEN_EXPIRATION
+              value: 2h
             - name: CORS_DOMAINS
               value: "https://pairfy.dev,http://pairfy.dev,http://localhost:8080"                           
           resources:
