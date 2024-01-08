@@ -20,8 +20,8 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .  
-    - image: pairfy/service-sellers
-      context: service-sellers
+    - image: pairfy/service-seller
+      context: service-seller
       docker:
         dockerfile: Dockerfile
       sync:
