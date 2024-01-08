@@ -1,8 +1,15 @@
 {
-  "name": "service-frost",
+  "name": "service-seller",
   "version": "1.0.0",
-  "description": "",
+  "description": "crud service for seller accounts.",
   "main": "index.js",
+  "keywords": [
+    "pairfy",
+    "marketplace",
+    "cardano"
+  ],
+  "author": "https://github.com/Kraphene",
+  "license": "MIT",
   "scripts": {
     "build": "tsc --build",
     "dev": "ts-node-dev src/index.ts",
@@ -17,9 +24,6 @@
       "./src/__test/setup.ts"
     ]
   },
-  "keywords": [],
-  "author": "https://github.com/Kraphene",
-  "license": "ISC",
   "dependencies": {
     "@blockfrost/blockfrost-js": "^5.5.0",
     "ajv": "^8.12.0",
@@ -29,7 +33,8 @@
     "express-async-errors": "^3.1.1",
     "helmet": "^7.1.0",
     "nanoid": "^5.0.4",
-    "pino": "^8.17.2"
+    "pino": "^8.17.2",
+    "postgres": "^3.4.3"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",

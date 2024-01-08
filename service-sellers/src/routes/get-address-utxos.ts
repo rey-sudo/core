@@ -1,15 +1,22 @@
 import { BadRequestError } from "../../global";
 import { Request, Response } from "express";
 import blockfrost from "../client";
+import DB from "../db";
 
 const getAddressUtxos: any = [];
 
 const getAddressUtxosHandler = async (req: Request, res: Response) => {
-  const { address } = req.params;
 
-  const networkInfo = await blockfrost.client.addresses(address);
+  const xs = await DB`
+  insert into users (
+    name, age
+  ) values (
+    'Murray', 68
+  )
 
-  res.status(200).send(networkInfo);
+  returning *
+`;
+  res.status(200).send(xs);
 };
 
 export { getAddressUtxos, getAddressUtxosHandler };

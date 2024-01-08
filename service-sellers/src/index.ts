@@ -51,7 +51,7 @@ const main = async () => {
     );
 
     app.get(
-      "/api/frost/get-address-utxos/:address",
+      "/api/seller",
 
       route.getAddressUtxos,
 
