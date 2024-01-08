@@ -1,11 +1,11 @@
-# The following example is minimalist. The security policies
+# The following database is minimalist. The security policies
 # and resource specifications are not meant to be used in production.
 # Please refer to the operator documentation for recommendations on
 # production settings.
 apiVersion: planetscale.com/v2
 kind: VitessCluster
 metadata:
-  name: example
+  name: database
 spec:
   images:
     vtctld: vitess/lite:latest
@@ -18,12 +18,12 @@ spec:
       mysql80Compatible: vitess/lite:latest
     mysqldExporter: prom/mysqld-exporter:v0.11.0
   cells:
-  - name: zone1
+  - name: eeuu1
     gateway:
       authentication:
         static:
           secret:
-            name: example-cluster-config
+            name: database-cluster-config
             key: users.json
       replicas: 1
       resources:
@@ -34,7 +34,7 @@ spec:
           memory: 256Mi
   vitessDashboard:
     cells:
-    - zone1
+    - eeuu1
     extraFlags:
       security_policy: read-only
     replicas: 1
@@ -46,10 +46,10 @@ spec:
         memory: 128Mi
   vtadmin:
     rbac:
-      name: example-cluster-config
+      name: database-cluster-config
       key: rbac.yaml
     cells:
-      - zone1
+      - eeuu1
     apiAddresses:
       - http://localhost:14001
     replicas: 1
@@ -68,7 +68,7 @@ spec:
         memory: 128Mi
 
   keyspaces:
-  - name: commerce
+  - name: service-sellers
     durabilityPolicy: none
     turndownPolicy: Immediate
     vitessOrchestrator:
@@ -85,10 +85,10 @@ spec:
         parts: 1
         shardTemplate:
           databaseInitScriptSecret:
-            name: example-cluster-config
+            name: database-cluster-config
             key: init_db.sql
           tabletPools:
-          - cell: zone1
+          - cell: eeuu1
             type: replica
             replicas: 2
             vttablet:
@@ -118,7 +118,7 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: example-cluster-config
+  name: database-cluster-config
 type: Opaque
 stringData:
   users.json: |

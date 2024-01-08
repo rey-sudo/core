@@ -1,4 +1,4 @@
-create table if not exists product(
+create table if not exists seller(
   sku varbinary(128),
   description varbinary(128),
   price bigint,
