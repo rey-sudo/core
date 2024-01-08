@@ -68,7 +68,7 @@ spec:
         memory: 128Mi
 
   keyspaces:
-  - name: service-sellers
+  - name: service-seller
     durabilityPolicy: none
     turndownPolicy: Immediate
     vitessOrchestrator:
