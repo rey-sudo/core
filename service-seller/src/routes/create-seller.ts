@@ -30,7 +30,7 @@ const createSellerHandler = async (req: Request, res: Response) => {
       avatar_path,
       public_ip,
       schema_v
-     ) VALUES (?, ?, UNHEX(SHA2(?, 256)), UNHEX(SHA2(?, 256)), ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const schemeValue = [
       getSellerId(),
