@@ -23,8 +23,8 @@ spec:
             - name: SELLER_JWT_KEY
               valueFrom:
                 secretKeyRef:
-                  name: seller-jwt-secret
-                  key: JWT_KEY                   
+                  name: seller-token-secret
+                  key: SELLER_TOKEN_KEY                   
             - name: POD_TIMEOUT
               value: '120000'   
             - name: EXPRESS_PORT
