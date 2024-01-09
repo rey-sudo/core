@@ -27,3 +27,10 @@ spec:
                 name: frontend-main
                 port:
                   number: 8000                                        
+          - path: /api/seller/?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: service-seller
+                port:
+                  number: 8000

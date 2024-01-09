@@ -1,4 +1,4 @@
-import { createPool, PoolOptions, Pool } from "mysql2";
+import { createPool, PoolOptions, Pool } from "mysql2/promise";
 
 class DatabaseWrap {
   private _client?: any;

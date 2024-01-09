@@ -13,8 +13,7 @@ create table if not exists seller(
   created_at timestamp default current_timestamp,
   last_login timestamp default current_timestamp,
   schema_t timestamp default current_timestamp,
-  schema_v int not null auto_increment,
-  primary key(seller_id),
-  unique key(schema_v)
+  schema_v int not null,
+  primary key(seller_id)
 ) ENGINE=InnoDB;
 

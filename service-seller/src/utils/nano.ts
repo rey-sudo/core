@@ -1,7 +1,7 @@
 import { customAlphabet } from "nanoid";
 
-const customPid = customAlphabet("0123456789ABCDEFGHJKLMNOPQRTUVWXY", 12);
+const getSellerId = customAlphabet("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", 20);
 
 const largePid = customAlphabet("0123456789ABCDEFGHJKLMNOPQRTUVWXYZ", 20);
 
-export { customPid, largePid };
+export { getSellerId, largePid };
