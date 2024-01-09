@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-01-07T23:20:10.905Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="O7hj6Mg2G7Ciw5p6gus3" version="22.1.17" type="device">
+<mxfile host="app.diagrams.net" modified="2024-01-09T01:57:34.504Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="gov9_2-B8C0zcT4tYxTv" version="22.1.17" type="device">
   <diagram name="microservices" id="IcvIM7nfxtChby0fbi-c">
     <mxGraphModel dx="1434" dy="1888" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
       <root>
@@ -15,9 +15,6 @@
         </mxCell>
         <mxCell id="Nd_HAeP30ztiH6FcUex5-1" value="&lt;b&gt;service-products&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="120" y="-280" width="120" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="Nd_HAeP30ztiH6FcUex5-2" value="" style="sketch=0;points=[[0,0,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0,0],[0,1,0],[0.25,1,0],[0.5,1,0],[0.75,1,0],[1,1,0],[0,0.25,0],[0,0.5,0],[0,0.75,0],[1,0.25,0],[1,0.5,0],[1,0.75,0]];outlineConnect=0;fontColor=#232F3E;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.managed_streaming_for_kafka;" parent="1" vertex="1">
-          <mxGeometry x="700" y="-1100" width="40" height="40" as="geometry" />
         </mxCell>
         <mxCell id="Nd_HAeP30ztiH6FcUex5-3" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="120" y="370" width="120" height="110" as="geometry" />

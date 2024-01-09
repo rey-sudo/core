@@ -2,8 +2,8 @@ import * as route from "./routes";
 import { catcher, check, checkpoint } from "./pod/index";
 import { NotFoundError, errorMiddleware } from "../global";
 import { app } from "./app";
-import blockfrost from "./client";
 import compression from "compression";
+import DB from "./db";
 
 const main = async () => {
   try {
@@ -23,8 +23,12 @@ const main = async () => {
       throw new Error("CORS_DOMAINS error");
     }
 
-    blockfrost.connect({
-      projectId: "previewXgODba40jVJAs1QgKTBOAuwhvNFHHMVo",
+    DB.connect({
+      host: "10.96.222.125",
+      port: 3306,
+      user: "user",
+      password: "",
+      database: "service-seller",
     });
 
     checkpoint("ready");
@@ -42,15 +46,15 @@ const main = async () => {
     process.on("unhandledRejection", (e) => catcher(e));
 
     app.post(
-      "/api/audits/create-round",
+      "/api/seller/create-seller",
 
-      route.createRoundMiddlewares,
+      route.createSellerMiddlewares,
 
-      route.createRoundHandler
+      route.createSellerHandler
     );
 
     app.get(
-      "/api/seller",
+      "/api/seller/current-seller",
 
       route.getAddressUtxos,
 

@@ -1,7 +1,3 @@
-# The following database is minimalist. The security policies
-# and resource specifications are not meant to be used in production.
-# Please refer to the operator documentation for recommendations on
-# production settings.
 apiVersion: planetscale.com/v2
 kind: VitessCluster
 metadata:
