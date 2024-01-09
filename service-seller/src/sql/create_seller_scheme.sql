@@ -4,9 +4,9 @@ create table if not exists seller(
   email varbinary(128) not null,
   password_hash varbinary(128) not null,
   verified boolean default false,
-  country varchar(50) not null,
-  completed_sales int default 0,
-  uncompleted_sales int default 0,
+  country int unsigned not null,
+  completed_sales int unsigned default 0,
+  uncompleted_sales int unsigned default 0,
   terms varchar(1000) not null,
   avatar_base varchar(255) not null,
   avatar_path varchar(255) not null,
@@ -14,7 +14,7 @@ create table if not exists seller(
   created_at timestamp default current_timestamp,
   last_login timestamp default current_timestamp,
   schema_t timestamp default current_timestamp,
-  schema_v int not null,
+  schema_v int unsigned not null,
   primary key(seller_id)
 ) ENGINE=InnoDB;
 
