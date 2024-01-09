@@ -13,7 +13,7 @@ export * from "./middlewares/request-ip";
 
 
 
-export * from "./utils/crypto";
+export * from "../src/utils/password";
 export * from "./utils/sleep";
 export * from "./utils/txRetry";
 

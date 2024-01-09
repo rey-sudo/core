@@ -1,4 +1,4 @@
-import { _ } from "../utils/logger";
+import { _ } from "../utils/pino";
 import { app } from "../app";
 
 interface Checkpoints {

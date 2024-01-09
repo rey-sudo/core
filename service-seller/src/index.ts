@@ -23,6 +23,10 @@ const main = async () => {
       throw new Error("CORS_DOMAINS error");
     }
 
+    if (!process.env.SELLER_JWT_KEY) {
+      throw new Error("SELLER_JWT_KEY error");
+    }
+
     DB.connect({
       host: "10.96.222.125",
       port: 3306,

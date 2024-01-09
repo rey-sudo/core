@@ -1,7 +1,9 @@
-import { BadRequestError } from "../../global";
+import { BadRequestError, hashPassword } from "../../global";
 import { Request, Response } from "express";
-import DB from "../db";
 import { getSellerId } from "../utils/nano";
+import { createToken } from "../utils/token";
+import { _ } from "../utils/pino";
+import DB from "../db";
 
 const createSellerMiddlewares: any = [];
 
@@ -14,6 +16,15 @@ const createSellerHandler = async (req: Request, res: Response) => {
     conn = await DB.client.getConnection();
 
     await conn.beginTransaction();
+
+    const token = createToken({
+      role : "signup",
+      entity: "user",
+      email: params.email,
+      username: params.nickname,
+    });
+
+    const password = await hashPassword(params.password);
 
     const schemeData = `
     INSERT INTO seller (
@@ -36,7 +47,7 @@ const createSellerHandler = async (req: Request, res: Response) => {
       getSellerId(),
       params.nickname,
       params.email,
-      params.password,
+      password,
       false,
       params.country,
       0,
@@ -45,7 +56,7 @@ const createSellerHandler = async (req: Request, res: Response) => {
       "https://example.com",
       "/avatar.jpg",
       "192.168.1.1",
-      0
+      0,
     ];
 
     const result = await conn.execute(schemeData, schemeValue);
@@ -58,9 +69,9 @@ const createSellerHandler = async (req: Request, res: Response) => {
   } catch (err) {
     await conn.rollback();
 
-    console.log(err);
+    _.error(err);
 
-    res.status(500).send({ message: "unprocessed operation" });
+    throw new BadRequestError("failed");
   } finally {
     conn.release();
   }
