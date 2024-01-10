@@ -60,12 +60,20 @@ const main = async () => {
       route.createSellerHandler
     );
 
+    app.post(
+      "/api/seller/login-seller",
+
+      route.loginSellerMiddlewares,
+
+      route.loginSellerHandler
+    );
+
     app.get(
       "/api/seller/current-seller",
 
-      route.getAddressUtxos,
+      route.currentSellerMiddlewares,
 
-      route.getAddressUtxosHandler
+      route.currentSellerHandler
     );
 
     app.all("*", (_req, _res) => {

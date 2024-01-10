@@ -1,11 +1,10 @@
-import { BadRequestError } from "../../global";
 import { Request, Response } from "express";
+import { sellerMiddleware } from "../utils/seller";
 
-const getAddressUtxos: any = [];
+const currentSellerMiddlewares: any = [sellerMiddleware];
 
-const getAddressUtxosHandler = async (req: Request, res: Response) => {
-
-  res.status(200).send({});
+const currentSellerHandler = async (req: Request, res: Response) => {
+  res.send({ sellerData: req.sellerData || null });
 };
 
-export { getAddressUtxos, getAddressUtxosHandler };
+export { currentSellerMiddlewares, currentSellerHandler };
