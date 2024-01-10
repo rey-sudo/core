@@ -27,6 +27,10 @@ const main = async () => {
       throw new Error("SELLER_JWT_KEY error");
     }
 
+    if (!process.env.TOKEN_EXP_TIME) {
+      throw new Error("TOKEN_EXP_TIME error");
+    }
+
     DB.connect({
       host: "10.96.222.125",
       port: 3306,
@@ -37,17 +41,16 @@ const main = async () => {
 
     checkpoint("ready");
 
-    process.on("exit", (e) => catcher(e));
+    const errorEvents: string[] = [
+      "exit",
+      "SIGINT",
+      "SIGTERM",
+      "SIGQUIT",
+      "uncaughtException",
+      "unhandledRejection",
+    ];
 
-    process.on("SIGINT", (e) => catcher(e));
-
-    process.on("SIGTERM", (e) => catcher(e));
-
-    process.on("SIGQUIT", (e) => catcher(e));
-
-    process.on("uncaughtException", (e) => catcher(e));
-
-    process.on("unhandledRejection", (e) => catcher(e));
+    errorEvents.forEach((e: string) => process.on(e, (err) => catcher(err)));
 
     app.post(
       "/api/seller/create-seller",
