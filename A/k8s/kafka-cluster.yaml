@@ -1,7 +1,7 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
 metadata:
-  name: kafka-cluster
+  name: debezium-cluster
 spec:
   kafka:
     version: 3.6.1
