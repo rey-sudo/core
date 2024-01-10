@@ -2,8 +2,8 @@ import { BadRequestError, comparePassword } from "../../global";
 import { Request, Response } from "express";
 import { createToken } from "../utils/token";
 import { _ } from "../utils/pino";
-import DB from "../db";
 import { SellerToken, sellerMiddleware } from "../utils/seller";
+import DB from "../db";
 
 const loginSellerMiddlewares: any = [sellerMiddleware];
 
@@ -26,24 +26,24 @@ const loginSellerHandler = async (req: Request, res: Response) => {
       throw new BadRequestError("failed");
     }
 
-    const seller = rows[0];
+    const SELLER = rows[0];
 
     const passwordsMatch = await comparePassword(
-      seller.password_hash,
+      SELLER.password_hash,
       params.password
     );
 
     if (!passwordsMatch) throw new BadRequestError("failed");
 
-    if (seller.verified !== 1) {
+    if (SELLER.verified !== 1) {
       throw new BadRequestError("unverified");
     }
 
     const sellerData: SellerToken = {
-      seller_id: seller.seller_id,
-      role: "seller",
-      email: seller.email,
-      nickname: seller.nickname,
+      seller_id: SELLER.seller_id,
+      role: "SELLER",
+      email: SELLER.email,
+      nickname: SELLER.nickname,
     };
 
     const token = createToken(sellerData);

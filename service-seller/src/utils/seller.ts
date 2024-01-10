@@ -28,7 +28,7 @@ const sellerMiddleware = (req: Request, res: Response, next: NextFunction) => {
       process.env.SELLER_JWT_KEY!
     ) as SellerToken;
 
-    if (sessionData.role !== "seller") {
+    if (sessionData.role !== "SELLER") {
       return next();
     }
 
