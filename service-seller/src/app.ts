@@ -23,7 +23,7 @@ const corsOptions = {
 const sessionOptions: object = {
   maxAge: 168 * 60 * 60 * 1000,
   signed: false,
-  secureProxy: true,
+  secure: true,
   httpOnly: true,
   sameSite: "strict",
 };
