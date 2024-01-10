@@ -25,7 +25,7 @@ const sellerMiddleware = (req: Request, res: Response, next: NextFunction) => {
   try {
     const sessionData = jwt.verify(
       req.session.jwt,
-      process.env.JWT_KEY!
+      process.env.SELLER_JWT_KEY!
     ) as SellerToken;
 
     if (sessionData.role !== "seller") {

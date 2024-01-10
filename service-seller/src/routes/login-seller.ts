@@ -8,18 +8,19 @@ import { SellerToken, sellerMiddleware } from "../utils/seller";
 const loginSellerMiddlewares: any = [sellerMiddleware];
 
 const loginSellerHandler = async (req: Request, res: Response) => {
-  let conn = null;
+  let connection = null;
   let params = req.body;
   try {
     if (params.sellerData) {
       throw new BadRequestError("logged");
     }
 
-    conn = await DB.client.getConnection();
+    connection = await DB.client.getConnection();
 
-    const [rows] = await conn.execute("SELECT * FROM seller WHERE email = ?", [
-      params.email,
-    ]);
+    const [rows] = await connection.execute(
+      "SELECT * FROM seller WHERE email = ?",
+      [params.email]
+    );
 
     if (rows.length === 0) {
       throw new BadRequestError("failed");
@@ -53,13 +54,13 @@ const loginSellerHandler = async (req: Request, res: Response) => {
 
     res.status(200).send({ success: true, data: sellerData });
   } catch (err) {
-    await conn.rollback();
+    await connection.rollback();
 
     _.error(err);
 
-    throw new BadRequestError("invalid credential o unverified");
+    throw new BadRequestError("Invalid credential o unverified");
   } finally {
-    conn.release();
+    connection.release();
   }
 };
 
