@@ -18,7 +18,7 @@ const createSellerHandler = async (req: Request, res: Response) => {
     await conn.beginTransaction();
 
     const token = createToken({
-      role : "signup",
+      role: "signup",
       entity: "user",
       email: params.email,
       username: params.nickname,
@@ -59,13 +59,11 @@ const createSellerHandler = async (req: Request, res: Response) => {
       0,
     ];
 
-    const result = await conn.execute(schemeData, schemeValue);
-
-    console.log(result);
+    await conn.execute(schemeData, schemeValue);
 
     await conn.commit();
 
-    res.status(200).send({});
+    res.status(200).send({ success: true });
   } catch (err) {
     await conn.rollback();
 
