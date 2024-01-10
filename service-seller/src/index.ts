@@ -76,6 +76,12 @@ const main = async () => {
       route.currentSellerHandler
     );
 
+    app.get(
+      "/api/seller/logout",
+
+      route.logoutHandler
+    );
+
     app.all("*", (_req, _res) => {
       throw new NotFoundError();
     });
