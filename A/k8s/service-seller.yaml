@@ -37,7 +37,7 @@ spec:
                   name: streaming-config
                   key: redis                                                                                  
             - name: TOKEN_EXPIRATION
-              value: "604800"
+              value: "7d"
             - name: CORS_DOMAINS
               value: "https://pairfy.dev,http://pairfy.dev,http://localhost:8080"                           
           resources:
