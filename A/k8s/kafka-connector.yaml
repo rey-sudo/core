@@ -5,18 +5,8 @@ metadata:
   namespace: debezium-example
 type: Opaque
 data:
-  username: ZGViZXppdW0=
-  password: ZGJ6
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: debezium-secret
-  namespace: debezium-example
-type: Opaque
-data:
-  username: ZGViZXppdW0=
-  password: ZGJ6
+  username: user
+  password: ""
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -92,9 +82,9 @@ spec:
     database.password: ${secrets:debezium-example/debezium-secret:password}
     database.server.id: 184054
     topic.prefix: mysql
-    database.include.list: inventory
+    database.include.list: service-seller
     schema.history.internal.kafka.bootstrap.servers: debezium-cluster-kafka-bootstrap:9092
-    schema.history.internal.kafka.topic: schema-changes.inventory
+    schema.history.internal.kafka.topic: schema-changes.service-seller
 
 
 
