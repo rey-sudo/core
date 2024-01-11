@@ -1,91 +1,51 @@
-apiVersion: v1
-kind: Secret
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: debezium-secret
-  namespace: debezium-example
-type: Opaque
-data:
-  username: user
-  password: ""
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: connector-configuration-role
-  namespace: debezium-example
-rules:
-- apiGroups: [""]
-  resources: ["secrets"]
-  resourceNames: ["debezium-secret"]
-  verbs: ["get"]
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: connector-configuration-role-binding
-  namespace: debezium-example
-subjects:
-- kind: ServiceAccount
-  name: debezium-connect-cluster-connect
-  namespace: debezium-example
-roleRef:
-  kind: Role
-  name: connector-configuration-role
-  apiGroup: rbac.authorization.k8s.io
----
-apiVersion: kafka.strimzi.io/v1beta2
-kind: KafkaConnect
-metadata:
-  name: debezium-connect-cluster
-  annotations:
-    strimzi.io/use-connector-resources: "true"
+  name: debezium-connector
+  namespace: default
 spec:
-  version: 3.1.0
   replicas: 1
-  bootstrapServers: debezium-cluster-kafka-bootstrap:9092
-  config:
-    config.providers: secrets
-    config.providers.secrets.class: io.strimzi.kafka.KubernetesSecretConfigProvider
-    group.id: connect-cluster
-    offset.storage.topic: connect-cluster-offsets
-    config.storage.topic: connect-cluster-configs
-    status.storage.topic: connect-cluster-status
-    # -1 means it will use the default replication factor configured in the broker
-    config.storage.replication.factor: -1
-    offset.storage.replication.factor: -1
-    status.storage.replication.factor: -1
-  build:
-    output:
-      type: docker
-      # kubectl -n kube-system get svc registry -o jsonpath='{.spec.clusterIP}'
-      image: 10.101.12.170/debezium-connect-mysql:latest
-    plugins:
-      - name: debezium-mysql-connector
-        artifacts:
-          - type: tgz
-            url: https://repo1.maven.org/maven2/io/debezium/debezium-connector-mysql/2.5.0.Beta1/debezium-connector-mysql-2.5.0.Beta1-plugin.tar.gz
----
-apiVersion: kafka.strimzi.io/v1beta2
-kind: KafkaConnector
-metadata:
-  name: debezium-connector-mysql
-  labels:
-    strimzi.io/cluster: debezium-connect-cluster
-spec:
-  class: io.debezium.connector.mysql.MySqlConnector
-  tasksMax: 1
-  config:
-    tasks.max: 1
-    database.hostname: "10.96.222.125"
-    database.port: 3306
-    database.user: ${secrets:debezium-example/debezium-secret:username}
-    database.password: ${secrets:debezium-example/debezium-secret:password}
-    database.server.id: 184054
-    topic.prefix: mysql
-    database.include.list: service-seller
-    schema.history.internal.kafka.bootstrap.servers: debezium-cluster-kafka-bootstrap:9092
-    schema.history.internal.kafka.topic: schema-changes.service-seller
-
-
-
-    
+  selector:
+    matchLabels:
+      app: debezium-connector
+  template:
+    metadata:
+      labels:
+        app: debezium-connector
+    spec:
+      containers:
+      - name: debezium-connector
+        image: debezium/connect
+        env:
+        - name: BOOTSTRAP_SERVERS
+          value: "kafka-cluster-kafka-bootstrap:9092"
+        - name: GROUP_ID
+          value: "1"
+        - name: CONFIG_STORAGE_TOPIC
+          value: "kafka-cluster-configs"
+        - name: OFFSET_STORAGE_TOPIC
+          value: "kafka-cluster-offsets"
+        - name: STATUS_STORAGE_TOPIC
+          value: "kafka-cluster-status"
+        - name: CONFIG_STORAGE_REPLICATION_FACTOR
+          value: "3"
+        - name: OFFSET_STORAGE_REPLICATION_FACTOR
+          value: "3"
+        - name: STATUS_STORAGE_REPLICATION_FACTOR
+          value: "3"
+        - name: OFFSET_FLUSH_INTERVAL_MS
+          value: "60000"
+        - name: DATABASE_HOSTNAME
+          value: "10.96.222.125"
+        - name: DATABASE_PORT
+          value: "3306"
+        - name: DATABASE_USER
+          value: "user"
+        - name: DATABASE_PASSWORD
+          value: ""
+        - name: DATABASE_SERVER_NAME
+          value: "service-seller"
+        - name: DATABASE_WHITELIST
+          value: "service-seller"
+        ports:
+        - containerPort: 8083

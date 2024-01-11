@@ -27,8 +27,8 @@ const main = async () => {
       throw new Error("SELLER_JWT_KEY error");
     }
 
-    if (!process.env.TOKEN_EXP_TIME) {
-      throw new Error("TOKEN_EXP_TIME error");
+    if (!process.env.TOKEN_EXPIRATION) {
+      throw new Error("TOKEN_EXPIRATION error");
     }
 
     DB.connect({

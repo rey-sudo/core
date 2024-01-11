@@ -19,8 +19,8 @@ const createSellerHandler = async (req: Request, res: Response) => {
     await conn.beginTransaction();
 
     const token = createToken({
-      role: "signup",
-      entity: "user",
+      role: "create-seller",
+      entity: "seller",
       email: params.email,
       username: params.nickname,
     });
