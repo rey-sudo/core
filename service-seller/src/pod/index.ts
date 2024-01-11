@@ -5,18 +5,18 @@ interface Checkpoints {
   ready: boolean;
 }
 
-const checkList: Checkpoints = {
+const checkpoints: Checkpoints = {
   ready: false,
 };
 
 const checkpoint = (point: string) => {
-  _.info(`${point} connected`);
+  _.info(`CHECKPOINT=>${point}`);
 
-  Object.defineProperty(checkList, point, {
+  Object.defineProperty(checkpoints, point, {
     value: true,
   });
 
-  if (isReady(checkList)) {
+  if (isReady(checkpoints)) {
     const port = process.env.EXPRESS_PORT || "8000";
 
     const timeout = process.env.EXPRESS_TIMEOUT || "5000";
@@ -29,17 +29,17 @@ const checkpoint = (point: string) => {
   }
 };
 
-const isReady = (checkList: Checkpoints) =>
-  !Object.values(checkList).includes(false);
+const isReady = (checkpoints: Checkpoints) =>
+  !Object.values(checkpoints).includes(false);
 
 const check = () => {
   const time = parseInt(process.env.POD_TIMEOUT!) || 120000;
 
-  setTimeout(() => isReady(checkList) || catcher("pod:timeout"), time);
+  setTimeout(() => isReady(checkpoints) || catcher("pod:timeout"), time);
 };
 
 const catcher = (message?: any, error?: any, bypass?: boolean) => {
-  _.error(`EXIT=${message}-${error}`);
+  _.error(`EXIT=>${message}-${error}`);
 
   return bypass || process.exit(1);
 };
