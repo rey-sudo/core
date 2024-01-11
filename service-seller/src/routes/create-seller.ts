@@ -1,4 +1,5 @@
-import { BadRequestError, hashPassword } from "../../global";
+import { hashPassword } from "../utils/password";
+import { BadRequestError } from "../errors";
 import { Request, Response } from "express";
 import { getSellerId } from "../utils/nano";
 import { createToken } from "../utils/token";

@@ -4,7 +4,7 @@ import cors from "cors";
 import helmet from "helmet";
 import cookieSession from "cookie-session";
 import { json, urlencoded } from "body-parser";
-import { requestIp } from "../global";
+import { getPublicAddress } from "./utils/address";
 
 const app = express();
 
@@ -34,7 +34,7 @@ app.use(helmet());
 
 app.use(cors(corsOptions));
 
-app.use(requestIp);
+app.use(getPublicAddress);
 
 app.use(urlencoded({ extended: true, parameterLimit: 15 }));
 

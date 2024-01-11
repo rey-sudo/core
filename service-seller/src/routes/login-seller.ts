@@ -1,8 +1,9 @@
-import { BadRequestError, comparePassword } from "../../global";
+import { BadRequestError } from "../errors";
+import { comparePassword } from "../utils/password";
 import { Request, Response } from "express";
 import { createToken } from "../utils/token";
-import { _ } from "../utils/pino";
 import { SellerToken, sellerMiddleware } from "../utils/seller";
+import { _ } from "../utils/pino";
 import DB from "../db";
 
 const loginSellerMiddlewares: any = [sellerMiddleware];

@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-01-09T21:00:14.062Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="v0ptogJ2_67g3qmrqIOn" version="22.1.17" type="device">
+<mxfile host="app.diagrams.net" modified="2024-01-11T03:51:16.380Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="HbBnXRQv0kgnKNQaTilt" version="22.1.18" type="device">
   <diagram name="microservices" id="IcvIM7nfxtChby0fbi-c">
-    <mxGraphModel dx="1195" dy="1785" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
+    <mxGraphModel dx="1434" dy="1922" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -132,6 +132,15 @@
         </mxCell>
         <mxCell id="q8XJJQvrvl3L1fI4ORvT-41" value="service-gate" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="q8XJJQvrvl3L1fI4ORvT-40" vertex="1">
           <mxGeometry y="30" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="WDx0GrEupUTrxjV6Cwgy-2" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-world-outline-128.png" vertex="1" parent="1">
+          <mxGeometry y="-400" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="WDx0GrEupUTrxjV6Cwgy-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="40" y="-380.5" as="sourcePoint" />
+            <mxPoint x="120" y="-380.5" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
