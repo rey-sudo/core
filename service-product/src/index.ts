@@ -43,10 +43,14 @@ const main = async () => {
 
     const kafka = new Kafka({
       clientId: "service-product",
-      brokers: ["kafka-cluster-kafka-bootstrap:9092", "kafka-cluster-kafka-bootstrap:9093"],
+      brokers: [
+        "10.104.114.76:9091",
+        "10.104.114.76:9092",
+        "10.104.114.76:9093"
+      ],
     });
 
-    const consumer = kafka.consumer({ groupId: "service-product-1" });
+    const consumer = kafka.consumer({ groupId: "1" });
 
     await consumer.connect();
 
