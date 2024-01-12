@@ -36,11 +36,3 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .               
-    - image: pairfy/data-capture
-      context: data-capture
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: 'src/**/*.ts'
-            dest: .               

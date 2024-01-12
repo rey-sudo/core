@@ -1,9 +1,9 @@
 apiVersion: flink.apache.org/v1beta1
 kind: FlinkDeployment
 metadata:
-  name: seatunnel-flink-streaming-example
+  name: seatunnel-flink
 spec:
-  image: pairfy/data-capture
+  image: pairfy/source-tunnel
   flinkVersion: v1_13
   flinkConfiguration:
     taskmanager.numberOfTaskSlots: "2"
