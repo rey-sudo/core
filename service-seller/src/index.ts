@@ -32,10 +32,10 @@ const main = async () => {
     }
 
     DB.connect({
-      host: "10.104.44.107",
-      port: 3306,
+      host: "database1-cockroachdb-public",
+      port: 26257,
       user: "marketplace",
-      password: "password",
+      password: "",
       database: "service_seller",
     });
 
