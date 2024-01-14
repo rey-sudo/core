@@ -1,23 +1,7 @@
 {
-    "sharded": true,
-    "vindexes": {
-      "hash": {
-        "type": "hash"
-      }
-    },
-    "tables": {
-      "seller": {
-        "column_vindexes": [
-          {
-            "column": "seller_id",
-            "name": "hash"
-          }
-        ],
-        "auto_increment": {
-          "column": "seller_id",
-          "sequence": "seq_seller"
-        }
-      }
+  "tables": {
+    "seller": {
+
     }
   }
-  
+}

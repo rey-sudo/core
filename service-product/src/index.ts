@@ -32,13 +32,13 @@ const main = async () => {
     }
 
     DB.connect({
-      host: "10.107.220.147",
+      host: "10.96.176.98",
       port: 3306,
       user: "marketplace",
       password: "password",
       database: "service_seller",
     });
-
+/*
     const { Kafka } = require("kafkajs");
 
     const kafka = new Kafka({
@@ -71,7 +71,7 @@ const main = async () => {
     };
 
     run().catch(console.error);
-
+**/
     checkpoint("ready");
 
     const errorEvents: string[] = [

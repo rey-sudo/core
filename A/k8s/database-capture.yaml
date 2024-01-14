@@ -1,7 +1,7 @@
 apiVersion: flink.apache.org/v1beta1
 kind: FlinkDeployment
 metadata:
-  name: seatunnel-flink
+  name: capture-service-seller
 spec:
   image: pairfy/source-tunnel
   flinkVersion: v1_13
