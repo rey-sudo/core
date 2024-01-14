@@ -12,7 +12,7 @@ const createSellerHandler = async (req: Request, res: Response) => {
   const params = req.body;
 
   try {
-    const [user] = await DB.client.begin(async (sql: any) => {
+    const result  = await DB.client.begin(async (sql: any) => {
       const token = createToken({
         role: "create-seller",
         entity: "seller",
@@ -46,10 +46,10 @@ const createSellerHandler = async (req: Request, res: Response) => {
        ${params.country},
        ${0},
        ${0},
-       "https://example.com",
-       "Terms and conditions: Provide correct data for effective shipping.",
-       "192.168.1.1", 
-       "/avatar.jpg",
+       'Terms and conditions: Provide correct data for effective shipping.',
+       'https://example.com',    
+       '/avatar.jpg',
+       '192.168.1.1',
        ${0})
 
        returning *
@@ -58,7 +58,7 @@ const createSellerHandler = async (req: Request, res: Response) => {
       return user;
     });
 
-    res.status(200).send({ success: true, data: user });
+    res.status(200).send({ success: true, data: result  });
   } catch (err) {
     _.error(err);
 
