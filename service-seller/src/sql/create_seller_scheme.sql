@@ -18,24 +18,3 @@ create table if not exists seller(
   primary key(seller_id),
   unique(email)
 ) ENGINE=InnoDB;
-
-CREATE TABLE IF NOT EXISTS seller (
-  seller_id STRING(20) NOT NULL,
-  nickname STRING(50) NOT NULL,
-  email STRING(100) NOT NULL,
-  password_hash STRING(255) NOT NULL,
-  verified BOOLEAN DEFAULT false,
-  country INT8 NOT NULL,
-  completed_sales INT8 DEFAULT 0,
-  uncompleted_sales INT8 DEFAULT 0,
-  terms STRING(1000) NOT NULL,
-  avatar_base STRING(255) NOT NULL,
-  avatar_path STRING(255) NOT NULL,
-  public_ip STRING(50) NOT NULL,
-  created_at TIMESTAMPTZ DEFAULT current_timestamp(),
-  last_login TIMESTAMPTZ DEFAULT current_timestamp(),
-  schema_t TIMESTAMPTZ DEFAULT current_timestamp(),
-  schema_v INT8 NOT NULL,
-  PRIMARY KEY (seller_id),
-  UNIQUE (email)
-);

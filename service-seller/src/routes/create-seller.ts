@@ -9,60 +9,70 @@ import DB from "../db";
 const createSellerMiddlewares: any = [];
 
 const createSellerHandler = async (req: Request, res: Response) => {
+  let conn = null;
+
   const params = req.body;
 
   try {
-    const result  = await DB.client.begin(async (sql: any) => {
-      const token = createToken({
-        role: "create-seller",
-        entity: "seller",
-        email: params.email,
-        username: params.nickname,
-      });
+    conn = await DB.client.getConnection();
 
-      const password = await hashPassword(params.password);
+    await conn.beginTransaction();
 
-      const [user] = await sql`
-      insert into seller (
-        seller_id,
-        nickname,
-        email,
-        password_hash,
-        verified,
-        country,
-        completed_sales,
-        uncompleted_sales,
-        terms,
-        avatar_base,
-        avatar_path,
-        public_ip,
-        schema_v
-       ) values (
-       ${getSellerId()}, 
-       ${params.nickname},
-       ${params.email},
-       ${password},
-       ${false},
-       ${params.country},
-       ${0},
-       ${0},
-       'Terms and conditions: Provide correct data for effective shipping.',
-       'https://example.com',    
-       '/avatar.jpg',
-       '192.168.1.1',
-       ${0})
-
-       returning *
-       `;
-
-      return user;
+    const token = createToken({
+      role: "create-seller",
+      entity: "seller",
+      email: params.email,
+      username: params.nickname,
     });
 
-    res.status(200).send({ success: true, data: result  });
+    const password = await hashPassword(params.password);
+
+    const schemeData = `
+    INSERT INTO seller (
+      seller_id,
+      nickname,
+      email,
+      password_hash,
+      verified,
+      country,
+      completed_sales,
+      uncompleted_sales,
+      terms,
+      avatar_base,
+      avatar_path,
+      public_ip,
+      schema_v
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+
+    const schemeValue = [
+      getSellerId(),
+      params.nickname,
+      params.email,
+      password,
+      false,
+      params.country,
+      0,
+      0,
+      "Terms and conditions: Provide correct data for effective shipping.",
+      "https://example.com",
+      "/avatar.jpg",
+      "192.168.1.1",
+      0,
+    ];
+
+    await conn.execute(schemeData, schemeValue);
+
+    await conn.commit();
+
+    res.status(200).send({ success: true });
   } catch (err) {
+    await conn.rollback();
+
     _.error(err);
 
     throw new BadRequestError("failed");
+  } finally {
+    conn.release();
   }
 };
 

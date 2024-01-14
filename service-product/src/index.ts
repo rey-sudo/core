@@ -1,8 +1,8 @@
-import compression from "compression";
 import * as route from "./routes";
 import { catcher, check, checkpoint } from "./pod/index";
 import { NotFoundError, errorMiddleware } from "./errors";
 import { app } from "./app";
+import compression from "compression";
 import DB from "./db";
 
 const main = async () => {
@@ -32,41 +32,46 @@ const main = async () => {
     }
 
     DB.connect({
-      host: "10.104.44.107",
+      host: "10.107.220.147",
       port: 3306,
       user: "marketplace",
       password: "password",
       database: "service_seller",
     });
 
-    /*
     const { Kafka } = require("kafkajs");
 
     const kafka = new Kafka({
       clientId: "service-product",
+      ssl: false,
+      enforceRequestTimeout: false,
       brokers: [
-        "10.104.114.76:9091",
-        "10.104.114.76:9092",
-        "10.104.114.76:9093"
+        "10.109.196.17:9092",
+        "10.109.196.17:9092",
+        "10.109.196.17:9092",
       ],
     });
 
-    const consumer = kafka.consumer({ groupId: "1" });
+    const run = async () => {
+      const consumer = kafka.consumer({ groupId: "service-product-group" });
 
-    await consumer.connect();
+      await consumer.connect();
 
-    await consumer.subscribe({ topic: "service-seller", fromBeginning: true });
+      await consumer.subscribe({ topic: "seller.topic", fromBeginning: true });
 
-    await consumer.run({
-      eachMessage: async ({ topic, partition, message }: any) => {
-        console.log({
-          topic,
-          partition,
-          value: message.value.toString(),
-        });
-      },
-    });
-*/
+      await consumer.run({
+        eachMessage: async ({ topic, partition, message }: any) => {
+          console.log({
+            topic,
+            partition,
+            value: message.value.toString(),
+          });
+        },
+      });
+    };
+
+    run().catch(console.error);
+
     checkpoint("ready");
 
     const errorEvents: string[] = [

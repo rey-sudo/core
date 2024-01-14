@@ -32,12 +32,39 @@ const main = async () => {
     }
 
     DB.connect({
-      host: "database1-cockroachdb-public",
-      port: 26257,
+      host: "10.107.220.147",
+      port: 3306,
       user: "marketplace",
-      password: "",
+      password: "password",
       database: "service_seller",
     });
+
+    const { Kafka } = require("kafkajs");
+
+    const kafka = new Kafka({
+      clientId: "service-seller",
+      ssl: false,
+      enforceRequestTimeout: false,
+      brokers: [
+        "10.109.196.17:9092",
+        "10.109.196.17:9092",
+        "10.109.196.17:9092",
+      ],
+    });
+
+    const run = async () => {
+      const producer = kafka.producer();
+
+      await producer.connect();
+      await producer.send({
+        topic: "seller.topic",
+        messages: [{ value: "Hello KafkaJS user!" }],
+      });
+
+      await producer.disconnect();
+    };
+
+    run().catch(console.error);
 
     checkpoint("ready");
 

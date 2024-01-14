@@ -1,4 +1,4 @@
-import postgres from "postgres";
+import { createPool, PoolOptions, Pool } from "mysql2/promise";
 
 class DatabaseWrap {
   private _client?: any;
@@ -11,8 +11,8 @@ class DatabaseWrap {
     return this._client;
   }
 
-  connect(options: any): postgres.Sql {
-    this._client = postgres(options);
+  connect(options: PoolOptions): Pool {
+    this._client = createPool(options);
     return this.client;
   }
 }
