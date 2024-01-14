@@ -1,7 +1,7 @@
 apiVersion: planetscale.com/v2
 kind: VitessCluster
 metadata:
-  name: database
+  name: database1
 spec:
   images:
     vtctld: vitess/lite:latest
@@ -19,7 +19,7 @@ spec:
       authentication:
         static:
           secret:
-            name: database-cluster-config
+            name: database1-cluster-config
             key: users.json
       replicas: 1
       resources:
@@ -42,7 +42,7 @@ spec:
         memory: 128Mi
   vtadmin:
     rbac:
-      name: database-cluster-config
+      name: database1-cluster-config
       key: rbac.yaml
     cells:
       - eeuu1
@@ -64,7 +64,7 @@ spec:
         memory: 128Mi
 
   keyspaces:
-  - name: service-seller
+  - name: service_seller
     durabilityPolicy: none
     turndownPolicy: Immediate
     vitessOrchestrator:
@@ -81,7 +81,7 @@ spec:
         parts: 1
         shardTemplate:
           databaseInitScriptSecret:
-            name: database-cluster-config
+            name: database1-cluster-config
             key: init_db.sql
           tabletPools:
           - cell: eeuu1
@@ -114,14 +114,14 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: database-cluster-config
+  name: database1-cluster-config
 type: Opaque
 stringData:
   users.json: |
     {
-      "user": [{
-        "UserData": "user",
-        "Password": ""
+      "marketplace": [{
+        "UserData": "marketplace",
+        "Password": "password"
       }]
     }
   init_db.sql: |

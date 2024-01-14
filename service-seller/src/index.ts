@@ -32,11 +32,11 @@ const main = async () => {
     }
 
     DB.connect({
-      host: "10.105.154.230",
+      host: "10.104.44.107",
       port: 3306,
-      user: "user",
-      password: "",
-      database: "service-seller",
+      user: "marketplace",
+      password: "password",
+      database: "service_seller",
     });
 
     checkpoint("ready");
