@@ -40,7 +40,7 @@ metadata:
   annotations:
     strimzi.io/use-connector-resources: "true"
 spec:
-  version: 3.1.0
+  version: 3.6.1
   replicas: 1
   bootstrapServers: streaming-kafka-bootstrap:9092,streaming-kafka-bootstrap:9092,streaming-kafka-bootstrap:9092
   config:
@@ -57,7 +57,7 @@ spec:
   build:
     output:
       type: docker
-      image: 10.102.184.94:36345/debezium-vitess-connect:latest
+      image: 10.102.184.94/debezium-connector-vitess:latest
     plugins:
       - name: debezium-connector-vitess
         artifacts:
