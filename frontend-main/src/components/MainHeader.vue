@@ -208,7 +208,7 @@ img.scrolled {
 }
 .header .header-logo {
   cursor: pointer;
-  height: var(--text-size-h);
+  height: 40px;
 }
 
 .header-column {
