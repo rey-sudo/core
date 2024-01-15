@@ -44,12 +44,13 @@ spec:
   replicas: 1
   bootstrapServers: streaming-kafka-bootstrap:9092,streaming-kafka-bootstrap:9092,streaming-kafka-bootstrap:9092
   config:
+    bootstrap.servers: streaming-kafka-bootstrap:9092,streaming-kafka-bootstrap:9092,streaming-kafka-bootstrap:9092
     config.providers: secrets
     config.providers.secrets.class: io.strimzi.kafka.KubernetesSecretConfigProvider
-    group.id: connect-cluster
-    offset.storage.topic: connect-cluster-offsets
-    config.storage.topic: connect-cluster-configs
-    status.storage.topic: connect-cluster-status
+    group.id: sellerKafka
+    offset.storage.topic: sellerKafka-offsets
+    config.storage.topic: sellerKafka-configs
+    status.storage.topic: sellerKafka-status
     # -1 means it will use the default replication factor configured in the broker  kubectl -n kube-system get svc registry -o jsonpath='{.spec.clusterIP}'
     config.storage.replication.factor: -1
     offset.storage.replication.factor: -1
