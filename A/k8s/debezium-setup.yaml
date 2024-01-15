@@ -50,14 +50,14 @@ spec:
     offset.storage.topic: connect-cluster-offsets
     config.storage.topic: connect-cluster-configs
     status.storage.topic: connect-cluster-status
-    # -1 means it will use the default replication factor configured in the broker     kubectl -n kube-system get svc registry -o jsonpath='{.spec.clusterIP}'
+    # -1 means it will use the default replication factor configured in the broker  kubectl -n kube-system get svc registry -o jsonpath='{.spec.clusterIP}'
     config.storage.replication.factor: -1
     offset.storage.replication.factor: -1
     status.storage.replication.factor: -1
   build:
     output:
       type: docker
-      image: 10.102.184.94:43885/debezium-vitess-connect:latest
+      image: 10.102.184.94:36345/debezium-vitess-connect:latest
     plugins:
       - name: debezium-connector-vitess
         artifacts:
