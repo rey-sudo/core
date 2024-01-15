@@ -57,7 +57,7 @@ const main = async () => {
 
       await consumer.connect();
 
-      await consumer.subscribe({ topic: "fulfillment.service_seller.seller", fromBeginning: true });
+      await consumer.subscribe({ topic: "fullfillment.service_seller.seller", fromBeginning: true });
 
       await consumer.run({
         eachMessage: async ({ topic, partition, message }: any) => {
