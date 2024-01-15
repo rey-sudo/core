@@ -32,7 +32,7 @@ const main = async () => {
     }
 
     DB.connect({
-      host: "10.108.225.194",
+      host: "10.99.28.58",
       port: 3306,
       user: "marketplace",
       password: "password",
