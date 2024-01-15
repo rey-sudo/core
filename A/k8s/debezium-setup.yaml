@@ -42,7 +42,7 @@ metadata:
 spec:
   version: 3.1.0
   replicas: 1
-  bootstrapServers: debezium-cluster-kafka-bootstrap:9092,debezium-cluster-kafka-bootstrap:9092,debezium-cluster-kafka-bootstrap:9092
+  bootstrapServers: streaming-kafka-bootstrap:9092,streaming-kafka-bootstrap:9092,streaming-kafka-bootstrap:9092
   config:
     config.providers: secrets
     config.providers.secrets.class: io.strimzi.kafka.KubernetesSecretConfigProvider
@@ -57,9 +57,9 @@ spec:
   build:
     output:
       type: docker
-      image: 10.102.235.126:43885/debezium-connect-mysql:latest
+      image: 10.102.184.94:43885/debezium-vitess-connect:latest
     plugins:
-      - name: debezium-mysql-connector
+      - name: debezium-connector-vitess
         artifacts:
           - type: tgz
             url: https://repo1.maven.org/maven2/io/debezium/debezium-connector-vitess/2.5.0.Final/debezium-connector-vitess-2.5.0.Final-plugin.tar.gz

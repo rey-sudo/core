@@ -12,14 +12,6 @@ build:
     push: false
     concurrency: 0
   artifacts:
-    - image: pairfy/frontend-main
-      context: frontend-main
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: 'src/**/*.ts'
-            dest: .  
     - image: pairfy/service-seller
       context: service-seller
       docker:

@@ -16,5 +16,5 @@ spec:
     database.server.id: 184054
     topic.prefix: mysql
     database.include.list: service_seller
-    schema.history.internal.kafka.bootstrap.servers: kafka-cluster-kafka-bootstrap:9092,kafka-cluster-kafka-bootstrap:9092,kafka-cluster-kafka-bootstrap:9092
+    schema.history.internal.kafka.bootstrap.servers: streaming-kafka-bootstrap:9092,streaming-kafka-bootstrap:9092,streaming-kafka-bootstrap:9092
     schema.history.internal.kafka.topic: schema-changes.service_seller
