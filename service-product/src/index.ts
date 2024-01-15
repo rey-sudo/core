@@ -32,13 +32,13 @@ const main = async () => {
     }
 
     DB.connect({
-      host: "10.99.28.58",
+      host: "10.101.74.192",
       port: 3306,
       user: "marketplace",
       password: "password",
       database: "service_seller",
     });
-/*
+
     const { Kafka } = require("kafkajs");
 
     const kafka = new Kafka({
@@ -46,9 +46,9 @@ const main = async () => {
       ssl: false,
       enforceRequestTimeout: false,
       brokers: [
-        "10.109.196.17:9092",
-        "10.109.196.17:9092",
-        "10.109.196.17:9092",
+        "10.109.180.56:9092",
+        "10.109.180.56:9092",
+        "10.109.180.56:9092",
       ],
     });
 
@@ -57,7 +57,7 @@ const main = async () => {
 
       await consumer.connect();
 
-      await consumer.subscribe({ topic: "seller.topic", fromBeginning: true });
+      await consumer.subscribe({ topic: "fulfillment.service_seller.seller", fromBeginning: true });
 
       await consumer.run({
         eachMessage: async ({ topic, partition, message }: any) => {
@@ -71,7 +71,7 @@ const main = async () => {
     };
 
     run().catch(console.error);
-**/
+
     checkpoint("ready");
 
     const errorEvents: string[] = [
