@@ -7,7 +7,7 @@
       <div class="top-menu">
         <div class="top-menu-column left">
           <div class="submenu-button">
-            <img src="@/assets/menu.svg" alt="" />
+            <i class="pi pi-bars"/> 
           </div>
 
           <div class="submenu-nav">

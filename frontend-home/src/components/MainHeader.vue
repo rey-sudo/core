@@ -315,7 +315,7 @@ img.scrolled {
 .counter {
   background: var(--base-b);
   color: var(--text-a);
-  font-weight: 700 !important;
+  font-weight: 500 !important;
   border-radius: 99px;
   text-align: center !important;
   font-size: var(--text-size-a) !important;

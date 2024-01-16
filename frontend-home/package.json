@@ -1,6 +1,6 @@
 {
-  "name": "interface-main",
-  "version": "0.1.0",
+  "name": "frontend-home",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
