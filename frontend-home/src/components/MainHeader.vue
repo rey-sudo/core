@@ -1,8 +1,8 @@
 <template>
   <header class="header" :class="{ scrolled: isScrolled }">
-    <div class="header-column left">
+    <div class="header-column-left">
       <img
-        class="header-logo"
+        class="header-column-left-logo"
         :class="{ scrolled: isScrolled }"
         @click="reloadPage"
         src="@/assets/logo.svg"
@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <div class="header-column center hide">
+    <div class="header-column-center hide">
       <div class="header-search" :class="{ scrolled: isScrolled }">
         <input
           :class="{ scrolled: isScrolled }"
@@ -43,7 +43,7 @@
       </div>
     </div>
 
-    <div class="header-column right hide">
+    <div class="header-column-right hide">
       <div class="header-box right" :class="{ scrolled: isScrolled }">
         <label> <i class="pi pi-gift"></i></label>
         <div>
@@ -115,8 +115,6 @@ export default {
           address: byteAddr.to_bech32(),
         };
       });
-
-      
 
       const contractAddr = "-";
 
@@ -194,9 +192,6 @@ img.scrolled {
   color: var(--text-a);
 }
 
-.header-logo.scrolled {
-}
-
 .header-search.scrolled {
   border: 1px solid var(--border-a);
   color: var(--text-b);
@@ -205,29 +200,25 @@ img.scrolled {
 .header-search-icon.scrolled {
   background: var(--blue-a);
 }
-.header .header-logo {
+.header .header-column-left .header-column-left-logo {
   cursor: pointer;
   height: 38px;
 }
 
-.header-column {
-  flex-basis: 33.33%;
-}
-
-.header-column.left {
+.header-column-left {
   flex-basis: 33.33%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.header-column.right {
+.header-column-right {
   flex-basis: 33.33%;
   display: flex;
   justify-content: flex-end;
 }
 
-.header-column.center {
+.header-column-center {
   flex-basis: 66.66%;
   width: auto;
   display: flex;
@@ -377,7 +368,7 @@ img.scrolled {
     display: none !important;
   }
 
-  .header-column.left {
+  .header-column-left {
     justify-content: space-between;
   }
 }
