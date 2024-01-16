@@ -131,7 +131,7 @@ export default {
 }
 
 .store .top .top-menu {
-  padding-left: 3rem;
+  padding-left: 2rem;
   margin-top: 82px;
   z-index: 100;
   display: flex;

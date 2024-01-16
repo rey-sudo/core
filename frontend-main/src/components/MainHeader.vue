@@ -270,7 +270,7 @@ img.scrolled {
 }
 
 .header-box.right {
-  margin: 0 auto;
+  margin-left: auto;
 }
 
 .header-box div {
