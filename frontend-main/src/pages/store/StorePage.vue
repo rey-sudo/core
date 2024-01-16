@@ -128,13 +128,11 @@ export default {
 
 .store .top .top-menu {
   padding-left: 3rem;
-  margin-top: 74px;
+  margin-top: 82px;
   z-index: 100;
   display: flex;
   align-items: center;
-  background: var(--blue-a);
-  border-top: 1px solid var(--border-c);
-  background: black;
+  background: var(--base-b);
 }
 
 .store .top .top-menu .top-menu-column {
@@ -185,7 +183,7 @@ export default {
   line-height: 40px;
   font-weight: 400;
   margin-right: 1rem;
-  color: var(--text-w);
+  color: var(--text-a);
   background: transparent;
   border-radius: 999px;
 }

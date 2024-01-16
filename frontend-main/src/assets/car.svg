@@ -18,14 +18,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      showgrid="false"
-     inkscape:zoom="13.109375"
-     inkscape:cx="34.36472"
-     inkscape:cy="15.179976"
-     inkscape:window-width="2560"
-     inkscape:window-height="1043"
-     inkscape:window-x="1920"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
+     inkscape:zoom="6.5546875"
+     inkscape:cx="47.828367"
+     inkscape:cy="24.8677"
+     inkscape:window-width="1495"
+     inkscape:window-height="773"
+     inkscape:window-x="425"
+     inkscape:window-y="168"
+     inkscape:window-maximized="0"
      inkscape:current-layer="icon" />
   <defs
      id="defs735">
@@ -35,19 +35,19 @@
   <title
      id="title737">shopping--cart</title>
   <circle
-     cx="10"
-     cy="28"
-     r="2"
+     cx="11.642793"
+     cy="27.071436"
+     r="1.9285569"
      id="circle739"
-     style="fill:#ffffff" />
+     style="fill:#222222;fill-opacity:1;stroke-width:0.964278" />
   <circle
-     cx="24"
-     cy="28"
-     r="2"
+     cx="25.142691"
+     cy="27.071436"
+     r="1.9285569"
      id="circle741"
-     style="fill:#ffffff" />
+     style="fill:#222222;fill-opacity:1;stroke-width:0.964278" />
   <path
-     d="M28,7H5.82L5,2.8A1,1,0,0,0,4,2H0V4H3.18L7,23.2A1,1,0,0,0,8,24H26V22H8.82L8,18H26a1,1,0,0,0,1-.78l2-9A1,1,0,0,0,28,7Zm-2.8,9H7.62L6.22,9H26.75Z"
+     d="M 28.999797,6.8215884 H 7.6121007 L 6.8213923,2.7716188 A 0.96427847,0.96427847 0 0 0 5.8571139,2.000196 H 2 v 1.928557 h 3.0664055 l 3.6835437,18.514146 a 0.96427847,0.96427847 0 0 0 0.9642785,0.771423 H 27.07124 V 21.285764 H 10.504936 L 9.7142277,17.428651 H 27.07124 a 0.96427847,0.96427847 0 0 0 0.964279,-0.752137 L 29.964075,7.998008 A 0.96427847,0.96427847 0 0 0 28.999797,6.8215884 Z m -2.69998,8.6785056 H 9.3478019 L 7.997812,8.750145 h 19.796637 z"
      id="path743"
-     style="fill:#ffffff" />
+     style="fill:#222222;fill-opacity:1;stroke-width:0.964278" />
 </svg>
