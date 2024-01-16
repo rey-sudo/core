@@ -123,7 +123,11 @@ export default {
   z-index: 2;
   position: absolute;
   backdrop-filter: blur(0px);
-  background: linear-gradient(180deg, var(--blue-b) 90%, rgba(0, 0, 0, 0.1) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--blue-b) 90%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
 }
 
 .store .top .top-menu {
@@ -132,7 +136,7 @@ export default {
   z-index: 100;
   display: flex;
   align-items: center;
-  background: var(--base-b);
+  background: var(--base-a);
 }
 
 .store .top .top-menu .top-menu-column {
@@ -189,8 +193,8 @@ export default {
 }
 
 .store .top .top-menu .top-menu-column .submenu-nav div:hover {
-  color: var(--text-w);
-  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-a);
+  background: var(--base-b);
 }
 
 .store .top .top-banner {

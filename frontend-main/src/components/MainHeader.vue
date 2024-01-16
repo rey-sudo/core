@@ -63,10 +63,10 @@
         </div>
       </div>
 
-      <div class="header-box right" :class="{ scrolled: isScrolled }">
+      <div class="header-box right border" :class="{ scrolled: isScrolled }">
         <label for=""> <i class="pi pi-wallet" /></label>
         <div @click="connectWallet">
-          <span>Login</span>
+          <span>Use</span>
           <span>Wallet</span>
         </div>
       </div>
@@ -174,6 +174,16 @@ i {
   line-height: 0;
 }
 
+.border {
+  cursor: pointer;
+  border-radius: 32px;
+  padding: 0.25rem 1rem;
+  border: 1px solid var(--border-a);
+}
+
+.border:hover {
+  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+}
 img.scrolled {
 }
 .header.scrolled {
@@ -270,7 +280,6 @@ img.scrolled {
 }
 
 .header-box div:hover {
-  text-decoration: underline;
   transition: var(--button-transition-a);
 }
 
@@ -296,6 +305,7 @@ img.scrolled {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .header-box i {
