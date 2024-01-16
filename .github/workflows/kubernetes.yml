@@ -17,4 +17,4 @@ jobs:
           token: ${{ secrets.OCEAN_API_TOKEN }}
       - run: doctl kubernetes cluster kubeconfig save k8arka
       - run: kubectl apply -f A/k8s && kubectl apply -f A/k8s-prod
-      #
+      

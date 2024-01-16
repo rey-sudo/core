@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
-
 :root {
   --text-size-a: 0.889rem;
   --text-size-b: 1rem;
@@ -11,9 +9,9 @@
   --text-size-h: 2.027rem;
 
 
-  --violet-a: #8a97ff;
-  --violet-b: rgba(138, 151, 255, 0.5);
-  --violet-c: rgba(138, 151, 255, 0.9);
+  --violet-a: red;
+  --violet-b: red;
+  --violet-c: red;
 
   --text-a: #222222;
   --text-b: #717171;
@@ -54,17 +52,21 @@
     ),
     rgba(138, 151, 255, 0.24);
 
-  --shadow-a: 0 5px 40px rgba(0, 0, 0, 0.1);
+  --shadow-a: 0 3px 12px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+
   --shadow-b: 0 2px 3px -1px rgba(0, 0, 0, 0.2), 0 0 1px 0 rgba(0, 0, 0, 0.14),
     0 1px 3px 0 rgba(0, 0, 0, 0.12);
+
   --shadow-c: rgba(0, 0, 0, 0.08) 0px 4px 16px;
+  
   --shadow-d: rgba(0, 0, 0, 0.1) 0px 4px 16px;
 
   --border-shadow: rgb(0 0 0/8%) 0 1px 0;
+  
   --border-a: #dddddd;
   --border-b: red;
   --border-c: red;
-  --border-d: rgba(255, 255, 255, 0.4);
+  --border-d: red;
 }
 
 #app {

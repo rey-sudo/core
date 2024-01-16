@@ -1,11 +1,11 @@
-name: frontend-main
+name: frontend-home
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'frontend-main/**'
+      - 'frontend-home/**'
       
 jobs:
   build:
@@ -18,11 +18,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}    
-      - run: cd frontend-main && docker build -t pairfy/frontend-main .    
-      - run: docker push pairfy/frontend-main
+      - run: cd frontend-home && docker build -t pairfy/frontend-home .    
+      - run: docker push pairfy/frontend-home
       - uses: digitalocean/action-doctl@v2.3.0
         with:
           token: ${{ secrets.OCEAN_API_TOKEN }}
       - run: doctl kubernetes cluster kubeconfig save k8arka
-      - run: kubectl rollout restart deployment frontend-main
+      - run: kubectl rollout restart deployment frontend-home
 

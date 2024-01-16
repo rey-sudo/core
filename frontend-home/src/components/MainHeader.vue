@@ -5,13 +5,13 @@
         class="header-logo"
         :class="{ scrolled: isScrolled }"
         @click="reloadPage"
-        src="@/assets/logo-white.svg"
+        src="@/assets/logo.svg"
         alt=""
       />
 
       <div class="header-box left hide" :class="{ scrolled: isScrolled }">
         <label>🇺🇸</label>
-        <div @click="payPrice">
+        <div>
           <span>EN</span>
           <span>USA</span>
         </div>
@@ -21,7 +21,7 @@
         <label>
           <i class="pi pi-tag" />
         </label>
-        <div @click="deploy">
+        <div>
           <span>Hi, Sell</span>
           <span>Product</span>
         </div>
@@ -46,7 +46,7 @@
     <div class="header-column right hide">
       <div class="header-box right" :class="{ scrolled: isScrolled }">
         <label> <i class="pi pi-gift"></i></label>
-        <div @click="getPubKeyHash">
+        <div>
           <span>Be a</span>
           <span>Mediator</span>
         </div>
@@ -64,9 +64,9 @@
       </div>
 
       <div class="header-box right border" :class="{ scrolled: isScrolled }">
-        <label for=""> <i class="pi pi-wallet" /></label>
+        <label for=""> <i class="pi pi-user" /></label>
         <div @click="connectWallet">
-          <span>Use</span>
+          <span>User</span>
           <span>Wallet</span>
         </div>
       </div>
@@ -76,7 +76,6 @@
 
 <script>
 import { walletAPI, CardanoWasm, balanceTx } from "@/api/wallet-api";
-//var Buffer = require('buffer/').Buffer
 
 export default {
   setup() {
@@ -117,7 +116,7 @@ export default {
         };
       });
 
-      //"c78f1b306d10e0699c2286efe7a39f8079da8f5f45ca0aad74ea871c";
+      
 
       const contractAddr = "-";
 
@@ -334,7 +333,7 @@ img.scrolled {
   font-size: var(--text-size-a);
   padding: 0.5rem;
   border: 1px solid #dddddd;
-  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-a);
 }
 
 .header-search-icon {

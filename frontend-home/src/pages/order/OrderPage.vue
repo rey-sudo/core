@@ -18,21 +18,21 @@
       </div>
     </div>
 
-    <LoaderWrap v-if="!isReady" />
+    <LoadingComp v-if="!isReady" />
   </div>
 </template>
 
 <script>
 import TimelineComp from "@/pages/order/components/TimelineComp.vue";
 import orderAPI from "@/pages/order/composable/order-api";
-import LoaderWrap from "@/components/LoaderWrap.vue";
+import LoadingComp from "@/components/LoadingComp.vue";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 
 export default {
   components: {
     TimelineComp,
-    LoaderWrap,
+    LoadingComp,
   },
   setup() {
     const router = useRouter();

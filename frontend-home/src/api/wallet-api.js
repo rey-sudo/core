@@ -2,7 +2,7 @@ import { Wallet } from "@cardano-foundation/cardano-connect-with-wallet-core";
 
 import * as CardanoWasm from "@emurgo/cardano-serialization-lib-browser";
 
-var Buffer = require('buffer/').Buffer
+const Buffer = require('buffer/').Buffer
 
 const walletAPI = () => {
   return {
@@ -200,7 +200,7 @@ const buildTx = async (
 const fetchProtocolParameters = () => {
   return fetch("https://cardano-preview.blockfrost.io/api/v0/blocks/latest", {
     headers: {
-      project_id: "previewXgODba40jVJAs1QgKTBOAuwhvNFHHMVo",
+      project_id: "-",
     },
   })
     .then((res) => res.json())
@@ -209,7 +209,7 @@ const fetchProtocolParameters = () => {
         `https://cardano-preview.blockfrost.io/api/v0/epochs/${latestBlock.epoch}/parameters`,
         {
           headers: {
-            project_id: "previewXgODba40jVJAs1QgKTBOAuwhvNFHHMVo",
+            project_id: "-",
           },
         }
       )

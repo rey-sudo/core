@@ -5,9 +5,6 @@ module.exports = defineConfig({
     experiments: {
       asyncWebAssembly: true,
       syncWebAssembly: true
-    
     }
-
   }
-
 })

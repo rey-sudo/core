@@ -37,8 +37,6 @@
             <div class="card-body-collateral">
               <span> {{ item.collateral }} ADA Collateral</span>
             </div>
-
-
           </div>
 
           <div class="card-bottom">
@@ -124,7 +122,7 @@ export default {
   font-weight: 600;
   text-align: left;
   font-size: var(--text-size-b);
-  margin-bottom: 1rem; 
+  margin-bottom: 1rem;
   color: var(--text-a);
 }
 
@@ -161,7 +159,7 @@ export default {
 
 .card:hover {
   transform: translateY(-0.25rem);
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: var(--shadow-a);
 }
 
 .card-body-stock {
@@ -211,7 +209,6 @@ export default {
   justify-content: center;
   margin-bottom: 1rem;
   font-weight: 400;
-
 }
 .card-body-name span::first-letter {
   text-transform: capitalize;
