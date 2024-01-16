@@ -58,7 +58,7 @@
         /></label>
 
         <div>
-          <span class="counter" :class="{ scrolled: isScrolled }">0</span>
+          <span class="counter" :class="{ scrolled: isScrolled }">14</span>
           <span>Items</span>
         </div>
       </div>
@@ -154,8 +154,8 @@ export default {
 <style lang="css" scoped>
 header {
   padding: 1rem;
-  padding-left: 3rem;
-  padding-right: 3rem;
+  padding-left: 1%;
+  padding-right: 1%;
   display: flex;
   align-items: center;
   justify-content: space-between;
