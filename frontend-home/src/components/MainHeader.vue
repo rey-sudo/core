@@ -1,8 +1,8 @@
 <template>
   <header class="header" :class="{ scrolled: isScrolled }">
-    <div class="header-column-left">
+    <div class="header-left">
       <img
-        class="header-logo"
+        class="header-left-logo"
         :class="{ scrolled: isScrolled }"
         @click="reloadPage"
         src="@/assets/logo.svg"
@@ -28,8 +28,8 @@
       </div>
     </div>
 
-    <div class="header-column-center mobile">
-      <div class="header-search" :class="{ scrolled: isScrolled }">
+    <div class="header-center mobile">
+      <div class="header-center-search" :class="{ scrolled: isScrolled }">
         <input
           :class="{ scrolled: isScrolled }"
           type="text"
@@ -37,13 +37,16 @@
           placeholder="Search products"
         />
 
-        <div class="header-search-icon" :class="{ scrolled: isScrolled }">
+        <div
+          class="header-center-search-icon"
+          :class="{ scrolled: isScrolled }"
+        >
           <i class="pi pi-search" />
         </div>
       </div>
     </div>
 
-    <div class="header-column-right mobile">
+    <div class="header-right mobile">
       <div class="header-button right" :class="{ scrolled: isScrolled }">
         <label> <i class="pi pi-gift"></i></label>
         <div>
@@ -87,7 +90,7 @@ export default {
   },
   data() {
     return {
-      isScrolled: false
+      isScrolled: false,
     };
   },
   methods: {
@@ -162,85 +165,22 @@ export default {
   box-shadow: var(--border-shadow);
 }
 
-.header .header-column-left {
+.header.scrolled {
+  background: var(--base-a);
+  color: var(--text-a);
+  border-bottom: 1px solid var(--border-a);
+}
+
+.header .header-left {
   flex-basis: 33.33%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.header .header-column-left .header-logo {
+.header .header-left .header-left-logo {
   cursor: pointer;
   height: 38px;
-}
-
-i {
-  line-height: 0;
-}
-
-.border {
-  cursor: pointer;
-  border-radius: 32px;
-  padding: 0.25rem 1rem;
-  border: 1px solid var(--border-a);
-}
-
-.border:hover {
-  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
-}
-
-.header.scrolled {
-  background: var(--base-a);
-  color: var(--text-a);
-  border-bottom: 1px solid var(--border-a);
-}
-.counter.scrolled {
-  color: var(--text-w);
-}
-
-.header-search.scrolled {
-  border: 1px solid var(--border-a);
-  color: var(--text-b);
-}
-
-.header-search-icon.scrolled {
-  background: var(--blue-a);
-}
-
-
-
-
-.header-column-right {
-  flex-basis: 33.33%;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.header-column-center {
-  flex-basis: 66.66%;
-  width: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.header-nav {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  justify-content: center;
-}
-
-.header-nav div {
-  padding: 0 1rem;
-  font-weight: 600;
-  font-size: var(--text-size-a);
-  cursor: pointer;
-  transition: var(--button-transition-a);
-}
-
-.header-nav div:hover {
-  opacity: 0.7;
 }
 
 .header-button {
@@ -259,6 +199,94 @@ i {
 
 .header-button.right {
   margin-left: auto;
+}
+
+.header .header-center {
+  flex-basis: 66.66%;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-center-search {
+  border: 1px solid transparent;
+  background: var(--base-a);
+  transition: var(--button-transition-a);
+  cursor: text;
+  display: flex;
+  align-items: center;
+  border-radius: 999px;
+  width: 100%;
+  color: var(--text-a);
+  font-size: var(--text-size-a);
+  padding: 0.5rem;
+  border: 1px solid #dddddd;
+  box-shadow: var(--shadow-a);
+}
+.header-center-search-icon.scrolled {
+  background: var(--blue-a);
+}
+.header-center-search.scrolled {
+  border: 1px solid var(--border-a);
+  color: var(--text-b);
+}
+.header-center-search-icon {
+  background: var(--blue-a);
+  color: var(--text-w);
+  font-size: var(--text-size-b);
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.header-center-search-icon i {
+  font-weight: bold !important;
+}
+
+.header-center-search input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: var(--text-size-a);
+  color: inherit;
+  margin: 0 1rem;
+  padding: 0.5rem;
+}
+
+.header-center-search input::placeholder {
+  color: inherit;
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+.header .header-right {
+  flex-basis: 33.33%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/*------*/
+i {
+  line-height: 0;
+}
+
+.border {
+  cursor: pointer;
+  border-radius: 32px;
+  padding: 0.25rem 1rem;
+  border: 1px solid var(--border-a);
+}
+
+.border:hover {
+  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+}
+
+.counter.scrolled {
+  color: var(--text-w);
 }
 
 .header-button div {
@@ -309,54 +337,6 @@ i {
   font-size: var(--text-size-a) !important;
 }
 
-.header-search {
-  border: 1px solid transparent;
-  background: var(--base-a);
-  transition: var(--button-transition-a);
-  cursor: text;
-  display: flex;
-  align-items: center;
-  border-radius: 999px;
-  width: 100%;
-  color: var(--text-a);
-  font-size: var(--text-size-a);
-  padding: 0.5rem;
-  border: 1px solid #dddddd;
-  box-shadow: var(--shadow-a);
-}
-
-.header-search-icon {
-  background: var(--blue-a);
-  color: var(--text-w);
-  font-size: var(--text-size-b);
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  cursor: pointer;
-}
-
-.header-search-icon i {
-  font-weight: bold !important;
-}
-
-.header-search input {
-  background-color: transparent;
-  border: none;
-  outline: none;
-  width: 100%;
-  font-size: var(--text-size-a);
-  color: inherit;
-  margin: 0 1rem;
-  padding: 0.5rem;
-}
-
-.header-search input::placeholder {
-  color: inherit;
-  font-weight: 400;
-  opacity: 0.6;
-}
-
 @media only screen and (max-width: 600px) {
   header {
     padding-left: 1rem;
@@ -366,7 +346,7 @@ i {
     display: none !important;
   }
 
-  .header-column-left {
+  .header-left {
     justify-content: space-between;
   }
 }
