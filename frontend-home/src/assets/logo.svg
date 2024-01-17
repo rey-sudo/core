@@ -7,7 +7,7 @@
    viewBox="0 0 120 30"
    version="1.1"
    id="SVGRoot"
-   sodipodi:docname="logo-white.svg"
+   sodipodi:docname="logo.svg"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
    inkscape:export-filename="/home/debian/bitmap.png"
    inkscape:export-xdpi="96"
@@ -27,15 +27,15 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
      showgrid="false"
-     inkscape:zoom="13.15"
-     inkscape:cx="29.695818"
-     inkscape:cy="19.315589"
-     inkscape:window-width="1495"
-     inkscape:window-height="773"
-     inkscape:window-x="2261"
-     inkscape:window-y="232"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="layer3"
+     inkscape:zoom="9.2984542"
+     inkscape:cx="59.90243"
+     inkscape:cy="19.465601"
+     inkscape:window-width="1920"
+     inkscape:window-height="1043"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
      inkscape:pageshadow="2" />
   <defs
      id="defs132">
@@ -78,7 +78,7 @@
          style="font-weight:bold;-inkscape-font-specification:'Manrope Bold';fill:#0069f5;fill-opacity:1;stroke:#0069f5;stroke-width:0.408922;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:7;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
          id="path103276" />
       <path
-         d="m 56.477333,26.643646 2.496,-6.852 0.048,2.016 -5.652,-13.884 h 3.012 l 4.008,10.272 h -0.768 l 3.9,-10.272 h 2.892 l -7.224,18.72 z"
+         d="m 57.303998,26.643646 2.496,-6.852 0.048,2.016 -5.652,-13.884 h 3.012 l 4.008,10.272 h -0.768 l 3.9,-10.272 h 2.892 l -7.224,18.72 z"
          style="font-weight:bold;-inkscape-font-specification:'Manrope Bold';fill:#0069f5;fill-opacity:1;stroke:#0069f5;stroke-width:0.408922;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:7;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
          id="path103278" />
     </g>

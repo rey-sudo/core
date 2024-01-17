@@ -107,8 +107,8 @@ export default {
 
 .store .top {
   width: inherit;
-  height: 600px;
-  min-height: 600px;
+  height: 500px;
+  min-height: 500px;
   z-index: 1;
   position: relative;
   inset: 0px 0px -1px;
