@@ -256,6 +256,7 @@ i {
   border-radius: 32px;
   padding: 0.25rem 1rem;
   border: 1px solid var(--border-a);
+  transition: var(--transition-a);
 }
 
 .border:hover {
