@@ -21,7 +21,7 @@
           <i class="pi pi-tag" />
         </label>
         <div>
-          <span>Hi, Sell</span>
+          <span>Sell a</span>
           <span>Product</span>
         </div>
       </div>

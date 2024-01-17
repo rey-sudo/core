@@ -9,7 +9,7 @@ export default () => ({
           price_diff: 200,
           price: 220,
           image:
-            "https://ae04.alicdn.com/kf/S25c19813f3c74d54ba886c61a836a3ces/Autum-Winter-Warm-Turtleneck-Sweater-Men-s-Casual-Rollneck-Knitted-Pullover-Keep-Warm-Men-Jumper-Knit.jpg_220x220xz.jpg_.webp",
+            "https://ae01.alicdn.com/kf/S353ebdf1639c4bbebe3636bf7c79da41t.jpg_480x480.jpg_.webp",
           payment_type: "10 Slots",
           stock_supply: 20,
           collateral: 20,
@@ -25,7 +25,7 @@ export default () => ({
           price_diff: 200,
           price: 300,
           image:
-            "https://ae04.alicdn.com/kf/Se7fe002864764a32a1bd005ef4bcec793/Men-Windbreaker-Military-Field-Jackets-Outerwear-Mens-Tactical-Waterproof-Pilot-Coat-Hoodie-Men-Hunting-Army-Clothes.jpg_220x220xz.jpg_.webp",
+            "https://ae01.alicdn.com/kf/Sa820fb5952264ddb85ee55e3d55f5c20u/JONSBO-U4Mini-Case-Black-White-MESH-360-Cold-Row-Position-Support-Back-Plug-Motherboard-MicroATX-Desktop.jpg_350x350xz.jpg_.webp",
           payment_type: "10 Slots",
           stock_supply: 20,
           collateral: 20,
@@ -35,14 +35,13 @@ export default () => ({
           discount_color: "var(--text-b)",
           discount_label: "Reditor67",
         },
-
         {
           pid: "pid1",
           name: "Tailored comfort in azure cotton, unveiling timeless style and contemporary sophistication for a graceful",
           price_diff: 330,
           price: 330,
           image:
-            "https://ae01.alicdn.com/kf/Sa820fb5952264ddb85ee55e3d55f5c20u/JONSBO-U4Mini-Case-Black-White-MESH-360-Cold-Row-Position-Support-Back-Plug-Motherboard-MicroATX-Desktop.jpg_350x350xz.jpg_.webp",
+            " https://ae01.alicdn.com/kf/Sec8976097adf4c3ba9d34b9e61f18204n.jpg_480x480.jpg_.webp",
           payment_type: "10 Slots",
           stock_supply: 50,
           collateral: 15,
@@ -72,7 +71,7 @@ export default () => ({
 
         {
           pid: "pid1",
-          name:"Tailored comfort in azure cotton, unveiling timeless style and contemporary sophistication for a graceful",
+          name: "Tailored comfort in azure cotton, unveiling timeless style and contemporary sophistication for a graceful",
           price_diff: 200,
           price: 220,
           image:
@@ -93,7 +92,7 @@ export default () => ({
           price_diff: 200,
           price: 100,
           image:
-            "https://ae04.alicdn.com/kf/Sb89f23f7f4e84d6a948d03202d7d7722D/2024-Christmas-Tree-Decorations-Acrylic-Transparent-Snowflake-String-Ice-Hanging-Ornament-New-Year-s-Decor.jpg_220x220xz.jpg_.webp",
+            "https://ae01.alicdn.com/kf/S15575f1efc64479d99bff7815a8903c1k.jpg_480x480.jpg_.webp",
           payment_type: "10 Slots",
           stock_supply: 20,
           collateral: 20,
@@ -110,7 +109,7 @@ export default () => ({
           price_diff: 200,
           price: 100,
           image:
-            "https://ae04.alicdn.com/kf/S49eb93c5f09f460cb7756a841d4cf3457/60-Wireless-Mechanical-Keyboard-Bluetooth-Dual-Mode-Hot-Swappable-Mini-68-Key-Red-Switch-for-PC.jpg_220x220xz.jpg_.webp",
+            "https://ae01.alicdn.com/kf/Hf2fce96804694f44b63031f7e9123a7dY.jpg_480x480.jpg_.webp",
           payment_type: "10 Slots",
           stock_supply: 20,
           collateral: 20,
@@ -123,7 +122,7 @@ export default () => ({
 
         {
           pid: "pid1",
-          name: "Tailored comfort in azure cotton, unveiling timeless style and contemporary sophistication for a graceful",
+          name: "Tailored comfort in azure cotton, unveiling timeless style and contemporary sophistication for a graceful timeless style and contemporary sophistication for a graceful",
           price_diff: 200,
           price: 100,
           image:
@@ -144,7 +143,7 @@ export default () => ({
           price_diff: 200,
           price: 100,
           image:
-            "https://ae04.alicdn.com/kf/S2aeb08f7e8824b18b007205df9c0187fo/Kingston-SSD-Internal-Solid-State-Drive-A400-120GB-240GB-480GB-960GB-2-5-Inch-SSDs-SATA.jpg_220x220xz.jpg_.webp",
+            "https://ae01.alicdn.com/kf/Sd1e9dd73bc374a00ac9fc7862da56f54R.jpg_480x480.jpg_.webp",
           payment_type: "10 Slots",
           stock_supply: 20,
           collateral: 20,
@@ -171,9 +170,6 @@ export default () => ({
           discount_color: "var(--text-b)",
           discount_label: "TheRock77",
         },
-
-
-
       ],
     },
   ],
