@@ -155,6 +155,7 @@ export default {
   padding-bottom: 0;
   margin: auto;
   line-height: 1.5rem;
+  border: 1px solid var(--border-a);
 }
 
 .card:hover {
@@ -202,13 +203,13 @@ export default {
 
 .card-body-name {
   color: var(--text-a);
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
   text-align: left;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-  font-weight: 400;
+  font-weight: 500;
 }
 .card-body-name span::first-letter {
   text-transform: capitalize;
@@ -272,7 +273,7 @@ export default {
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
   border-right: transparent;
-  background: rgb(249 249 249);
+  background: transparent;
 }
 
 .card-badge::after {
@@ -285,7 +286,7 @@ export default {
   border-bottom-right-radius: 0px;
   border-right: transparent;
   z-index: 1;
-  background: rgb(249 249 249);
+  background: transparent;
 }
 
 @media (max-width: 768px) {
