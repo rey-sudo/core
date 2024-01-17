@@ -1,15 +1,14 @@
 <template>
-  <header class="header" :class="{ scrolled: isScrolled }">
+  <header class="header">
     <div class="header-left">
       <img
         class="header-left-logo"
-        :class="{ scrolled: isScrolled }"
         @click="reloadPage"
         src="@/assets/logo.svg"
         alt=""
       />
 
-      <div class="header-button left mobile" :class="{ scrolled: isScrolled }">
+      <div class="header-button left mobile">
         <label>🇺🇸</label>
         <div>
           <span>EN</span>
@@ -17,7 +16,7 @@
         </div>
       </div>
 
-      <div class="header-button left mobile" :class="{ scrolled: isScrolled }">
+      <div class="header-button left mobile">
         <label>
           <i class="pi pi-tag" />
         </label>
@@ -29,25 +28,17 @@
     </div>
 
     <div class="header-center mobile">
-      <div class="header-center-search" :class="{ scrolled: isScrolled }">
-        <input
-          :class="{ scrolled: isScrolled }"
-          type="text"
-          maxlength="200"
-          placeholder="Search products"
-        />
+      <div class="header-center-search">
+        <input type="text" maxlength="200" placeholder="Search products" />
 
-        <div
-          class="header-center-search-icon"
-          :class="{ scrolled: isScrolled }"
-        >
+        <div class="header-center-search-icon">
           <i class="pi pi-search" />
         </div>
       </div>
     </div>
 
     <div class="header-right mobile">
-      <div class="header-button right" :class="{ scrolled: isScrolled }">
+      <div class="header-button right">
         <label> <i class="pi pi-gift"></i></label>
         <div>
           <span>Be a</span>
@@ -55,18 +46,16 @@
         </div>
       </div>
 
-      <div class="header-button right" :class="{ scrolled: isScrolled }">
-        <label for="">
-          <img src="@/assets/car.svg" :class="{ scrolled: isScrolled }" alt=""
-        /></label>
+      <div class="header-button right">
+        <label for=""> <img src="@/assets/car.svg" alt="" /></label>
 
         <div>
-          <span class="counter" :class="{ scrolled: isScrolled }">14</span>
+          <span class="counter">14</span>
           <span>Items</span>
         </div>
       </div>
 
-      <div class="header-button right border" :class="{ scrolled: isScrolled }">
+      <div class="header-button right border">
         <label for=""> <i class="pi pi-user" /></label>
         <div @click="connectWallet">
           <span>User</span>
@@ -165,12 +154,6 @@ export default {
   box-shadow: var(--border-shadow);
 }
 
-.header.scrolled {
-  background: var(--base-a);
-  color: var(--text-a);
-  border-bottom: 1px solid var(--border-a);
-}
-
 .header .header-left {
   flex-basis: 33.33%;
   display: flex;
@@ -224,13 +207,7 @@ export default {
   border: 1px solid #dddddd;
   box-shadow: var(--shadow-a);
 }
-.header-center-search-icon.scrolled {
-  background: var(--blue-a);
-}
-.header-center-search.scrolled {
-  border: 1px solid var(--border-a);
-  color: var(--text-b);
-}
+
 .header-center-search-icon {
   background: var(--blue-a);
   color: var(--text-w);
@@ -283,10 +260,6 @@ i {
 
 .border:hover {
   box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
-}
-
-.counter.scrolled {
-  color: var(--text-w);
 }
 
 .header-button div {
