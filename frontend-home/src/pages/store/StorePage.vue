@@ -212,5 +212,10 @@ export default {
   .top-menu {
     display: none !important;
   }
+
+  .store .top{
+    height: 300px;
+    min-height: 300px;
+  }
 }
 </style>

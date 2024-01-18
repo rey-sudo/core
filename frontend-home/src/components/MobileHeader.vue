@@ -7,9 +7,11 @@
         src="@/assets/logo.svg"
         alt=""
       />
-      <div class="header-left-count">
-        <div>4</div>
-        <img src="@/assets/mobile-car.svg" alt="" />
+      <div class="header-left-item">
+        <i class="pi pi-user" />
+      </div>
+      <div class="header-left-item right">
+        <i class="pi pi-shopping-cart" />
       </div>
     </div>
 
@@ -133,7 +135,7 @@ i {
 .header .header-left {
   flex-basis: 33.33%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   height: 50px;
 }
@@ -143,26 +145,20 @@ i {
   height: 38px;
 }
 
-.header .header-left .header-left-count {
+.header .header-left .header-left-item {
   position: relative;
   justify-content: center;
   display: flex;
   align-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
   margin-left: auto;
+  font-size: var(--text-size-e);
+  width: 2rem;
+  height: 2rem;
+
 }
-.header .header-left .header-left-count div {
-  color: var(--text-a);
-  font-weight: 700;
-  display: flex;
-  justify-content: center;
-  text-align: start;
-  font-size: var(--text-size-b);
-  position: absolute;
-  top: 0px;
-  margin-left: 3px;
-  width: inherit;
+
+.header .header-left .header-left-item.right {
+  margin-left: 1rem;
 }
 
 .header .header-center {
