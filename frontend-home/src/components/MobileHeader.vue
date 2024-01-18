@@ -7,16 +7,10 @@
         src="@/assets/logo.svg"
         alt=""
       />
-
-      <div class="header-button right">
-        <label for=""> <img src="@/assets/mobile-car.svg" alt="" /></label>
-
-        <div>
-          <span class="counter">14</span>
-          <span>Items</span>
-        </div>
+      <div class="header-left-counter">
+        <div>14</div>
+        <img src="@/assets/mobile-car.svg" alt="" />
       </div>
-
     </div>
 
     <div class="header-center">
@@ -29,11 +23,7 @@
       </div>
     </div>
 
-    <div class="header-right">
-
-    </div>
-
-
+    <div class="header-right"></div>
   </header>
 </template>
 
@@ -233,12 +223,6 @@ i {
   box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
 }
 
-.header-button div {
-  display: flex;
-  flex-direction: column;
-  margin-left: 1rem;
-}
-
 .header-button div:hover {
   transition: var(--button-transition-a);
 }
@@ -253,32 +237,29 @@ i {
   font-weight: 400;
 }
 
-.header-button img {
-  width: 2rem;
-  height: 2rem;
-}
-
-.header-button label {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 3px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
 .header-button i {
   width: 2rem;
 }
-
-.counter {
-  background: black;
-  color: var(--text-w);
-  font-weight: 500 !important;
-  border-radius: 99px;
-  text-align: center !important;
-  font-size: var(--text-size-a) !important;
+.header-left-counter {
+  position: relative;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-left: auto;
+}
+.header-left-counter div {
+  color: var(--text-a);
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  text-align: start;
+  font-size: var(--text-size-a);
+  position: absolute;
+  top: 0;
+  margin-left: 3px;
+  width: inherit;
 }
 
 @media only screen and (max-width: 600px) {
