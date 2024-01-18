@@ -1,5 +1,5 @@
 <template>
-  <header class="header mobile">
+  <header class="header">
     <div class="header-left">
       <img
         class="header-left-logo"
@@ -8,7 +8,7 @@
         alt=""
       />
       <div class="header-left-counter">
-        <div>14</div>
+        <div>4</div>
         <img src="@/assets/mobile-car.svg" alt="" />
       </div>
     </div>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { walletAPI, CardanoWasm, balanceTx } from "@/api/wallet-api";
+import { walletAPI } from "@/api/wallet-api";
 
 export default {
   setup() {
@@ -46,42 +46,6 @@ export default {
   methods: {
     connectWallet() {
       this.wallet.connect("nami");
-    },
-
-    async getPubKeyHash() {
-      const usedAddr = await window.cardano.getUsedAddresses();
-
-      const addrMap = usedAddr.map((hexAddr) => {
-        let byteAddr = CardanoWasm.Address.from_hex(hexAddr);
-        // eslint-disable-next-line
-        let pkh = CardanoWasm.BaseAddress.from_address(byteAddr)
-          .payment_cred()
-          .to_keyhash()
-          .to_hex();
-
-        return {
-          address: byteAddr.to_bech32(),
-        };
-      });
-
-      const contractAddr = "-";
-
-      const contractAdd = CardanoWasm.Address.from_bech32(contractAddr);
-
-      const contractPkh = CardanoWasm.BaseAddress.from_address(contractAdd)
-        .payment_cred()
-        .to_keyhash()
-        .to_hex();
-
-      console.log(JSON.stringify(addrMap));
-      console.log("contractAddr", JSON.stringify(contractPkh));
-    },
-
-    async deploy() {
-      const tx = "-";
-
-      const result = await balanceTx(tx);
-      console.log(result);
     },
   },
   mounted() {
@@ -250,15 +214,16 @@ i {
   margin-left: auto;
 }
 .header-left-counter div {
-  color: var(--text-a);
+  color: var(--blue-a);
   font-weight: bold;
   display: flex;
   justify-content: center;
   text-align: start;
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   position: absolute;
-  top: 0;
+  top: -3px;
   margin-left: 3px;
+  margin-bottom: 4px;
   width: inherit;
 }
 
@@ -266,9 +231,6 @@ i {
   .header {
     padding-left: 1rem;
     padding-right: 1rem;
-  }
-
-  .mobile {
     display: block;
   }
 
