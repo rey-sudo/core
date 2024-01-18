@@ -183,7 +183,7 @@ export default {
 }
 
 .store .top .top-menu .top-menu-column .submenu-nav div {
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   white-space: nowrap;
   cursor: pointer;
   padding: 0 1rem;

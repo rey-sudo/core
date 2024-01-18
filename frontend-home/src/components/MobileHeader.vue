@@ -25,7 +25,6 @@
 
     <div class="header-right">
       <div class="header-right-nav">
-
         <div class="header-right-nav-button">
           <i class="pi pi-bars" />
         </div>
@@ -39,7 +38,6 @@
             {{ item.label }}
           </div>
         </div>
-
       </div>
     </div>
   </header>
@@ -185,23 +183,27 @@ i {
   width: 100%;
   color: var(--text-a);
   font-size: var(--text-size-a);
-  padding: 0.5rem;
-  border: 1px solid #dddddd;
+  border: 3px solid transparent;
   background: var(--base-b);
+}
+
+.header .header-center .header-center-search:focus-within {
+  border: 3px solid var(--border-a);
+ 
 }
 
 .header .header-center .header-center-search div {
   background: var(--blue-a);
   color: var(--text-w);
-  font-size: var(--text-size-b);
-  border-radius: 999px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
-  padding: 1rem;
+  padding: 1.5rem 1rem;
   cursor: pointer;
 }
 
 .header .header-center .header-center-search div i {
+  font-size: var(--text-size-d);
   font-weight: bold;
 }
 
@@ -210,7 +212,7 @@ i {
   border: none;
   outline: none;
   width: 100%;
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   color: inherit;
   margin: 0 0.5rem;
   padding: 0.5rem;
@@ -235,8 +237,6 @@ i {
   width: 100%;
 }
 
-
-
 .header .header-right .header-right-nav-button {
   cursor: pointer;
   line-height: 0;
@@ -253,10 +253,10 @@ i {
 }
 
 .header .header-right .header-right-nav-item div {
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   white-space: nowrap;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 700;
   margin: auto;
   color: var(--text-a);
   background: transparent;
