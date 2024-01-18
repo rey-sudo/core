@@ -17,7 +17,7 @@
       <div class="header-center-search">
         <input type="text" maxlength="200" placeholder="Search products" />
 
-        <div class="header-center-search-icon">
+        <div>
           <i class="pi pi-search" />
         </div>
       </div>
