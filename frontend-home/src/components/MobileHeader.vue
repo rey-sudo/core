@@ -139,7 +139,7 @@ i {
   margin: 0.5rem 0;
 }
 
-.header .header-center .header-center-search-icon {
+.header .header-center .header-center-search div {
   background: var(--blue-a);
   color: var(--text-w);
   font-size: var(--text-size-b);
@@ -150,7 +150,7 @@ i {
   cursor: pointer;
 }
 
-.header .header-center .header-center-search-icon i {
+.header .header-center .header-center-search div i {
   font-weight: bold;
 }
 
