@@ -7,7 +7,7 @@
         src="@/assets/logo.svg"
         alt=""
       />
-      <div class="header-left-counter">
+      <div class="header-left-count">
         <div>4</div>
         <img src="@/assets/mobile-car.svg" alt="" />
       </div>
@@ -61,6 +61,9 @@ export default {
 </script>
 
 <style lang="css" scoped>
+i {
+  line-height: 0;
+}
 .header {
   padding: 0.5rem;
   align-items: center;
@@ -89,22 +92,26 @@ export default {
   height: 38px;
 }
 
-.header-button {
-  font-weight: 600;
-  font-size: var(--text-size-d);
+.header .header-left .header-left-count {
+  position: relative;
+  justify-content: center;
   display: flex;
   align-items: center;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: var(--button-transition-a);
-}
-
-.header-button.left {
-  margin: auto;
-}
-
-.header-button.right {
+  width: 2.25rem;
+  height: 2.25rem;
   margin-left: auto;
+}
+.header .header-left .header-left-count div {
+  color: var(--text-a);
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  text-align: start;
+  font-size: var(--text-size-b);
+  position: absolute;
+  top: -4px;
+  margin-left: 3px;
+  width: inherit;
 }
 
 .header .header-center {
@@ -115,7 +122,7 @@ export default {
   justify-content: center;
 }
 
-.header-center-search {
+.header .header-center .header-center-search {
   border: 1px solid transparent;
   background: var(--base-a);
   transition: var(--button-transition-a);
@@ -132,7 +139,7 @@ export default {
   margin: 0.5rem 0;
 }
 
-.header-center-search-icon {
+.header .header-center .header-center-search-icon {
   background: var(--blue-a);
   color: var(--text-w);
   font-size: var(--text-size-b);
@@ -143,11 +150,11 @@ export default {
   cursor: pointer;
 }
 
-.header-center-search-icon i {
+.header .header-center .header-center-search-icon i {
   font-weight: bold;
 }
 
-.header-center-search input {
+.header .header-center .header-center-search input {
   background-color: transparent;
   border: none;
   outline: none;
@@ -158,7 +165,7 @@ export default {
   padding: 0.5rem;
 }
 
-.header-center-search input::placeholder {
+.header .header-center .header-center-search input::placeholder {
   color: inherit;
   font-weight: 400;
   opacity: 0.6;
@@ -168,63 +175,6 @@ export default {
   flex-basis: 33.33%;
   display: flex;
   justify-content: flex-end;
-}
-
-/*------*/
-i {
-  line-height: 0;
-}
-
-.border {
-  cursor: pointer;
-  border-radius: 32px;
-  padding: 0.25rem 1rem;
-  border: 1px solid var(--border-a);
-  transition: var(--transition-a);
-}
-
-.border:hover {
-  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
-}
-
-.header-button div:hover {
-  transition: var(--button-transition-a);
-}
-
-.header-button span {
-  font-size: var(--text-size-a);
-  line-height: 1.25rem;
-  text-align: left;
-}
-
-.header-button span:nth-child(1) {
-  font-weight: 400;
-}
-
-.header-button i {
-  width: 2rem;
-}
-.header-left-counter {
-  position: relative;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  margin-left: auto;
-}
-.header-left-counter div {
-  color: var(--blue-a);
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  text-align: start;
-  font-size: var(--text-size-b);
-  position: absolute;
-  top: -3px;
-  margin-left: 3px;
-  margin-bottom: 4px;
-  width: inherit;
 }
 
 @media only screen and (max-width: 600px) {
