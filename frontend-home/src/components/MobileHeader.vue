@@ -8,23 +8,15 @@
         alt=""
       />
 
-      <div class="header-button left">
-        <label>🇺🇸</label>
+      <div class="header-button right">
+        <label for=""> <img src="@/assets/mobile-car.svg" alt="" /></label>
+
         <div>
-          <span>EN</span>
-          <span>USA</span>
+          <span class="counter">14</span>
+          <span>Items</span>
         </div>
       </div>
 
-      <div class="header-button left">
-        <label>
-          <i class="pi pi-tag" />
-        </label>
-        <div>
-          <span>Sell a</span>
-          <span>Product</span>
-        </div>
-      </div>
     </div>
 
     <div class="header-center">
@@ -38,31 +30,10 @@
     </div>
 
     <div class="header-right">
-      <div class="header-button right">
-        <label> <i class="pi pi-gift"></i></label>
-        <div>
-          <span>Be a</span>
-          <span>Mediator</span>
-        </div>
-      </div>
 
-      <div class="header-button right">
-        <label for=""> <img src="@/assets/car.svg" alt="" /></label>
-
-        <div>
-          <span class="counter">14</span>
-          <span>Items</span>
-        </div>
-      </div>
-
-      <div class="header-button right border">
-        <label for=""> <i class="pi pi-user" /></label>
-        <div @click="connectWallet">
-          <span>User</span>
-          <span>Wallet</span>
-        </div>
-      </div>
     </div>
+
+
   </header>
 </template>
 
@@ -137,10 +108,7 @@ export default {
 
 <style lang="css" scoped>
 .header {
-  padding: 1rem;
-  padding-left: 1%;
-  padding-right: 1%;
-  display: flex;
+  padding: 0.5rem;
   align-items: center;
   justify-content: space-between;
   position: fixed;
@@ -152,6 +120,7 @@ export default {
   color: var(--text-a);
   background: white;
   box-shadow: var(--border-shadow);
+  display: none;
 }
 
 .header .header-left {
@@ -199,13 +168,14 @@ export default {
   cursor: text;
   display: flex;
   align-items: center;
-  border-radius: 999px;
+  border-radius: 8px;
   width: 100%;
   color: var(--text-a);
   font-size: var(--text-size-a);
   padding: 0.5rem;
   border: 1px solid #dddddd;
-  box-shadow: var(--shadow-a);
+  background: var(--base-b);
+  margin: 0.5rem 0;
 }
 
 .header-center-search-icon {
@@ -220,7 +190,7 @@ export default {
 }
 
 .header-center-search-icon i {
-  font-weight: bold !important;
+  font-weight: bold;
 }
 
 .header-center-search input {
@@ -230,7 +200,7 @@ export default {
   width: 100%;
   font-size: var(--text-size-a);
   color: inherit;
-  margin: 0 1rem;
+  margin: 0 0.5rem;
   padding: 0.5rem;
 }
 
@@ -312,12 +282,13 @@ i {
 }
 
 @media only screen and (max-width: 600px) {
-  header {
+  .header {
     padding-left: 1rem;
     padding-right: 1rem;
   }
+
   .mobile {
-    display: none !important;
+    display: block;
   }
 
   .header-left {

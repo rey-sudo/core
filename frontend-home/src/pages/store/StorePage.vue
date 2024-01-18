@@ -2,12 +2,13 @@
   <div class="store">
     <div class="top">
       <MainHeader />
+      <MobileHeader />
       <div class="top-mask" />
 
       <div class="top-menu">
         <div class="top-menu-column left">
           <div class="submenu-button">
-            <i class="pi pi-bars"/> 
+            <i class="pi pi-bars" />
           </div>
 
           <div class="submenu-nav">
@@ -34,6 +35,7 @@
 
 <script>
 import MainHeader from "@/components/MainHeader.vue";
+import MobileHeader from "@/components/MobileHeader.vue";
 import GridWrap from "@/pages/store/components/GridWrap.vue";
 import storeAPI from "@/pages/store/composable/store-api";
 import { useRouter } from "vue-router";
@@ -41,6 +43,7 @@ import { useRouter } from "vue-router";
 export default {
   components: {
     MainHeader,
+    MobileHeader,
     GridWrap,
   },
 
