@@ -115,7 +115,7 @@ i {
   line-height: 0;
 }
 .header {
-  padding: 0 0.5rem;
+  padding: 0 0.75rem;
   align-items: center;
   justify-content: space-between;
   position: fixed;
@@ -148,19 +148,19 @@ i {
   justify-content: center;
   display: flex;
   align-items: center;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
   margin-left: auto;
 }
 .header .header-left .header-left-count div {
-  color: var(--blue-a);
+  color: var(--text-a);
   font-weight: 700;
   display: flex;
   justify-content: center;
   text-align: start;
   font-size: var(--text-size-b);
   position: absolute;
-  top: -2px;
+  top: 0px;
   margin-left: 3px;
   width: inherit;
 }
@@ -197,8 +197,9 @@ i {
   border-radius: 8px;
   display: flex;
   align-items: center;
-  padding: 1.5rem 1rem;
+  padding: 1.25rem 1rem;
   cursor: pointer;
+  margin-right: -1px;
 }
 
 .header .header-center .header-center-search div i {
@@ -268,8 +269,6 @@ i {
 }
 @media only screen and (max-width: 600px) {
   .header {
-    padding-left: 1rem;
-    padding-right: 1rem;
     display: block;
   }
 
