@@ -188,7 +188,7 @@ export default {
   cursor: pointer;
   padding: 0 1rem;
   line-height: 40px;
-  font-weight: 400;
+  font-weight: 500;
   margin-right: 1rem;
   color: var(--text-a);
   background: transparent;

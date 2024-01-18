@@ -115,7 +115,7 @@ i {
   line-height: 0;
 }
 .header {
-  padding: 0.5rem;
+  padding: 0 0.5rem;
   align-items: center;
   justify-content: space-between;
   position: fixed;
@@ -154,13 +154,13 @@ i {
 }
 .header .header-left .header-left-count div {
   color: var(--blue-a);
-  font-weight: bold;
+  font-weight: 700;
   display: flex;
   justify-content: center;
   text-align: start;
   font-size: var(--text-size-b);
   position: absolute;
-  top: -4px;
+  top: -2px;
   margin-left: 3px;
   width: inherit;
 }
@@ -189,7 +189,6 @@ i {
 
 .header .header-center .header-center-search:focus-within {
   border: 3px solid var(--border-a);
- 
 }
 
 .header .header-center .header-center-search div {
@@ -256,7 +255,7 @@ i {
   font-size: var(--text-size-b);
   white-space: nowrap;
   cursor: pointer;
-  font-weight: 700;
+  font-weight: 600;
   margin: auto;
   color: var(--text-a);
   background: transparent;
