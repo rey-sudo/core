@@ -154,7 +154,6 @@ i {
   font-size: var(--text-size-e);
   width: 2rem;
   height: 2rem;
-
 }
 
 .header .header-left .header-left-item.right {
