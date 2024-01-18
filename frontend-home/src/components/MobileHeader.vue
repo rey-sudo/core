@@ -23,7 +23,25 @@
       </div>
     </div>
 
-    <div class="header-right"></div>
+    <div class="header-right">
+      <div class="header-right-nav">
+
+        <div class="header-right-nav-button">
+          <i class="pi pi-bars" />
+        </div>
+
+        <div class="header-right-nav-item">
+          <div
+            v-for="item in navTabs"
+            :key="item"
+            :class="{ active: selectedTab === item.value }"
+          >
+            {{ item.label }}
+          </div>
+        </div>
+
+      </div>
+    </div>
   </header>
 </template>
 
@@ -41,6 +59,40 @@ export default {
   data() {
     return {
       isScrolled: false,
+      selectedTab: "all",
+      navTabs: [
+        {
+          label: "All",
+          value: "all",
+          badge: false,
+          badgeLabel: "",
+        },
+        {
+          label: "New",
+          value: "new",
+          badge: false,
+          badgeLabel: "",
+        },
+        {
+          label: "Offers",
+          value: "offers",
+          badge: false,
+          badgeLabel: "",
+        },
+        {
+          label: "Docs",
+          value: "docs",
+          badge: false,
+          badgeLabel: "",
+        },
+
+        {
+          label: "Support",
+          value: "support",
+          badge: false,
+          badgeLabel: "",
+        },
+      ],
     };
   },
   methods: {
@@ -85,6 +137,7 @@ i {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  height: 50px;
 }
 
 .header .header-left .header-left-logo {
@@ -102,7 +155,7 @@ i {
   margin-left: auto;
 }
 .header .header-left .header-left-count div {
-  color: var(--text-a);
+  color: var(--blue-a);
   font-weight: bold;
   display: flex;
   justify-content: center;
@@ -120,11 +173,10 @@ i {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 50px;
 }
 
 .header .header-center .header-center-search {
-  border: 1px solid transparent;
-  background: var(--base-a);
   transition: var(--button-transition-a);
   cursor: text;
   display: flex;
@@ -136,7 +188,6 @@ i {
   padding: 0.5rem;
   border: 1px solid #dddddd;
   background: var(--base-b);
-  margin: 0.5rem 0;
 }
 
 .header .header-center .header-center-search div {
@@ -174,9 +225,48 @@ i {
 .header .header-right {
   flex-basis: 33.33%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  height: 50px;
 }
 
+.header .header-right .header-right-nav {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+
+
+.header .header-right .header-right-nav-button {
+  cursor: pointer;
+  line-height: 0;
+}
+
+.header .header-right .header-right-nav-button img {
+  width: var(--text-size-e);
+}
+
+.header .header-right .header-right-nav-item {
+  display: flex;
+  align-items: center;
+  width: inherit;
+}
+
+.header .header-right .header-right-nav-item div {
+  font-size: var(--text-size-a);
+  white-space: nowrap;
+  cursor: pointer;
+  font-weight: 600;
+  margin: auto;
+  color: var(--text-a);
+  background: transparent;
+  border-radius: 999px;
+}
+
+.header .header-right .header-right-nav-item div:hover {
+  color: var(--text-a);
+  background: var(--base-b);
+}
 @media only screen and (max-width: 600px) {
   .header {
     padding-left: 1rem;
