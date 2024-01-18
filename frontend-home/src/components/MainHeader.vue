@@ -58,7 +58,7 @@
       <div class="header-button right border">
         <label for=""> <i class="pi pi-user" /></label>
         <div @click="connectWallet">
-          <span>User</span>
+          <span>Use</span>
           <span>Wallet</span>
         </div>
       </div>
@@ -137,9 +137,7 @@ export default {
 
 <style lang="css" scoped>
 .header {
-  padding: 1rem;
-  padding-left: 1%;
-  padding-right: 1%;
+  padding: 1rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -305,7 +303,7 @@ i {
 .counter {
   background: black;
   color: var(--text-w);
-  font-weight: 500 !important;
+  font-weight: 600 !important;
   border-radius: 99px;
   text-align: center !important;
   font-size: var(--text-size-a) !important;
