@@ -252,7 +252,6 @@ export default {
   text-align: center;
   align-items: center;
   justify-content: center;
-  z-index: 2;
 }
 
 .card-badge::before,
