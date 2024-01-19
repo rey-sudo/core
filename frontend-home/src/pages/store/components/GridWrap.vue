@@ -123,14 +123,14 @@ export default {
   text-align: left;
   font-size: var(--text-size-b);
   margin-bottom: 0.5rem;
-  color: var(--blue-a);
+  color: var(--text-a);
 }
 
 .grid-item-title {
   font-size: var(--text-size-f);
   font-weight: 700;
   text-align: start;
-  line-height: 125px;
+  line-height: 100px;
   color: var(--text-a);
   padding-left: 1.25rem;
   letter-spacing: -0.02em;
