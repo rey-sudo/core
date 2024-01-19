@@ -104,7 +104,7 @@
        style="display:inline;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers;opacity:0"
        d="M 15.000001,5.0000003e-7 A 15,15 0 0 0 5e-7,15.000001 15,15 0 0 0 15,30.000001 a 15,15 0 0 0 15,-15 A 15,15 0 0 0 15.000001,5.0000003e-7 Z" />
     <path
-       style="display:inline;fill:#0069f5;fill-opacity:1;stroke:#0069f5;stroke-width:0.560914;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       style="display:inline;fill:#0069f5;fill-opacity:1;stroke:#0069f5;stroke-width:0.560914;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers;opacity:1"
        d="m 6.1563581,15.255261 h 5.2705699 l -11.14656043,9.54858 1.46899053,-2.38715 1.469,-2.38714 1.469,-2.38714 z"
        id="path7720"
        sodipodi:nodetypes="ccccccc" />
