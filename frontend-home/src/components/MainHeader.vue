@@ -191,7 +191,6 @@ export default {
 }
 
 .header-center-search {
-  border: 1px solid transparent;
   background: var(--base-a);
   transition: var(--button-transition-a);
   cursor: text;
@@ -201,7 +200,7 @@ export default {
   width: 100%;
   color: var(--text-a);
   font-size: var(--text-size-b);
-  padding: 0.5rem;
+  padding: 0.4rem;
   border: 1px solid #dddddd;
   box-shadow: var(--shadow-a);
 }
@@ -301,7 +300,7 @@ i {
 }
 
 .counter {
-  background: black;
+  background: var(--blue-a);
   color: var(--text-w);
   font-weight: 600 !important;
   border-radius: 99px;

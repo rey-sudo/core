@@ -100,7 +100,7 @@ export default {
   font-weight: 600;
   text-align: left;
   font-size: var(--text-size-b);
-  color: var(--text-a);
+  color: var(--blue-a);
   margin-top: 0.5rem;
 }
 
@@ -165,6 +165,7 @@ export default {
   min-width: 100%;
   max-width: 100%;
   border-radius: 16px;
+  object-fit: cover;
 }
 
 .card-body {

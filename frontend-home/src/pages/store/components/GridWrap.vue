@@ -108,8 +108,8 @@ export default {
   gap: 20px;
   padding: 0 2rem;
   min-height: 100vh;
-  border-top-left-radius: 32px;
-  border-top-right-radius: 32px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
   background: var(--base-a);
 }
 
@@ -123,7 +123,7 @@ export default {
   text-align: left;
   font-size: var(--text-size-b);
   margin-bottom: 0.5rem;
-  color: var(--text-a);
+  color: var(--blue-a);
 }
 
 .grid-item-title {

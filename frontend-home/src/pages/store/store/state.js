@@ -25,7 +25,7 @@ export default () => ({
           price_diff: 200,
           price: 600,
           image:
-            "https://ae01.alicdn.com/kf/Sa820fb5952264ddb85ee55e3d55f5c20u/JONSBO-U4Mini-Case-Black-White-MESH-360-Cold-Row-Position-Support-Back-Plug-Motherboard-MicroATX-Desktop.jpg_350x350xz.jpg_.webp",
+            "https://ae01.alicdn.com/kf/S0dde624d7c8a4e31bfc58daf3456daade/JONSBO-D40-Chassis-Desktop-Aluminum-ATX-Twin-Glass-Side-Penetration-Support-Water-Cooled-Graphics-Card-PC.jpg_350x350xz.jpg_.webp",
           payment_type: "10 Slots",
           stock_supply: 10,
           collateral: 20,
@@ -335,6 +335,27 @@ export default () => ({
           shipping_icon: "pi user",
           discount_color: "var(--text-b)",
           discount_label: "TheRock77",
+        },
+      ],
+    },
+    {
+      title: "NFT",
+      items: [
+        {
+          pid: "pid1",
+          name: "NFT Mockup",
+          price_diff: 200,
+          price: 1200,
+          image:
+            "https://i.seadn.io/s/raw/files/9b832f79c79d9bec089d546fc24b30d4.png",
+          payment_type: "10 Slots",
+          stock_supply: 20,
+          collateral: 40,
+          shipping_tax: false,
+          shipping_label: "Free shipping",
+          shipping_icon: "pi user",
+          discount_color: "var(--text-b)",
+          discount_label: "Tony66",
         },
       ],
     },
