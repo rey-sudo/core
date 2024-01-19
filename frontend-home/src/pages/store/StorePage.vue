@@ -121,9 +121,6 @@ export default {
   background-size: contain;
   display: flex;
   flex-direction: column;
-  background-image: url("@/assets/2.png");
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .store .top .top-mask {
