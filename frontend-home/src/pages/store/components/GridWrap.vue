@@ -50,7 +50,7 @@
                   width="1rem"
                   height="1rem"
                   role="img"
-                  fill="rgba(29,155,240,1.00)"
+                  fill="#0069f5"
                 >
                   <g>
                     <path
@@ -122,7 +122,7 @@ export default {
   font-weight: 600;
   text-align: left;
   font-size: var(--text-size-b);
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   color: var(--text-a);
 }
 
@@ -155,24 +155,25 @@ export default {
   padding-bottom: 0;
   margin: auto;
   line-height: 1.5rem;
-  border: 1px solid var(--border-a);
+  border: 1px solid transparent;
 }
 
 .card:hover {
   transform: translateY(-0.25rem);
   box-shadow: var(--shadow-a);
+  border: 1px solid var(--border-a);
 }
 
 .card-body-stock {
   margin-bottom: 0.5rem;
   text-align: left;
   color: var(--text-b);
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
 }
 
 .card-body-collateral {
   text-align: left;
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   display: flex;
   align-items: center;
   color: var(--text-b);
@@ -210,6 +211,7 @@ export default {
   justify-content: center;
   margin-bottom: 1rem;
   font-weight: 400;
+  text-transform: lowercase;
 }
 .card-body-name span::first-letter {
   text-transform: capitalize;
