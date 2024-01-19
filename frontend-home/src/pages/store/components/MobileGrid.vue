@@ -101,6 +101,7 @@ export default {
   text-align: left;
   font-size: var(--text-size-b);
   color: var(--text-a);
+  margin-top: 0.5rem;
 }
 
 .grid-item-title {
@@ -159,10 +160,10 @@ export default {
 }
 
 .card-image img {
-  width: calc(150px - 2rem);
-  height: calc(150px - 2rem);
-  min-width: calc(150px - 2rem);
-  max-width: calc(150px - 2rem);
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  max-width: 100%;
   border-radius: 16px;
 }
 
@@ -176,15 +177,14 @@ export default {
   text-align: left;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  line-height: 10px;
+  margin-top: 1rem;
+  font-weight: 400;
+  white-space: normal;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 .card-body-name span::first-letter {
   text-transform: capitalize;

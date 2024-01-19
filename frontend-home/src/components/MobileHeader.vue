@@ -87,8 +87,8 @@ export default {
         },
 
         {
-          label: "Support",
-          value: "support",
+          label: "Help",
+          value: "help",
           badge: false,
           badgeLabel: "",
         },
@@ -174,7 +174,7 @@ i {
   cursor: text;
   display: flex;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 999px;
   width: 100%;
   color: var(--text-a);
   font-size: var(--text-size-a);
@@ -187,8 +187,8 @@ i {
 }
 
 .header .header-center .header-center-search div {
-  background: var(--blue-a);
-  color: var(--text-w);
+  background: transparent;
+  color: var(--text-a);
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -198,8 +198,7 @@ i {
 }
 
 .header .header-center .header-center-search div i {
-  font-size: var(--text-size-d);
-  font-weight: bold;
+  font-size: var(--text-size-c);
 }
 
 .header .header-center .header-center-search input {

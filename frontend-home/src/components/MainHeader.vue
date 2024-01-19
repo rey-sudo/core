@@ -200,7 +200,7 @@ export default {
   border-radius: 999px;
   width: 100%;
   color: var(--text-a);
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   padding: 0.5rem;
   border: 1px solid #dddddd;
   box-shadow: var(--shadow-a);
@@ -226,10 +226,10 @@ export default {
   border: none;
   outline: none;
   width: 100%;
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   color: inherit;
   margin: 0 1rem;
-  padding: 0.5rem;
+  padding: 0.25rem;
 }
 
 .header-center-search input::placeholder {

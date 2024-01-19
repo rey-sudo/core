@@ -91,8 +91,8 @@ export default {
         },
 
         {
-          label: "Support",
-          value: "support",
+          label: "Help",
+          value: "help",
           badge: false,
           badgeLabel: "",
         },
@@ -121,6 +121,9 @@ export default {
   background-size: contain;
   display: flex;
   flex-direction: column;
+  background-image: url("@/assets/2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .store .top .top-mask {
@@ -131,7 +134,7 @@ export default {
   backdrop-filter: blur(0px);
   background: linear-gradient(
     180deg,
-    var(--blue-b) 90%,
+    transparent 90%,
     rgba(0, 0, 0, 0.1) 100%
   );
 }
@@ -216,7 +219,7 @@ export default {
     display: none !important;
   }
 
-  .store .top{
+  .store .top {
     height: 300px;
     min-height: 300px;
   }
