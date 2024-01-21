@@ -36,7 +36,7 @@ const main = async () => {
       port: 3306,
       user: "marketplace",
       password: "password",
-      database: "service_seller",
+      database: "service_product",
     });
 
     const { Kafka } = require("kafkajs");
@@ -94,11 +94,11 @@ const main = async () => {
     errorEvents.forEach((e: string) => process.on(e, (err) => catcher(err)));
 
     app.post(
-      "/api/seller/create-seller",
+      "/api/product/create-product",
 
-      route.createSellerMiddlewares,
+      route.createProductMiddlewares,
 
-      route.createSellerHandler
+      route.createProductHandler
     );
 
     app.post(
