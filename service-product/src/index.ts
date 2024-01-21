@@ -94,7 +94,7 @@ const main = async () => {
     errorEvents.forEach((e: string) => process.on(e, (err) => catcher(err)));
 
     app.post(
-      "/api/seller/create-seller",
+      "/api/product/create-product",
 
       route.createProductMiddlewares,
 

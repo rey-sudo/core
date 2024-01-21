@@ -34,3 +34,10 @@ spec:
                 name: service-seller
                 port:
                   number: 8000
+          - path: /api/product/?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: service-product
+                port:
+                  number: 8000                  

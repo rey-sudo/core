@@ -1,64 +1,62 @@
-import { hashPassword } from "../utils/password";
 import { BadRequestError } from "../errors";
 import { Request, Response } from "express";
-import { getSellerId } from "../utils/nano";
-import { createToken } from "../utils/token";
+import { getProductId } from "../utils/nano";
+import { sellerMiddleware } from "../utils/seller";
+import { requireAuth } from "../utils/required";
 import { _ } from "../utils/pino";
 import DB from "../db";
 
-const createProductMiddlewares: any = [];
+const createProductMiddlewares: any = [sellerMiddleware, requireAuth];
 
 const createProductHandler = async (req: Request, res: Response) => {
   let conn = null;
 
   const params = req.body;
 
+  const seller = req.sellerData;
+
   try {
     conn = await DB.client.getConnection();
 
     await conn.beginTransaction();
 
-    const token = createToken({
-      role: "create-seller",
-      entity: "seller",
-      email: params.email,
-      username: params.nickname,
-    });
-
-    const password = await hashPassword(params.password);
-
     const schemeData = `
-    INSERT INTO seller (
+    INSERT INTO product (
       product_id,
       seller_id,
-      nickname,
-      email,
-      password_hash,
-      verified,
-      country,
-      completed_sales,
-      uncompleted_sales,
+      title,
+      category,
+      price,
+      collateral,
+      stock,
+      slots,
+      note,
+      keywords,
+      theme,
       terms,
-      avatar_base,
-      avatar_path,
-      public_ip,
+      country,
+      image_base,
+      image_path,
       schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const schemeValue = [
-      getSellerId(),
-      params.nickname,
-      params.email,
-      password,
-      false,
+      getProductId(),
+      seller.seller_id,
+      params.title,
+      params.category,
+      params.price,
+      params.collateral,
+      params.stock,
+      params.slots,
+      params.note,
+      params.keywords,
+      params.theme,
+      params.terms,
       params.country,
-      0,
-      0,
-      "Terms and conditions: Provide correct data for effective shipping.",
-      "https://example.com",
-      "/avatar.jpg",
-      "192.168.1.1",
-      0,
+      params.image_base,
+      params.image_path,
+      0
     ];
 
     await conn.execute(schemeData, schemeValue);
