@@ -28,3 +28,11 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .               
+    - image: pairfy/service-gate
+      context: service-gate
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .

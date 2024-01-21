@@ -101,28 +101,6 @@ const main = async () => {
       route.createProductHandler
     );
 
-    app.post(
-      "/api/seller/login-seller",
-
-      route.loginSellerMiddlewares,
-
-      route.loginSellerHandler
-    );
-
-    app.get(
-      "/api/seller/current-seller",
-
-      route.currentSellerMiddlewares,
-
-      route.currentSellerHandler
-    );
-
-    app.get(
-      "/api/seller/logout",
-
-      route.logoutHandler
-    );
-
     app.all("*", (_req, _res) => {
       throw new NotFoundError();
     });

@@ -1,7 +1,7 @@
 {
-  "name": "service-product",
+  "name": "service-gate",
   "version": "1.0.0",
-  "description": "CRUD service for products.",
+  "description": "CRUD service for negotiations.",
   "main": "index.js",
   "keywords": [
     "pairfy",

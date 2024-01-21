@@ -36,13 +36,13 @@ const main = async () => {
       port: 3306,
       user: "marketplace",
       password: "password",
-      database: "service_product",
+      database: "service_gate",
     });
 
     const { Kafka } = require("kafkajs");
 
     const kafka = new Kafka({
-      clientId: "service-product",
+      clientId: "service-gate",
       ssl: false,
       enforceRequestTimeout: false,
       brokers: [
@@ -52,14 +52,14 @@ const main = async () => {
       ],
     });
 
-    const serviceUserListener = async () => {
+    const serviceProductListener = async () => {
       try {
-        const consumer = kafka.consumer({ groupId: "service-product-group" });
+        const consumer = kafka.consumer({ groupId: "service-gate-group" });
 
         await consumer.connect();
 
         await consumer.subscribe({
-          topic: "fullfillment.service_seller.seller",
+          topic: "fullfillment.service_product.product",
           fromBeginning: true,
         });
 
@@ -68,17 +68,18 @@ const main = async () => {
             console.log({
               topic,
               partition,
-              value: message.value.toString(),
             });
+
+            const value = JSON.parse(message.value.toString());
+            console.log(value);
           },
         });
-        
       } catch (err) {
         console.error(err);
       }
     };
 
-    serviceUserListener();
+    serviceProductListener();
 
     checkpoint("ready");
 
@@ -99,28 +100,6 @@ const main = async () => {
       route.createProductMiddlewares,
 
       route.createProductHandler
-    );
-
-    app.post(
-      "/api/seller/login-seller",
-
-      route.loginSellerMiddlewares,
-
-      route.loginSellerHandler
-    );
-
-    app.get(
-      "/api/seller/current-seller",
-
-      route.currentSellerMiddlewares,
-
-      route.currentSellerHandler
-    );
-
-    app.get(
-      "/api/seller/logout",
-
-      route.logoutHandler
     );
 
     app.all("*", (_req, _res) => {

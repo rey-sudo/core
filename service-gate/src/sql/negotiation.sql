@@ -1,4 +1,4 @@
-create table if not exists product(
+create table if not exists negotiation(
   product_id varchar(20) not null,
   seller_id varchar(20) not null,
   title varchar(125) not null,

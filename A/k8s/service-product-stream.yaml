@@ -1,0 +1,25 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: service-product-stream
+  labels:
+    strimzi.io/cluster: debezium-connect-cluster
+spec:
+  class: io.debezium.connector.vitess.VitessConnector
+  tasksMax: 1
+  config:
+    connector.class: io.debezium.connector.vitess.VitessConnector
+    database.hostname: "10.101.74.192"
+    database.port: "15999"
+    database.user: "marketplace"
+    database.password: "password" 
+    vitess.keyspace: "service_product"
+    vitess.tablet.type: "MASTER"
+    vitess.vtctld.host": "10.102.28.185"
+    vitess.vtctld.port": "15999"
+    vitess.vtctld.user": "marketplace"
+    vitess.vtctld.password: "password"  
+    vitess.database.user: "marketplace"
+    vitess.database.password: "password"
+    topic.prefix: "fullfillment"
+    tasks.max: 1 
