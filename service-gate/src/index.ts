@@ -36,7 +36,7 @@ const main = async () => {
       port: 3306,
       user: "marketplace",
       password: "password",
-      database: "service_product",
+      database: "service_seller",
     });
 
     const { Kafka } = require("kafkajs");
@@ -96,9 +96,9 @@ const main = async () => {
     app.post(
       "/api/seller/create-seller",
 
-      route.createProductMiddlewares,
+      route.createSellerMiddlewares,
 
-      route.createProductHandler
+      route.createSellerHandler
     );
 
     app.post(
