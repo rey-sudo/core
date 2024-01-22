@@ -1,7 +1,7 @@
 import * as route from "./routes";
 import { catcher, check, checkpoint } from "./pod/index";
 import { NotFoundError, errorMiddleware } from "./errors";
-import { serviceProductListener } from "./streaming/service-product";
+import serviceProductListener from "./kafka/service-product";
 import { app } from "./app";
 import compression from "compression";
 import DB from "./db";

@@ -9,9 +9,9 @@ vtctldclient ApplySchema --sql-file="service-seller/src/sql/seller.sql" service_
 vtctldclient ApplyVSchema --vschema-file="service-seller/src/sql/seller.json" service_seller
 
 
-
 vtctldclient ApplySchema --sql-file="service-product/src/sql/product.sql" service_product
 vtctldclient ApplyVSchema --vschema-file="service-product/src/sql/product.json" service_product
+
 
 vtctldclient ApplySchema --sql-file="service-gate/src/sql/product.sql" service_gate
 vtctldclient ApplyVSchema --vschema-file="service-gate/src/sql/product.json" service_gate

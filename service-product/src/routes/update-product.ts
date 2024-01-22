@@ -1,19 +1,16 @@
 import { BadRequestError } from "../errors";
 import { Request, Response } from "express";
-import { getProductId } from "../utils/nano";
 import { sellerMiddleware } from "../utils/seller";
 import { requireAuth } from "../utils/required";
 import { _ } from "../utils/pino";
 import DB from "../db";
 
-const createProductMiddlewares: any = [sellerMiddleware, requireAuth];
+const updateProductMiddlewares: any = [sellerMiddleware, requireAuth];
 
-const createProductHandler = async (req: Request, res: Response) => {
-  let connection = null;
-
+const updateProductHandler = async (req: Request, res: Response) => {
   const params = req.body;
 
-  const seller = req.sellerData;
+  let connection = null;
 
   try {
     connection = await DB.client.getConnection();
@@ -21,28 +18,25 @@ const createProductHandler = async (req: Request, res: Response) => {
     await connection.beginTransaction();
 
     const schemeData = `
-    INSERT INTO product (
-      product_id,
-      seller_id,
-      title,
-      category,
-      price,
-      collateral,
-      stock,
-      slots,
-      note,
-      keywords,
-      theme,
-      terms,
-      country,
-      image_base,
-      image_path,
-      schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    UPDATE product 
+    SET title = ?,
+        category = ?,
+        price = ?,
+        collateral = ?,
+        stock = ?,
+        slots = ?,
+        note = ?,
+        keywords = ?,
+        theme = ?,
+        terms = ?,
+        country = ?,
+        image_base = ?,
+        image_path = ?,
+        schema_v = schema_v + 1
+    WHERE product_id = ?
+    `;
 
     const schemeValue = [
-      getProductId(),
-      seller.seller_id,
       params.title,
       params.category,
       params.price,
@@ -56,7 +50,7 @@ const createProductHandler = async (req: Request, res: Response) => {
       params.country,
       params.image_base,
       params.image_path,
-      0
+      params.product_id,
     ];
 
     await connection.execute(schemeData, schemeValue);
@@ -75,4 +69,4 @@ const createProductHandler = async (req: Request, res: Response) => {
   }
 };
 
-export { createProductMiddlewares, createProductHandler };
+export { updateProductMiddlewares, updateProductHandler };

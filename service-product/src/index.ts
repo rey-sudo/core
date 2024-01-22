@@ -101,6 +101,14 @@ const main = async () => {
       route.createProductHandler
     );
 
+    app.post(
+      "/api/product/update-product",
+
+      route.updateProductMiddlewares,
+
+      route.updateProductHandler
+    );
+
     app.all("*", (_req, _res) => {
       throw new NotFoundError();
     });
