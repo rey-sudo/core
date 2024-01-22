@@ -99,7 +99,7 @@ const handleCreate = async (
     );
 
     if (rows.length !== 0) {
-      throw new Error("ROW_DUPLICATION");
+      throw new Error("DUPLICATION");
     }
 
     const [created] = await connection.execute(schemeData, schemeValue);
