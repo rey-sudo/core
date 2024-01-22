@@ -21,22 +21,32 @@ const serviceProductListener = async () => {
         eachMessage: async ({ topic, partition, message }: any) => {
           if (!message.value) return;
 
-          const value = JSON.parse(message.value.toString());
-
-          const payload = value.payload;
+          const payload = JSON.parse(message.value.toString()).payload;
 
           console.log(payload);
 
           if (payload.op === "c") {
-            await handleCreate(payload);
+            await handleCreate(payload, consumer, {
+              topic,
+              partition,
+              message,
+            });
           }
 
           if (payload.op === "u") {
-            await handleUpdate(payload);
+            await handleUpdate(payload, consumer, {
+              topic,
+              partition,
+              message,
+            });
           }
 
           if (payload.op === "d") {
-            await handleDelete(payload);
+            await handleDelete(payload, consumer, {
+              topic,
+              partition,
+              message,
+            });
           }
         },
       })
@@ -44,8 +54,12 @@ const serviceProductListener = async () => {
     .catch((err: any) => _.error(err));
 };
 
-const handleCreate = async (payload_: any) => {
-  const payload = payload_.after;
+const handleCreate = async (
+  data: any,
+  consumer: any,
+  { topic, partition, message }: any
+) => {
+  const payload = data.after;
 
   let connection = null;
 
@@ -95,6 +109,10 @@ const handleCreate = async (payload_: any) => {
     }
 
     await connection.commit();
+
+    await consumer.commitOffsets([
+      { topic, partition, offset: message.offset + 1 },
+    ]);
   } catch (err) {
     await connection.rollback().then(() => _.error(err));
   } finally {
@@ -102,8 +120,12 @@ const handleCreate = async (payload_: any) => {
   }
 };
 
-const handleUpdate = async (payload_: any) => {
-  const payload = payload_.after;
+const handleUpdate = async (
+  data: any,
+  consumer: any,
+  { topic, partition, message }: any
+) => {
+  const payload = data.after;
 
   let connection = null;
 
@@ -148,6 +170,10 @@ const handleUpdate = async (payload_: any) => {
     }
 
     await connection.commit();
+
+    await consumer.commitOffsets([
+      { topic, partition, offset: message.offset + 1 },
+    ]);
   } catch (err) {
     await connection.rollback().then(() => _.error(err));
   } finally {
@@ -155,8 +181,12 @@ const handleUpdate = async (payload_: any) => {
   }
 };
 
-const handleDelete = async (payload_: any) => {
-  const payload = payload_.before;
+const handleDelete = async (
+  data: any,
+  consumer: any,
+  { topic, partition, message }: any
+) => {
+  const payload = data.before;
 
   let connection = null;
 
@@ -175,6 +205,10 @@ const handleDelete = async (payload_: any) => {
     }
 
     await connection.commit();
+
+    await consumer.commitOffsets([
+      { topic, partition, offset: message.offset + 1 },
+    ]);
   } catch (err) {
     await connection.rollback().then(() => _.error(err));
   } finally {
