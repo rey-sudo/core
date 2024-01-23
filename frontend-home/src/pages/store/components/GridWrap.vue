@@ -4,7 +4,6 @@
       <div class="grid-item-title">{{ row.title }}</div>
 
       <div class="grid-row">
-        <!---->
         <div
           class="card"
           v-for="item in row.items"
@@ -62,7 +61,6 @@
             </div>
           </div>
         </div>
-        <!---->
       </div>
     </div>
   </div>
@@ -254,6 +252,7 @@ export default {
   text-align: center;
   align-items: center;
   justify-content: center;
+  z-index: -1;
 }
 
 .card-badge::before,
@@ -263,6 +262,7 @@ export default {
   top: 0;
   width: 50%;
   height: 30px;
+  transition: box-shadow 0.1s ease-in-out 0s, transform 0.25s ease 0s;
 }
 
 .card-badge::before {
@@ -274,7 +274,8 @@ export default {
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
   border-right: transparent;
-  background: transparent;
+  background: var(--base-b);
+  z-index: -1;
 }
 
 .card-badge::after {
@@ -286,8 +287,9 @@ export default {
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
   border-right: transparent;
-  z-index: 1;
+  z-index: -2;
   background: transparent;
+  background: var(--base-b);
 }
 
 @media only screen and (max-width: 600px) {

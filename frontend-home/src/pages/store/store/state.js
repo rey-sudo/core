@@ -16,7 +16,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "TheRock77",
         },
         {
@@ -32,7 +32,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "Reditor67",
         },
         {
@@ -48,7 +48,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "Hosky67",
         },
 
@@ -65,7 +65,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "JenniferPro",
         },
 
@@ -82,7 +82,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "CharlesVitalik",
         },
 
@@ -99,7 +99,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "TheRock77",
         },
         {
@@ -115,7 +115,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "TheRock77",
         },
         {
@@ -131,7 +131,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "TheRock77",
         },
         {
@@ -147,7 +147,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "TheRock77",
         },
         {
@@ -163,7 +163,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "TheRock77",
         },
       ],
@@ -184,7 +184,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "TheRock77",
         },
         {
@@ -200,7 +200,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "Reditor67",
         },
         {
@@ -216,7 +216,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "Hosky67",
         },
 
@@ -233,7 +233,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "JenniferPro",
         },
 
@@ -250,7 +250,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "CharlesVitalik",
         },
 
@@ -267,7 +267,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "TheRock77",
         },
         {
@@ -283,7 +283,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "TheRock77",
         },
         {
@@ -299,7 +299,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "TheRock77",
         },
 
@@ -316,7 +316,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "TheRock77",
         },
 
@@ -333,7 +333,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "TheRock77",
         },
       ],
@@ -354,7 +354,7 @@ export default () => ({
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
-          discount_color: "var(--text-b)",
+          discount_color: "var(--text-a)",
           discount_label: "Tony66",
         },
       ],

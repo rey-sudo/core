@@ -4,7 +4,7 @@
       <img
         class="header-left-logo"
         @click="reloadPage"
-        src="@/assets/logo.svg"
+        src="@/assets/logo.png"
         alt=""
       />
 
@@ -161,7 +161,7 @@ export default {
 
 .header .header-left .header-left-logo {
   cursor: pointer;
-  height: 38px;
+  image-rendering: optimizeQuality;
 }
 
 .header-button {
@@ -302,7 +302,7 @@ i {
 .counter {
   background: var(--blue-a);
   color: var(--text-w);
-  font-weight: 600 !important;
+  font-weight: 700 !important;
   border-radius: 99px;
   text-align: center !important;
   font-size: var(--text-size-a) !important;
