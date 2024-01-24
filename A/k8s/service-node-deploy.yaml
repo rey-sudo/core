@@ -35,8 +35,6 @@ spec:
                 fieldRef:
                   fieldPath: metadata.name
           resources:
-            limits:
-              memory: "1000Mi"
             requests:
               memory: "556Mi"
       volumes:
