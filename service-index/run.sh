@@ -4,7 +4,7 @@ WORKDIR=$(pwd)
 network=preview
 network_id=2
 index_path="$WORKDIR/bin/"
-
+config_path="$WORKDIR/bin/configuration"
 
 export PATH=$PATH:$index_path
 
@@ -31,7 +31,8 @@ cd service-index
 
 plutus-chain-index --socket-path $node_config_path/db/node.socket \
     --db-path ./index.db \
-    --config ./config.json \
+    --port 9083 \
+    --network-id 2 \
      start-index
 
 
