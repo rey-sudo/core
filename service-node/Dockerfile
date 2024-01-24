@@ -2,17 +2,15 @@ FROM alpine:latest as base-stage
 
 WORKDIR /app
 
-VOLUME /app/data
-
 COPY /bin /app/data
 
 RUN chmod +x /app/data
 
-ENV PATH="/app/data:${PATH}"
-
 ENV NETWORK=preview
 
-ENV CONFIG=/app/data/configuration/$NETWORK
+ENV PATH="/app/data:${PATH}"
+
+ENV CONFIG="/app/data/configuration/${NETWORK}"
 
 EXPOSE 30
 

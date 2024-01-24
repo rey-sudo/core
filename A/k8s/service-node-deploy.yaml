@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: service-node-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 15Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: service-node
+  template:
+    metadata:
+      labels:
+        role: service-node
+    spec:
+      containers:
+        - name: service-node
+          image: pairfy/service-node
+          volumeMounts:
+            - name: storage-volume
+              mountPath: /app/data
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NETWORK
+              value: preview
+            - name: CONFIG
+              value: "/app/data/configuration/$(NETWORK)"
+          resources:
+            limits:
+              memory: "500Mi"
+            requests:
+              memory: "256Mi"
+      volumes:
+        - name: storage-volume
+          persistentVolumeClaim:
+            claimName: service-node-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-node
+spec:
+  selector:
+    role: service-node
+  ports:
+    - name: service-node
+      protocol: TCP
+      port: 3001
+      targetPort: 3001
