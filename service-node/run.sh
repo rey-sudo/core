@@ -60,5 +60,5 @@ cardano-node run \
     --socket-path $node_config_path/db/node.socket \
     --host-addr 0.0.0.0 \
     --port 3001 \
-    --topology $node_config_path/topology.json \
+    --topology $node_config_path/topology.json 
 
