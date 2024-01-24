@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: service-index-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-index
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: service-index
+  template:
+    metadata:
+      labels:
+        role: service-index
+    spec:
+      containers:
+        - name: service-index
+          image: pairfy/service-index
+          volumeMounts:
+            - name: storage-volume
+              mountPath: /index
+            - name: socket-volume
+              mountPath: /data  
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NETWORK
+              value: preview                 
+            - name: NETWORK_ID
+              value: "2"
+            - name: PATH
+              value: "/app/index:${PATH}"
+            - name: CONFIG
+              value: "/app/index/configuration/$(NETWORK)"
+            - name: SOCKET_PATH
+              value: "/app/data/configuration/$(NETWORK)"               
+          resources:
+            requests:
+              memory: "556Mi"
+      volumes:
+        - name: storage-volume
+          persistentVolumeClaim:
+            claimName: service-index-pvc
+        - name: socket-volume
+          persistentVolumeClaim:
+            claimName: service-node-pvc            
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-index
+spec:
+  selector:
+    role: service-index
+  ports:
+    - name: service-index
+      protocol: TCP
+      port: 9083
+      targetPort: 9083

@@ -44,3 +44,11 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .            
+    - image: pairfy/service-index
+      context: service-index
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .             
