@@ -34,6 +34,12 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
+            - name: NETWORK
+              value: preview
+            - name: PATH
+              value: "/app/data:${PATH}"
+            - name: CONFIG
+              value: "/app/data/configuration/$(NETWORK)"
           resources:
             requests:
               memory: "556Mi"
