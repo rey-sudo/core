@@ -209,7 +209,7 @@ export default {
   justify-content: center;
   margin-bottom: 1rem;
   font-weight: 400;
-  text-transform: lowercase;
+  text-transform: capitalize;
 }
 .card-body-name span::first-letter {
   text-transform: capitalize;

@@ -29,8 +29,6 @@ spec:
           volumeMounts:
             - name: storage-volume
               mountPath: /index
-            - name: socket-volume
-              mountPath: /data  
           env:
             - name: POD_NAME
               valueFrom:
@@ -52,10 +50,7 @@ spec:
       volumes:
         - name: storage-volume
           persistentVolumeClaim:
-            claimName: service-index-pvc
-        - name: socket-volume
-          persistentVolumeClaim:
-            claimName: service-node-pvc            
+            claimName: service-index-pvc         
 ---
 apiVersion: v1
 kind: Service
