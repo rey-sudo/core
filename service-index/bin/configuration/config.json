@@ -1,0 +1,20 @@
+{
+  "cicSlotConfig": {
+    "scSlotLength": 1000,
+    "scSlotZeroTime": 1596059091000
+  },
+  "cicPort": 9083,
+  "cicSecurityParam": 2160,
+  "cicSocketPath": "/home/debian/Documents/GitHub/marketplace/service-node/bin/configuration/preview/db/node.socket",
+  "cicDbPath": "./index.db",
+  "cicNetworkId": {
+    "contents": {
+      "unNetworkMagic": 2
+    },
+    "tag": "Testnet"
+  },
+  "cicStoreFrom": {
+    "unBlockNo": 0
+  },
+  "cicAppendTransactionQueueSize": 500
+}

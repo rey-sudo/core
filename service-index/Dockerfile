@@ -2,12 +2,12 @@ FROM alpine:latest as base-stage
 
 WORKDIR /app
 
-COPY /bin /app/index
+COPY /bin /app/bin
 
-ENV PATH="/app/index:${PATH}"
+ENV PATH="/app/bin:${PATH}"
 
-RUN chmod +x /app/index
+RUN chmod +x /app/bin/
 
 EXPOSE 30
 
-CMD ["./index/plutus-chain-index"]
+CMD ["/bin/sh", "-c", "plutus-chain-index"]
