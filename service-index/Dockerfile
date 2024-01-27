@@ -2,16 +2,16 @@ FROM debian:latest as base-stage
 
 WORKDIR /app
 
-COPY /bin /app/bin
+COPY /bin /app/index
 
-ENV PATH="/app/bin:${PATH}"
+ENV PATH="/app/index:${PATH}"
 
-RUN chmod +x /app/bin
+RUN chmod +x /app/index
 
-#RUN apt-get update -y && apt-get upgrade -y
+RUN apt-get update -y && apt-get upgrade -y
 
-#RUN apt-get install automake build-essential pkg-config libffi-dev libgmp-dev libssl-dev libtinfo-dev libsystemd-dev zlib1g-dev make g++ tmux git jq wget libncursesw5 libtool autoconf -y
+RUN apt-get install automake build-essential pkg-config libffi-dev libgmp-dev libssl-dev libtinfo-dev libsystemd-dev zlib1g-dev make g++ tmux git jq wget libncursesw5 libtool autoconf -y
 
 EXPOSE 30
 
-CMD ["/bin/sh", "-c", "plutus-chain-index --socket-path $SOCKET_PATH/db/node.socket --db-path $CONFIG/index.db --port 9083 --network-id $NETWORK_ID start-index"]
+CMD ["/bin/sh", "-c", "cd index && ls && ldd ./plutus-chain-index"]
