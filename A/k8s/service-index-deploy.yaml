@@ -28,7 +28,7 @@ spec:
           image: pairfy/service-index
           volumeMounts:
             - name: storage-volume
-              mountPath: /index
+              mountPath: /plutus-apps
           env:
             - name: POD_NAME
               valueFrom:
@@ -38,8 +38,6 @@ spec:
               value: preview                 
             - name: NETWORK_ID
               value: "2"
-            - name: PATH
-              value: "/app/index:${PATH}"
             - name: CONFIG
               value: "/app/index/configuration/$(NETWORK)"
             - name: SOCKET_PATH

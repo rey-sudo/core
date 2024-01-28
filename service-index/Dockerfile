@@ -1,17 +1,15 @@
-FROM debian:latest as base-stage
+FROM nixos/nix:latest as base-stage
 
 WORKDIR /app
 
-COPY /bin /app/index
+RUN test -d /plutus-apps || (echo "Error: Local folder not found try repo.sh!" && exit 1)
 
-ENV PATH="/app/index:${PATH}"
+COPY /plutus-apps /app/plutus-apps
 
-RUN chmod +x /app/index
+COPY ./setup.sh /app
 
-RUN apt-get update -y && apt-get upgrade -y
+RUN chmod +x /app
 
-RUN apt-get install automake build-essential pkg-config libffi-dev libgmp-dev libssl-dev libtinfo-dev libsystemd-dev zlib1g-dev make g++ tmux git jq wget libncursesw5 libtool autoconf -y
+EXPOSE 90
 
-EXPOSE 30
-
-CMD ["/bin/sh", "-c", "cd index && ls && ldd ./plutus-chain-index"]
+CMD ["/bin/sh", "-c", "sh ./setup.sh"]
