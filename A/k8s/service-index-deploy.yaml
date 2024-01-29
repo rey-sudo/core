@@ -28,7 +28,9 @@ spec:
           image: pairfy/service-index
           volumeMounts:
             - name: storage-volume
-              mountPath: /plutus-apps
+              mountPath: /index
+            - name: node-volume
+              mountPath: /node              
           env:
             - name: POD_NAME
               valueFrom:
@@ -40,15 +42,20 @@ spec:
               value: "2"
             - name: CONFIG
               value: "/app/index/configuration/$(NETWORK)"
+            - name: PATH
+              value: "/app/index:${PATH}"  
             - name: SOCKET_PATH
-              value: "/app/data/configuration/$(NETWORK)"               
+              value: "/app/node/configuration/$(NETWORK)"                             
           resources:
             requests:
               memory: "556Mi"
       volumes:
         - name: storage-volume
           persistentVolumeClaim:
-            claimName: service-index-pvc         
+            claimName: service-index-pvc
+        - name: node-volume
+          persistentVolumeClaim:
+            claimName: service-node-pvc                     
 ---
 apiVersion: v1
 kind: Service

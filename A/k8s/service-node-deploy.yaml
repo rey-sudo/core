@@ -28,7 +28,7 @@ spec:
           image: pairfy/service-node
           volumeMounts:
             - name: storage-volume
-              mountPath: /data
+              mountPath: /node
           env:
             - name: POD_NAME
               valueFrom:
@@ -37,9 +37,9 @@ spec:
             - name: NETWORK
               value: preview
             - name: PATH
-              value: "/app/data:${PATH}"
+              value: "/app/node:${PATH}"
             - name: CONFIG
-              value: "/app/data/configuration/$(NETWORK)"
+              value: "/app/node/configuration/$(NETWORK)"
           resources:
             requests:
               memory: "556Mi"

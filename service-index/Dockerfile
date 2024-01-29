@@ -2,14 +2,10 @@ FROM nixos/nix:latest as base-stage
 
 WORKDIR /app
 
-VOLUME /nix/store
-
 COPY /bin /app/index
 
 COPY /tmp /nix/store
 
-ENV PATH="/app/index:${PATH}"
-
 EXPOSE 90
 
-CMD ["/bin/sh", "-c", "plutus-chain-index"]
+CMD ["/bin/sh", "-c", "plutus-chain-index --socket-path $SOCKET_PATH/db/node.socket --db-path $CONFIG/index.db --port 9083 --network-id $NETWORK_ID start-index"]
