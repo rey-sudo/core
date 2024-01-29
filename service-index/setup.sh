@@ -1,10 +1,12 @@
-#!/bin/bash
 
-echo "extra-substituters  = https://cache.iog.io" >> /etc/nix/nix.conf 
-echo "extra-experimental-features  = nix-command flakes" >> /etc/nix/nix.conf 
-echo "trusted-users  = root" >> /etc/nix/nix.conf 
-echo "extra-trusted-public-key = hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" >> /etc/nix/nix.conf 
+ldd_output=$(ldd ./bin/plutus-chain-index)
 
-cd plutus-apps 
+paths=$(echo "$ldd_output" | awk -F '/' '/=> \/nix\/store\// {print $4}')
 
-nix develop
+destination="$(pwd)/tmp"
+
+for folder in $paths; do
+    source_path="/nix/store/$folder"
+    sudo cp -r "$source_path" "$destination"
+    echo "Copied: $folder"
+done
