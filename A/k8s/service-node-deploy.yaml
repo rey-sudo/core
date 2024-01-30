@@ -2,24 +2,28 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: service-node-pv
+  labels:
+    type: local  
 spec:
+  storageClassName: manual
   capacity:
     storage: 50Gi
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: /node 
+    path: "/mnt/data"   
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: service-node-pvc
 spec:
+  storageClassName: manual
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 25Gi
+      storage: 50Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -54,7 +58,7 @@ spec:
               memory: "556Mi"
           volumeMounts:
             - name: storage-volume  
-              mountPath: /node              
+              mountPath: /node             
       volumes:
         - name: storage-volume
           persistentVolumeClaim:
