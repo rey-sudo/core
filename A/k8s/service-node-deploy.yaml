@@ -38,9 +38,6 @@ spec:
       containers:
         - name: service-node
           image: pairfy/service-node
-          volumeMounts:
-            - mountPath: /node 
-              name: storage-volume
           env:
             - name: POD_NAME
               valueFrom:
@@ -55,6 +52,9 @@ spec:
           resources:
             requests:
               memory: "556Mi"
+          volumeMounts:
+            - name: storage-volume  
+              mountPath: /node              
       volumes:
         - name: storage-volume
           persistentVolumeClaim:
