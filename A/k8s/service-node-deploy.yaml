@@ -58,7 +58,7 @@ spec:
               memory: "556Mi"
           volumeMounts:
             - name: storage-volume  
-              mountPath: "/app/node/configuration/$(NETWORK)"            
+              mountPath: "/node"            
       volumes:
         - name: storage-volume
           persistentVolumeClaim:
