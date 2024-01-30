@@ -5,20 +5,23 @@ metadata:
   labels:
     type: local  
 spec:
-  storageClassName: manual
+  storageClassName: "service-node-storage-class"
   capacity:
     storage: 50Gi
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/mnt/data"   
+    path: "/mnt/data" 
+  claimRef:
+    name: service-node-pvc
+    namespace: default       
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: service-node-pvc
 spec:
-  storageClassName: manual
+  storageClassName: "service-node-storage-class"
   accessModes:
     - ReadWriteMany
   resources:

@@ -5,20 +5,23 @@ metadata:
   labels:
     type: local  
 spec:
-  storageClassName: manual
+  storageClassName: "service-index-storage-class"
   capacity:
     storage: 60Gi
   accessModes:
     - ReadWriteMany
   hostPath:
     path: "/mnt/data"
+  claimRef:
+    name: service-index-pvc
+    namespace: default   
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: service-index-pvc
 spec:
-  storageClassName: manual
+  storageClassName: "service-index-storage-class"
   accessModes:
     - ReadWriteMany
   resources:
