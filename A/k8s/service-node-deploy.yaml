@@ -1,13 +1,25 @@
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: service-node-pv
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: /node 
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: service-node-pvc
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
-      storage: 15Gi
+      storage: 25Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -27,8 +39,8 @@ spec:
         - name: service-node
           image: pairfy/service-node
           volumeMounts:
-            - name: storage-volume
-              mountPath: /node
+            - mountPath: /node 
+              name: storage-volume
           env:
             - name: POD_NAME
               valueFrom:

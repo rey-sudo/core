@@ -1,10 +1,22 @@
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: service-index-pv
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: /index
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: service-index-pvc
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 50Gi
@@ -25,12 +37,7 @@ spec:
     spec:
       containers:
         - name: service-index
-          image: pairfy/service-index
-          volumeMounts:
-            - name: storage-volume
-              mountPath: /index
-            - name: node-volume
-              mountPath: /node              
+          image: pairfy/service-index                       
           env:
             - name: POD_NAME
               valueFrom:
@@ -39,16 +46,21 @@ spec:
             - name: NETWORK
               value: preview                 
             - name: NETWORK_ID
-              value: "2"
+              value: "2"         
             - name: CONFIG
               value: "/app/index/configuration/$(NETWORK)"
             - name: PATH
-              value: "/app/index:${PATH}"  
+              value: "/app/index:${PATH}"                
             - name: SOCKET_PATH
               value: "/app/node/configuration/$(NETWORK)"                             
           resources:
             requests:
               memory: "556Mi"
+          volumeMounts:
+            - name: storage-volume 
+              mountPath: /app/index
+            - name: node-volume
+              mountPath: /app/node                
       volumes:
         - name: storage-volume
           persistentVolumeClaim:
