@@ -52,11 +52,11 @@ spec:
             - name: NETWORK_ID
               value: "2"         
             - name: CONFIG
-              value: "/app/index/configuration/$(NETWORK)"
+              value: "/app/index/configuration/$(NETWORK)" 
             - name: PATH
-              value: "/app/index:${PATH}"                
+              value: "/app/index:${PATH}"                   
             - name: SOCKET_PATH
-              value: "/app/node/configuration/$(NETWORK)"                             
+              value: "/app/node/configuration/$(NETWORK)/db/node.socket"                             
           resources:
             requests:
               memory: "556Mi"
@@ -64,7 +64,7 @@ spec:
             - name: storage-volume 
               mountPath: /index
             - name: node-volume
-              mountPath: /app/node             
+              mountPath: /app/node/configuration/$(NETWORK)             
       volumes:
         - name: storage-volume
           persistentVolumeClaim:
