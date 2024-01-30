@@ -1,10 +1,10 @@
 FROM alpine:latest as base-stage
 
-WORKDIR /node
+WORKDIR /app
 
-COPY /bin /node
+COPY /bin /app/node
 
-RUN chmod +x /node
+RUN chmod +x /app/node
 
 EXPOSE 30
 

@@ -2,28 +2,24 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: service-index-pv
-  labels:
-    type: local  
 spec:
-  storageClassName: manual
   capacity:
-    storage: 60Gi
+    storage: 50Gi
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/mnt/data"
+    path: /index
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: service-index-pvc
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 60Gi
+      storage: 50Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -64,14 +60,14 @@ spec:
             - name: storage-volume 
               mountPath: /index
             - name: node-volume
-              mountPath: /app/node             
+              mountPath: /node                
       volumes:
         - name: storage-volume
           persistentVolumeClaim:
             claimName: service-index-pvc
         - name: node-volume
           persistentVolumeClaim:
-            claimName: service-node-pvc                    
+            claimName: service-node-pvc                     
 ---
 apiVersion: v1
 kind: Service
