@@ -1,0 +1,6 @@
+dist-newstyle
+bin/plutus-chain-index
+tmp/**
+index.db
+index.db-shm
+index.db-wal
