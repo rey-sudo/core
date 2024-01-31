@@ -1,5 +1,7 @@
 FROM nixos/nix:latest as base-stage
 
+VOLUME /app/index
+
 WORKDIR /app
 
 COPY /bin /app/index
