@@ -6,7 +6,7 @@ services:
     volumes:
       - shared_volume:/app/node
     ports:
-      - "9037:30"
+      - "3001:3001"
 
   service-index:
     build:
@@ -14,7 +14,7 @@ services:
     volumes:
       - shared_volume:/app/node
     ports:
-      - "9038:90"
+      - "9083:9083"
 
 volumes:
   shared_volume:
