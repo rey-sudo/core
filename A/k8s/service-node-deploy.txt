@@ -68,11 +68,11 @@ spec:
               memory: "556Mi"
           volumeMounts:
             - name: storage-volume  
-              mountPath: "/app/node/configuration"            
+              mountPath: "/app/node"            
       volumes:
         - name: storage-volume
           persistentVolumeClaim:
-            claimName: service-node-pvc
+            claimName: service-node-pv
 ---
 apiVersion: v1
 kind: Service

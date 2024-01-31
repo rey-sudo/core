@@ -74,7 +74,7 @@ spec:
             - name: storage-volume 
               mountPath: /app/index/configuration
             - name: node-volume
-              mountPath: /app/node/configuration           
+              mountPath: /app/node/configuration       
       volumes:
         - name: storage-volume
           persistentVolumeClaim:
