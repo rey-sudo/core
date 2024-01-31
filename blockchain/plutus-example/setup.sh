@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ldd_output=$(ldd ./bin/plutus-chain-index)
+ldd_output=$(ldd ./bin/plutus-example-deploy)
 
 paths=$(echo "$ldd_output" | awk -F '/' '/=> \/nix\/store\// {print $4}')
 

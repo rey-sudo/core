@@ -1,4 +1,6 @@
 dist-newstyle
 pab/testnet/db
 pab/testnet/node.sock
-pab/preview/dbpreview.db
+preview.db
+tmp/**
+plutus-example-deploy
