@@ -1,6 +1,6 @@
 # Configuration for an SQLite file
 sqliteDB:
-  dbConfigFile: ./preview.db
+  dbConfigFile: /app/pab/configuration/preview/preview.db
   dbConfigPoolSize: 2
 
 #postgresDB:
@@ -37,8 +37,8 @@ walletServerConfig:
 nodeServerConfig:
   pscNodeMode: AlonzoNode
   pscNodeServerConfig:
-    nscBaseUrl: http://0.0.0.0:3001
-    nscSocketPath: /home/debian/Documents/GitHub/marketplace/service-node/bin/configuration/preview/db/node.socket
+    nscBaseUrl: http://localhost:3001
+    nscSocketPath: /app/node/configuration/preview/db/node.socket
     nscKeptBlocks: 50
     nscNetworkId: 2
     nscSlotConfig:

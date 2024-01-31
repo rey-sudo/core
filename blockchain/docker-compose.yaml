@@ -15,6 +15,12 @@ services:
       - shared_volume:/app/node
     ports:
       - "9083:9083"
-
+  service-pab:
+    build:
+      context: ./plutus-example
+    volumes:
+      - shared_volume:/app/node
+    ports:
+      - "9080:9080"
 volumes:
   shared_volume:
