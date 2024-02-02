@@ -3,28 +3,28 @@ kind: Ingress
 metadata:
   name: ingress-service
   annotations:
-    spec.ingressClassName: nginx
+    kubernetes.io/ingress.class: "nginx" 
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
     nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
     nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "pairfy.dev"
+    nginx.ingress.kubernetes.io/cors-allow-origin: localhost
     nginx.ingress.kubernetes.io/cors-expose-headers: "Set-Cookie"
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
 
 spec:
   rules:
-    - host: pairfy.dev
+    - host: localhost
       http:
         paths:
           - path: /?(.*)
             pathType: ImplementationSpecific
             backend:
               service:
-                name: frontend-main
+                name: frontend-home
                 port:
                   number: 8000                                        
           - path: /api/seller/?(.*)
