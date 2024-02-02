@@ -8,3 +8,11 @@ doctl kubernetes cluster kubeconfig save 83ffbc45-db61-4dcf-94b2-501994cb7c2c
 
 kubectl config set-context do-nyc1-k8arka
 kubectl config use-context do-nyc1-k8arka
+
+
+
+
+
+
+
+#kubectl get nodes -o wide      docker internal ip
