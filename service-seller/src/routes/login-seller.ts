@@ -13,7 +13,7 @@ const loginSellerHandler = async (req: Request, res: Response) => {
   let params = req.body;
   try {
     if (params.sellerData) {
-      throw new BadRequestError("logged");
+      throw new Error("logged");
     }
 
     connection = await DB.client.getConnection();
@@ -24,27 +24,27 @@ const loginSellerHandler = async (req: Request, res: Response) => {
     );
 
     if (rows.length === 0) {
-      throw new BadRequestError("failed");
+      throw new Error("nonexist");
     }
 
-    const SELLER = rows[0];
+    const sellerDatum = rows[0];
 
     const passwordsMatch = await comparePassword(
-      SELLER.password_hash,
+      sellerDatum.password_hash,
       params.password
     );
 
     if (!passwordsMatch) throw new BadRequestError("failed");
 
-    if (SELLER.verified !== 1) {
-      throw new BadRequestError("unverified");
+    if (sellerDatum.verified !== 1) {
+      throw new Error("unverified");
     }
 
     const sellerData: SellerToken = {
-      seller_id: SELLER.seller_id,
+      seller_id: sellerDatum.seller_id,
       role: "SELLER",
-      email: SELLER.email,
-      nickname: SELLER.nickname,
+      email: sellerDatum.email,
+      nickname: sellerDatum.nickname,
     };
 
     const token = createToken(sellerData);
@@ -59,7 +59,7 @@ const loginSellerHandler = async (req: Request, res: Response) => {
 
     _.error(err);
 
-    throw new BadRequestError("Invalid credential o unverified");
+    throw new BadRequestError("logged, nonexist o unverified");
   } finally {
     connection.release();
   }

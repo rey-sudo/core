@@ -7,6 +7,7 @@ services:
       - shared_volume:/app/node
     ports:
       - "3001:3001"
+    mem_limit: 8Gib
 
   service-index:
     build:
@@ -15,6 +16,8 @@ services:
       - shared_volume:/app/node
     ports:
       - "9083:9083"
+    mem_limit: 8Gib
+
   service-pab:
     build:
       context: ./plutus-example
@@ -22,5 +25,7 @@ services:
       - shared_volume:/app/node
     ports:
       - "9080:9080"
+    mem_limit: 8Gib
+
 volumes:
   shared_volume:

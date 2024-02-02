@@ -9,13 +9,13 @@ spec:
   tasksMax: 1
   config:
     connector.class: io.debezium.connector.vitess.VitessConnector
-    database.hostname: "10.101.74.192"
+    database.hostname: "10.101.30.248"
     database.port: "15999"
     database.user: "marketplace"
     database.password: "password" 
     vitess.keyspace: "service_product"
     vitess.tablet.type: "MASTER"
-    vitess.vtctld.host": "10.102.28.185"
+    vitess.vtctld.host": "10.106.55.9"
     vitess.vtctld.port": "15999"
     vitess.vtctld.user": "marketplace"
     vitess.vtctld.password: "password"  

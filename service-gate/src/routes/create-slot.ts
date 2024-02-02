@@ -12,38 +12,56 @@ const createSlotMiddlewares: any = [sellerMiddleware, requireAuth];
 const createSlotHandler = async (req: Request, res: Response) => {
   const params = req.body;
 
-  const seller = req.sellerData;
+  const sellerDatum = req.sellerData;
 
-  let connection = null;
-
-  const scheme = {
-    caID: "SlaveContract",
-    caWallet: {
-      getWalletId: "c08b3754a3fc2c4cb063e12295e903d14edc899d",
-    },
-  };
-
-  await API.post("/api/contract/activate", scheme)
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => console.error(err));
-  
-  return res.status(200).send({ success: true });
-
+  let connection: any = null;
 
   try {
     connection = await DB.client.getConnection();
 
     await connection.beginTransaction();
 
-    //check product
+    const [product] = await connection.execute(
+      "SELECT * FROM product WHERE product_id = ?",
+      [params.product_id]
+    );
 
-    //check slots
+    if (product.length === 0) {
+      throw new Error("nonexist");
+    }
+
+    const productData = product[0];
+
+    if (productData.slots === 0) {
+      throw new Error("nonslots");
+    }
+
+    if (params.quantity > productData.slots) {
+      throw new Error("nonslots");
+    }
+
+    const scheme = {
+      caID: "SlaveContract",
+      caWallet: {
+        getWalletId: "c08b3754a3fc2c4cb063e12295e903d14edc899d",
+      },
+    };
+
+    let contractInstances: string[] = [];
+
+    for (let i = 0; i < params.quantity; i++) {
+      const response = await API.post("/api/contract/activate", scheme);
+
+      if (!response.data.hasOwnProperty("unContractInstanceId")) {
+        throw new Error("failed");
+      }
+
+      contractInstances.push(response.data.unContractInstanceId);
+    }
 
     const schemeData = `
     INSERT INTO slot (
-      order_id,
+      slot_id,
       seller_id,
       product_id,
       instance_id,
@@ -51,16 +69,20 @@ const createSlotHandler = async (req: Request, res: Response) => {
       schema_v
      ) VALUES (?, ?, ?, ?, ?, ?)`;
 
-    const schemeValue = [
-      getSlotId(),
-      seller.seller_id,
-      params.product_id,
-      params.instance_id,
-      params.wallet_id,
-      0,
-    ];
+    contractInstances.forEach(async (cid) => {
+      const schemeValue = [
+        getSlotId(),
+        sellerDatum.seller_id,
+        productData.product_id,
+        cid,
+        params.wallet_id,
+        0,
+      ];
+      
+      console.log(schemeValue);
 
-    await connection.execute(schemeData, schemeValue);
+      await connection.execute(schemeData, schemeValue);
+    });
 
     await connection.commit();
 

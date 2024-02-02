@@ -58,7 +58,7 @@ spec:
   build:
     output:
       type: docker
-      image: 10.102.184.94/debezium-connector-vitess:latest
+      image: 10.97.5.36/debezium-connector-vitess:latest
     plugins:
       - name: debezium-connector-vitess
         artifacts:

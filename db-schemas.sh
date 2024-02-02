@@ -17,5 +17,5 @@ vtctldclient ApplySchema --sql-file="service-gate/src/sql/product.sql" service_g
 vtctldclient ApplyVSchema --vschema-file="service-gate/src/sql/product.json" service_gate
 
 
-vtctldclient ApplySchema --sql-file="service-gate/src/sql/order.sql" service_gate
-vtctldclient ApplyVSchema --vschema-file="service-gate/src/sql/order.json" service_gate
+vtctldclient ApplySchema --sql-file="service-gate/src/sql/slot.sql" service_gate
+vtctldclient ApplyVSchema --vschema-file="service-gate/src/sql/slot.json" service_gate
