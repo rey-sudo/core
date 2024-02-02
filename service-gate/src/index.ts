@@ -33,7 +33,7 @@ const main = async () => {
     }
 
     DB.connect({
-      host: "10.101.74.192",
+      host: "10.101.30.248",
       port: 3306,
       user: "marketplace",
       password: "password",
@@ -56,11 +56,11 @@ const main = async () => {
     errorEvents.forEach((e: string) => process.on(e, (err) => catcher(err)));
 
     app.post(
-      "/api/product/create-product",
+      "/api/gate/create-slot",
 
-      route.createProductMiddlewares,
+      route.createSlotMiddlewares,
 
-      route.createProductHandler
+      route.createSlotHandler
     );
 
     app.all("*", (_req, _res) => {

@@ -40,4 +40,11 @@ spec:
               service:
                 name: service-product
                 port:
-                  number: 8000                  
+                  number: 8000                 
+          - path: /api/gate/?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: service-gate
+                port:
+                  number: 8000                    

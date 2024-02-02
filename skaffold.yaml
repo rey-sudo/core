@@ -11,6 +11,8 @@ build:
     useDockerCLI: true
     push: false
     concurrency: 0
+  tagPolicy:
+    sha256: {}    
   artifacts:
     - image: pairfy/service-seller
       context: service-seller
@@ -36,19 +38,4 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: pairfy/service-node
-      context: service-node
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: 'src/**/*.ts'
-            dest: .            
-    - image: pairfy/service-index
-      context: service-index
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: 'src/**/*.ts'
-            dest: .             
+     
