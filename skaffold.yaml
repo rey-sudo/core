@@ -14,14 +14,6 @@ build:
   tagPolicy:
     sha256: {}    
   artifacts:
-    - image: pairfy/frontend-home
-      context: frontend-home
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: 'src/**/*.ts'
-            dest: .  
     - image: pairfy/service-seller
       context: service-seller
       docker:
