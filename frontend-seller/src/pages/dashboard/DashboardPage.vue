@@ -126,7 +126,7 @@ export default {
 }
 
 .dashboard-nav-logo {
-  margin-bottom: 1rem;
+  margin: 1rem 0;
   justify-content: flex-start;
   display: flex;
 }
