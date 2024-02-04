@@ -17,9 +17,8 @@
     </div>
 
     <template v-if="selectedNav === 'products'">
-      <ProductsView/>
+      <ProductsView />
     </template>
-
   </div>
 </template>
 
@@ -32,7 +31,7 @@ export default {
   },
   data() {
     return {
-      selectedNav: "home",
+      selectedNav: "products",
       navTabs: [
         {
           name: "home",
@@ -87,6 +86,7 @@ export default {
   height: 100vh;
   overflow: hidden;
   z-index: 1000;
+  background: var(--base-a);
 }
 
 .dashboard-nav:hover {
@@ -127,6 +127,8 @@ export default {
 
 .dashboard-nav-logo {
   margin-bottom: 1rem;
+  justify-content: flex-start;
+  display: flex;
 }
 
 .dashboard-nav-logo img {
