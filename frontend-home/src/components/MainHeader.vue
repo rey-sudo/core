@@ -202,7 +202,6 @@ export default {
   font-size: var(--text-size-b);
   padding: 0.4rem;
   border: 1px solid #dddddd;
-  box-shadow: var(--shadow-a);
 }
 
 .header-center-search-icon {
