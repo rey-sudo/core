@@ -51,18 +51,16 @@ spec:
     offset.storage.topic: sellerKafka-offsets
     config.storage.topic: sellerKafka-configs
     status.storage.topic: sellerKafka-status
-    # -1 means it will use the default replication factor configured in the broker  kubectl -n kube-system get svc registry -o jsonpath='{.spec.clusterIP}'
+    # -1 means it will use the default replication factor configured in the broker   kubectl -n registry get svc registry -o jsonpath='{.spec.clusterIP}'
     config.storage.replication.factor: -1
     offset.storage.replication.factor: -1
     status.storage.replication.factor: -1
   build:
     output:
       type: docker
-      image: 10.97.5.36:5000/debezium-connector-vitess
+      image: 10.97.106.67:5000/debezium-connector-vitess:latest
     plugins:
-      - name: debezium-connector-vitess
+      - name: debezium-connector-vitess 
         artifacts:
           - type: tgz
             url: https://repo1.maven.org/maven2/io/debezium/debezium-connector-vitess/2.5.0.Final/debezium-connector-vitess-2.5.0.Final-plugin.tar.gz
-
-  
