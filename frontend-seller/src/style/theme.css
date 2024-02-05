@@ -2723,9 +2723,11 @@
   .p-datatable .p-datatable-header {
     color: var(--text-a);
     border-width: 0 0 1px 0;
-    padding: 1.5rem 1rem;
-    backdrop-filter: blur(12px);
+    padding: 1rem;
+    background: var(--base-a);
     font-weight: 600;
+    border-top-right-radius: calc(6px + 0.25rem);
+    border-top-left-radius: calc(6px + 0.25rem);
   }
   .p-datatable .p-datatable-footer {
     background: #f8f9fa;
@@ -4201,7 +4203,7 @@
   }
   .p-toolbar {
     background: var(--base-a);
-    padding: 1rem;
+    padding: 1rem 0;
     border-radius: 0px;
     gap: 0.5rem;
     border-top-right-radius: calc(6px + 0.25rem);
