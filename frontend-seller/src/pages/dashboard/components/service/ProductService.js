@@ -3,7 +3,7 @@ export const ProductService = {
         return [
             {
                 id: '1000',
-                code: 'f230fh0g3',
+                code: 'P948324950',
                 name: 'Bamboo Watch',
                 description: 'Product Description',
                 image: 'bamboo-watch.jpg',
@@ -15,7 +15,7 @@ export const ProductService = {
             },
             {
                 id: '1001',
-                code: 'nvklal433',
+                code: 'P331814905',
                 name: 'Black Watch',
                 description: 'Product Description',
                 image: 'black-watch.jpg',

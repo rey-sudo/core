@@ -990,7 +990,7 @@
     border: 1px solid #ced4da;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s,
       box-shadow 0.2s;
-    border-radius: 3px;
+    border-radius: 6px;
     outline-color: transparent;
   }
   .p-dropdown:not(.p-disabled):hover {
@@ -1062,10 +1062,11 @@
     margin: 0;
     padding: 0.5rem 1rem;
     border: 0 none;
-    color: #495057;
+    color: var(--text-b);
     background: transparent;
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
     border-radius: 0;
+    font-size: var(--text-size-b);
   }
   .p-dropdown-panel .p-dropdown-items .p-dropdown-item:first-child {
     margin-top: 0;
@@ -1090,6 +1091,8 @@
     position: relative;
     margin-left: -0.5rem;
     margin-right: 0.5rem;
+    width: 15px;
+    height: 15px;
   }
   .p-dropdown-panel .p-dropdown-items .p-dropdown-item-group {
     margin: 0;
@@ -2719,7 +2722,7 @@
     border-radius: 0;
   }
   .p-datatable .p-datatable-header {
-    background: var(--base-a);
+    background: var(--base-b);
     color: var(--text-a);
     border: 1px solid var(--border-a);
     border-width: 0 0 1px 0;
@@ -2806,7 +2809,7 @@
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-width: 0 0 1px 0;
     padding: 0.5rem 1rem;
-    font-size: var(--text-size-a);
+    font-size: var(--text-size-b);
   }
   .p-datatable .p-datatable-tbody > tr > td .p-row-toggler,
   .p-datatable .p-datatable-tbody > tr > td .p-row-editor-init,
@@ -3399,12 +3402,12 @@
   .p-paginator .p-paginator-pages .p-paginator-page {
     background-color: transparent;
     border: 0 none;
-    color: #6c757d;
+    color: var(--text-b);
     min-width: 2.357rem;
     height: 2.357rem;
     margin: 0.143rem;
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
-    border-radius: 6px;
+    border-radius:  50%;
   }
   .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
     background: #2196f3;
@@ -4259,9 +4262,8 @@
     margin-left: 1rem;
   }
   .p-dialog {
-    border-radius: 6px;
+    border-radius: 12px;
     padding: 3px;
-    background: var(--base-a);
     box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.1);
     border: 0 none;
   }
@@ -4270,8 +4272,8 @@
     background: #ffffff;
     color: #495057;
     padding: 1rem;
-    border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
+    border-top-right-radius: calc(6px + 0.25rem);
+    border-top-left-radius: calc(6px + 0.25rem);
   }
   .p-dialog .p-dialog-header .p-dialog-title {
     font-weight: 600;
@@ -4304,7 +4306,7 @@
   .p-dialog .p-dialog-content {
     background: #ffffff;
     color: var(--text-b);
-    padding: 1rem;
+    padding: 1rem 1.5rem;
     font-size: var(--text-size-b);
   }
   .p-dialog .p-dialog-content:last-of-type {
@@ -4319,8 +4321,8 @@
     display: flex;
     justify-content: end;
     gap: 0.5rem;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: calc(6px + 0.25rem);
+    border-bottom-left-radius: calc(6px + 0.25rem);
   }
   .p-dialog.p-confirm-dialog .p-confirm-dialog-icon {
     font-size: 2rem;
@@ -6700,7 +6702,7 @@
     background: #2196f3;
     color: #ffffff;
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 700;
     padding: 0.25rem 0.4rem;
     border-radius: 6px;
     text-transform: uppercase;
@@ -6717,6 +6719,7 @@
     background-color: var(--orange-s);
     color: var(--orange-a);
   }
+
   .p-tag.p-tag-danger {
     background-color: var(--red-s);
     color: var(--red-a);

@@ -48,7 +48,7 @@
               <div class="products-header-left">
                 <span class="products-header-title">Products</span>
                 <span class="products-header-subtitle"
-                  >Create and modify product inventory</span
+                  >Create and modify product and more...</span
                 >
               </div>
 
@@ -151,7 +151,7 @@
       <Dialog
         v-model:visible="productDialog"
         :style="{ width: '450px' }"
-        header="Product Details"
+        header="Create"
         :modal="true"
         :draggable="false"
         class="p-fluid"
@@ -187,15 +187,28 @@
         </div>
 
         <div class="field">
+          <label for="category" class="field-label">Category</label>
+          <Dropdown
+            v-model="selectedCategory"
+            :options="categories"
+            id="category"
+            optionLabel="name"
+            placeholder="-"
+            checkmark
+            :highlightOnSelect="false"
+          />
+        </div>
+
+        <div class="field">
           <label for="inventoryStatus" class="field-label"
-            >Inventory Status</label
+            >Status</label
           >
           <Dropdown
             id="inventoryStatus"
             v-model="product.inventoryStatus"
             :options="statuses"
             optionLabel="label"
-            placeholder="Select a Status"
+            placeholder="-"
           >
             <template #value="slotProps">
               <div v-if="slotProps.value && slotProps.value.value">
@@ -224,7 +237,17 @@
               id="price"
               v-model="product.price"
               mode="currency"
-              currency="USD"
+              currency="ADA"
+              locale="en-US"
+            />
+          </div>
+          <div class="field col">
+            <label for="collateral" class="field-label">Collateral</label>
+            <InputNumber
+              id="collateral"
+              v-model="product.collateral"
+              mode="currency"
+              currency="ADA"
               locale="en-US"
             />
           </div>
@@ -309,10 +332,23 @@ export default {
       selectedProducts: null,
       filters: {},
       submitted: false,
+      selectedCategory: null, 
+      categories: [
+        { name: "Australia", code: "AU" },
+        { name: "Brazil", code: "BR" },
+        { name: "China", code: "CN" },
+        { name: "Egypt", code: "EG" },
+        { name: "France", code: "FR" },
+        { name: "Germany", code: "DE" },
+        { name: "India", code: "IN" },
+        { name: "Japan", code: "JP" },
+        { name: "Spain", code: "ES" },
+        { name: "United States", code: "US" },
+      ],
       statuses: [
-        { label: "stock", value: "stock" },
-        { label: "low", value: "low" },
-        { label: "out", value: "out" },
+        { label: "STOCK", value: "stock" },
+        { label: "LOW", value: "low" },
+        { label: "OUT", value: "out" },
       ],
     };
   },
@@ -604,7 +640,7 @@ img {
   margin-left: 0.25rem;
 }
 .field-label {
-  line-height: 30px;
+  line-height: 40px;
 }
 
 .products-header {
