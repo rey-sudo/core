@@ -2722,7 +2722,8 @@
     border-radius: 0;
   }
   .p-datatable .p-datatable-header {
-    background: var(--base-b);
+    background: transparent;
+    backdrop-filter: blur(12px);
     color: var(--text-a);
     border: 1px solid var(--border-a);
     border-width: 0 0 1px 0;
@@ -3407,7 +3408,7 @@
     height: 2.357rem;
     margin: 0.143rem;
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
-    border-radius:  50%;
+    border-radius: 50%;
   }
   .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
     background: #2196f3;
@@ -6702,7 +6703,7 @@
     background: #2196f3;
     color: #ffffff;
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: 600;
     padding: 0.25rem 0.4rem;
     border-radius: 6px;
     text-transform: uppercase;
