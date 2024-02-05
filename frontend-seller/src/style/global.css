@@ -1,12 +1,13 @@
 :root {
-  --text-size-a: 13px;
-  --text-size-b: 15px;
-  --text-size-c: 18px;
-  --text-size-d: 1.266rem;
-  --text-size-e: 1.424rem;
-  --text-size-f: 1.602rem;
-  --text-size-g: 1.802rem;
-  --text-size-h: 2.027rem;
+  --text-size-a: 0.79rem;
+  --text-size-b: 0.889rem;
+  --text-size-c: 1rem;
+  --text-size-d: 1.125rem;
+  --text-size-e: 1.266rem;
+  --text-size-f: 1.424rem;
+  --text-size-g: 1.602rem;
+  --text-size-h: 1.802rem;
+  --text-size-i: 2.027rem;
 
   --text-a: #222222;
   --text-b: #717171;
@@ -20,6 +21,7 @@
 
   --blue-a: #0069f5;
   --blue-b: #005AE6;
+  --blue-s: rgba(0, 105, 245, 0.1);
   
   --red-a: #FF385C;
   

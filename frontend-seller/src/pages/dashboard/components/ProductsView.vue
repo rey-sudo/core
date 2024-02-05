@@ -7,14 +7,13 @@
             <Button
               label="New"
               icon="pi pi-plus"
-              severity="success"
               class="mr-2"
               @click="openNew"
             />
             <Button
               label="Delete"
               icon="pi pi-trash"
-              severity="danger"
+              
               @click="confirmDeleteSelected"
               :disabled="!selectedProducts || !selectedProducts.length"
             />
@@ -32,7 +31,6 @@
             <Button
               label="Export"
               icon="pi pi-upload"
-              severity="help"
               @click="exportCSV($event)"
             />
           </template>
@@ -619,9 +617,13 @@ export default {
   border-radius: 24px;
   display: flex;
   justify-content: center;
+  width: 100%;
+  padding: 1rem 2rem;
 }
 
 .products-card {
-  background: var(--base-a);
+  width: inherit;
+
+  box-shadow: var(--shadow-a);
 }
 </style>
