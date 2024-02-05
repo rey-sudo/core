@@ -150,7 +150,7 @@
 
       <Dialog
         v-model:visible="productDialog"
-        :style="{ width: '450px' }"
+        :style="{ width: '500px' }"
         header="Create"
         :modal="true"
         :draggable="false"
@@ -186,51 +186,20 @@
           />
         </div>
 
-        <div class="field">
-          <label for="category" class="field-label">Category</label>
-          <Dropdown
-            v-model="selectedCategory"
-            :options="categories"
-            id="category"
-            optionLabel="name"
-            placeholder="-"
-            checkmark
-            :highlightOnSelect="false"
-          />
-        </div>
-
-        <div class="field">
-          <label for="inventoryStatus" class="field-label"
-            >Status</label
-          >
-          <Dropdown
-            id="inventoryStatus"
-            v-model="product.inventoryStatus"
-            :options="statuses"
-            optionLabel="label"
-            placeholder="-"
-          >
-            <template #value="slotProps">
-              <div v-if="slotProps.value && slotProps.value.value">
-                <Tag
-                  :value="slotProps.value.value"
-                  :severity="getStatusLabel(slotProps.value.label)"
-                />
-              </div>
-              <div v-else-if="slotProps.value && !slotProps.value.value">
-                <Tag
-                  :value="slotProps.value"
-                  :severity="getStatusLabel(slotProps.value)"
-                />
-              </div>
-              <span v-else>
-                {{ slotProps.placeholder }}
-              </span>
-            </template>
-          </Dropdown>
-        </div>
-
         <div class="formgrid grid">
+          <div class="field col">
+            <label for="category" class="field-label">Category</label>
+            <Dropdown
+              v-model="selectedCategory"
+              :options="categories"
+              id="category"
+              optionLabel="name"
+              placeholder="-"
+              checkmark
+              :highlightOnSelect="false"
+            />
+          </div>
+
           <div class="field col">
             <label for="price" class="field-label">Price</label>
             <InputNumber
@@ -255,7 +224,35 @@
             <label for="quantity" class="field-label">Stock</label>
             <InputNumber id="quantity" v-model="product.quantity" integeronly />
           </div>
+          <div class="field col">
+            <label for="keywords" class="field-label">Keywords</label>
+            <Chips
+              id="keywords"
+              v-model="product.keywords"
+              separator=","
+              :max="3"
+            />
+          </div>
         </div>
+
+        <div class="field">
+          <div class="product-upload">
+            <Toast />
+            <FileUpload
+              name="demo[]"
+              url="/api/upload"
+              @upload="onAdvancedUpload($event)"
+              :multiple="true"
+              accept="image/*"
+              :maxFileSize="1000000"
+            >
+              <template #empty>
+                <p>Drag and drop files to here to upload.</p>
+              </template>
+            </FileUpload>
+          </div>
+        </div>
+
         <template #footer>
           <Button label="Cancel" icon="pi pi-times" text @click="hideDialog" />
           <Button label="Save" icon="pi pi-check" text @click="saveProduct" />
@@ -320,8 +317,23 @@
 <script>
 import { FilterMatchMode } from "primevue/api";
 import { ProductService } from "./service/ProductService";
+import { useToast } from "primevue/usetoast";
 
 export default {
+  setup() {
+    const toast = useToast();
+
+    const onAdvancedUpload = () => {
+      toast.add({
+        severity: "info",
+        summary: "Success",
+        detail: "File Uploaded",
+        life: 3000,
+      });
+    };
+
+    return { onAdvancedUpload };
+  },
   data() {
     return {
       products: null,
@@ -332,7 +344,7 @@ export default {
       selectedProducts: null,
       filters: {},
       submitted: false,
-      selectedCategory: null, 
+      selectedCategory: null,
       categories: [
         { name: "Australia", code: "AU" },
         { name: "Brazil", code: "BR" },
@@ -495,7 +507,6 @@ export default {
 
 <style lang="css" scoped>
 img {
-  background: red;
   border-radius: 6px;
 }
 .products {
@@ -627,6 +638,9 @@ img {
   padding: 0.25rem;
 }
 
+.product-upload{
+  margin-top: 1rem;
+}
 .table-button {
   margin-left: 1rem;
 }
