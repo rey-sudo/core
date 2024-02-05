@@ -1712,7 +1712,7 @@
     box-shadow: 0 0 0 0.2rem #bfd1f6;
   }
   .p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
-    color: #2196f3;
+    color: var(--text-b);
   }
   .p-rating:not(.p-disabled):not(.p-readonly)
     .p-rating-item:hover
@@ -3337,7 +3337,7 @@
     background: #ffffff;
     color: #6c757d;
     border-width: 0;
-    padding: 0.5rem 1rem;
+    padding: 1rem;
     border-bottom-left-radius: calc(6px + 0.25rem);
     border-bottom-right-radius: calc(6px + 0.25rem);
   }
@@ -6713,8 +6713,8 @@
     color: #ffffff;
   }
   .p-tag.p-tag-warning {
-    background-color: var(--base-b);
-    color: var(--text-b);
+    background-color: var(--orange-s);
+    color: var(--orange-a);
   }
   .p-tag.p-tag-danger {
     background-color: var(--red-s);
