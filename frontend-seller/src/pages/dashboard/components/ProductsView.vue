@@ -45,7 +45,13 @@
         >
           <template #header>
             <div class="products-header">
-              <h4 class="m-0">Manage Products</h4>
+              <div class="products-header-left">
+                <span class="products-header-title">Products</span>
+                <span class="products-header-subtitle"
+                  >Create and modify inventory</span
+                >
+              </div>
+
               <span class="p-input-icon-left">
                 <i class="pi pi-search" />
                 <InputText
@@ -582,6 +588,7 @@ img {
   width: inherit;
   border-radius: 12px;
   box-shadow: var(--shadow-a);
+  padding: 0.25rem;
 }
 
 .table-button {
@@ -604,5 +611,22 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.products-header-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem 0;
+}
+
+.products-header-title {
+  font-weight: 700;
+  font-size: var(--text-size-e);
+}
+
+.products-header-subtitle {
+  font-weight: 400;
+  font-size: var(--text-size-b);
 }
 </style>

@@ -2719,7 +2719,7 @@
     border-radius: 0;
   }
   .p-datatable .p-datatable-header {
-    background: #f8f9fa;
+    background: var(--base-b);
     color: var(--text-a);
     border: 1px solid var(--border-a);
     border-width: 0 0 1px 0;
@@ -3336,11 +3336,10 @@
   .p-paginator {
     background: #ffffff;
     color: #6c757d;
-    border: solid #e9ecef;
     border-width: 0;
     padding: 0.5rem 1rem;
-    border-radius: 0px;
-    margin: 0.25rem;
+    border-bottom-left-radius: calc(6px + 0.25rem);
+    border-bottom-right-radius: calc(6px + 0.25rem);
   }
   .p-paginator .p-paginator-first,
   .p-paginator .p-paginator-prev,
@@ -4200,11 +4199,14 @@
     border-bottom-left-radius: 3px;
   }
   .p-toolbar {
-    background: transparent;
+    background: var(--base-a);
     padding: 1rem;
     border-radius: 0px;
     gap: 0.5rem;
+    border-top-right-radius: calc(6px + 0.25rem);
+    border-top-left-radius: calc(6px + 0.25rem);
   }
+
   .p-toolbar .p-toolbar-separator {
     margin: 0 0.5rem;
   }
