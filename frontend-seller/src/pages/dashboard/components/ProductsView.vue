@@ -194,7 +194,7 @@
               :options="categories"
               id="category"
               optionLabel="name"
-              placeholder="-"
+              placeholder=""
               checkmark
               :highlightOnSelect="false"
             />
@@ -244,10 +244,11 @@
               @upload="onAdvancedUpload($event)"
               :multiple="true"
               accept="image/*"
+              :fileLimit="5"
               :maxFileSize="1000000"
             >
               <template #empty>
-                <p>Drag and drop files to here to upload.</p>
+                <p>Drag and drop images to here to upload.</p>
               </template>
             </FileUpload>
           </div>
@@ -638,7 +639,7 @@ img {
   padding: 0.25rem;
 }
 
-.product-upload{
+.product-upload {
   margin-top: 1rem;
 }
 .table-button {
