@@ -1973,7 +1973,7 @@
       box-shadow 0.2s;
     border-radius: 6px;
     outline-color: transparent;
-    font-size: var(--text-size-a); 
+    font-size: var(--text-size-a);
   }
   .p-button:not(:disabled):hover {
     background: #1e88e5;
@@ -2756,7 +2756,8 @@
   }
   .p-datatable .p-sortable-column .p-sortable-column-icon {
     color: #6c757d;
-    margin-left: 0.5rem;
+    margin-left: 0.75rem;
+    width: 0.75rem;
   }
   .p-datatable .p-sortable-column .p-sortable-column-badge {
     border-radius: 50%;
@@ -3338,7 +3339,8 @@
     border: solid #e9ecef;
     border-width: 0;
     padding: 0.5rem 1rem;
-    border-radius: 3px;
+    border-radius: 0px;
+    margin: 0.5rem;
   }
   .p-paginator .p-paginator-first,
   .p-paginator .p-paginator-prev,
@@ -3401,7 +3403,7 @@
     height: 2.357rem;
     margin: 0.143rem;
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
-    border-radius: 3px;
+    border-radius: 6px;
   }
   .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
     background: #2196f3;
@@ -4198,9 +4200,8 @@
   }
   .p-toolbar {
     background: transparent;
-    border: 1px solid #dee2e6;
     padding: 1rem;
-    border-radius: 3px;
+    border-radius: 0px;
     gap: 0.5rem;
   }
   .p-toolbar .p-toolbar-separator {
@@ -6694,23 +6695,23 @@
     font-size: 0.75rem;
     font-weight: 700;
     padding: 0.25rem 0.4rem;
-    border-radius: 3px;
+    border-radius: 6px;
   }
   .p-tag.p-tag-success {
-    background-color: #4caf50;
-    color: #ffffff;
+    background-color: var(--blue-s);
+    color: var(--blue-a);
   }
   .p-tag.p-tag-info {
     background-color: #03a9f4;
     color: #ffffff;
   }
   .p-tag.p-tag-warning {
-    background-color: #ffc107;
-    color: #495057;
+    background-color: transparent;
+    color: var(--text-b);
   }
   .p-tag.p-tag-danger {
-    background-color: #f44336;
-    color: #ffffff;
+    background-color: var(--red-s);
+    color: var(--red-a);
   }
   .p-tag .p-tag-icon {
     font-size: 0.75rem;

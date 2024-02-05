@@ -498,6 +498,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
+img{
+  background: red;
+  border-radius: 6px;
+}
 .products {
   display: flex;
   justify-content: center;
@@ -614,7 +618,7 @@ export default {
 }
 
 .products-wrap {
-  border-radius: 24px;
+
   display: flex;
   justify-content: center;
   width: 100%;
@@ -623,7 +627,8 @@ export default {
 
 .products-card {
   width: inherit;
-
+  border-radius: 12px;
   box-shadow: var(--shadow-a);
+
 }
 </style>
