@@ -4339,7 +4339,7 @@
     color: #495057;
     padding: 1rem;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     gap: 0.5rem;
     border-bottom-right-radius: calc(6px + 0.25rem);
     border-bottom-left-radius: calc(6px + 0.25rem);
