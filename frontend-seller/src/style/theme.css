@@ -2719,11 +2719,12 @@
     border-radius: 0;
   }
   .p-datatable .p-datatable-header {
-    background: var(--base-b);
+    background: var(--base-a);
     color: var(--text-a);
     border: 1px solid var(--border-a);
     border-width: 0 0 1px 0;
     padding: 1rem 1rem;
+    margin-top: 0.25rem;
     font-weight: 600;
   }
   .p-datatable .p-datatable-footer {
