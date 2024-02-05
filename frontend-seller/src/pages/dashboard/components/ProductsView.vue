@@ -2,8 +2,6 @@
   <div class="products">
     <div class="products-wrap">
       <div class="products-card">
-
-
         <DataTable
           ref="dt"
           :value="products"
@@ -34,7 +32,6 @@
               </span>
             </div>
 
-
             <Toolbar class="mb-4">
               <template #start>
                 <Button label="New" icon="pi pi-plus" @click="openNew" />
@@ -46,7 +43,7 @@
                   :disabled="!selectedProducts || !selectedProducts.length"
                 />
               </template>
-    
+
               <template #end>
                 <FileUpload
                   mode="basic"
@@ -179,13 +176,21 @@
           >
         </div>
         <div class="field">
-          <label for="description" class="field-label">Description</label>
+          <label for="description" class="field-label">
+            <span>Description</span>
+            <i
+              class="pi pi-info-circle"
+              v-tooltip.top="'Write a clear description about the product.'"
+            />
+          </label>
           <Textarea
             id="description"
             v-model="product.description"
             required="true"
             rows="3"
             cols="20"
+            style="resize: none"
+            autoResize
           />
         </div>
 
@@ -195,7 +200,9 @@
               <span>Category</span>
               <i
                 class="pi pi-info-circle"
-                v-tooltip.top="'Enter your username'"
+                v-tooltip.top="
+                  'Select the category corresponding to the product.'
+                "
               />
             </label>
             <Dropdown
@@ -210,7 +217,13 @@
           </div>
 
           <div class="field col">
-            <label for="price" class="field-label">Price</label>
+            <label for="price" class="field-label">
+              <span>Price</span>
+              <i
+                class="pi pi-info-circle"
+                v-tooltip.top="'Product price in ADA'"
+              />
+            </label>
             <InputNumber
               id="price"
               v-model="product.price"
@@ -220,7 +233,13 @@
             />
           </div>
           <div class="field col">
-            <label for="collateral" class="field-label">Collateral</label>
+            <label for="collateral" class="field-label">
+              <span>Collateral</span>
+              <i
+                class="pi pi-info-circle"
+                v-tooltip.top="'Assign an ADA amount as a guarantee.'"
+              />
+            </label>
             <InputNumber
               id="collateral"
               v-model="product.collateral"
@@ -230,7 +249,13 @@
             />
           </div>
           <div class="field col">
-            <label for="quantity" class="field-label">Stock</label>
+            <label for="quantity" class="field-label">
+              <span>Stock</span>
+              <i
+                class="pi pi-info-circle"
+                v-tooltip.top="'Current number of units of the product.'"
+              />
+            </label>
             <InputNumber id="quantity" v-model="product.quantity" integeronly />
           </div>
           <div class="field col">
@@ -356,16 +381,18 @@ export default {
       submitted: false,
       selectedCategory: null,
       categories: [
-        { name: "Australia", code: "AU" },
-        { name: "Brazil", code: "BR" },
-        { name: "China", code: "CN" },
-        { name: "Egypt", code: "EG" },
-        { name: "France", code: "FR" },
-        { name: "Germany", code: "DE" },
-        { name: "India", code: "IN" },
-        { name: "Japan", code: "JP" },
-        { name: "Spain", code: "ES" },
-        { name: "United States", code: "US" },
+        { name: "Home", code: "home" },
+        { name: "Electronics", code: "electronics" },
+        { name: "Fashion", code: "fashion" },
+        { name: "Beauty", code: "beauty" },
+        { name: "Toys", code: "toys" },
+        { name: "Tools", code: "tools" },
+        { name: "Sports", code: "sports" },
+        { name: "Health", code: "health" },
+        { name: "Books", code: "books" },
+        { name: "Automotive", code: "automotive" },
+        { name: "Appliances", code: "appliances" },
+        { name: "Furniture", code: "furniture" },
       ],
       statuses: [
         { label: "STOCK", value: "stock" },
@@ -681,6 +708,7 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1rem 0;
   border-bottom: 1px solid var(--border-a);
 }
 

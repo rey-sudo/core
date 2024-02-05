@@ -1246,7 +1246,7 @@
     font-family: var(--font-family);
     font-feature-settings: var(--font-feature-settings, normal);
     font-size: var(--text-size-b);
-    color: var(--text-a);
+    color: var(--text-b);
     background: #ffffff;
     padding: 0.5rem 0.5rem;
     border: 1px solid #ced4da;
@@ -2723,8 +2723,7 @@
   .p-datatable .p-datatable-header {
     color: var(--text-a);
     border-width: 0 0 1px 0;
-    padding: 1rem;
-    padding-bottom: 0;
+    padding: 0 1rem;
     background: var(--base-a);
     font-weight: 600;
     border-top-right-radius: calc(6px + 0.25rem);
@@ -4436,9 +4435,10 @@
   .p-tooltip .p-tooltip-text {
     background: #495057;
     color: #ffffff;
-    padding: 0.5rem 0.5rem;
+    padding: 1rem 0.75rem;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 3px;
+    border-radius: 6px;
+    font-size: var(--text-size-b);
   }
   .p-tooltip.p-tooltip-right .p-tooltip-arrow {
     border-right-color: #495057;

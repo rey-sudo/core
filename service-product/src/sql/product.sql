@@ -13,7 +13,7 @@ create table if not exists product(
   theme varchar(100) default "modern",
   country int unsigned not null,
   moderated boolean default false,
-  image_origin varchar(255) not null,
+  image_base varchar(255) not null,
   image_path varchar(255) not null,
   image_main varchar(255) not null,
   image_set varchar(1000) not null,
