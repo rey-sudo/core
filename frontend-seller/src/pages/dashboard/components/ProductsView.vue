@@ -157,7 +157,7 @@
           class="block m-auto pb-3"
         />
         <div class="field">
-          <label for="name">Name</label>
+          <label for="name" class="field-label">Name</label>
           <InputText
             id="name"
             v-model.trim="product.name"
@@ -170,7 +170,7 @@
           >
         </div>
         <div class="field">
-          <label for="description">Description</label>
+          <label for="description" class="field-label">Description</label>
           <Textarea
             id="description"
             v-model="product.description"
@@ -181,7 +181,9 @@
         </div>
 
         <div class="field">
-          <label for="inventoryStatus" class="mb-3">Inventory Status</label>
+          <label for="inventoryStatus" class="field-label"
+            >Inventory Status</label
+          >
           <Dropdown
             id="inventoryStatus"
             v-model="product.inventoryStatus"
@@ -209,51 +211,9 @@
           </Dropdown>
         </div>
 
-        <div class="field">
-          <label class="mb-3">Category</label>
-          <div class="formgrid grid">
-            <div class="field-radiobutton col-6">
-              <RadioButton
-                id="category1"
-                name="category"
-                value="Accessories"
-                v-model="product.category"
-              />
-              <label for="category1">Accessories</label>
-            </div>
-            <div class="field-radiobutton col-6">
-              <RadioButton
-                id="category2"
-                name="category"
-                value="Clothing"
-                v-model="product.category"
-              />
-              <label for="category2">Clothing</label>
-            </div>
-            <div class="field-radiobutton col-6">
-              <RadioButton
-                id="category3"
-                name="category"
-                value="Electronics"
-                v-model="product.category"
-              />
-              <label for="category3">Electronics</label>
-            </div>
-            <div class="field-radiobutton col-6">
-              <RadioButton
-                id="category4"
-                name="category"
-                value="Fitness"
-                v-model="product.category"
-              />
-              <label for="category4">Fitness</label>
-            </div>
-          </div>
-        </div>
-
         <div class="formgrid grid">
           <div class="field col">
-            <label for="price">Price</label>
+            <label for="price" class="field-label">Price</label>
             <InputNumber
               id="price"
               v-model="product.price"
@@ -263,7 +223,7 @@
             />
           </div>
           <div class="field col">
-            <label for="quantity">Quantity</label>
+            <label for="quantity" class="field-label">Stock</label>
             <InputNumber id="quantity" v-model="product.quantity" integeronly />
           </div>
         </div>
@@ -628,11 +588,19 @@ img {
   margin-left: 1rem;
 }
 
-.field label {
-  background: red;
+.field-radiobutton {
+  display: flex;
+  align-items: center;
 }
 
-.products-header{
+.field-radiobutton label {
+  margin-left: 0.25rem;
+}
+.field-label {
+  line-height: 30px;
+}
+
+.products-header {
   display: flex;
   justify-content: space-between;
   align-items: center;

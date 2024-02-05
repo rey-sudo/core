@@ -16,9 +16,7 @@
       </div>
     </div>
 
-    <template v-if="selectedNav === 'products'">
-      <ProductsView />
-    </template>
+    <ProductsView v-show="selectedNav === 'products'" />
   </div>
 </template>
 
