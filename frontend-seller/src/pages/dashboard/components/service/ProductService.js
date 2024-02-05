@@ -951,7 +951,7 @@ export const ProductService = {
             },
             {
                 id: '1020',
-                code: 'r23fwf2w3',
+                code: 'P331814905',
                 name: 'Pink Purse',
                 description: 'Product Description',
                 image: 'pink-purse.jpg',
@@ -983,7 +983,7 @@ export const ProductService = {
             },
             {
                 id: '1021',
-                code: 'pxpzczo23',
+                code: 'P331814905',
                 name: 'Purple Band',
                 description: 'Product Description',
                 image: 'purple-band.jpg',
@@ -1006,7 +1006,7 @@ export const ProductService = {
             },
             {
                 id: '1022',
-                code: '2c42cb5cb',
+                code: 'P331814905',
                 name: 'Purple Gemstone Necklace',
                 description: 'Product Description',
                 image: 'purple-gemstone-necklace.jpg',

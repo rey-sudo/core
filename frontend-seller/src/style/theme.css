@@ -343,8 +343,8 @@
     font-size: 1rem;
   }
   .p-icon {
-    width: 1rem;
-    height: 1rem;
+    width: 0.75rem;
+    height: 0.75rem;
   }
   .p-link {
     font-family: var(--font-family);
@@ -1091,8 +1091,8 @@
     position: relative;
     margin-left: -0.5rem;
     margin-right: 0.5rem;
-    width: 15px;
-    height: 15px;
+    width: 0.75rem;
+    height: 0.75rem;
   }
   .p-dropdown-panel .p-dropdown-items .p-dropdown-item-group {
     margin: 0;
@@ -1972,8 +1972,7 @@
     border: 1px solid transparent;
     padding: 0.5rem 1rem;
     font-size: 1rem;
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s,
-      box-shadow 0.2s;
+    transition: 0.1s cubic-bezier(0.08, 0.52, 0.52, 1);
     border-radius: 6px;
     outline-color: transparent;
     font-size: var(--text-size-a);
@@ -2722,11 +2721,10 @@
     border-radius: 0;
   }
   .p-datatable .p-datatable-header {
-    background: var(--base-a);
     color: var(--text-a);
     border-width: 0 0 1px 0;
     padding: 1.5rem 1rem;
-    margin-top: 0.25rem;
+    backdrop-filter: blur(12px);
     font-weight: 600;
   }
   .p-datatable .p-datatable-footer {
@@ -4308,6 +4306,26 @@
     padding: 1rem 1.5rem;
     font-size: var(--text-size-b);
   }
+
+  .p-dialog .p-dialog-content {
+    background: #ffffff;
+    color: var(--text-b);
+    padding: 1rem 1.5rem;
+    font-size: var(--text-size-b);
+  }
+
+  .p-dialog .p-dialog-content::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .p-dialog .p-dialog-content::-webkit-scrollbar-thumb {
+    background-color: var(--gray-300);
+  }
+
+  .p-dialog .p-dialog-content::-webkit-scrollbar-track {
+    background-color: var(--base-b); /* Scrollbar track color */
+  }
+
   .p-dialog .p-dialog-content:last-of-type {
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;

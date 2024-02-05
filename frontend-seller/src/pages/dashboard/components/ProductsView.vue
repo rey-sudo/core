@@ -2,34 +2,7 @@
   <div class="products">
     <div class="products-wrap">
       <div class="products-card">
-        <Toolbar class="mb-4">
-          <template #start>
-            <Button label="New" icon="pi pi-plus" @click="openNew" />
-            <Button
-              label="Delete"
-              icon="pi pi-trash"
-              style="margin: 0 1rem"
-              @click="confirmDeleteSelected"
-              :disabled="!selectedProducts || !selectedProducts.length"
-            />
-          </template>
 
-          <template #end>
-            <FileUpload
-              mode="basic"
-              accept="image/*"
-              :maxFileSize="1000000"
-              label="Import"
-              chooseLabel="Import"
-              style="margin: 0 1rem"
-            />
-            <Button
-              label="Export"
-              icon="pi pi-upload"
-              @click="exportCSV($event)"
-            />
-          </template>
-        </Toolbar>
 
         <DataTable
           ref="dt"
@@ -60,6 +33,36 @@
                 />
               </span>
             </div>
+
+
+            <Toolbar class="mb-4">
+              <template #start>
+                <Button label="New" icon="pi pi-plus" @click="openNew" />
+                <Button
+                  label="Delete"
+                  icon="pi pi-trash"
+                  style="margin: 0 1rem"
+                  @click="confirmDeleteSelected"
+                  :disabled="!selectedProducts || !selectedProducts.length"
+                />
+              </template>
+    
+              <template #end>
+                <FileUpload
+                  mode="basic"
+                  accept="image/*"
+                  :maxFileSize="1000000"
+                  label="Import"
+                  chooseLabel="Import"
+                  style="margin: 0 1rem"
+                />
+                <Button
+                  label="Export"
+                  icon="pi pi-upload"
+                  @click="exportCSV($event)"
+                />
+              </template>
+            </Toolbar>
           </template>
 
           <Column
@@ -188,7 +191,13 @@
 
         <div class="formgrid grid">
           <div class="field col">
-            <label for="category" class="field-label">Category</label>
+            <label for="category" class="field-label">
+              <span>Category</span>
+              <i
+                class="pi pi-info-circle"
+                v-tooltip.top="'Enter your username'"
+              />
+            </label>
             <Dropdown
               v-model="selectedCategory"
               :options="categories"
@@ -656,6 +665,16 @@ img {
 }
 .field-label {
   line-height: 40px;
+  color: var(--text-a);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.field-label i {
+  font-size: var(--text-size-a);
+  margin-left: 0.5rem;
+  margin-top: 3px;
 }
 
 .products-header {
