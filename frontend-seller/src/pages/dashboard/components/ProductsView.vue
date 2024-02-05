@@ -645,7 +645,7 @@ img {
   width: inherit;
   border-radius: 12px;
   box-shadow: var(--shadow-a);
-  padding: 0.25rem;
+  padding: 0.5rem;
 }
 
 .product-upload {
@@ -681,6 +681,7 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid var(--border-a);
 }
 
 .products-header-left {
