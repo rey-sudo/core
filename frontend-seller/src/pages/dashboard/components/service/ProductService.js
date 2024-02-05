@@ -10,7 +10,7 @@ export const ProductService = {
                 price: 65,
                 category: 'Accessories',
                 quantity: 24,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 5
             },
             {
@@ -22,7 +22,7 @@ export const ProductService = {
                 price: 72,
                 category: 'Accessories',
                 quantity: 61,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 4
             },
             {
@@ -34,7 +34,7 @@ export const ProductService = {
                 price: 79,
                 category: 'Fitness',
                 quantity: 2,
-                inventoryStatus: 'LOWSTOCK',
+                inventoryStatus: 'low',
                 rating: 3
             },
             {
@@ -46,7 +46,7 @@ export const ProductService = {
                 price: 29,
                 category: 'Clothing',
                 quantity: 25,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 5
             },
             {
@@ -58,7 +58,7 @@ export const ProductService = {
                 price: 15,
                 category: 'Accessories',
                 quantity: 73,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 4
             },
             {
@@ -70,7 +70,7 @@ export const ProductService = {
                 price: 120,
                 category: 'Accessories',
                 quantity: 0,
-                inventoryStatus: 'OUTOFSTOCK',
+                inventoryStatus: 'out',
                 rating: 4
             },
             {
@@ -82,7 +82,7 @@ export const ProductService = {
                 price: 32,
                 category: 'Accessories',
                 quantity: 5,
-                inventoryStatus: 'LOWSTOCK',
+                inventoryStatus: 'low',
                 rating: 3
             },
             {
@@ -94,7 +94,7 @@ export const ProductService = {
                 price: 34,
                 category: 'Accessories',
                 quantity: 23,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 5
             },
             {
@@ -106,7 +106,7 @@ export const ProductService = {
                 price: 99,
                 category: 'Electronics',
                 quantity: 2,
-                inventoryStatus: 'LOWSTOCK',
+                inventoryStatus: 'low',
                 rating: 4
             },
             {
@@ -118,7 +118,7 @@ export const ProductService = {
                 price: 299,
                 category: 'Electronics',
                 quantity: 63,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 3
             },
             {
@@ -130,7 +130,7 @@ export const ProductService = {
                 price: 24,
                 category: 'Accessories',
                 quantity: 0,
-                inventoryStatus: 'OUTOFSTOCK',
+                inventoryStatus: 'out',
                 rating: 4
             },
             {
@@ -142,7 +142,7 @@ export const ProductService = {
                 price: 89,
                 category: 'Electronics',
                 quantity: 23,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 4
             },
             {
@@ -154,7 +154,7 @@ export const ProductService = {
                 price: 49,
                 category: 'Clothing',
                 quantity: 74,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 5
             },
             {
@@ -166,7 +166,7 @@ export const ProductService = {
                 price: 48,
                 category: 'Clothing',
                 quantity: 0,
-                inventoryStatus: 'OUTOFSTOCK',
+                inventoryStatus: 'out',
                 rating: 3
             },
             {
@@ -178,7 +178,7 @@ export const ProductService = {
                 price: 175,
                 category: 'Electronics',
                 quantity: 8,
-                inventoryStatus: 'LOWSTOCK',
+                inventoryStatus: 'low',
                 rating: 5
             },
             {
@@ -190,7 +190,7 @@ export const ProductService = {
                 price: 49,
                 category: 'Clothing',
                 quantity: 34,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 4
             },
             {
@@ -202,7 +202,7 @@ export const ProductService = {
                 price: 79,
                 category: 'Fitness',
                 quantity: 12,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 3
             },
             {
@@ -214,7 +214,7 @@ export const ProductService = {
                 price: 85,
                 category: 'Clothing',
                 quantity: 42,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 4
             },
             {
@@ -226,7 +226,7 @@ export const ProductService = {
                 price: 56,
                 category: 'Accessories',
                 quantity: 41,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 5
             },
             {
@@ -238,7 +238,7 @@ export const ProductService = {
                 price: 79,
                 category: 'Fitness',
                 quantity: 63,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 4
             },
             {
@@ -250,7 +250,7 @@ export const ProductService = {
                 price: 110,
                 category: 'Accessories',
                 quantity: 0,
-                inventoryStatus: 'OUTOFSTOCK',
+                inventoryStatus: 'out',
                 rating: 4
             },
             {
@@ -262,7 +262,7 @@ export const ProductService = {
                 price: 79,
                 category: 'Fitness',
                 quantity: 6,
-                inventoryStatus: 'LOWSTOCK',
+                inventoryStatus: 'low',
                 rating: 3
             },
             {
@@ -274,7 +274,7 @@ export const ProductService = {
                 price: 45,
                 category: 'Accessories',
                 quantity: 62,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 4
             },
             {
@@ -286,7 +286,7 @@ export const ProductService = {
                 price: 49,
                 category: 'Clothing',
                 quantity: 2,
-                inventoryStatus: 'LOWSTOCK',
+                inventoryStatus: 'low',
                 rating: 5
             },
             {
@@ -298,7 +298,7 @@ export const ProductService = {
                 price: 64,
                 category: 'Clothing',
                 quantity: 0,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 4
             },
             {
@@ -310,7 +310,7 @@ export const ProductService = {
                 price: 78,
                 category: 'Clothing',
                 quantity: 52,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 4
             },
             {
@@ -322,7 +322,7 @@ export const ProductService = {
                 price: 49,
                 category: 'Clothing',
                 quantity: 3,
-                inventoryStatus: 'LOWSTOCK',
+                inventoryStatus: 'low',
                 rating: 3
             },
             {
@@ -334,7 +334,7 @@ export const ProductService = {
                 price: 89,
                 category: 'Electronics',
                 quantity: 35,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 3
             },
             {
@@ -346,7 +346,7 @@ export const ProductService = {
                 price: 20,
                 category: 'Fitness',
                 quantity: 15,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 5
             },
             {
@@ -358,7 +358,7 @@ export const ProductService = {
                 price: 20,
                 category: 'Fitness',
                 quantity: 25,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 8
             }
         ];
@@ -375,7 +375,7 @@ export const ProductService = {
                 price: 65,
                 category: 'Accessories',
                 quantity: 24,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 5,
                 orders: [
                     {
@@ -425,7 +425,7 @@ export const ProductService = {
                 price: 72,
                 category: 'Accessories',
                 quantity: 61,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 4,
                 orders: [
                     {
@@ -457,7 +457,7 @@ export const ProductService = {
                 price: 79,
                 category: 'Fitness',
                 quantity: 2,
-                inventoryStatus: 'LOWSTOCK',
+                inventoryStatus: 'low',
                 rating: 3,
                 orders: [
                     {
@@ -489,7 +489,7 @@ export const ProductService = {
                 price: 29,
                 category: 'Clothing',
                 quantity: 25,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 5,
                 orders: []
             },
@@ -502,7 +502,7 @@ export const ProductService = {
                 price: 15,
                 category: 'Accessories',
                 quantity: 73,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 4,
                 orders: [
                     {
@@ -534,7 +534,7 @@ export const ProductService = {
                 price: 120,
                 category: 'Accessories',
                 quantity: 0,
-                inventoryStatus: 'OUTOFSTOCK',
+                inventoryStatus: 'out',
                 rating: 4,
                 orders: [
                     {
@@ -575,7 +575,7 @@ export const ProductService = {
                 price: 32,
                 category: 'Accessories',
                 quantity: 5,
-                inventoryStatus: 'LOWSTOCK',
+                inventoryStatus: 'low',
                 rating: 3,
                 orders: [
                     {
@@ -607,7 +607,7 @@ export const ProductService = {
                 price: 34,
                 category: 'Accessories',
                 quantity: 23,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 5,
                 orders: [
                     {
@@ -630,7 +630,7 @@ export const ProductService = {
                 price: 99,
                 category: 'Electronics',
                 quantity: 2,
-                inventoryStatus: 'LOWSTOCK',
+                inventoryStatus: 'low',
                 rating: 4,
                 orders: [
                     {
@@ -662,7 +662,7 @@ export const ProductService = {
                 price: 299,
                 category: 'Electronics',
                 quantity: 63,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 3,
                 orders: [
                     {
@@ -712,7 +712,7 @@ export const ProductService = {
                 price: 24,
                 category: 'Accessories',
                 quantity: 0,
-                inventoryStatus: 'OUTOFSTOCK',
+                inventoryStatus: 'out',
                 rating: 4,
                 orders: [
                     {
@@ -744,7 +744,7 @@ export const ProductService = {
                 price: 89,
                 category: 'Electronics',
                 quantity: 23,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 4,
                 orders: [
                     {
@@ -767,7 +767,7 @@ export const ProductService = {
                 price: 49,
                 category: 'Clothing',
                 quantity: 74,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 5,
                 orders: [
                     {
@@ -799,7 +799,7 @@ export const ProductService = {
                 price: 48,
                 category: 'Clothing',
                 quantity: 0,
-                inventoryStatus: 'OUTOFSTOCK',
+                inventoryStatus: 'out',
                 rating: 3,
                 orders: [
                     {
@@ -822,7 +822,7 @@ export const ProductService = {
                 price: 175,
                 category: 'Electronics',
                 quantity: 8,
-                inventoryStatus: 'LOWSTOCK',
+                inventoryStatus: 'low',
                 rating: 5,
                 orders: [
                     {
@@ -854,7 +854,7 @@ export const ProductService = {
                 price: 49,
                 category: 'Clothing',
                 quantity: 34,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 4,
                 orders: [
                     {
@@ -877,7 +877,7 @@ export const ProductService = {
                 price: 79,
                 category: 'Fitness',
                 quantity: 12,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 3,
                 orders: []
             },
@@ -890,7 +890,7 @@ export const ProductService = {
                 price: 85,
                 category: 'Clothing',
                 quantity: 42,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 4,
                 orders: [
                     {
@@ -913,7 +913,7 @@ export const ProductService = {
                 price: 56,
                 category: 'Accessories',
                 quantity: 41,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 5,
                 orders: [
                     {
@@ -945,7 +945,7 @@ export const ProductService = {
                 price: 79,
                 category: 'Fitness',
                 quantity: 63,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 4,
                 orders: []
             },
@@ -958,7 +958,7 @@ export const ProductService = {
                 price: 110,
                 category: 'Accessories',
                 quantity: 0,
-                inventoryStatus: 'OUTOFSTOCK',
+                inventoryStatus: 'out',
                 rating: 4,
                 orders: [
                     {
@@ -990,7 +990,7 @@ export const ProductService = {
                 price: 79,
                 category: 'Fitness',
                 quantity: 6,
-                inventoryStatus: 'LOWSTOCK',
+                inventoryStatus: 'low',
                 rating: 3,
                 orders: [
                     {
@@ -1013,7 +1013,7 @@ export const ProductService = {
                 price: 45,
                 category: 'Accessories',
                 quantity: 62,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 4,
                 orders: [
                     {
@@ -1045,7 +1045,7 @@ export const ProductService = {
                 price: 49,
                 category: 'Clothing',
                 quantity: 2,
-                inventoryStatus: 'LOWSTOCK',
+                inventoryStatus: 'low',
                 rating: 5,
                 orders: [
                     {
@@ -1068,7 +1068,7 @@ export const ProductService = {
                 price: 64,
                 category: 'Clothing',
                 quantity: 0,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 4,
                 orders: []
             },
@@ -1081,7 +1081,7 @@ export const ProductService = {
                 price: 78,
                 category: 'Clothing',
                 quantity: 52,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 4,
                 orders: [
                     {
@@ -1113,7 +1113,7 @@ export const ProductService = {
                 price: 49,
                 category: 'Clothing',
                 quantity: 3,
-                inventoryStatus: 'LOWSTOCK',
+                inventoryStatus: 'low',
                 rating: 3,
                 orders: [
                     {
@@ -1136,7 +1136,7 @@ export const ProductService = {
                 price: 89,
                 category: 'Electronics',
                 quantity: 35,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 3,
                 orders: [
                     {
@@ -1168,7 +1168,7 @@ export const ProductService = {
                 price: 20,
                 category: 'Fitness',
                 quantity: 15,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 5,
                 orders: []
             },
@@ -1181,7 +1181,7 @@ export const ProductService = {
                 price: 20,
                 category: 'Fitness',
                 quantity: 25,
-                inventoryStatus: 'INSTOCK',
+                inventoryStatus: 'stock',
                 rating: 8,
                 orders: [
                     {

@@ -1242,8 +1242,8 @@
   .p-inputtext {
     font-family: var(--font-family);
     font-feature-settings: var(--font-feature-settings, normal);
-    font-size: 1rem;
-    color: #495057;
+    font-size: var(--text-size-b);
+    color: var(--text-a);
     background: #ffffff;
     padding: 0.5rem 0.5rem;
     border: 1px solid #ced4da;
@@ -1283,11 +1283,11 @@
   }
   .p-input-icon-left > svg:first-of-type,
   .p-input-icon-left > i:first-of-type {
-    left: 0.5rem;
+    left: 0.75rem;
     color: #495057;
   }
   .p-input-icon-left > .p-inputtext {
-    padding-left: 2rem;
+    padding-left: 2.5rem;
   }
   .p-input-icon-left.p-float-label > label {
     left: 2rem;
@@ -1964,9 +1964,9 @@
     border-color: #ced4da #ced4da #ced4da #e4677e;
   }
   .p-button {
-    color: #ffffff;
-    background: #2196f3;
-    border: 1px solid #2196f3;
+    color: var(--blue-a);
+    background: var(--blue-s);
+    border: 1px solid transparent;
     padding: 0.5rem 1rem;
     font-size: 1rem;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s,
@@ -2513,7 +2513,7 @@
   .p-buttonset.p-button-danger > .p-button.p-button-outlined,
   .p-splitbutton.p-button-danger > .p-button.p-button-outlined {
     background-color: transparent;
-    color: #f44336;
+    color: var(--red-a);
     border: 1px solid;
   }
   .p-button.p-button-danger.p-button-outlined:not(:disabled):hover,
@@ -2720,8 +2720,8 @@
   }
   .p-datatable .p-datatable-header {
     background: #f8f9fa;
-    color: #495057;
-    border: 1px solid #e9ecef;
+    color: var(--text-a);
+    border: 1px solid var(--border-a);
     border-width: 0 0 1px 0;
     padding: 1rem 1rem;
     font-weight: 600;
@@ -3340,7 +3340,7 @@
     border-width: 0;
     padding: 0.5rem 1rem;
     border-radius: 0px;
-    margin: 0.5rem;
+    margin: 0.25rem;
   }
   .p-paginator .p-paginator-first,
   .p-paginator .p-paginator-prev,
@@ -3389,7 +3389,8 @@
   .p-paginator .p-paginator-current {
     background-color: transparent;
     border: 0 none;
-    color: #6c757d;
+    color: var(--text-b);
+    font-size: var(--text-size-b);
     min-width: 2.357rem;
     height: 2.357rem;
     margin: 0.143rem;
@@ -4255,7 +4256,9 @@
     margin-left: 1rem;
   }
   .p-dialog {
-    border-radius: 3px;
+    border-radius: 6px;
+    padding: 3px;
+    background: var(--base-a);
     box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.1);
     border: 0 none;
   }
@@ -4297,8 +4300,9 @@
   }
   .p-dialog .p-dialog-content {
     background: #ffffff;
-    color: #495057;
-    padding: 0 1.5rem;
+    color: var(--text-b);
+    padding: 0 1rem;
+    font-size: var(--text-size-b);
   }
   .p-dialog .p-dialog-content:last-of-type {
     border-bottom-right-radius: 3px;
@@ -6693,9 +6697,10 @@
     background: #2196f3;
     color: #ffffff;
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: 600;
     padding: 0.25rem 0.4rem;
     border-radius: 6px;
+    text-transform: uppercase;
   }
   .p-tag.p-tag-success {
     background-color: var(--blue-s);
@@ -6706,7 +6711,7 @@
     color: #ffffff;
   }
   .p-tag.p-tag-warning {
-    background-color: transparent;
+    background-color: var(--base-b);
     color: var(--text-b);
   }
   .p-tag.p-tag-danger {

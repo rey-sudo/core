@@ -4,16 +4,11 @@
       <div class="products-card">
         <Toolbar class="mb-4">
           <template #start>
-            <Button
-              label="New"
-              icon="pi pi-plus"
-              class="mr-2"
-              @click="openNew"
-            />
+            <Button label="New" icon="pi pi-plus" @click="openNew" />
             <Button
               label="Delete"
               icon="pi pi-trash"
-              
+              style="margin: 0 1rem"
               @click="confirmDeleteSelected"
               :disabled="!selectedProducts || !selectedProducts.length"
             />
@@ -26,7 +21,7 @@
               :maxFileSize="1000000"
               label="Import"
               chooseLabel="Import"
-              class="mr-2 inline-block"
+              style="margin: 0 1rem"
             />
             <Button
               label="Export"
@@ -49,9 +44,7 @@
           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
         >
           <template #header>
-            <div
-              class="flex flex-wrap gap-2 align-items-center justify-content-between"
-            >
+            <div class="products-header">
               <h4 class="m-0">Manage Products</h4>
               <span class="p-input-icon-left">
                 <i class="pi pi-search" />
@@ -131,17 +124,17 @@
           <Column :exportable="false" style="min-width: 8rem">
             <template #body="slotProps">
               <Button
+                class="table-button"
                 icon="pi pi-pencil"
                 outlined
                 rounded
-                class="mr-2"
                 @click="editProduct(slotProps.data)"
               />
               <Button
+                class="table-button"
                 icon="pi pi-trash"
                 outlined
                 rounded
-                severity="danger"
                 @click="confirmDeleteProduct(slotProps.data)"
               />
             </template>
@@ -154,6 +147,7 @@
         :style="{ width: '450px' }"
         header="Product Details"
         :modal="true"
+        :draggable="false"
         class="p-fluid"
       >
         <img
@@ -350,9 +344,9 @@ export default {
       filters: {},
       submitted: false,
       statuses: [
-        { label: "INSTOCK", value: "instock" },
-        { label: "LOWSTOCK", value: "lowstock" },
-        { label: "OUTOFSTOCK", value: "outofstock" },
+        { label: "stock", value: "stock" },
+        { label: "low", value: "low" },
+        { label: "out", value: "out" },
       ],
     };
   },
@@ -401,7 +395,7 @@ export default {
           this.product.image = "product-placeholder.svg";
           this.product.inventoryStatus = this.product.inventoryStatus
             ? this.product.inventoryStatus.value
-            : "INSTOCK";
+            : "stock";
           this.products.push(this.product);
           this.$toast.add({
             severity: "success",
@@ -480,13 +474,13 @@ export default {
     },
     getStatusLabel(status) {
       switch (status) {
-        case "INSTOCK":
+        case "stock":
           return "success";
 
-        case "LOWSTOCK":
+        case "low":
           return "warning";
 
-        case "OUTOFSTOCK":
+        case "out":
           return "danger";
 
         default:
@@ -498,7 +492,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-img{
+img {
   background: red;
   border-radius: 6px;
 }
@@ -618,7 +612,6 @@ img{
 }
 
 .products-wrap {
-
   display: flex;
   justify-content: center;
   width: 100%;
@@ -629,6 +622,19 @@ img{
   width: inherit;
   border-radius: 12px;
   box-shadow: var(--shadow-a);
+}
 
+.table-button {
+  margin-left: 1rem;
+}
+
+.field label {
+  background: red;
+}
+
+.products-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>
