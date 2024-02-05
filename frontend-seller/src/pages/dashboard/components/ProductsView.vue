@@ -48,7 +48,7 @@
               <div class="products-header-left">
                 <span class="products-header-title">Products</span>
                 <span class="products-header-subtitle"
-                  >Create and modify inventory</span
+                  >Create and modify product inventory</span
                 >
               </div>
 
