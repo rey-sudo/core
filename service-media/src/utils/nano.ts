@@ -1,5 +1,5 @@
 import { customAlphabet } from "nanoid";
 
-const getSlotId = customAlphabet("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", 20);
+const getImageId = customAlphabet("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", 20);
 
-export { getSlotId };
+export { getImageId };

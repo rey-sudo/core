@@ -19,3 +19,7 @@ vtctldclient ApplyVSchema --vschema-file="service-gate/src/sql/product.json" ser
 
 vtctldclient ApplySchema --sql-file="service-gate/src/sql/slot.sql" service_gate
 vtctldclient ApplyVSchema --vschema-file="service-gate/src/sql/slot.json" service_gate
+
+
+vtctldclient ApplySchema --sql-file="service-media/src/sql/media.sql" service_media
+vtctldclient ApplyVSchema --vschema-file="service-media/src/sql/media.json" service_media

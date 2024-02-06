@@ -273,7 +273,7 @@
           <div class="product-upload">
             <Toast />
             <FileUpload
-              name="image[]"
+              name="image"
               url="https://localhost:443/api/media/create-image"
               @upload="onAdvancedUpload($event)"
               :multiple="true"

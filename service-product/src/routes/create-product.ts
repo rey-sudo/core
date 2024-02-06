@@ -9,11 +9,11 @@ import DB from "../db";
 const createProductMiddlewares: any = [sellerMiddleware, requireAuth];
 
 const createProductHandler = async (req: Request, res: Response) => {
-  let connection = null;
-
   const params = req.body;
 
   const seller = req.sellerData;
+
+  let connection = null;
 
   try {
     connection = await DB.client.getConnection();
@@ -56,7 +56,7 @@ const createProductHandler = async (req: Request, res: Response) => {
       params.country,
       params.image_base,
       params.image_path,
-      0
+      0,
     ];
 
     await connection.execute(schemeData, schemeValue);
