@@ -221,7 +221,7 @@
               <span>Price</span>
               <i
                 class="pi pi-info-circle"
-                v-tooltip.top="'Product price in ADA'"
+                v-tooltip.top="'Product price in ADA.'"
               />
             </label>
             <InputNumber
