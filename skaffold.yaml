@@ -38,4 +38,11 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-     
+    - image: pairfy/service-media
+      context: service-media
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .     

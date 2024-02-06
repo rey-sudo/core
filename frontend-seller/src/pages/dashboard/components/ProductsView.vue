@@ -273,8 +273,8 @@
           <div class="product-upload">
             <Toast />
             <FileUpload
-              name="demo[]"
-              url="/api/upload"
+              name="image[]"
+              url="https://localhost:443/api/media/create-image"
               @upload="onAdvancedUpload($event)"
               :multiple="true"
               accept="image/*"
@@ -358,13 +358,15 @@ export default {
   setup() {
     const toast = useToast();
 
-    const onAdvancedUpload = () => {
-      toast.add({
-        severity: "info",
-        summary: "Success",
-        detail: "File Uploaded",
-        life: 3000,
-      });
+    const onAdvancedUpload = (e) => {
+      if (e.xhr.response === "true") {
+        toast.add({
+          severity: "info",
+          summary: "Success",
+          detail: "File Uploaded",
+          life: 3000,
+        });
+      }
     };
 
     return { onAdvancedUpload };

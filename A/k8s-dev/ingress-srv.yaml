@@ -48,3 +48,10 @@ spec:
                 name: service-gate
                 port:
                   number: 8000                    
+          - path: /api/media/?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: service-media
+                port:
+                  number: 8000                   

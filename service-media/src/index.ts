@@ -40,8 +40,6 @@ const main = async () => {
       database: "service_gate",
     });
 
-    serviceProductListener();
-
     checkpoint("ready");
 
     const errorEvents: string[] = [
