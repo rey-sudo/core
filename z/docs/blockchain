@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-02-06T00:11:47.185Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="mxWv9MSSqgSCxDbn4RFa" version="23.0.0" type="device">
+<mxfile host="app.diagrams.net" modified="2024-02-06T01:37:25.664Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="DWiH_wIZgtoFMjbpX1JU" version="23.1.1" type="device">
   <diagram name="microservices" id="IcvIM7nfxtChby0fbi-c">
     <mxGraphModel dx="1434" dy="2988" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
       <root>
@@ -7,7 +7,7 @@
         <mxCell id="y7bAVpZdRzomH11BTOyZ-1" value="&lt;b&gt;service-gate&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="120" y="520" width="120" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="y7bAVpZdRzomH11BTOyZ-2" value="&lt;b&gt;service-images&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="y7bAVpZdRzomH11BTOyZ-2" value="&lt;b&gt;service-media&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="120" y="120" width="120" height="40" as="geometry" />
         </mxCell>
         <mxCell id="y7bAVpZdRzomH11BTOyZ-4" value="&lt;b&gt;service-moderation&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=1;" parent="1" vertex="1">
