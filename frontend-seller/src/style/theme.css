@@ -45,7 +45,7 @@
   --surface-border: #dee2e6;
   --surface-hover: #e9ecef;
   --focus-ring: 0 0 0 0.2rem #bfd1f6;
-  --maskbg: rgba(0, 0, 0, 0.4);
+  --maskbg: rgba(50,50,50,.88);
   --highlight-bg: #2196f3;
   --highlight-text-color: #ffffff;
   color-scheme: light;
@@ -2726,8 +2726,8 @@
     padding: 0 1rem;
     background: var(--base-a);
     font-weight: 600;
-    border-top-right-radius: calc(6px + 0.25rem);
-    border-top-left-radius: calc(6px + 0.25rem);
+    border-top-right-radius: 18px;
+    border-top-left-radius: 18px;
   }
   .p-datatable .p-datatable-footer {
     background: #f8f9fa;
@@ -3341,8 +3341,8 @@
     color: #6c757d;
     border-width: 0;
     padding: 1rem;
-    border-bottom-left-radius: calc(6px + 0.25rem);
-    border-bottom-right-radius: calc(6px + 0.25rem);
+    border-bottom-left-radius: calc(9px + 1rem);
+    border-bottom-right-radius: calc(9px + 1rem);
   }
   .p-paginator .p-paginator-first,
   .p-paginator .p-paginator-prev,
@@ -4261,8 +4261,8 @@
     margin-left: 1rem;
   }
   .p-dialog {
-    border-radius: 12px;
-    padding: 3px;
+    border-radius: 18px;
+    padding: 0px;
     box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.1);
     border: 0 none;
   }
@@ -4271,8 +4271,8 @@
     background: #ffffff;
     color: var(--text-a);
     padding: 1rem;
-    border-top-right-radius: calc(6px + 0.25rem);
-    border-top-left-radius: calc(6px + 0.25rem);
+    border-top-right-radius: 18px;
+    border-top-left-radius: 18px;
   }
   .p-dialog .p-dialog-header .p-dialog-title {
     font-weight: 700;
@@ -4340,8 +4340,8 @@
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
-    border-bottom-right-radius: calc(6px + 0.25rem);
-    border-bottom-left-radius: calc(6px + 0.25rem);
+    border-bottom-right-radius:  18px;
+    border-bottom-left-radius: 18px;
   }
   .p-dialog.p-confirm-dialog .p-confirm-dialog-icon {
     font-size: 2rem;

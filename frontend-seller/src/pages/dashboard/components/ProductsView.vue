@@ -150,7 +150,7 @@
 
       <Dialog
         v-model:visible="productDialog"
-        :style="{ width: '500px' }"
+        :style="{ width: '480px' }"
         header="Create"
         :modal="true"
         :draggable="false"
@@ -672,9 +672,10 @@ img {
 
 .products-card {
   width: inherit;
-  border-radius: 12px;
+  border-radius: 18px;
   box-shadow: var(--shadow-a);
-  padding: 0.5rem;
+  padding: 1rem;
+  background: var(--base-a);
 }
 
 .product-upload {

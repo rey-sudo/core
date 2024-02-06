@@ -13,7 +13,13 @@ const storage = multer.memoryStorage();
 const upload = multer({
   storage: storage,
   fileFilter: function (req, file, callback) {
-    console.log("FILTER");
+    console.log("FILTER", file);
+    const whitelist = ["image/png", "image/jpeg", "image/gif", "image/webp"];
+
+    if (!whitelist.includes(file.mimetype)) {
+      return callback(null, false);
+    }
+
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
       return callback(null, false);
     }
@@ -35,28 +41,26 @@ const createImageHandler = async (req: Request, res: Response) => {
 
   try {
     if (!req.files) {
-      throw new Error("nonfiles");
+      throw new Error("NON_FILES");
     }
 
     connection = await DB.client.getConnection();
 
     await connection.beginTransaction();
 
-    for (const item in req.files) {
-      const image = JSON.parse(item);
-
+    for (const image of req.files as Express.Multer.File[]) {
       const schemeData = `
-        INSERT INTO media (
-          media_id,
-          seller_id,
-          media_type,
-          media_data,
-          schema_v
-         ) VALUES (?, ?, ?, ?, ?)`;
+      INSERT INTO media (
+        media_id,
+        seller_id,
+        media_type,
+        media_data,
+        schema_v
+       ) VALUES (?, ?, ?, ?, ?)`;
 
       const schemeValue = [
         getImageId(),
-        SELLER.seller_id,
+        "deletethis", //
         "image",
         image.buffer,
         0,
