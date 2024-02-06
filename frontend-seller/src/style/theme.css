@@ -6728,10 +6728,11 @@
     background: #2196f3;
     color: #ffffff;
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 500;
     padding: 0.25rem 0.4rem;
     border-radius: 6px;
-    text-transform: uppercase;
+    text-transform: capitalize;
+    font-size: var(--text-size-b);
   }
   .p-tag.p-tag-success {
     background-color: var(--blue-s);
