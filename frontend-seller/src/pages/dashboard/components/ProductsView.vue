@@ -351,10 +351,15 @@
 
 <script>
 import { FilterMatchMode } from "primevue/api";
-import fakeData from "./service/index.js";
 import { HOST } from "@/api/index";
+import dashboardAPI from "@/pages/dashboard/api/index";
 
 export default {
+  setup() {
+    const { getProductData } = dashboardAPI();
+
+    return { getProductData };
+  },
   data() {
     return {
       mediaUrl: HOST + "/api/media/create-image",
@@ -392,7 +397,7 @@ export default {
     this.initFilters();
   },
   mounted() {
-    this.products = fakeData;
+    this.products = this.getProductData;
   },
   methods: {
     onAdvancedUpload(e) {

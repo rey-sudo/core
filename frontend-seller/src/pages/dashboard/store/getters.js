@@ -1,7 +1,8 @@
-const getter__allProducts = (state) => {
-  return state.allProducts;
+/**GETTER */
+const getProductData = (state) => {
+  return state.productData;
 };
 
 
 
-export { getter__allProducts };
+export { getProductData };

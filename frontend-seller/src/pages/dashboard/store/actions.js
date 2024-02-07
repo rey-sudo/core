@@ -1,7 +1,7 @@
 import axiosApi from "@/api/axios-api";
 
 
-const action__getAllProducts = async ({ commit }) => {
+const fetchProductData= async ({ commit }) => {
   try {
     
     const response = await axiosApi.get("/api/store/get-all-products");
@@ -17,4 +17,4 @@ const action__getAllProducts = async ({ commit }) => {
 
 
 
-export { action__getAllProducts };
+export { fetchProductData };
