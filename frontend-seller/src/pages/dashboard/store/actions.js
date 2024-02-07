@@ -1,12 +1,12 @@
-import axiosApi from "@/api/axios-api";
+import axiosAPI from "@/api/axios-api";
 
-
-const fetchProductData= async ({ commit }) => {
+const createProduct = async ({ commit }, params) => {
   try {
-    
-    const response = await axiosApi.get("/api/store/get-all-products");
+    const response = await axiosAPI.post("/api/product/create-product", params);
 
-    commit("commit__getAllProducts", response.data);
+    console.log(response);
+
+    commit("createProduct", response.data);
 
     return { ok: true, response: response.data };
   } catch (error) {
@@ -14,7 +14,4 @@ const fetchProductData= async ({ commit }) => {
   }
 };
 
-
-
-
-export { fetchProductData };
+export { createProduct };

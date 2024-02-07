@@ -1,10 +1,5 @@
-
-const commit__getAllProducts = (state, data) => {
-  state.allProducts = data;
+const createProduct = (state, data) => {
+  state.productData.push(data);
 };
 
-
-
-export {
-  commit__getAllProducts
-};
+export { createProduct };

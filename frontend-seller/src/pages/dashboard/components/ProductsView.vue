@@ -356,9 +356,9 @@ import dashboardAPI from "@/pages/dashboard/api/index";
 
 export default {
   setup() {
-    const { getProductData } = dashboardAPI();
+    const { getProductData, createProduct } = dashboardAPI();
 
-    return { getProductData };
+    return { getProductData, createProduct };
   },
   data() {
     return {
@@ -431,7 +431,7 @@ export default {
       this.productDialog = false;
       this.submitted = false;
     },
-    saveProduct() {
+    async saveProduct() {
       this.submitted = true;
 
       if (this.product.name.trim()) {
@@ -447,23 +447,32 @@ export default {
             life: 3000,
           });
         } else {
-          this.product.id = this.createId();
-          this.product.code = this.createId();
-          this.product.image = "product-placeholder.svg";
-          this.product.inventoryStatus = this.product.inventoryStatus
-            ? this.product.inventoryStatus.value
-            : "stock";
-          this.products.push(this.product);
-          this.$toast.add({
-            severity: "success",
-            summary: "Successful",
-            detail: "Product Created",
-            life: 3000,
-          });
+          
+          const params = {
+            name: "name",
+            description: "description",
+            category: "",
+            price: "",
+            collateral: "",
+            stock: 2,
+            keywords: "a,b,c",
+            image_set: "1,2,3",
+          };
+
+          const { success } = await this.createProduct(params);
+
+          if (success === true) {
+            this.$toast.add({
+              severity: "success",
+              summary: "Successful",
+              detail: "Product Created",
+              life: 3000,
+            });
+          }
         }
 
-        this.productDialog = false;
         this.product = {};
+        this.productDialog = false;
       }
     },
     editProduct(product) {
