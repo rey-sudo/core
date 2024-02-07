@@ -4,7 +4,7 @@ create table if not exists seller(
   email varchar(100) not null,
   password_hash varchar(255) not null,
   verified boolean default false,
-  country int unsigned not null,
+  country varchar(10) not null,
   completed_sales int unsigned default 0,
   uncompleted_sales int unsigned default 0,
   terms varchar(1000) not null,

@@ -84,7 +84,7 @@
 
     <div class="legend">
       <span>I already have an account</span>
-      <span>Or reset password</span>
+      <span>Reset password</span>
     </div>
   </div>
 </template>
@@ -104,11 +104,11 @@ export default {
     const selectedCountry = ref();
 
     const countries = ref([
-      { name: "United States", code: "US", number: 840 },
-      { name: "Chile", code: "CL", number: 152 },
-      { name: "Argentina", code: "AR", number: 32 },
-      { name: "Venezuela", code: "VE", number: 862 },
-      { name: "Colombia", code: "CO", number: 170 },
+      { name: "United States", code: "US", number: '840' },
+      { name: "Chile", code: "CL", number: '152' },
+      { name: "Argentina", code: "AR", number: '032' },
+      { name: "Venezuela", code: "VE", number: '862' },
+      { name: "Colombia", code: "CO", number: '170' },
     ]);
 
     return {

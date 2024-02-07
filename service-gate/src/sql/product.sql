@@ -11,7 +11,7 @@ create table if not exists product(
   keywords varchar(100) not null,
   theme varchar(500) not null,
   terms varchar(1000) not null,
-  country int unsigned not null,
+  country varchar(10) not null,
   moderated boolean default false,
   image_base varchar(255) not null,
   image_path varchar(255) not null,
