@@ -45,7 +45,7 @@
   --surface-border: #dee2e6;
   --surface-hover: #e9ecef;
   --focus-ring: 0 0 0 0.2rem #bfd1f6;
-  --maskbg: rgba(50,50,50,.88);
+  --maskbg: rgba(50, 50, 50, 0.88);
   --highlight-bg: #2196f3;
   --highlight-text-color: #ffffff;
   color-scheme: light;
@@ -1118,6 +1118,11 @@
   .p-input-filled .p-dropdown:not(.p-disabled).p-focus .p-inputtext {
     background-color: transparent;
   }
+
+  .p-inputgroup {
+    border-radius: 6px;
+  }
+
   .p-inputgroup-addon {
     background: #e9ecef;
     color: #6c757d;
@@ -1156,8 +1161,8 @@
   .p-inputgroup input:first-child,
   .p-inputgroup > .p-inputwrapper:first-child,
   .p-inputgroup > .p-inputwrapper:first-child > .p-inputtext {
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
   }
   .p-inputgroup .p-float-label:first-child input {
     border-top-left-radius: 3px;
@@ -1168,8 +1173,8 @@
   .p-inputgroup input:last-child,
   .p-inputgroup > .p-inputwrapper:last-child,
   .p-inputgroup > .p-inputwrapper:last-child > .p-inputtext {
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
   }
   .p-inputgroup .p-float-label:last-child input {
     border-top-right-radius: 3px;
@@ -2807,7 +2812,7 @@
     text-align: left;
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-width: 0 0 1px 0;
-    padding: 0.5rem 1rem;
+    padding: 1rem;
     font-size: var(--text-size-b);
   }
   .p-datatable .p-datatable-tbody > tr > td .p-row-toggler,
@@ -4340,7 +4345,7 @@
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
-    border-bottom-right-radius:  18px;
+    border-bottom-right-radius: 18px;
     border-bottom-left-radius: 18px;
   }
   .p-dialog.p-confirm-dialog .p-confirm-dialog-icon {
