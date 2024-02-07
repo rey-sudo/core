@@ -351,7 +351,7 @@
 
 <script>
 import { FilterMatchMode } from "primevue/api";
-import { ProductService } from "./service/ProductService";
+import fakeData from "./service/index.js";
 import { HOST } from "@/api/index";
 
 export default {
@@ -392,7 +392,7 @@ export default {
     this.initFilters();
   },
   mounted() {
-    ProductService.getProducts().then((data) => (this.products = data));
+    this.products = fakeData;
   },
   methods: {
     onAdvancedUpload(e) {
@@ -731,3 +731,4 @@ img {
   font-size: var(--text-size-b);
 }
 </style>
+./service
