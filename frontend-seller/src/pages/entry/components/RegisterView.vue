@@ -1,5 +1,74 @@
 <template>
   <div class="card">
+    <Dialog
+      v-model:visible="termsModalVisible"
+      modal
+      header="Terms of use"
+      :style="{ width: '40rem' }"
+      :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
+    >
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+      <p>
+        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
+        illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
+        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+        voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
+        quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
+        eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
+        voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
+        corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse
+        quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo
+        voluptas nulla pariatur?
+      </p>
+      <p>
+        At vero eos et accusamus et iusto odio dignissimos ducimus qui
+        blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
+        et quas molestias excepturi sint occaecati cupiditate non provident,
+        similique sunt in culpa qui officia deserunt mollitia animi, id est
+        laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
+        distinctio. Nam libero tempore, cum soluta nobis est eligendi optio
+        cumque nihil impedit quo minus id quod maxime placeat facere possimus,
+        omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem
+        quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet
+        ut et voluptates repudiandae sint et molestiae non recusandae. Itaque
+        earum rerum hic tenetur a sapiente delectus, ut aut reiciendis
+        voluptatibus maiores alias consequatur aut perferendis doloribus
+        asperiores repellat.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+      <template #footer>
+        <div class="modal-footer">
+          <Button
+            type="button"
+            label="Cancel"
+            severity="secondary"
+            @click="termsModalVisible = false"
+          />
+          <Button type="button" label="Save" @click="handleSubmit(true)" />
+        </div>
+      </template>
+    </Dialog>
+
+    <!----->
     <div class="title">Sign Up</div>
 
     <div class="field">
@@ -7,7 +76,11 @@
         <InputGroupAddon>
           <i class="pi pi-envelope" />
         </InputGroupAddon>
-        <InputText placeholder="Email" v-model="email" />
+        <InputText
+          placeholder="Email"
+          v-model="email"
+          :class="{ invalid: invalidEmail }"
+        />
       </InputGroup>
     </div>
     <div class="field">
@@ -79,7 +152,7 @@
       type="submit"
       label="Register"
       class="button"
-      @click="handleSubmit"
+      @click="displayTermsModal"
     />
 
     <div class="legend">
@@ -104,12 +177,18 @@ export default {
     const selectedCountry = ref();
 
     const countries = ref([
-      { name: "United States", code: "US", number: '840' },
-      { name: "Chile", code: "CL", number: '152' },
-      { name: "Argentina", code: "AR", number: '032' },
-      { name: "Venezuela", code: "VE", number: '862' },
-      { name: "Colombia", code: "CO", number: '170' },
+      { name: "United States", code: "US", number: "840" },
+      { name: "Chile", code: "CL", number: "152" },
+      { name: "Argentina", code: "AR", number: "032" },
+      { name: "Venezuela", code: "VE", number: "862" },
+      { name: "Colombia", code: "CO", number: "170" },
     ]);
+
+    const termsModalVisible = ref(false);
+
+    const invalidEmail = ref(false);
+    const invalidUsername = ref(false);
+    const invalidPassword = ref(false);
 
     return {
       username,
@@ -118,15 +197,31 @@ export default {
       createUser,
       selectedCountry,
       countries,
+      termsModalVisible,
+      invalidEmail,
+      invalidUsername,
+      invalidPassword,
     };
   },
   methods: {
-    async handleSubmit() {
+    displayTermsModal() {
+      //this.termsModalVisible = !this.termsModalVisible;
+
+      this.invalidEmail = !this.validateEmail(this.email) ? true : false;
+      this.invalidUsername = !this.validateUsername(this.username)
+        ? true
+        : false;
+      this.invalidPassword = !this.validatePassword(this.password)
+        ? true
+        : false;
+    },
+    async handleSubmit(isAccepted) {
       const params = {
         username: this.username,
         email: this.email,
         password: this.password,
         country: this.selectedCountry.number,
+        terms_accepted: isAccepted,
       };
 
       console.log(params);
@@ -135,12 +230,20 @@ export default {
 
       console.log(result);
     },
+    validateEmail(value) {
+      const emailInput = value;
+      const emailRegex = /^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return emailRegex.test(emailInput);
+    },
   },
 };
 </script>
 <style src="../assets/flags.css" />
 
 <style lang="css" scoped>
+.invalid {
+  border: 1px solid red;
+}
 .card {
   background: var(--base-a);
   padding: 1.5rem;
@@ -179,8 +282,11 @@ export default {
 .legend span {
   margin-top: 0.5rem;
 }
+
 p {
   font-size: var(--text-size-a);
+  line-height: 1.75;
+  margin: 0 !important;
 }
 
 ul {
@@ -193,6 +299,15 @@ ul {
 }
 
 .dropdown-item div {
+  margin-left: 1rem;
+}
+
+.modal-footer {
+  display: flex;
+  align-items: center;
+}
+
+.modal-footer button {
   margin-left: 1rem;
 }
 </style>
