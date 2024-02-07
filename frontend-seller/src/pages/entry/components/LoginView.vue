@@ -1,12 +1,11 @@
 <template>
   <div class="card">
-    <div class="field">
-      <div class="title">Be a seller</div>
-    </div>
+    <div class="title">Sign Up</div>
+
     <div class="field">
       <InputGroup>
         <InputGroupAddon>
-          <i class="pi pi-user" />
+          <i class="pi pi-envelope" />
         </InputGroupAddon>
         <InputText placeholder="Email" />
       </InputGroup>
@@ -27,8 +26,12 @@
         <InputText placeholder="Password" />
       </InputGroup>
     </div>
-    <div class="field">
-      <Button type="submit" label="Register" class="button" />
+
+    <Button type="submit" label="Register" class="button" />
+
+    <div class="legend">
+      <span>I already have an account...</span>
+      <span>Or reset password.</span>
     </div>
   </div>
 </template>
@@ -54,7 +57,7 @@ export default {
 <style lang="css" scoped>
 .card {
   background: var(--base-a);
-  padding: 2rem;
+  padding: 2rem 1.5rem;
   border-radius: 18px;
   display: block;
 }
@@ -66,10 +69,28 @@ export default {
 
 .button {
   width: 100%;
+  margin-top: 1rem;
 }
 
 .title {
   font-weight: 700;
   font-size: var(--text-size-g);
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.legend {
+  text-align: left;
+  font-size: var(--text-size-a);
+  cursor: pointer;
+  color: var(--blue-a);
+  margin-top: 1rem;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+}
+
+.legend span {
+  margin-top: 0.5rem;
 }
 </style>
