@@ -1,5 +1,5 @@
-const createProduct = (state, data) => {
-  state.productData.push(data);
+const createUser = (state, data) => {
+  state.sellerData = data;
 };
 
-export { createProduct };
+export { createUser };

@@ -1,6 +1,6 @@
 create table if not exists seller(
   seller_id varchar(20) not null,
-  nickname varchar(50) not null,
+  username varchar(50) not null,
   email varchar(100) not null,
   password_hash varchar(255) not null,
   verified boolean default false,

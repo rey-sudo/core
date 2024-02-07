@@ -22,7 +22,7 @@ const createSellerHandler = async (req: Request, res: Response) => {
       role: "create-seller",
       entity: "seller",
       email: params.email,
-      username: params.nickname,
+      username: params.username,
     });
 
     const password = await hashPassword(params.password);
@@ -30,7 +30,7 @@ const createSellerHandler = async (req: Request, res: Response) => {
     const schemeData = `
     INSERT INTO seller (
       seller_id,
-      nickname,
+      username,
       email,
       password_hash,
       verified,
@@ -46,7 +46,7 @@ const createSellerHandler = async (req: Request, res: Response) => {
 
     const schemeValue = [
       getSellerId(),
-      params.nickname,
+      params.username,
       params.email,
       password,
       false,

@@ -1,12 +1,12 @@
 import axiosAPI from "@/api/axios-api";
 
-const createProduct = async ({ commit }, params) => {
+const createUser = async ({ commit }, params) => {
   try {
-    const response = await axiosAPI.post("/api/product/create-product", params);
+    const response = await axiosAPI.post("/api/seller/create-seller", params);
 
     console.log(response);
 
-    commit("createProduct", response.data);
+    commit("createUser", response.data);
 
     return { ok: true, response: response.data };
   } catch (error) {
@@ -14,4 +14,4 @@ const createProduct = async ({ commit }, params) => {
   }
 };
 
-export { createProduct };
+export { createUser };

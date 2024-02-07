@@ -1,24 +1,24 @@
 import { useStore } from "vuex";
 import { computed } from "vue";
 
-const dashboardAPI = () => {
+const entryAPI = () => {
   const store = useStore();
 
-  const fetchProductData = async (params) =>
-    await store.dispatch("dashboard/fetchProductData", params);
+  const userLogin = async (params) =>
+    await store.dispatch("entry/userLogin", params);
 
-  const createProduct = async (params) =>
-    await store.dispatch("dashboard/createProduct", params);
+  const createUser = async (params) =>
+    await store.dispatch("entry/createUser", params);
 
   const sleep = (timeInMs) =>
     new Promise((resolve) => setTimeout(() => resolve(false), timeInMs));
 
   return {
     getProductData: computed(() => store.getters["dashboard/getProductData"]),
-    fetchProductData,
-    createProduct,
+    userLogin,
+    createUser,
     sleep,
   };
 };
 
-export default dashboardAPI;
+export default entryAPI;

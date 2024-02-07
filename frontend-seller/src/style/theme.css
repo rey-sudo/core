@@ -992,6 +992,8 @@
       box-shadow 0.2s;
     border-radius: 6px;
     outline-color: transparent;
+    width: 100%;
+    text-align: left;
   }
   .p-dropdown:not(.p-disabled):hover {
     border-color: #2196f3;
@@ -1600,10 +1602,12 @@
   }
   .p-password-panel .p-password-meter {
     margin-bottom: 0.5rem;
-    background: #dee2e6;
+    background: #dee2e6;  
+ 
   }
   .p-password-panel .p-password-meter .p-password-strength.weak {
     background: #e53935;
+
   }
   .p-password-panel .p-password-meter .p-password-strength.medium {
     background: #ffb300;

@@ -1,8 +1,8 @@
 /**GETTER */
-const getProductData = (state) => {
-  return state.productData;
+const getUser = (state) => {
+  return state.sellerData;
 };
 
 
 
-export { getProductData };
+export { getUser };
