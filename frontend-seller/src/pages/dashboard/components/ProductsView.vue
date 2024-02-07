@@ -150,7 +150,7 @@
 
       <Dialog
         v-model:visible="productDialog"
-        :style="{ width: '480px' }"
+        :style="{ width: '500px' }"
         header="Create"
         :modal="true"
         :draggable="false"
@@ -274,7 +274,7 @@
             <Toast />
             <FileUpload
               name="image"
-              url="https://localhost:443/api/media/create-image"
+              :url="mediaUrl"
               @upload="onAdvancedUpload($event)"
               :multiple="true"
               accept="image/*"
@@ -352,27 +352,12 @@
 <script>
 import { FilterMatchMode } from "primevue/api";
 import { ProductService } from "./service/ProductService";
-import { useToast } from "primevue/usetoast";
+import { HOST } from "@/api/index";
 
 export default {
-  setup() {
-    const toast = useToast();
-
-    const onAdvancedUpload = (e) => {
-      if (e.xhr.response === "true") {
-        toast.add({
-          severity: "info",
-          summary: "Success",
-          detail: "File Uploaded",
-          life: 3000,
-        });
-      }
-    };
-
-    return { onAdvancedUpload };
-  },
   data() {
     return {
+      mediaUrl: HOST + "/api/media/create-image",
       products: null,
       productDialog: false,
       deleteProductDialog: false,
@@ -410,6 +395,20 @@ export default {
     ProductService.getProducts().then((data) => (this.products = data));
   },
   methods: {
+    onAdvancedUpload(e) {
+      const response = JSON.parse(e.xhr.response);
+
+      if (response.success === true) {
+        this.$toast.add({
+          severity: "info",
+          summary: "Success",
+          detail: "File Uploaded",
+          life: 3000,
+        });
+
+        console.log(response.payload);
+      }
+    },
     formatCurrency(value) {
       if (value)
         return value.toLocaleString("en-US", {

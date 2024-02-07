@@ -1,10 +1,10 @@
-const env = "prod"; 
+const env = "dev";
 
 const baseURL = {
-  dev: "https://pairfy.dev",
+  dev: "https://localhost:443",
   prod: "https://pairfy.io",
 };
 
+const HOST = baseURL[env];
 
-export { env, baseURL };
-  
+export { env, baseURL, HOST };

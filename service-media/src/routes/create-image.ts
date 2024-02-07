@@ -23,7 +23,7 @@ const upload = multer({
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
       return callback(null, false);
     }
-    //mimetype
+    
     callback(null, true);
   },
 });
@@ -38,6 +38,8 @@ const createImageHandler = async (req: Request, res: Response) => {
   const SELLER = req.sellerData;
 
   let connection: any = null;
+
+  let response: string[] = [];
 
   try {
     if (!req.files) {
@@ -58,20 +60,26 @@ const createImageHandler = async (req: Request, res: Response) => {
         schema_v
        ) VALUES (?, ?, ?, ?, ?)`;
 
+      const image_id = getImageId();
+
       const schemeValue = [
-        getImageId(),
+        image_id,
         "deletethis", //
         "image",
         image.buffer,
         0,
       ];
 
-      await connection.execute(schemeData, schemeValue);
+      const [result] = await connection.execute(schemeData, schemeValue);
+
+      if (result.affectedRows === 1) {
+        response.push(image_id);
+      }
     }
 
     await connection.commit();
 
-    res.status(200).send({ success: true });
+    res.status(200).send({ success: true, payload: response });
   } catch (err) {
     await connection.rollback();
 
