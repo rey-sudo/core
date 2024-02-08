@@ -35,15 +35,13 @@ const createSellerHandler = async (req: Request, res: Response) => {
       password_hash,
       verified,
       country,
-      completed_sales,
-      uncompleted_sales,
       trade_terms,
       terms_accepted,
       avatar_base,
       avatar_path,
       public_ip,
       schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const schemeValue = [
       getSellerId(),
@@ -52,8 +50,6 @@ const createSellerHandler = async (req: Request, res: Response) => {
       password,
       false,
       params.country,
-      0,
-      0,
       "Terms and conditions: Provide correct data for effective shipping.",
       params.terms_accepted,
       "https://example.com",
