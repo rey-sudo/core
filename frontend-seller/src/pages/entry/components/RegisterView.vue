@@ -88,7 +88,11 @@
         <InputGroupAddon>
           <i class="pi pi-user" />
         </InputGroupAddon>
-        <InputText v-model="username" placeholder="Username" />
+        <InputText
+          v-model="username"
+          placeholder="Username"
+          :class="{ invalid: invalidUsername }"
+        />
       </InputGroup>
     </div>
     <div class="field">
@@ -96,7 +100,12 @@
         <InputGroupAddon>
           <i class="pi pi-lock" />
         </InputGroupAddon>
-        <Password v-model="password" placeholder="Password" toggleMask>
+        <Password
+          v-model="password"
+          placeholder="Password"
+          toggleMask
+          :class="{ invalid: invalidPassword }"
+        >
           <template #header>
             <p class="mt-2">Suggestions</p>
           </template>
@@ -207,13 +216,20 @@ export default {
     displayTermsModal() {
       //this.termsModalVisible = !this.termsModalVisible;
 
-      this.invalidEmail = !this.validateEmail(this.email) ? true : false;
-      this.invalidUsername = !this.validateUsername(this.username)
-        ? true
-        : false;
-      this.invalidPassword = !this.validatePassword(this.password)
-        ? true
-        : false;
+      this.invalidEmail = !this.validateEmail(this.email);
+      this.invalidUsername = !this.validateUsername(this.username);
+      this.invalidPassword = !this.validatePassword(this.password);
+
+      if (
+        [
+          this.invalidEmail,
+          this.invalidUsername,
+          this.invalidPassword,
+        ].includes(true)
+      ) {
+        console.log("returned");
+        return;
+      }
     },
     async handleSubmit(isAccepted) {
       const params = {
@@ -234,6 +250,17 @@ export default {
       const emailInput = value;
       const emailRegex = /^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       return emailRegex.test(emailInput);
+    },
+    validateUsername(value) {
+      const usernameInput = value;
+      const usernameRegex = /^[a-zA-Z0-9]{7,}$/;
+      return usernameRegex.test(usernameInput);
+    },
+
+    validatePassword(value) {
+      const passwordInput = value;
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+      return passwordRegex.test(passwordInput);
     },
   },
 };
