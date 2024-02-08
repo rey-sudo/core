@@ -1,8 +1,29 @@
 <template>
   <div class="card">
     <Dialog
+      v-model:visible="messageModalVisible"
+      modal
+      header="Message"
+      :draggable="false"
+      :style="{ width: '40rem' }"
+      :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
+    >
+      <p>{{ messageModal }}</p>
+      <template #footer>
+        <div class="modal-footer">
+          <Button
+            type="button"
+            label="Save"
+            @click="messageModalVisible = false"
+          />
+        </div>
+      </template>
+    </Dialog>
+
+    <Dialog
       v-model:visible="termsModalVisible"
       modal
+      :draggable="false"
       header="Terms of use"
       :style="{ width: '40rem' }"
       :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
@@ -129,7 +150,7 @@
         :options="countries"
         optionLabel="name"
         placeholder="Operations area"
-        class="w-full md:w-14rem"
+        :class="{ invalid: invalidCountry }"
       >
         <template #value="slotProps">
           <div v-if="slotProps.value" class="dropdown-item">
@@ -183,7 +204,7 @@ export default {
 
     const { createUser } = entryAPI();
 
-    const selectedCountry = ref();
+    const selectedCountry = ref(null);
 
     const countries = ref([
       { name: "United States", code: "US", number: "840" },
@@ -194,10 +215,13 @@ export default {
     ]);
 
     const termsModalVisible = ref(false);
+    const messageModalVisible = ref(false);
+    const messageModal = ref("");
 
     const invalidEmail = ref(false);
     const invalidUsername = ref(false);
     const invalidPassword = ref(false);
+    const invalidCountry = ref(false);
 
     return {
       username,
@@ -210,28 +234,39 @@ export default {
       invalidEmail,
       invalidUsername,
       invalidPassword,
+      messageModalVisible,
+      messageModal,
+      invalidCountry,
     };
   },
   methods: {
+    handleMessage(message) {
+      this.messageModalVisible = true;
+      this.messageModal = message;
+    },
     displayTermsModal() {
-      //this.termsModalVisible = !this.termsModalVisible;
+      this.termsModalVisible = !this.termsModalVisible;
+    },
 
+    async handleSubmit(isAccepted) {
       this.invalidEmail = !this.validateEmail(this.email);
       this.invalidUsername = !this.validateUsername(this.username);
       this.invalidPassword = !this.validatePassword(this.password);
+      this.invalidCountry = !this.validateCountry(this.selectedCountry);
 
       if (
         [
           this.invalidEmail,
           this.invalidUsername,
           this.invalidPassword,
+          this.invalidCountry,
         ].includes(true)
       ) {
         console.log("returned");
-        return;
+
+        return (this.termsModalVisible = false);
       }
-    },
-    async handleSubmit(isAccepted) {
+
       const params = {
         username: this.username,
         email: this.email,
@@ -242,9 +277,9 @@ export default {
 
       console.log(params);
 
-      const result = await this.createUser(params);
-
-      console.log(result);
+      await this.createUser(params)
+        .then((res) => this.handleMessage(res.result))
+        .catch(() => this.handleMessage("error"));
     },
     validateEmail(value) {
       const emailInput = value;
@@ -261,6 +296,9 @@ export default {
       const passwordInput = value;
       const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
       return passwordRegex.test(passwordInput);
+    },
+    validateCountry(value) {
+      return !value ? false : true;
     },
   },
 };
