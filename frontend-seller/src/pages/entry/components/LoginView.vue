@@ -182,7 +182,7 @@ export default {
 }
 
 .legend span {
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
 }
 
 p {

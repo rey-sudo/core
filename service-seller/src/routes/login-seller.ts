@@ -44,7 +44,8 @@ const loginSellerHandler = async (req: Request, res: Response) => {
       seller_id: sellerDatum.seller_id,
       role: "SELLER",
       email: sellerDatum.email,
-      nickname: sellerDatum.nickname,
+      avatar: sellerDatum.avatar_base + sellerDatum.avatar_path,
+      username: sellerDatum.username,
     };
 
     const token = createToken(sellerData);

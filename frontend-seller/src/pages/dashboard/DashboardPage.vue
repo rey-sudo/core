@@ -14,6 +14,15 @@
         <i :class="item.icon" />
         <span>{{ item.label }}</span>
       </div>
+      <div class="dashboard-nav-item bottom">
+        <img
+          class="avatar"
+          src="https://api.dicebear.com/7.x/initial/svg?seed=tester1&backgroundColor=b6e3f4"
+          alt=""
+        />
+
+        <span>{{ getUserData?.username }}</span>
+      </div>
     </div>
 
     <ProductsView v-show="selectedNav === 'products'" />
@@ -22,10 +31,18 @@
 
 <script>
 import ProductsView from "./components/ProductsView.vue";
+import entryAPI from "@/pages/entry/api";
 
 export default {
   components: {
     ProductsView,
+  },
+
+  setup() {
+    const { getUserData } = entryAPI();
+    return {
+      getUserData,
+    };
   },
   data() {
     return {
@@ -130,6 +147,15 @@ export default {
   display: flex;
 }
 
-.dashboard-nav-logo img {
+.dashboard-nav-item.bottom {
+  position: absolute;
+  bottom: 1rem;
+  padding: 0;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 </style>

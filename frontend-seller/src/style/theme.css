@@ -960,7 +960,7 @@
     padding: 0.25rem 0;
   }
   .p-chips .p-chips-multiple-container .p-chips-input-token input {
-    font-family: var(--font-family);
+    font-size: var(--text-size-b);
     font-feature-settings: var(--font-feature-settings, normal);
     font-size: 1rem;
     color: #495057;
@@ -1253,7 +1253,7 @@
     font-family: var(--font-family);
     font-feature-settings: var(--font-feature-settings, normal);
     font-size: var(--text-size-b);
-    color: var(--text-b);
+    color: var(--text-a);
     background: #ffffff;
     padding: 0.5rem 0.5rem;
     border: 1px solid #ced4da;

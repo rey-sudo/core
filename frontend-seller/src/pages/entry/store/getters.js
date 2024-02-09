@@ -1,5 +1,5 @@
 /**GETTER */
-const getUser = (state) => {
+const getUserData = (state) => {
   return state.userData;
 };
 
@@ -7,4 +7,5 @@ const getUser = (state) => {
 
 
 
-export { getUser };
+export { getUserData };
+ 

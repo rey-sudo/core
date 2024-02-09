@@ -17,8 +17,8 @@ const entryAPI = () => {
     new Promise((resolve) => setTimeout(() => resolve(false), timeInMs));
 
   return {
-    getProductData: computed(() => store.getters["dashboard/getProductData"]),
     loginUser,
+    getUserData: computed(() => store.getters["entry/getUserData"]),
     createUser,
     getUser,
     sleep,

@@ -1,8 +1,8 @@
 <template>
   <div class="card">
-    <div class="title">Verify Email</div>
+    <div class="title">Please verify email</div>
 
-    <div class="subtitle">Please check spam box or all</div>
+    <div class="subtitle">Check your spam box or all</div>
 
     <div class="circle-icon">
       <i class="pi pi-envelope" />
