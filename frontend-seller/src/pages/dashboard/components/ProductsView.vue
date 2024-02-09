@@ -447,7 +447,6 @@ export default {
             life: 3000,
           });
         } else {
-          
           const params = {
             name: "name",
             description: "description",
@@ -612,7 +611,7 @@ img {
     radial-gradient(
       50% 50% at 50% 50%,
       rgba(24, 119, 242, 0.064) 0,
-      rgba(24, 119, 242, 0) 100%
+      rgba(24, 119, 242, 0.1) 100%
     ),
     radial-gradient(
       50% 50% at 50% 50%,
@@ -622,7 +621,7 @@ img {
     radial-gradient(
       50% 50% at 50% 50%,
       rgba(255, 108, 92, 0.04) 0,
-      rgba(255, 108, 92, 0) 75%
+      rgba(255, 108, 92, 0.1) 75%
     ),
     radial-gradient(
       50% 50% at 50% 50%,
@@ -737,12 +736,15 @@ img {
 
 .products-header-title {
   font-weight: 700;
-  font-size: var(--text-size-e);
+  font-size: var(--text-size-f);
 }
 
 .products-header-subtitle {
   font-weight: 400;
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-c);
+}
+
+::v-deep(.p-dropdown) {
+  width: initial;
 }
 </style>
-./service

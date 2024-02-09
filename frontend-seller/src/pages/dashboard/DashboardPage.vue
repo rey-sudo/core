@@ -73,6 +73,7 @@ export default {
 <style lang="css" scoped>
 .dashboard {
   display: flex;
+  height: 100vh;
 }
 
 .dashboard-nav {

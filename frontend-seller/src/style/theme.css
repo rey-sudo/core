@@ -1602,12 +1602,10 @@
   }
   .p-password-panel .p-password-meter {
     margin-bottom: 0.5rem;
-    background: #dee2e6;  
- 
+    background: #dee2e6;
   }
   .p-password-panel .p-password-meter .p-password-strength.weak {
     background: #e53935;
-
   }
   .p-password-panel .p-password-meter .p-password-strength.medium {
     background: #ffb300;
@@ -6752,8 +6750,8 @@
     color: #ffffff;
   }
   .p-tag.p-tag-warning {
-    background-color: var(--orange-s);
-    color: var(--orange-a);
+    background-color: var(--base-b);
+    color: var(--text-b);
   }
 
   .p-tag.p-tag-danger {
