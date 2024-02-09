@@ -53,13 +53,4 @@ export default {};
   text-align: left;
   color: var(--text-b);
 }
-
-.dropdown-item {
-  display: flex;
-  justify-content: space-between;
-}
-
-.dropdown-item div {
-  margin-left: 1rem;
-}
 </style>
