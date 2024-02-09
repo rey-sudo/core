@@ -44,16 +44,12 @@
           v-model="password"
           placeholder="Password"
           toggleMask
+          :feedback="false"
         />
       </InputGroup>
     </div>
 
-    <Button
-      type="submit"
-      label="Login"
-      class="button"
-      @click="handleSubmit"
-    />
+    <Button type="submit" label="Login" class="button" @click="handleSubmit" />
 
     <div class="legend">
       <span @click="handleMode('register')">Create an account</span>
@@ -71,7 +67,7 @@ export default {
     const email = ref(null);
     const password = ref(null);
 
-    const { createUser } = entryAPI();
+    const { loginUser  } = entryAPI();
 
     const messageModalVisible = ref(false);
     const messageModal = ref(null);
@@ -79,12 +75,10 @@ export default {
 
     const invalidEmail = ref(false);
 
-   
-
     return {
       email,
       password,
-      createUser,
+      loginUser,
       invalidEmail,
       messageModalVisible,
       messageModal,
@@ -128,8 +122,14 @@ export default {
 
       console.log(params);
 
-      await this.createUser(params)
-        .then((res) => this.handleMessage("response", res))
+      await this.loginUser(params)
+        .then(() => {
+          this.$router.push({ name: "dashboard" }).catch((err) => {
+            if (err.name !== "NavigationDuplicated") {
+              throw err;
+            }
+          });
+        })
         .catch((err) => this.handleMessage("error", err));
     },
     validateEmail(value) {

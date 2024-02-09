@@ -299,7 +299,7 @@ export default {
       console.log(params);
 
       await this.createUser(params)
-        .then((res) => this.handleMessage("response", res))
+        .then(() => this.handleMode('email'))
         .catch((err) => this.handleMessage("error", err));
     },
     validateEmail(value) {

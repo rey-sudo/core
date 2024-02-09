@@ -1,4 +1,4 @@
 export default () => ({
-  sellerData: null,
-  country: 940
+  userData: null,
+  country: '940'
 });

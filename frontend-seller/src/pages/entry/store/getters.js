@@ -1,7 +1,9 @@
 /**GETTER */
 const getUser = (state) => {
-  return state.sellerData;
+  return state.userData;
 };
+
+
 
 
 

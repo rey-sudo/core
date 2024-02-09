@@ -3,6 +3,7 @@
     <RegisterView v-if="mode === 'register'" />
     <LoginView v-if="mode === 'login'" />
     <RecoveryView v-if="mode === 'recovery'" />
+    <EmailView v-if="mode === 'email'" />
   </div>
 </template>
 
@@ -10,12 +11,14 @@
 import RegisterView from "@/pages/entry/components/RegisterView";
 import LoginView from "@/pages/entry/components/LoginView.vue";
 import RecoveryView from "@/pages/entry/components/RecoveryView.vue";
+import EmailView from "@/pages/entry/components/EmailView.vue";
 
-export default { 
+export default {
   components: {
     RegisterView,
     LoginView,
-    RecoveryView
+    RecoveryView,
+    EmailView
   },
   data() {
     return {
@@ -33,7 +36,7 @@ export default {
     main(e) {
       console.log(e);
 
-      const modes = ["register", "login", "recovery"];
+      const modes = ["register", "login", "recovery", "email"];
 
       if (!e.mode) {
         return (this.mode = "register");
@@ -44,7 +47,6 @@ export default {
       }
 
       this.mode = e.mode;
- 
     },
   },
 };
