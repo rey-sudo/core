@@ -707,7 +707,7 @@ img {
 }
 .field-label {
   line-height: 40px;
-  color: var(--text-a);
+  color: var(--text-b);
   font-weight: 500;
   display: flex;
   align-items: center;

@@ -5,17 +5,22 @@
 </template>
 
 <script>
+import entryAPI from "@/pages/entry/api";
 
 export default {
   name: "App",
-
-  mounted(){
-    
-  }
+  setup() {
+    const { getUser } = entryAPI();
+    return {
+      getUser,
+    };
+  },
+  mounted() {
+    this.getUser().catch((err) => {
+      console.error(err);
+    });
+  },
 };
-
 </script>
 
-<style src="./style/global.css"/>
-
-
+<style src="./style/global.css" />

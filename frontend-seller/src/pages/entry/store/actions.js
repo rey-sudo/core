@@ -26,13 +26,13 @@ const loginUser = async ({ commit }, params) => {
   }
 };
 
-const getUser = async ({ commit }, params) => {
+const getUser = async ({ commit }) => {
   try {
-    const response = await axiosAPI.post("/api/seller/current-seller", params);
+    const response = await axiosAPI.get("/api/seller/current-seller");
 
     console.log(response);
 
-    commit("userData", response.data);
+    commit("userData", response.data.sellerData);
 
     return { ok: true, response: response.data };
   } catch (error) {
