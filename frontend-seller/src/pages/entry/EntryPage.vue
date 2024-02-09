@@ -2,18 +2,20 @@
   <div class="entry">
     <RegisterView v-if="mode === 'register'" />
     <LoginView v-if="mode === 'login'" />
-    <RegisterView v-if="mode === 'recovery'" />
+    <RecoveryView v-if="mode === 'recovery'" />
   </div>
 </template>
 
 <script>
 import RegisterView from "@/pages/entry/components/RegisterView";
 import LoginView from "@/pages/entry/components/LoginView.vue";
+import RecoveryView from "@/pages/entry/components/RecoveryView.vue";
 
-export default {
+export default { 
   components: {
     RegisterView,
     LoginView,
+    RecoveryView
   },
   data() {
     return {
