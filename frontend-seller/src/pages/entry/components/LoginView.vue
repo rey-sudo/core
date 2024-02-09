@@ -89,7 +89,7 @@
     </Dialog>
 
     <!----->
-    <div class="title">Sign Up</div>
+    <div class="title">Sign In</div>
 
     <div class="field">
       <InputGroup>
@@ -185,7 +185,7 @@
     />
 
     <div class="legend">
-      <span @click="handleMode('login')">I already have an account</span>
+      <span @click="handleMode('register')">Create an account</span>
       <span @click="handleMode('recovery')">Reset password</span>
     </div>
   </div>
