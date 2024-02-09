@@ -27,25 +27,26 @@ const loginSellerHandler = async (req: Request, res: Response) => {
       throw new Error("nonexist");
     }
 
-    const sellerDatum = rows[0];
+    const SELLER = rows[0];
 
     const passwordsMatch = await comparePassword(
-      sellerDatum.password_hash,
+      SELLER.password_hash,
       params.password
     );
 
     if (!passwordsMatch) throw new BadRequestError("failed");
 
-    if (sellerDatum.verified !== 1) {
+    if (SELLER.verified !== 1) {
       throw new Error("unverified");
     }
 
     const sellerData: SellerToken = {
-      seller_id: sellerDatum.seller_id,
+      seller_id: SELLER.seller_id,
       role: "SELLER",
-      email: sellerDatum.email,
-      avatar: sellerDatum.avatar_base + sellerDatum.avatar_path,
-      username: sellerDatum.username,
+      email: SELLER.email,
+      avatar: SELLER.avatar_base + SELLER.avatar_path,
+      country: SELLER.country,
+      username: SELLER.username,
     };
 
     const token = createToken(sellerData);

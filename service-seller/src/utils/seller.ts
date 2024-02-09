@@ -7,6 +7,7 @@ interface SellerToken {
   role: string;
   email: string;
   avatar: string;
+  country: string;
   username: string;
 }
 

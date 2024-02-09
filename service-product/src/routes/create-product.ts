@@ -11,7 +11,7 @@ const createProductMiddlewares: any = [sellerMiddleware, requireAuth];
 const createProductHandler = async (req: Request, res: Response) => {
   const params = req.body;
 
-  const seller = req.sellerData;
+  const SELLER = req.sellerData;
 
   let connection = null;
 
@@ -31,7 +31,6 @@ const createProductHandler = async (req: Request, res: Response) => {
       collateral,
       stock,
       stock_status,
-      slots,
       keywords,
       country,
       image_base,
@@ -39,11 +38,11 @@ const createProductHandler = async (req: Request, res: Response) => {
       image_main,
       image_set,
       schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const schemeValue = [
       getProductId(),
-      seller.seller_id,
+      SELLER.seller_id,
       params.name,
       params.description,
       params.category,
@@ -51,9 +50,8 @@ const createProductHandler = async (req: Request, res: Response) => {
       params.collateral,
       params.stock,
       getStockStatus(params.stock),
-      params.slots,
       params.keywords,
-      params.country,
+      SELLER.country,
       "http://what",
       "path/image",
       "image1",

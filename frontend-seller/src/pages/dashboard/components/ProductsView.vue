@@ -284,6 +284,7 @@
             <Chips
               id="keywords"
               v-model="productKeywords"
+              :allowDuplicate="false"
               separator=","
               :max="3"
               :class="{ invalid: invalidProductKeywords }"
@@ -506,9 +507,7 @@ export default {
         price: this.productPrice,
         collateral: this.productCollateral,
         stock: this.productStock,
-        slots: this.productSlots,
         keywords: this.productKeywords,
-        country: this.productCountry,
         image_set: this.productImageSet
       };
 
@@ -771,8 +770,8 @@ img {
 }
 .field-label {
   line-height: 40px;
-  color: var(--text-b);
-  font-weight: 500;
+  color: var(--text-a);
+  font-weight: 600;
   display: flex;
   align-items: center;
 }
