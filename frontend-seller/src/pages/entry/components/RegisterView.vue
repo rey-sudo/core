@@ -5,17 +5,16 @@
       modal
       header="Message"
       :draggable="false"
-      :style="{ width: '40rem' }"
+      :style="{ width: '35rem' }"
       :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
     >
       <p>{{ messageModal }}</p>
+
+      <p v-for="e in errorModal" :key="e">{{ e }}</p>
+
       <template #footer>
         <div class="modal-footer">
-          <Button
-            type="button"
-            label="Save"
-            @click="messageModalVisible = false"
-          />
+          <Button type="button" label="Ok" @click="hideModals" />
         </div>
       </template>
     </Dialog>
@@ -25,7 +24,7 @@
       modal
       :draggable="false"
       header="Terms of use"
-      :style="{ width: '40rem' }"
+      :style="{ width: '35rem' }"
       :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
     >
       <p>
@@ -216,7 +215,8 @@ export default {
 
     const termsModalVisible = ref(false);
     const messageModalVisible = ref(false);
-    const messageModal = ref("");
+    const messageModal = ref(null);
+    const errorModal = ref(null);
 
     const invalidEmail = ref(false);
     const invalidUsername = ref(false);
@@ -237,12 +237,25 @@ export default {
       messageModalVisible,
       messageModal,
       invalidCountry,
+      errorModal,
     };
   },
   methods: {
-    handleMessage(message) {
+    hideModals() {
+      this.messageModalVisible = false;
+      this.termsModalVisible = false;
+    },
+    handleMessage(type, message) {
       this.messageModalVisible = true;
-      this.messageModal = message;
+
+      console.log(type, message);
+
+      if (type === "response") {
+        this.messageModal = message.response.message;
+      }
+      if (type === "error") {
+        this.errorModal = message.response.errors;
+      }
     },
     displayTermsModal() {
       this.termsModalVisible = !this.termsModalVisible;
@@ -254,16 +267,14 @@ export default {
       this.invalidPassword = !this.validatePassword(this.password);
       this.invalidCountry = !this.validateCountry(this.selectedCountry);
 
-      if (
-        [
-          this.invalidEmail,
-          this.invalidUsername,
-          this.invalidPassword,
-          this.invalidCountry,
-        ].includes(true)
-      ) {
-        console.log("returned");
+      const form = [
+        this.invalidEmail,
+        this.invalidUsername,
+        this.invalidPassword,
+        this.invalidCountry,
+      ];
 
+      if (form.includes(true)) {
         return (this.termsModalVisible = false);
       }
 
@@ -278,8 +289,8 @@ export default {
       console.log(params);
 
       await this.createUser(params)
-        .then((res) => this.handleMessage(res.result))
-        .catch(() => this.handleMessage("error"));
+        .then((res) => this.handleMessage("response", res))
+        .catch((err) => this.handleMessage("error", err));
     },
     validateEmail(value) {
       const emailInput = value;

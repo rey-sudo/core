@@ -62,7 +62,7 @@ const createSellerHandler = async (req: Request, res: Response) => {
 
     await conn.commit();
 
-    res.status(200).send({ success: true });
+    res.status(200).send({ success: true, message:  "Successfully registered" });
   } catch (err) {
     await conn.rollback();
 
