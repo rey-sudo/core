@@ -33,14 +33,13 @@ const createProductHandler = async (req: Request, res: Response) => {
       stock_status,
       slots,
       keywords,
-      theme,
       country,
       image_base,
       image_path,
       image_main,
       image_set,
       schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const schemeValue = [
       getProductId(),
@@ -51,14 +50,13 @@ const createProductHandler = async (req: Request, res: Response) => {
       params.price,
       params.collateral,
       params.stock,
-      params.stock_status,
+      getStockStatus(params.stock),
       params.slots,
       params.keywords,
-      params.theme,
       params.country,
-      params.image_base,
-      params.image_path,
-      params.image_main,
+      "http://what",
+      "path/image",
+      "image1",
       params.image_set,
       0,
     ];
@@ -80,3 +78,19 @@ const createProductHandler = async (req: Request, res: Response) => {
 };
 
 export { createProductMiddlewares, createProductHandler };
+
+function getStockStatus(stock: number): string {
+  if (stock < 1) {
+    return "out";
+  }
+
+  if (stock < 10) {
+    return "low";
+  }
+
+  if (stock < 20) {
+    return "stock";
+  }
+
+  return "stock";
+}

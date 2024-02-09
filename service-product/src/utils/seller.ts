@@ -6,7 +6,8 @@ interface SellerToken {
   seller_id: string;
   role: string;
   email: string;
-  nickname: string;
+  avatar: string;
+  username: string;
 }
 
 declare global {

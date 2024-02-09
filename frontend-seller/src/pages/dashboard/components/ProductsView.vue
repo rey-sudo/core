@@ -317,7 +317,7 @@
 
         <template #footer>
           <Button label="Cancel" icon="pi pi-times" text @click="hideDialog" />
-          <Button label="Save" icon="pi pi-check" text @click="saveProduct" />
+          <Button label="Save" icon="pi pi-check" text @click="handleSubmit" />
         </template>
       </Dialog>
 
@@ -496,18 +496,20 @@ export default {
       this.productDialog = false;
       this.submitted = false;
     },
-    async saveProduct() {
+    async handleSubmit() {
       this.submitted = true;
 
       const params = {
-        name: "name",
-        description: "description",
-        category: "",
-        price: "",
-        collateral: "",
-        stock: 2,
-        keywords: "a,b,c",
-        image_set: "1,2,3",
+        name: this.productName,
+        description: this.productDescription,
+        category: this.productCategory,
+        price: this.productPrice,
+        collateral: this.productCollateral,
+        stock: this.productStock,
+        slots: this.productSlots,
+        keywords: this.productKeywords,
+        country: this.productCountry,
+        image_set: this.productImageSet
       };
 
       const { success } = await this.createProduct(params);
