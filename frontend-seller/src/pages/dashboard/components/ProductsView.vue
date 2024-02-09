@@ -66,7 +66,7 @@
             selectionMode="multiple"
             style="width: 3rem"
             :exportable="false"
-          ></Column>
+          />
           <Column
             field="code"
             header="Code"
@@ -166,13 +166,13 @@
           <label for="name" class="field-label">Name</label>
           <InputText
             id="name"
-            v-model.trim="product.name"
+            v-model="productName"
             required="true"
             autofocus
-            :class="{ 'p-invalid': submitted && !product.name }"
+            :class="{ invalid: invalidProductName }"
           />
-          <small class="p-error" v-if="submitted && !product.name"
-            >Name is required.</small
+          <small class="p-error" v-if="true"
+            >The name is required and 100 characters long.</small
           >
         </div>
         <div class="field">
@@ -185,13 +185,17 @@
           </label>
           <Textarea
             id="description"
-            v-model="product.description"
+            v-model="productDescription"
             required="true"
             rows="3"
             cols="20"
             style="resize: none"
             autoResize
+            :class="{ invalid: invalidProductDescription }"
           />
+          <small class="p-error" v-if="true"
+            >The description is required and 1000 characters long.
+          </small>
         </div>
 
         <div class="formgrid grid">
@@ -206,14 +210,18 @@
               />
             </label>
             <Dropdown
-              v-model="selectedCategory"
+              v-model="productCategory"
               :options="categories"
               id="category"
               optionLabel="name"
               placeholder=""
               checkmark
+              :class="{ invalid: invalidProductCategory }"
               :highlightOnSelect="false"
             />
+            <small class="p-error" v-if="true"
+              >The category is required.
+            </small>
           </div>
 
           <div class="field col">
@@ -226,11 +234,13 @@
             </label>
             <InputNumber
               id="price"
-              v-model="product.price"
+              v-model="productPrice"
               mode="currency"
               currency="ADA"
               locale="en-US"
+              :class="{ invalid: invalidProductPrice }"
             />
+            <small class="p-error" v-if="true">The price is required.</small>
           </div>
           <div class="field col">
             <label for="collateral" class="field-label">
@@ -242,11 +252,15 @@
             </label>
             <InputNumber
               id="collateral"
-              v-model="product.collateral"
+              v-model="productCollateral"
               mode="currency"
               currency="ADA"
               locale="en-US"
+              :class="{ invalid: invalidProductCollateral }"
             />
+            <small class="p-error" v-if="true"
+              >The collateral is required.
+            </small>
           </div>
           <div class="field col">
             <label for="quantity" class="field-label">
@@ -256,23 +270,36 @@
                 v-tooltip.top="'Current number of units of the product.'"
               />
             </label>
-            <InputNumber id="quantity" v-model="product.quantity" integeronly />
+            <InputNumber
+              id="quantity"
+              v-model="productStock"
+              integeronly
+              :class="{ invalid: invalidProductStock }"
+            />
+
+            <small class="p-error" v-if="true">The stock is required. </small>
           </div>
           <div class="field col">
             <label for="keywords" class="field-label">Keywords</label>
             <Chips
               id="keywords"
-              v-model="product.keywords"
+              v-model="productKeywords"
               separator=","
               :max="3"
+              :class="{ invalid: invalidProductKeywords }"
             />
+            <small class="p-error" v-if="true"
+              >The keywords are required.
+            </small>
           </div>
         </div>
 
         <div class="field">
           <div class="product-upload">
+            <label for="fileupload" class="field-label">Images</label>
             <Toast />
             <FileUpload
+              id="fileupload"
               name="image"
               :url="mediaUrl"
               @upload="onAdvancedUpload($event)"
@@ -352,13 +379,51 @@
 <script>
 import { FilterMatchMode } from "primevue/api";
 import { HOST } from "@/api/index";
+import { ref } from "vue";
 import dashboardAPI from "@/pages/dashboard/api/index";
 
 export default {
   setup() {
     const { getProductData, createProduct } = dashboardAPI();
 
-    return { getProductData, createProduct };
+    const productName = ref(null);
+    const productDescription = ref(null);
+    const productCategory = ref(null);
+    const productPrice = ref(null);
+    const productCollateral = ref(null);
+    const productStock = ref(null);
+    const productKeywords = ref(null);
+    const productImageSet = ref(null);
+
+    const invalidProductName = ref(false);
+    const invalidProductDescription = ref(false);
+    const invalidProductCategory = ref(false);
+    const invalidProductPrice = ref(false);
+    const invalidProductCollateral = ref(false);
+    const invalidProductStock = ref(false);
+    const invalidProductKeywords = ref(false);
+    const invalidProductImageSet = ref(false);
+
+    return {
+      getProductData,
+      createProduct,
+      productName,
+      productDescription,
+      productCategory,
+      productPrice,
+      productCollateral,
+      productStock,
+      productKeywords,
+      productImageSet,
+      invalidProductName,
+      invalidProductDescription,
+      invalidProductCategory,
+      invalidProductPrice,
+      invalidProductCollateral,
+      invalidProductStock,
+      invalidProductKeywords,
+      invalidProductImageSet,
+    };
   },
   data() {
     return {
@@ -434,41 +499,26 @@ export default {
     async saveProduct() {
       this.submitted = true;
 
-      if (this.product.name.trim()) {
-        if (this.product.id) {
-          this.product.inventoryStatus = this.product.inventoryStatus.value
-            ? this.product.inventoryStatus.value
-            : this.product.inventoryStatus;
-          this.products[this.findIndexById(this.product.id)] = this.product;
-          this.$toast.add({
-            severity: "success",
-            summary: "Successful",
-            detail: "Product Updated",
-            life: 3000,
-          });
-        } else {
-          const params = {
-            name: "name",
-            description: "description",
-            category: "",
-            price: "",
-            collateral: "",
-            stock: 2,
-            keywords: "a,b,c",
-            image_set: "1,2,3",
-          };
+      const params = {
+        name: "name",
+        description: "description",
+        category: "",
+        price: "",
+        collateral: "",
+        stock: 2,
+        keywords: "a,b,c",
+        image_set: "1,2,3",
+      };
 
-          const { success } = await this.createProduct(params);
+      const { success } = await this.createProduct(params);
 
-          if (success === true) {
-            this.$toast.add({
-              severity: "success",
-              summary: "Successful",
-              detail: "Product Created",
-              life: 3000,
-            });
-          }
-        }
+      if (success === true) {
+        this.$toast.add({
+          severity: "success",
+          summary: "Successful",
+          detail: "Product Created",
+          life: 3000,
+        });
 
         this.product = {};
         this.productDialog = false;
@@ -557,6 +607,11 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.invalid {
+  border: 1px solid red;
+  border-radius: 6px;
+}
+
 img {
   border-radius: 6px;
 }
@@ -565,6 +620,12 @@ img {
   justify-content: center;
   padding-left: 56px;
   width: 100%;
+  background-size: 156.45vw 99.03vw, 156.45vw 99.03vw, 156.45vw 99.03vw,
+    226.86vw 145.44vw, 226.86vw 145.44vw, 226.86vw 145.44vw, 171.96vw 110.31vw,
+    171.96vw 110.31vw, 171.96vw 110.31vw, 130.29vw 83.58vw, 130.29vw 83.58vw,
+    130.29vw 83.58vw, 198vw 126.9vw, 198vw 126.9vw, 198vw 126.9vw, 300vw 192vw,
+    300vw 192vw, 300vw 192vw;
+
   background-position: 37.97vw calc(((300vw - 100vh) / 2 - 85.77vw) * -1),
     37.97vw calc(((300vw - 100vh) / 2 - 85.77vw) * -1),
     37.97vw calc(((300vw - 100vh) / 2 - 85.77vw) * -1),
@@ -583,6 +644,7 @@ img {
     -100vw calc(((300vw - 100vh) / 2 - 78vw) * -1),
     -100vw calc(((300vw - 100vh) / 2 - 78vw) * -1),
     -100vw calc(((300vw - 100vh) / 2 - 78vw) * -1);
+
   background-image: radial-gradient(
       50% 50% at 50% 50%,
       rgba(160, 51, 255, 0.024) 0,
@@ -611,7 +673,7 @@ img {
     radial-gradient(
       50% 50% at 50% 50%,
       rgba(24, 119, 242, 0.064) 0,
-      rgba(24, 119, 242, 0.1) 100%
+      rgba(24, 119, 242, 0) 100%
     ),
     radial-gradient(
       50% 50% at 50% 50%,
@@ -621,7 +683,7 @@ img {
     radial-gradient(
       50% 50% at 50% 50%,
       rgba(255, 108, 92, 0.04) 0,
-      rgba(255, 108, 92, 0.1) 75%
+      rgba(255, 108, 92, 0) 75%
     ),
     radial-gradient(
       50% 50% at 50% 50%,

@@ -17,7 +17,7 @@
       <div class="dashboard-nav-item bottom">
         <img
           class="avatar"
-          src="https://api.dicebear.com/7.x/initial/svg?seed=tester1&backgroundColor=b6e3f4"
+          src="https://api.dicebear.com/7.x/initials/svg?seed=tester1&backgroundColor=b6e3f4"
           alt=""
         />
 
@@ -151,6 +151,10 @@ export default {
   position: absolute;
   bottom: 1rem;
   padding: 0;
+}
+
+.dashboard-nav-item.bottom span {
+  font-size: var(--text-size-b);
 }
 
 .avatar {
