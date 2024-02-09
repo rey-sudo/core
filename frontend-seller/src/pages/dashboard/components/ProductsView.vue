@@ -2,6 +2,26 @@
   <div class="products">
     <div class="products-wrap">
       <div class="products-card">
+        <Dialog
+          v-model:visible="messageModalVisible"
+          modal
+          header="Message"
+          :draggable="false"
+          :style="{ width: '35rem' }"
+          :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
+        >
+          <p>{{ messageModal }}</p>
+
+          <p v-for="e in errorModal" :key="e">{{ e }}</p>
+
+          <template #footer>
+            <div class="modal-footer">
+              <Button type="button" label="Ok" @click="hideModals" />
+            </div>
+          </template>
+        </Dialog>
+
+        <!----->
         <DataTable
           ref="dt"
           :value="products"
@@ -405,7 +425,14 @@ export default {
     const invalidProductKeywords = ref(false);
     const invalidProductImageSet = ref(false);
 
+    const messageModalVisible = ref(false);
+    const messageModal = ref(null);
+    const errorModal = ref(null);
+
     return {
+      messageModalVisible,
+      messageModal,
+      errorModal,
       getProductData,
       createProduct,
       productName,
@@ -466,6 +493,22 @@ export default {
     this.products = this.getProductData;
   },
   methods: {
+    handleMessage(type, message) {
+      this.messageModalVisible = true;
+
+      console.log(type, message);
+
+      if (type === "response") {
+        this.messageModal = message.response.message;
+      }
+
+      if (type === "error") {
+        this.errorModal = message.response.errors;
+      }
+    },
+    hideModals() {
+      this.messageModalVisible = false;
+    },
     onAdvancedUpload(e) {
       const response = JSON.parse(e.xhr.response);
 
@@ -508,8 +551,23 @@ export default {
         collateral: this.productCollateral,
         stock: this.productStock,
         keywords: this.productKeywords,
-        image_set: this.productImageSet
+        image_set: this.productImageSet,
       };
+
+      const form = [
+        this.invalidProductName,
+        this.invalidProductDescription,
+        this.invalidProductCategory,
+        this.invalidProductPrice,
+        this.invalidProductCollateral,
+        this.invalidProductStock,
+        this.invalidProductKeywords,
+        this.invalidProductImageSet,
+      ];
+
+      if (form.includes(true)) {
+        return (this.termsModalVisible = false);
+      }
 
       const { success } = await this.createProduct(params);
 
@@ -524,6 +582,11 @@ export default {
         this.product = {};
         this.productDialog = false;
       }
+    },
+    validateEmail(value) {
+      const emailInput = value;
+      const emailRegex = /^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return emailRegex.test(emailInput);
     },
     editProduct(product) {
       this.product = { ...product };
