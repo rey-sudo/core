@@ -1723,7 +1723,7 @@
     box-shadow: 0 0 0 0.2rem #bfd1f6;
   }
   .p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
-    color: var(--blue-a); 
+    color: var(--blue-a);
   }
   .p-rating:not(.p-disabled):not(.p-readonly)
     .p-rating-item:hover
@@ -2750,7 +2750,6 @@
     border: 1px solid #e9ecef;
     border-width: 0 0 1px 0;
     font-weight: 600;
-    color: #495057;
     background: #f8f9fa;
     font-size: var(--text-size-b);
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
@@ -2807,7 +2806,7 @@
   }
   .p-datatable .p-datatable-tbody > tr {
     background: #ffffff;
-    color: #495057;
+    color: var(--text-a);
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
   .p-datatable .p-datatable-tbody > tr > td {

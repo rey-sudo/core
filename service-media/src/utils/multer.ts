@@ -12,7 +12,7 @@ const uploadMiddleware = multer({
       return callback(null, false);
     }
 
-    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif|webp)$/)) {
       return callback(null, false);
     }
 

@@ -170,7 +170,7 @@
 
       <Dialog
         v-model:visible="productDialog"
-        :style="{ width: '500px' }"
+        :style="{ width: '480px' }"
         header="Create"
         :modal="true"
         :draggable="false"
@@ -266,7 +266,7 @@
               id="price"
               v-model="productPrice"
               showButtons
-              prefix="₳ "
+              prefix="ADA "
               locale="en-US"
               :min="1"
               :class="{ invalid: invalidProductPrice }"
@@ -288,7 +288,7 @@
               id="collateral"
               v-model="productCollateral"
               showButtons
-              prefix="₳ "
+              prefix="ADA "
               locale="en-US"
               :min="1"
               :class="{ invalid: invalidProductCollateral }"
@@ -343,6 +343,7 @@
               name="image"
               :url="mediaUrl"
               @upload="onAdvancedUpload($event)"
+              @before-upload="onBeforeUpload($event)"
               :multiple="true"
               accept="image/*"
               :fileLimit="5"
@@ -549,6 +550,13 @@ export default {
     this.products = this.getProductData;
   },
   methods: {
+    onBeforeUpload() {
+      console.log("e", this.productImages.length);
+
+      if (this.productImages.length < this.maxProductImages) {
+        this.disableUpload = false;
+      }
+    },
     handleMessage(type, message) {
       this.messageModalVisible = true;
 
@@ -567,11 +575,11 @@ export default {
       const response = JSON.parse(e.xhr.response);
 
       if (response.success === true) {
-        if (this.productImages.length >= this.maxProductImages - 1) {
+        this.productImages.push(...response.payload);
+
+        if (this.productImages.length >= this.maxProductImages) {
           this.disableUpload = true;
         }
-
-        this.productImages.push(...response.payload);
 
         this.$toast.add({
           severity: "info",
@@ -582,12 +590,7 @@ export default {
       }
     },
     formatCurrency(value) {
-      if (value)
-        return value.toLocaleString("en-US", {
-          style: "currency",
-          currency: "USD",
-        });
-      return;
+      if (value) return "₳ " + value;
     },
     newProduct() {
       this.resetForm();
@@ -629,8 +632,8 @@ export default {
         price: this.productPrice,
         collateral: this.productCollateral,
         stock: this.productStock,
-        keywords: this.productKeywords.join(','),
-        image_set: this.productImages.join(','),
+        keywords: this.productKeywords.join(","),
+        image_set: this.productImages.join(","),
       };
 
       await this.createProduct(params).then((res) => {
