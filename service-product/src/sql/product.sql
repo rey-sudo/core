@@ -1,8 +1,8 @@
 create table if not exists product(
   product_id varchar(20) not null,
   seller_id varchar(20) not null,
-  name varchar(125) not null,
-  description varchar(500) not null,
+  name varchar(200) not null,
+  description varchar(1000) not null,
   category varchar(100) not null,
   price int unsigned default 0,
   collateral int unsigned default 0,

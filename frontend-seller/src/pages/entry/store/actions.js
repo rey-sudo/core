@@ -30,8 +30,6 @@ const getUser = async ({ commit }) => {
   try {
     const response = await axiosAPI.get("/api/seller/current-seller");
 
-    console.log(response);
-
     commit("userData", response.data.sellerData);
 
     return { ok: true, response: response.data };

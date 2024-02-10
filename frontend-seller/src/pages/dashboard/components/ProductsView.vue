@@ -191,8 +191,8 @@
             autofocus
             :class="{ invalid: invalidProductName }"
           />
-          <small class="p-error" v-if="true"
-            >The name is required and 100 characters long.</small
+          <small class="p-error" v-if="invalidProductName"
+            >The name is required and max 200 characters long.</small
           >
         </div>
         <div class="field">
@@ -543,16 +543,12 @@ export default {
     async handleSubmit() {
       this.submitted = true;
 
-      const params = {
-        name: this.productName,
-        description: this.productDescription,
-        category: this.productCategory,
-        price: this.productPrice,
-        collateral: this.productCollateral,
-        stock: this.productStock,
-        keywords: this.productKeywords,
-        image_set: this.productImageSet,
-      };
+      this.invalidProductName = !this.validateProductName(this.productName);
+      this.invalidProductDescription = !this.validateProductDescription(
+        this.productDescription
+      );
+
+      console.log(this.productName);
 
       const form = [
         this.invalidProductName,
@@ -565,9 +561,22 @@ export default {
         this.invalidProductImageSet,
       ];
 
+      console.log(form);
+
       if (form.includes(true)) {
-        return (this.termsModalVisible = false);
+        return;
       }
+
+      const params = {
+        name: this.productName,
+        description: this.productDescription,
+        category: this.productCategory,
+        price: this.productPrice,
+        collateral: this.productCollateral,
+        stock: this.productStock,
+        keywords: this.productKeywords,
+        image_set: this.productImageSet,
+      };
 
       const { success } = await this.createProduct(params);
 
@@ -583,10 +592,15 @@ export default {
         this.productDialog = false;
       }
     },
-    validateEmail(value) {
-      const emailInput = value;
-      const emailRegex = /^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      return emailRegex.test(emailInput);
+    validateProductName(value) {
+      const data = value;
+      const dataRegex = /^.{1,200}$/;
+      return dataRegex.test(data);
+    },
+    validateProductDescription(value) {
+      const data = value;
+      const dataRegex = /^.{1,1000}$/;
+      return dataRegex.test(data);
     },
     editProduct(product) {
       this.product = { ...product };
