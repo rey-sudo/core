@@ -32,7 +32,7 @@
           :filters="filters"
           paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
           :rowsPerPageOptions="[5, 10, 25]"
-          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
+          currentPageReportTemplate="{first} to {last} of {totalRecords} items"
         >
           <template #header>
             <div class="products-header">
@@ -560,10 +560,10 @@ export default {
         (this.invalidProductCollateral = !this.checkProductCollateral(
           this.productCollateral
         )),
-        (this.invalidProductStock = !this.checkProductCollateral(
-          this.productStock
+        (this.invalidProductStock = !this.checkProductStock(this.productStock)),
+        (this.invalidProductKeywords = !this.checkProductKeywords(
+          this.productKeywords
         )),
-        this.invalidProductKeywords,
         this.invalidProductImageSet,
       ];
 
@@ -629,6 +629,13 @@ export default {
       }
 
       return Number.isInteger(value) && value >= 0;
+    },
+    checkProductKeywords(value) {
+      if (!value || value.length < 3) {
+        return false;
+      }
+
+      return true;
     },
     editProduct(product) {
       this.product = { ...product };
