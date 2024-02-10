@@ -54,7 +54,7 @@
 
             <Toolbar class="mb-4">
               <template #start>
-                <Button label="New" icon="pi pi-plus" @click="openNew" />
+                <Button label="New" icon="pi pi-plus" @click="newProduct" />
                 <Button
                   label="Delete"
                   icon="pi pi-trash"
@@ -576,7 +576,7 @@ export default {
         this.$toast.add({
           severity: "info",
           summary: "Success",
-          detail: this.productImages.length + "File Uploaded",
+          detail: this.productImages.length + " File Uploaded",
           life: 3000,
         });
       }
@@ -589,7 +589,7 @@ export default {
         });
       return;
     },
-    openNew() {
+    newProduct() {
       this.resetForm();
       this.productDialog = true;
     },
