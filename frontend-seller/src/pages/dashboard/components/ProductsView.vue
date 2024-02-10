@@ -213,7 +213,7 @@
             autoResize
             :class="{ invalid: invalidProductDescription }"
           />
-          <small class="p-error" v-if="true"
+          <small class="p-error" v-if="invalidProductDescription"
             >The description is required and 1000 characters long.
           </small>
         </div>
@@ -239,7 +239,7 @@
               :class="{ invalid: invalidProductCategory }"
               :highlightOnSelect="false"
             />
-            <small class="p-error" v-if="true"
+            <small class="p-error" v-if="invalidProductCategory"
               >The category is required.
             </small>
           </div>
@@ -254,14 +254,17 @@
             </label>
             <InputNumber
               id="price"
-              v-model="productPrice"
-              mode="currency"
-              currency="ADA"
+              v-model="productPrice"            
+              showButtons           
+              prefix="ADA "
               locale="en-US"
               :class="{ invalid: invalidProductPrice }"
             />
-            <small class="p-error" v-if="true">The price is required.</small>
+            <small class="p-error" v-if="invalidProductPrice"
+              >The price is required.</small
+            >
           </div>
+
           <div class="field col">
             <label for="collateral" class="field-label">
               <span>Collateral</span>
@@ -273,12 +276,12 @@
             <InputNumber
               id="collateral"
               v-model="productCollateral"
-              mode="currency"
-              currency="ADA"
+              showButtons           
+              prefix="ADA "
               locale="en-US"
               :class="{ invalid: invalidProductCollateral }"
             />
-            <small class="p-error" v-if="true"
+            <small class="p-error" v-if="invalidProductCollateral"
               >The collateral is required.
             </small>
           </div>
@@ -543,10 +546,17 @@ export default {
     async handleSubmit() {
       this.submitted = true;
 
-      this.invalidProductName = !this.validateProductName(this.productName);
-      this.invalidProductDescription = !this.validateProductDescription(
+      this.invalidProductName = !this.checkProductName(this.productName);
+
+      this.invalidProductDescription = !this.checkProductDescription(
         this.productDescription
       );
+
+      this.invalidProductCategory = !this.checkProductCategory(
+        this.productCategory
+      );
+
+      this.invalidProductPrice = !this.checkProductPrice(this.productPrice);
 
       console.log(this.productName);
 
@@ -563,9 +573,7 @@ export default {
 
       console.log(form);
 
-      if (form.includes(true)) {
-        return;
-      }
+      if (form.includes(true)) return;
 
       const params = {
         name: this.productName,
@@ -592,15 +600,27 @@ export default {
         this.productDialog = false;
       }
     },
-    validateProductName(value) {
+    checkProductName(value) {
+      if (!value) return false;
+
       const data = value;
       const dataRegex = /^.{1,200}$/;
       return dataRegex.test(data);
     },
-    validateProductDescription(value) {
+    checkProductDescription(value) {
+      if (!value) return false;
+
       const data = value;
       const dataRegex = /^.{1,1000}$/;
       return dataRegex.test(data);
+    },
+
+    checkProductCategory(value) {
+      return !value ? false : true;
+    },
+    checkProductPrice(value) {
+      console.log(value);
+      return true;
     },
     editProduct(product) {
       this.product = { ...product };
@@ -826,7 +846,7 @@ img {
   width: inherit;
   border-radius: 18px;
   box-shadow: var(--shadow-a);
-  padding: 1rem;
+  padding: 1rem 2rem;
   background: var(--base-a);
 }
 
@@ -837,6 +857,9 @@ img {
   margin-left: 1rem;
 }
 
+.field{
+  margin-bottom: 0.5rem;
+}
 .field-radiobutton {
   display: flex;
   align-items: center;
