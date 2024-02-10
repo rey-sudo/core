@@ -254,9 +254,9 @@
             </label>
             <InputNumber
               id="price"
-              v-model="productPrice"            
-              showButtons           
-              prefix="ADA "
+              v-model="productPrice"
+              showButtons
+              prefix="₳ "
               locale="en-US"
               :class="{ invalid: invalidProductPrice }"
             />
@@ -276,8 +276,8 @@
             <InputNumber
               id="collateral"
               v-model="productCollateral"
-              showButtons           
-              prefix="ADA "
+              showButtons
+              prefix="₳ "
               locale="en-US"
               :class="{ invalid: invalidProductCollateral }"
             />
@@ -300,7 +300,9 @@
               :class="{ invalid: invalidProductStock }"
             />
 
-            <small class="p-error" v-if="invalidProductStock">The stock is required. </small>
+            <small class="p-error" v-if="invalidProductStock"
+              >The stock is required.
+            </small>
           </div>
           <div class="field col">
             <label for="keywords" class="field-label">Keywords</label>
@@ -546,27 +548,21 @@ export default {
     async handleSubmit() {
       this.submitted = true;
 
-      this.invalidProductName = !this.checkProductName(this.productName);
-
-      this.invalidProductDescription = !this.checkProductDescription(
-        this.productDescription
-      );
-
-      this.invalidProductCategory = !this.checkProductCategory(
-        this.productCategory
-      );
-
-      this.invalidProductPrice = !this.checkProductPrice(this.productPrice);
-
-      console.log(this.productName);
-
       const form = [
-        this.invalidProductName,
-        this.invalidProductDescription,
-        this.invalidProductCategory,
-        this.invalidProductPrice,
-        this.invalidProductCollateral,
-        this.invalidProductStock,
+        (this.invalidProductName = !this.checkProductName(this.productName)),
+        (this.invalidProductDescription = !this.checkProductDescription(
+          this.productDescription
+        )),
+        (this.invalidProductCategory = !this.checkProductCategory(
+          this.productCategory
+        )),
+        (this.invalidProductPrice = !this.checkProductPrice(this.productPrice)),
+        (this.invalidProductCollateral = !this.checkProductCollateral(
+          this.productCollateral
+        )),
+        (this.invalidProductStock = !this.checkProductCollateral(
+          this.productStock
+        )),
         this.invalidProductKeywords,
         this.invalidProductImageSet,
       ];
@@ -602,25 +598,37 @@ export default {
     },
     checkProductName(value) {
       if (!value) return false;
-
-      const data = value;
       const dataRegex = /^.{1,200}$/;
-      return dataRegex.test(data);
+      return dataRegex.test(value);
     },
     checkProductDescription(value) {
       if (!value) return false;
-
-      const data = value;
       const dataRegex = /^.{1,1000}$/;
-      return dataRegex.test(data);
+      return dataRegex.test(value);
     },
-
     checkProductCategory(value) {
       return !value ? false : true;
     },
     checkProductPrice(value) {
-      console.log(value);
-      return true;
+      if (typeof value !== "number") {
+        return false;
+      }
+
+      return Number.isInteger(value) && value > 0;
+    },
+    checkProductCollateral(value) {
+      if (typeof value !== "number") {
+        return false;
+      }
+
+      return Number.isInteger(value) && value > 0;
+    },
+    checkProductStock(value) {
+      if (typeof value !== "number") {
+        return false;
+      }
+
+      return Number.isInteger(value) && value >= 0;
     },
     editProduct(product) {
       this.product = { ...product };
@@ -857,7 +865,7 @@ img {
   margin-left: 1rem;
 }
 
-.field{
+.field {
   margin-bottom: 0.5rem;
 }
 .field-radiobutton {
