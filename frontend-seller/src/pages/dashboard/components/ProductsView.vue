@@ -300,7 +300,7 @@
               :class="{ invalid: invalidProductStock }"
             />
 
-            <small class="p-error" v-if="true">The stock is required. </small>
+            <small class="p-error" v-if="invalidProductStock">The stock is required. </small>
           </div>
           <div class="field col">
             <label for="keywords" class="field-label">Keywords</label>
@@ -312,8 +312,8 @@
               :max="3"
               :class="{ invalid: invalidProductKeywords }"
             />
-            <small class="p-error" v-if="true"
-              >The keywords are required.
+            <small class="p-error" v-if="invalidProductKeywords"
+              >3 keywords are required.
             </small>
           </div>
         </div>

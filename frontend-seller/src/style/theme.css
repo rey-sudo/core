@@ -343,8 +343,8 @@
     font-size: 1rem;
   }
   .p-icon {
-    width: 1rem;
-    height: 1rem;
+    width: var(--text-size-b);
+    height: var(--text-size-b);
   }
   .p-link {
     font-family: var(--font-family);
