@@ -347,13 +347,17 @@
               accept="image/*"
               :fileLimit="5"
               :maxFileSize="1000000"
+              :withCredentials="true"
+              :disabled="disableUpload"
             >
               <template #empty>
-                <p :class="{ invalid: invalidProductImageSet }">
-                  Drag and drop images to here to upload.
-                </p>
+                <p>Drag and drop images to here to upload.</p>
               </template>
             </FileUpload>
+            <small class="invalid" v-if="invalidProductImages">
+              {{ productImages.length }} / {{ minProductImages }} images are
+              required.
+            </small>
           </div>
         </div>
 
@@ -428,29 +432,57 @@ export default {
   setup() {
     const { getProductData, createProduct } = dashboardAPI();
 
-    const productName = ref(null);
-    const productDescription = ref("");
-    const productCategory = ref(null);
-    const productPrice = ref(null);
-    const productCollateral = ref(null);
-    const productStock = ref(null);
-    const productKeywords = ref(null);
-    const productImageSet = ref(null);
+    let productName = ref(null);
+    let productDescription = ref("");
+    let productCategory = ref(null);
+    let productPrice = ref(null);
+    let productCollateral = ref(null);
+    let productStock = ref(null);
+    let productKeywords = ref(null);
+    let productImages = ref([]);
 
-    const invalidProductName = ref(false);
-    const invalidProductDescription = ref(false);
-    const invalidProductCategory = ref(false);
-    const invalidProductPrice = ref(false);
-    const invalidProductCollateral = ref(false);
-    const invalidProductStock = ref(false);
-    const invalidProductKeywords = ref(false);
-    const invalidProductImageSet = ref(false);
+    let invalidProductName = ref(false);
+    let invalidProductDescription = ref(false);
+    let invalidProductCategory = ref(false);
+    let invalidProductPrice = ref(false);
+    let invalidProductCollateral = ref(false);
+    let invalidProductStock = ref(false);
+    let invalidProductKeywords = ref(false);
+    let invalidProductImages = ref(false);
 
-    const messageModalVisible = ref(false);
-    const messageModal = ref(null);
-    const errorModal = ref(null);
+    let messageModalVisible = ref(false);
+    let messageModal = ref(null);
+    let errorModal = ref(null);
+    let disableUpload = ref(false);
+
+    const resetForm = () => {
+      productName = ref(null);
+      productDescription = ref("");
+      productCategory = ref(null);
+      productPrice = ref(null);
+      productCollateral = ref(null);
+      productStock = ref(null);
+      productKeywords = ref(null);
+      productImages = ref([]);
+
+      invalidProductName = ref(false);
+      invalidProductDescription = ref(false);
+      invalidProductCategory = ref(false);
+      invalidProductPrice = ref(false);
+      invalidProductCollateral = ref(false);
+      invalidProductStock = ref(false);
+      invalidProductKeywords = ref(false);
+      invalidProductImages = ref(false);
+
+      messageModalVisible = ref(false);
+      messageModal = ref(null);
+      errorModal = ref(null);
+      disableUpload = ref(false);
+    };
 
     return {
+      disableUpload,
+      resetForm,
       messageModalVisible,
       messageModal,
       errorModal,
@@ -463,7 +495,7 @@ export default {
       productCollateral,
       productStock,
       productKeywords,
-      productImageSet,
+      productImages,
       invalidProductName,
       invalidProductDescription,
       invalidProductCategory,
@@ -471,7 +503,7 @@ export default {
       invalidProductCollateral,
       invalidProductStock,
       invalidProductKeywords,
-      invalidProductImageSet,
+      invalidProductImages,
     };
   },
   data() {
@@ -483,10 +515,11 @@ export default {
       deleteProductsDialog: false,
       descriptionLengthLimit: 1000,
       nameLengthLimit: 200,
+      minProductImages: 5,
+      maxProductImages: 5,
       product: {},
       selectedProducts: null,
       filters: {},
-      submitted: false,
       selectedCategory: null,
       categories: [
         { name: "Home", code: "home" },
@@ -519,8 +552,6 @@ export default {
     handleMessage(type, message) {
       this.messageModalVisible = true;
 
-      console.log(type, message);
-
       if (type === "response") {
         this.messageModal = message.response.message;
       }
@@ -536,14 +567,18 @@ export default {
       const response = JSON.parse(e.xhr.response);
 
       if (response.success === true) {
+        if (this.productImages.length >= this.maxProductImages - 1) {
+          this.disableUpload = true;
+        }
+
+        this.productImages.push(...response.payload);
+
         this.$toast.add({
           severity: "info",
           summary: "Success",
-          detail: "File Uploaded",
+          detail: this.productImages.length + "File Uploaded",
           life: 3000,
         });
-
-        console.log(response.payload);
       }
     },
     formatCurrency(value) {
@@ -555,17 +590,13 @@ export default {
       return;
     },
     openNew() {
-      this.product = {};
-      this.submitted = false;
+      this.resetForm();
       this.productDialog = true;
     },
     hideDialog() {
       this.productDialog = false;
-      this.submitted = false;
     },
     async handleSubmit() {
-      this.submitted = true;
-
       const productForm = [
         (this.invalidProductName = !this.checkProductName(this.productName)),
         (this.invalidProductDescription = !this.checkProductDescription(
@@ -582,8 +613,8 @@ export default {
         (this.invalidProductKeywords = !this.checkProductKeywords(
           this.productKeywords
         )),
-        (this.invalidProductImageSet = !this.checkProductImageSet(
-          this.productImageSet
+        (this.invalidProductImages = !this.checkProductImages(
+          this.productImages
         )),
       ];
 
@@ -599,7 +630,7 @@ export default {
         collateral: this.productCollateral,
         stock: this.productStock,
         keywords: this.productKeywords,
-        image_set: this.productImageSet,
+        image_set: this.productImages,
       };
 
       const { success } = await this.createProduct(params);
@@ -656,6 +687,17 @@ export default {
     },
     checkProductKeywords(value) {
       if (!value || value.length < 3) {
+        return false;
+      }
+
+      return true;
+    },
+    checkProductImages(value) {
+      if (!value.length) {
+        return false;
+      }
+
+      if (this.productImages.length < this.minProductImages) {
         return false;
       }
 
@@ -744,8 +786,9 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.product-upload p {
-  padding: 1rem;
+.product-upload small {
+  padding: 5px;
+  line-height: 50px;
 }
 .p-counter {
   font-weight: 500;
