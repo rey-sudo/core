@@ -192,7 +192,7 @@
             :class="{ invalid: invalidProductName }"
           />
           <small class="p-error" v-if="invalidProductName"
-            >The name is required and max 200 characters long.</small
+            >The name is required and max {{ nameLengthLimit }} characters long.</small
           >
         </div>
         <div class="field">
@@ -479,6 +479,7 @@ export default {
       deleteProductDialog: false,
       deleteProductsDialog: false,
       descriptionLengthLimit: 1000,
+      nameLengthLimit: 200,
       product: {},
       selectedProducts: null,
       filters: {},
@@ -612,8 +613,10 @@ export default {
     },
     checkProductName(value) {
       if (!value) return false;
-      const dataRegex = /^.{1,200}$/;
-      return dataRegex.test(value);
+
+      if (value.length > this.nameLengthLimit) return false;
+
+      return true;
     },
     checkProductDescription(value) {
       if (!value) return false;
@@ -737,7 +740,6 @@ export default {
 
 <style lang="css" scoped>
 .p-counter {
-  color: var(--blue-a);
   font-weight: 500;
   text-align: right;
   padding: 1px 5px;
