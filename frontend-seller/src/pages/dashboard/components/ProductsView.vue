@@ -738,7 +738,7 @@ export default {
 <style lang="css" scoped>
 .p-counter {
   color: var(--blue-a);
-  font-weight: 600;
+  font-weight: 500;
   text-align: right;
   padding: 1px 5px;
 }
