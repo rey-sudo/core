@@ -548,7 +548,7 @@ export default {
     async handleSubmit() {
       this.submitted = true;
 
-      const form = [
+      const productForm = [
         (this.invalidProductName = !this.checkProductName(this.productName)),
         (this.invalidProductDescription = !this.checkProductDescription(
           this.productDescription
@@ -567,9 +567,9 @@ export default {
         this.invalidProductImageSet,
       ];
 
-      console.log(form);
+      console.log(productForm);
 
-      if (form.includes(true)) return;
+      if (productForm.includes(true)) return;
 
       const params = {
         name: this.productName,
