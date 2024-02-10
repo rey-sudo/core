@@ -1722,7 +1722,7 @@
     box-shadow: 0 0 0 0.2rem #bfd1f6;
   }
   .p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
-    color: var(--text-b);
+    color: var(--blue-a); 
   }
   .p-rating:not(.p-disabled):not(.p-readonly)
     .p-rating-item:hover
