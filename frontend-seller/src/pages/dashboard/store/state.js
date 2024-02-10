@@ -26,7 +26,7 @@ export default () => ({
     },
     {
       id: "1002",
-      code: "zz21cz3c1",
+      code: "P918324950",
       name: "Blue Band",
       description: "Product Description",
       image: "blue-band.jpg",
@@ -38,7 +38,7 @@ export default () => ({
     },
     {
       id: "1003",
-      code: "244wgerg2",
+      code: "P147324950",
       name: "Blue T-Shirt",
       description: "Product Description",
       image: "blue-t-shirt.jpg",
@@ -50,7 +50,7 @@ export default () => ({
     },
     {
       id: "1004",
-      code: "h456wer53",
+      code: "P333324810",
       name: "Bracelet",
       description: "Product Description",
       image: "bracelet.jpg",
@@ -62,7 +62,7 @@ export default () => ({
     },
     {
       id: "1005",
-      code: "av2231fwg",
+      code: "P948524920",
       name: "Brown Purse",
       description: "Product Description",
       image: "brown-purse.jpg",
