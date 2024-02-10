@@ -192,7 +192,8 @@
             :class="{ invalid: invalidProductName }"
           />
           <small class="p-error" v-if="invalidProductName"
-            >The name is required and max {{ nameLengthLimit }} characters long.</small
+            >The name is required and max {{ nameLengthLimit }} characters
+            long.</small
           >
         </div>
         <div class="field">
@@ -348,7 +349,9 @@
               :maxFileSize="1000000"
             >
               <template #empty>
-                <p>Drag and drop images to here to upload.</p>
+                <p :class="{ invalid: invalidProductImageSet }">
+                  Drag and drop images to here to upload.
+                </p>
               </template>
             </FileUpload>
           </div>
@@ -579,7 +582,9 @@ export default {
         (this.invalidProductKeywords = !this.checkProductKeywords(
           this.productKeywords
         )),
-        this.invalidProductImageSet,
+        (this.invalidProductImageSet = !this.checkProductImageSet(
+          this.productImageSet
+        )),
       ];
 
       console.log(productForm);
@@ -739,6 +744,9 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.product-upload p {
+  padding: 1rem;
+}
 .p-counter {
   font-weight: 500;
   text-align: right;
