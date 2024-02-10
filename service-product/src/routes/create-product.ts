@@ -41,7 +41,7 @@ const createProductHandler = async (req: Request, res: Response) => {
      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const schemeValue = [
-      getProductId(),
+      "P" + getProductId(),
       SELLER.seller_id,
       params.name,
       params.description,

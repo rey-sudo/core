@@ -1,5 +1,5 @@
 create table if not exists product(
-  product_id varchar(20) not null,
+  product_id varchar(16) not null,
   seller_id varchar(20) not null,
   name varchar(200) not null,
   description varchar(1000) not null,

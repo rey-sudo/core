@@ -625,27 +625,29 @@ export default {
       const params = {
         name: this.productName,
         description: this.productDescription,
-        category: this.productCategory,
+        category: this.productCategory.code,
         price: this.productPrice,
         collateral: this.productCollateral,
         stock: this.productStock,
-        keywords: this.productKeywords,
-        image_set: this.productImages,
+        keywords: this.productKeywords.join(','),
+        image_set: this.productImages.join(','),
       };
 
-      const { success } = await this.createProduct(params);
+      await this.createProduct(params).then((res) => {
+        console.log(res);
 
-      if (success === true) {
-        this.$toast.add({
-          severity: "success",
-          summary: "Successful",
-          detail: "Product Created",
-          life: 3000,
-        });
+        if (res.response.success === true) {
+          this.$toast.add({
+            severity: "success",
+            summary: "Successful",
+            detail: "Product Created",
+            life: 3000,
+          });
 
-        this.product = {};
-        this.productDialog = false;
-      }
+          this.product = {};
+          this.productDialog = false;
+        }
+      });
     },
     checkProductName(value) {
       if (!value) return false;
