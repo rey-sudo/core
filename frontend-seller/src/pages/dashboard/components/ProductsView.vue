@@ -209,12 +209,21 @@
             required="true"
             rows="3"
             cols="20"
-            style="resize: none"
             autoResize
             :class="{ invalid: invalidProductDescription }"
           />
+          <small
+            class="p-counter"
+            :class="{
+              invalid: productDescription.length > descriptionLengthLimit,
+            }"
+            v-if="!invalidProductDescription"
+          >
+            {{ productDescription.length }} / {{ descriptionLengthLimit }}
+          </small>
           <small class="p-error" v-if="invalidProductDescription"
-            >The description is required and 1000 characters long.
+            >The description is required and
+            {{ descriptionLengthLimit }} characters long.
           </small>
         </div>
 
@@ -258,6 +267,7 @@
               showButtons
               prefix="₳ "
               locale="en-US"
+              :min="1"
               :class="{ invalid: invalidProductPrice }"
             />
             <small class="p-error" v-if="invalidProductPrice"
@@ -279,6 +289,7 @@
               showButtons
               prefix="₳ "
               locale="en-US"
+              :min="1"
               :class="{ invalid: invalidProductCollateral }"
             />
             <small class="p-error" v-if="invalidProductCollateral"
@@ -297,6 +308,7 @@
               id="quantity"
               v-model="productStock"
               integeronly
+              :min="0"
               :class="{ invalid: invalidProductStock }"
             />
 
@@ -312,6 +324,7 @@
               :allowDuplicate="false"
               separator=","
               :max="3"
+              placeholder="Separate with , or  ↵"
               :class="{ invalid: invalidProductKeywords }"
             />
             <small class="p-error" v-if="invalidProductKeywords"
@@ -413,7 +426,7 @@ export default {
     const { getProductData, createProduct } = dashboardAPI();
 
     const productName = ref(null);
-    const productDescription = ref(null);
+    const productDescription = ref("");
     const productCategory = ref(null);
     const productPrice = ref(null);
     const productCollateral = ref(null);
@@ -465,6 +478,7 @@ export default {
       productDialog: false,
       deleteProductDialog: false,
       deleteProductsDialog: false,
+      descriptionLengthLimit: 1000,
       product: {},
       selectedProducts: null,
       filters: {},
@@ -603,8 +617,10 @@ export default {
     },
     checkProductDescription(value) {
       if (!value) return false;
-      const dataRegex = /^.{1,1000}$/;
-      return dataRegex.test(value);
+
+      if (value.length > this.descriptionLengthLimit) return false;
+
+      return true;
     },
     checkProductCategory(value) {
       return !value ? false : true;
@@ -720,8 +736,15 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.p-counter {
+  color: var(--blue-a);
+  font-weight: 600;
+  text-align: right;
+  padding: 1px 5px;
+}
 .invalid {
   border: 1px solid red;
+  color: red;
   border-radius: 6px;
 }
 
