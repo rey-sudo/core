@@ -5,7 +5,7 @@ export default () => ({
       code: "P948524920",
       name: "Brown Purse",
       description: "Product Description",
-      image: "https://localhost/api/media/get-image/yYjDJU1caLbI8wEr8TuK.webp",
+      image: "https://pairfy.dev/api/media/get-image/yYjDJU1caLbI8wEr8TuK.webp",
       price: 120,
       category: "Accessories",
       quantity: 0,

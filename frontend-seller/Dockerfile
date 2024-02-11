@@ -1,24 +1,12 @@
-FROM node:21 as build-stage
+FROM node:lts as build-stage
 
-WORKDIR /frontend-seller
+WORKDIR /app
 
-COPY package.json ./
-
-RUN npm config set fetch-timeout 2900000
-
-RUN npm config set fetch-retry-maxtimeout 2900000
-
-RUN npm config set fetch-retry-mintimeout 2900000
-
-RUN npm install --verbose
-
-COPY . .
-
-RUN npm run build
+COPY /dist /app/dist
 
 FROM nginx:alpine  as production-stage
 
-COPY --from=build-stage /frontend-seller/dist /usr/share/nginx/html
+COPY --from=build-stage /app/dist /usr/share/nginx/html
 
 COPY nginx.conf /etc/nginx/nginx.conf 
 

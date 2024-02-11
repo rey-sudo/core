@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "buildx": "rm -rf dist && npm run build"
   },
   "dependencies": {
     "@cardano-foundation/cardano-connect-with-wallet-core": "^0.2.4",

@@ -39,7 +39,7 @@ spec:
             - name: TOKEN_EXPIRATION
               value: "7d"
             - name: CORS_DOMAINS
-              value: "https://pairfy.dev,http://pairfy.dev,http://localhost:8080"                           
+              value: "https://pairfy.dev,http://pairfy.dev,http://localhost:8080,https://pairfy.dev,https://dashboard.pairfy.dev"                           
           resources:
             limits:
               memory: "500Mi"
