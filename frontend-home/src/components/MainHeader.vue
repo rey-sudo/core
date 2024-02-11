@@ -162,6 +162,7 @@ export default {
 .header .header-left .header-left-logo {
   cursor: pointer;
   image-rendering: optimizeQuality;
+  height: 40px;
 }
 
 .header-button {
