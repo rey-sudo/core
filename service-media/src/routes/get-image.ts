@@ -13,7 +13,8 @@ const getImageHandler = async (req: Request, res: Response) => {
   try {
     connection = await DB.client.getConnection();
 
-    const mediaId = req.params.mediaId;
+    const mediaId = req.params.mediaId.split('.')[0];
+
 
     const [rows] = await connection.execute(
       "SELECT * FROM media WHERE media_id = ?",

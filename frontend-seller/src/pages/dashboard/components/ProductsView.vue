@@ -102,7 +102,7 @@
           <Column header="Image">
             <template #body="slotProps">
               <img
-                :src="`https://primefaces.org/cdn/primevue/images/product/${slotProps.data.image}`"
+                :src="slotProps.data.image"
                 :alt="slotProps.data.image"
                 class="border-round"
                 style="width: 64px"
