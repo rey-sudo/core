@@ -1,3 +1,5 @@
+import { clients } from "../routes/get-events";
+
 function getStockStatus(stock: number): string {
   if (stock < 1) {
     return "out";
@@ -14,4 +16,17 @@ function getStockStatus(stock: number): string {
   return "stock";
 }
 
-export { getStockStatus };
+function sendEvent(clientId: string, type: string, payload: any) {
+  if (clients.hasOwnProperty(clientId)) {
+    const scheme = {
+      type: type,
+      client: clientId,
+      payload: payload,
+    };
+
+    clients[clientId].write(`data: ${JSON.stringify(scheme)}\n\n`);
+    console.log("client updated", clientId);
+  }
+}
+
+export { getStockStatus, sendEvent };
