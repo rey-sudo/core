@@ -1,37 +1,43 @@
 import { Request, Response } from "express";
 import { sellerMiddleware } from "../utils/seller";
 import { requireAuth } from "../utils/required";
-import { getProductId } from "../utils/nano";
+import { BadRequestError } from "../errors";
+import { _ } from "../utils/pino";
 
 const clients: any = {};
 
 const getEventsMiddlewares: any = [sellerMiddleware, requireAuth];
 
 const getEventsHandler = async (req: Request, res: Response) => {
-  const SELLER = req.sellerData;
+  try {
+    const SELLER = req.sellerData;
 
-  if (clients.hasOwnProperty(SELLER.seller_id)) {
-    delete clients[SELLER.seller_id];
-  }
+    if (clients.hasOwnProperty(SELLER.seller_id)) {
+      delete clients[SELLER.seller_id];
+    }
 
-  res.setHeader("Content-Type", "text/event-stream");
-  res.setHeader("Cache-Control", "no-cache");
-  res.setHeader("Connection", "keep-alive");
+    res.setHeader("Content-Type", "text/event-stream");
+    res.setHeader("Cache-Control", "no-cache");
+    res.setHeader("Connection", "keep-alive");
 
-  clients[SELLER.seller_id] = res;
+    clients[SELLER.seller_id] = res;
 
-  const scheme = {
-    type: "connected",
-    client: SELLER.seller_id,
-    payload: "",
-  };
+    const scheme = {
+      type: "connected",
+      client: SELLER.seller_id,
+      payload: "",
+    };
 
-  clients[SELLER.seller_id].write(`data: ${JSON.stringify(scheme)}\n\n`);
+    clients[SELLER.seller_id].write(`data: ${JSON.stringify(scheme)}\n\n`);
 
-  req.on("close", () => {
-    clients[SELLER.seller_id].end();
-    delete clients[SELLER.seller_id];
-  });
+    req.on("close", () => {
+      clients[SELLER.seller_id].end();
+      delete clients[SELLER.seller_id];
+    });
+  } catch (err) {
+    _.error(err);
+    throw new BadRequestError("failed");
+  } 
 };
 
 export { getEventsMiddlewares, getEventsHandler, clients };

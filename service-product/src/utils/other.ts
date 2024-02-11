@@ -16,7 +16,7 @@ function getStockStatus(stock: number): string {
   return "stock";
 }
 
-function sendEvent(clientId: string, type: string, payload: any) {
+function sendEvent(clientId: string, type: string, payload?: any) {
   if (clients.hasOwnProperty(clientId)) {
     const scheme = {
       type: type,
@@ -25,7 +25,6 @@ function sendEvent(clientId: string, type: string, payload: any) {
     };
 
     clients[clientId].write(`data: ${JSON.stringify(scheme)}\n\n`);
-    console.log("client updated", clientId);
   }
 }
 
