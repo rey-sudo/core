@@ -64,7 +64,7 @@ const createProductHandler = async (req: Request, res: Response) => {
 
     await connection.commit();
 
-    sendEvent(SELLER.seller_id, "product_created");
+    sendEvent(SELLER.seller_id, "product:created");
 
     res.status(200).send({ success: true });
   } catch (err) {

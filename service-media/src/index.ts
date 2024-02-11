@@ -60,6 +60,14 @@ const main = async () => {
       route.createImageHandler
     );
 
+    app.get(
+      "/api/media/get-image/:mediaId",
+
+      route.getImageMiddlewares,
+
+      route.getImageHandler
+    );
+
     app.all("*", (_req, _res) => {
       throw new NotFoundError();
     });
