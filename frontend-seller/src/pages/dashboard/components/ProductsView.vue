@@ -336,7 +336,13 @@
 
         <div class="field">
           <div class="product-upload">
-            <label for="fileupload" class="field-label">Images</label>
+            <label for="fileupload" class="field-label">
+              <span>Images</span>
+              <i
+                class="pi pi-info-circle"
+                v-tooltip.top="'The first image is the preview image.'"
+              />
+            </label>
             <Toast />
             <FileUpload
               id="fileupload"
@@ -590,7 +596,7 @@ export default {
       }
     },
     formatCurrency(value) {
-      if (value) return "₳ " + value;
+      if (value) return "ADA " + value;
     },
     newProduct() {
       this.resetForm();
