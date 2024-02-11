@@ -9,8 +9,13 @@ const getImageHandler = async (req: Request, res: Response) => {
   let connection: any = null;
 
   let response: string[] = [];
-
+  
   try {
+    res.setHeader('Cross-Origin-Resource-Policy', 'none');
+
+    res.setHeader('Cross-Origin-Opener-Policy', 'none');
+
+
     connection = await DB.client.getConnection();
 
     const mediaId = req.params.mediaId.split('.')[0];
