@@ -3,8 +3,10 @@ import { Request, Response } from "express";
 import { getProductId } from "../utils/nano";
 import { sellerMiddleware } from "../utils/seller";
 import { requireAuth } from "../utils/required";
+import { getStockStatus } from "../utils/other";
 import { _ } from "../utils/pino";
 import DB from "../db";
+import { clients } from "./get-events";
 
 const createProductMiddlewares: any = [sellerMiddleware, requireAuth];
 
@@ -63,6 +65,12 @@ const createProductHandler = async (req: Request, res: Response) => {
 
     await connection.commit();
 
+    if (clients.hasOwnProperty(SELLER.seller_id)) {
+      clients[SELLER.seller_id].write(
+        `event:product-created;client:${SELLER.seller_id};`
+      );
+    }
+
     res.status(200).send({ success: true });
   } catch (err) {
     await connection.rollback();
@@ -76,19 +84,3 @@ const createProductHandler = async (req: Request, res: Response) => {
 };
 
 export { createProductMiddlewares, createProductHandler };
-
-function getStockStatus(stock: number): string {
-  if (stock < 1) {
-    return "out";
-  }
-
-  if (stock < 10) {
-    return "low";
-  }
-
-  if (stock < 20) {
-    return "stock";
-  }
-
-  return "stock";
-}

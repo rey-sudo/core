@@ -1,9 +1,10 @@
 import * as route from "./routes";
+import compression from "compression";
+import DB from "./db";
 import { catcher, check, checkpoint } from "./pod/index";
 import { NotFoundError, errorMiddleware } from "./errors";
 import { app } from "./app";
-import compression from "compression";
-import DB from "./db";
+
 
 const main = async () => {
   try {
@@ -99,6 +100,14 @@ const main = async () => {
       route.createProductMiddlewares,
 
       route.createProductHandler
+    );
+
+    app.get(
+      "/api/product/get-events",
+
+      route.getEventsMiddlewares,
+
+      route.getEventsHandler
     );
 
     app.post(
