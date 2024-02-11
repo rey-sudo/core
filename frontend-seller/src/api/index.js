@@ -1,7 +1,8 @@
 const env = "dev";
 
 const baseURL = {
-  dev: "https://localhost:443",
+  local: "https://localhost:443",
+  dev: "https://pairfy.dev",
   prod: "https://pairfy.io",
 };
 

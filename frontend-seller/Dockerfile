@@ -1,6 +1,6 @@
-FROM node:19 as build-stage
+FROM node:21 as build-stage
 
-WORKDIR /interface-main
+WORKDIR /frontend-seller
 
 COPY package.json ./
 
@@ -18,9 +18,9 @@ RUN npm run build
 
 FROM nginx:alpine  as production-stage
 
-COPY --from=build-stage /interface-main/dist /usr/share/nginx/html
+COPY --from=build-stage /frontend-seller/dist /usr/share/nginx/html
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf 
 
 EXPOSE 80
 
