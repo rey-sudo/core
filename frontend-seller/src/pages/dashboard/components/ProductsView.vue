@@ -92,38 +92,46 @@
             header="Code"
             sortable
             style="min-width: 12rem"
-          ></Column>
+          />
           <Column
             field="name"
             header="Name"
             sortable
             style="min-width: 16rem"
-          ></Column>
-          <Column header="Image">
-            <template #body="slotProps">
-              <img
-                :src="
-                  slotProps.data.image_base +
-                  slotProps.data.image_path +
-                  slotProps.data.image_main
-                "
-                :alt="slotProps.data.image"
-                class="border-round"
-                style="width: 64px; height: 64px"
-              />
-            </template>
-          </Column>
+          />
+
           <Column field="price" header="Price" sortable style="min-width: 8rem">
             <template #body="slotProps">
               {{ formatCurrency(slotProps.data.price) }}
             </template>
           </Column>
+
+          <Column
+            field="moderated"
+            header="Status"
+            sortable
+            style="min-width: 10rem"
+          >
+            <template #body="slotProps">
+              <div
+                class="table-tag"
+                :class="{
+                  pending: slotProps.data.moderated === 0,
+                  moderated: slotProps.data.moderated === 1,
+                }"
+              >
+                {{ checkModerated(slotProps.data.moderated) }}
+              </div>
+            </template>
+          </Column>
+
           <Column
             field="category"
             header="Category"
             sortable
-            style="min-width: 10rem"
-          ></Column>
+            style="min-width: 12rem; text-transform: capitalize;"
+          />
+
           <Column
             field="rating"
             header="Reviews"
@@ -138,9 +146,10 @@
               />
             </template>
           </Column>
+          
           <Column
             field="stock_status"
-            header="Status"
+            header="Stock"
             sortable
             style="min-width: 12rem"
           >
@@ -151,6 +160,21 @@
               />
             </template>
           </Column>
+
+          <Column header="Image">
+            <template #body="slotProps">
+              <img
+                :src="
+                  slotProps.data.image_base +
+                  slotProps.data.image_path +
+                  slotProps.data.image_main
+                "
+                :alt="slotProps.data.image"
+                class="table-image"
+              />
+            </template>
+          </Column>
+
           <Column :exportable="false" style="min-width: 8rem">
             <template #body="slotProps">
               <div class="table-buttons">
@@ -722,6 +746,14 @@ export default {
 
       return true;
     },
+    checkModerated(e) {
+      if (e === 0) {
+        return "Pending";
+      }
+      if (e === 1) {
+        return "Published";
+      }
+    },
     editProduct(product) {
       this.product = { ...product };
       this.productDialog = true;
@@ -808,6 +840,22 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.table-tag {
+  padding: 0.5rem 0;
+}
+
+.table-tag.moderated {
+  background: var(--base-s);
+}
+
+.table-tag.pending {
+  background: var(--base-s);
+}
+
+.table-image {
+  width: 100px;
+  height: 100px;
+}
 .table-buttons {
   display: flex;
   align-items: center;
