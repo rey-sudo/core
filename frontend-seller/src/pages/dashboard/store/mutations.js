@@ -2,4 +2,8 @@ const createProduct = (state, data) => {
   state.productData.push(data);
 };
 
-export { createProduct };
+const getProducts = (state, data) => {
+  state.productData.push(...data);
+};
+
+export { createProduct, getProducts };

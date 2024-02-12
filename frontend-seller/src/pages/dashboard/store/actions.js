@@ -14,4 +14,18 @@ const createProduct = async ({ commit }, params) => {
   }
 };
 
-export { createProduct };
+const getProducts = async ({ commit }, params) => {
+  try {
+    const response = await axiosAPI.post("/api/product/get-products", params);
+
+    console.log(response);
+
+    commit("getProducts", response.data.payload);
+
+    return { ok: true, response: response.data };
+  } catch (error) {
+    throw { ok: false, response: error.response.data };
+  }
+};
+
+export { createProduct, getProducts };

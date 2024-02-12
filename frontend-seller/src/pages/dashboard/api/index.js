@@ -10,13 +10,18 @@ const dashboardAPI = () => {
   const createProduct = async (params) =>
     await store.dispatch("dashboard/createProduct", params);
 
+  const getProducts = async (params) =>
+    await store.dispatch("dashboard/getProducts", params);
+  
+
   const sleep = (timeInMs) =>
     new Promise((resolve) => setTimeout(() => resolve(false), timeInMs));
 
   return {
-    getProductData: computed(() => store.getters["dashboard/getProductData"]),
+    getProductsData: computed(() => store.getters["dashboard/getProductsData"]),
     fetchProductData,
     createProduct,
+    getProducts,
     sleep,
   };
 };

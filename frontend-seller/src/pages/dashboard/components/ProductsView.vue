@@ -88,7 +88,7 @@
             :exportable="false"
           />
           <Column
-            field="code"
+            field="product_id"
             header="Code"
             sortable
             style="min-width: 12rem"
@@ -102,10 +102,14 @@
           <Column header="Image">
             <template #body="slotProps">
               <img
-                :src="slotProps.data.image"
+                :src="
+                  slotProps.data.image_base +
+                  slotProps.data.image_path +
+                  slotProps.data.image_main
+                "
                 :alt="slotProps.data.image"
                 class="border-round"
-                style="width: 64px; height: 64px;"
+                style="width: 64px; height: 64px"
               />
             </template>
           </Column>
@@ -135,34 +139,36 @@
             </template>
           </Column>
           <Column
-            field="inventoryStatus"
+            field="stock_status"
             header="Status"
             sortable
             style="min-width: 12rem"
           >
             <template #body="slotProps">
               <Tag
-                :value="slotProps.data.inventoryStatus"
-                :severity="getStatusLabel(slotProps.data.inventoryStatus)"
+                :value="slotProps.data.stock_status"
+                :severity="getStatusLabel(slotProps.data.stock_status)"
               />
             </template>
           </Column>
           <Column :exportable="false" style="min-width: 8rem">
             <template #body="slotProps">
-              <Button
-                class="table-button"
-                icon="pi pi-pencil"
-                outlined
-                rounded
-                @click="editProduct(slotProps.data)"
-              />
-              <Button
-                class="table-button"
-                icon="pi pi-trash"
-                outlined
-                rounded
-                @click="confirmDeleteProduct(slotProps.data)"
-              />
+              <div class="table-buttons">
+                <Button
+                  class="table-button"
+                  icon="pi pi-pencil"
+                  outlined
+                  rounded
+                  @click="editProduct(slotProps.data)"
+                />
+                <Button
+                  class="table-button"
+                  icon="pi pi-trash"
+                  outlined
+                  rounded
+                  @click="confirmDeleteProduct(slotProps.data)"
+                />
+              </div>
             </template>
           </Column>
         </DataTable>
@@ -437,7 +443,9 @@ import dashboardAPI from "@/pages/dashboard/api/index";
 
 export default {
   setup() {
-    const { getProductData, createProduct } = dashboardAPI();
+    const { getProductsData, createProduct, getProducts } = dashboardAPI();
+
+    getProducts().catch((err) => console.log(err));
 
     let productName = ref(null);
     let productDescription = ref("");
@@ -493,7 +501,7 @@ export default {
       messageModalVisible,
       messageModal,
       errorModal,
-      getProductData,
+      getProductsData,
       createProduct,
       productName,
       productDescription,
@@ -553,7 +561,7 @@ export default {
     this.initFilters();
   },
   mounted() {
-    this.products = this.getProductData;
+    this.products = this.getProductsData;
   },
   methods: {
     onBeforeUpload() {
@@ -723,7 +731,10 @@ export default {
       this.deleteProductDialog = true;
     },
     deleteProduct() {
-      this.products = this.products.filter((val) => val.id !== this.product.id);
+      this.products = this.products.filter(
+        (val) => val.product_id !== this.product.product_id
+      );
+
       this.deleteProductDialog = false;
       this.product = {};
       this.$toast.add({
@@ -797,6 +808,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.table-buttons {
+  display: flex;
+  align-items: center;
+}
 .product-upload small {
   padding: 5px;
   line-height: 50px;
