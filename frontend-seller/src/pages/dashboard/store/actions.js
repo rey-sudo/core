@@ -4,8 +4,6 @@ const createProduct = async ({ commit }, params) => {
   try {
     const response = await axiosAPI.post("/api/product/create-product", params);
 
-    console.log(response);
-
     commit("createProduct", response.data);
 
     return { ok: true, response: response.data };
@@ -17,8 +15,6 @@ const createProduct = async ({ commit }, params) => {
 const getProducts = async ({ commit }, params) => {
   try {
     const response = await axiosAPI.post("/api/product/get-products", params);
-
-    console.log(response);
 
     commit("getProducts", response.data.payload);
 

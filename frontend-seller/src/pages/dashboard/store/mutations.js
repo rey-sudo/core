@@ -4,6 +4,8 @@ const createProduct = (state, data) => {
 
 const getProducts = (state, data) => {
   state.productData.push(...data);
+
+  console.log(state.productData);
 };
 
 export { createProduct, getProducts };

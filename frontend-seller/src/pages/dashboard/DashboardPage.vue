@@ -32,6 +32,7 @@
 <script>
 import ProductsView from "./components/ProductsView.vue";
 import entryAPI from "@/pages/entry/api";
+import dashboardAPI from "@/pages/dashboard/api";
 
 export default {
   components: {
@@ -40,6 +41,24 @@ export default {
 
   setup() {
     const { getUserData } = entryAPI();
+    const { getProducts } = dashboardAPI();
+
+    const updateData = {
+      products: () => {
+        getProducts()
+          .then(() => console.info("productsUpdated"))
+          .catch((err) => console.log(err));
+      },
+    };
+
+    updateData.products();
+
+    document.addEventListener("globalMessage", (event) => {
+      if (event.detail.data.type === "product:created") {
+        updateData.products();
+      }
+    });
+
     return {
       getUserData,
     };

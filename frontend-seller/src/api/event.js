@@ -1,8 +1,7 @@
 import { HOST } from "@/api";
-import dashboardAPI from "@/pages/dashboard/api";
 
 const eventMachine = {
-  run: () => {
+  setup: () => {
     const SSEurl = HOST + "/api/product/get-events";
 
     const eventSource = new EventSource(SSEurl, { withCredentials: true });
@@ -16,11 +15,17 @@ const eventMachine = {
     };
 
     eventSource.onmessage = function (event) {
-      console.log(event);
-      const { getProducts } = dashboardAPI();
-      getProducts().catch((err) => console.log(err));
+      const datum = JSON.parse(event.data);
+
+      const sendEvent = new CustomEvent("globalMessage", {
+        detail: {
+          data: datum,
+        },
+      });
+
+      document.dispatchEvent(sendEvent);
     };
   },
 };
 
-export default eventMachine;
+export { eventMachine };

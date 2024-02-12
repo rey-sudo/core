@@ -129,7 +129,7 @@
             field="category"
             header="Category"
             sortable
-            style="min-width: 12rem; text-transform: capitalize;"
+            style="min-width: 12rem; text-transform: capitalize"
           />
 
           <Column
@@ -146,7 +146,7 @@
               />
             </template>
           </Column>
-          
+
           <Column
             field="stock_status"
             header="Stock"
@@ -467,9 +467,7 @@ import dashboardAPI from "@/pages/dashboard/api/index";
 
 export default {
   setup() {
-    const { getProductsData, createProduct, getProducts } = dashboardAPI();
-
-    getProducts().catch((err) => console.log(err));
+    const { getProductsData, createProduct } = dashboardAPI();
 
     let productName = ref(null);
     let productDescription = ref("");

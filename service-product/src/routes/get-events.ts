@@ -20,24 +20,30 @@ const getEventsHandler = async (req: Request, res: Response) => {
     res.setHeader("Cache-Control", "no-cache");
     res.setHeader("Connection", "keep-alive");
 
-    clients[SELLER.seller_id] = res;
+    const sendPing = setInterval(() => {
+      res.write("event: ping\n");
+      res.flush();
+    }, 30000);
 
-    const scheme = {
+    const response = {
       type: "connected",
       client: SELLER.seller_id,
       payload: "",
     };
 
-    clients[SELLER.seller_id].write(`data: ${JSON.stringify(scheme)}\n\n`);
+    clients[SELLER.seller_id] = res;
+
+    res.write(`data: ${JSON.stringify(response)}\n\n`);
 
     req.on("close", () => {
-      clients[SELLER.seller_id].end();
+      res.end();
       delete clients[SELLER.seller_id];
+      clearInterval(sendPing);
     });
   } catch (err) {
     _.error(err);
     throw new BadRequestError("failed");
-  } 
+  }
 };
 
 export { getEventsMiddlewares, getEventsHandler, clients };
