@@ -53,9 +53,9 @@ const createProductHandler = async (req: Request, res: Response) => {
       getStockStatus(params.stock),
       params.keywords,
       SELLER.country,
-      "http://what",
-      "path/image",
-      "image1",
+      "https://pairfy.dev",
+      "/api/media/get-image/",
+      params.image_set.split(",")[0],
       params.image_set,
       0,
     ];

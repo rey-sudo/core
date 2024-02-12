@@ -105,7 +105,7 @@
                 :src="slotProps.data.image"
                 :alt="slotProps.data.image"
                 class="border-round"
-                style="width: 64px"
+                style="width: 64px; height: 64px;"
               />
             </template>
           </Column>
