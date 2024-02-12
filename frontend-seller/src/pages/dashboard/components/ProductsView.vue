@@ -493,28 +493,28 @@ export default {
     let disableUpload = ref(false);
 
     const resetForm = () => {
-      productName = ref(null);
-      productDescription = ref("");
-      productCategory = ref(null);
-      productPrice = ref(null);
-      productCollateral = ref(null);
-      productStock = ref(null);
-      productKeywords = ref(null);
-      productImages = ref([]);
+      productName.value = null;
+      productDescription.value = "";
+      productCategory.value = null;
+      productPrice.value = null;
+      productCollateral.value = null;
+      productStock.value = null;
+      productKeywords.value = null;
+      productImages.value = [];
 
-      invalidProductName = ref(false);
-      invalidProductDescription = ref(false);
-      invalidProductCategory = ref(false);
-      invalidProductPrice = ref(false);
-      invalidProductCollateral = ref(false);
-      invalidProductStock = ref(false);
-      invalidProductKeywords = ref(false);
-      invalidProductImages = ref(false);
+      invalidProductName.value = false;
+      invalidProductDescription.value = false;
+      invalidProductCategory.value = false;
+      invalidProductPrice.value = false;
+      invalidProductCollateral.value = false;
+      invalidProductStock.value = false;
+      invalidProductKeywords.value = false;
+      invalidProductImages.value = false;
 
-      messageModalVisible = ref(false);
-      messageModal = ref(null);
-      errorModal = ref(null);
-      disableUpload = ref(false);
+      messageModalVisible.value = false;
+      messageModal.value = null;
+      errorModal.value = null;
+      disableUpload.value = false;
     };
 
     return {
@@ -683,7 +683,7 @@ export default {
             life: 3000,
           });
 
-          this.product = {};
+          this.resetForm();
           this.productDialog = false;
         }
       });
