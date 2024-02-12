@@ -1,3 +1,4 @@
+import DB from "../db";
 import { BadRequestError } from "../errors";
 import { Request, Response } from "express";
 import { getProductId } from "../utils/nano";
@@ -5,7 +6,7 @@ import { sellerMiddleware } from "../utils/seller";
 import { requireAuth } from "../utils/required";
 import { getStockStatus, sendEvent } from "../utils/other";
 import { _ } from "../utils/pino";
-import DB from "../db";
+
 
 const createProductMiddlewares: any = [sellerMiddleware, requireAuth];
 
