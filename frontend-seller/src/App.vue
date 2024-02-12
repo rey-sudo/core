@@ -6,7 +6,8 @@
 
 <script>
 import entryAPI from "@/pages/entry/api";
-import { HOST } from "./api";
+import eventMachine from "@/api/event";
+
 
 export default {
   name: "App",
@@ -19,21 +20,7 @@ export default {
   mounted() {
     this.getUser()
       .then(() => {
-        const SSEurl = HOST + "/api/product/get-events";
-        
-        const eventSource = new EventSource(SSEurl, { withCredentials: true });
-
-        eventSource.onopen = function () {
-          console.log("SSE connection opened.");
-        };
-
-        eventSource.onerror = function (error) {
-          console.error("SSE connection error:", error);
-        };
-
-        eventSource.onmessage = function (event) {
-          console.log(event);
-        };
+        eventMachine.run();
       })
       .catch((err) => {
         console.error(err);
