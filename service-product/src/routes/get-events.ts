@@ -20,20 +20,20 @@ const getEventsHandler = async (req: Request, res: Response) => {
     res.setHeader("Cache-Control", "no-cache");
     res.setHeader("Connection", "keep-alive");
 
-    const sendPing = setInterval(() => {
-      res.write("event: ping\n");
-      res.flush();
-    }, 30000);
-
     const response = {
       type: "connected",
       client: SELLER.seller_id,
       payload: "",
     };
 
-    clients[SELLER.seller_id] = res;
-
     res.write(`data: ${JSON.stringify(response)}\n\n`);
+
+    const sendPing = setInterval(() => {
+      res.write('event: ping\n');
+      res.write('data: {}\n\n');
+    }, 29000);
+
+    clients[SELLER.seller_id] = res;
 
     req.on("close", () => {
       res.end();

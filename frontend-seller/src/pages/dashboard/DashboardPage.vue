@@ -54,6 +54,7 @@ export default {
     updateData.products();
 
     document.addEventListener("globalMessage", (event) => {
+      console.log(event.detail.data.type);
       if (event.detail.data.type === "product:created") {
         updateData.products();
       }

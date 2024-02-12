@@ -23,8 +23,6 @@ const getProductsHandler = async (req: Request, res: Response) => {
       [SELLER.seller_id]
     );
 
-    console.log(response);
-
     await connection.commit();
 
     res.status(200).send({ success: true, payload: response });
