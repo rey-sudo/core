@@ -73,7 +73,7 @@
 
     <Dialog
       v-model:visible="productDialog"
-      :style="{ width: '480px' }"
+      :style="{ width: '500px' }"
       header="Product"
       :modal="true"
       :draggable="false"
@@ -85,7 +85,7 @@
         :numVisible="1"
         :numScroll="1"
         orientation="horizontal"
-        verticalViewPortHeight="330px"
+        verticalViewPortHeight="340px"
         contentClass="flex align-items-center"
       >
         <template #item="slotProps">
@@ -112,7 +112,13 @@
             :class="{ mainImage: isMainImage(item.id) }"
             @click="setMainImage(item.id)"
           >
-            <Image :src="item.image" imageStyle="border-radius: 6px;display: flex;align-items: center;" alt="Image" width="50" height="50"  />
+            <Image
+              :src="item.image"
+              imageStyle="border-radius: 6px;display: flex;align-items: center;"
+              alt="Image"
+              width="50"
+              height="50"
+            />
           </div>
         </div>
       </div>
@@ -180,7 +186,6 @@
             id="category"
             optionLabel="name"
             placeholder=""
-            checkmark
             :class="{ invalid: invalidProductCategory }"
             :highlightOnSelect="false"
           />
@@ -598,7 +603,6 @@ export default {
       product: {},
       selectedProducts: null,
       filters: {},
-      selectedCategory: null,
       categories: [
         { name: "Home", code: "home" },
         { name: "Electronics", code: "electronics" },
@@ -796,6 +800,16 @@ export default {
     editProduct(product) {
       console.log("edit", product);
       this.product = { ...product };
+
+      this.productName = product.name;
+      this.productDescription = product.description;
+      this.productCategory = { name: product.category, code: product.category };
+      this.productPrice = product.price;
+      this.productCollateral = product.collateral;
+      this.productStock = product.stock;
+      this.productKeywords = product.keywords.split(",");
+      this.productImages = product.image_set.split(",");
+
       this.productDialog = true;
     },
     confirmDeleteProduct(product) {
@@ -1120,7 +1134,7 @@ img {
 }
 
 .field {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 .field-radiobutton {
   display: flex;
