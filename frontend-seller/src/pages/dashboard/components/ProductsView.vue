@@ -1,27 +1,285 @@
 <template>
   <div class="products">
+    <Dialog
+      v-model:visible="messageModalVisible"
+      modal
+      header="Message"
+      :draggable="false"
+      :style="{ width: '35rem' }"
+      :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
+    >
+      <p>{{ messageModal }}</p>
+
+      <p v-for="e in errorModal" :key="e">{{ e }}</p>
+
+      <template #footer>
+        <div class="modal-footer">
+          <Button type="button" label="Ok" @click="hideModals" />
+        </div>
+      </template>
+    </Dialog>
+
+    <Dialog
+      v-model:visible="deleteProductDialog"
+      :style="{ width: '450px' }"
+      header="Confirm"
+      :modal="true"
+    >
+      <div class="confirmation-content">
+        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+        <span v-if="product"
+          >Are you sure you want to delete <b>{{ product.name }}</b
+          >?</span
+        >
+      </div>
+      <template #footer>
+        <Button
+          label="No"
+          icon="pi pi-times"
+          text
+          @click="deleteProductDialog = false"
+        />
+        <Button label="Yes" icon="pi pi-check" text @click="deleteProduct" />
+      </template>
+    </Dialog>
+
+    <Dialog
+      v-model:visible="deleteProductsDialog"
+      :style="{ width: '450px' }"
+      header="Confirm"
+      :modal="true"
+    >
+      <div class="confirmation-content">
+        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+        <span v-if="product"
+          >Are you sure you want to delete the selected products?</span
+        >
+      </div>
+      <template #footer>
+        <Button
+          label="No"
+          icon="pi pi-times"
+          text
+          @click="deleteProductsDialog = false"
+        />
+        <Button
+          label="Yes"
+          icon="pi pi-check"
+          text
+          @click="deleteSelectedProducts"
+        />
+      </template>
+    </Dialog>
+
+    <Dialog
+      v-model:visible="productDialog"
+      :style="{ width: '480px' }"
+      header="Create"
+      :modal="true"
+      :draggable="false"
+      class="p-fluid"
+    >
+      <img
+        v-if="product.image"
+        :src="`https://primefaces.org/cdn/primevue/images/product/${product.image}`"
+        :alt="product.image"
+        class="block m-auto pb-3"
+      />
+      <div class="field">
+        <label for="name" class="field-label">Name</label>
+        <InputText
+          id="name"
+          v-model="productName"
+          required="true"
+          autofocus
+          :class="{ invalid: invalidProductName }"
+        />
+        <small class="p-error" v-if="invalidProductName"
+          >The name is required and max {{ nameLengthLimit }} characters
+          long.</small
+        >
+      </div>
+      <div class="field">
+        <label for="description" class="field-label">
+          <span>Description</span>
+          <i
+            class="pi pi-info-circle"
+            v-tooltip.top="'Write a clear description about the product.'"
+          />
+        </label>
+        <Textarea
+          id="description"
+          v-model="productDescription"
+          required="true"
+          rows="3"
+          cols="20"
+          autoResize
+          :class="{ invalid: invalidProductDescription }"
+        />
+        <small
+          class="p-counter"
+          :class="{
+            invalid: productDescription.length > descriptionLengthLimit,
+          }"
+          v-if="!invalidProductDescription"
+        >
+          {{ productDescription.length }} / {{ descriptionLengthLimit }}
+        </small>
+        <small class="p-error" v-if="invalidProductDescription"
+          >The description is required and
+          {{ descriptionLengthLimit }} characters long.
+        </small>
+      </div>
+
+      <div class="formgrid grid">
+        <div class="field col">
+          <label for="category" class="field-label">
+            <span>Category</span>
+            <i
+              class="pi pi-info-circle"
+              v-tooltip.top="
+                'Select the category corresponding to the product.'
+              "
+            />
+          </label>
+          <Dropdown
+            v-model="productCategory"
+            :options="categories"
+            id="category"
+            optionLabel="name"
+            placeholder=""
+            checkmark
+            :class="{ invalid: invalidProductCategory }"
+            :highlightOnSelect="false"
+          />
+          <small class="p-error" v-if="invalidProductCategory"
+            >The category is required.
+          </small>
+        </div>
+
+        <div class="field col">
+          <label for="price" class="field-label">
+            <span>Price</span>
+            <i
+              class="pi pi-info-circle"
+              v-tooltip.top="'Product price in ADA.'"
+            />
+          </label>
+          <InputNumber
+            id="price"
+            v-model="productPrice"
+            showButtons
+            prefix="ADA "
+            locale="en-US"
+            :min="1"
+            :class="{ invalid: invalidProductPrice }"
+          />
+          <small class="p-error" v-if="invalidProductPrice"
+            >The price is required.</small
+          >
+        </div>
+
+        <div class="field col">
+          <label for="collateral" class="field-label">
+            <span>Collateral</span>
+            <i
+              class="pi pi-info-circle"
+              v-tooltip.top="'Assign an ADA amount as a guarantee.'"
+            />
+          </label>
+          <InputNumber
+            id="collateral"
+            v-model="productCollateral"
+            showButtons
+            prefix="ADA "
+            locale="en-US"
+            :min="1"
+            :class="{ invalid: invalidProductCollateral }"
+          />
+          <small class="p-error" v-if="invalidProductCollateral"
+            >The collateral is required.
+          </small>
+        </div>
+        <div class="field col">
+          <label for="quantity" class="field-label">
+            <span>Stock</span>
+            <i
+              class="pi pi-info-circle"
+              v-tooltip.top="'Current number of units of the product.'"
+            />
+          </label>
+          <InputNumber
+            id="quantity"
+            v-model="productStock"
+            integeronly
+            :min="0"
+            :class="{ invalid: invalidProductStock }"
+          />
+
+          <small class="p-error" v-if="invalidProductStock"
+            >The stock is required.
+          </small>
+        </div>
+        <div class="field col">
+          <label for="keywords" class="field-label">Keywords</label>
+          <Chips
+            id="keywords"
+            v-model="productKeywords"
+            :allowDuplicate="false"
+            separator=","
+            :max="3"
+            placeholder="Separate with , or  ↵"
+            :class="{ invalid: invalidProductKeywords }"
+          />
+          <small class="p-error" v-if="invalidProductKeywords"
+            >3 keywords are required.
+          </small>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="product-upload">
+          <label for="fileupload" class="field-label">
+            <span>Images</span>
+            <i
+              class="pi pi-info-circle"
+              v-tooltip.top="'The first image is the preview image.'"
+            />
+          </label>
+          <Toast />
+          <FileUpload
+            id="fileupload"
+            name="image"
+            :url="mediaUrl"
+            @upload="onAdvancedUpload($event)"
+            @before-upload="onBeforeUpload($event)"
+            :multiple="true"
+            accept="image/*"
+            :fileLimit="5"
+            :maxFileSize="1000000"
+            :withCredentials="true"
+            :disabled="disableUpload"
+          >
+            <template #empty>
+              <p>Drag and drop images to here to upload.</p>
+            </template>
+          </FileUpload>
+          <small class="invalid" v-if="invalidProductImages">
+            {{ productImages.length }} / {{ minProductImages }} images are
+            required.
+          </small>
+        </div>
+      </div>
+
+      <template #footer>
+        <Button label="Cancel" icon="pi pi-times" text @click="hideDialog" />
+        <Button label="Save" icon="pi pi-check" text @click="handleSubmit" />
+      </template>
+    </Dialog>
+
+    <!---CONTENT-->
     <div class="products-wrap">
       <div class="products-card">
-        <Dialog
-          v-model:visible="messageModalVisible"
-          modal
-          header="Message"
-          :draggable="false"
-          :style="{ width: '35rem' }"
-          :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
-        >
-          <p>{{ messageModal }}</p>
-
-          <p v-for="e in errorModal" :key="e">{{ e }}</p>
-
-          <template #footer>
-            <div class="modal-footer">
-              <Button type="button" label="Ok" @click="hideModals" />
-            </div>
-          </template>
-        </Dialog>
-
-        <!----->
         <DataTable
           ref="dt"
           :value="products"
@@ -97,7 +355,7 @@
             field="name"
             header="Name"
             sortable
-            style="min-width: 16rem"
+            style="max-width: 16rem"
           />
 
           <Column field="price" header="Price" sortable style="min-width: 8rem">
@@ -107,10 +365,21 @@
           </Column>
 
           <Column
+            field="collateral"
+            header="Collateral"
+            sortable
+            style="min-width: 8rem"
+          >
+            <template #body="slotProps">
+              {{ formatCurrency(slotProps.data.collateral) }}
+            </template>
+          </Column>
+
+          <Column
             field="moderated"
             header="Status"
             sortable
-            style="min-width: 10rem"
+            style="min-width: 8rem"
           >
             <template #body="slotProps">
               <div
@@ -129,14 +398,14 @@
             field="category"
             header="Category"
             sortable
-            style="min-width: 12rem; text-transform: capitalize"
+            style="min-width: 8rem; text-transform: capitalize"
           />
 
           <Column
             field="rating"
             header="Reviews"
             sortable
-            style="min-width: 12rem"
+            style="min-width: 8rem"
           >
             <template #body="slotProps">
               <Rating
@@ -151,7 +420,7 @@
             field="stock_status"
             header="Stock"
             sortable
-            style="min-width: 12rem"
+            style="min-width: 8rem"
           >
             <template #body="slotProps">
               <Tag
@@ -161,7 +430,7 @@
             </template>
           </Column>
 
-          <Column header="Image">
+          <Column header="Image" style="max-width: 8rem">
             <template #body="slotProps">
               <img
                 :src="
@@ -197,264 +466,6 @@
           </Column>
         </DataTable>
       </div>
-
-      <Dialog
-        v-model:visible="productDialog"
-        :style="{ width: '480px' }"
-        header="Create"
-        :modal="true"
-        :draggable="false"
-        class="p-fluid"
-      >
-        <img
-          v-if="product.image"
-          :src="`https://primefaces.org/cdn/primevue/images/product/${product.image}`"
-          :alt="product.image"
-          class="block m-auto pb-3"
-        />
-        <div class="field">
-          <label for="name" class="field-label">Name</label>
-          <InputText
-            id="name"
-            v-model="productName"
-            required="true"
-            autofocus
-            :class="{ invalid: invalidProductName }"
-          />
-          <small class="p-error" v-if="invalidProductName"
-            >The name is required and max {{ nameLengthLimit }} characters
-            long.</small
-          >
-        </div>
-        <div class="field">
-          <label for="description" class="field-label">
-            <span>Description</span>
-            <i
-              class="pi pi-info-circle"
-              v-tooltip.top="'Write a clear description about the product.'"
-            />
-          </label>
-          <Textarea
-            id="description"
-            v-model="productDescription"
-            required="true"
-            rows="3"
-            cols="20"
-            autoResize
-            :class="{ invalid: invalidProductDescription }"
-          />
-          <small
-            class="p-counter"
-            :class="{
-              invalid: productDescription.length > descriptionLengthLimit,
-            }"
-            v-if="!invalidProductDescription"
-          >
-            {{ productDescription.length }} / {{ descriptionLengthLimit }}
-          </small>
-          <small class="p-error" v-if="invalidProductDescription"
-            >The description is required and
-            {{ descriptionLengthLimit }} characters long.
-          </small>
-        </div>
-
-        <div class="formgrid grid">
-          <div class="field col">
-            <label for="category" class="field-label">
-              <span>Category</span>
-              <i
-                class="pi pi-info-circle"
-                v-tooltip.top="
-                  'Select the category corresponding to the product.'
-                "
-              />
-            </label>
-            <Dropdown
-              v-model="productCategory"
-              :options="categories"
-              id="category"
-              optionLabel="name"
-              placeholder=""
-              checkmark
-              :class="{ invalid: invalidProductCategory }"
-              :highlightOnSelect="false"
-            />
-            <small class="p-error" v-if="invalidProductCategory"
-              >The category is required.
-            </small>
-          </div>
-
-          <div class="field col">
-            <label for="price" class="field-label">
-              <span>Price</span>
-              <i
-                class="pi pi-info-circle"
-                v-tooltip.top="'Product price in ADA.'"
-              />
-            </label>
-            <InputNumber
-              id="price"
-              v-model="productPrice"
-              showButtons
-              prefix="ADA "
-              locale="en-US"
-              :min="1"
-              :class="{ invalid: invalidProductPrice }"
-            />
-            <small class="p-error" v-if="invalidProductPrice"
-              >The price is required.</small
-            >
-          </div>
-
-          <div class="field col">
-            <label for="collateral" class="field-label">
-              <span>Collateral</span>
-              <i
-                class="pi pi-info-circle"
-                v-tooltip.top="'Assign an ADA amount as a guarantee.'"
-              />
-            </label>
-            <InputNumber
-              id="collateral"
-              v-model="productCollateral"
-              showButtons
-              prefix="ADA "
-              locale="en-US"
-              :min="1"
-              :class="{ invalid: invalidProductCollateral }"
-            />
-            <small class="p-error" v-if="invalidProductCollateral"
-              >The collateral is required.
-            </small>
-          </div>
-          <div class="field col">
-            <label for="quantity" class="field-label">
-              <span>Stock</span>
-              <i
-                class="pi pi-info-circle"
-                v-tooltip.top="'Current number of units of the product.'"
-              />
-            </label>
-            <InputNumber
-              id="quantity"
-              v-model="productStock"
-              integeronly
-              :min="0"
-              :class="{ invalid: invalidProductStock }"
-            />
-
-            <small class="p-error" v-if="invalidProductStock"
-              >The stock is required.
-            </small>
-          </div>
-          <div class="field col">
-            <label for="keywords" class="field-label">Keywords</label>
-            <Chips
-              id="keywords"
-              v-model="productKeywords"
-              :allowDuplicate="false"
-              separator=","
-              :max="3"
-              placeholder="Separate with , or  ↵"
-              :class="{ invalid: invalidProductKeywords }"
-            />
-            <small class="p-error" v-if="invalidProductKeywords"
-              >3 keywords are required.
-            </small>
-          </div>
-        </div>
-
-        <div class="field">
-          <div class="product-upload">
-            <label for="fileupload" class="field-label">
-              <span>Images</span>
-              <i
-                class="pi pi-info-circle"
-                v-tooltip.top="'The first image is the preview image.'"
-              />
-            </label>
-            <Toast />
-            <FileUpload
-              id="fileupload"
-              name="image"
-              :url="mediaUrl"
-              @upload="onAdvancedUpload($event)"
-              @before-upload="onBeforeUpload($event)"
-              :multiple="true"
-              accept="image/*"
-              :fileLimit="5"
-              :maxFileSize="1000000"
-              :withCredentials="true"
-              :disabled="disableUpload"
-            >
-              <template #empty>
-                <p>Drag and drop images to here to upload.</p>
-              </template>
-            </FileUpload>
-            <small class="invalid" v-if="invalidProductImages">
-              {{ productImages.length }} / {{ minProductImages }} images are
-              required.
-            </small>
-          </div>
-        </div>
-
-        <template #footer>
-          <Button label="Cancel" icon="pi pi-times" text @click="hideDialog" />
-          <Button label="Save" icon="pi pi-check" text @click="handleSubmit" />
-        </template>
-      </Dialog>
-
-      <Dialog
-        v-model:visible="deleteProductDialog"
-        :style="{ width: '450px' }"
-        header="Confirm"
-        :modal="true"
-      >
-        <div class="confirmation-content">
-          <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
-          <span v-if="product"
-            >Are you sure you want to delete <b>{{ product.name }}</b
-            >?</span
-          >
-        </div>
-        <template #footer>
-          <Button
-            label="No"
-            icon="pi pi-times"
-            text
-            @click="deleteProductDialog = false"
-          />
-          <Button label="Yes" icon="pi pi-check" text @click="deleteProduct" />
-        </template>
-      </Dialog>
-
-      <Dialog
-        v-model:visible="deleteProductsDialog"
-        :style="{ width: '450px' }"
-        header="Confirm"
-        :modal="true"
-      >
-        <div class="confirmation-content">
-          <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
-          <span v-if="product"
-            >Are you sure you want to delete the selected products?</span
-          >
-        </div>
-        <template #footer>
-          <Button
-            label="No"
-            icon="pi pi-times"
-            text
-            @click="deleteProductsDialog = false"
-          />
-          <Button
-            label="Yes"
-            icon="pi pi-check"
-            text
-            @click="deleteSelectedProducts"
-          />
-        </template>
-      </Dialog>
     </div>
   </div>
 </template>
@@ -840,14 +851,15 @@ export default {
 <style lang="css" scoped>
 .table-tag {
   padding: 0.5rem 0;
+  text-transform: uppercase;
 }
 
 .table-tag.moderated {
-  background: var(--base-s);
+
 }
 
 .table-tag.pending {
-  background: var(--base-s);
+ 
 }
 
 .table-image {
