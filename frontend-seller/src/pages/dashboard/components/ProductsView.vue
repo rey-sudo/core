@@ -26,7 +26,7 @@
       :modal="true"
     >
       <div class="confirmation-content">
-        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+        <i class="pi pi-exclamation-triangle" style="font-size: 2rem" />
         <span v-if="product"
           >Are you sure you want to delete <b>{{ product.name }}</b
           >?</span
@@ -50,7 +50,7 @@
       :modal="true"
     >
       <div class="confirmation-content">
-        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+        <i class="pi pi-exclamation-triangle" style="font-size: 2rem" />
         <span v-if="product"
           >Are you sure you want to delete the selected products?</span
         >
@@ -74,17 +74,27 @@
     <Dialog
       v-model:visible="productDialog"
       :style="{ width: '480px' }"
-      header="Create"
+      header="Product details"
       :modal="true"
       :draggable="false"
       class="p-fluid"
     >
-      <img
-        v-if="product.image"
-        :src="`https://primefaces.org/cdn/primevue/images/product/${product.image}`"
-        :alt="product.image"
-        class="block m-auto pb-3"
-      />
+      <Carousel
+        v-if="product.image_base"
+        :value="getImages(product)"
+        :numVisible="1"
+        :numScroll="1"
+        orientation="vertical"
+        verticalViewPortHeight="330px"
+        contentClass="flex align-items-center"
+      >
+        <template #item="slotProps">
+          <div class="product-image-preview">
+            <img :src="slotProps.data.image" :alt="slotProps.data.image" />
+          </div>
+        </template>
+      </Carousel>
+
       <div class="field">
         <label for="name" class="field-label">Name</label>
         <InputText
@@ -282,7 +292,7 @@
       <div class="products-card">
         <DataTable
           ref="dt"
-          :value="products"  
+          :value="products"
           v-model:selection="selectedProducts"
           dataKey="product_id"
           :paginator="true"
@@ -436,7 +446,7 @@
                   slotProps.data.image_path +
                   slotProps.data.image_main
                 "
-                :alt="slotProps.data.image"
+                :alt="slotProps.data.image_main"
                 class="table-image"
               />
             </template>
@@ -762,6 +772,7 @@ export default {
       }
     },
     editProduct(product) {
+      console.log("edit", product);
       this.product = { ...product };
       this.productDialog = true;
     },
@@ -775,7 +786,9 @@ export default {
       );
 
       this.deleteProductDialog = false;
-      this.product = {};
+
+      this.resetForm();
+
       this.$toast.add({
         severity: "success",
         summary: "Successful",
@@ -802,6 +815,13 @@ export default {
         id += chars.charAt(Math.floor(Math.random() * chars.length));
       }
       return id;
+    },
+    getImages(product) {
+      const data = product.image_set.split(",");
+
+      return data.map((imageId) => ({
+        image: product.image_base + product.image_path + imageId,
+      }));
     },
     exportCSV() {
       this.$refs.dt.exportCSV();
@@ -847,13 +867,24 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.product-image-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-.confirmation-content{
+.product-image-preview img {
+  border-radius: 18px;
+  width: 300px;
+  height: 300px;
+}
+
+.confirmation-content {
   display: flex;
   align-items: center;
 }
 
-.confirmation-content span{
+.confirmation-content span {
   margin-left: 1rem;
 }
 .table-tag {
