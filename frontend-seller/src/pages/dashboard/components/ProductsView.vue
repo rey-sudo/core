@@ -282,9 +282,9 @@
       <div class="products-card">
         <DataTable
           ref="dt"
-          :value="products"
+          :value="products"  
           v-model:selection="selectedProducts"
-          dataKey="id"
+          dataKey="product_id"
           :paginator="true"
           :rows="10"
           :filters="filters"
@@ -295,22 +295,20 @@
           <template #header>
             <div class="products-header">
               <div class="products-header-left">
-                <span class="products-header-title">Products</span>
-                <span class="products-header-subtitle"
-                  >Create and modify product and more...</span
-                >
+                <span>Products</span>
+                <span>Create and modify product and more...</span>
               </div>
 
               <span class="p-input-icon-left">
                 <i class="pi pi-search" />
                 <InputText
                   v-model="filters['global'].value"
-                  placeholder="Search..."
+                  placeholder="Search"
                 />
               </span>
             </div>
 
-            <Toolbar class="mb-4">
+            <Toolbar>
               <template #start>
                 <Button label="New" icon="pi pi-plus" @click="newProduct" />
                 <Button
@@ -849,17 +847,24 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
+.confirmation-content{
+  display: flex;
+  align-items: center;
+}
+
+.confirmation-content span{
+  margin-left: 1rem;
+}
 .table-tag {
   padding: 0.5rem 0;
   text-transform: uppercase;
 }
 
 .table-tag.moderated {
-
 }
 
 .table-tag.pending {
- 
 }
 
 .table-image {
@@ -1072,12 +1077,12 @@ img {
   padding: 1rem 0;
 }
 
-.products-header-title {
+.products-header-left span:nth-child(1) {
   font-weight: 700;
   font-size: var(--text-size-f);
 }
 
-.products-header-subtitle {
+.products-header-left span:nth-child(2) {
   font-weight: 400;
   font-size: var(--text-size-c);
 }
