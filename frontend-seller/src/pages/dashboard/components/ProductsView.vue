@@ -91,7 +91,13 @@
         <template #item="slotProps">
           <div class="product-image-wrap">
             <div class="product-image-preview">
-              <img :src="slotProps.data.image" :alt="slotProps.data.image" />
+              <Image
+                :src="slotProps.data.image"
+                alt="Image"
+                width="330"
+                height="330"
+                preview
+              />
             </div>
           </div>
         </template>
@@ -103,9 +109,10 @@
           <span
             v-for="item in getImages(product)"
             :key="item"
-            :class="{ mainImage: isMainImage(item) }"
+            :class="{ mainImage: isMainImage(item.id) }"
+            @click="setMainImage(item.id)"
           >
-            <img :src="item.image" alt="productImage" />
+            <Image :src="item.image" alt="Image" width="50" height="50" />
           </span>
         </div>
       </div>
@@ -831,11 +838,12 @@ export default {
       }
       return id;
     },
-
     isMainImage(e) {
-      return this.product.image_main === e.id;
+      return this.product.image_main === e;
     },
-
+    setMainImage(e) {
+      this.product.image_main = e;
+    },
     getImages(product) {
       const data = product.image_set.split(",");
 
@@ -845,7 +853,6 @@ export default {
         image: product.image_base + product.image_path + imageId,
       }));
     },
-
     exportCSV() {
       this.$refs.dt.exportCSV();
     },
@@ -892,15 +899,14 @@ export default {
 <style lang="css" scoped>
 .product-image-main {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 80px;
-  margin-top: 1rem;
 }
 .product-image-main span {
-  padding: 0.25rem;
-  margin: 0 0.5rem;
-  border: 1px solid var(--border-a);
+  padding: 4px;
+  margin: 0 2px;
+  border: 1px solid transparent;
   border-radius: 6px;
   display: flex;
   justify-content: center;
@@ -908,7 +914,7 @@ export default {
 }
 
 .product-image-main span.mainImage {
-  border: 1px solid red;
+  border: 1px solid var(--blue-a);
 }
 
 .product-image-main img {

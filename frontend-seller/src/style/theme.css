@@ -2676,7 +2676,7 @@
       0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
   }
 
-  .p-carousel .p-carousel-item{
+  .p-carousel .p-carousel-item {
     flex: 1 0 100%;
     display: flex;
     align-items: center;
@@ -2725,7 +2725,7 @@
     background: #dee2e6;
   }
   .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
-    background: #2196f3;
+    background: var(--blue-a);
     color: #ffffff;
   }
   .p-datatable .p-paginator-top {
