@@ -104,16 +104,16 @@
       </Carousel>
 
       <div v-if="product.image_base" class="field">
-        <label for="mainImage" class="field-label">Thumbnail</label>
+        <label for="mainImage" class="field-label">Main</label>
         <div id="mainImage" class="product-image-main">
-          <span
+          <div
             v-for="item in getImages(product)"
             :key="item"
             :class="{ mainImage: isMainImage(item.id) }"
             @click="setMainImage(item.id)"
           >
-            <Image :src="item.image" alt="Image" width="50" height="50" />
-          </span>
+            <Image :src="item.image" imageStyle="border-radius: 6px;display: flex;align-items: center;" alt="Image" width="50" height="50"  />
+          </div>
         </div>
       </div>
 
@@ -903,30 +903,18 @@ export default {
   align-items: center;
   height: 80px;
 }
-.product-image-main span {
-  padding: 4px;
-  margin: 0 2px;
+.product-image-main div {
+  padding: 0.25rem;
   border: 1px solid transparent;
   border-radius: 6px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 1rem;
 }
 
-.product-image-main span.mainImage {
+.product-image-main div.mainImage {
   border: 1px solid var(--blue-a);
-}
-
-.product-image-main img {
-  cursor: pointer;
-  background: var(--base-b);
-  border-radius: 6px;
-  color: var(--text-a);
-  border: 1px solid var(--border-a);
-  font-size: var(--text-size-b);
-  font-weight: 600;
-  width: 50px;
-  height: 50px;
 }
 .product-image-wrap {
   display: block;
