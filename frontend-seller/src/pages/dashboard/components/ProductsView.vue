@@ -74,7 +74,7 @@
     <Dialog
       v-model:visible="productDialog"
       :style="{ width: '480px' }"
-      header="Product details"
+      header="Product"
       :modal="true"
       :draggable="false"
       class="p-fluid"
@@ -84,13 +84,18 @@
         :value="getImages(product)"
         :numVisible="1"
         :numScroll="1"
-        orientation="vertical"
+        orientation="horizontal"
         verticalViewPortHeight="330px"
         contentClass="flex align-items-center"
       >
         <template #item="slotProps">
-          <div class="product-image-preview">
-            <img :src="slotProps.data.image" :alt="slotProps.data.image" />
+          <div class="product-image-wrap">
+            <div class="product-image-preview">
+              <img :src="slotProps.data.image" :alt="slotProps.data.image" />
+            </div>
+            <div class="product-image-main">
+              <span>Set as Main</span>
+            </div>
           </div>
         </template>
       </Carousel>
@@ -821,8 +826,10 @@ export default {
 
       return data.map((imageId) => ({
         image: product.image_base + product.image_path + imageId,
+        main: false,
       }));
     },
+
     exportCSV() {
       this.$refs.dt.exportCSV();
     },
@@ -867,6 +874,27 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.product-image-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  margin-top: 1rem;
+}
+
+.product-image-main span {
+  cursor: pointer;
+  background: var(--base-b);
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  color: var(--text-a);
+  border: 1px solid var(--border-a);
+  font-size: var(--text-size-a);
+  font-weight: 600;
+}
+.product-image-wrap {
+  display: block;
+}
 .product-image-preview {
   display: flex;
   justify-content: center;
