@@ -93,12 +93,22 @@
             <div class="product-image-preview">
               <img :src="slotProps.data.image" :alt="slotProps.data.image" />
             </div>
-            <div class="product-image-main">
-              <span>Set as Main</span>
-            </div>
           </div>
         </template>
       </Carousel>
+
+      <div v-if="product.image_base" class="field">
+        <label for="mainImage" class="field-label">Thumbnail</label>
+        <div id="mainImage" class="product-image-main">
+          <span
+            v-for="item in getImages(product)"
+            :key="item"
+            :class="{ mainImage: isMainImage(item) }"
+          >
+            <img :src="item.image" alt="productImage" />
+          </span>
+        </div>
+      </div>
 
       <div class="field">
         <label for="name" class="field-label">Name</label>
@@ -821,12 +831,18 @@ export default {
       }
       return id;
     },
+
+    isMainImage(e) {
+      return this.product.image_main === e.id;
+    },
+
     getImages(product) {
       const data = product.image_set.split(",");
 
       return data.map((imageId) => ({
+        main: product.image_main,
+        id: imageId,
         image: product.image_base + product.image_path + imageId,
-        main: false,
       }));
     },
 
@@ -878,19 +894,33 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40px;
+  height: 80px;
   margin-top: 1rem;
 }
-
 .product-image-main span {
+  padding: 0.25rem;
+  margin: 0 0.5rem;
+  border: 1px solid var(--border-a);
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-image-main span.mainImage {
+  border: 1px solid red;
+}
+
+.product-image-main img {
   cursor: pointer;
   background: var(--base-b);
   border-radius: 6px;
-  padding: 0.25rem 0.5rem;
   color: var(--text-a);
   border: 1px solid var(--border-a);
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   font-weight: 600;
+  width: 50px;
+  height: 50px;
 }
 .product-image-wrap {
   display: block;
@@ -917,7 +947,6 @@ export default {
 }
 .table-tag {
   padding: 0.5rem 0;
-  text-transform: uppercase;
 }
 
 .table-tag.moderated {
