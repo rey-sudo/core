@@ -5,21 +5,13 @@ metadata:
   labels:
     strimzi.io/cluster: debezium-connect-cluster
 spec:
-  class: io.debezium.connector.vitess.VitessConnector
+  class: io.debezium.connector.mysql.MySqlConnector
   tasksMax: 1
   config:
-    connector.class: io.debezium.connector.vitess.VitessConnector
-    database.hostname: "10.98.206.2"
-    database.port: "15999"
+    connector.class: io.debezium.connector.mysql.MySqlConnector
+    database.hostname: "mysql"
+    database.port: 3306
     database.user: "marketplace"
     database.password: "password" 
-    vitess.keyspace: "service_seller"
-    vitess.tablet.type: "MASTER"
-    vitess.vtctld.host": "10.110.83.109"
-    vitess.vtctld.port": "15999"
-    vitess.vtctld.user": "marketplace"
-    vitess.vtctld.password: "password"  
-    vitess.database.user: "marketplace"
-    vitess.database.password: "password"
     topic.prefix: "fullfillment"
     tasks.max: 1 

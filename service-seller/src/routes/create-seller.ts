@@ -9,14 +9,14 @@ import DB from "../db";
 const createSellerMiddlewares: any = [];
 
 const createSellerHandler = async (req: Request, res: Response) => {
-  let conn = null;
+  let connection = null;
 
   const params = req.body;
 
   try {
-    conn = await DB.client.getConnection();
+    connection = await DB.client.getConnection();
 
-    await conn.beginTransaction();
+    await connection.beginTransaction();
 
     const token = createToken({
       role: "create-seller",
@@ -58,19 +58,19 @@ const createSellerHandler = async (req: Request, res: Response) => {
       0,
     ];
 
-    await conn.execute(schemeData, schemeValue);
+    await connection.execute(schemeData, schemeValue);
 
-    await conn.commit();
+    await connection.commit();
 
     res.status(200).send({ success: true, message:  "Successfully registered" });
   } catch (err) {
-    await conn.rollback();
+    await connection.rollback();
 
     _.error(err);
 
     throw new BadRequestError("invalid username or email");
   } finally {
-    conn.release();
+    connection.release();
   }
 };
 
