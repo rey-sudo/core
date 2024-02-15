@@ -1,3 +1,5 @@
+CREATE DATABASE service_product;
+
 create table if not exists product(
   product_id varchar(16) not null,
   seller_id varchar(20) not null,

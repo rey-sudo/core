@@ -1,3 +1,6 @@
+CREATE DATABASE service_gate;
+
+
 create table if not exists slot(
   slot_id varchar(20) not null,
   seller_id varchar(20) not null,
