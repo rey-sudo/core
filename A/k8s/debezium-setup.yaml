@@ -33,6 +33,16 @@ roleRef:
   name: connector-configuration-role
   apiGroup: rbac.authorization.k8s.io
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: registry-secret
+  namespace: default
+type: Opaque
+data:
+  username: cGFpcmZ5Cg==
+  password: YXJyaWJhIGxhcmdhIHZpZGEgNTA1Cg==
+---  
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaConnect
 metadata:
@@ -59,11 +69,14 @@ spec:
   build:
     output:
       type: docker
-      image: 10.108.172.231:5000/debezium-connector-mysql:latest    
+      image: pairfy/debezium-connector-mysql:latest
+      pushSecret: registry-secret  
     plugins:
       - name: debezium-connector-mysql
         artifacts:
           - type: tgz
             url: https://repo1.maven.org/maven2/io/debezium/debezium-connector-mysql/2.5.0.Final/debezium-connector-mysql-2.5.0.Final-plugin.tar.gz
+
+
 
 
