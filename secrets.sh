@@ -4,5 +4,12 @@ kubectl create secret generic admin-jwt-secret --from-literal=ADMIN_JWT_KEY=ugly
 
 kubectl create secret generic encrypto-secret --from-literal=ENCRYPTO_KEY=password567567567
 
-kubectl create secret docker-registry my-registry-secret   --docker-server=localhost:5000   --docker-username=pairfy   --docker-password='arriba larga vida 505'   --docker-email=pairfy.io@gmail.com
 
+
+
+kubectl create secret docker-registry registry-secret \
+    --docker-server=https://index.docker.io/v1/ \
+    --docker-username='pairfy' \
+    --docker-password='arriba larga vida 505' \
+    --docker-email='pairfy.io@gmail.com' \
+    --dry-run=client -o yaml | kubectl apply -f -
