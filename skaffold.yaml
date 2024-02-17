@@ -46,3 +46,11 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .    
+    - image: pairfy/debezium-mysql-connector
+      context: plugin-connector
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .               
