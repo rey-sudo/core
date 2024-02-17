@@ -13,3 +13,8 @@ kubectl create secret docker-registry registry-secret \
     --docker-password='arriba larga vida 505' \
     --docker-email='pairfy.io@gmail.com' \
     --dry-run=client -o yaml | kubectl apply -f -
+
+
+
+
+

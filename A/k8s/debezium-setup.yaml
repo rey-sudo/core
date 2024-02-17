@@ -59,8 +59,8 @@ spec:
   build:
     output:
       type: docker
-      image: pairfy/debezium-connector-mysql:latest
-      pushSecret: registry-secret  
+      image: 10.111.65.44:5000/debezium-connector-mysql
+      #pushSecret: registry-secret
     plugins:
       - name: debezium-connector-mysql
         artifacts:
