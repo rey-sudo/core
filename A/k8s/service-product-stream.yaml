@@ -13,5 +13,7 @@ spec:
     database.port: 3306
     database.user: "marketplace"
     database.password: "password" 
+    database.server.id: "5051" 
+    database.include.list": "service_product"
     topic.prefix: "fullfillment"
     tasks.max: 1 

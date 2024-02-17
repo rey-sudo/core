@@ -12,6 +12,8 @@ spec:
     database.hostname: "mysql"
     database.port: 3306
     database.user: "marketplace"
-    database.password: "password" 
+    database.password: "password"
+    database.server.id: "5050" 
+    database.include.list": "service_seller"
     topic.prefix: "fullfillment"
     tasks.max: 1 
