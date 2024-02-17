@@ -8,7 +8,7 @@ kubectl create secret generic encrypto-secret --from-literal=ENCRYPTO_KEY=passwo
 
 
 kubectl create secret docker-registry registry-secret \
-    --docker-server=https://index.docker.io/v1/ \
+    --docker-server=10.111.65.44:5000 \
     --docker-username='pairfy' \
     --docker-password='arriba larga vida 505' \
     --docker-email='pairfy.io@gmail.com' \
