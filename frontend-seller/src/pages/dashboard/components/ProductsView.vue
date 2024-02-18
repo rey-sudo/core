@@ -21,7 +21,7 @@
 
     <Dialog
       v-model:visible="deleteProductDialog"
-      :style="{ width: '450px' }"
+      :style="{ width: '500px' }"
       header="Confirm"
       :modal="true"
     >
@@ -45,7 +45,7 @@
 
     <Dialog
       v-model:visible="deleteProductsDialog"
-      :style="{ width: '450px' }"
+      :style="{ width: '500px' }"
       header="Confirm"
       :modal="true"
     >
@@ -84,7 +84,7 @@
         :value="getImages(product)"
         :numVisible="1"
         :numScroll="1"
-        orientation="horizontal"
+        orientation="vertical"
         verticalViewPortHeight="340px"
         contentClass="flex align-items-center"
       >
@@ -104,7 +104,7 @@
       </Carousel>
 
       <div v-if="product.image_base" class="field">
-        <label for="mainImage" class="field-label">Main</label>
+        <label for="mainImage" class="field-label">Front image</label>
         <div id="mainImage" class="product-image-main">
           <div
             v-for="item in getImages(product)"
