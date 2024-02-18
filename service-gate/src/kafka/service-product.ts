@@ -132,6 +132,9 @@ const handleUpdate = async (
   { topic, partition, message }: any
 ) => {
   const payload = data.after;
+  
+  payload.created_at = stringToTimestamp(payload.created_at);
+  payload.schema_t = stringToTimestamp(payload.schema_t);
 
   let connection = null;
 
