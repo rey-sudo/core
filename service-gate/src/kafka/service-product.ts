@@ -1,6 +1,7 @@
 import DB from "../db";
 import kafka from "./client";
 import { _ } from "../utils/pino";
+import { stringToTimestamp } from "../utils/other";
 
 const TOPIC_NAME = "fullfillment.service_product.product";
 const CONSUMER_GROUP = "service-gate-group";
@@ -60,6 +61,9 @@ const handleCreate = async (
   { topic, partition, message }: any
 ) => {
   const payload = data.after;
+
+  payload.created_at = stringToTimestamp(payload.created_at);
+  payload.schema_t = stringToTimestamp(payload.schema_t);
 
   let connection = null;
 
