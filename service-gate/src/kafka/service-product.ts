@@ -69,27 +69,29 @@ const handleCreate = async (
     await connection.beginTransaction();
 
     const schemeData = `
-      INSERT INTO product (
-        product_id,
-        seller_id,
-        title,
-        category,
-        price,
-        collateral,
-        stock,
-        slots,
-        note,
-        keywords,
-        theme,
-        terms,
-        country,
-        moderated,
-        image_base,
-        image_path,
-        created_at,
-        schema_t,
-        schema_v
-       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    INSERT INTO product (
+      product_id,
+      seller_id,
+      name,
+      description,
+      category,
+      price,
+      collateral,
+      stock,
+      stock_status,
+      slots,
+      keywords,
+      theme,
+      country,
+      moderated,
+      image_base,
+      image_path,
+      image_main,
+      image_set,
+      created_at,
+      schema_t,
+      schema_v
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const schemeValue = Object.values(payload);
 
@@ -138,20 +140,22 @@ const handleUpdate = async (
     UPDATE product 
     SET product_id = ?,
         seller_id = ?,
-        title = ?,
+        name = ?,
+        description = ?,        
         category = ?,
         price = ?,
         collateral = ?,
         stock = ?,
+        stock_status = ?,
         slots = ?,
-        note = ?,
         keywords = ?,
         theme = ?,
-        terms = ?,
         country = ?,
         moderated = ?,        
         image_base = ?,
         image_path = ?,
+        image_main = ?,
+        image_set = ?,
         created_at = ?,
         schema_t = ?,
         schema_v = ?
