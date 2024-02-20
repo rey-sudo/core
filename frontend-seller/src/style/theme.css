@@ -2742,8 +2742,8 @@
     border-width: 0 0 1px 0;
     background: var(--base-a);
     font-weight: 600;
-    border-top-right-radius: 18px;
-    border-top-left-radius: 18px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
   }
   .p-datatable .p-datatable-footer {
     background: #f8f9fa;

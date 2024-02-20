@@ -1006,8 +1006,8 @@ export default {
 }
 
 .table-image {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
 }
 .table-buttons {
   display: flex;
