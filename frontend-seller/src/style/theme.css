@@ -6758,8 +6758,8 @@
     color: #ffffff;
   }
   .p-tag.p-tag-warning {
-    background-color: var(--base-b);
-    color: var(--text-b);
+    background-color: var(--orange-s);
+    color: var(--orange-a);
   }
 
   .p-tag.p-tag-danger {

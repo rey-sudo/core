@@ -105,7 +105,7 @@
       </Carousel>
 
       <div v-if="product.image_base" class="field">
-        <label for="mainImage" class="field-label">Front image</label>
+        <label for="mainImage" class="field-label">Front</label>
         <div id="mainImage" class="product-image-main">
           <div
             v-for="item in getImages(product)"
@@ -322,6 +322,7 @@
       <div class="products-card">
         <DataTable
           ref="dt"
+          resizableColumns
           :value="products"
           v-model:selection="selectedProducts"
           dataKey="product_id"
@@ -385,7 +386,7 @@
             field="name"
             header="Name"
             sortable
-            style="max-width: 16rem"
+            style="max-width: 16rem; white-space: break-spaces;"
           />
 
           <Column field="price" header="Price" sortable style="min-width: 8rem">

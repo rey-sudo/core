@@ -322,8 +322,9 @@
       <div class="slots-card">
         <DataTable
           ref="dt"
+          resizableColumns
           :value="products"
-          v-model:selection="selectedProducts"
+          v-model:expandedRows="selectedProducts"
           dataKey="product_id"
           :paginator="true"
           :rows="10"
@@ -332,6 +333,7 @@
           :rowsPerPageOptions="[5, 10, 25]"
           currentPageReportTemplate="{first} to {last} of {totalRecords} items"
         >
+          <template #expansion> x </template>
           <template #header>
             <div class="slots-header">
               <div class="slots-header-left">
@@ -370,11 +372,8 @@
             </Toolbar>
           </template>
 
-          <Column
-            selectionMode="multiple"
-            style="width: 3rem"
-            :exportable="false"
-          />
+          <Column expander style="width: 3rem" :exportable="false" />
+
           <Column
             field="product_id"
             header="Code"
@@ -385,7 +384,7 @@
             field="name"
             header="Name"
             sortable
-            style="max-width: 16rem"
+            style="max-width: 16rem; white-space: break-spaces"
           />
 
           <Column field="price" header="Price" sortable style="min-width: 8rem">
@@ -436,21 +435,6 @@
           </Column>
 
           <Column
-            field="rating"
-            header="Reviews"
-            sortable
-            style="min-width: 8rem"
-          >
-            <template #body="slotProps">
-              <Rating
-                :modelValue="slotProps.data.rating"
-                :readonly="true"
-                :cancel="false"
-              />
-            </template>
-          </Column>
-
-          <Column
             field="stock_status"
             header="Stock"
             sortable
@@ -490,7 +474,7 @@
                 />
                 <Button
                   class="table-button"
-                  icon="pi pi-trash"
+                  icon="pi pi-external-link"
                   outlined
                   rounded
                   @click="confirmDeleteProduct(slotProps.data)"
@@ -509,7 +493,6 @@ import dashboardAPI from "@/pages/dashboard/api/index";
 import { FilterMatchMode } from "primevue/api";
 import { HOST } from "@/api/index";
 import { ref } from "vue";
-
 
 export default {
   setup() {
@@ -676,7 +659,6 @@ export default {
       const response = JSON.parse(e.xhr.response);
 
       if (response.success === true) {
-
         this.product.image_set.push(...response.payload);
 
         if (this.product.image_set.length >= this.maxProductImages) {
