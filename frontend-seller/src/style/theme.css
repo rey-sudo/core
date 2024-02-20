@@ -1976,7 +1976,7 @@
   }
   .p-button {
     color: var(--text-w);
-    background: var(--blue-a);
+    background: var(--blue-c);
     border: 1px solid transparent;
     padding: 0.5rem 1rem;
     font-size: 1rem;
@@ -3424,8 +3424,8 @@
     border-radius: 50%;
   }
   .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-    background: var(--blue-a);
-    border-color: var(--blue-a);
+    background: var(--blue-c);
+    border-color: var(--blue-c);
     color: #ffffff;
   }
   .p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover {
@@ -4276,7 +4276,7 @@
     margin-left: 1rem;
   }
   .p-dialog {
-    border-radius: 18px;
+    border-radius: 6px;
     padding: 0px;
     box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.1);
     border: 0 none;
@@ -4286,8 +4286,8 @@
     background: #ffffff;
     color: var(--text-a);
     padding: 1rem;
-    border-top-right-radius: 18px;
-    border-top-left-radius: 18px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
   }
   .p-dialog .p-dialog-header .p-dialog-title {
     font-weight: 700;
@@ -4355,8 +4355,8 @@
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
-    border-bottom-right-radius: 18px;
-    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
   }
   .p-dialog.p-confirm-dialog .p-confirm-dialog-icon {
     font-size: 2rem;
