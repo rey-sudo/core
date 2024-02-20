@@ -21,7 +21,7 @@
 
     <Dialog
       v-model:visible="deleteProductDialog"
-      :style="{ width: '500px' }"
+      :style="{ width: '520px' }"
       header="Confirm"
       :modal="true"
     >
@@ -45,7 +45,7 @@
 
     <Dialog
       v-model:visible="deleteProductsDialog"
-      :style="{ width: '500px' }"
+      :style="{ width: '520px' }"
       header="Confirm"
       :modal="true"
     >
@@ -73,7 +73,7 @@
 
     <Dialog
       v-model:visible="productDialog"
-      :style="{ width: '500px' }"
+      :style="{ width: '520px' }"
       header="Product"
       :modal="true"
       :draggable="false"
@@ -127,7 +127,7 @@
         <label for="name" class="field-label">Name</label>
         <InputText
           id="name"
-          v-model="productName"
+          v-model="product.name"
           required="true"
           autofocus
           :class="{ invalid: invalidProductName }"
@@ -147,7 +147,7 @@
         </label>
         <Textarea
           id="description"
-          v-model="productDescription"
+          v-model="product.description"
           required="true"
           rows="3"
           cols="20"
@@ -157,12 +157,13 @@
         <small
           class="p-counter"
           :class="{
-            invalid: productDescription.length > descriptionLengthLimit,
+            invalid: product.description.length > descriptionLengthLimit,
           }"
           v-if="!invalidProductDescription"
         >
-          {{ productDescription.length }} / {{ descriptionLengthLimit }}
+          {{ product.description.length }} / {{ descriptionLengthLimit }}
         </small>
+
         <small class="p-error" v-if="invalidProductDescription"
           >The description is required and
           {{ descriptionLengthLimit }} characters long.
@@ -181,7 +182,7 @@
             />
           </label>
           <Dropdown
-            v-model="productCategory"
+            v-model="product.category"
             :options="categories"
             id="category"
             optionLabel="name"
@@ -204,7 +205,7 @@
           </label>
           <InputNumber
             id="price"
-            v-model="productPrice"
+            v-model="product.price"
             showButtons
             prefix="ADA "
             locale="en-US"
@@ -226,7 +227,7 @@
           </label>
           <InputNumber
             id="collateral"
-            v-model="productCollateral"
+            v-model="product.collateral"
             showButtons
             prefix="ADA "
             locale="en-US"
@@ -247,7 +248,7 @@
           </label>
           <InputNumber
             id="quantity"
-            v-model="productStock"
+            v-model="product.stock"
             integeronly
             :min="0"
             :class="{ invalid: invalidProductStock }"
@@ -261,7 +262,7 @@
           <label for="keywords" class="field-label">Keywords</label>
           <Chips
             id="keywords"
-            v-model="productKeywords"
+            v-model="product.keywords"
             :allowDuplicate="false"
             separator=","
             :max="3"
@@ -302,7 +303,7 @@
             </template>
           </FileUpload>
           <small class="invalid" v-if="invalidProductImages">
-            {{ productImages.length }} / {{ minProductImages }} images are
+            {{ product.image_set.length }} / {{ minProductImages }} images are
             required.
           </small>
         </div>
@@ -434,7 +435,11 @@
             header="Category"
             sortable
             style="min-width: 8rem; text-transform: capitalize"
-          />
+          >
+            <template #body="slotProps">
+              {{ slotProps.data.category.code || slotProps.data.category }}
+            </template>
+          </Column>
 
           <Column
             field="rating"
@@ -515,14 +520,29 @@ export default {
   setup() {
     const { getProductsData, createProduct } = dashboardAPI();
 
-    let productName = ref(null);
-    let productDescription = ref("");
-    let productCategory = ref(null);
-    let productPrice = ref(null);
-    let productCollateral = ref(null);
-    let productStock = ref(null);
-    let productKeywords = ref(null);
-    let productImages = ref([]);
+    let product = ref({
+      product_id: null,
+      seller_id: null,
+      name: null,
+      description: "",
+      category: null,
+      price: null,
+      collateral: null,
+      stock: null,
+      stock_status: null,
+      slots: null,
+      keywords: null,
+      theme: null,
+      country: null,
+      moderated: false,
+      image_base: null,
+      image_path: null,
+      image_main: null,
+      image_set: [],
+      created_at: null,
+      schema_t: null,
+      schema_v: null,
+    });
 
     let invalidProductName = ref(false);
     let invalidProductDescription = ref(false);
@@ -539,14 +559,29 @@ export default {
     let disableUpload = ref(false);
 
     const resetForm = () => {
-      productName.value = null;
-      productDescription.value = "";
-      productCategory.value = null;
-      productPrice.value = null;
-      productCollateral.value = null;
-      productStock.value = null;
-      productKeywords.value = null;
-      productImages.value = [];
+      product.value = {
+        product_id: null,
+        seller_id: null,
+        name: null,
+        description: "",
+        category: null,
+        price: null,
+        collateral: null,
+        stock: null,
+        stock_status: null,
+        slots: null,
+        keywords: null,
+        theme: null,
+        country: null,
+        moderated: false,
+        image_base: null,
+        image_path: null,
+        image_main: null,
+        image_set: [],
+        created_at: null,
+        schema_t: null,
+        schema_v: null,
+      };
 
       invalidProductName.value = false;
       invalidProductDescription.value = false;
@@ -564,6 +599,7 @@ export default {
     };
 
     return {
+      product,
       disableUpload,
       resetForm,
       messageModalVisible,
@@ -571,14 +607,6 @@ export default {
       errorModal,
       getProductsData,
       createProduct,
-      productName,
-      productDescription,
-      productCategory,
-      productPrice,
-      productCollateral,
-      productStock,
-      productKeywords,
-      productImages,
       invalidProductName,
       invalidProductDescription,
       invalidProductCategory,
@@ -600,7 +628,6 @@ export default {
       nameLengthLimit: 200,
       minProductImages: 5,
       maxProductImages: 5,
-      product: {},
       selectedProducts: null,
       filters: {},
       categories: [
@@ -632,9 +659,7 @@ export default {
   },
   methods: {
     onBeforeUpload() {
-      console.log("e", this.productImages.length);
-
-      if (this.productImages.length < this.maxProductImages) {
+      if (this.product.image_set.length < this.maxProductImages) {
         this.disableUpload = false;
       }
     },
@@ -656,16 +681,17 @@ export default {
       const response = JSON.parse(e.xhr.response);
 
       if (response.success === true) {
-        this.productImages.push(...response.payload);
+        console.log(this.product.image_set);
+        this.product.image_set.push(...response.payload);
 
-        if (this.productImages.length >= this.maxProductImages) {
+        if (this.product.image_set.length >= this.maxProductImages) {
           this.disableUpload = true;
         }
 
         this.$toast.add({
           severity: "info",
           summary: "Success",
-          detail: this.productImages.length + " File Uploaded",
+          detail: this.product.image_set.length + " File Uploaded",
           life: 3000,
         });
       }
@@ -682,44 +708,48 @@ export default {
     },
     async handleSubmit() {
       const productForm = [
-        (this.invalidProductName = !this.checkProductName(this.productName)),
+        (this.invalidProductName = !this.checkProductName(this.product.name)),
         (this.invalidProductDescription = !this.checkProductDescription(
-          this.productDescription
+          this.product.description
         )),
         (this.invalidProductCategory = !this.checkProductCategory(
-          this.productCategory
+          this.product.category
         )),
-        (this.invalidProductPrice = !this.checkProductPrice(this.productPrice)),
+        (this.invalidProductPrice = !this.checkProductPrice(
+          this.product.price
+        )),
         (this.invalidProductCollateral = !this.checkProductCollateral(
-          this.productCollateral
+          this.product.collateral
         )),
-        (this.invalidProductStock = !this.checkProductStock(this.productStock)),
+        (this.invalidProductStock = !this.checkProductStock(
+          this.product.stock
+        )),
         (this.invalidProductKeywords = !this.checkProductKeywords(
-          this.productKeywords
+          this.product.keywords
         )),
         (this.invalidProductImages = !this.checkProductImages(
-          this.productImages
+          this.product.image_set
         )),
       ];
 
-      console.log(productForm);
-
-      if (productForm.includes(true)) return;
+      if (productForm.includes(true)) {
+        return;
+      }
 
       const params = {
-        name: this.productName,
-        description: this.productDescription,
-        category: this.productCategory.code,
-        price: this.productPrice,
-        collateral: this.productCollateral,
-        stock: this.productStock,
-        keywords: this.productKeywords.join(","),
-        image_set: this.productImages.join(","),
+        name: this.product.name,
+        description: this.product.description,
+        category: this.product.category.code,
+        price: this.product.price,
+        collateral: this.product.collateral,
+        stock: this.product.stock,
+        keywords: this.product.keywords.join(","),
+        image_set: this.product.image_set.join(","),
       };
 
-      await this.createProduct(params).then((res) => {
-        console.log(res);
+      console.log(params);
 
+      await this.createProduct(params).then((res) => {
         if (res.response.success === true) {
           this.$toast.add({
             severity: "success",
@@ -783,7 +813,7 @@ export default {
         return false;
       }
 
-      if (this.productImages.length < this.minProductImages) {
+      if (this.product.image_set.length < this.minProductImages) {
         return false;
       }
 
@@ -798,17 +828,29 @@ export default {
       }
     },
     editProduct(product) {
-      console.log("edit", product);
-      this.product = { ...product };
+      product.keywords =
+        typeof product.keywords === "string"
+          ? product.keywords.split(",")
+          : product.keywords;
 
-      this.productName = product.name;
-      this.productDescription = product.description;
-      this.productCategory = { name: product.category, code: product.category };
-      this.productPrice = product.price;
-      this.productCollateral = product.collateral;
-      this.productStock = product.stock;
-      this.productKeywords = product.keywords.split(",");
-      this.productImages = product.image_set.split(",");
+      product.image_set =
+        typeof product.image_set === "string"
+          ? product.image_set.split(",")
+          : product.image_set;
+
+      let categoryCode = product.category;
+
+      let categoryName =
+        categoryCode.charAt(0).toUpperCase() + categoryCode.slice(1);
+
+      product.category = {
+        name: categoryName,
+        code: categoryCode,
+      };
+
+      console.log(product.category);
+
+      this.product = product;
 
       this.productDialog = true;
     },
@@ -859,7 +901,7 @@ export default {
       this.product.image_main = e;
     },
     getImages(product) {
-      const data = product.image_set.split(",");
+      const data = product.image_set;
 
       return data.map((imageId) => ({
         main: product.image_main,
