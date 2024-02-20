@@ -382,12 +382,24 @@
             sortable
             style="min-width: 12rem"
           />
+
           <Column
             field="name"
             header="Name"
             sortable
-            style="max-width: 16rem; white-space: break-spaces;"
+            style="max-width: 16rem; white-space: break-spaces"
           />
+
+          <Column
+            field="category"
+            header="Category"
+            sortable
+            style="min-width: 8rem; text-transform: capitalize"
+          >
+            <template #body="slotProps">
+              {{ slotProps.data.category.code || slotProps.data.category }}
+            </template>
+          </Column>
 
           <Column field="price" header="Price" sortable style="min-width: 8rem">
             <template #body="slotProps">
@@ -422,17 +434,6 @@
               >
                 {{ checkModerated(slotProps.data.moderated) }}
               </div>
-            </template>
-          </Column>
-
-          <Column
-            field="category"
-            header="Category"
-            sortable
-            style="min-width: 8rem; text-transform: capitalize"
-          >
-            <template #body="slotProps">
-              {{ slotProps.data.category.code || slotProps.data.category }}
             </template>
           </Column>
 
@@ -510,7 +511,6 @@ import dashboardAPI from "@/pages/dashboard/api/index";
 import { FilterMatchMode } from "primevue/api";
 import { HOST } from "@/api/index";
 import { ref } from "vue";
-
 
 export default {
   setup() {
@@ -677,7 +677,6 @@ export default {
       const response = JSON.parse(e.xhr.response);
 
       if (response.success === true) {
-
         this.product.image_set.push(...response.payload);
 
         if (this.product.image_set.length >= this.maxProductImages) {

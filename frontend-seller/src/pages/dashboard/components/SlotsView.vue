@@ -380,13 +380,26 @@
             sortable
             style="min-width: 12rem"
           />
+
+
+
           <Column
             field="name"
             header="Name"
             sortable
             style="max-width: 16rem; white-space: break-spaces"
           />
-
+          <Column
+            field="category"
+            header="Category"
+            sortable
+            style="min-width: 8rem; text-transform: capitalize"
+          >
+            <template #body="slotProps">
+              {{ slotProps.data.category.code || slotProps.data.category }}
+            </template>
+          </Column>
+          
           <Column field="price" header="Price" sortable style="min-width: 8rem">
             <template #body="slotProps">
               {{ formatCurrency(slotProps.data.price) }}
@@ -404,47 +417,15 @@
             </template>
           </Column>
 
-          <Column
-            field="moderated"
-            header="Status"
-            sortable
-            style="min-width: 8rem"
-          >
+          <Column field="slots" header="Slots" sortable style="min-width: 8rem">
             <template #body="slotProps">
-              <div
-                class="table-tag"
-                :class="{
-                  pending: slotProps.data.moderated === 0,
-                  moderated: slotProps.data.moderated === 1,
-                }"
-              >
-                {{ checkModerated(slotProps.data.moderated) }}
-              </div>
+              {{ slotProps.data.slots }}
             </template>
           </Column>
 
-          <Column
-            field="category"
-            header="Category"
-            sortable
-            style="min-width: 8rem; text-transform: capitalize"
-          >
+          <Column field="stock" header="Stock" sortable style="min-width: 8rem">
             <template #body="slotProps">
-              {{ slotProps.data.category.code || slotProps.data.category }}
-            </template>
-          </Column>
-
-          <Column
-            field="stock_status"
-            header="Stock"
-            sortable
-            style="min-width: 8rem"
-          >
-            <template #body="slotProps">
-              <Tag
-                :value="slotProps.data.stock_status"
-                :severity="getStatusLabel(slotProps.data.stock_status)"
-              />
+              {{ slotProps.data.stock }}
             </template>
           </Column>
 
@@ -652,6 +633,14 @@ export default {
         this.errorModal = message.response.errors;
       }
     },
+    formatDate(e) {
+      const date = new Date(e);
+      const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1)
+        .toString()
+        .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
+
+      return formattedDate;
+    },
     hideModals() {
       this.messageModalVisible = false;
     },
@@ -793,14 +782,6 @@ export default {
       }
 
       return true;
-    },
-    checkModerated(e) {
-      if (e === 0) {
-        return "Pending";
-      }
-      if (e === 1) {
-        return "Published";
-      }
     },
     editProduct(product) {
       product.keywords =
@@ -952,12 +933,6 @@ export default {
 }
 .table-tag {
   padding: 0.5rem 0;
-}
-
-.table-tag.moderated {
-}
-
-.table-tag.pending {
 }
 
 .table-image {
