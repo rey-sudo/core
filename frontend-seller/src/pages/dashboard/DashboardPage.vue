@@ -26,6 +26,7 @@
     </div>
 
     <ProductsView v-show="selectedNav === 'products'" />
+    <SlotsView v-show="selectedNav === 'slots'" />
   </div>
 </template>
 
@@ -33,10 +34,12 @@
 import ProductsView from "./components/ProductsView.vue";
 import entryAPI from "@/pages/entry/api";
 import dashboardAPI from "@/pages/dashboard/api";
+import SlotsView from "./components/SlotsView.vue";
 
 export default {
   components: {
     ProductsView,
+    SlotsView,
   },
 
   setup() {
@@ -66,7 +69,7 @@ export default {
   },
   data() {
     return {
-      selectedNav: "products",
+      selectedNav: "slots",
       navTabs: [
         {
           name: "home",
