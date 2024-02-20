@@ -505,10 +505,11 @@
 </template>
 
 <script>
+import dashboardAPI from "@/pages/dashboard/api/index";
 import { FilterMatchMode } from "primevue/api";
 import { HOST } from "@/api/index";
 import { ref } from "vue";
-import dashboardAPI from "@/pages/dashboard/api/index";
+
 
 export default {
   setup() {
