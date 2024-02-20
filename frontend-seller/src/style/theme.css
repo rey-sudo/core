@@ -1975,13 +1975,14 @@
     border-color: #ced4da #ced4da #ced4da #e4677e;
   }
   .p-button {
-    color: var(--blue-a);
-    background: var(--blue-s);
+    color: var(--text-w);
+    background: var(--blue-a);
     border: 1px solid transparent;
     padding: 0.5rem 1rem;
     font-size: 1rem;
     transition: 0.1s cubic-bezier(0.08, 0.52, 0.52, 1);
-    border-radius: 6px;
+    border-radius: 4px;
+    font-weight: 600;
     outline-color: transparent;
     font-size: var(--text-size-a);
   }

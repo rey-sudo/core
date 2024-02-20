@@ -74,7 +74,7 @@
     <Dialog
       v-model:visible="productDialog"
       :style="{ width: '520px' }"
-      header="Product"
+      header="Product details"
       :modal="true"
       :draggable="false"
       class="p-fluid"
@@ -84,7 +84,7 @@
         :value="getImages(product)"
         :numVisible="1"
         :numScroll="1"
-        orientation="vertical"
+        orientation="horizontal"
         verticalViewPortHeight="340px"
         contentClass="flex align-items-center"
       >
@@ -955,7 +955,7 @@ export default {
 <style lang="css" scoped>
 .product-image-main {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   height: 80px;
 }
