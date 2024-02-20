@@ -1,5 +1,6 @@
 <template>
   <div class="products">
+    <!--DIALOG SECTION-->
     <Dialog
       v-model:visible="messageModalVisible"
       modal
@@ -288,7 +289,7 @@
           <FileUpload
             id="fileupload"
             name="image"
-            :url="mediaUrl"
+            :url="mediaHostURL"
             @upload="onAdvancedUpload($event)"
             @before-upload="onBeforeUpload($event)"
             :multiple="true"
@@ -314,6 +315,7 @@
         <Button label="Save" icon="pi pi-check" text @click="handleSubmit" />
       </template>
     </Dialog>
+    <!--DIALOG SECTION-->
 
     <!---CONTENT-->
     <div class="products-wrap">
@@ -359,14 +361,6 @@
               </template>
 
               <template #end>
-                <FileUpload
-                  mode="basic"
-                  accept="image/*"
-                  :maxFileSize="1000000"
-                  label="Import"
-                  chooseLabel="Import"
-                  style="margin: 0 1rem"
-                />
                 <Button
                   label="Export"
                   icon="pi pi-upload"
@@ -619,7 +613,7 @@ export default {
   },
   data() {
     return {
-      mediaUrl: HOST + "/api/media/create-image",
+      mediaHostURL: HOST + "/api/media/create-image",
       products: null,
       productDialog: false,
       deleteProductDialog: false,
@@ -652,7 +646,7 @@ export default {
     };
   },
   created() {
-    this.initFilters();
+    this.setupFilters();
   },
   mounted() {
     this.products = this.getProductsData;
@@ -681,7 +675,7 @@ export default {
       const response = JSON.parse(e.xhr.response);
 
       if (response.success === true) {
-        console.log(this.product.image_set);
+
         this.product.image_set.push(...response.payload);
 
         if (this.product.image_set.length >= this.maxProductImages) {
@@ -746,8 +740,6 @@ export default {
         keywords: this.product.keywords.join(","),
         image_set: this.product.image_set.join(","),
       };
-
-      console.log(params);
 
       await this.createProduct(params).then((res) => {
         if (res.response.success === true) {
@@ -848,16 +840,16 @@ export default {
         code: categoryCode,
       };
 
-      console.log(product.category);
-
       this.product = product;
 
       this.productDialog = true;
     },
+
     confirmDeleteProduct(product) {
       this.product = product;
       this.deleteProductDialog = true;
     },
+
     deleteProduct() {
       this.products = this.products.filter(
         (val) => val.product_id !== this.product.product_id
@@ -873,26 +865,6 @@ export default {
         detail: "Product Deleted",
         life: 3000,
       });
-    },
-    findIndexById(id) {
-      let index = -1;
-      for (let i = 0; i < this.products.length; i++) {
-        if (this.products[i].id === id) {
-          index = i;
-          break;
-        }
-      }
-
-      return index;
-    },
-    createId() {
-      let id = "";
-      var chars =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      for (var i = 0; i < 5; i++) {
-        id += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-      return id;
     },
     isMainImage(e) {
       return this.product.image_main === e;
@@ -917,7 +889,7 @@ export default {
     },
     deleteSelectedProducts() {
       this.products = this.products.filter(
-        (val) => !this.selectedProducts.includes(val)
+        (value) => !this.selectedProducts.includes(value)
       );
       this.deleteProductsDialog = false;
       this.selectedProducts = null;
@@ -928,7 +900,7 @@ export default {
         life: 3000,
       });
     },
-    initFilters() {
+    setupFilters() {
       this.filters = {
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
       };
@@ -1206,7 +1178,7 @@ img {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--border-a);
-  padding: 2rem 0;
+  padding: 1.5rem 0;
 }
 
 .products-header-left {
