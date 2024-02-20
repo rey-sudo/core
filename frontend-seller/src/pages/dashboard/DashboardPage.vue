@@ -110,7 +110,7 @@ export default {
 <style lang="css" scoped>
 .dashboard {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .dashboard-nav {
@@ -119,7 +119,7 @@ export default {
   transition: 0.2s cubic-bezier(0.08, 0.52, 0.52, 1);
   box-shadow: var(--shadow-a);
   position: fixed;
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
   z-index: 1000;
   background: var(--base-a);

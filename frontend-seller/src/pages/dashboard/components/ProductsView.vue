@@ -1164,8 +1164,9 @@ img {
   width: inherit;
   border-radius: 18px;
   box-shadow: var(--shadow-a);
-  padding: 1rem 2rem;
+  padding: 0 2rem;
   background: var(--base-a);
+  overflow-y: hide;
 }
 
 .product-upload {
@@ -1204,8 +1205,8 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0;
   border-bottom: 1px solid var(--border-a);
+  padding: 2rem 0;
 }
 
 .products-header-left {
