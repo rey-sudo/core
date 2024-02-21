@@ -55,12 +55,15 @@ const createSlotHandler = async (req: Request, res: Response) => {
     const schemeData = `
     INSERT INTO slot (
       slot_id,
+      status,
+      wallet_id,
+      instance_id,
       seller_id,
       product_id,
-      instance_id,
-      wallet_id,
+      product_price,
+      product_collateral,
       schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?)`;
+     ) VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
     const schemeValue = [
       "S" + getSlotId(),
