@@ -46,7 +46,7 @@ cd $WORKDIR
 
 
 plutus-chain-index --socket-path $node_config_path/db/node.socket \
-    --db-path $index_bin_path/index.db \
+    --db-path $index_bin_path/configuration/$NETWORK/index.db \
     --port 9083 \
     --network-id 2 \
      start-index
