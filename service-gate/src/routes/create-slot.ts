@@ -9,10 +9,11 @@ import { _ } from "../utils/pino";
 
 const createSlotMiddlewares: any = [sellerMiddleware, requireAuth];
 
+/**HANDLER:  creates a contract instance and returns an unbalanced transaction.*/
 const createSlotHandler = async (req: Request, res: Response) => {
   const params = req.body;
 
-  const sellerDatum = req.sellerData;
+  const SELLER = req.sellerData;
 
   let connection: any = null;
 
@@ -22,22 +23,22 @@ const createSlotHandler = async (req: Request, res: Response) => {
     await connection.beginTransaction();
 
     const [product] = await connection.execute(
-      "SELECT * FROM product WHERE product_id = ?",
-      [params.product_id]
+      "SELECT * FROM product WHERE product_id = ? AND seller_id = ?",
+      [params.product_id, SELLER.seller_id]
     );
 
     if (product.length === 0) {
-      throw new Error("nonexist");
+      throw new Error("NON_EXIST");
     }
 
     const productData = product[0];
 
-    if (productData.slots === 0) {
-      throw new Error("nonslots");
+    if (productData.stock < 1) {
+      throw new Error("NON_STOCK");
     }
 
-    if (params.quantity > productData.slots) {
-      throw new Error("nonslots");
+    if (params.quantity > productData.stock) {
+      throw new Error("NON_STOCK");
     }
 
     const scheme = {
@@ -71,14 +72,14 @@ const createSlotHandler = async (req: Request, res: Response) => {
 
     contractInstances.forEach(async (cid) => {
       const schemeValue = [
-        getSlotId(),
-        sellerDatum.seller_id,
+        "S" + getSlotId(),
+        SELLER.seller_id,
         productData.product_id,
         cid,
         params.wallet_id,
         0,
       ];
-      
+
       console.log(schemeValue);
 
       await connection.execute(schemeData, schemeValue);
