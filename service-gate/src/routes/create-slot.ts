@@ -37,10 +37,6 @@ const createSlotHandler = async (req: Request, res: Response) => {
       throw new Error("NON_STOCK");
     }
 
-    if (params.quantity > productData.stock) {
-      throw new Error("NON_STOCK");
-    }
-
     const scheme = {
       caID: "SlaveContract",
       caWallet: {
@@ -48,17 +44,13 @@ const createSlotHandler = async (req: Request, res: Response) => {
       },
     };
 
-    let contractInstances: string[] = [];
+    const response = await API.post("/api/contract/activate", scheme);
 
-    for (let i = 0; i < params.quantity; i++) {
-      const response = await API.post("/api/contract/activate", scheme);
-
-      if (!response.data.hasOwnProperty("unContractInstanceId")) {
-        throw new Error("failed");
-      }
-
-      contractInstances.push(response.data.unContractInstanceId);
+    if (!response.data.hasOwnProperty("unContractInstanceId")) {
+      throw new Error("CID_FAILED");
     }
+
+    const contractInstance = response.data.unContractInstanceId;
 
     const schemeData = `
     INSERT INTO slot (
@@ -70,21 +62,19 @@ const createSlotHandler = async (req: Request, res: Response) => {
       schema_v
      ) VALUES (?, ?, ?, ?, ?, ?)`;
 
-    contractInstances.forEach(async (cid) => {
-      const schemeValue = [
-        "S" + getSlotId(),
-        SELLER.seller_id,
-        productData.product_id,
-        cid,
-        params.wallet_id,
-        0,
-      ];
+    const schemeValue = [
+      "S" + getSlotId(),
+      SELLER.seller_id,
+      productData.product_id,
+      contractInstance,
+      params.wallet_id,
+      0,
+    ];
 
-      console.log(schemeValue);
+    console.log(schemeValue);
 
-      await connection.execute(schemeData, schemeValue);
-    });
-
+    await connection.execute(schemeData, schemeValue);
+    
     await connection.commit();
 
     res.status(200).send({ success: true });
