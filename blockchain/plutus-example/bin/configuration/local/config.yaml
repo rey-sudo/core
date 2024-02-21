@@ -1,0 +1,91 @@
+# Configuration for an SQLite file
+sqliteDB:
+  dbConfigFile: ./bin/configuration/local/local.db
+  dbConfigPoolSize: 2
+
+#postgresDB:
+#  dbConfigUser: postgres
+#  dbConfigPass: pairfymarketplace
+#  dbConfigHost: 127.0.0.1
+#  dbConfigPort: 5432
+#  dbConfigDatabase: dbpreview
+#  dbConfigPoolSize: 20
+#  dbConfigMarconiFile: marconi.sqlite
+
+pabWebserverConfig:
+  baseUrl: http://localhost:9080
+  staticDir: .
+  permissiveCorsPolicy: False
+  # Optional timeout (in seconds) for calls to endpoints that are not currently
+  # available. If this is not set, calls to unavailable endpoints fail
+  # immediately.
+  endpointTimeout: 5
+  # Optional timeout (in seconds) when querying the status of an invoked endpoint for
+  # which the expected contract status must be set to Done.
+  # If this is not set, the query will wait until the instance state is updated.
+  waitStatusTimeout: 60
+  enableMarconi: False
+  # Configure the paths to the certificate and the private key file to enable HTTPS:
+  # certificatePath: host.crt
+  # keyPath: host.key
+
+walletServerConfig:
+  tag: RemoteWalletConfig
+#  walletSettings:
+#    baseUrl: http://localhost:8090
+
+nodeServerConfig:
+  pscNodeMode: AlonzoNode
+  pscNodeServerConfig:
+    nscBaseUrl: http://localhost:3001
+    nscSocketPath: /home/debian/Documents/GitHub/pairfy/blockchain/service-node/bin/configuration/preview/db/node.socket
+    nscKeptBlocks: 50
+    nscNetworkId: 2
+    nscSlotConfig:
+      scSlotZeroTime: 1596059091000 # Wednesday, July 29, 2020 21:44:51 - shelley launch time in milliseconds
+      scSlotLength: 1000 # In milliseconds
+    nscInitialTxWallets:
+      - getWallet: 1
+      - getWallet: 2
+      - getWallet: 3
+
+  # Which cardano-node to use
+  # Options are
+  # - MockNode          (plutus-apps internal mock version of the node)
+  # - AlonzoNode        (cardano-node via socket connection)
+  # - NoChainSyncEvents (no node for chain sync events)
+
+chainIndexConfig:
+  ciBaseUrl: http://localhost:9083
+  ciWatchedAddresses: []
+
+#blockfrostConfig:
+#  bfTokenPath: ./preview/blockfrost.json
+
+requestProcessingConfig:
+  requestProcessingInterval: 1
+
+#signingProcessConfig:
+#  spBaseUrl: http://localhost:9084
+#  spWallet:
+#    getWallet: 1
+
+metadataServerConfig:
+  mdBaseUrl: http://localhost:9085
+
+developmentOptions:
+  pabRollbackHistory: null
+  pabResumeFrom:
+    #    { "tag" : "PointAtGenesis" }
+    {
+      "tag": "Point",
+      "pointBlockId": "893dd999b26a34cc827904366396c838c099db59aded45dc36bb2f2c76fd7168",
+      "pointSlot": { "getSlot": 37053296 },
+    }
+
+# Optional EKG Server Config
+# ----
+#  { "tag" : "PointAtGenesis" }
+
+monitoringConfig:
+  monitoringPort: 9090

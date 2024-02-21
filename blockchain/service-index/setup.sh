@@ -9,7 +9,7 @@ config_path="$WORKDIR/bin/configuration/$NETWORK"
 
 
 if [ ! -x "$index_binary" ]; then
-    echo "Error: binary not found in /bin."
+    echo "Error: index binary not found in /bin."
     exit 1
 else
     echo "plutus-chain-index binary found."
