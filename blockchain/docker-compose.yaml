@@ -8,7 +8,8 @@ services:
     ports:
       - "3001:3001"
     mem_limit: 8Gib
-
+    restart: always
+    
   service-index:
     build:
       context: ./service-index
@@ -17,6 +18,15 @@ services:
     ports:
       - "9083:9083"
     mem_limit: 8Gib
+    depends_on:
+      - service-node
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9083/healthcheck"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 60s          
+    restart: always
 
   service-pab:
     build:
@@ -26,6 +36,17 @@ services:
     ports:
       - "9080:9080"
     mem_limit: 8Gib
+    depends_on:
+      - service-node
+      - service-index
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9080/api/healthcheck"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 60s 
+    restart: always
+
 
 volumes:
   shared_volume:

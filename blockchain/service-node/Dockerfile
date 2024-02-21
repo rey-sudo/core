@@ -1,7 +1,5 @@
 FROM alpine:latest as base-stage
 
-VOLUME /app/node
-
 WORKDIR /app
 
 COPY /bin /app/node
