@@ -417,17 +417,20 @@
             </template>
           </Column>
 
+          <Column field="stock" header="Stock" sortable style="min-width: 8rem">
+            <template #body="slotProps">
+              {{ slotProps.data.stock }}
+            </template>
+          </Column>
+
+          
           <Column field="slots" header="Slots" sortable style="min-width: 8rem">
             <template #body="slotProps">
               {{ slotProps.data.slots }}
             </template>
           </Column>
 
-          <Column field="stock" header="Stock" sortable style="min-width: 8rem">
-            <template #body="slotProps">
-              {{ slotProps.data.stock }}
-            </template>
-          </Column>
+
 
           <Column header="Image" style="max-width: 8rem">
             <template #body="slotProps">

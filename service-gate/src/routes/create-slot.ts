@@ -34,7 +34,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
     const productData = product[0];
 
     if (productData.stock < 1) {
-      throw new Error("NON_STOCK");
+      throw new Error("NOT_STOCK");
     }
 
     const scheme = {
@@ -55,7 +55,6 @@ const createSlotHandler = async (req: Request, res: Response) => {
     const schemeData = `
     INSERT INTO slot (
       slot_id,
-      status,
       wallet_id,
       instance_id,
       seller_id,
@@ -63,14 +62,16 @@ const createSlotHandler = async (req: Request, res: Response) => {
       product_price,
       product_collateral,
       schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const schemeValue = [
       "S" + getSlotId(),
+      params.wallet_id,
+      contractInstance,
       SELLER.seller_id,
       productData.product_id,
-      contractInstance,
-      params.wallet_id,
+      productData.price,
+      productData.collateral,
       0,
     ];
 
