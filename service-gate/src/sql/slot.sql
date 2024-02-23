@@ -6,10 +6,10 @@ create table if not exists slot(
   status varchar(20) default "created",
   wallet_id varchar(100) not null,
   instance_id varchar(100) not null,
-  status_start varchar(1000) default "unset",
-  status_locking varchar(1000) default "unset",
-  status_delivered varchar(1000) default "unset",
-  status_received varchar(1000) default "unset",
+  status_start mediumtext,
+  status_locking mediumtext,
+  status_delivered mediumtext,
+  status_received mediumtext,
   seller_id varchar(20) not null,
   seller_pkh varchar(56) default "unset",
   buyer_id varchar(20) default "unset",
@@ -23,6 +23,8 @@ create table if not exists slot(
   primary key(slot_id),
   unique (instance_id)
 ) ENGINE=InnoDB;
+
+
 
 
 
