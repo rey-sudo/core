@@ -24,6 +24,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
   };
 
   let connection: any = null;
+  
   try {
     connection = await DB.client.getConnection();
 
