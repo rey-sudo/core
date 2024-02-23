@@ -87,7 +87,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
 
     _.error(err);
 
-    throw new BadRequestError("failed");
+    throw new BadRequestError("FAILED");
   } finally {
     connection.release();
   }
