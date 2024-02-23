@@ -1,5 +1,6 @@
 import DB from "../db";
 import API from "../api";
+import assert from "assert";
 import { BadRequestError } from "../errors";
 import { Request, Response } from "express";
 import { getSlotId } from "../utils/nano";
@@ -9,14 +10,20 @@ import { _ } from "../utils/pino";
 
 const createSlotMiddlewares: any = [sellerMiddleware, requireAuth];
 
-/**HANDLER:  creates a contract instance and returns an unbalanced transaction.*/
+/**HANDLER:  creates a contract instance*/
 const createSlotHandler = async (req: Request, res: Response) => {
   const params = req.body;
 
   const SELLER = req.sellerData;
 
-  let connection: any = null;
+  const cidScheme = {
+    caID: "SlaveContract",
+    caWallet: {
+      getWalletId: params.wallet_id,
+    },
+  };
 
+  let connection: any = null;
   try {
     connection = await DB.client.getConnection();
 
@@ -28,7 +35,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
     );
 
     if (product.length === 0) {
-      throw new Error("NON_EXIST");
+      throw new Error("NOT_PRODUCT");
     }
 
     const productData = product[0];
@@ -37,20 +44,14 @@ const createSlotHandler = async (req: Request, res: Response) => {
       throw new Error("NOT_STOCK");
     }
 
-    const scheme = {
-      caID: "SlaveContract",
-      caWallet: {
-        getWalletId: "c08b3754a3fc2c4cb063e12295e903d14edc899d",
-      },
-    };
-
-    const response = await API.post("/api/contract/activate", scheme);
-
-    if (!response.data.hasOwnProperty("unContractInstanceId")) {
-      throw new Error("CID_FAILED");
-    }
-
-    const contractInstance = response.data.unContractInstanceId;
+    const contractInstance = await API.post("/api/contract/activate", cidScheme)
+      .then((res) => {
+        assert.ok(res.data.hasOwnProperty("unContractInstanceId"));
+        return res.data.unContractInstanceId;
+      })
+      .catch(() => {
+        throw new Error("CID_FAILED");
+      });
 
     const schemeData = `
     INSERT INTO slot (
@@ -78,16 +79,14 @@ const createSlotHandler = async (req: Request, res: Response) => {
     console.log(schemeValue);
 
     await connection.execute(schemeData, schemeValue);
-    
+
     await connection.commit();
 
     res.status(200).send({ success: true });
-  } catch (err) {
+  } catch (err: any) {
     await connection.rollback();
 
-    _.error(err);
-
-    throw new BadRequestError("FAILED");
+    throw new BadRequestError(err.message);
   } finally {
     connection.release();
   }
