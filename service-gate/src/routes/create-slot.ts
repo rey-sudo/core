@@ -31,7 +31,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
     await connection.beginTransaction();
 
     const [product] = await connection.execute(
-      "SELECT * FROM product WHERE product_id = ? AND seller_id = ?",
+      "SELECT * FROM product WHERE id = ? AND seller_id = ?",
       [params.product_id, SELLER.seller_id]
     );
 
@@ -55,8 +55,8 @@ const createSlotHandler = async (req: Request, res: Response) => {
       });
 
     const schemeData = `
-    INSERT INTO slot (
-      slot_id,
+    INSERT INTO slots (
+      id,
       wallet_id,
       instance_id,
       seller_id,
@@ -71,7 +71,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
       params.wallet_id,
       contractInstance,
       SELLER.seller_id,
-      productData.product_id,
+      productData.id,
       productData.price,
       productData.collateral,
       0,

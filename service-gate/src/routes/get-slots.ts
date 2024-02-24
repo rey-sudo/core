@@ -29,11 +29,11 @@ const getSlotsHandler = async (req: Request, res: Response) => {
       FROM 
         product p
       LEFT JOIN 
-        slot s ON p.product_id = s.product_id
+        slot s ON p.id = s.product_id
       WHERE
         p.seller_id = ?
       GROUP BY 
-        p.product_id;      
+        p.id;      
       `,
       [SELLER.seller_id]
     );

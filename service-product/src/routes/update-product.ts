@@ -24,7 +24,6 @@ const updateProductHandler = async (req: Request, res: Response) => {
         price = ?,
         collateral = ?,
         stock = ?,
-        slots = ?,
         note = ?,
         keywords = ?,
         theme = ?,
@@ -33,7 +32,7 @@ const updateProductHandler = async (req: Request, res: Response) => {
         image_base = ?,
         image_path = ?,
         schema_v = schema_v + 1
-    WHERE product_id = ?
+    WHERE id = ?
     `;
 
     const schemeValue = [
@@ -42,7 +41,6 @@ const updateProductHandler = async (req: Request, res: Response) => {
       params.price,
       params.collateral,
       params.stock,
-      params.slots,
       params.note,
       params.keywords,
       params.theme,
@@ -50,7 +48,7 @@ const updateProductHandler = async (req: Request, res: Response) => {
       params.country,
       params.image_base,
       params.image_path,
-      params.product_id,
+      params.id,
     ];
 
     await connection.execute(schemeData, schemeValue);

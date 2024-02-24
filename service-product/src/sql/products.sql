@@ -1,7 +1,7 @@
-CREATE DATABASE service_gate;
+CREATE DATABASE service_product;
 
-create table if not exists product(
-  product_id varchar(20) not null,
+create table if not exists products(
+  id varchar(20) not null,
   seller_id varchar(20) not null,
   name varchar(200) not null,
   description varchar(1000) not null,
@@ -10,7 +10,6 @@ create table if not exists product(
   collateral int unsigned default 0,
   stock int unsigned default 0,
   stock_status varchar(125) default "out",
-  slots int unsigned default 0,
   keywords varchar(100) not null,
   theme varchar(100) default "modern",
   country varchar(10) not null,
@@ -18,10 +17,10 @@ create table if not exists product(
   image_base varchar(255) not null,
   image_path varchar(255) not null,
   image_main varchar(255) not null,
-  image_set varchar(1000) not null,
+  image_set varchar(500) not null,
   created_at timestamp default current_timestamp,
   schema_t timestamp default current_timestamp,
   schema_v int unsigned not null,
-  primary key(product_id)
+  primary key(id)
 ) ENGINE=InnoDB;
 

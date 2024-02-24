@@ -63,7 +63,7 @@ const main = async () => {
       route.createSlotHandler
     );
 
-    app.post(
+    app.get(
       "/api/gate/get-slots",
 
       route.getSlotsMiddlewares,

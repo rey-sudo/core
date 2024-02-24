@@ -24,7 +24,7 @@ const createProductHandler = async (req: Request, res: Response) => {
 
     const schemeData = `
     INSERT INTO product (
-      product_id,
+      id,
       seller_id,
       name,
       description,
