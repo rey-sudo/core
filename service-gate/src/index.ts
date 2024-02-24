@@ -63,6 +63,14 @@ const main = async () => {
       route.createSlotHandler
     );
 
+    app.post(
+      "/api/gate/get-slots",
+
+      route.getSlotsMiddlewares,
+
+      route.getSlotsHandler
+    );
+
     app.all("*", (_req, _res) => {
       throw new NotFoundError();
     });

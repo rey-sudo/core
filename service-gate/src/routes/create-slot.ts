@@ -10,7 +10,7 @@ import { _ } from "../utils/pino";
 
 const createSlotMiddlewares: any = [sellerMiddleware, requireAuth];
 
-/**HANDLER:  creates a contract instance*/
+/**HANDLER: creates a contract instance*/
 const createSlotHandler = async (req: Request, res: Response) => {
   const params = req.body;
 
