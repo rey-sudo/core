@@ -374,14 +374,7 @@
 
           <Column expander style="width: 3rem" :exportable="false" />
 
-          <Column
-            field="id"
-            header="Code"
-            sortable
-            style="min-width: 12rem"
-          />
-
-
+          <Column field="id" header="Code" sortable style="min-width: 12rem" />
 
           <Column
             field="name"
@@ -399,7 +392,7 @@
               {{ slotProps.data.category.code || slotProps.data.category }}
             </template>
           </Column>
-          
+
           <Column field="price" header="Price" sortable style="min-width: 8rem">
             <template #body="slotProps">
               {{ formatCurrency(slotProps.data.price) }}
@@ -423,14 +416,16 @@
             </template>
           </Column>
 
-          
-          <Column field="slots" header="Slots" sortable style="min-width: 8rem">
+          <Column
+            field="slots_count"
+            header="Slots"
+            sortable
+            style="min-width: 8rem"
+          >
             <template #body="slotProps">
-              {{ slotProps.data.slots }}
+              {{ slotProps.data.slots_count }}
             </template>
           </Column>
-
-
 
           <Column header="Image" style="max-width: 8rem">
             <template #body="slotProps">
@@ -492,7 +487,6 @@ export default {
       collateral: null,
       stock: null,
       stock_status: null,
-      slots: null,
       keywords: null,
       theme: null,
       country: null,
@@ -504,6 +498,8 @@ export default {
       created_at: null,
       schema_t: null,
       schema_v: null,
+      slots: [],
+      slots_count: null,
     });
 
     let invalidProductName = ref(false);
@@ -531,7 +527,6 @@ export default {
         collateral: null,
         stock: null,
         stock_status: null,
-        slots: null,
         keywords: null,
         theme: null,
         country: null,
@@ -543,6 +538,8 @@ export default {
         created_at: null,
         schema_t: null,
         schema_v: null,
+        slots: [],
+        slots_count: null,
       };
 
       invalidProductName.value = false;
@@ -818,9 +815,7 @@ export default {
     },
 
     deleteProduct() {
-      this.products = this.products.filter(
-        (val) => val.id !== this.product.id
-      );
+      this.products = this.products.filter((val) => val.id !== this.product.id);
 
       this.deleteProductDialog = false;
 

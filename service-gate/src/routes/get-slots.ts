@@ -25,11 +25,12 @@ const getSlotsHandler = async (req: Request, res: Response) => {
                 'id', s.id,
                 'status', s.status
             )
-        ) AS slot_array
+        ) AS slots,
+        COUNT(s.id) AS slots_count
       FROM 
         products p
       LEFT JOIN 
-        slot s ON p.id = s.product_id
+        slots s ON p.id = s.product_id
       WHERE
         p.seller_id = ?
       GROUP BY 
