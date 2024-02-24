@@ -19,7 +19,7 @@ const getProductsHandler = async (req: Request, res: Response) => {
     connection = await DB.client.getConnection();
 
     const [response] = await connection.execute(
-      "SELECT * FROM product WHERE seller_id = ?",
+      "SELECT * FROM products WHERE seller_id = ?",
       [SELLER.seller_id]
     );
 

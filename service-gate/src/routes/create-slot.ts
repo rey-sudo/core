@@ -30,16 +30,16 @@ const createSlotHandler = async (req: Request, res: Response) => {
 
     await connection.beginTransaction();
 
-    const [product] = await connection.execute(
-      "SELECT * FROM product WHERE id = ? AND seller_id = ?",
+    const [products] = await connection.execute(
+      "SELECT * FROM products WHERE id = ? AND seller_id = ?",
       [params.product_id, SELLER.seller_id]
     );
 
-    if (product.length === 0) {
+    if (products.length === 0) {
       throw new Error("NOT_PRODUCT");
     }
 
-    const productData = product[0];
+    const productData = products[0];
 
     if (productData.stock < 1) {
       throw new Error("NOT_STOCK");

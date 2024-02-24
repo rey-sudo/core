@@ -325,7 +325,7 @@
           resizableColumns
           :value="products"
           v-model:expandedRows="selectedProducts"
-          dataKey="product_id"
+          dataKey="id"
           :paginator="true"
           :rows="10"
           :filters="filters"
@@ -375,7 +375,7 @@
           <Column expander style="width: 3rem" :exportable="false" />
 
           <Column
-            field="product_id"
+            field="id"
             header="Code"
             sortable
             style="min-width: 12rem"
@@ -483,7 +483,7 @@ export default {
     const { getProductsData, createProduct } = dashboardAPI();
 
     let product = ref({
-      product_id: null,
+      id: null,
       seller_id: null,
       name: null,
       description: "",
@@ -522,7 +522,7 @@ export default {
 
     const resetForm = () => {
       product.value = {
-        product_id: null,
+        id: null,
         seller_id: null,
         name: null,
         description: "",
@@ -819,7 +819,7 @@ export default {
 
     deleteProduct() {
       this.products = this.products.filter(
-        (val) => val.product_id !== this.product.product_id
+        (val) => val.id !== this.product.id
       );
 
       this.deleteProductDialog = false;

@@ -22,12 +22,12 @@ const getSlotsHandler = async (req: Request, res: Response) => {
         p.*,
         JSON_ARRAYAGG(
             JSON_OBJECT(
-                'slot_id', s.slot_id,
+                'id', s.id,
                 'status', s.status
             )
         ) AS slot_array
       FROM 
-        product p
+        products p
       LEFT JOIN 
         slot s ON p.id = s.product_id
       WHERE

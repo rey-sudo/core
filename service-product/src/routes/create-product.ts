@@ -23,7 +23,7 @@ const createProductHandler = async (req: Request, res: Response) => {
     await connection.beginTransaction();
 
     const schemeData = `
-    INSERT INTO product (
+    INSERT INTO products (
       id,
       seller_id,
       name,

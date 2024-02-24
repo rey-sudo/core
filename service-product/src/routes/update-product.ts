@@ -18,7 +18,7 @@ const updateProductHandler = async (req: Request, res: Response) => {
     await connection.beginTransaction();
 
     const schemeData = `
-    UPDATE product 
+    UPDATE products 
     SET title = ?,
         category = ?,
         price = ?,
