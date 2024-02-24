@@ -453,7 +453,7 @@
                 />
                 <Button
                   class="table-button"
-                  icon="pi pi-external-link"
+                  icon="pi pi-eye"
                   outlined
                   rounded
                   @click="confirmDeleteProduct(slotProps.data)"
@@ -957,7 +957,7 @@ export default {
 }
 
 img {
-  border-radius: 6px;
+  border-radius: 8px;
 }
 .slots {
   display: flex;

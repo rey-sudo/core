@@ -1002,7 +1002,7 @@ export default {
 }
 
 img {
-  border-radius: 6px;
+  border-radius: 8px;
 }
 .products {
   display: flex;

@@ -3424,9 +3424,9 @@
     border-radius: 50%;
   }
   .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-    background: var(--blue-c);
+    background: var(--blue-s);
     border-color: var(--blue-c);
-    color: #ffffff;
+    color: var(--blue-a);
   }
   .p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover {
     background: #e9ecef;
