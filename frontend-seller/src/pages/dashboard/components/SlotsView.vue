@@ -404,6 +404,23 @@
 
           <Column expander style="width: 3rem" :exportable="false" />
 
+          <Column header="Image" style="max-width: 8rem">
+            <template #body="slotProps">
+              <Image
+                :src="
+                  slotProps.data.image_base +
+                  slotProps.data.image_path +
+                  slotProps.data.image_main
+                "
+                :alt="slotProps.data.image_main"
+                width="50"
+                height="50"
+                imageStyle="border-radius: 4px;"
+                preview
+              />
+            </template>
+          </Column>
+
           <Column field="id" header="Code" sortable style="min-width: 12rem" />
 
           <Column
@@ -411,7 +428,12 @@
             header="Name"
             sortable
             style="max-width: 16rem; white-space: break-spaces"
-          />
+          >
+            <template #body="slotProps">
+              {{ slotProps.data.name.slice(0, 100) }}...
+            </template>
+          </Column>
+
           <Column
             field="category"
             header="Category"
@@ -454,23 +476,6 @@
           >
             <template #body="slotProps">
               {{ slotProps.data.slots_count }}
-            </template>
-          </Column>
-
-          <Column header="Image" style="max-width: 8rem">
-            <template #body="slotProps">
-              <Image
-                :src="
-                  slotProps.data.image_base +
-                  slotProps.data.image_path +
-                  slotProps.data.image_main
-                "
-                :alt="slotProps.data.image_main"
-                width="80"
-                height="80"
-                imageStyle="border-radius: 6px;"
-                preview
-              />
             </template>
           </Column>
 

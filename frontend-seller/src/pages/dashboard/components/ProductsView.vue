@@ -120,8 +120,8 @@
               :src="item.image"
               imageStyle="border-radius: 6px;display: flex;align-items: center;"
               alt="Image"
-              width="60"
-              height="60"
+              width="50"
+              height="50"
             />
           </div>
         </div>
@@ -385,6 +385,24 @@
             style="width: 3rem"
             :exportable="false"
           />
+
+          <Column header="Image" style="max-width: 8rem">
+            <template #body="slotProps">
+              <Image
+                :src="
+                  slotProps.data.image_base +
+                  slotProps.data.image_path +
+                  slotProps.data.image_main
+                "
+                :alt="slotProps.data.image_main"
+                width="50"
+                height="50"
+                imageStyle="border-radius: 6px;"
+                preview
+              />
+            </template>
+          </Column>
+
           <Column field="id" header="Code" sortable style="min-width: 12rem" />
 
           <Column
@@ -392,7 +410,11 @@
             header="Name"
             sortable
             style="max-width: 16rem; white-space: break-spaces"
-          />
+          >
+            <template #body="slotProps">
+              {{ slotProps.data.name.slice(0, 100) }}...
+            </template>
+          </Column>
 
           <Column
             field="category"
@@ -466,23 +488,6 @@
               <Tag
                 :value="slotProps.data.stock_status"
                 :severity="getStatusLabel(slotProps.data.stock_status)"
-              />
-            </template>
-          </Column>
-
-          <Column header="Image" style="max-width: 8rem">
-            <template #body="slotProps">
-              <Image
-                :src="
-                  slotProps.data.image_base +
-                  slotProps.data.image_path +
-                  slotProps.data.image_main
-                "
-                :alt="slotProps.data.image_main"
-                width="80"
-                height="80"
-                imageStyle="border-radius: 6px;"
-                preview
               />
             </template>
           </Column>
