@@ -4317,17 +4317,11 @@
   .p-dialog .p-dialog-header .p-dialog-header-icon:last-child {
     margin-right: 0;
   }
-  .p-dialog .p-dialog-content {
-    background: #ffffff;
-    color: var(--text-b);
-    padding: 1rem 1.5rem;
-    font-size: var(--text-size-b);
-  }
 
   .p-dialog .p-dialog-content {
     background: #ffffff;
     color: var(--text-b);
-    padding: 1rem 1.5rem;
+    padding: 2rem 1.5rem;
     font-size: var(--text-size-b);
   }
 

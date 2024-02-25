@@ -75,7 +75,7 @@
     <Dialog
       v-model:visible="productDialog"
       :style="{ width: '500px' }"
-      header="Product details"
+      header="Product"
       :modal="true"
       :draggable="false"
       class="p-fluid"
@@ -105,7 +105,10 @@
       </Carousel>
 
       <div v-if="product.image_base" class="field">
-        <label for="mainImage" class="field-label">Front</label>
+        <label for="mainImage" class="field-label">
+          <span>Thumbnail</span>
+          <i class="pi pi-info-circle" v-tooltip.top="'First image.'" />
+        </label>
         <div id="mainImage" class="product-image-main">
           <div
             v-for="item in getImages(product)"
@@ -125,7 +128,13 @@
       </div>
 
       <div class="field">
-        <label for="name" class="field-label">Name</label>
+        <label for="name" class="field-label">
+          <span>Name</span>
+          <i
+            class="pi pi-info-circle"
+            v-tooltip.top="'Declarative and descriptive name of the product.'"
+          />
+        </label>
         <InputText
           id="name"
           v-model="product.name"
@@ -376,12 +385,7 @@
             style="width: 3rem"
             :exportable="false"
           />
-          <Column
-            field="id"
-            header="Code"
-            sortable
-            style="min-width: 12rem"
-          />
+          <Column field="id" header="Code" sortable style="min-width: 12rem" />
 
           <Column
             field="name"
@@ -852,9 +856,7 @@ export default {
     },
 
     deleteProduct() {
-      this.products = this.products.filter(
-        (val) => val.id !== this.product.id
-      );
+      this.products = this.products.filter((val) => val.id !== this.product.id);
 
       this.deleteProductDialog = false;
 
@@ -1150,7 +1152,7 @@ img {
 }
 
 .field {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 .field-radiobutton {
   display: flex;
