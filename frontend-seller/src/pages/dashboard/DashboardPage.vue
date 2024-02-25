@@ -44,17 +44,23 @@ export default {
 
   setup() {
     const { getUserData } = entryAPI();
-    const { getProducts } = dashboardAPI();
+    const { getProducts, getSlots } = dashboardAPI();
 
     const updateData = {
       products: () => {
         getProducts()
-          .then(() => console.info("productsUpdated"))
+          .then(() => console.info("products:updated"))
+          .catch((err) => console.log(err));
+      },
+      slots: () => {
+        getSlots()
+          .then(() => console.info("slots:updated"))
           .catch((err) => console.log(err));
       },
     };
 
     updateData.products();
+    updateData.slots();
 
     document.addEventListener("globalMessage", (event) => {
       console.log(event.detail.data.type);

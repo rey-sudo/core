@@ -1,8 +1,11 @@
 /**GETTER */
 const getProductsData = (state) => {
-  return state.productData;
+  return state.productsData;
+};
+
+const getSlotsData = (state) => {
+  return state.slotsData;
 };
 
 
-
-export { getProductsData };
+export { getProductsData, getSlotsData };

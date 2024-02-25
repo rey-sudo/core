@@ -322,7 +322,7 @@
       :style="{ width: '75vw' }"
       maximizable
       modal
-      style="padding: 1rem;"
+      style="padding: 1rem"
       :contentStyle="{ height: '500px' }"
     >
       <DataTable
@@ -508,7 +508,7 @@ import { ref } from "vue";
 
 export default {
   setup() {
-    const { getProductsData, createProduct } = dashboardAPI();
+    const { getSlotsData, createProduct } = dashboardAPI();
 
     let product = ref({
       id: null,
@@ -597,7 +597,7 @@ export default {
       messageModalVisible,
       messageModal,
       errorModal,
-      getProductsData,
+      getSlotsData,
       createProduct,
       invalidProductName,
       invalidProductDescription,
@@ -758,7 +758,8 @@ export default {
     this.setupFilters();
   },
   mounted() {
-    this.products = this.getProductsData;
+    console.log(this.getSlotsData);
+    this.products = this.getSlotsData;
   },
   methods: {
     openSlotDialog() {

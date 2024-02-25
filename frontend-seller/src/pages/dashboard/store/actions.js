@@ -14,7 +14,7 @@ const createProduct = async (_, params) => {
 
 const getProducts = async ({ commit }, params) => {
   try {
-    const response = await axiosAPI.post("/api/product/get-products", params);
+    const response = await axiosAPI.get("/api/product/get-products", params);
 
     commit("getProducts", response.data.payload);
 
@@ -24,4 +24,16 @@ const getProducts = async ({ commit }, params) => {
   }
 };
 
-export { createProduct, getProducts };
+const getSlots = async ({ commit }, params) => {
+  try {
+    const response = await axiosAPI.get("/api/gate/get-slots", params);
+
+    commit("getSlots", response.data.payload);
+
+    return { ok: true, response: response.data };
+  } catch (error) {
+    throw { ok: false, response: error.response.data };
+  }
+};
+
+export { createProduct, getProducts, getSlots };

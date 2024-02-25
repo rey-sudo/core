@@ -118,13 +118,14 @@ const main = async () => {
       route.updateProductHandler
     );
 
-    app.post(
+    app.get(
       "/api/product/get-products",
 
       route.getProductsMiddlewares,
 
       route.getProductsHandler
     );
+    
 
     app.all("*", (_req, _res) => {
       throw new NotFoundError();
