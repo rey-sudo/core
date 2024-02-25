@@ -6424,8 +6424,9 @@
   }
   .p-image-mask {
     --maskbg: rgba(0, 0, 0, 0.9);
+  
   }
-  .p-image-preview-indicator {
+  .p-image-preview-indicator {  border-radius: 6px;
     background-color: transparent;
     color: #f8f9fa;
     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;

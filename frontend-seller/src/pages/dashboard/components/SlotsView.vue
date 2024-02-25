@@ -458,14 +458,17 @@
 
           <Column header="Image" style="max-width: 8rem">
             <template #body="slotProps">
-              <img
+              <Image
                 :src="
                   slotProps.data.image_base +
                   slotProps.data.image_path +
                   slotProps.data.image_main
                 "
                 :alt="slotProps.data.image_main"
-                class="table-image"
+                width="80"
+                height="80"
+                imageStyle="border-radius: 6px;"
+                preview
               />
             </template>
           </Column>

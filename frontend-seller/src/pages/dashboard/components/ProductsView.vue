@@ -472,14 +472,17 @@
 
           <Column header="Image" style="max-width: 8rem">
             <template #body="slotProps">
-              <img
+              <Image
                 :src="
                   slotProps.data.image_base +
                   slotProps.data.image_path +
                   slotProps.data.image_main
                 "
                 :alt="slotProps.data.image_main"
-                class="table-image"
+                width="80"
+                height="80"
+                imageStyle="border-radius: 6px;"
+                preview
               />
             </template>
           </Column>
@@ -930,7 +933,6 @@ export default {
 <style lang="css" scoped>
 .product-image-main {
   display: flex;
-  justify-content: center;
   align-items: center;
   height: 80px;
 }
@@ -978,11 +980,6 @@ export default {
 }
 
 .table-tag.pending {
-}
-
-.table-image {
-  width: 80px;
-  height: 80px;
 }
 .table-buttons {
   display: flex;
