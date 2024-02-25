@@ -85,7 +85,7 @@
         :value="getImages(product)"
         :numVisible="1"
         :numScroll="1"
-        orientation="horizontal"
+        orientation="vertical"
         verticalViewPortHeight="340px"
         contentClass="flex align-items-center"
       >
@@ -120,8 +120,8 @@
               :src="item.image"
               imageStyle="border-radius: 6px;display: flex;align-items: center;"
               alt="Image"
-              width="50"
-              height="50"
+              width="60"
+              height="60"
             />
           </div>
         </div>

@@ -322,6 +322,7 @@
       :style="{ width: '75vw' }"
       maximizable
       modal
+      style="padding: 1rem;"
       :contentStyle="{ height: '500px' }"
     >
       <DataTable
