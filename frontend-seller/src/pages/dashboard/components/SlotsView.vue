@@ -15,7 +15,7 @@
 
       <template #footer>
         <div class="modal-footer">
-          <Button type="button" label="Ok" @click="hideModals" />
+          <Button type="button" label="Ok" @click="closeAllModals" />
         </div>
       </template>
     </Dialog>
@@ -110,7 +110,7 @@
           <div
             v-for="item in getImages(product)"
             :key="item"
-            :class="{ mainImage: isMainImage(item.id) }"
+            :class="{ mainImage: checkMainImage(item.id) }"
             @click="setMainImage(item.id)"
           >
             <Image
@@ -311,7 +311,7 @@
       </div>
 
       <template #footer>
-        <Button label="Cancel" icon="pi pi-times" text @click="hideDialog" />
+        <Button label="Cancel" icon="pi pi-times" text @click="closeProductDialog" />
         <Button label="Save" icon="pi pi-check" text @click="handleSubmit" />
       </template>
     </Dialog>
@@ -326,15 +326,13 @@
       :contentStyle="{ height: '500px' }"
     >
       <DataTable
-        :value="customers"
+        :value="slotDialogData.slots"
         scrollable
         scrollHeight="flex"
         tableStyle="min-width: 50rem"
       >
-        <Column field="name" header="Name"></Column>
-        <Column field="country.name" header="Country"></Column>
-        <Column field="representative.name" header="Representative"></Column>
-        <Column field="company" header="Company"></Column>
+        <Column field="id" header="ID"></Column>
+        <Column field="status" header="Country"></Column>
       </DataTable>
       <template #footer>
         <Button
@@ -382,7 +380,7 @@
 
             <Toolbar>
               <template #start>
-                <Button label="New" icon="pi pi-plus" @click="newProduct" />
+                <Button label="New" icon="pi pi-plus" @click="openProductDialog" />
                 <Button
                   label="Delete"
                   icon="pi pi-trash"
@@ -494,7 +492,7 @@
                   icon="pi pi-eye"
                   outlined
                   rounded
-                  @click="openSlotDialog(slotProps.data)"
+                  @click="openSlotsDialog(slotProps.data)"
                 />
               </div>
             </template>
@@ -625,6 +623,7 @@ export default {
       nameLengthLimit: 200,
       minProductImages: 5,
       slotDialogVisible: false,
+      slotDialogData: [],
       customers: [
         {
           id: 1000,
@@ -763,19 +762,19 @@ export default {
     this.setupFilters();
   },
   mounted() {
-    console.log(this.getSlotsData);
     this.products = this.getSlotsData;
   },
   methods: {
-    openSlotDialog() {
+    openSlotsDialog(e) {
       this.slotDialogVisible = true;
+      this.slotDialogData = e;
     },
     onBeforeUpload() {
       if (this.product.image_set.length < this.maxProductImages) {
         this.disableUpload = false;
       }
     },
-    handleMessage(type, message) {
+    openMessageDialog(type, message) {
       this.messageModalVisible = true;
 
       if (type === "response") {
@@ -794,7 +793,7 @@ export default {
 
       return formattedDate;
     },
-    hideModals() {
+    closeAllModals() {
       this.messageModalVisible = false;
     },
     onAdvancedUpload(e) {
@@ -818,11 +817,11 @@ export default {
     formatCurrency(value) {
       if (value) return "ADA " + value;
     },
-    newProduct() {
+    openProductDialog() {
       this.resetForm();
       this.productDialog = true;
     },
-    hideDialog() {
+    closeProductDialog() {
       this.productDialog = false;
     },
     async handleSubmit() {
@@ -981,7 +980,7 @@ export default {
         life: 3000,
       });
     },
-    isMainImage(e) {
+    checkMainImage(e) {
       return this.product.image_main === e;
     },
     setMainImage(e) {
