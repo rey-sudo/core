@@ -370,7 +370,7 @@
           <template #header>
             <div class="slots-header">
               <div class="slots-header-left">
-                <span>Slots</span>
+                <span>Product slots</span>
                 <span>Create and modify slots and more...</span>
               </div>
 
