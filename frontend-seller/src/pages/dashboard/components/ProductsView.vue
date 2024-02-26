@@ -1184,7 +1184,7 @@ img {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--border-a);
-  padding: 1.5rem 0;
+  padding: 1rem 0;
 }
 
 .products-header-left {

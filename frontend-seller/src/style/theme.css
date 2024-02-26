@@ -1260,7 +1260,7 @@
     transition: background-color 0.2s, color 0.2s, border-color 0.2s,
       box-shadow 0.2s;
     appearance: none;
-    border-radius: 6px;
+    border-radius: 4px;
     outline-color: transparent;
   }
   .p-inputtext:enabled:hover {
@@ -1981,7 +1981,7 @@
     padding: 0.5rem 1rem;
     font-size: 1rem;
     transition: 0.1s cubic-bezier(0.08, 0.52, 0.52, 1);
-    border-radius: 6px;
+    border-radius: 4px;
     font-weight: 600;
     outline-color: transparent;
     font-size: var(--text-size-a);
@@ -1998,17 +1998,17 @@
   }
   .p-button.p-button-outlined {
     background-color: transparent;
-    color: #2196f3;
+    color: var(--blue-c);
     border: 1px solid;
   }
   .p-button.p-button-outlined:not(:disabled):hover {
-    background: rgba(33, 150, 243, 0.04);
-    color: #2196f3;
+    background:  var(--blue-s);
+    color: var(--blue-c);
     border: 1px solid;
   }
   .p-button.p-button-outlined:not(:disabled):active {
-    background: rgba(33, 150, 243, 0.16);
-    color: #2196f3;
+    background:  var(--blue-s);
+    color: var(--blue-c);
     border: 1px solid;
   }
   .p-button.p-button-outlined.p-button-plain {
@@ -2093,7 +2093,7 @@
     margin: 0;
   }
   .p-button.p-button-icon-only.p-button-rounded {
-    border-radius: 50%;
+    border-radius: 4px;
     height: 2.357rem;
   }
   .p-button.p-button-sm {
@@ -2753,10 +2753,13 @@
     padding: 1rem 1rem;
     font-weight: 600;
   }
+  .p-datatable .p-datatable-thead > tr {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 1px 1px rgba(0, 0, 0, 0.05);
+  }
+
   .p-datatable .p-datatable-thead > tr > th {
     text-align: left;
     padding: 1rem 1rem;
-    border: 1px solid #e9ecef;
     border-width: 0 0 1px 0;
     font-weight: 700;
     font-size: var(--text-size-b);
@@ -6423,9 +6426,9 @@
   }
   .p-image-mask {
     --maskbg: rgba(0, 0, 0, 0.9);
-  
   }
-  .p-image-preview-indicator {  border-radius: 6px;
+  .p-image-preview-indicator {
+    border-radius: 6px;
     background-color: transparent;
     color: #f8f9fa;
     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;

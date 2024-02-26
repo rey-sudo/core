@@ -311,7 +311,12 @@
       </div>
 
       <template #footer>
-        <Button label="Cancel" icon="pi pi-times" text @click="closeProductDialog" />
+        <Button
+          label="Cancel"
+          icon="pi pi-times"
+          text
+          @click="closeProductDialog"
+        />
         <Button label="Save" icon="pi pi-check" text @click="handleSubmit" />
       </template>
     </Dialog>
@@ -380,7 +385,11 @@
 
             <Toolbar>
               <template #start>
-                <Button label="New" icon="pi pi-plus" @click="openProductDialog" />
+                <Button
+                  label="New"
+                  icon="pi pi-plus"
+                  @click="openProductDialog"
+                />
                 <Button
                   label="Delete"
                   icon="pi pi-trash"
@@ -482,9 +491,17 @@
               <div class="table-buttons">
                 <Button
                   class="table-button"
+                  icon="pi pi pi-ellipsis-h"
+                  outlined
+                  rounded
+                  @click="editProduct(slotProps.data)"
+                />
+                <Button
+                  class="table-button"
                   icon="pi pi-plus"
                   outlined
                   rounded
+                  v-tooltip.top="'Enable a slot'"
                   @click="editProduct(slotProps.data)"
                 />
                 <Button
@@ -1286,7 +1303,7 @@ img {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--border-a);
-  padding: 1.5rem 0;
+  padding: 1rem 0;
 }
 
 .slots-header-left {
