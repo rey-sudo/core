@@ -334,6 +334,7 @@
           resizableColumns
           :value="products"
           v-model:selection="selectedProducts"
+          selectionMode="single"
           dataKey="id"
           :paginator="true"
           :rows="10"
