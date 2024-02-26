@@ -1975,9 +1975,9 @@
     border-color: #ced4da #ced4da #ced4da #e4677e;
   }
   .p-button {
-    color: var(--text-w);
-    background: var(--blue-c);
-    border: 1px solid transparent;
+    color: var(--blue-c);
+    background: var(--base-a);
+    border: 1px solid var(--blue-c);
     padding: 0.5rem 1rem;
     font-size: 1rem;
     transition: 0.1s cubic-bezier(0.08, 0.52, 0.52, 1);
@@ -2002,12 +2002,12 @@
     border: 1px solid;
   }
   .p-button.p-button-outlined:not(:disabled):hover {
-    background:  var(--blue-s);
+    background: var(--blue-s);
     color: var(--blue-c);
     border: 1px solid;
   }
   .p-button.p-button-outlined:not(:disabled):active {
-    background:  var(--blue-s);
+    background: var(--blue-s);
     color: var(--blue-c);
     border: 1px solid;
   }
@@ -4223,8 +4223,8 @@
     padding: 1rem 0;
     border-radius: 0px;
     gap: 0.5rem;
-    border-top-right-radius: calc(6px + 0.25rem);
-    border-top-left-radius: calc(6px + 0.25rem);
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
   }
 
   .p-toolbar .p-toolbar-separator {

@@ -396,8 +396,8 @@
                   slotProps.data.image_main
                 "
                 :alt="slotProps.data.image_main"
-                width="50"
-                height="50"
+                width="60"
+                height="60"
                 imageStyle="border-radius: 6px;"
                 preview
               />
@@ -413,7 +413,7 @@
             style="max-width: 16rem; white-space: break-spaces"
           >
             <template #body="slotProps">
-              {{ slotProps.data.name.slice(0, 100) }}...
+              {{ slotProps.data.name.slice(0, 50) }}...
             </template>
           </Column>
 
