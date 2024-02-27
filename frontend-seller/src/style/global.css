@@ -21,7 +21,7 @@
 
   --blue-a: #0069f5;
   --blue-b: #005ae6;
-  --blue-c: #1A83FF;
+  --blue-c: #1a83ff;
   --blue-s: rgba(0, 105, 245, 0.1);
 
   --red-a: #ff385c;
@@ -57,20 +57,23 @@
 
   --border-a: #e9ecef;
 }
+
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap");
 
 * {
   font-family: "Open Sans", sans-serif;
 }
+
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+  font-style: normal;
   text-align: center;
   color: var(--text-a);
-  background: var(--base-a);
   letter-spacing: -0.005em;
+  background: var(--base-a);
   text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
-
 }
 
 p {

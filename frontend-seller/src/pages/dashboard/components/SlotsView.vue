@@ -491,10 +491,19 @@
               <div class="table-buttons">
                 <Button
                   class="table-button"
-                  icon="pi pi pi-ellipsis-h"
+                  type="button"
+                  icon="pi pi-ellipsis-h"
                   outlined
                   rounded
-                  @click="editProduct(slotProps.data)"
+                  aria-haspopup="true"
+                  aria-controls="overlay_menu"
+                  @click="openRowMenu"
+                />
+                <Menu
+                  ref="rowMenuRef"
+                  id="overlay_menu"
+                  :model="rowMenu"
+                  :popup="true"
                 />
                 <Button
                   class="table-button"
@@ -610,8 +619,33 @@ export default {
       disableUpload.value = false;
     };
 
+    const rowMenuRef = ref();
+
+    const rowMenu = ref([
+      {
+        label: "Options",
+        items: [
+          {
+            label: "Refresh",
+            icon: "pi pi-refresh",
+          },
+          {
+            label: "Export",
+            icon: "pi pi-upload",
+          },
+        ],
+      },
+    ]);
+
+    const openRowMenu = (event) => {
+      rowMenuRef.value.toggle(event);
+    };
+
     return {
+      openRowMenu,
       product,
+      rowMenuRef,
+      rowMenu,
       disableUpload,
       resetForm,
       messageModalVisible,
