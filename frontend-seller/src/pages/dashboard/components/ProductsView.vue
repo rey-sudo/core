@@ -1196,7 +1196,7 @@ img {
 
 .products-header-left span:nth-child(1) {
   font-weight: 700;
-  font-size: var(--text-size-g);
+  font-size: var(--text-size-f);
 }
 
 .products-header-left span:nth-child(2) {

@@ -1315,7 +1315,7 @@ img {
 
 .slots-header-left span:nth-child(1) {
   font-weight: 700;
-  font-size: var(--text-size-g);
+  font-size: var(--text-size-f);
 }
 
 .slots-header-left span:nth-child(2) {
