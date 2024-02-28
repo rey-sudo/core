@@ -1195,14 +1195,14 @@
     .p-inputnumber-button-group
     .p-button.p-inputnumber-button {
     border: 1px solid #ced4da;
-    color: var(--blue-a);
+    color: var(--text-a);
   }
   .p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-up{
     border-bottom: 1px solid var(--border-a) !important;
   }
 
   .p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-down{
-    border-top: 1px solid transparent !important;
+    border-top: 1px solid var(--border-a) !important;
   }
   .p-inputswitch {
     width: 3rem;
@@ -4013,7 +4013,7 @@
     color: var(--text-a);
     border-radius: 4px;
     font-size: var(--text-size-b);
-    margin-bottom: 1rem;
+    margin: 2rem 0;
   }
   .p-fieldset .p-fieldset-legend {
     padding: 1rem;

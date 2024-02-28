@@ -80,26 +80,35 @@
       :draggable="false"
       class="p-fluid"
     >
-      <Fieldset legend="About" :toggleable="true">
-        <span class="m-0">
-          Product slots are the equivalent of sales orders on a DEX. The slot
-          allows a buyer to purchase the unit or a batch of units of a product.
-          It is a way of representing availability for immediate purchase. It
-          differs from the stock number which represents the internal inventory
-          units.
-        </span>
-      </Fieldset>
-
       <Steps
         :model="createSlotSteps"
         v-model:activeStep="createSlotStep"
         :readonly="true"
       />
 
-
+      <Fieldset legend="About" :toggleable="true">
+        <span class="m-0">
+          Product slots are the equivalent of sell orders on a DEX. The slot
+          allows a buyer to purchase the unit or a batch of units of a product.
+          Represents availability for immediate purchase. It
+          differs from the stock number which represents the internal inventory
+          units.
+        </span>
+      </Fieldset>
 
       <div class="formgrid grid">
-
+        <div class="field col">
+          <label for="quantity" class="field-label">
+            <span>Batch Mode</span>
+            <i
+              class="pi pi-info-circle"
+              v-tooltip.top="
+                'In batch mode each slot includes several units. This allows discounts to be applied for the simultaneous purchase of several units.'
+              "
+            />
+          </label>
+          <InputSwitch v-model="batchMode" />
+        </div>
 
         <div class="field col">
           <label for="quantity" class="field-label">
@@ -132,9 +141,10 @@
             />
           </label>
           <InputNumber
-            id="quantity"
+            id="batch"
             v-model="product.collateral"
             showButtons
+            :disabled="!batchMode"
             integeronly
             locale="en-US"
             :min="1"
@@ -145,8 +155,6 @@
           >
         </div>
       </div>
-
-
 
       <template #footer>
         <Button
@@ -521,6 +529,7 @@ export default {
       createSlotDialog: true,
       deleteProductDialog: false,
       deleteProductsDialog: false,
+      batchMode: false,
       descriptionLengthLimit: 1000,
       nameLengthLimit: 200,
       minProductImages: 5,
