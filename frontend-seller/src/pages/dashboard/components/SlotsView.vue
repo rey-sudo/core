@@ -80,16 +80,21 @@
       :draggable="false"
       class="p-fluid"
     >
-  
       <Fieldset legend="About" :toggleable="true">
         <span class="m-0">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          Product slots are the equivalent of sales orders on a DEX. The slot
+          allows a buyer to purchase the unit or a batch of units of a product.
+          It is a way of representing availability for immediate purchase. It
+          differs from the stock number which represents the internal inventory
+          units.
         </span>
-    </Fieldset>
+      </Fieldset>
 
-    <Steps :model="createSlotSteps"  v-model:activeStep="createSlotStep" :readonly="true" />
-
+      <Steps
+        :model="createSlotSteps"
+        v-model:activeStep="createSlotStep"
+        :readonly="true"
+      />
 
       <div class="field">
         <label for="name" class="field-label">Name</label>
@@ -204,7 +209,6 @@
             >The quantity is required.</small
           >
         </div>
-
 
         <div class="field col">
           <label for="quantity" class="field-label">
@@ -860,7 +864,7 @@ export default {
         (this.invalidProductName = !this.checkProductName(this.product.name)),
         (this.invalidProductDescription = !this.checkProductDescription(
           this.product.description
-        )),  
+        )),
         (this.invalidProductCategory = !this.checkProductCategory(
           this.product.category
         )),
