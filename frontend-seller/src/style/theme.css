@@ -3999,8 +3999,10 @@
   .p-fieldset {
     border: 1px solid #dee2e6;
     background: #ffffff;
-    color: #495057;
-    border-radius: 3px;
+    color: var(--text-a);
+    border-radius: 4px;
+    font-size: var(--text-size-b);
+    margin-bottom: 1rem;
   }
   .p-fieldset .p-fieldset-legend {
     padding: 1rem;
@@ -4015,9 +4017,9 @@
     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
   }
   .p-fieldset.p-fieldset-toggleable .p-fieldset-legend a {
-    padding: 1rem;
-    color: #495057;
-    border-radius: 3px;
+    padding: 0.5rem;
+    color: var(--text-a);
+    border-radius: 4px;
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
     outline-color: transparent;
   }
