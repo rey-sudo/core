@@ -22,7 +22,7 @@
 
     <Dialog
       v-model:visible="deleteProductDialog"
-      :style="{ width: '500px' }"
+      :style="{ width: '450px' }"
       header="Confirm"
       :modal="true"
     >
@@ -46,7 +46,7 @@
 
     <Dialog
       v-model:visible="deleteProductsDialog"
-      :style="{ width: '500px' }"
+      :style="{ width: '450px' }"
       header="Confirm"
       :modal="true"
     >
@@ -74,7 +74,7 @@
 
     <Dialog
       v-model:visible="createSlotDialog"
-      :style="{ width: '500px' }"
+      :style="{ width: '450px' }"
       header="Create slots"
       :modal="true"
       :draggable="false"
@@ -96,77 +96,10 @@
         :readonly="true"
       />
 
-      <div class="field">
-        <label for="name" class="field-label">Name</label>
-        <InputText
-          id="name"
-          v-model="product.name"
-          required="true"
-          autofocus
-          :class="{ invalid: invalidProductName }"
-        />
-        <small class="p-error" v-if="invalidProductName"
-          >The name is required and max {{ nameLengthLimit }} characters
-          long.</small
-        >
-      </div>
-      <div class="field">
-        <label for="description" class="field-label">
-          <span>Description</span>
-          <i
-            class="pi pi-info-circle"
-            v-tooltip.top="'Write a clear description about the product.'"
-          />
-        </label>
-        <Textarea
-          id="description"
-          v-model="product.description"
-          required="true"
-          rows="3"
-          cols="20"
-          autoResize
-          :class="{ invalid: invalidProductDescription }"
-        />
-        <small
-          class="p-counter"
-          :class="{
-            invalid: product.description.length > descriptionLengthLimit,
-          }"
-          v-if="!invalidProductDescription"
-        >
-          {{ product.description.length }} / {{ descriptionLengthLimit }}
-        </small>
 
-        <small class="p-error" v-if="invalidProductDescription"
-          >The description is required and
-          {{ descriptionLengthLimit }} characters long.
-        </small>
-      </div>
 
       <div class="formgrid grid">
-        <div class="field col">
-          <label for="category" class="field-label">
-            <span>Category</span>
-            <i
-              class="pi pi-info-circle"
-              v-tooltip.top="
-                'Select the category corresponding to the product.'
-              "
-            />
-          </label>
-          <Dropdown
-            v-model="product.category"
-            :options="categories"
-            id="category"
-            optionLabel="name"
-            placeholder=""
-            :class="{ invalid: invalidProductCategory }"
-            :highlightOnSelect="false"
-          />
-          <small class="p-error" v-if="invalidProductCategory"
-            >The category is required.
-          </small>
-        </div>
+
 
         <div class="field col">
           <label for="quantity" class="field-label">
@@ -180,6 +113,7 @@
             id="quantity"
             v-model="product.price"
             showButtons
+            integeronly
             locale="en-US"
             :min="1"
             :class="{ invalid: invalidSlotQuantity }"
@@ -201,6 +135,7 @@
             id="quantity"
             v-model="product.collateral"
             showButtons
+            integeronly
             locale="en-US"
             :min="1"
             :class="{ invalid: invalidSlotQuantity }"
@@ -209,77 +144,9 @@
             >The quantity is required.</small
           >
         </div>
-
-        <div class="field col">
-          <label for="quantity" class="field-label">
-            <span>Stock</span>
-            <i
-              class="pi pi-info-circle"
-              v-tooltip.top="'Current number of units of the product.'"
-            />
-          </label>
-          <InputNumber
-            id="quantity"
-            v-model="product.stock"
-            integeronly
-            :min="0"
-            :class="{ invalid: invalidProductStock }"
-          />
-
-          <small class="p-error" v-if="invalidProductStock"
-            >The stock is required.
-          </small>
-        </div>
-        <div class="field col">
-          <label for="keywords" class="field-label">Keywords</label>
-          <Chips
-            id="keywords"
-            v-model="product.keywords"
-            :allowDuplicate="false"
-            separator=","
-            :max="3"
-            placeholder="Separate with , or  ↵"
-            :class="{ invalid: invalidProductKeywords }"
-          />
-          <small class="p-error" v-if="invalidProductKeywords"
-            >3 keywords are required.
-          </small>
-        </div>
       </div>
 
-      <div class="field">
-        <div class="product-upload">
-          <label for="fileupload" class="field-label">
-            <span>Images</span>
-            <i
-              class="pi pi-info-circle"
-              v-tooltip.top="'The first image is the preview image.'"
-            />
-          </label>
-          <Toast />
-          <FileUpload
-            id="fileupload"
-            name="image"
-            :url="mediaHostURL"
-            @upload="onAdvancedUpload($event)"
-            @before-upload="onBeforeUpload($event)"
-            :multiple="true"
-            accept="image/*"
-            :fileLimit="5"
-            :maxFileSize="1000000"
-            :withCredentials="true"
-            :disabled="disableUpload"
-          >
-            <template #empty>
-              <p>Drag and drop images to here to upload.</p>
-            </template>
-          </FileUpload>
-          <small class="invalid" v-if="invalidProductImages">
-            {{ product.image_set.length }} / {{ minProductImages }} images are
-            required.
-          </small>
-        </div>
-      </div>
+
 
       <template #footer>
         <Button
@@ -299,7 +166,7 @@
       maximizable
       modal
       style="padding: 1rem"
-      :contentStyle="{ height: '500px' }"
+      :contentStyle="{ height: '450px' }"
     >
       <DataTable
         :value="slotDialogData.slots"

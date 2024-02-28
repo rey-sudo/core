@@ -217,6 +217,7 @@
             id="price"
             v-model="product.price"
             showButtons
+            integeronly
             prefix="ADA "
             locale="en-US"
             :min="1"
@@ -239,6 +240,7 @@
             id="collateral"
             v-model="product.collateral"
             showButtons
+            integeronly
             prefix="ADA "
             locale="en-US"
             :min="1"
