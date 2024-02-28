@@ -22,7 +22,7 @@
 
     <Dialog
       v-model:visible="deleteProductDialog"
-      :style="{ width: '450px' }"
+      :style="{ width: '425px' }"
       header="Confirm"
       :modal="true"
     >
@@ -46,7 +46,7 @@
 
     <Dialog
       v-model:visible="deleteProductsDialog"
-      :style="{ width: '450px' }"
+      :style="{ width: '425px' }"
       header="Confirm"
       :modal="true"
     >
@@ -74,7 +74,7 @@
 
     <Dialog
       v-model:visible="createSlotDialog"
-      :style="{ width: '450px' }"
+      :style="{ width: '425px' }"
       header="Create slots"
       :modal="true"
       :draggable="false"
@@ -166,7 +166,7 @@
       maximizable
       modal
       style="padding: 1rem"
-      :contentStyle="{ height: '450px' }"
+      :contentStyle="{ height: '425px' }"
     >
       <DataTable
         :value="slotDialogData.slots"

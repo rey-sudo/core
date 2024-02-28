@@ -1195,9 +1195,15 @@
     .p-inputnumber-button-group
     .p-button.p-inputnumber-button {
     border: 1px solid #ced4da;
-    color: var(--text-a);
+    color: var(--blue-a);
+  }
+  .p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-up{
+    border-bottom: 1px solid var(--border-a) !important;
   }
 
+  .p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-down{
+    border-top: 1px solid transparent !important;
+  }
   .p-inputswitch {
     width: 3rem;
     height: 1.75rem;
@@ -4012,7 +4018,7 @@
   .p-fieldset .p-fieldset-legend {
     padding: 1rem;
     border: 1px solid #dee2e6;
-    color: #495057;
+    color: var(--text-a);
     background: #f8f9fa;
     font-weight: 600;
     border-radius: 3px;
