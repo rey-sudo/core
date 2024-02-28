@@ -62,6 +62,7 @@
 
 * {
   font-family: "Open Sans", sans-serif;
+  letter-spacing: -0.006em;
 }
 
 #app {
@@ -71,7 +72,6 @@
   font-style: normal;
   text-align: center;
   color: var(--text-a);
-  letter-spacing: -0.005em;
   background: var(--base-a);
   text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
 }

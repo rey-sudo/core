@@ -73,56 +73,14 @@
     </Dialog>
 
     <Dialog
-      v-model:visible="productDialog"
+      v-model:visible="createSlotDialog"
       :style="{ width: '500px' }"
-      header="Product details"
+      header="Create slots"
       :modal="true"
       :draggable="false"
       class="p-fluid"
     >
-      <Carousel
-        v-if="product.image_base"
-        :value="getImages(product)"
-        :numVisible="1"
-        :numScroll="1"
-        orientation="horizontal"
-        verticalViewPortHeight="340px"
-        contentClass="flex align-items-center"
-      >
-        <template #item="slotProps">
-          <div class="product-image-wrap">
-            <div class="product-image-preview">
-              <Image
-                :src="slotProps.data.image"
-                alt="Image"
-                width="330"
-                height="330"
-                preview
-              />
-            </div>
-          </div>
-        </template>
-      </Carousel>
-
-      <div v-if="product.image_base" class="field">
-        <label for="mainImage" class="field-label">Front image</label>
-        <div id="mainImage" class="product-image-main">
-          <div
-            v-for="item in getImages(product)"
-            :key="item"
-            :class="{ mainImage: checkMainImage(item.id) }"
-            @click="setMainImage(item.id)"
-          >
-            <Image
-              :src="item.image"
-              imageStyle="border-radius: 6px;display: flex;align-items: center;"
-              alt="Image"
-              width="50"
-              height="50"
-            />
-          </div>
-        </div>
-      </div>
+      <Steps :model="createSlotSteps"  v-model:activeStep="createSlotStep" :readonly="true" />
 
       <div class="field">
         <label for="name" class="field-label">Name</label>
@@ -197,23 +155,22 @@
         </div>
 
         <div class="field col">
-          <label for="price" class="field-label">
-            <span>Price</span>
+          <label for="quantity" class="field-label">
+            <span>Quantity</span>
             <i
               class="pi pi-info-circle"
-              v-tooltip.top="'Product price in ADA.'"
+              v-tooltip.top="'Number of slots to create.'"
             />
           </label>
           <InputNumber
-            id="price"
+            id="quantity"
             v-model="product.price"
             showButtons
-            prefix="ADA "
             locale="en-US"
             :min="1"
-            :class="{ invalid: invalidProductPrice }"
+            :class="{ invalid: invalidSlotQuantity }"
           />
-          <small class="p-error" v-if="invalidProductPrice"
+          <small class="p-error" v-if="invalidSlotQuantity"
             >The price is required.</small
           >
         </div>
@@ -511,7 +468,7 @@
                   outlined
                   rounded
                   v-tooltip.top="'Enable a slot'"
-                  @click="editProduct(slotProps.data)"
+                  @click="createSlot(slotProps.data)"
                 />
                 <Button
                   class="table-button"
@@ -567,7 +524,7 @@ export default {
     let invalidProductName = ref(false);
     let invalidProductDescription = ref(false);
     let invalidProductCategory = ref(false);
-    let invalidProductPrice = ref(false);
+    let invalidSlotQuantity = ref(false);
     let invalidProductCollateral = ref(false);
     let invalidProductStock = ref(false);
     let invalidProductKeywords = ref(false);
@@ -607,7 +564,7 @@ export default {
       invalidProductName.value = false;
       invalidProductDescription.value = false;
       invalidProductCategory.value = false;
-      invalidProductPrice.value = false;
+      invalidSlotQuantity.value = false;
       invalidProductCollateral.value = false;
       invalidProductStock.value = false;
       invalidProductKeywords.value = false;
@@ -641,7 +598,20 @@ export default {
       rowMenuRef.value.toggle(event);
     };
 
+    const createSlotStep = ref(0);
+
+    const createSlotSteps = ref([
+      {
+        label: "Create",
+      },
+      {
+        label: "Deploy",
+      },
+    ]);
+
     return {
+      createSlotSteps,
+      createSlotStep,
       openRowMenu,
       product,
       rowMenuRef,
@@ -656,7 +626,7 @@ export default {
       invalidProductName,
       invalidProductDescription,
       invalidProductCategory,
-      invalidProductPrice,
+      invalidSlotQuantity,
       invalidProductCollateral,
       invalidProductStock,
       invalidProductKeywords,
@@ -667,7 +637,7 @@ export default {
     return {
       mediaHostURL: HOST + "/api/media/create-image",
       products: null,
-      productDialog: false,
+      createSlotDialog: true,
       deleteProductDialog: false,
       deleteProductsDialog: false,
       descriptionLengthLimit: 1000,
@@ -870,21 +840,21 @@ export default {
     },
     openProductDialog() {
       this.resetForm();
-      this.productDialog = true;
+      this.createSlotDialog = true;
     },
     closeProductDialog() {
-      this.productDialog = false;
+      this.createSlotDialog = false;
     },
     async handleSubmit() {
       const productForm = [
         (this.invalidProductName = !this.checkProductName(this.product.name)),
         (this.invalidProductDescription = !this.checkProductDescription(
           this.product.description
-        )),
+        )),  
         (this.invalidProductCategory = !this.checkProductCategory(
           this.product.category
         )),
-        (this.invalidProductPrice = !this.checkProductPrice(
+        (this.invalidSlotQuantity = !this.checkProductPrice(
           this.product.price
         )),
         (this.invalidProductCollateral = !this.checkProductCollateral(
@@ -926,7 +896,7 @@ export default {
           });
 
           this.resetForm();
-          this.productDialog = false;
+          this.createSlotDialog = false;
         }
       });
     },
@@ -986,7 +956,7 @@ export default {
 
       return true;
     },
-    editProduct(product) {
+    createSlot(product) {
       product.keywords =
         typeof product.keywords === "string"
           ? product.keywords.split(",")
@@ -1007,9 +977,7 @@ export default {
         code: categoryCode,
       };
 
-      this.product = product;
-
-      this.productDialog = true;
+      this.createSlotDialog = true;
     },
 
     confirmDeleteProduct(product) {
