@@ -108,6 +108,7 @@
           </label>
           <InputSwitch v-model="batchMode" />
         </div>
+        
         <div class="slots-total">
           <p>Total ADA {{ createSlotDialogData.price }}</p>
           <p>Slots</p>
@@ -116,6 +117,7 @@
         </div>
 
         
+
         <div class="field col">
           <label for="units" class="field-label">
             <span>Units</span>
@@ -137,6 +139,9 @@
             >The quantity is required.</small
           >
         </div>
+
+
+
 
 
         <div class="field col">
