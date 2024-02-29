@@ -331,7 +331,7 @@
   }
   .p-disabled,
   .p-component:disabled {
-    opacity: 0.7;
+    opacity: 0.5;
   }
   .p-error {
     color: #e4677e;

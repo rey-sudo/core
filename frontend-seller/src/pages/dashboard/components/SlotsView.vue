@@ -22,7 +22,7 @@
 
     <Dialog
       v-model:visible="deleteProductDialog"
-      :style="{ width: '425px' }"
+      :style="{ width: '450px' }"
       header="Confirm"
       :modal="true"
     >
@@ -46,7 +46,7 @@
 
     <Dialog
       v-model:visible="deleteProductsDialog"
-      :style="{ width: '425px' }"
+      :style="{ width: '450px' }"
       header="Confirm"
       :modal="true"
     >
@@ -74,7 +74,7 @@
 
     <Dialog
       v-model:visible="createSlotDialog"
-      :style="{ width: '425px' }"
+      :style="{ width: '450px' }"
       header="Create slots"
       :modal="true"
       :draggable="false"
@@ -90,9 +90,8 @@
         <span class="m-0">
           Product slots are the equivalent of sell orders on a DEX. The slot
           allows a buyer to purchase the unit or a batch of units of a product.
-          Represents availability for immediate purchase. It
-          differs from the stock number which represents the internal inventory
-          units.
+          It represents availability for immediate purchase and differs from the
+          stock number which represents the internal inventory units.
         </span>
       </Fieldset>
 
@@ -109,17 +108,24 @@
           </label>
           <InputSwitch v-model="batchMode" />
         </div>
+        <div class="slots-total">
+          <p>Total ADA {{ createSlotDialogData.price }}</p>
+          <p>Slots</p>
+          <p>Units</p>
+          <p>Total</p>
+        </div>
 
+        
         <div class="field col">
-          <label for="quantity" class="field-label">
-            <span>Quantity</span>
+          <label for="units" class="field-label">
+            <span>Units</span>
             <i
               class="pi pi-info-circle"
               v-tooltip.top="'Number of slots to create.'"
             />
           </label>
           <InputNumber
-            id="quantity"
+            id="units"
             v-model="product.price"
             showButtons
             integeronly
@@ -131,6 +137,7 @@
             >The quantity is required.</small
           >
         </div>
+
 
         <div class="field col">
           <label for="batch" class="field-label">
@@ -148,6 +155,32 @@
             integeronly
             locale="en-US"
             :min="1"
+            :class="{ invalid: invalidSlotQuantity }"
+          />
+          <small class="p-error" v-if="invalidSlotQuantity"
+            >The quantity is required.</small
+          >
+        </div>
+
+        <div class="field col">
+          <label for="batchDiscount" class="field-label">
+            <span>Batch discount</span>
+            <i
+              class="pi pi-info-circle"
+              v-tooltip.top="
+                'Optional discount to the total price of the batch of products.'
+              "
+            />
+          </label>
+          <InputNumber
+            id="batchDiscount"
+            v-model="product.collateral"
+            showButtons
+            :disabled="!batchMode"
+            integeronly
+            suffix=" %"
+            locale="en-US"
+            :min="0"
             :class="{ invalid: invalidSlotQuantity }"
           />
           <small class="p-error" v-if="invalidSlotQuantity"
@@ -174,7 +207,7 @@
       maximizable
       modal
       style="padding: 1rem"
-      :contentStyle="{ height: '425px' }"
+      :contentStyle="{ height: '450px' }"
     >
       <DataTable
         :value="slotDialogData.slots"
@@ -526,7 +559,8 @@ export default {
     return {
       mediaHostURL: HOST + "/api/media/create-image",
       products: null,
-      createSlotDialog: true,
+      createSlotDialog: false,
+      createSlotDialogData: this.product,
       deleteProductDialog: false,
       deleteProductsDialog: false,
       batchMode: false,
@@ -847,25 +881,7 @@ export default {
       return true;
     },
     createSlot(product) {
-      product.keywords =
-        typeof product.keywords === "string"
-          ? product.keywords.split(",")
-          : product.keywords;
-
-      product.image_set =
-        typeof product.image_set === "string"
-          ? product.image_set.split(",")
-          : product.image_set;
-
-      let categoryCode = product.category;
-
-      let categoryName =
-        categoryCode.charAt(0).toUpperCase() + categoryCode.slice(1);
-
-      product.category = {
-        name: categoryName,
-        code: categoryCode,
-      };
+      this.createSlotDialogData = product;
 
       this.createSlotDialog = true;
     },
@@ -948,6 +964,23 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.slots-total {
+  border: 1px solid var(--blue-c);
+  background: var(--blue-s);
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  color: var(--blue-c);
+}
+
+.slots-total p {
+  line-height: 1rem;
+}
+
+.slots-total p:nth-child(1) {
+  font-size: var(--text-size-c);
+  font-weight: 600;
+}
+
 .product-image-main {
   display: flex;
   justify-content: center;
