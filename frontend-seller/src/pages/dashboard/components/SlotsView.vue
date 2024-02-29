@@ -108,15 +108,13 @@
           </label>
           <InputSwitch v-model="batchMode" />
         </div>
-        
+
         <div class="slots-total">
           <p>Total ADA {{ createSlotDialogData.price }}</p>
           <p>Slots</p>
           <p>Units</p>
-          <p>Total</p>
+          <p>Collateral</p>
         </div>
-
-        
 
         <div class="field col">
           <label for="units" class="field-label">
@@ -139,10 +137,6 @@
             >The quantity is required.</small
           >
         </div>
-
-
-
-
 
         <div class="field col">
           <label for="batch" class="field-label">
@@ -970,11 +964,11 @@ export default {
 
 <style lang="css" scoped>
 .slots-total {
-  border: 1px solid var(--blue-c);
-  background: var(--blue-s);
+  border: 1px solid var(--border-a);
+  background: var(--base-b);
   border-radius: 4px;
   padding: 0.5rem 1rem;
-  color: var(--blue-c);
+  color: var(--text-a);
 }
 
 .slots-total p {
