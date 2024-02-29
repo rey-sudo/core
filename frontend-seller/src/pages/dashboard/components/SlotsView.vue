@@ -94,12 +94,13 @@
           stock number which represents the internal inventory units.
         </span>
       </Fieldset>
-      
+
       <div class="slots-total">
         <p>Total ADA {{ createSlotDialogData.price }}</p>
         <p>Slots</p>
         <p>Units</p>
         <p>Collateral</p>
+        <p>Discount</p>
       </div>
 
       <div class="formgrid grid">
@@ -113,7 +114,7 @@
               "
             />
           </label>
-          <InputSwitch v-model="batchMode" />
+          <InputSwitch v-model="createSlotForm.batchMode" />
         </div>
 
         <div class="field col">
@@ -143,14 +144,14 @@
             <span>Batch</span>
             <i
               class="pi pi-info-circle"
-              v-tooltip.top="'Number of slots to create.'"
+              v-tooltip.top="'Each batch contains the chosen number of units.'"
             />
           </label>
           <InputNumber
             id="batch"
-            v-model="product.collateral"
+            v-model="createSlotForm.batch"
             showButtons
-            :disabled="!batchMode"
+            :disabled="!createSlotForm.batchMode"
             integeronly
             locale="en-US"
             :min="1"
@@ -167,15 +168,15 @@
             <i
               class="pi pi-info-circle"
               v-tooltip.top="
-                'Optional discount to the total price of the batch of products.'
+                'Optional discount to the total price of the batch.'
               "
             />
           </label>
           <InputNumber
             id="batchDiscount"
-            v-model="product.collateral"
+            v-model="createSlotForm.batch_discount"
             showButtons
-            :disabled="!batchMode"
+            :disabled="!createSlotForm.batchMode"
             integeronly
             suffix=" %"
             locale="en-US"
@@ -530,7 +531,15 @@ export default {
       },
     ]);
 
+    let createSlotForm = ref({
+      batchMode: false,
+      units: null,
+      batch: null,
+      batch_discount: null,
+    });
+
     return {
+      createSlotForm,
       createSlotSteps,
       createSlotStep,
       openRowMenu,
@@ -562,7 +571,6 @@ export default {
       createSlotDialogData: this.product,
       deleteProductDialog: false,
       deleteProductsDialog: false,
-      batchMode: false,
       descriptionLengthLimit: 1000,
       nameLengthLimit: 200,
       minProductImages: 5,
