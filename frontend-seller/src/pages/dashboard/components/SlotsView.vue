@@ -88,19 +88,18 @@
 
       <Fieldset legend="About" :toggleable="true">
         <span class="m-0">
-          Product slots are the equivalent of sell orders on a DEX. The slot
-          allows a buyer to purchase the unit or a batch of units of a product.
-          It represents availability for immediate purchase and differs from the
+          Product slots are similar to sell orders on a DEX. The slot allows a
+          buyer to purchase the unit or a batch of units of a product. It
+          represents availability for immediate purchase and differs from the
           stock number which represents the internal inventory units.
         </span>
       </Fieldset>
 
       <div class="slots-total">
-        <p>Total ADA {{ createSlotDialogData.price }}</p>
-        <p>Slots</p>
-        <p>Units</p>
-        <p>Collateral</p>
-        <p>Discount</p>
+        <p>Slots: {{ computedSlots }}</p>
+        <p>Units: {{ computedUnits }}</p>
+        <p>Total Collateral: {{ computedCollateral }}</p>
+        <p>Unit price: {{ computedPrice }}</p>
       </div>
 
       <div class="formgrid grid">
@@ -114,7 +113,7 @@
               "
             />
           </label>
-          <InputSwitch v-model="createSlotForm.batchMode" />
+          <InputSwitch v-model="slotForm.batch_mode" />
         </div>
 
         <div class="field col">
@@ -127,7 +126,7 @@
           </label>
           <InputNumber
             id="units"
-            v-model="product.price"
+            v-model="slotForm.unit_number"
             showButtons
             integeronly
             locale="en-US"
@@ -149,9 +148,9 @@
           </label>
           <InputNumber
             id="batch"
-            v-model="createSlotForm.batch"
+            v-model="slotForm.batch_number"
             showButtons
-            :disabled="!createSlotForm.batchMode"
+            :disabled="!slotForm.batch_mode"
             integeronly
             locale="en-US"
             :min="1"
@@ -163,20 +162,20 @@
         </div>
 
         <div class="field col">
-          <label for="batchDiscount" class="field-label">
-            <span>Batch discount</span>
+          <label for="unitDiscount" class="field-label">
+            <span>Discount</span>
             <i
               class="pi pi-info-circle"
               v-tooltip.top="
-                'Optional discount to the total price of the batch.'
+                'Discount per unit in batch mode.'
               "
             />
           </label>
           <InputNumber
-            id="batchDiscount"
-            v-model="createSlotForm.batch_discount"
+            id="unitDiscount"
+            v-model="slotForm.unit_discount"
             showButtons
-            :disabled="!createSlotForm.batchMode"
+            :disabled="!slotForm.batch_mode"
             integeronly
             suffix=" %"
             locale="en-US"
@@ -531,15 +530,15 @@ export default {
       },
     ]);
 
-    let createSlotForm = ref({
-      batchMode: false,
-      units: null,
-      batch: null,
-      batch_discount: null,
+    let slotForm = ref({
+      batch_mode: false,
+      unit_number: 1,
+      batch_number: 1,
+      unit_discount: 0,
     });
 
     return {
-      createSlotForm,
+      slotForm,
       createSlotSteps,
       createSlotStep,
       openRowMenu,
@@ -568,7 +567,7 @@ export default {
       mediaHostURL: HOST + "/api/media/create-image",
       products: null,
       createSlotDialog: false,
-      createSlotDialogData: this.product,
+      slotFormData: this.product,
       deleteProductDialog: false,
       deleteProductsDialog: false,
       descriptionLengthLimit: 1000,
@@ -715,6 +714,67 @@ export default {
   },
   mounted() {
     this.products = this.getSlotsData;
+  },
+  computed: {
+    computedSlots() {
+      if (!this.slotForm.batch_mode) {
+        return this.slotForm.unit_number;
+      }
+
+      if (this.slotForm.batch_mode) {
+        return this.slotForm.batch_number;
+      }
+
+      return 0;
+    },
+
+    computedUnits() {
+      if (!this.slotForm.batch_mode) {
+        return this.slotForm.unit_number;
+      }
+
+      if (this.slotForm.batch_mode) {
+        return this.slotForm.unit_number * this.slotForm.batch_number;
+      }
+
+      return 0;
+    },
+
+    computedCollateral() {
+      if (!this.slotForm.batch_mode) {
+        let total = this.slotFormData.collateral * this.slotForm.unit_number;
+        return `${total} ADA`;
+      }
+
+      if (this.slotForm.batch_mode) {
+        let units = this.slotForm.unit_number * this.slotForm.batch_number;
+        let total = this.slotFormData.collateral * units;
+        return `${total} ADA`;
+      }
+
+      return 0;
+    },
+
+    computedPrice() {
+      if (!this.slotForm.batch_mode) {
+        let total = this.slotFormData.price;
+        return `${total} ADA`;
+      }
+
+      if (this.slotForm.batch_mode) {
+        let originalPrice = this.slotFormData.price;
+
+        let discountPercentage = this.slotForm.unit_discount;
+
+        let discountAmount = (originalPrice * discountPercentage) / 100;
+
+        let discountedPrice = originalPrice - discountAmount;
+
+        return `${originalPrice} ADA - ${discountPercentage} % = ${discountedPrice} ADA`;
+      }
+
+      return 0;
+    },
   },
   methods: {
     openSlotsDialog(e) {
@@ -888,7 +948,7 @@ export default {
       return true;
     },
     createSlot(product) {
-      this.createSlotDialogData = product;
+      this.slotFormData = product;
 
       this.createSlotDialog = true;
     },
@@ -975,7 +1035,7 @@ export default {
   border: 1px solid var(--border-a);
   background: var(--base-b);
   border-radius: 4px;
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
   color: var(--text-a);
   margin-bottom: 1rem;
 }
