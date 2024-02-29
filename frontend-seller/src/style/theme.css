@@ -1197,11 +1197,11 @@
     border: 1px solid #ced4da;
     color: var(--text-a);
   }
-  .p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-up{
+  .p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-up {
     border-bottom: 1px solid var(--border-a) !important;
   }
 
-  .p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-down{
+  .p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-down {
     border-top: 1px solid var(--border-a) !important;
   }
   .p-inputswitch {
@@ -4013,8 +4013,10 @@
     color: var(--text-a);
     border-radius: 4px;
     font-size: var(--text-size-b);
-    margin: 2rem 0;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
   }
+  
   .p-fieldset .p-fieldset-legend {
     padding: 1rem;
     border: 1px solid #dee2e6;

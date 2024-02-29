@@ -94,6 +94,13 @@
           stock number which represents the internal inventory units.
         </span>
       </Fieldset>
+      
+      <div class="slots-total">
+        <p>Total ADA {{ createSlotDialogData.price }}</p>
+        <p>Slots</p>
+        <p>Units</p>
+        <p>Collateral</p>
+      </div>
 
       <div class="formgrid grid">
         <div class="field col">
@@ -107,13 +114,6 @@
             />
           </label>
           <InputSwitch v-model="batchMode" />
-        </div>
-
-        <div class="slots-total">
-          <p>Total ADA {{ createSlotDialogData.price }}</p>
-          <p>Slots</p>
-          <p>Units</p>
-          <p>Collateral</p>
         </div>
 
         <div class="field col">
@@ -969,6 +969,7 @@ export default {
   border-radius: 4px;
   padding: 0.5rem 1rem;
   color: var(--text-a);
+  margin-bottom: 1rem;
 }
 
 .slots-total p {
