@@ -105,7 +105,6 @@
       </Fieldset>
 
 
-
       <div class="formgrid grid">
         <div class="field col">
           <label for="quantity" class="field-label">
@@ -207,6 +206,7 @@
       :style="{ width: '75vw' }"
       maximizable
       modal
+      :draggable="false"
       style="padding: 1rem"
       :contentStyle="{ height: '450px' }"
     >
@@ -1034,7 +1034,7 @@ export default {
 
 <style lang="css" scoped>
 .slots-total {
-  border: 1px solid var(--border-a);
+  border: 1px solid transparent;
   border-radius: 4px;
   padding: 0 1rem;
   color: var(--text-a);
