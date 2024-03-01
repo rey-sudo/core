@@ -24,7 +24,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
   };
 
   let connection: any = null;
-  
+
   try {
     connection = await DB.client.getConnection();
 
@@ -39,13 +39,13 @@ const createSlotHandler = async (req: Request, res: Response) => {
       throw new Error("NOT_PRODUCT");
     }
 
-    const productData = products[0];
+    const PRODUCT = products[0];
 
-    if (productData.stock < 1) {
+    if (PRODUCT.stock < 1) {
       throw new Error("NOT_STOCK");
     }
 
-    const contractInstance = await API.post("/api/contract/activate", cidScheme)
+    const instance_id = await API.post("/api/contract/activate", cidScheme)
       .then((res) => {
         assert.ok(res.data.hasOwnProperty("unContractInstanceId"));
         return res.data.unContractInstanceId;
@@ -54,26 +54,35 @@ const createSlotHandler = async (req: Request, res: Response) => {
         throw new Error("CID_FAILED");
       });
 
+    const product_units = 0;
+    const mode = "unit";
+
     const schemeData = `
     INSERT INTO slots (
       id,
+      mode,
       wallet_id,
       instance_id,
       seller_id,
       product_id,
       product_price,
       product_collateral,
+      product_discount,
+      product_units,
       schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const schemeValue = [
       "S" + getSlotId(),
+      mode,
       params.wallet_id,
-      contractInstance,
+      instance_id,
       SELLER.seller_id,
-      productData.id,
-      productData.price,
-      productData.collateral,
+      PRODUCT.id,
+      PRODUCT.price,
+      PRODUCT.collateral,
+      params.product_discount,
+      product_units,
       0,
     ];
 
