@@ -86,6 +86,15 @@
         :readonly="true"
       />
 
+      <div class="slots-total">
+        <p>Total Slots: {{ computedSlots }}</p>
+        <p>Stock: {{ slotFormData.stock }}</p>
+        <p>Total Units: {{ computedUnits }}</p>
+        <p>Total Collateral: {{ computedCollateral }}</p>
+        <p>Unit price: {{ computedPrice }}</p>
+      </div>
+
+      
       <Fieldset legend="About" :toggleable="true">
         <span class="about-content">
           Product slots are similar to sell orders on a DEX. The slot allows a
@@ -95,13 +104,7 @@
         </span>
       </Fieldset>
 
-      <div class="slots-total">
-        <p>Total Slots: {{ computedSlots }}</p>
-        <p>Stock: {{ slotFormData.stock }}</p>
-        <p>Units: {{ computedUnits }}</p>
-        <p>Total Collateral: {{ computedCollateral }}</p>
-        <p>Unit price: {{ computedPrice }}</p>
-      </div>
+
 
       <div class="formgrid grid">
         <div class="field col">
