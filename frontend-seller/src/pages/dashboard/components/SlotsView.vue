@@ -86,6 +86,13 @@
         :readonly="true"
       />
 
+      <div class="slots-total">
+        <p>Total Slots: {{ computedSlots }}</p>
+        <p>Units: {{ computedUnits }}</p>
+        <p>Total Collateral: {{ computedCollateral }}</p>
+        <p>Unit price: {{ computedPrice }}</p>
+      </div>
+
       <Fieldset legend="About" :toggleable="true">
         <span class="m-0">
           Product slots are similar to sell orders on a DEX. The slot allows a
@@ -95,12 +102,7 @@
         </span>
       </Fieldset>
 
-      <div class="slots-total">
-        <p>Slots: {{ computedSlots }}</p>
-        <p>Units: {{ computedUnits }}</p>
-        <p>Total Collateral: {{ computedCollateral }}</p>
-        <p>Unit price: {{ computedPrice }}</p>
-      </div>
+
 
       <div class="formgrid grid">
         <div class="field col">
@@ -195,7 +197,7 @@
           text
           @click="closeProductDialog"
         />
-        <Button label="Save" icon="pi pi-check" text @click="handleSubmit" />
+        <Button label="Done" icon="pi pi-check" text @click="handleSubmit" />
       </template>
     </Dialog>
 
@@ -1033,11 +1035,10 @@ export default {
 <style lang="css" scoped>
 .slots-total {
   border: 1px solid var(--border-a);
-  background: var(--base-b);
   border-radius: 4px;
   padding: 0 1rem;
   color: var(--text-a);
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 
 .slots-total p {
@@ -1045,7 +1046,7 @@ export default {
 }
 
 .slots-total p:nth-child(1) {
-  font-size: var(--text-size-c);
+  font-size: var(--text-size-d);
   font-weight: 600;
 }
 
