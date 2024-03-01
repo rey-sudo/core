@@ -4009,14 +4009,14 @@
   }
   .p-fieldset {
     border: 1px solid #dee2e6;
-    background: #ffffff;
+    background: var(--base-b);
     color: var(--text-a);
     border-radius: 4px;
     font-size: var(--text-size-b);
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
-  
+
   .p-fieldset .p-fieldset-legend {
     padding: 1rem;
     border: 1px solid #dee2e6;

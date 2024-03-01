@@ -86,15 +86,8 @@
         :readonly="true"
       />
 
-      <div class="slots-total">
-        <p>Total Slots: {{ computedSlots }}</p>
-        <p>Units: {{ computedUnits }}</p>
-        <p>Total Collateral: {{ computedCollateral }}</p>
-        <p>Unit price: {{ computedPrice }}</p>
-      </div>
-
       <Fieldset legend="About" :toggleable="true">
-        <span class="m-0">
+        <span class="about-content">
           Product slots are similar to sell orders on a DEX. The slot allows a
           buyer to purchase the unit or a batch of units of a product. It
           represents availability for immediate purchase and differs from the
@@ -102,7 +95,13 @@
         </span>
       </Fieldset>
 
-
+      <div class="slots-total">
+        <p>Total Slots: {{ computedSlots }}</p>
+        <p>Stock: {{ slotFormData.stock }}</p>
+        <p>Units: {{ computedUnits }}</p>
+        <p>Total Collateral: {{ computedCollateral }}</p>
+        <p>Unit price: {{ computedPrice }}</p>
+      </div>
 
       <div class="formgrid grid">
         <div class="field col">
@@ -168,9 +167,7 @@
             <span>Discount</span>
             <i
               class="pi pi-info-circle"
-              v-tooltip.top="
-                'Discount per unit in batch mode.'
-              "
+              v-tooltip.top="'Discount per unit in batch mode.'"
             />
           </label>
           <InputNumber
