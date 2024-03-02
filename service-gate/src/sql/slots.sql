@@ -11,6 +11,7 @@ create table if not exists slots(
   contract_locking_status mediumtext default null,
   contract_delivered_status mediumtext default null,
   contract_received_status mediumtext default null,
+  contract_finished_status mediumtext default null,
   seller_id varchar(20) not null,
   seller_pkh varchar(100) default null,
   buyer_id varchar(20) default null,
@@ -26,4 +27,8 @@ create table if not exists slots(
   primary key(id),
   unique (instance_id)
 ) ENGINE = InnoDB;
+
+
+
+
 
