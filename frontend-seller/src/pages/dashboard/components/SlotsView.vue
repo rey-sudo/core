@@ -80,112 +80,118 @@
       :draggable="false"
       class="p-fluid"
     >
-      <Steps
-        :model="createSlotSteps"
-        v-model:activeStep="createSlotStep"
-        :readonly="true"
-      />
+      <div class="create-slot-dialog-wrap">
+        <LoadingBars v-if="isLoading" />
 
-      <div class="slots-total">
-        <p>Total Slots: {{ computedSlots }}</p>
-        <p>Stock: {{ slotFormData.stock }}</p>
-        <p>Total Units: {{ computedUnits }}</p>
-        <p>Total Collateral: {{ computedCollateral }}</p>
-        <p>Unit price: {{ computedPrice }}</p>
-      </div>
-
-      
-      <Fieldset legend="About" :toggleable="true">
-        <span class="about-content">
-          Product slots are similar to sell orders on a DEX. The slot allows a
-          buyer to purchase the unit or a batch of units of a product. It
-          represents availability for immediate purchase and differs from the
-          stock number which represents the internal inventory units.
-        </span>
-      </Fieldset>
-
-
-      <div class="formgrid grid">
-        <div class="field col">
-          <label for="quantity" class="field-label">
-            <span>Batch Mode</span>
-            <i
-              class="pi pi-info-circle"
-              v-tooltip.top="
-                'In batch mode each slot includes several units. This allows discounts to be applied for the simultaneous purchase of several units.'
-              "
-            />
-          </label>
-          <InputSwitch v-model="slotForm.batch_mode" />
-        </div>
-
-        <div class="field col">
-          <label for="units" class="field-label">
-            <span>Units</span>
-            <i
-              class="pi pi-info-circle"
-              v-tooltip.top="'Number of slots to create.'"
-            />
-          </label>
-          <InputNumber
-            id="units"
-            v-model="slotForm.unit_number"
-            showButtons
-            integeronly
-            locale="en-US"
-            :min="1"
-            :class="{ invalid: invalidSlotQuantity }"
+        <div v-if="!isLoading">
+          <Steps
+            :model="createSlotSteps"
+            v-model:activeStep="createSlotStep"
+            :readonly="true"
           />
-          <small class="p-error" v-if="invalidSlotQuantity"
-            >The quantity is required.</small
-          >
-        </div>
 
-        <div class="field col">
-          <label for="batch" class="field-label">
-            <span>Batch</span>
-            <i
-              class="pi pi-info-circle"
-              v-tooltip.top="'Each batch contains the chosen number of units.'"
-            />
-          </label>
-          <InputNumber
-            id="batch"
-            v-model="slotForm.batch_number"
-            showButtons
-            :disabled="!slotForm.batch_mode"
-            integeronly
-            locale="en-US"
-            :min="1"
-            :class="{ invalid: invalidSlotQuantity }"
-          />
-          <small class="p-error" v-if="invalidSlotQuantity"
-            >The quantity is required.</small
-          >
-        </div>
+          <div class="slots-total">
+            <p>Total Slots: {{ computedSlots }}</p>
+            <p>Stock: {{ slotFormData.stock }}</p>
+            <p>Total Units: {{ computedUnits }}</p>
+            <p>Total Collateral: {{ computedCollateral }}</p>
+            <p>Unit price: {{ computedPrice }}</p>
+          </div>
 
-        <div class="field col">
-          <label for="unitDiscount" class="field-label">
-            <span>Discount</span>
-            <i
-              class="pi pi-info-circle"
-              v-tooltip.top="'Discount per unit in batch mode.'"
-            />
-          </label>
-          <InputNumber
-            id="unitDiscount"
-            v-model="slotForm.unit_discount"
-            showButtons
-            :disabled="!slotForm.batch_mode"
-            integeronly
-            suffix=" %"
-            locale="en-US"
-            :min="0"
-            :class="{ invalid: invalidSlotQuantity }"
-          />
-          <small class="p-error" v-if="invalidSlotQuantity"
-            >The quantity is required.</small
-          >
+          <Fieldset legend="About" :toggleable="true">
+            <span class="about-content">
+              Product slots are similar to sell orders on a DEX. The slot allows
+              a buyer to purchase the unit or a batch of units of a product. It
+              represents availability for immediate purchase and differs from
+              the stock number which represents the internal inventory units.
+            </span>
+          </Fieldset>
+
+          <div class="formgrid grid">
+            <div class="field col">
+              <label for="quantity" class="field-label">
+                <span>Batch Mode</span>
+                <i
+                  class="pi pi-info-circle"
+                  v-tooltip.top="
+                    'In batch mode each slot includes several units. This allows discounts to be applied for the simultaneous purchase of several units.'
+                  "
+                />
+              </label>
+              <InputSwitch v-model="slotForm.batch_mode" />
+            </div>
+
+            <div class="field col">
+              <label for="units" class="field-label">
+                <span>Units</span>
+                <i
+                  class="pi pi-info-circle"
+                  v-tooltip.top="'Number of slots to create.'"
+                />
+              </label>
+              <InputNumber
+                id="units"
+                v-model="slotForm.unit_number"
+                showButtons
+                integeronly
+                locale="en-US"
+                :min="1"
+                :class="{ invalid: invalidSlotQuantity }"
+              />
+              <small class="p-error" v-if="invalidSlotQuantity"
+                >The quantity is required.</small
+              >
+            </div>
+
+            <div class="field col">
+              <label for="batch" class="field-label">
+                <span>Batch</span>
+                <i
+                  class="pi pi-info-circle"
+                  v-tooltip.top="
+                    'Each batch contains the chosen number of units.'
+                  "
+                />
+              </label>
+              <InputNumber
+                id="batch"
+                v-model="slotForm.batch_number"
+                showButtons
+                :disabled="!slotForm.batch_mode"
+                integeronly
+                locale="en-US"
+                :min="1"
+                :class="{ invalid: invalidSlotQuantity }"
+              />
+              <small class="p-error" v-if="invalidSlotQuantity"
+                >The quantity is required.</small
+              >
+            </div>
+
+            <div class="field col">
+              <label for="unitDiscount" class="field-label">
+                <span>Discount</span>
+                <i
+                  class="pi pi-info-circle"
+                  v-tooltip.top="'Discount per unit in batch mode.'"
+                />
+              </label>
+              <InputNumber
+                id="unitDiscount"
+                v-model="slotForm.unit_discount"
+                showButtons
+                :disabled="!slotForm.batch_mode"
+                integeronly
+                suffix=" %"
+                locale="en-US"
+                :min="0"
+                :class="{ invalid: invalidSlotQuantity }"
+              />
+              <small class="p-error" v-if="invalidSlotQuantity"
+                >The quantity is required.</small
+              >
+            </div>
+          </div>
         </div>
       </div>
 
@@ -411,11 +417,15 @@
 
 <script>
 import dashboardAPI from "@/pages/dashboard/api/index";
+import LoadingBars from "@/components/LoadingBars.vue";
 import { FilterMatchMode } from "primevue/api";
 import { HOST } from "@/api/index";
 import { ref } from "vue";
 
 export default {
+  components: {
+    LoadingBars,
+  },
   setup() {
     const { getSlotsData, createProduct } = dashboardAPI();
 
@@ -568,6 +578,7 @@ export default {
     return {
       mediaHostURL: HOST + "/api/media/create-image",
       products: null,
+      isLoading: true,
       createSlotDialog: false,
       slotFormData: this.product,
       deleteProductDialog: false,
@@ -1033,6 +1044,12 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.create-slot-dialog-wrap {
+  height: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .slots-total {
   border: 1px solid transparent;
   border-radius: 4px;

@@ -30,7 +30,7 @@ export default {};
 }
 .bars {
   width: 8px;
-  height: 48px;
+  height: 40px;
   display: inline-block;
   position: relative;
   left: calc(50% - 90px);
