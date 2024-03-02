@@ -73,26 +73,25 @@
     </Dialog>
 
     <Dialog
-      v-model:visible="createSlotDialog"
+      v-model:visible="dialogCreateSlot"
       :style="{ width: '450px' }"
       header="Create slots"
       :modal="true"
       :draggable="false"
-      class="p-fluid"
     >
-      <div class="create-slot-dialog-wrap">
+      <div class="dcs">
         <LoadingBars v-if="isLoading" />
 
-        <div v-if="!isLoading">
+        <div class="dcs-wrap" v-if="!isLoading">
           <Steps
             :model="createSlotSteps"
             v-model:activeStep="createSlotStep"
             :readonly="true"
           />
 
-          <div class="slots-total">
+          <div class="dcs-wrap-total">
             <p>Total Slots: {{ computedSlots }}</p>
-            <p>Stock: {{ slotFormData.stock }}</p>
+            <p>Stock: {{ createSlotData.stock }}</p>
             <p>Total Units: {{ computedUnits }}</p>
             <p>Total Collateral: {{ computedCollateral }}</p>
             <p>Unit price: {{ computedPrice }}</p>
@@ -107,8 +106,8 @@
             </span>
           </Fieldset>
 
-          <div class="formgrid grid">
-            <div class="field col">
+          <div class="dcs-wrap-form">
+            <div class="field">
               <label for="quantity" class="field-label">
                 <span>Batch Mode</span>
                 <i
@@ -118,10 +117,10 @@
                   "
                 />
               </label>
-              <InputSwitch v-model="slotForm.batch_mode" />
+              <InputSwitch v-model="createSlotForm.batch_mode" />
             </div>
 
-            <div class="field col">
+            <div class="field">
               <label for="units" class="field-label">
                 <span>Units</span>
                 <i
@@ -131,7 +130,7 @@
               </label>
               <InputNumber
                 id="units"
-                v-model="slotForm.unit_number"
+                v-model="createSlotForm.unit_number"
                 showButtons
                 integeronly
                 locale="en-US"
@@ -143,7 +142,7 @@
               >
             </div>
 
-            <div class="field col">
+            <div class="field">
               <label for="batch" class="field-label">
                 <span>Batch</span>
                 <i
@@ -155,9 +154,9 @@
               </label>
               <InputNumber
                 id="batch"
-                v-model="slotForm.batch_number"
+                v-model="createSlotForm.batch_number"
                 showButtons
-                :disabled="!slotForm.batch_mode"
+                :disabled="!createSlotForm.batch_mode"
                 integeronly
                 locale="en-US"
                 :min="1"
@@ -168,7 +167,7 @@
               >
             </div>
 
-            <div class="field col">
+            <div class="field">
               <label for="unitDiscount" class="field-label">
                 <span>Discount</span>
                 <i
@@ -178,9 +177,9 @@
               </label>
               <InputNumber
                 id="unitDiscount"
-                v-model="slotForm.unit_discount"
+                v-model="createSlotForm.product_discount"
                 showButtons
-                :disabled="!slotForm.batch_mode"
+                :disabled="!createSlotForm.batch_mode"
                 integeronly
                 suffix=" %"
                 locale="en-US"
@@ -202,7 +201,7 @@
           text
           @click="closeProductDialog"
         />
-        <Button label="Done" icon="pi pi-check" text @click="handleSubmit" />
+        <Button label="Done" icon="pi pi-check" text @click="createSlots" />
       </template>
     </Dialog>
 
@@ -542,17 +541,17 @@ export default {
       },
     ]);
 
-    let slotForm = ref({
+    const createSlotForm = ref({
       wallet_id: "wallet",
-      product_id: "a",
       batch_mode: false,
       unit_number: 1,
       batch_number: 1,
-      unit_discount: 0,
+      product_id: "a",
+      product_discount: 0,
     });
 
     return {
-      slotForm,
+      createSlotForm,
       createSlotSteps,
       createSlotStep,
       openRowMenu,
@@ -581,8 +580,8 @@ export default {
       mediaHostURL: HOST + "/api/media/create-image",
       products: null,
       isLoading: true,
-      createSlotDialog: false,
-      slotFormData: this.product,
+      dialogCreateSlot: false,
+      createSlotData: this.product,
       deleteProductDialog: false,
       deleteProductsDialog: false,
       descriptionLengthLimit: 1000,
@@ -732,38 +731,42 @@ export default {
   },
   computed: {
     computedSlots() {
-      if (!this.slotForm.batch_mode) {
-        return this.slotForm.unit_number;
+      if (!this.createSlotForm.batch_mode) {
+        return this.createSlotForm.unit_number;
       }
 
-      if (this.slotForm.batch_mode) {
-        return this.slotForm.batch_number;
+      if (this.createSlotForm.batch_mode) {
+        return this.createSlotForm.batch_number;
       }
 
       return 0;
     },
 
     computedUnits() {
-      if (!this.slotForm.batch_mode) {
-        return this.slotForm.unit_number;
+      if (!this.createSlotForm.batch_mode) {
+        return this.createSlotForm.unit_number;
       }
 
-      if (this.slotForm.batch_mode) {
-        return this.slotForm.unit_number * this.slotForm.batch_number;
+      if (this.createSlotForm.batch_mode) {
+        return (
+          this.createSlotForm.unit_number * this.createSlotForm.batch_number
+        );
       }
 
       return 0;
     },
 
     computedCollateral() {
-      if (!this.slotForm.batch_mode) {
-        let total = this.slotFormData.collateral * this.slotForm.unit_number;
+      if (!this.createSlotForm.batch_mode) {
+        let total =
+          this.createSlotData.collateral * this.createSlotForm.unit_number;
         return `${total} ADA`;
       }
 
-      if (this.slotForm.batch_mode) {
-        let units = this.slotForm.unit_number * this.slotForm.batch_number;
-        let total = this.slotFormData.collateral * units;
+      if (this.createSlotForm.batch_mode) {
+        let units =
+          this.createSlotForm.unit_number * this.createSlotForm.batch_number;
+        let total = this.createSlotData.collateral * units;
         return `${total} ADA`;
       }
 
@@ -771,15 +774,15 @@ export default {
     },
 
     computedPrice() {
-      if (!this.slotForm.batch_mode) {
-        let total = this.slotFormData.price;
+      if (!this.createSlotForm.batch_mode) {
+        let total = this.createSlotData.price;
         return `${total} ADA`;
       }
 
-      if (this.slotForm.batch_mode) {
-        let originalPrice = this.slotFormData.price;
+      if (this.createSlotForm.batch_mode) {
+        let originalPrice = this.createSlotData.price;
 
-        let discountPercentage = this.slotForm.unit_discount;
+        let discountPercentage = this.createSlotForm.product_discount;
 
         let discountAmount = (originalPrice * discountPercentage) / 100;
 
@@ -846,12 +849,12 @@ export default {
     },
     openProductDialog() {
       this.resetForm();
-      this.createSlotDialog = true;
+      this.dialogCreateSlot = true;
     },
     closeProductDialog() {
-      this.createSlotDialog = false;
+      this.dialogCreateSlot = false;
     },
-    async handleSubmit() {
+    async createSlots() {
       const productForm = [
         (this.invalidProductName = !this.checkProductName(this.product.name)),
         (this.invalidProductDescription = !this.checkProductDescription(
@@ -902,7 +905,7 @@ export default {
           });
 
           this.resetForm();
-          this.createSlotDialog = false;
+          this.dialogCreateSlot = false;
         }
       });
     },
@@ -963,9 +966,9 @@ export default {
       return true;
     },
     createSlot(product) {
-      this.slotFormData = product;
+      this.createSlotData = product;
 
-      this.createSlotDialog = true;
+      this.dialogCreateSlot = true;
     },
 
     confirmDeleteProduct(product) {
@@ -1046,13 +1049,13 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.create-slot-dialog-wrap {
+.dcs {
   height: 700px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.slots-total {
+.dcs-wrap-total {
   border: 1px solid transparent;
   border-radius: 4px;
   padding: 0 1rem;
@@ -1060,11 +1063,11 @@ export default {
   margin: 1rem 0;
 }
 
-.slots-total p {
+.dcs-wrap-total p {
   line-height: 1rem;
 }
 
-.slots-total p:nth-child(1) {
+.dcs-wrap-total p:nth-child(1) {
   font-size: var(--text-size-d);
   font-weight: 600;
 }
