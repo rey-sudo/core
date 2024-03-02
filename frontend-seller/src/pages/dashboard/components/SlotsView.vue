@@ -866,16 +866,19 @@ export default {
       this.dialogCreateSlot = false;
     },
     async createSlots() {
-      const unitNumber = (this.createSlotFormErrors.unit_number =
-        !this.checkProductName(this.createSlotForm.unit_number));
+      this.createSlotFormErrors.unit_number = this.checkUnitNumber(
+        this.createSlotForm.unit_number
+      );
 
-      const batchNumber = (this.createSlotFormErrors.batch_number =
-        !this.checkProductDescription(this.createSlotForm.batch_number));
+      this.createSlotFormErrors.batch_number = this.checkBatchNumber(
+        this.createSlotForm.batch_number
+      );
 
-      const productDiscount = (this.this.createSlotFormErrors.product_discount =
-        !this.checkProductCategory(this.createSlotForm.product_discount));
+      this.createSlotFormErrors.product_discount = this.checkProductDiscount(
+        this.createSlotForm.product_discount
+      );
 
-      if ([unitNumber, batchNumber, productDiscount].includes(true)) {
+      if (Object.values(this.createSlotFormErrors).includes(true)) {
         return;
       }
 
@@ -888,6 +891,8 @@ export default {
         product_discount: this.createSlotForm.product_discount,
       };
 
+      console.log(params);
+      /*
       await this.createSlot(params).then((res) => {
         if (res.response.success === true) {
           this.$toast.add({
@@ -900,22 +905,24 @@ export default {
           this.dialogCreateSlot = false;
         }
       });
+
+      */
     },
-    checkProductName(value) {
+    checkUnitNumber(value) {
       if (!value) return false;
 
       if (value.length > this.nameLengthLimit) return false;
 
       return true;
     },
-    checkProductDescription(value) {
+    checkBatchNumber(value) {
       if (!value) return false;
 
       if (value.length > this.descriptionLengthLimit) return false;
 
       return true;
     },
-    checkProductCategory(value) {
+    checkProductDiscount(value) {
       return !value ? false : true;
     },
     checkProductPrice(value) {
@@ -925,41 +932,9 @@ export default {
 
       return Number.isInteger(value) && value > 0;
     },
-    checkProductCollateral(value) {
-      if (typeof value !== "number") {
-        return false;
-      }
 
-      return Number.isInteger(value) && value > 0;
-    },
-    checkProductStock(value) {
-      if (typeof value !== "number") {
-        return false;
-      }
-
-      return Number.isInteger(value) && value >= 0;
-    },
-    checkProductKeywords(value) {
-      if (!value || value.length < 3) {
-        return false;
-      }
-
-      return true;
-    },
-    checkProductImages(value) {
-      if (!value.length) {
-        return false;
-      }
-
-      if (this.product.image_set.length < this.minProductImages) {
-        return false;
-      }
-
-      return true;
-    },
     createSlot(product) {
       this.createSlotData = product;
-
       this.dialogCreateSlot = true;
     },
 
