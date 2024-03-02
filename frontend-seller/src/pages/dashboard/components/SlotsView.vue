@@ -542,15 +542,23 @@ export default {
     ]);
 
     const createSlotForm = ref({
-      wallet_id: "wallet",
       batch_mode: false,
       unit_number: 1,
       batch_number: 1,
-      product_id: "a",
       product_discount: 0,
     });
 
+    const createSlotFormErrors = ref({
+      wallet_id: false,
+      batch_mode: false,
+      unit_number: false,
+      batch_number: false,
+      product_id: false,
+      product_discount: false,
+    });
+
     return {
+      createSlotFormErrors,
       createSlotForm,
       createSlotSteps,
       createSlotStep,
@@ -730,6 +738,9 @@ export default {
     this.products = this.getSlotsData;
   },
   computed: {
+    computedMode() {
+      return this.createSlotForm.batch_mode ? "batch" : "unit";
+    },
     computedSlots() {
       if (!this.createSlotForm.batch_mode) {
         return this.createSlotForm.unit_number;
@@ -855,56 +866,37 @@ export default {
       this.dialogCreateSlot = false;
     },
     async createSlots() {
-      const productForm = [
-        (this.invalidProductName = !this.checkProductName(this.product.name)),
-        (this.invalidProductDescription = !this.checkProductDescription(
-          this.product.description
-        )),
-        (this.invalidProductCategory = !this.checkProductCategory(
-          this.product.category
-        )),
-        (this.invalidSlotQuantity = !this.checkProductPrice(
-          this.product.price
-        )),
-        (this.invalidProductCollateral = !this.checkProductCollateral(
-          this.product.collateral
-        )),
-        (this.invalidProductStock = !this.checkProductStock(
-          this.product.stock
-        )),
-        (this.invalidProductKeywords = !this.checkProductKeywords(
-          this.product.keywords
-        )),
-        (this.invalidProductImages = !this.checkProductImages(
-          this.product.image_set
-        )),
-      ];
+      const unitNumber = (this.createSlotFormErrors.unit_number =
+        !this.checkProductName(this.createSlotForm.unit_number));
 
-      if (productForm.includes(true)) {
+      const batchNumber = (this.createSlotFormErrors.batch_number =
+        !this.checkProductDescription(this.createSlotForm.batch_number));
+
+      const productDiscount = (this.this.createSlotFormErrors.product_discount =
+        !this.checkProductCategory(this.createSlotForm.product_discount));
+
+      if ([unitNumber, batchNumber, productDiscount].includes(true)) {
         return;
       }
 
       const params = {
-        name: this.product.name,
-        description: this.product.description,
-        category: this.product.category.code,
-        price: this.product.price,
-        collateral: this.product.collateral,
-        stock: this.product.stock,
-        keywords: this.product.keywords.join(","),
-        image_set: this.product.image_set.join(","),
+        wallet_id: "c08b3754a3fc2c4cb063e12295e903d14edc899d",
+        product_id: this.createSlotData.id,
+        mode: this.computedMode,
+        slot_number: this.computedSlots,
+        product_units: this.computedUnits,
+        product_discount: this.createSlotForm.product_discount,
       };
 
-      await this.createProduct(params).then((res) => {
+      await this.createSlot(params).then((res) => {
         if (res.response.success === true) {
           this.$toast.add({
             severity: "success",
             summary: "Successful",
-            detail: "Product Created",
+            detail: "Slots Created",
             life: 3000,
           });
 
-          this.resetForm();
           this.dialogCreateSlot = false;
         }
       });
