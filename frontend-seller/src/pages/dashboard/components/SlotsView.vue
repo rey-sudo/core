@@ -909,21 +909,45 @@ export default {
       */
     },
     checkUnitNumber(value) {
-      if (!value) return false;
+      if (!value) {
+        return true;
+      }
 
-      if (value.length > this.nameLengthLimit) return false;
+      if (typeof value !== "number") {
+        return true;
+      }
+
+      if (value < 1) {
+        return true;
+      }
 
       return true;
     },
     checkBatchNumber(value) {
-      if (!value) return false;
+      if (!value) {
+        return true;
+      }
 
-      if (value.length > this.descriptionLengthLimit) return false;
+      if (typeof value !== "number") {
+        return true;
+      }
+
+      if (value < 1) {
+        return true;
+      }
 
       return true;
     },
     checkProductDiscount(value) {
-      return !value ? false : true;
+      if (value < 0) {
+        return true;
+      }
+
+      if (typeof value !== "number") {
+        return true;
+      }
+
+      return true;
     },
     checkProductPrice(value) {
       if (typeof value !== "number") {
