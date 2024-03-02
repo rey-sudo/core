@@ -86,7 +86,7 @@
         :numVisible="1"
         :numScroll="1"
         orientation="horizontal"
-        verticalViewPortHeight="330px"
+        verticalViewPortHeight="300px"
         contentClass="flex align-items-center"
       >
         <template #item="slotProps">
