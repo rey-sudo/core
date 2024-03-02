@@ -79,17 +79,17 @@
       :modal="true"
       :draggable="false"
     >
-      <div class="dcs">
+      <div class="cs">
         <LoadingBars v-if="isLoading" />
 
-        <div class="dcs-wrap" v-if="!isLoading">
+        <div class="cs-wrap" v-if="!isLoading">
           <Steps
             :model="createSlotSteps"
             v-model:activeStep="createSlotStep"
             :readonly="true"
           />
 
-          <div class="dcs-wrap-total">
+          <div class="cs-wrap-total">
             <p>Total Slots: {{ computedSlots }}</p>
             <p>Stock: {{ createSlotData.stock }}</p>
             <p>Total Units: {{ computedUnits }}</p>
@@ -106,7 +106,7 @@
             </span>
           </Fieldset>
 
-          <div class="dcs-wrap-form">
+          <div class="cs-wrap-form">
             <div class="field">
               <label for="quantity" class="field-label">
                 <span>Batch Mode</span>
@@ -579,7 +579,7 @@ export default {
     return {
       mediaHostURL: HOST + "/api/media/create-image",
       products: null,
-      isLoading: true,
+      isLoading: false,
       dialogCreateSlot: false,
       createSlotData: this.product,
       deleteProductDialog: false,
@@ -1049,13 +1049,13 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.dcs {
-  height: 700px;
+.cs {
+  min-height: 800px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.dcs-wrap-total {
+.cs-wrap-total {
   border: 1px solid transparent;
   border-radius: 4px;
   padding: 0 1rem;
@@ -1063,11 +1063,11 @@ export default {
   margin: 1rem 0;
 }
 
-.dcs-wrap-total p {
+.cs-wrap-total p {
   line-height: 1rem;
 }
 
-.dcs-wrap-total p:nth-child(1) {
+.cs-wrap-total p:nth-child(1) {
   font-size: var(--text-size-d);
   font-weight: 600;
 }

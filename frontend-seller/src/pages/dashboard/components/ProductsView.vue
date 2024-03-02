@@ -22,7 +22,7 @@
 
     <Dialog
       v-model:visible="deleteProductDialog"
-      :style="{ width: '500px' }"
+      :style="{ width: '450px' }"
       header="Confirm"
       :modal="true"
     >
@@ -46,7 +46,7 @@
 
     <Dialog
       v-model:visible="deleteProductsDialog"
-      :style="{ width: '500px' }"
+      :style="{ width: '450px' }"
       header="Confirm"
       :modal="true"
     >
@@ -74,7 +74,7 @@
 
     <Dialog
       v-model:visible="productDialog"
-      :style="{ width: '500px' }"
+      :style="{ width: '450px' }"
       header="Product"
       :modal="true"
       :draggable="false"
@@ -85,8 +85,8 @@
         :value="getImages(product)"
         :numVisible="1"
         :numScroll="1"
-        orientation="vertical"
-        verticalViewPortHeight="340px"
+        orientation="horizontal"
+        verticalViewPortHeight="330px"
         contentClass="flex align-items-center"
       >
         <template #item="slotProps">
@@ -95,8 +95,8 @@
               <Image
                 :src="slotProps.data.image"
                 alt="Image"
-                width="330"
-                height="330"
+                width="300"
+                height="300"
                 preview
               />
             </div>

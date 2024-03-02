@@ -1188,6 +1188,10 @@
   .p-fluid .p-inputgroup .p-button.p-button-icon-only {
     width: 2.357rem;
   }
+  .p-inputnumber{
+    width: 100%;
+  }
+  
   .p-inputnumber.p-invalid.p-component > .p-inputtext {
     border-color: #ced4da #ced4da #ced4da #e4677e;
   }
