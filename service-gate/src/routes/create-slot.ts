@@ -45,7 +45,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
       throw new Error("NOT_STOCK");
     }
 
-    const instance_id = await API.post("/api/contract/activate", cidScheme)
+    const contract_id = await API.post("/api/contract/activate", cidScheme)
       .then((res) => {
         assert.ok(res.data.hasOwnProperty("unContractInstanceId"));
         return res.data.unContractInstanceId;
@@ -62,7 +62,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
       id,
       mode,
       wallet_id,
-      instance_id,
+      contract_id,
       seller_id,
       product_id,
       product_price,
@@ -76,7 +76,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
       "S" + getSlotId(),
       mode,
       params.wallet_id,
-      instance_id,
+      contract_id,
       SELLER.seller_id,
       PRODUCT.id,
       PRODUCT.price,

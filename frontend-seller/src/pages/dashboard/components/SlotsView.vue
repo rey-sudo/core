@@ -543,6 +543,8 @@ export default {
     ]);
 
     let slotForm = ref({
+      wallet_id: "wallet",
+      product_id: "a",
       batch_mode: false,
       unit_number: 1,
       batch_number: 1,
