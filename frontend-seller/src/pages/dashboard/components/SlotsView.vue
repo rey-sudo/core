@@ -177,18 +177,18 @@
               </label>
               <InputNumber
                 id="unitDiscount"
-                v-model="createSlotForm.product_discount"
+                v-model="createSlotForm.unit_discount"
                 showButtons
                 :disabled="!createSlotForm.batch_mode"
                 integeronly
                 suffix=" %"
                 locale="en-US"
                 :min="0"
-                :class="{ invalid: createSlotFormErrors.product_discount }"
+                :class="{ invalid: createSlotFormErrors.unit_discount }"
               />
               <small
                 class="p-error"
-                v-if="createSlotFormErrors.product_discount"
+                v-if="createSlotFormErrors.unit_discount"
                 >The discount is required.</small
               >
             </div>
@@ -547,16 +547,14 @@ export default {
       batch_mode: false,
       unit_number: 1,
       batch_number: 1,
-      product_discount: 0,
+      unit_discount: 0,
     });
 
     const createSlotFormErrors = ref({
-      wallet_id: false,
       batch_mode: false,
       unit_number: false,
       batch_number: false,
-      product_id: false,
-      product_discount: false,
+      unit_discount: false,
     });
 
     return {
@@ -590,7 +588,7 @@ export default {
       mediaHostURL: HOST + "/api/media/create-image",
       products: null,
       isLoading: false,
-      dialogCreateSlot: false, 
+      dialogCreateSlot: false,
       createSlotData: this.product,
       deleteProductDialog: false,
       deleteProductsDialog: false,
@@ -795,7 +793,7 @@ export default {
       if (this.createSlotForm.batch_mode) {
         let originalPrice = this.createSlotData.price;
 
-        let discountPercentage = this.createSlotForm.product_discount;
+        let discountPercentage = this.createSlotForm.unit_discount;
 
         let discountAmount = (originalPrice * discountPercentage) / 100;
 
@@ -876,8 +874,8 @@ export default {
         this.createSlotForm.batch_number
       );
 
-      this.createSlotFormErrors.product_discount = this.checkProductDiscount(
-        this.createSlotForm.product_discount
+      this.createSlotFormErrors.unit_discount = this.checkProductDiscount(
+        this.createSlotForm.unit_discount
       );
 
       if (Object.values(this.createSlotFormErrors).includes(true)) {
@@ -887,15 +885,12 @@ export default {
       const params = {
         wallet_id: "c08b3754a3fc2c4cb063e12295e903d14edc899d",
         product_id: this.createSlotData.id,
-        mode: this.computedMode,
-        slot_number: this.computedSlots,
-        product_units: this.computedUnits,
-        product_discount: this.createSlotForm.product_discount,
+        ...this.createSlotForm,
       };
 
       console.log(this.createSlotFormErrors);
 
-      console.log(this.createSlotData);
+      console.log(this.createSlotForm);
 
       console.log(params);
       /*

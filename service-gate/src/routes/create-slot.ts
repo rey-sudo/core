@@ -8,6 +8,13 @@ import { sellerMiddleware } from "../utils/seller";
 import { requireAuth } from "../utils/required";
 import { _ } from "../utils/pino";
 
+interface slotScheme {
+  mode: string;
+  iterations: number;
+  units: number;
+  discount: number;
+}
+
 const createSlotMiddlewares: any = [sellerMiddleware, requireAuth];
 
 /**HANDLER: creates a contract instance*/
@@ -24,6 +31,27 @@ const createSlotHandler = async (req: Request, res: Response) => {
   };
 
   let connection: any = null;
+
+  let slotScheme: slotScheme = {
+    mode: "unit",
+    iterations: 0,
+    units: 0,
+    discount: 0,
+  };
+
+  if (params.batch_mode === true) {
+    slotScheme.mode = "batch";
+    slotScheme.iterations = params.batch_number;
+    slotScheme.units = params.unit_number;
+    slotScheme.discount = params.product_discount;
+  }
+
+  if (params.batch_mode === false) {
+    slotScheme.mode = "unit";
+    slotScheme.iterations = params.unit_number;
+    slotScheme.units = 1;
+    slotScheme.discount = 0;
+  }
 
   try {
     connection = await DB.client.getConnection();
@@ -54,9 +82,6 @@ const createSlotHandler = async (req: Request, res: Response) => {
         throw new Error("CID_FAILED");
       });
 
-    const product_units = 0;
-    const mode = "unit";
-
     const schemeData = `
     INSERT INTO slots (
       id,
@@ -74,15 +99,15 @@ const createSlotHandler = async (req: Request, res: Response) => {
 
     const schemeValue = [
       "S" + getSlotId(),
-      mode,
+      slotScheme.mode,
       params.wallet_id,
       contract_id,
       SELLER.seller_id,
       PRODUCT.id,
       PRODUCT.price,
       PRODUCT.collateral,
-      params.product_discount,
-      product_units,
+      slotScheme.discount,
+      slotScheme.units,
       0,
     ];
 
