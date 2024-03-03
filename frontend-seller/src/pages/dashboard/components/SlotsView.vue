@@ -135,11 +135,11 @@
                 integeronly
                 locale="en-US"
                 :min="1"
-                :class="{ invalid: invalidSlotQuantity }"
+                :class="{ invalid: createSlotFormErrors.unit_number }"
               />
-              <small class="p-error" v-if="invalidSlotQuantity"
-                >The quantity is required.</small
-              >
+              <small class="p-error" v-if="createSlotFormErrors.unit_number">
+                The unit is required and greater than 0.
+              </small>
             </div>
 
             <div class="field">
@@ -160,11 +160,11 @@
                 integeronly
                 locale="en-US"
                 :min="1"
-                :class="{ invalid: invalidSlotQuantity }"
+                :class="{ invalid: createSlotFormErrors.batch_number }"
               />
-              <small class="p-error" v-if="invalidSlotQuantity"
-                >The quantity is required.</small
-              >
+              <small class="p-error" v-if="createSlotFormErrors.batch_number">
+                The batch must be greater than 0.
+              </small>
             </div>
 
             <div class="field">
@@ -184,10 +184,12 @@
                 suffix=" %"
                 locale="en-US"
                 :min="0"
-                :class="{ invalid: invalidSlotQuantity }"
+                :class="{ invalid: createSlotFormErrors.product_discount }"
               />
-              <small class="p-error" v-if="invalidSlotQuantity"
-                >The quantity is required.</small
+              <small
+                class="p-error"
+                v-if="createSlotFormErrors.product_discount"
+                >The discount is required.</small
               >
             </div>
           </div>
@@ -588,7 +590,7 @@ export default {
       mediaHostURL: HOST + "/api/media/create-image",
       products: null,
       isLoading: false,
-      dialogCreateSlot: false,
+      dialogCreateSlot: true,
       createSlotData: this.product,
       deleteProductDialog: false,
       deleteProductsDialog: false,
@@ -1051,7 +1053,7 @@ export default {
   border-radius: 4px;
   padding: 0 1rem;
   color: var(--text-a);
-  margin: 1rem 0;
+  margin: 2rem 0;
 }
 
 .cs-wrap-total p {
