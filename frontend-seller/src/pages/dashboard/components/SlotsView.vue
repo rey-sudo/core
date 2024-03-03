@@ -893,7 +893,8 @@ export default {
         product_discount: this.createSlotForm.product_discount,
       };
 
-      console.log(params);
+      console.log(this.createSlotFormErrors);
+
       /*
       await this.createSlot(params).then((res) => {
         if (res.response.success === true) {
@@ -923,7 +924,7 @@ export default {
         return true;
       }
 
-      return true;
+      return false;
     },
     checkBatchNumber(value) {
       if (!value) {
@@ -938,7 +939,7 @@ export default {
         return true;
       }
 
-      return true;
+      return false;
     },
     checkProductDiscount(value) {
       if (value < 0) {
@@ -949,16 +950,8 @@ export default {
         return true;
       }
 
-      return true;
+      return false;
     },
-    checkProductPrice(value) {
-      if (typeof value !== "number") {
-        return false;
-      }
-
-      return Number.isInteger(value) && value > 0;
-    },
-
     createSlot(product) {
       this.createSlotData = product;
       this.dialogCreateSlot = true;
@@ -1053,7 +1046,7 @@ export default {
   border-radius: 4px;
   padding: 0 1rem;
   color: var(--text-a);
-  margin: 2rem 0;
+  margin: 1rem 0;
 }
 
 .cs-wrap-total p {
