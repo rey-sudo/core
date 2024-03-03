@@ -590,7 +590,7 @@ export default {
       mediaHostURL: HOST + "/api/media/create-image",
       products: null,
       isLoading: false,
-      dialogCreateSlot: true,
+      dialogCreateSlot: false, 
       createSlotData: this.product,
       deleteProductDialog: false,
       deleteProductsDialog: false,
@@ -895,6 +895,9 @@ export default {
 
       console.log(this.createSlotFormErrors);
 
+      console.log(this.createSlotData);
+
+      console.log(params);
       /*
       await this.createSlot(params).then((res) => {
         if (res.response.success === true) {
