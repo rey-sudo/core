@@ -3,7 +3,7 @@ import { _ } from "./pino";
 import jwt from "jsonwebtoken";
 
 interface SellerToken {
-  seller_id: string;
+  id: string;
   role: string;
   email: string;
   avatar: string;

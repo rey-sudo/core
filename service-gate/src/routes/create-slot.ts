@@ -61,7 +61,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
 
     const [products] = await connection.execute(
       "SELECT * FROM products WHERE id = ? AND seller_id = ?",
-      [params.product_id, SELLER.seller_id]
+      [params.product_id, SELLER.id]
     );
 
     if (products.length === 0) {
@@ -106,7 +106,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
         slotScheme.mode,
         params.wallet_id,
         contract_id,
-        SELLER.seller_id,
+        SELLER.id,
         PRODUCT.id,
         PRODUCT.price,
         PRODUCT.collateral,
@@ -123,7 +123,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
 
     await connection.commit();
 
-    sendEvent(SELLER.seller_id, "slot:created");
+    sendEvent(SELLER.id, "slot:created");
 
     res.status(200).send({ success: true });
   } catch (err: any) {

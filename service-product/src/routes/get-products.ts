@@ -20,7 +20,7 @@ const getProductsHandler = async (req: Request, res: Response) => {
 
     const [response] = await connection.execute(
       "SELECT * FROM products WHERE seller_id = ?",
-      [SELLER.seller_id]
+      [SELLER.id]
     );
 
     await connection.commit();

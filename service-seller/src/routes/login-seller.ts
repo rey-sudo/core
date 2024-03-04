@@ -41,7 +41,7 @@ const loginSellerHandler = async (req: Request, res: Response) => {
     }
 
     const sellerData: SellerToken = {
-      seller_id: SELLER.seller_id,
+      id: SELLER.id,
       role: "SELLER",
       email: SELLER.email,
       avatar: SELLER.avatar_base + SELLER.avatar_path,

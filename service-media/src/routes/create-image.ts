@@ -44,7 +44,7 @@ const createImageHandler = async (req: Request, res: Response) => {
 
       const schemeValue = [
         imageId,
-        SELLER.seller_id,
+        SELLER.id,
         "image",
         item.mimetype,
         item.buffer,

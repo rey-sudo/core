@@ -29,7 +29,7 @@ const createSellerHandler = async (req: Request, res: Response) => {
 
     const schemeData = `
     INSERT INTO seller (
-      seller_id,
+      id,
       username,
       email,
       password_hash,

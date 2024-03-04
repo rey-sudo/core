@@ -36,7 +36,7 @@ const getSlotsHandler = async (req: Request, res: Response) => {
       GROUP BY 
         p.id;      
       `,
-      [SELLER.seller_id]
+      [SELLER.id]
     );
 
     await connection.commit();

@@ -24,8 +24,8 @@ const getEventsHandler = async (req: Request, res: Response) => {
   try {
     const SELLER = req.sellerData;
 
-    if (clients.hasOwnProperty(SELLER.seller_id)) {
-      delete clients[SELLER.seller_id];
+    if (clients.hasOwnProperty(SELLER.id)) {
+      delete clients[SELLER.id];
     }
 
     res.setHeader("Content-Type", "text/event-stream");
@@ -34,7 +34,7 @@ const getEventsHandler = async (req: Request, res: Response) => {
 
     const response = {
       type: "connected",
-      client: SELLER.seller_id,
+      client: SELLER.id,
       payload: "",
     };
 
@@ -45,11 +45,11 @@ const getEventsHandler = async (req: Request, res: Response) => {
       res.write("data: {}\n\n");
     }, 29000);
 
-    clients[SELLER.seller_id] = res;
+    clients[SELLER.id] = res;
 
     req.on("close", () => {
       res.end();
-      delete clients[SELLER.seller_id];
+      delete clients[SELLER.id];
       clearInterval(sendPing);
     });
   } catch (err) {
