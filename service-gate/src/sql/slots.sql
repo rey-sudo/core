@@ -4,6 +4,7 @@ create table if not exists slots(
   id varchar(20) not null,
   mode varchar(20) not null,
   status varchar(20) default "created",
+  deployed boolean default false,
   wallet_id varchar(100) not null,
   contract_id varchar(100) not null,
   contract_state varchar(20) default null,
