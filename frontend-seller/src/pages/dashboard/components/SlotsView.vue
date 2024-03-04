@@ -99,7 +99,7 @@
           />
 
           <div class="cs-wrap-total">
-            <p>Total Slots: {{ computedSlots }}</p>
+            <p>Total Slots {{ computedSlots }}</p>
             <p>Stock: {{ createSlotData.stock }}</p>
             <p>Total Units: {{ computedUnits }}</p>
             <p>Total Collateral: {{ computedCollateral }}</p>
@@ -201,7 +201,7 @@
           text
           @click="closeProductDialog"
         />
-        <Button label="Done" icon="pi pi-check" text @click="createSlots" />
+        <Button label="Ok" icon="pi pi-check" text @click="createSlots" />
       </template>
     </Dialog>
 
@@ -894,8 +894,6 @@ export default {
       await this.createSlot(params)
         .then((res) => {
           if (res.response.success === true) {
-            this.dialogCreateSlot = false;
-
             this.$toast.add({
               severity: "success",
               summary: "Successful",
@@ -903,10 +901,13 @@ export default {
               life: 3000,
             });
 
-            this.slotDialogVisible = true;
+            this.dialogCreateSlot = false;
 
             this.slotDialogData = this.createSlotData;
+
+            this.slotDialogVisible = true;
           }
+
           if (res.response.success === false) {
             this.$toast.add({
               severity: "error",
@@ -968,6 +969,7 @@ export default {
 
       return false;
     },
+
     handleSubmit(product) {
       this.createSlotData = product;
       this.dialogCreateSlot = true;
