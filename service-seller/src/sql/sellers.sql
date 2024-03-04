@@ -1,4 +1,7 @@
-create table if not exists seller(
+CREATE DATABASE service_seller;
+
+
+create table if not exists sellers(
   id varchar(20) not null,
   username varchar(50) not null,
   email varchar(100) not null,

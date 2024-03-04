@@ -28,7 +28,7 @@ const createSellerHandler = async (req: Request, res: Response) => {
     const password = await hashPassword(params.password);
 
     const schemeData = `
-    INSERT INTO seller (
+    INSERT INTO sellers (
       id,
       username,
       email,

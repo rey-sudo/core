@@ -19,7 +19,7 @@ const loginSellerHandler = async (req: Request, res: Response) => {
     connection = await DB.client.getConnection();
 
     const [rows] = await connection.execute(
-      "SELECT * FROM seller WHERE email = ?",
+      "SELECT * FROM sellers WHERE email = ?",
       [params.email]
     );
 
