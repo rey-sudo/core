@@ -903,9 +903,9 @@ export default {
               life: 3000,
             });
 
-            this.slotDialogData = this.createSlotData;
-
             this.slotDialogVisible = true;
+
+            this.slotDialogData = this.createSlotData;
           }
           if (res.response.success === false) {
             this.$toast.add({
