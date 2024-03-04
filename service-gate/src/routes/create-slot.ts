@@ -7,6 +7,7 @@ import { getSlotId } from "../utils/nano";
 import { sellerMiddleware } from "../utils/seller";
 import { requireAuth } from "../utils/required";
 import { _ } from "../utils/pino";
+import { sendEvent } from "./get-events";
 
 interface slotScheme {
   mode: string;
@@ -121,6 +122,8 @@ const createSlotHandler = async (req: Request, res: Response) => {
     console.log("/////////////////////");
 
     await connection.commit();
+
+    sendEvent(SELLER.seller_id, "slot:created");
 
     res.status(200).send({ success: true });
   } catch (err: any) {

@@ -71,6 +71,15 @@ const main = async () => {
       route.getSlotsHandler
     );
 
+
+    app.get(
+      "/api/gate/get-events",
+
+      route.getEventsMiddlewares,
+
+      route.getEventsHandler
+    );
+
     app.all("*", (_req, _res) => {
       throw new NotFoundError();
     });

@@ -4,8 +4,9 @@ import { Request, Response } from "express";
 import { getProductId } from "../utils/nano";
 import { sellerMiddleware } from "../utils/seller";
 import { requireAuth } from "../utils/required";
-import { getStockStatus, sendEvent } from "../utils/other";
+import { getStockStatus } from "../utils/other";
 import { _ } from "../utils/pino";
+import { sendEvent } from "./get-events";
 
 
 const createProductMiddlewares: any = [sellerMiddleware, requireAuth];
@@ -66,6 +67,7 @@ const createProductHandler = async (req: Request, res: Response) => {
     await connection.commit();
 
     sendEvent(SELLER.seller_id, "product:created");
+    
 
     res.status(200).send({ success: true });
   } catch (err) {
