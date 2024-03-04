@@ -62,10 +62,17 @@ export default {
     updateData.products();
     updateData.slots();
 
-    document.addEventListener("globalMessage", (event) => {
+    document.addEventListener("productEvents", (event) => {
       console.log(event.detail.data.type);
       if (event.detail.data.type === "product:created") {
         updateData.products();
+      }
+    });
+
+    document.addEventListener("gateEvents", (event) => {
+      console.log(event.detail.data.type);
+      if (event.detail.data.type === "slot:created") {
+        updateData.slots();
       }
     });
 

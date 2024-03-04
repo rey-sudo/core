@@ -83,6 +83,15 @@
         <LoadingBars v-if="isLoading" />
 
         <div class="cs-wrap" v-if="!isLoading">
+          <Fieldset legend="About" :toggleable="true">
+            <span class="about-content">
+              Product slots are similar to sell orders on a DEX. The slot allows
+              a buyer to purchase the unit or a batch of units of a product. It
+              represents availability for immediate purchase and differs from
+              the stock number which represents the internal inventory units.
+            </span>
+          </Fieldset>
+
           <Steps
             :model="createSlotSteps"
             v-model:activeStep="createSlotStep"
@@ -96,15 +105,6 @@
             <p>Total Collateral: {{ computedCollateral }}</p>
             <p>Unit price: {{ computedPrice }}</p>
           </div>
-
-          <Fieldset legend="About" :toggleable="true" collapsed>
-            <span class="about-content">
-              Product slots are similar to sell orders on a DEX. The slot allows
-              a buyer to purchase the unit or a batch of units of a product. It
-              represents availability for immediate purchase and differs from
-              the stock number which represents the internal inventory units.
-            </span>
-          </Fieldset>
 
           <div class="cs-wrap-form">
             <div class="field">
@@ -232,7 +232,7 @@
         />
       </template>
     </Dialog>
-
+    <Toast />
     <!--DIALOG SECTION-->
 
     <!---CONTENT-->
@@ -887,24 +887,41 @@ export default {
         ...this.createSlotForm,
       };
 
-      console.log(this.createSlotFormErrors);
-
-      console.log(this.createSlotForm);
-
       console.log(params);
 
-      await this.createSlot(params).then((res) => {
-        if (res.response.success === true) {
-          this.dialogCreateSlot = false;
+      this.isLoading = true;
 
+      await this.createSlot(params)
+        .then((res) => {
+          if (res.response.success === true) {
+            this.dialogCreateSlot = false;
+
+            this.$toast.add({
+              severity: "success",
+              summary: "Successful",
+              detail: "Slots Created",
+              life: 3000,
+            });
+          }
+          if (res.response.success === false) {
+            this.$toast.add({
+              severity: "error",
+              summary: "Error Message",
+              detail: "Please try again later.",
+              life: 3000,
+            });
+          }
+        })
+        .catch((err) => {
+          console.error(err);
           this.$toast.add({
-            severity: "success",
-            summary: "Successful",
-            detail: "Slots Created",
+            severity: "error",
+            summary: "Error Message",
+            detail: "Please try again later.",
             life: 3000,
           });
-        }
-      });
+        })
+        .finally(() => (this.isLoading = false));
     },
     checkUnitNumber(value) {
       if (!value) {
@@ -1031,9 +1048,10 @@ export default {
 
 <style lang="css" scoped>
 .cs {
-  min-height: 800px;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
 }
 
 .cs-wrap {
@@ -1044,7 +1062,6 @@ export default {
   border: 1px solid transparent;
   border-radius: 4px;
   color: var(--text-a);
-  padding: 0 1rem;
   margin: 1rem 0;
 }
 
@@ -1053,7 +1070,7 @@ export default {
 }
 
 .cs-wrap-total p:nth-child(1) {
-  font-size: var(--text-size-d);
+  font-size: var(--text-size-e);
   font-weight: 600;
 }
 

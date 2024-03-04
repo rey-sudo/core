@@ -2,22 +2,48 @@ import { HOST } from "@/api";
 
 const eventMachine = {
   setup: () => {
-    const eventSource = new EventSource(HOST + "/api/product/get-events", {
+    const productEvents = new EventSource(HOST + "/api/product/get-events", {
       withCredentials: true,
     });
 
-    eventSource.onopen = function () {
+    productEvents.onopen = function () {
       console.log("SSE connection opened.");
     };
 
-    eventSource.onerror = function (error) {
+    productEvents.onerror = function (error) {
       console.error("SSE connection error:", error);
     };
 
-    eventSource.onmessage = function (event) {
+    productEvents.onmessage = function (event) {
       const datum = JSON.parse(event.data);
 
-      const sendEvent = new CustomEvent("globalMessage", {
+      const sendEvent = new CustomEvent("productEvents", {
+        detail: {
+          data: datum,
+        },
+      });
+
+      document.dispatchEvent(sendEvent);
+    };
+
+    /////
+
+    const gateEvents = new EventSource(HOST + "/api/gate/get-events", {
+      withCredentials: true,
+    });
+
+    gateEvents.onopen = function () {
+      console.log("SSE connection opened.");
+    };
+
+    gateEvents.onerror = function (error) {
+      console.error("SSE connection error:", error);
+    };
+
+    gateEvents.onmessage = function (event) {
+      const datum = JSON.parse(event.data);
+
+      const sendEvent = new CustomEvent("gateEvents", {
         detail: {
           data: datum,
         },
