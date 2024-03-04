@@ -213,7 +213,7 @@
       modal
       :draggable="false"
       style="padding: 1rem"
-      :contentStyle="{ height: '450px' }"
+      :contentStyle="{ height: '550px' }"
     >
       <DataTable
         :value="slotDialogData.slots"
@@ -396,7 +396,7 @@
                   outlined
                   rounded
                   v-tooltip.top="'Enable a slot'"
-                  @click="createSlot(slotProps.data)"
+                  @click="handleSubmit(slotProps.data)"
                 />
                 <Button
                   class="table-button"
@@ -426,7 +426,7 @@ export default {
     LoadingBars,
   },
   setup() {
-    const { getSlotsData, createProduct } = dashboardAPI();
+    const { getSlotsData, createProduct, createSlot } = dashboardAPI();
 
     let product = ref({
       id: null,
@@ -560,6 +560,7 @@ export default {
       createSlotForm,
       createSlotSteps,
       createSlotStep,
+      createSlot,
       openRowMenu,
       product,
       rowMenuRef,
@@ -891,21 +892,19 @@ export default {
       console.log(this.createSlotForm);
 
       console.log(params);
-      /*
+
       await this.createSlot(params).then((res) => {
         if (res.response.success === true) {
+          this.dialogCreateSlot = false;
+
           this.$toast.add({
             severity: "success",
             summary: "Successful",
             detail: "Slots Created",
             life: 3000,
           });
-
-          this.dialogCreateSlot = false;
         }
       });
-
-      */
     },
     checkUnitNumber(value) {
       if (!value) {
@@ -948,7 +947,7 @@ export default {
 
       return false;
     },
-    createSlot(product) {
+    handleSubmit(product) {
       this.createSlotData = product;
       this.dialogCreateSlot = true;
     },

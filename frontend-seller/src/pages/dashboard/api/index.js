@@ -10,6 +10,9 @@ const dashboardAPI = () => {
   const createProduct = async (params) =>
     await store.dispatch("dashboard/createProduct", params);
 
+  const createSlot = async (params) =>
+    await store.dispatch("dashboard/createSlot", params);
+
   const getProducts = async (params) =>
     await store.dispatch("dashboard/getProducts", params);
 
@@ -25,6 +28,7 @@ const dashboardAPI = () => {
     fetchProductData,
     createProduct,
     getProducts,
+    createSlot,
     getSlots,
     sleep,
   };

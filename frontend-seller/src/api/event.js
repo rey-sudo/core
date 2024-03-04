@@ -2,9 +2,9 @@ import { HOST } from "@/api";
 
 const eventMachine = {
   setup: () => {
-    const SSEurl = HOST + "/api/product/get-events";
-
-    const eventSource = new EventSource(SSEurl, { withCredentials: true });
+    const eventSource = new EventSource(HOST + "/api/product/get-events", {
+      withCredentials: true,
+    });
 
     eventSource.onopen = function () {
       console.log("SSE connection opened.");
