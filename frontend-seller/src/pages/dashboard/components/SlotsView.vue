@@ -1050,8 +1050,9 @@ export default {
 .cs {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
   flex-direction: column;
+  min-height: 700px;
+  align-items: center;
 }
 
 .cs-wrap {
@@ -1062,7 +1063,8 @@ export default {
   border: 1px solid transparent;
   border-radius: 4px;
   color: var(--text-a);
-  margin: 1rem 0;
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 
 .cs-wrap-total p {
