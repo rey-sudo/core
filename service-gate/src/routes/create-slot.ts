@@ -90,8 +90,6 @@ const createSlotHandler = async (req: Request, res: Response) => {
      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     for (let i = 0; i < slotScheme.iterations; i++) {
-      console.log(i, slotScheme.iterations);
-
       const contract_id = await API.post("/api/contract/activate", cidScheme)
         .then((res) => {
           assert.ok(res.data.hasOwnProperty("unContractInstanceId"));
@@ -118,8 +116,6 @@ const createSlotHandler = async (req: Request, res: Response) => {
       console.log(schemeValue);
       await connection.execute(schemeData, schemeValue);
     }
-
-    console.log("/////////////////////");
 
     await connection.commit();
 

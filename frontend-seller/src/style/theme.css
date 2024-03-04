@@ -4013,7 +4013,7 @@
   }
   .p-fieldset {
     border: 1px solid #dee2e6;
-    background: var(--base-b);
+    background: var(--base-a);
     color: var(--text-a);
     border-radius: 4px;
     font-size: var(--text-size-b);

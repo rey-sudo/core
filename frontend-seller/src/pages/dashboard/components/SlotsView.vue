@@ -1045,6 +1045,7 @@ export default {
   border: 1px solid transparent;
   border-radius: 4px;
   color: var(--text-a);
+  padding: 0 1rem;
   margin: 1rem 0;
 }
 
