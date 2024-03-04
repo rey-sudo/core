@@ -97,7 +97,7 @@
             <p>Unit price: {{ computedPrice }}</p>
           </div>
 
-          <Fieldset legend="About" :toggleable="true">
+          <Fieldset legend="About" :toggleable="true" collapsed>
             <span class="about-content">
               Product slots are similar to sell orders on a DEX. The slot allows
               a buyer to purchase the unit or a batch of units of a product. It
@@ -1044,7 +1044,6 @@ export default {
 .cs-wrap-total {
   border: 1px solid transparent;
   border-radius: 4px;
-  padding: 0 1rem;
   color: var(--text-a);
   margin: 1rem 0;
 }
