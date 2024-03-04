@@ -902,6 +902,10 @@ export default {
               detail: "Slots Created",
               life: 3000,
             });
+
+            this.slotDialogData = this.createSlotData;
+
+            this.slotDialogVisible = true;
           }
           if (res.response.success === false) {
             this.$toast.add({
