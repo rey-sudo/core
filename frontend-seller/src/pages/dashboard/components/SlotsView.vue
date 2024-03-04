@@ -1063,7 +1063,7 @@ export default {
   border: 1px solid transparent;
   border-radius: 4px;
   color: var(--text-a);
-  margin-top: 0;
+  margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
