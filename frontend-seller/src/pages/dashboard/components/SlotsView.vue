@@ -186,9 +186,7 @@
                 :min="0"
                 :class="{ invalid: createSlotFormErrors.unit_discount }"
               />
-              <small
-                class="p-error"
-                v-if="createSlotFormErrors.unit_discount"
+              <small class="p-error" v-if="createSlotFormErrors.unit_discount"
                 >The discount is required.</small
               >
             </div>
@@ -1037,8 +1035,12 @@ export default {
   min-height: 800px;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
+
+.cs-wrap {
+  width: 100%;
+}
+
 .cs-wrap-total {
   border: 1px solid transparent;
   border-radius: 4px;
