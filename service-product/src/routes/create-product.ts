@@ -45,7 +45,7 @@ const createProductHandler = async (req: Request, res: Response) => {
 
     const schemeValue = [
       "P" + getProductId(),
-      SELLER.seller_id,
+      SELLER.id,
       params.name,
       params.description,
       params.category,
@@ -66,7 +66,7 @@ const createProductHandler = async (req: Request, res: Response) => {
 
     await connection.commit();
 
-    sendEvent(SELLER.seller_id, "product:created");
+    sendEvent(SELLER.id, "product:created");
     
 
     res.status(200).send({ success: true });
