@@ -23,7 +23,15 @@ const getSlotsHandler = async (req: Request, res: Response) => {
         JSON_ARRAYAGG(
             JSON_OBJECT(
                 'id', s.id,
-                'status', s.status
+                'mode', s.mode,
+                'status', s.status,
+                'deployed', s.deployed,
+                'contract_state', s.contract_state,
+                'product_price', s.product_price,
+                'product_collateral', s.product_collateral,
+                'product_discount', s.product_discount,
+                'product_units', s.product_units,
+                'product_net', s.product_net
             )
         ) AS slots,
         COUNT(s.id) AS slots_count

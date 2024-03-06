@@ -22,6 +22,7 @@ create table if not exists slots(
   product_collateral int unsigned not null,
   product_discount int unsigned not null,
   product_units int unsigned not null,
+  product_net int unsigned not null,
   created_at timestamp default current_timestamp,
   schema_t timestamp default current_timestamp,
   schema_v int unsigned not null,

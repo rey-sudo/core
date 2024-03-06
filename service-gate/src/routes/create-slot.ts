@@ -8,6 +8,7 @@ import { sellerMiddleware } from "../utils/seller";
 import { requireAuth } from "../utils/required";
 import { _ } from "../utils/pino";
 import { sendEvent } from "./get-events";
+import { getNetPrice } from "../utils/other";
 
 interface slotScheme {
   mode: string;
@@ -86,8 +87,9 @@ const createSlotHandler = async (req: Request, res: Response) => {
       product_collateral,
       product_discount,
       product_units,
+      product_net,
       schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     for (let i = 0; i < slotScheme.iterations; i++) {
       const contract_id = await API.post("/api/contract/activate", cidScheme)
@@ -110,6 +112,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
         PRODUCT.collateral,
         slotScheme.discount,
         slotScheme.units,
+        getNetPrice(PRODUCT.price, slotScheme.discount),
         0,
       ];
 
