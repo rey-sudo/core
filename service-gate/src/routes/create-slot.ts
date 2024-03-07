@@ -45,7 +45,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
     slotScheme.mode = "batch";
     slotScheme.iterations = params.batch_number;
     slotScheme.units = params.unit_number;
-    slotScheme.discount = params.product_discount;
+    slotScheme.discount = params.unit_discount;
   }
 
   if (params.batch_mode === false) {
@@ -54,6 +54,9 @@ const createSlotHandler = async (req: Request, res: Response) => {
     slotScheme.units = 1;
     slotScheme.discount = 0;
   }
+  console.log(params);
+  
+  console.log(slotScheme);
 
   try {
     connection = await DB.client.getConnection();
