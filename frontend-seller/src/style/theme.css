@@ -2777,7 +2777,7 @@
     padding: 1rem 1rem;
     color: var(--text-a);
     border-width: 0 0 1px 0;
-    font-weight: 700;
+    font-weight: 600;
     font-size: var(--text-size-b);
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
@@ -2842,6 +2842,7 @@
     border-width: 0 0 1px 0;
     padding: 1rem;
     font-size: var(--text-size-b);
+    text-transform: capitalize;
   }
   .p-datatable .p-datatable-tbody > tr > td .p-row-toggler,
   .p-datatable .p-datatable-tbody > tr > td .p-row-editor-init,
@@ -4310,8 +4311,8 @@
     background: #ffffff;
     color: var(--text-a);
     padding: 1rem;
-    border-top-right-radius: 16px;
-    border-top-left-radius: 16px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
   }
   .p-dialog .p-dialog-header .p-dialog-title {
     font-weight: 700;
@@ -4373,8 +4374,8 @@
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
-    border-bottom-right-radius: 16px;
-    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
   }
   .p-dialog.p-confirm-dialog .p-confirm-dialog-icon {
     font-size: 2rem;
@@ -6671,7 +6672,7 @@
   }
   .p-progressbar {
     border: 0 none;
-    height: 6px;
+    height: 4px;
     background: #dee2e6;
     border-radius: 8px;
   }

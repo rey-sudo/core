@@ -208,32 +208,54 @@
     <Dialog
       v-model:visible="slotDialogVisible"
       header="Product slots"
-      :style="{ width: '75vw' }"
+      :style="{ width: '80vw' }"
       maximizable
       modal
       :draggable="false"
-      style="padding: 1rem"
-      :contentStyle="{ height: '550px' }"
+      :contentStyle="{ height: '80vw' }"
     >
       <DataTable
         :value="slotDialogData.slots"
+        stripedRows
         scrollable
         scrollHeight="flex"
         tableStyle="min-width: 50rem"
       >
-        <Column field="id" header="ID" style="max-width: 5rem"></Column>
-        <Column field="mode" header="Type"></Column>
+        <Column field="created_at" header="Date" style="max-width: 5rem">
+          <template #body="slotProps">
+            {{ formatDate(slotProps.data.created_at) }}
+          </template>
+        </Column>
 
+        <Column field="mode" header="Mode"></Column>
         <Column field="status" header="Status" style="max-width: 5rem"></Column>
         <Column field="contract_price" header="Price"></Column>
         <Column field="contract_units" header="Units"></Column>
-        <Column field="contract_collateral" header="Collateral"></Column>
+        <Column
+          field="contract_collateral"
+          header="Collateral"
+          style="max-width: 5rem"
+        ></Column>
 
-        <Column field="contract_state" header="State">
+        <Column field="actived" header="Active" style="max-width: 5rem">
           <template #body="slotProps">
-            <ProgressBar :value="20" :showValue="false">
-              {{ slotProps.contract_state || 0 }}/5
-            </ProgressBar>
+            <InputSwitch v-model="slotProps.data.actived" />
+          </template>
+        </Column>
+
+        <Column field="contract_state" header="State" style="min-width: 7rem">
+          <template #body="slotProps">
+            <div class="column-block">
+              <div class="column-block-label">
+                {{ slotProps.data.contract_stage }}
+              </div>
+              <ProgressBar
+                :value="progressBar(slotProps.data.contract_state)"
+                :showValue="false"
+              >
+                {{ slotProps.contract_state || 0 }}/5
+              </ProgressBar>
+            </div>
           </template>
         </Column>
       </DataTable>
@@ -818,6 +840,9 @@ export default {
     },
   },
   methods: {
+    progressBar(e) {
+      return e * 20;
+    },
     openSlotsDialog(e) {
       this.slotDialogVisible = true;
       this.slotDialogData = e;
@@ -839,10 +864,11 @@ export default {
       }
     },
     formatDate(e) {
-      const date = new Date(e);
-      const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1)
-        .toString()
-        .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
+      const mysqlDateString = e;
+
+      const formattedDate = mysqlDateString.split(".")[0];
+
+      console.log(formattedDate);
 
       return formattedDate;
     },
@@ -1066,6 +1092,15 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.column-block {
+  display: block;
+}
+
+.column-block div:nth-child(1) {
+  line-height: 3rem;
+  font-weight: 400;
+  font-size: var(--text-size-b);
+}
 .cs {
   display: flex;
   justify-content: center;

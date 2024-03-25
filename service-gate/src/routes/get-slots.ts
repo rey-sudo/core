@@ -25,14 +25,16 @@ const getSlotsHandler = async (req: Request, res: Response) => {
                 'id', s.id,
                 'mode', s.mode,
                 'status', s.status,
-                'deployed', s.deployed,
+                'actived', s.actived,
                 'contract_units', s.contract_units,
                 'contract_price', s.contract_price,
                 'contract_collateral', s.contract_collateral,
+                'contract_stage', s.contract_stage,
                 'contract_state', s.contract_state,
                 'product_price', s.product_price,
                 'product_collateral', s.product_collateral,
-                'product_discount', s.product_discount              
+                'product_discount', s.product_discount,
+                'created_at', s.created_at              
             )
         ) AS slots,
         COUNT(s.id) AS slots_count

@@ -4,7 +4,7 @@ create table if not exists slots(
   id varchar(20) not null,
   mode varchar(20) not null,
   status varchar(20) default "created",
-  deployed boolean default false,
+  actived boolean default false,
   seller_id varchar(20) not null,
   seller_pubkeyhash varchar(100) default null,
   buyer_id varchar(20) default null,
@@ -14,7 +14,8 @@ create table if not exists slots(
   contract_units int unsigned not null,
   contract_price int unsigned not null,
   contract_collateral int unsigned not null,
-  contract_state varchar(20) default null,
+  contract_stage varchar(20) default "inactive",
+  contract_state int unsigned default 0,
   contract_state_0 mediumtext default null,
   contract_state_1 mediumtext default null,
   contract_state_2 mediumtext default null,
@@ -31,5 +32,3 @@ create table if not exists slots(
   primary key(id),
   unique (contract_id)
 ) ENGINE = InnoDB;
-
-
