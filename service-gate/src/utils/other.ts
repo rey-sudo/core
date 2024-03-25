@@ -3,26 +3,44 @@ function stringToTimestamp(date: string) {
 }
 
 function getContractPrice(
+  mode: string,
   productPrice: number,
-  discountPercent: number,
+  productDiscount: number,
   productUnits: number
 ): number {
-  let discountMount = productPrice * (discountPercent / 100);
+  if (mode === "unit") {
+    return productPrice;
+  }
 
-  let discountPrice = productPrice - discountMount;
+  if (mode === "batch") {
+    let discountMount = productPrice * (productDiscount / 100);
 
-  let totalPrice = discountPrice * productUnits;
+    let discountPrice = productPrice - discountMount;
 
-  return Math.floor(totalPrice);
+    let totalPrice = discountPrice * productUnits;
+
+    return Math.floor(totalPrice);
+  }
+
+  return 0;
 }
 
 function getContractCollateral(
+  mode: string,
   productCollateral: number,
   productUnits: number
 ): number {
-  let totalCollateral = productCollateral * productUnits;
+  if (mode === "unit") {
+    return productCollateral
+  }
 
-  return Math.floor(totalCollateral);
+  if (mode === "batch") {
+    let totalCollateral = productCollateral * productUnits;
+
+    return Math.floor(totalCollateral);
+  }
+
+  return 0;
 }
 
 export { stringToTimestamp, getContractPrice, getContractCollateral };

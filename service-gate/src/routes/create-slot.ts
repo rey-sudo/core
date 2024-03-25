@@ -13,8 +13,10 @@ import { _ } from "../utils/pino";
 interface createScheme {
   mode: string;
   iterations: number;
-  units: number;
-  discount: number;
+  iteration_units: number;
+  iteration_price: number;
+  iteration_collateral: number;
+  product_discount: number;
 }
 
 const createSlotMiddlewares: any = [sellerMiddleware, requireAuth];
@@ -35,28 +37,13 @@ const createSlotHandler = async (req: Request, res: Response) => {
   let connection: any = null;
 
   let createScheme: createScheme = {
-    mode: "unit",
+    mode: "",
     iterations: 0,
-    units: 0,
-    discount: 0,
+    iteration_units: 0,
+    iteration_price: 0,
+    iteration_collateral: 0,
+    product_discount: 0,
   };
-
-  if (params.batch_mode === true) {
-    createScheme.mode = "batch";
-    createScheme.iterations = params.batch_number;
-    createScheme.units = params.unit_number;
-    createScheme.discount = params.unit_discount;
-  }
-
-  if (params.batch_mode === false) {
-    createScheme.mode = "unit";
-    createScheme.iterations = params.unit_number;
-    createScheme.units = 1;
-    createScheme.discount = 0;
-  }
-  console.log(params);
-
-  console.log(createScheme);
 
   try {
     connection = await DB.client.getConnection();
@@ -77,11 +64,42 @@ const createSlotHandler = async (req: Request, res: Response) => {
     if (PRODUCT.stock < 1) {
       throw new Error("NOT_STOCK");
     }
-
-    if (PRODUCT.stock < createScheme.units) {
-      throw new Error("NOT_STOCK");
+    ///////////////////////////////
+    if (params.batch_mode === true) {
+      createScheme.mode = "batch";
+      createScheme.iterations = params.batch_number;
+      createScheme.iteration_units = params.product_units;
+      createScheme.iteration_price = getContractPrice(
+        "batch",
+        PRODUCT.price,
+        params.product_discount,
+        params.product_units
+      );
+      createScheme.iteration_collateral = getContractCollateral(
+        "batch",
+        PRODUCT.collateral,
+        params.product_units
+      );
+      createScheme.product_discount = params.product_discount;
     }
 
+    if (params.batch_mode === false) {
+      createScheme.mode = "unit";
+      createScheme.iterations = params.product_units;
+      createScheme.iteration_units = 1;
+      createScheme.iteration_price = getContractPrice(
+        "unit",
+        PRODUCT.price,
+        params.product_discount,
+        params.product_units
+      );
+      createScheme.iteration_collateral = PRODUCT.collateral;
+      createScheme.product_discount = 0;
+    }
+    
+    console.log(createScheme);
+
+    ///////////////////////////////
     const schemeData = `
     INSERT INTO slots (
       id,
@@ -89,18 +107,19 @@ const createSlotHandler = async (req: Request, res: Response) => {
       seller_id,
       contract_id,
       contract_wid,
+      contract_units,
       contract_price,
       contract_collateral,
       product_id,
       product_price,
       product_discount,
-      product_units,
       schema_v
      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-
     //////////////////////////
 
-    for (let i = 0; i < createScheme.iterations; i++) {
+    for (let acc = 0; acc < createScheme.iterations; acc++) {
+      const id = "S" + getSlotId();
+
       const contract_id = await API.post("/api/contract/activate", cidScheme)
         .then((res) => {
           assert.ok(res.data.hasOwnProperty("unContractInstanceId"));
@@ -111,21 +130,17 @@ const createSlotHandler = async (req: Request, res: Response) => {
         });
 
       const schemeValue = [
-        "S" + getSlotId(),
+        id,
         createScheme.mode,
         SELLER.id,
         contract_id,
         params.wallet_id,
-        getContractPrice(
-          PRODUCT.price,
-          createScheme.discount,
-          createScheme.units
-        ),
-        getContractCollateral(PRODUCT.collateral, createScheme.units),
+        createScheme.iteration_units,
+        createScheme.iteration_price,
+        createScheme.iteration_collateral,
         PRODUCT.id,
         PRODUCT.price,
-        createScheme.discount,
-        createScheme.units,
+        createScheme.product_discount,
         0,
       ];
 

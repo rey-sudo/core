@@ -11,6 +11,7 @@ create table if not exists slots(
   buyer_pubkeyhash varchar(100) default null,
   contract_id varchar(100) not null,
   contract_wid varchar(100) not null,
+  contract_units int unsigned not null,
   contract_price int unsigned not null,
   contract_collateral int unsigned not null,
   contract_state varchar(20) default null,
