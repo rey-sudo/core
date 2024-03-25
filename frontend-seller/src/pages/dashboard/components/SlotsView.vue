@@ -74,7 +74,7 @@
 
     <Dialog
       v-model:visible="dialogCreateSlot"
-      :style="{ width: '450px' }"
+      :style="{ width: '500px' }"
       header="Create slots"
       :modal="true"
       :draggable="false"
@@ -119,7 +119,7 @@
                 showButtons
                 integeronly
                 locale="en-US"
-                :min="1"
+                :min="0"
                 :class="{ invalid: createSlotFormErrors.product_units }"
               />
               <small class="p-error" v-if="createSlotFormErrors.product_units">
@@ -144,7 +144,7 @@
                 :disabled="!createSlotForm.batch_mode"
                 integeronly
                 locale="en-US"
-                :min="1"
+                :min="0"
                 :class="{ invalid: createSlotFormErrors.batch_number }"
               />
               <small class="p-error" v-if="createSlotFormErrors.batch_number">
@@ -188,13 +188,8 @@
       </div>
 
       <template #footer>
-        <Button
-          label="Cancel"
-          icon="pi pi-times"
-          text
-          @click="closeProductDialog"
-        />
-        <Button label="Create" icon="pi pi-check" text @click="createSlots" />
+        <Button label="Cancel" text @click="closeProductDialog" />
+        <Button label="Create" text @click="createSlots" />
       </template>
     </Dialog>
 
@@ -240,7 +235,7 @@
 
         <Column field="contract_units" header="Units"></Column>
 
-        <Column field="actived" header="Active" style="max-width: 5rem">
+        <Column field="actived" header="Actived" style="max-width: 5rem">
           <template #body="slotProps">
             <InputSwitch v-model="slotProps.data.actived" />
           </template>
@@ -912,6 +907,7 @@ export default {
       );
 
       this.createSlotFormErrors.batch_number = this.checkBatchNumber(
+        this.createSlotForm.batch_mode,
         this.createSlotForm.batch_number
       );
 
@@ -985,17 +981,19 @@ export default {
 
       return false;
     },
-    checkBatchNumber(value) {
-      if (!value) {
-        return true;
-      }
+    checkBatchNumber(batchMode, value) {
+      if (batchMode === true) {
+        if (!value) {
+          return true;
+        }
 
-      if (typeof value !== "number") {
-        return true;
-      }
+        if (typeof value !== "number") {
+          return true;
+        }
 
-      if (value < 1) {
-        return true;
+        if (value < 1) {
+          return true;
+        }
       }
 
       return false;
@@ -1112,7 +1110,6 @@ export default {
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  min-height: 700px;
   align-items: center;
 }
 
