@@ -74,7 +74,7 @@
 
     <Dialog
       v-model:visible="dialogCreateSlot"
-      :style="{ width: '500px' }"
+      :style="{ width: '450px' }"
       header="Create slots"
       :modal="true"
       :draggable="false"
@@ -1131,6 +1131,7 @@ export default {
 
 .cs-wrap-total p:nth-child(1) {
   font-size: var(--text-size-e);
+  color: var(--blue-c);
   font-weight: 600;
 }
 
