@@ -53,7 +53,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
     iteration_units: 0,
     iteration_price: 0,
     iteration_collateral: 0,
-    product_discount: 0,
+    product_discount: 0
   };
 
   try {
@@ -126,9 +126,10 @@ const createSlotHandler = async (req: Request, res: Response) => {
       contract_collateral,
       product_id,
       product_price,
+      product_collateral,
       product_discount,
       schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     for (let acc = 0; acc < createScheme.iterations; acc++) {
       const id = "S" + getSlotId();
@@ -153,6 +154,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
         createScheme.iteration_collateral,
         PRODUCT.id,
         PRODUCT.price,
+        PRODUCT.collateral,
         createScheme.product_discount,
         0,
       ];
