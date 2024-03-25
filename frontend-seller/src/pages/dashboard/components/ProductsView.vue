@@ -74,7 +74,7 @@
 
     <Dialog
       v-model:visible="productDialog"
-      :style="{ width: '450px' }"
+      :style="{ width: '500px' }"
       header="Product"
       :modal="true"
       :draggable="false"

@@ -169,6 +169,7 @@
                 suffix=" % OFF"
                 locale="en-US"
                 :min="0"
+                :max="100"
                 :class="{ invalid: createSlotFormErrors.product_discount }"
               />
               <small
@@ -209,15 +210,39 @@
         scrollHeight="flex"
         tableStyle="min-width: 50rem"
       >
-        <Column field="created_at" header="Date" style="max-width: 5rem">
+        <Column
+          field="created_at"
+          header="Date"
+          style="max-width: 5rem"
+          sortable
+        >
           <template #body="slotProps">
             {{ formatDate(slotProps.data.created_at) }}
           </template>
         </Column>
 
-        <Column field="mode" header="Mode"></Column>
-        <Column field="status" header="Status" style="max-width: 5rem"></Column>
-        <Column field="contract_price" header="Price">
+        <Column
+          field="mode"
+          header="Mode"
+          sortable
+          style="max-width: 5rem"
+        ></Column>
+
+        <Column
+          field="status"
+          header="Status"
+          style="max-width: 5rem"
+          sortable
+        ></Column>
+
+        <Column
+          field="contract_units"
+          header="Units"
+          sortable
+          style="max-width: 5rem"
+        ></Column>
+
+        <Column field="contract_price" header="Price" sortable>
           <template #body="slotProps">
             {{ formatCurrency(slotProps.data.contract_price) }}
           </template>
@@ -227,21 +252,30 @@
           field="contract_collateral"
           header="Collateral"
           style="max-width: 5rem"
+          sortable
         >
           <template #body="slotProps">
             {{ formatCurrency(slotProps.data.contract_collateral) }}
           </template>
         </Column>
 
-        <Column field="contract_units" header="Units"></Column>
-
-        <Column field="actived" header="Actived" style="max-width: 5rem">
+        <Column
+          field="actived"
+          header="Actived"
+          style="max-width: 5rem"
+          sortable
+        >
           <template #body="slotProps">
             <InputSwitch v-model="slotProps.data.actived" />
           </template>
         </Column>
 
-        <Column field="contract_state" header="State" style="min-width: 7rem">
+        <Column
+          field="contract_state"
+          header="State"
+          style="min-width: 7rem"
+          sortable
+        >
           <template #body="slotProps">
             <div class="column-block">
               <div class="column-block-label">
@@ -250,18 +284,36 @@
               <ProgressBar
                 :value="progressBar(slotProps.data.contract_state)"
                 :showValue="false"
-              >
-                {{ slotProps.contract_state || 0 }}/5
-              </ProgressBar>
+              />
+            </div>
+          </template>
+        </Column>
+
+        <Column :exportable="false">
+          <template #body="">
+            <div class="table-buttons">
+              <Button
+                class="table-button"
+                type="button"
+                icon="pi pi-ellipsis-h"
+                outlined
+                rounded
+                aria-haspopup="true"
+                aria-controls="slot_overlay_menu"
+                @click="slotopenRowMenu"
+              />
+              <Menu
+                ref="slotrowMenuRef"
+                id="slot_overlay_menu"
+                :model="slotrowMenu"
+                :popup="true"
+              />
             </div>
           </template>
         </Column>
       </DataTable>
       <template #footer>
-        <Button
-          label="Done"
-          @click="slotDialogVisible = false"
-        />
+        <Button label="Done" @click="slotDialogVisible = false" />
       </template>
     </Dialog>
     <Toast />
@@ -548,11 +600,11 @@ export default {
         items: [
           {
             label: "Refresh",
-            icon: "pi pi-refresh",
+            icon: "",
           },
           {
             label: "Export",
-            icon: "pi pi-upload",
+            icon: "",
           },
         ],
       },
@@ -569,7 +621,7 @@ export default {
         label: "Create",
       },
       {
-        label: "Deploy",
+        label: "Active",
       },
     ]);
 
