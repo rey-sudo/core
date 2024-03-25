@@ -82,11 +82,11 @@ const createSlotHandler = async (req: Request, res: Response) => {
     INSERT INTO slots (
       id,
       mode,
-      wallet_id,
+      seller_id,
       contract_id,
+      contract_wallet,
       contract_price,
       contract_collateral,
-      seller_id,
       product_id,
       product_price,
       product_discount,
