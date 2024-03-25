@@ -1111,6 +1111,7 @@ export default {
   justify-content: flex-start;
   flex-direction: column;
   align-items: center;
+  min-height: 685px;
 }
 
 .cs-wrap {
@@ -1131,8 +1132,7 @@ export default {
 
 .cs-wrap-total p:nth-child(1) {
   font-size: var(--text-size-e);
-  color: var(--blue-c);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .product-image-main {
