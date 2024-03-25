@@ -84,13 +84,13 @@ const createSlotHandler = async (req: Request, res: Response) => {
       mode,
       wallet_id,
       contract_id,
+      contract_price,
+      contract_collateral,
       seller_id,
       product_id,
       product_price,
-      product_collateral,
       product_discount,
       product_units,
-      product_net,
       schema_v
      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
