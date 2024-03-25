@@ -83,6 +83,12 @@
         <LoadingBars v-if="isLoading" />
 
         <div class="cs-wrap" v-if="!isLoading">
+          <Steps
+            :model="createSlotSteps"
+            v-model:activeStep="createSlotStep"
+            :readonly="true"
+          />
+
           <Fieldset legend="About" :toggleable="true">
             <span class="about-content">
               Product slots are similar to sell orders on a DEX. The slot allows
@@ -92,14 +98,8 @@
             </span>
           </Fieldset>
 
-          <Steps
-            :model="createSlotSteps"
-            v-model:activeStep="createSlotStep"
-            :readonly="true"
-          />
-
           <div class="cs-wrap-total">
-            <p>Total Slots {{ computedSlots }}</p>
+            <p>Create Slots {{ computedSlots }}</p>
             <p>Stock: {{ createSlotData.stock }}</p>
             <p>Total Units: {{ computedUnits }}</p>
             <p>Total Collateral: {{ computedCollateral }}</p>
@@ -201,7 +201,7 @@
           text
           @click="closeProductDialog"
         />
-        <Button label="Ok" icon="pi pi-check" text @click="createSlots" />
+        <Button label="Create" icon="pi pi-check" text @click="createSlots" />
       </template>
     </Dialog>
 
