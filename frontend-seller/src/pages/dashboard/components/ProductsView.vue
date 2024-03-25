@@ -707,7 +707,7 @@ export default {
       }
     },
     formatCurrency(value) {
-      if (value) return "ADA " + value;
+      if (value) return value + " ADA";
     },
     newProduct() {
       this.resetForm();

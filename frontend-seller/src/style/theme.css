@@ -1188,10 +1188,10 @@
   .p-fluid .p-inputgroup .p-button.p-button-icon-only {
     width: 2.357rem;
   }
-  .p-inputnumber{
+  .p-inputnumber {
     width: 100%;
   }
-  
+
   .p-inputnumber.p-invalid.p-component > .p-inputtext {
     border-color: #ced4da #ced4da #ced4da #e4677e;
   }
@@ -2775,6 +2775,7 @@
   .p-datatable .p-datatable-thead > tr > th {
     text-align: left;
     padding: 1rem 1rem;
+    color: var(--text-a);
     border-width: 0 0 1px 0;
     font-weight: 700;
     font-size: var(--text-size-b);
@@ -6670,18 +6671,20 @@
   }
   .p-progressbar {
     border: 0 none;
-    height: 1.5rem;
+    height: 6px;
     background: #dee2e6;
-    border-radius: 3px;
+    border-radius: 8px;
   }
   .p-progressbar .p-progressbar-value {
     border: 0 none;
     margin: 0;
-    background: #2196f3;
+    background: var(--green-a);
   }
   .p-progressbar .p-progressbar-label {
-    color: #ffffff;
+    color: var(--text-w);
     line-height: 1.5rem;
+    font-size: var(--text-size-a);
+    font-weight: 500;
   }
   .p-progress-spinner-svg {
     animation: p-progress-spinner-rotate 2s linear infinite;

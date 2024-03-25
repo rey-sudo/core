@@ -21,7 +21,7 @@ interface createScheme {
   product_discount: number;
 }
 
-interface contractScheme {
+interface instanceScheme {
   caID: string;
   caWallet: {
     getWalletId: string;
@@ -38,7 +38,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
 
   const SELLER = req.sellerData;
 
-  const cidScheme: contractScheme = {
+  const instanceScheme: instanceScheme = {
     caID: "SlaveContract",
     caWallet: {
       getWalletId: params.wallet_id,
@@ -53,7 +53,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
     iteration_units: 0,
     iteration_price: 0,
     iteration_collateral: 0,
-    product_discount: 0
+    product_discount: 0,
   };
 
   try {
@@ -134,7 +134,10 @@ const createSlotHandler = async (req: Request, res: Response) => {
     for (let acc = 0; acc < createScheme.iterations; acc++) {
       const id = "S" + getSlotId();
 
-      const contract_id = await API.post("/api/contract/activate", cidScheme)
+      const contract_id = await API.post(
+        "/api/contract/activate",
+        instanceScheme
+      )
         .then((res) => {
           assert.ok(res.data.hasOwnProperty("unContractInstanceId"));
           return res.data.unContractInstanceId;

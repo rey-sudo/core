@@ -221,8 +221,21 @@
         scrollHeight="flex"
         tableStyle="min-width: 50rem"
       >
-        <Column field="id" header="ID"></Column>
-        <Column field="status" header="Country"></Column>
+        <Column field="id" header="ID" style="max-width: 5rem"></Column>
+        <Column field="mode" header="Type"></Column>
+
+        <Column field="status" header="Status" style="max-width: 5rem"></Column>
+        <Column field="contract_price" header="Price"></Column>
+        <Column field="contract_units" header="Units"></Column>
+        <Column field="contract_collateral" header="Collateral"></Column>
+
+        <Column field="contract_state" header="State">
+          <template #body="slotProps">
+            <ProgressBar :value="20" :showValue="false">
+              {{ slotProps.contract_state || 0 }}/5
+            </ProgressBar>
+          </template>
+        </Column>
       </DataTable>
       <template #footer>
         <Button
@@ -855,7 +868,7 @@ export default {
       }
     },
     formatCurrency(value) {
-      if (value) return "ADA " + value;
+      if (value) return value + " ADA";
     },
     openProductDialog() {
       this.resetForm();
