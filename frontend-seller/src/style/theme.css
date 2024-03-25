@@ -5893,7 +5893,7 @@
     color: #ffffff;
   }
   .p-steps .p-steps-item.p-highlight .p-steps-title {
-    font-weight: 600;
+    font-weight: 500;
     color: var(--text-a);
     font-size: var(--text-size-b);
   }

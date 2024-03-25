@@ -259,8 +259,7 @@
       </DataTable>
       <template #footer>
         <Button
-          label="Ok"
-          icon="pi pi-check"
+          label="Done"
           @click="slotDialogVisible = false"
         />
       </template>
@@ -1108,7 +1107,7 @@ export default {
 }
 .cs {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
   min-height: 685px;
