@@ -10,6 +10,8 @@ import { sendEvent } from "./get-events";
 import { getContractCollateral, getContractPrice } from "../utils/other";
 import { _ } from "../utils/pino";
 
+///////////////////////////////////////////////
+
 interface createScheme {
   mode: string;
   iterations: number;
@@ -19,6 +21,15 @@ interface createScheme {
   product_discount: number;
 }
 
+interface contractScheme {
+  caID: string;
+  caWallet: {
+    getWalletId: string;
+  };
+}
+
+///////////////////////////////////////////////
+
 const createSlotMiddlewares: any = [sellerMiddleware, requireAuth];
 
 /**HANDLER: creates slots*/
@@ -27,7 +38,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
 
   const SELLER = req.sellerData;
 
-  const cidScheme = {
+  const cidScheme: contractScheme = {
     caID: "SlaveContract",
     caWallet: {
       getWalletId: params.wallet_id,
@@ -64,7 +75,9 @@ const createSlotHandler = async (req: Request, res: Response) => {
     if (PRODUCT.stock < 1) {
       throw new Error("NOT_STOCK");
     }
+
     ///////////////////////////////
+
     if (params.batch_mode === true) {
       createScheme.mode = "batch";
       createScheme.iterations = params.batch_number;
@@ -96,10 +109,11 @@ const createSlotHandler = async (req: Request, res: Response) => {
       createScheme.iteration_collateral = PRODUCT.collateral;
       createScheme.product_discount = 0;
     }
-    
+
     console.log(createScheme);
 
     ///////////////////////////////
+
     const schemeData = `
     INSERT INTO slots (
       id,
@@ -115,7 +129,6 @@ const createSlotHandler = async (req: Request, res: Response) => {
       product_discount,
       schema_v
      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-    //////////////////////////
 
     for (let acc = 0; acc < createScheme.iterations; acc++) {
       const id = "S" + getSlotId();
