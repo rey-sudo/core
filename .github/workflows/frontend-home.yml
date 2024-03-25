@@ -23,6 +23,6 @@ jobs:
       - uses: digitalocean/action-doctl@v2.3.0
         with:
           token: ${{ secrets.OCEAN_API_TOKEN }}
-      - run: doctl kubernetes cluster kubeconfig save k8arka
+      - run: doctl kubernetes cluster kubeconfig save k8pairfy
       - run: kubectl rollout restart deployment frontend-home
 

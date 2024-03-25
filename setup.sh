@@ -1,18 +1,25 @@
-doctl auth init --access-token dop_v1_132ac040845d213404a36f2f211f3d355fc68dad5261ead3a42f11d1ce7f4367
+#!/bin/sh
 
-#cd ~
+WORKDIR=$(pwd)
 
-#wget https://github.com/digitalocean/doctl/releases/download/v1.98.1/doctl-1.98.1-linux-amd64.tar.gz
+sh z/kafka/kafka.sh
 
-doctl kubernetes cluster kubeconfig save 83ffbc45-db61-4dcf-94b2-501994cb7c2c
+cd plugin-debezium
 
-kubectl config set-context do-nyc1-k8arka
-kubectl config use-context do-nyc1-k8arka
+sh ./setup.sh
 
+cd $WORKDIR
 
+sh z/ingress/setup.sh
 
+# Prompt for input
+read response
 
-
-
-
-#kubectl get nodes -o wide      docker internal ip
+# Check the response
+if [[ $response == "yes" || $response == "Yes" || $response == "YES" ]]; then
+    echo "You chose to continue."
+elif [[ $response == "no" || $response == "No" || $response == "NO" ]]; then
+    echo "You chose to cancel."
+else
+    echo "Invalid input. Please enter 'yes' or 'no'."
+fi
