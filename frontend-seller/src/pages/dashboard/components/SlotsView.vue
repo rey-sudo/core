@@ -83,29 +83,6 @@
         <LoadingBars v-if="isLoading" />
 
         <div class="cs-wrap" v-if="!isLoading">
-          <Steps
-            :model="createSlotSteps"
-            v-model:activeStep="createSlotStep"
-            :readonly="true"
-          />
-
-          <Fieldset legend="About" :toggleable="true">
-            <span class="about-content">
-              Product slots are similar to sell orders on a DEX. The slot allows
-              a buyer to purchase the unit or a batch of units of a product. It
-              represents availability for immediate purchase and differs from
-              the stock number which represents the internal inventory units.
-            </span>
-          </Fieldset>
-
-          <div class="cs-wrap-total">
-            <p>Create Slots {{ computedSlots }}</p>
-            <p>Stock: {{ createSlotData.stock }}</p>
-            <p>Total Units: {{ computedUnits }}</p>
-            <p>Total Collateral: {{ computedCollateral }}</p>
-            <p>Unit price: {{ computedPrice }}</p>
-          </div>
-
           <div class="cs-wrap-form">
             <div class="field">
               <label for="quantity" class="field-label">
@@ -113,11 +90,19 @@
                 <i
                   class="pi pi-info-circle"
                   v-tooltip.top="
-                    'In batch mode each slot includes several units. This allows discounts to be applied for the simultaneous purchase of several units.'
+                    'Allows to add discounts for the purchase of multiple units.'
                   "
                 />
               </label>
               <InputSwitch v-model="createSlotForm.batch_mode" />
+            </div>
+
+            <div class="cs-wrap-total">
+              <p>Total slots {{ computedSlots }}</p>
+              <p>Stock: {{ createSlotData.stock }}</p>
+              <p>Total Units: {{ computedUnits }}</p>
+              <p>Total Collateral: {{ computedCollateral }}</p>
+              <p>Unit Price: {{ computedPrice }}</p>
             </div>
 
             <div class="field">
@@ -130,14 +115,14 @@
               </label>
               <InputNumber
                 id="units"
-                v-model="createSlotForm.unit_number"
+                v-model="createSlotForm.product_units"
                 showButtons
                 integeronly
                 locale="en-US"
                 :min="1"
-                :class="{ invalid: createSlotFormErrors.unit_number }"
+                :class="{ invalid: createSlotFormErrors.product_units }"
               />
-              <small class="p-error" v-if="createSlotFormErrors.unit_number">
+              <small class="p-error" v-if="createSlotFormErrors.product_units">
                 The unit is required and greater than 0.
               </small>
             </div>
@@ -177,20 +162,28 @@
               </label>
               <InputNumber
                 id="unitDiscount"
-                v-model="createSlotForm.unit_discount"
+                v-model="createSlotForm.product_discount"
                 showButtons
                 :disabled="!createSlotForm.batch_mode"
                 integeronly
-                suffix=" %"
+                suffix=" % OFF"
                 locale="en-US"
                 :min="0"
-                :class="{ invalid: createSlotFormErrors.unit_discount }"
+                :class="{ invalid: createSlotFormErrors.product_discount }"
               />
-              <small class="p-error" v-if="createSlotFormErrors.unit_discount"
+              <small
+                class="p-error"
+                v-if="createSlotFormErrors.product_discount"
                 >The discount is required.</small
               >
             </div>
           </div>
+
+          <Steps
+            :model="createSlotSteps"
+            v-model:activeStep="createSlotStep"
+            :readonly="true"
+          />
         </div>
       </div>
 
@@ -229,13 +222,23 @@
 
         <Column field="mode" header="Mode"></Column>
         <Column field="status" header="Status" style="max-width: 5rem"></Column>
-        <Column field="contract_price" header="Price"></Column>
-        <Column field="contract_units" header="Units"></Column>
+        <Column field="contract_price" header="Price">
+          <template #body="slotProps">
+            {{ formatCurrency(slotProps.data.contract_price) }}
+          </template>
+        </Column>
+
         <Column
           field="contract_collateral"
           header="Collateral"
           style="max-width: 5rem"
-        ></Column>
+        >
+          <template #body="slotProps">
+            {{ formatCurrency(slotProps.data.contract_collateral) }}
+          </template>
+        </Column>
+
+        <Column field="contract_units" header="Units"></Column>
 
         <Column field="actived" header="Active" style="max-width: 5rem">
           <template #body="slotProps">
@@ -578,16 +581,16 @@ export default {
 
     const createSlotForm = ref({
       batch_mode: false,
-      unit_number: 1,
-      batch_number: 1,
-      unit_discount: 0,
+      product_units: 0,
+      batch_number: 0,
+      product_discount: 0,
     });
 
     const createSlotFormErrors = ref({
       batch_mode: false,
-      unit_number: false,
+      product_units: false,
       batch_number: false,
-      unit_discount: false,
+      product_discount: false,
     });
 
     return {
@@ -777,7 +780,7 @@ export default {
     },
     computedSlots() {
       if (!this.createSlotForm.batch_mode) {
-        return this.createSlotForm.unit_number;
+        return this.createSlotForm.product_units;
       }
 
       if (this.createSlotForm.batch_mode) {
@@ -789,12 +792,12 @@ export default {
 
     computedUnits() {
       if (!this.createSlotForm.batch_mode) {
-        return this.createSlotForm.unit_number;
+        return this.createSlotForm.product_units;
       }
 
       if (this.createSlotForm.batch_mode) {
         return (
-          this.createSlotForm.unit_number * this.createSlotForm.batch_number
+          this.createSlotForm.product_units * this.createSlotForm.batch_number
         );
       }
 
@@ -804,13 +807,13 @@ export default {
     computedCollateral() {
       if (!this.createSlotForm.batch_mode) {
         let total =
-          this.createSlotData.collateral * this.createSlotForm.unit_number;
+          this.createSlotData.collateral * this.createSlotForm.product_units;
         return `${total} ADA`;
       }
 
       if (this.createSlotForm.batch_mode) {
         let units =
-          this.createSlotForm.unit_number * this.createSlotForm.batch_number;
+          this.createSlotForm.product_units * this.createSlotForm.batch_number;
         let total = this.createSlotData.collateral * units;
         return `${total} ADA`;
       }
@@ -827,7 +830,7 @@ export default {
       if (this.createSlotForm.batch_mode) {
         let originalPrice = this.createSlotData.price;
 
-        let discountPercentage = this.createSlotForm.unit_discount;
+        let discountPercentage = this.createSlotForm.product_discount;
 
         let discountAmount = (originalPrice * discountPercentage) / 100;
 
@@ -904,16 +907,16 @@ export default {
       this.dialogCreateSlot = false;
     },
     async createSlots() {
-      this.createSlotFormErrors.unit_number = this.checkUnitNumber(
-        this.createSlotForm.unit_number
+      this.createSlotFormErrors.product_units = this.checkUnitNumber(
+        this.createSlotForm.product_units
       );
 
       this.createSlotFormErrors.batch_number = this.checkBatchNumber(
         this.createSlotForm.batch_number
       );
 
-      this.createSlotFormErrors.unit_discount = this.checkProductDiscount(
-        this.createSlotForm.unit_discount
+      this.createSlotFormErrors.product_discount = this.checkProductDiscount(
+        this.createSlotForm.product_discount
       );
 
       if (Object.values(this.createSlotFormErrors).includes(true)) {
@@ -1092,6 +1095,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.cs-wrap-form {
+  margin-bottom: 2rem;
+}
+
 .column-block {
   display: block;
 }
@@ -1103,7 +1110,7 @@ export default {
 }
 .cs {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   min-height: 700px;
   align-items: center;
@@ -1117,7 +1124,7 @@ export default {
   border: 1px solid transparent;
   border-radius: 4px;
   color: var(--text-a);
-  margin-top: 1rem;
+  margin-top: 0rem;
   margin-bottom: 1rem;
 }
 

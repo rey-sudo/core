@@ -1199,7 +1199,7 @@
     .p-inputnumber-button-group
     .p-button.p-inputnumber-button {
     border: 1px solid #ced4da;
-    color: var(--text-a);
+    color: var(--text-b);
   }
   .p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-up {
     border-bottom: 1px solid var(--border-a) !important;
@@ -4311,8 +4311,8 @@
     background: #ffffff;
     color: var(--text-a);
     padding: 1rem;
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
   }
   .p-dialog .p-dialog-header .p-dialog-title {
     font-weight: 700;
@@ -4374,8 +4374,8 @@
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
-    border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
   }
   .p-dialog.p-confirm-dialog .p-confirm-dialog-icon {
     font-size: 2rem;
