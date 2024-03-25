@@ -10,7 +10,7 @@ create table if not exists slots(
   buyer_id varchar(20) default null,
   buyer_pubkeyhash varchar(100) default null,
   contract_id varchar(100) not null,
-  contract_wallet varchar(100) not null,
+  contract_wid varchar(100) not null,
   contract_price int unsigned not null,
   contract_collateral int unsigned not null,
   contract_state varchar(20) default null,
@@ -30,3 +30,5 @@ create table if not exists slots(
   primary key(id),
   unique (contract_id)
 ) ENGINE = InnoDB;
+
+

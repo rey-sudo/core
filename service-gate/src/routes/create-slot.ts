@@ -6,11 +6,11 @@ import { Request, Response } from "express";
 import { getSlotId } from "../utils/nano";
 import { sellerMiddleware } from "../utils/seller";
 import { requireAuth } from "../utils/required";
-import { _ } from "../utils/pino";
 import { sendEvent } from "./get-events";
-import { getNetPrice } from "../utils/other";
+import { getContractCollateral, getContractPrice } from "../utils/other";
+import { _ } from "../utils/pino";
 
-interface slotScheme {
+interface createScheme {
   mode: string;
   iterations: number;
   units: number;
@@ -19,7 +19,7 @@ interface slotScheme {
 
 const createSlotMiddlewares: any = [sellerMiddleware, requireAuth];
 
-/**HANDLER: creates a contract instance*/
+/**HANDLER: creates slots*/
 const createSlotHandler = async (req: Request, res: Response) => {
   const params = req.body;
 
@@ -34,7 +34,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
 
   let connection: any = null;
 
-  let slotScheme: slotScheme = {
+  let createScheme: createScheme = {
     mode: "unit",
     iterations: 0,
     units: 0,
@@ -42,21 +42,21 @@ const createSlotHandler = async (req: Request, res: Response) => {
   };
 
   if (params.batch_mode === true) {
-    slotScheme.mode = "batch";
-    slotScheme.iterations = params.batch_number;
-    slotScheme.units = params.unit_number;
-    slotScheme.discount = params.unit_discount;
+    createScheme.mode = "batch";
+    createScheme.iterations = params.batch_number;
+    createScheme.units = params.unit_number;
+    createScheme.discount = params.unit_discount;
   }
 
   if (params.batch_mode === false) {
-    slotScheme.mode = "unit";
-    slotScheme.iterations = params.unit_number;
-    slotScheme.units = 1;
-    slotScheme.discount = 0;
+    createScheme.mode = "unit";
+    createScheme.iterations = params.unit_number;
+    createScheme.units = 1;
+    createScheme.discount = 0;
   }
   console.log(params);
-  
-  console.log(slotScheme);
+
+  console.log(createScheme);
 
   try {
     connection = await DB.client.getConnection();
@@ -78,13 +78,17 @@ const createSlotHandler = async (req: Request, res: Response) => {
       throw new Error("NOT_STOCK");
     }
 
+    if (PRODUCT.stock < createScheme.units) {
+      throw new Error("NOT_STOCK");
+    }
+
     const schemeData = `
     INSERT INTO slots (
       id,
       mode,
       seller_id,
       contract_id,
-      contract_wallet,
+      contract_wid,
       contract_price,
       contract_collateral,
       product_id,
@@ -94,7 +98,9 @@ const createSlotHandler = async (req: Request, res: Response) => {
       schema_v
      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
-    for (let i = 0; i < slotScheme.iterations; i++) {
+    //////////////////////////
+
+    for (let i = 0; i < createScheme.iterations; i++) {
       const contract_id = await API.post("/api/contract/activate", cidScheme)
         .then((res) => {
           assert.ok(res.data.hasOwnProperty("unContractInstanceId"));
@@ -106,22 +112,28 @@ const createSlotHandler = async (req: Request, res: Response) => {
 
       const schemeValue = [
         "S" + getSlotId(),
-        slotScheme.mode,
-        params.wallet_id,
-        contract_id,
+        createScheme.mode,
         SELLER.id,
+        contract_id,
+        params.wallet_id,
+        getContractPrice(
+          PRODUCT.price,
+          createScheme.discount,
+          createScheme.units
+        ),
+        getContractCollateral(PRODUCT.collateral, createScheme.units),
         PRODUCT.id,
         PRODUCT.price,
-        PRODUCT.collateral,
-        slotScheme.discount,
-        slotScheme.units,
-        getNetPrice(PRODUCT.price, slotScheme.discount),
+        createScheme.discount,
+        createScheme.units,
         0,
       ];
 
       console.log(schemeValue);
       await connection.execute(schemeData, schemeValue);
     }
+
+    //////////////////////////
 
     await connection.commit();
 

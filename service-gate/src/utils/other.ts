@@ -2,12 +2,27 @@ function stringToTimestamp(date: string) {
   return date.replace("T", " ").replace("Z", "");
 }
 
-function getNetPrice(originalPrice: number, discountPercent: number): number {
-  let discountMount = originalPrice * (discountPercent / 100);
+function getContractPrice(
+  productPrice: number,
+  discountPercent: number,
+  productUnits: number
+): number {
+  let discountMount = productPrice * (discountPercent / 100);
 
-  let discountPrice = originalPrice - discountMount;
+  let discountPrice = productPrice - discountMount;
 
-  return Math.floor(discountPrice);
+  let totalPrice = discountPrice * productUnits;
+
+  return Math.floor(totalPrice);
 }
 
-export { stringToTimestamp, getNetPrice };
+function getContractCollateral(
+  productCollateral: number,
+  productUnits: number
+): number {
+  let totalCollateral = productCollateral * productUnits;
+
+  return Math.floor(totalCollateral);
+}
+
+export { stringToTimestamp, getContractPrice, getContractCollateral };
