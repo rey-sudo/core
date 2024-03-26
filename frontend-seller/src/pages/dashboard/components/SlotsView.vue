@@ -197,7 +197,7 @@
     <Dialog
       v-model:visible="slotDialogVisible"
       header="Product slots"
-      :style="{ width: '80vw' }"
+      :style="{ width: '90vw' }"
       maximizable
       modal
       :draggable="false"
@@ -208,14 +208,9 @@
         stripedRows
         scrollable
         scrollHeight="flex"
-        tableStyle="min-width: 50rem"
+        tableStyle="min-width: 50rem;"
       >
-        <Column
-          field="created_at"
-          header="Date"
-          style="max-width: 5rem"
-          sortable
-        >
+        <Column field="created_at" header="Date" style="" sortable>
           <template #body="slotProps">
             {{ formatDate(slotProps.data.created_at) }}
           </template>
@@ -266,7 +261,13 @@
           sortable
         >
           <template #body="slotProps">
-            <InputSwitch v-model="slotProps.data.actived" />
+            <InputSwitch
+              :modelValue="toBoolean(slotProps.data.actived)"
+              @change="
+                (event) =>
+                  activateSlot(event.target.ariaChecked, slotProps.data.id)
+              "
+            />
           </template>
         </Column>
 
@@ -307,6 +308,13 @@
                 id="slot_overlay_menu"
                 :model="slotrowMenu"
                 :popup="true"
+              />
+              <Button
+                class="table-button"
+                icon="pi pi-eye"
+                outlined
+                rounded
+                @click="openSlotsDialog(slotProps.data)"
               />
             </div>
           </template>
@@ -889,6 +897,11 @@ export default {
     },
   },
   methods: {
+    toBoolean(e) {
+      return e ? true : false;
+    },
+
+    activateSlot() {},
     progressBar(e) {
       return e * 20;
     },
@@ -1144,6 +1157,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
+::v-deep(.p-progressbar) {
+  height: 4px;
+}
+
 .cs-wrap-form {
   margin-bottom: 2rem;
 }
@@ -1239,6 +1256,7 @@ export default {
 .table-buttons {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .product-upload small {
   padding: 5px;

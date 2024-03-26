@@ -6672,14 +6672,14 @@
   }
   .p-progressbar {
     border: 0 none;
-    height: 4px;
+    height: 8px;
     background: #dee2e6;
     border-radius: 8px;
   }
   .p-progressbar .p-progressbar-value {
     border: 0 none;
     margin: 0;
-    background: var(--blue-c);
+    background: var(--green-a);
   }
   .p-progressbar .p-progressbar-label {
     color: var(--text-w);
