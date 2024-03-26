@@ -210,7 +210,12 @@
         scrollHeight="flex"
         tableStyle="min-width: 50rem;"
       >
-        <Column field="created_at" header="Date" style="" sortable>
+        <Column
+          field="created_at"
+          header="Date"
+          sortable
+          style="max-width: 8rem" 
+        >
           <template #body="slotProps">
             {{ formatDate(slotProps.data.created_at) }}
           </template>
@@ -274,7 +279,7 @@
         <Column
           field="contract_state"
           header="State"
-          style="min-width: 7rem"
+          style="min-width: 8rem"
           sortable
         >
           <template #body="slotProps">
