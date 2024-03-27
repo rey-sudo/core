@@ -5,6 +5,7 @@ import { Request, Response } from "express";
 import { requireAuth } from "../utils/required";
 import { sellerMiddleware } from "../utils/seller";
 import { BadRequestError } from "../errors";
+import { sleep } from "../utils/sleep";
 
 interface instanceScheme {
   startDefault: {
@@ -41,6 +42,8 @@ const startEndpointHandler = async (req: Request, res: Response) => {
 
     const SLOT = slots[0];
 
+    //isactivated
+    
     const instanceScheme: instanceScheme = {
       startDefault: {
         sWalletParam: params.seller_pubkeyhash,
@@ -49,32 +52,38 @@ const startEndpointHandler = async (req: Request, res: Response) => {
       },
     };
 
-    const callEndpoint = await API.post(
+    const getTransaction = await API.post(
       `/api/contract/instance/${SLOT.contract_id}/endpoint/Start`,
       instanceScheme
     )
+      .then((res) => assert.ok(res.status === 200))
+      .then(() => sleep(1000))
+      .then(() => API.get(`/api/contract/instance/${SLOT.contract_id}/status`))
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+
+        assert.ok(res.data.cicYieldedExportTxs.length !== 0);
+
+        assert.ok(
+          res.data.cicYieldedExportTxs[0].hasOwnProperty("transaction")
+        );
+
+        assert.ok(res.data.cicYieldedExportTxs[0].transaction.length !== 0);
+
+        return res.data.cicYieldedExportTxs[0].transaction;
       })
       .catch(() => {
         throw new Error("CID_FAILED");
       });
-
-    const getStatus = await API.get(
-      `/api/contract/instance/${SLOT.contract_id}/status`
-    )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch(() => {
-        throw new Error("CID_FAILED");
-      });
-
-    //  await connection.execute(schemeData, schemeValue);
 
     await connection.commit();
 
-    res.status(200).send({ success: true });
+    res.status(200).send({
+      success: true,
+      payload: {
+        transaction: getTransaction,
+      },
+    });
   } catch (err: any) {
     await connection.rollback();
 
