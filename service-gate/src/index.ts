@@ -1,10 +1,13 @@
 import * as route from "./routes";
+import DB from "./db";
+import { app } from "./app";
 import { catcher, check, checkpoint } from "./pod/index";
 import { NotFoundError, errorMiddleware } from "./errors";
 import serviceProductListener from "./kafka/service-product";
-import { app } from "./app";
 import compression from "compression";
-import DB from "./db";
+
+
+
 
 const main = async () => {
   try {
@@ -61,6 +64,14 @@ const main = async () => {
       route.createSlotMiddlewares,
 
       route.createSlotHandler
+    );
+
+    app.post(
+      "/api/gate/start-endpoint",
+
+      route.startEndpointMiddlewares,
+
+      route.startEndpointHandler
     );
 
     app.get(
