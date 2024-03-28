@@ -84,6 +84,14 @@
 
         <div class="cs-wrap" v-if="!isLoading">
           <div class="cs-wrap-form">
+            <div class="cs-wrap-total">
+              <p>Total slots {{ computedSlots }}</p>
+              <p>Stock: {{ createSlotData.stock }}</p>
+              <p>Total Units: {{ computedUnits }}</p>
+              <p>Total Collateral: {{ computedCollateral }}</p>
+              <p>Unit Price: {{ computedPrice }}</p>
+            </div>
+
             <div class="field">
               <label for="quantity" class="field-label">
                 <span>Batch Mode</span>
@@ -95,14 +103,6 @@
                 />
               </label>
               <InputSwitch v-model="createSlotForm.batch_mode" />
-            </div>
-
-            <div class="cs-wrap-total">
-              <p>Total slots {{ computedSlots }}</p>
-              <p>Stock: {{ createSlotData.stock }}</p>
-              <p>Total Units: {{ computedUnits }}</p>
-              <p>Total Collateral: {{ computedCollateral }}</p>
-              <p>Unit Price: {{ computedPrice }}</p>
             </div>
 
             <div class="field">
@@ -214,7 +214,7 @@
           field="created_at"
           header="Date"
           sortable
-          style="max-width: 8rem" 
+          style="max-width: 8rem"
         >
           <template #body="slotProps">
             {{ formatDate(slotProps.data.created_at) }}
@@ -282,7 +282,7 @@
           style="min-width: 8rem"
           sortable
         >
-          <template #body="slotProps">
+          <template #body="slotProps"> 
             <div class="column-block">
               <div class="column-block-label">
                 {{ slotProps.data.contract_stage }}
