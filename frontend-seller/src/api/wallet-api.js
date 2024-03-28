@@ -2,7 +2,7 @@ import { Wallet } from "@cardano-foundation/cardano-connect-with-wallet-core";
 
 import * as CardanoWasm from "@emurgo/cardano-serialization-lib-browser";
 
-const Buffer = require('buffer').Buffer
+const Buffer = require('buffer/').Buffer
 
 const walletAPI = () => {
   return {

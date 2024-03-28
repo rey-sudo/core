@@ -1,11 +1,11 @@
+import 'primeicons/primeicons.css';
+import './style/theme.css';
 import App from './App.vue'
+import PrimeVue from 'primevue/config';
 import { stores } from "./store";
 import { router } from "./router";
 import { createApp } from 'vue';
-import 'primeicons/primeicons.css';
-import './style/theme.css';
 import  { walletAPI }  from '@/api/wallet-api';
-import PrimeVue from 'primevue/config';
 
 import AutoComplete from 'primevue/autocomplete';
 import Accordion from 'primevue/accordion';

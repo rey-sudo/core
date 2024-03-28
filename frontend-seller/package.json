@@ -15,6 +15,7 @@
     "axios": "^1.5.1",
     "buffer": "^6.0.3",
     "core-js": "^3.8.3",
+    "lucid-cardano": "^0.10.7",
     "primeicons": "^6.0.1",
     "primevue": "^3.47.2",
     "swiper": "^10.2.0",
