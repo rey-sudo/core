@@ -18,7 +18,7 @@
 
           <div class="card-body">
             <div class="card-body-name">
-              <span> {{ item.name }}</span>
+              <span> {{ item.name.slice(0, 50) }}...</span>
             </div>
             <div class="card-body-price">
               <span> {{ formatPrice(item.price) }}</span>
@@ -211,6 +211,11 @@ export default {
   font-weight: 400;
   text-transform: capitalize;
 }
+
+.card-body-name span {
+  text-align: inherit;
+}
+
 .card-body-name span::first-letter {
   text-transform: capitalize;
 }
