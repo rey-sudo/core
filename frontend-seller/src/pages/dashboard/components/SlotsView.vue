@@ -73,7 +73,7 @@
     </Dialog>
 
     <Dialog
-      v-model:visible="dialogCreateSlot"
+      v-model:visible="createSlotDialogVisible"
       :style="{ width: '425px' }"
       header="Create slots"
       :modal="true"
@@ -494,7 +494,7 @@
                   outlined
                   rounded
                   v-tooltip.top="'Enable a slot'"
-                  @click="handleSubmit(slotProps.data)"
+                  @click="openCreateSlotDialog(slotProps.data)"
                 />
                 <Button
                   class="table-button"
@@ -689,8 +689,8 @@ export default {
       mediaHostURL: HOST + "/api/media/create-image",
       productList: null,
       isLoading: false,
-      dialogCreateSlot: false,
-      createSlotData: this.product,
+      createSlotDialogVisible: false,
+      createSlotData: null, 
       deleteProductDialog: false,
       deleteProductsDialog: false,
       descriptionLengthLimit: 1000,
@@ -990,10 +990,10 @@ export default {
     },
     openProductDialog() {
       this.resetForm();
-      this.dialogCreateSlot = true;
+      this.createSlotDialogVisible = true;
     },
     closeProductDialog() {
-      this.dialogCreateSlot = false;
+      this.createSlotDialogVisible = false;
     },
     async createSlots() {
       this.createSlotFormErrors.product_units = this.checkUnitNumber(
@@ -1033,7 +1033,7 @@ export default {
               life: 3000,
             });
 
-            this.dialogCreateSlot = false;
+            this.createSlotDialogVisible = false;
 
             this.slotDialogData = this.createSlotData;
 
@@ -1104,13 +1104,13 @@ export default {
       return false;
     },
 
-    handleSubmit(product) {
-      this.createSlotData = product;
-      this.dialogCreateSlot = true;
+    openCreateSlotDialog(productData) {
+      this.createSlotData = productData;
+      this.createSlotDialogVisible = true;
     },
 
-    confirmDeleteProduct(product) {
-      this.product = product;
+    confirmDeleteProduct(productData) {
+      this.product = productData;
       this.deleteProductDialog = true;
     },
 
