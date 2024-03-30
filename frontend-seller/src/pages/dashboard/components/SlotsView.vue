@@ -1219,13 +1219,13 @@ export default {
 }
 
 .cs-wrap-total {
-  border: 1px solid var(--border-a);
-  color: var(--text-a);
+  color: var(--text-w);
   margin-top: 0rem;
-  margin-bottom: 1rem;
-  background: var(--base-b);
+  margin-bottom: 2rem;
+  background: var(--blue-c);
   border-radius: 8px;
   padding: 1rem;
+  box-shadow: var(--shadow-b);
 }
 
 .cs-wrap-total p {
