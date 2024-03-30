@@ -263,7 +263,7 @@
         >
           <template #body="slotProps">
             <InputSwitch
-              :disabled="slotProps.data.actived === 1"
+              :disabled="switchValues[slotProps.data.id]"
               :modelValue="slotProps.data.actived === 1"
               @change="
                 (event) =>
@@ -302,15 +302,16 @@
                 outlined
                 rounded
                 aria-haspopup="true"
-                aria-controls="slot_overlay_menu"
-                @click="slotopenRowMenu"
+                aria-controls="slot_menu"
+                @click="openSlotMenu"
               />
               <Menu
-                ref="slotrowMenuRef"
-                id="slot_overlay_menu"
-                :model="slotrowMenu"
+                ref="slotMenuRef"
+                id="slot_menu"
+                :model="slotMenu"
                 :popup="true"
               />
+
               <Button
                 class="table-button"
                 icon="pi pi-eye"
@@ -610,10 +611,29 @@ export default {
       },
     ]);
 
+    const slotMenuRef = ref();
+
+    const slotMenu = ref([
+      {
+        label: "Options",
+        items: [
+          {
+            label: "Transactions",
+            icon: "",
+          },
+          {
+            label: "Archive",
+            icon: "",
+          },
+        ],
+      },
+    ]);
     const openProductMenu = (event) => {
       productMenuRef.value.toggle(event);
     };
-
+    const openSlotMenu = (event) => {
+      slotMenuRef.value.toggle(event);
+    };
     const createSlotStep = ref(0);
 
     const createSlotSteps = ref([
@@ -653,6 +673,9 @@ export default {
       productMenu,
       productMenuRef,
       disableUpload,
+      slotMenuRef,
+      openSlotMenu,
+      slotMenu,
       resetForm,
       messageModalVisible,
       messageModal,
@@ -680,6 +703,7 @@ export default {
       descriptionLengthLimit: 1000,
       nameLengthLimit: 200,
       minProductImages: 5,
+      switchValues: {},
       slotListDialogVisible: false,
       slotListDialogData: [],
       customers: [
@@ -906,8 +930,12 @@ export default {
 
         this.startEndpoint(params)
           .then((res) => {
-            if (res.success) {
-              console.log(res.payload);
+            console.log(res);
+
+            if (res.response.success) {
+              this.switchValues[slotId] = true;
+
+              console.log(this.switchValues);
             }
           })
           .catch((err) => console.error(err));
