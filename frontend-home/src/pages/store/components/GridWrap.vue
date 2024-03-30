@@ -23,15 +23,6 @@
             <div class="card-body-price">
               <span> {{ formatPrice(item.price) }}</span>
             </div>
-            <div
-              class="card-body-stock"
-              :class="{
-                white: item.stock_supply,
-                red: !item.stock_supply,
-              }"
-            >
-              <span> {{ item.stock_supply }} Stock</span>
-            </div>
 
             <div class="card-body-collateral">
               <span> {{ item.collateral }} ADA Collateral</span>
@@ -104,7 +95,7 @@ export default {
   grid-template-columns: 1fr;
   grid-auto-rows: minmax(100px, auto);
   gap: 20px;
-  padding: 0 2rem;
+  padding: 0 1rem;
   min-height: 100vh;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
@@ -130,7 +121,7 @@ export default {
   text-align: start;
   line-height: 100px;
   color: var(--text-a);
-  padding-left: 1.25rem;
+  padding-left: 3rem;
   letter-spacing: -0.02em;
 }
 
@@ -157,16 +148,7 @@ export default {
 }
 
 .card:hover {
-  transform: translateY(-0.25rem);
-  box-shadow: var(--shadow-a);
-  border: 1px solid var(--border-a);
-}
-
-.card-body-stock {
-  margin-bottom: 0.5rem;
-  text-align: left;
-  color: var(--text-b);
-  font-size: var(--text-size-b);
+  transform: translateY(-0.1rem);
 }
 
 .card-body-collateral {
@@ -208,7 +190,7 @@ export default {
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-  font-weight: 400;
+  font-weight: 500;
   text-transform: capitalize;
 }
 
