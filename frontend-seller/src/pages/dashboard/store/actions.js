@@ -12,11 +12,28 @@ const createProduct = async (_, params) => {
   }
 };
 
+const startEndpoint = async (_, params) => {
+  try {
+    const response = await axiosAPI.post("/api/gate/start-endpoint", params);
+
+    console.log(response);
+    //commit("startEndpoint", response.data.payload);
+
+    return { ok: true, response: response.data };
+  } catch (error) {
+    throw { ok: false, response: error.response.data };
+  }
+};
+
+const setupLucid = async ({ commit }, data) => {
+  commit("setupLucid", data);
+};
+
 const createSlot = async (_, params) => {
   try {
     const response = await axiosAPI.post("/api/gate/create-slot", params);
 
-    //commit("createSlot", response.data.payload); 
+    //commit("createSlot", response.data.payload);
 
     return { ok: true, response: response.data };
   } catch (error) {
@@ -48,4 +65,4 @@ const getSlots = async ({ commit }, params) => {
   }
 };
 
-export { createProduct, getProducts, createSlot, getSlots };
+export { startEndpoint, setupLucid, createProduct, getProducts, createSlot, getSlots };

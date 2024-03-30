@@ -282,7 +282,7 @@
           style="min-width: 8rem"
           sortable
         >
-          <template #body="slotProps"> 
+          <template #body="slotProps">
             <div class="column-block">
               <div class="column-block-label">
                 {{ slotProps.data.contract_stage }}
@@ -905,8 +905,9 @@ export default {
     toBoolean(e) {
       return e ? true : false;
     },
-
-    activateSlot() {},
+    activateSlot(a,b) {
+      console.log(a,b);
+    },
     progressBar(e) {
       return e * 20;
     },

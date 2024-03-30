@@ -12,6 +12,8 @@ const getSlots = (state, data) => {
   state.slotsData.push(...data);
 };
 
+const setupLucid = (state, data) => {
+  state.lucidClient = data;
+};
 
-
-export { createProduct, getProducts, getSlots };
+export { setupLucid, createProduct, getProducts, getSlots };

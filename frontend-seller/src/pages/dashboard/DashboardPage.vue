@@ -4,6 +4,7 @@
       <div class="dashboard-nav-logo">
         <img src="./assets/logo.png" alt="" />
       </div>
+
       <div
         class="dashboard-nav-item"
         :class="{ selected: selectedNav === item.name }"
@@ -15,7 +16,11 @@
         <span>{{ item.label }}</span>
       </div>
 
-      <button @click="getPubKeyHash">x</button>
+      <div class="dashboard-nav-item" @click="getPubKeyHash">
+        <i class="pi pi-wallet" />
+
+        <span>Wallets</span>
+      </div>
 
       <div class="dashboard-nav-item bottom">
         <img
@@ -48,9 +53,10 @@ export default {
 
   setup() {
     const { getUserData } = entryAPI();
-    const { getProducts, getSlots } = dashboardAPI();
+    const { getProducts, getSlots, setupLucid, getLucid } = dashboardAPI();
 
     const update = {
+      lucid: async () => setupLucid(await Lucid.new()),
       products: () =>
         getProducts()
           .then(() => console.info("products:updated"))
@@ -76,14 +82,17 @@ export default {
       }
     });
 
-    document.addEventListener("getPubKeyHashEvent", (event) => {
+    document.addEventListener("getWalletEvent", (event) => {
       console.log(event);
     });
 
+    update.lucid();
     update.products();
     update.slots();
     return {
       getUserData,
+      setupLucid,
+      getLucid,
     };
   },
   data() {
@@ -126,23 +135,16 @@ export default {
     selectTab(e) {
       this.selectedNav = e;
     },
-    async setupLucid() {
-      this.lucidClient = await Lucid.new();
-
+    async getPubKeyHash() {
       const api = await window.cardano.nami.enable();
 
-      this.lucidClient.selectWallet(api);
-    },
+      this.getLucid.selectWallet(api);
 
-    async getPubKeyHash() {
-      const addr = await this.lucidClient.wallet.address();
+      const addr = await this.getLucid.wallet.address();
       const details = await getAddressDetails(addr);
       console.log(details);
       console.log(details.paymentCredential.hash);
     },
-  },
-  mounted() {
-    this.setupLucid();
   },
 };
 </script>

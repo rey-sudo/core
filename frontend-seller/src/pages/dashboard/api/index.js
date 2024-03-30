@@ -19,16 +19,21 @@ const dashboardAPI = () => {
   const getSlots = async (params) =>
     await store.dispatch("dashboard/getSlots", params);
 
+  const setupLucid = async (data) =>
+    await store.dispatch("dashboard/setupLucid", data);
+
   const sleep = (timeInMs) =>
     new Promise((resolve) => setTimeout(() => resolve(false), timeInMs));
 
   return {
     getProductsData: computed(() => store.getters["dashboard/getProductsData"]),
     getSlotsData: computed(() => store.getters["dashboard/getSlotsData"]),
+    getLucid: computed(() => store.getters["dashboard/getLucid"]), 
     fetchProductData,
     createProduct,
     getProducts,
     createSlot,
+    setupLucid,
     getSlots,
     sleep,
   };
