@@ -79,105 +79,93 @@
       :modal="true"
       :draggable="false"
     >
-      <div class="cs">
+      <div class="createslot">
         <LoadingBars v-if="isLoading" />
 
-        <div class="cs-wrap" v-if="!isLoading">
-          <div class="cs-wrap-form">
-            <div class="field">
-              <label for="quantity" class="field-label">
-                <span>Batch Mode</span>
-                <i
-                  class="pi pi-info-circle"
-                  v-tooltip.top="
-                    'Allows to add discounts for the purchase of multiple units.'
-                  "
-                />
-              </label>
-              <InputSwitch v-model="createSlotForm.batch_mode" />
-            </div>
-
-            <div class="field">
-              <label for="units" class="field-label">
-                <span>Units</span>
-                <i
-                  class="pi pi-info-circle"
-                  v-tooltip.top="'Number of slots to create.'"
-                />
-              </label>
-              <InputNumber
-                id="units"
-                v-model="createSlotForm.product_units"
-                showButtons
-                integeronly
-                locale="en-US"
-                :min="0"
-                :class="{ invalid: createSlotFormErrors.product_units }"
+        <div class="createslot-wrap" v-if="!isLoading">
+          <div class="field">
+            <label for="quantity" class="field-label">
+              <span>Batch Mode</span>
+              <i
+                class="pi pi-info-circle"
+                v-tooltip.top="
+                  'Allows to add discounts for the purchase of multiple units.'
+                "
               />
-              <small class="p-error" v-if="createSlotFormErrors.product_units">
-                The unit is required and greater than 0.
-              </small>
-            </div>
-
-            <div class="field">
-              <label for="batch" class="field-label">
-                <span>Batch</span>
-                <i
-                  class="pi pi-info-circle"
-                  v-tooltip.top="
-                    'Each batch contains the chosen number of units.'
-                  "
-                />
-              </label>
-              <InputNumber
-                id="batch"
-                v-model="createSlotForm.batch_number"
-                showButtons
-                :disabled="!createSlotForm.batch_mode"
-                integeronly
-                locale="en-US"
-                :min="0"
-                :class="{ invalid: createSlotFormErrors.batch_number }"
-              />
-              <small class="p-error" v-if="createSlotFormErrors.batch_number">
-                The batch must be greater than 0.
-              </small>
-            </div>
-
-            <div class="field">
-              <label for="unitDiscount" class="field-label">
-                <span>Discount</span>
-                <i
-                  class="pi pi-info-circle"
-                  v-tooltip.top="'Discount per unit in batch mode.'"
-                />
-              </label>
-              <InputNumber
-                id="unitDiscount"
-                v-model="createSlotForm.product_discount"
-                showButtons
-                :disabled="!createSlotForm.batch_mode"
-                integeronly
-                suffix=" % OFF"
-                locale="en-US"
-                :min="0"
-                :max="100"
-                :class="{ invalid: createSlotFormErrors.product_discount }"
-              />
-              <small
-                class="p-error"
-                v-if="createSlotFormErrors.product_discount"
-                >The discount is required.</small
-              >
-            </div>
+            </label>
+            <InputSwitch v-model="createSlotForm.batch_mode" />
           </div>
 
-          <div class="cs-wrap-total">
-            <p>Total slots {{ computedSlots }}</p>
-            <p>Stock: {{ createSlotData.stock }}</p>
-            <p>Total Units: {{ computedUnits }}</p>
-            <p>Total Collateral: {{ computedCollateral }}</p>
-            <p>Unit Price: {{ computedPrice }}</p>
+          <div class="field">
+            <label for="units" class="field-label">
+              <span>Units</span>
+              <i
+                class="pi pi-info-circle"
+                v-tooltip.top="'Number of slots to create.'"
+              />
+            </label>
+            <InputNumber
+              id="units"
+              v-model="createSlotForm.product_units"
+              showButtons
+              integeronly
+              locale="en-US"
+              :min="0"
+              :class="{ invalid: createSlotFormErrors.product_units }"
+            />
+            <small class="p-error" v-if="createSlotFormErrors.product_units">
+              The unit is required and greater than 0.
+            </small>
+          </div>
+
+          <div class="field">
+            <label for="batch" class="field-label">
+              <span>Batch</span>
+              <i
+                class="pi pi-info-circle"
+                v-tooltip.top="
+                  'Each batch contains the chosen number of units.'
+                "
+              />
+            </label>
+            <InputNumber
+              id="batch"
+              v-model="createSlotForm.batch_number"
+              showButtons
+              :disabled="!createSlotForm.batch_mode"
+              integeronly
+              locale="en-US"
+              :min="0"
+              :class="{ invalid: createSlotFormErrors.batch_number }"
+            />
+            <small class="p-error" v-if="createSlotFormErrors.batch_number">
+              The batch must be greater than 0.
+            </small>
+          </div>
+
+          <div class="field">
+            <label for="unitDiscount" class="field-label">
+              <span>Discount</span>
+              <i
+                class="pi pi-info-circle"
+                v-tooltip.top="'Discount per unit in batch mode.'"
+              />
+            </label>
+            <InputNumber
+              id="unitDiscount"
+              v-model="createSlotForm.product_discount"
+              showButtons
+              :disabled="!createSlotForm.batch_mode"
+              integeronly
+              suffix=" % OFF"
+              locale="en-US"
+              :min="0"
+              :max="100"
+              :class="{ invalid: createSlotFormErrors.product_discount }"
+            />
+            <small class="p-error" v-if="createSlotFormErrors.product_discount"
+              >The discount is required.</small
+            >
           </div>
 
           <Steps
@@ -185,6 +173,14 @@
             v-model:activeStep="createSlotStep"
             :readonly="true"
           />
+
+          <div class="createslot-wrap-total">
+            <p>Total slots {{ computedSlots }}</p>
+            <p>Stock: {{ createSlotData.stock }}</p>
+            <p>Total Units: {{ computedUnits }}</p>
+            <p>Total Collateral: {{ computedCollateral }}</p>
+            <p>Unit Price: {{ computedPrice }}</p>
+          </div>
         </div>
       </div>
 
@@ -690,7 +686,7 @@ export default {
       productList: null,
       isLoading: false,
       createSlotDialogVisible: false,
-      createSlotData: null, 
+      createSlotData: null,
       deleteProductDialog: false,
       deleteProductsDialog: false,
       descriptionLengthLimit: 1000,
@@ -1192,8 +1188,11 @@ export default {
 ::v-deep(.p-progressbar) {
   height: 4px;
 }
+::v-deep(.p-steps) {
+  margin-top: 2rem;
+}
 
-.cs-wrap-form {
+.createslot-wrap-form {
   margin-bottom: 0rem;
 }
 
@@ -1206,7 +1205,7 @@ export default {
   font-weight: 400;
   font-size: var(--text-size-b);
 }
-.cs {
+.createslot {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -1214,25 +1213,25 @@ export default {
   min-height: 685px;
 }
 
-.cs-wrap {
+.createslot-wrap {
   width: 100%;
 }
 
-.cs-wrap-total {
+.createslot-wrap-total {
   color: var(--text-w);
-  margin-top: 0rem;
-  margin-bottom: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 0rem;
   background: var(--blue-c);
   border-radius: 8px;
   padding: 1rem;
   box-shadow: var(--shadow-b);
 }
 
-.cs-wrap-total p {
+.createslot-wrap-total p {
   line-height: 1rem;
 }
 
-.cs-wrap-total p:nth-child(1) {
+.createslot-wrap-total p:nth-child(1) {
   font-size: var(--text-size-f);
   font-weight: 600;
 }
