@@ -43,8 +43,18 @@ const startEndpointHandler = async (req: Request, res: Response) => {
 
     const SLOT = slots[0];
 
-    //isactivated
+    ///////////////////////////////////
+    
+    if (SLOT.actived) {
+      return res.status(200).send({
+        success: true,
+        payload: {
+          transaction: SLOT.contract_state_0,
+        },
+      });
+    }
 
+    ///////////////////////////////////
     const instanceScheme: instanceScheme = {
       startDefault: {
         sWalletParam: params.seller_pubkeyhash,
@@ -53,7 +63,7 @@ const startEndpointHandler = async (req: Request, res: Response) => {
       },
     };
 
-    const getTransaction = await API.post(
+    const getStatus = await API.post(
       `/api/contract/instance/${SLOT.contract_id}/endpoint/Start`,
       instanceScheme
     )
@@ -71,18 +81,34 @@ const startEndpointHandler = async (req: Request, res: Response) => {
 
         assert.ok(res.data.cicYieldedExportTxs[0].transaction.length !== 0);
 
-        return res.data.cicYieldedExportTxs[0].transaction;
+        return res.data;
       })
       .catch(() => {
         throw new Error("CID_FAILED");
       });
+
+    //////////////////////////////////////////////
+
+    const schemeData = `
+      UPDATE slots 
+      SET actived = ?,
+          contract_stage = ?,
+          contract_state_0 = ?
+      WHERE id = ? AND seller_id = ?
+      `;
+
+    const schemeValue = [true, "actived", getStatus, params.slot_id, SELLER.id];
+
+    await connection.execute(schemeData, schemeValue);
+
+    //////////////////////////////////////////////
 
     await connection.commit();
 
     res.status(200).send({
       success: true,
       payload: {
-        transaction: getTransaction,
+        transaction: getStatus.cicYieldedExportTxs[0].transaction,
       },
     });
 
