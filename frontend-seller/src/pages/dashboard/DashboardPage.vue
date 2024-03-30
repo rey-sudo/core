@@ -136,15 +136,17 @@ export default {
       this.selectedNav = e;
     },
     async getPubKeyHash() {
-      const api = await window.cardano.nami.enable();
-
-      this.getLucid.selectWallet(api);
-
       const addr = await this.getLucid.wallet.address();
       const details = await getAddressDetails(addr);
       console.log(details);
       console.log(details.paymentCredential.hash);
     },
+  },
+
+  async mounted() {
+    const api = await window.cardano.nami.enable();
+
+    this.getLucid.selectWallet(api);
   },
 };
 </script>

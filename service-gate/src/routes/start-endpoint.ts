@@ -6,6 +6,7 @@ import { requireAuth } from "../utils/required";
 import { sellerMiddleware } from "../utils/seller";
 import { BadRequestError } from "../errors";
 import { sleep } from "../utils/sleep";
+import { sendEvent } from "./get-events";
 
 interface instanceScheme {
   startDefault: {
@@ -43,7 +44,7 @@ const startEndpointHandler = async (req: Request, res: Response) => {
     const SLOT = slots[0];
 
     //isactivated
-    
+
     const instanceScheme: instanceScheme = {
       startDefault: {
         sWalletParam: params.seller_pubkeyhash,
@@ -84,6 +85,8 @@ const startEndpointHandler = async (req: Request, res: Response) => {
         transaction: getTransaction,
       },
     });
+
+    sendEvent(SELLER.id, "slot:created");
   } catch (err: any) {
     await connection.rollback();
 

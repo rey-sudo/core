@@ -514,6 +514,7 @@
 <script>
 import dashboardAPI from "@/pages/dashboard/api/index";
 import LoadingBars from "@/components/LoadingBars.vue";
+import { getAddressDetails } from "lucid-cardano";
 import { FilterMatchMode } from "primevue/api";
 import { HOST } from "@/api/index";
 import { ref } from "vue";
@@ -523,7 +524,8 @@ export default {
     LoadingBars,
   },
   setup() {
-    const { getSlotsData, createProduct, createSlot } = dashboardAPI();
+    const { getSlotsData, createProduct, createSlot, getLucid, startEndpoint } =
+      dashboardAPI();
 
     let product = ref({
       id: null,
@@ -658,6 +660,8 @@ export default {
       createSlotSteps,
       createSlotStep,
       createSlot,
+      startEndpoint,
+      getLucid,
       openRowMenu,
       product,
       rowMenuRef,
@@ -905,8 +909,27 @@ export default {
     toBoolean(e) {
       return e ? true : false;
     },
-    activateSlot(a,b) {
-      console.log(a,b);
+    async activateSlot(value, slotId) {
+      console.log(typeof value) ;
+
+      if (value === "false") {
+        const addr = await this.getLucid.wallet.address();
+        const details = await getAddressDetails(addr);
+        const pubKeyHash = details.paymentCredential.hash;
+
+        const params = {
+          slot_id: slotId,
+          seller_pubkeyhash: pubKeyHash,
+        };
+
+        this.startEndpoint(params)
+          .then((res) => {
+            if (res.success) {
+              console.log(res.payload);
+            }
+          })
+          .catch((err) => console.error(err));
+      }
     },
     progressBar(e) {
       return e * 20;
