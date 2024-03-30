@@ -625,6 +625,14 @@ export default {
             label: "Archive",
             icon: "",
           },
+          {
+            label: "Appeal",
+            icon: "",
+          },
+          {
+            label: "Sign",
+            icon: "",
+          },
         ],
       },
     ]);
