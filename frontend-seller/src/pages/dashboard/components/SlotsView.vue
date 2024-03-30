@@ -84,7 +84,7 @@
 
         <div class="createslot-wrap" v-if="!isLoading">
           <div class="field">
-            <label for="quantity" class="field-label">
+            <label for="batch_mode" class="field-label">
               <span>Batch Mode</span>
               <i
                 class="pi pi-info-circle"
@@ -93,7 +93,7 @@
                 "
               />
             </label>
-            <InputSwitch v-model="createSlotForm.batch_mode" />
+            <InputSwitch id="batch_mode" v-model="createSlotForm.batch_mode" />
           </div>
 
           <div class="field">
@@ -168,19 +168,19 @@
             >
           </div>
 
-          <Steps
-            :model="createSlotSteps"
-            v-model:activeStep="createSlotStep"
-            :readonly="true"
-          />
-
-          <div class="createslot-wrap-total">
+          <div class="createslot-b-total">
             <p>Total slots {{ computedSlots }}</p>
             <p>Stock: {{ createSlotData.stock }}</p>
             <p>Total Units: {{ computedUnits }}</p>
             <p>Total Collateral: {{ computedCollateral }}</p>
             <p>Unit Price: {{ computedPrice }}</p>
           </div>
+
+          <Steps
+            :model="createSlotSteps"
+            v-model:activeStep="createSlotStep"
+            :readonly="true"
+          />
         </div>
       </div>
 
@@ -191,7 +191,7 @@
     </Dialog>
 
     <Dialog
-      v-model:visible="slotDialogVisible"
+      v-model:visible="slotListDialogVisible"
       header="Product slots"
       :style="{ width: '90vw' }"
       maximizable
@@ -200,7 +200,7 @@
       :contentStyle="{ height: '80vw' }"
     >
       <DataTable
-        :value="slotDialogData.slots"
+        :value="slotListDialogData.slots"
         stripedRows
         scrollable
         scrollHeight="flex"
@@ -316,14 +316,14 @@
                 icon="pi pi-eye"
                 outlined
                 rounded
-                @click="openSlotsDialog(slotProps.data)"
+                @click="openSlotListDialog(slotProps.data)"
               />
             </div>
           </template>
         </Column>
       </DataTable>
       <template #footer>
-        <Button label="Done" @click="slotDialogVisible = false" />
+        <Button label="Done" @click="slotListDialogVisible = false" />
       </template>
     </Dialog>
     <Toast />
@@ -331,9 +331,9 @@
 
     <!---CONTENT-->
     <div class="slots-wrap">
-      <div class="slots-card">
+      <div class="slots-b-card">
         <DataTable
-          ref="dt"
+          ref="productListTable"
           resizableColumns
           :value="productList"
           v-model:expandedRows="selectedProducts"
@@ -347,37 +347,24 @@
         >
           <template #expansion> x </template>
           <template #header>
-            <div class="slots-header">
-              <div class="slots-header-left">
+            <div class="slots-b-card-h">
+              <div class="slots-b-card-h-l">
                 <span>Product slots</span>
                 <span>Create or modify slots and more...</span>
               </div>
 
-              <span class="p-input-icon-left">
-                <i class="pi pi-search" />
-                <InputText
-                  v-model="filters['global'].value"
-                  placeholder="Search"
-                />
-              </span>
+              <div class="slots-b-card-h-r">
+                <div class="slots-b-card-h-r-search">
+                  <i class="pi pi-search" />
+                  <InputText
+                    v-model="filters['global'].value"
+                    placeholder="Search"
+                  />
+                </div>
+              </div>
             </div>
 
             <Toolbar>
-              <template #start>
-                <Button
-                  label="New"
-                  icon="pi pi-plus"
-                  @click="openProductDialog"
-                />
-                <Button
-                  label="Delete"
-                  icon="pi pi-trash"
-                  style="margin: 0 1rem"
-                  @click="confirmDeleteSelected"
-                  :disabled="!selectedProducts || !selectedProducts.length"
-                />
-              </template>
-
               <template #end>
                 <Button
                   label="Export"
@@ -407,7 +394,7 @@
             </template>
           </Column>
 
-          <Column field="id" header="Code" sortable style="min-width: 12rem" />
+          <Column field="id" header="Code" sortable />
 
           <Column
             field="name"
@@ -416,7 +403,7 @@
             style="max-width: 16rem; white-space: break-spaces"
           >
             <template #body="slotProps">
-              {{ slotProps.data.name.slice(0, 50) }}...
+              {{ slotProps.data.name.slice(0, 30) }}...
             </template>
           </Column>
 
@@ -427,7 +414,7 @@
             style="min-width: 8rem; text-transform: capitalize"
           >
             <template #body="slotProps">
-              {{ slotProps.data.category.code || slotProps.data.category }}
+              {{ slotProps.data.category }}
             </template>
           </Column>
 
@@ -475,13 +462,13 @@
                   outlined
                   rounded
                   aria-haspopup="true"
-                  aria-controls="overlay_menu"
-                  @click="openRowMenu"
+                  aria-controls="product_menu"
+                  @click="openProductMenu"
                 />
                 <Menu
-                  ref="rowMenuRef"
-                  id="overlay_menu"
-                  :model="rowMenu"
+                  ref="productMenuRef"
+                  id="product_menu"
+                  :model="productMenu"
                   :popup="true"
                 />
                 <Button
@@ -497,7 +484,7 @@
                   icon="pi pi-eye"
                   outlined
                   rounded
-                  @click="openSlotsDialog(slotProps.data)"
+                  @click="openSlotListDialog(slotProps.data)"
                 />
               </div>
             </template>
@@ -523,6 +510,8 @@ export default {
   setup() {
     const { getSlotsData, createProduct, createSlot, getLucid, startEndpoint } =
       dashboardAPI();
+
+    const productList = ref(getSlotsData.value);
 
     let product = ref({
       id: null,
@@ -603,10 +592,9 @@ export default {
       errorModal.value = null;
       disableUpload.value = false;
     };
+    const productMenuRef = ref();
 
-    const rowMenuRef = ref();
-
-    const rowMenu = ref([
+    const productMenu = ref([
       {
         label: "Options",
         items: [
@@ -622,8 +610,8 @@ export default {
       },
     ]);
 
-    const openRowMenu = (event) => {
-      rowMenuRef.value.toggle(event);
+    const openProductMenu = (event) => {
+      productMenuRef.value.toggle(event);
     };
 
     const createSlotStep = ref(0);
@@ -657,12 +645,13 @@ export default {
       createSlotSteps,
       createSlotStep,
       createSlot,
+      productList,
       startEndpoint,
       getLucid,
-      openRowMenu,
+      openProductMenu,
       product,
-      rowMenuRef,
-      rowMenu,
+      productMenu,
+      productMenuRef,
       disableUpload,
       resetForm,
       messageModalVisible,
@@ -683,7 +672,6 @@ export default {
   data() {
     return {
       mediaHostURL: HOST + "/api/media/create-image",
-      productList: null,
       isLoading: false,
       createSlotDialogVisible: false,
       createSlotData: null,
@@ -692,8 +680,8 @@ export default {
       descriptionLengthLimit: 1000,
       nameLengthLimit: 200,
       minProductImages: 5,
-      slotDialogVisible: false,
-      slotDialogData: [],
+      slotListDialogVisible: false,
+      slotListDialogData: [],
       customers: [
         {
           id: 1000,
@@ -831,9 +819,6 @@ export default {
   created() {
     this.setupFilters();
   },
-  mounted() {
-    this.productList = this.getSlotsData;
-  },
   computed: {
     computedMode() {
       return this.createSlotForm.batch_mode ? "batch" : "unit";
@@ -931,9 +916,9 @@ export default {
     progressBar(e) {
       return e * 20;
     },
-    openSlotsDialog(e) {
-      this.slotDialogVisible = true;
-      this.slotDialogData = e;
+    openSlotListDialog(e) {
+      this.slotListDialogVisible = true;
+      this.slotListDialogData = e;
     },
     onBeforeUpload() {
       if (this.product.image_set.length < this.maxProductImages) {
@@ -1030,10 +1015,6 @@ export default {
             });
 
             this.createSlotDialogVisible = false;
-
-            this.slotDialogData = this.createSlotData;
-
-            this.slotDialogVisible = true;
           }
 
           if (res.response.success === false) {
@@ -1142,7 +1123,7 @@ export default {
       }));
     },
     exportCSV() {
-      this.$refs.dt.exportCSV();
+      this.$refs.productListTable.exportCSV();
     },
     confirmDeleteSelected() {
       this.deleteProductsDialog = true;
@@ -1188,11 +1169,8 @@ export default {
 ::v-deep(.p-progressbar) {
   height: 4px;
 }
-::v-deep(.p-steps) {
-  margin-top: 2rem;
-}
 
-.createslot-wrap-form {
+.createslot-b-form {
   margin-bottom: 0rem;
 }
 
@@ -1217,21 +1195,21 @@ export default {
   width: 100%;
 }
 
-.createslot-wrap-total {
+.createslot-b-total {
   color: var(--text-w);
-  margin-top: 2rem;
-  margin-bottom: 0rem;
+  margin-top: 0rem;
+  margin-bottom: 2rem;
   background: var(--blue-c);
   border-radius: 8px;
   padding: 1rem;
   box-shadow: var(--shadow-b);
 }
 
-.createslot-wrap-total p {
+.createslot-b-total p {
   line-height: 1rem;
 }
 
-.createslot-wrap-total p:nth-child(1) {
+.createslot-b-total p:nth-child(1) {
   font-size: var(--text-size-f);
   font-weight: 600;
 }
@@ -1438,7 +1416,7 @@ img {
   padding: 1rem 2rem;
 }
 
-.slots-card {
+.slots-b-card {
   width: inherit;
   border-radius: 18px;
   box-shadow: var(--shadow-a);
@@ -1479,7 +1457,7 @@ img {
   margin-top: 3px;
 }
 
-.slots-header {
+.slots-b-card-h {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1487,23 +1465,35 @@ img {
   padding: 1rem 0;
 }
 
-.slots-header-left {
+.slots-b-card-h-l {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 1rem 0;
 }
 
-.slots-header-left span:nth-child(1) {
-  font-weight: 700;
-  font-size: var(--text-size-f);
+.slots-b-card-h-l span:nth-child(1) {
+  font-weight: 600;
+  font-size: var(--text-size-g);
 }
 
-.slots-header-left span:nth-child(2) {
+.slots-b-card-h-l span:nth-child(2) {
   font-weight: 400;
+  line-height: 2rem;
   font-size: var(--text-size-c);
 }
 
+.slots-b-card-h-r-search {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.slots-b-card-h-r-search i {
+  right: 0;
+  position: absolute;
+  margin-right: 1rem;
+}
 ::v-deep(.p-dropdown) {
   width: initial;
 }
