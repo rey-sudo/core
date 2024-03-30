@@ -22,7 +22,7 @@
 
     <Dialog
       v-model:visible="deleteProductDialog"
-      :style="{ width: '450px' }"
+      :style="{ width: '425px' }"
       header="Confirm"
       :modal="true"
     >
@@ -46,14 +46,14 @@
 
     <Dialog
       v-model:visible="deleteProductsDialog"
-      :style="{ width: '450px' }"
+      :style="{ width: '425px' }"
       header="Confirm"
       :modal="true"
     >
       <div class="confirmation-content">
         <i class="pi pi-exclamation-triangle" style="font-size: 2rem" />
         <span v-if="product"
-          >Are you sure you want to delete the selected products?</span
+          >Are you sure you want to delete the selected slots?</span
         >
       </div>
       <template #footer>
@@ -74,7 +74,7 @@
 
     <Dialog
       v-model:visible="dialogCreateSlot"
-      :style="{ width: '450px' }"
+      :style="{ width: '425px' }"
       header="Create slots"
       :modal="true"
       :draggable="false"
@@ -84,14 +84,6 @@
 
         <div class="cs-wrap" v-if="!isLoading">
           <div class="cs-wrap-form">
-            <div class="cs-wrap-total">
-              <p>Total slots {{ computedSlots }}</p>
-              <p>Stock: {{ createSlotData.stock }}</p>
-              <p>Total Units: {{ computedUnits }}</p>
-              <p>Total Collateral: {{ computedCollateral }}</p>
-              <p>Unit Price: {{ computedPrice }}</p>
-            </div>
-
             <div class="field">
               <label for="quantity" class="field-label">
                 <span>Batch Mode</span>
@@ -178,6 +170,14 @@
                 >The discount is required.</small
               >
             </div>
+          </div>
+
+          <div class="cs-wrap-total">
+            <p>Total slots {{ computedSlots }}</p>
+            <p>Stock: {{ createSlotData.stock }}</p>
+            <p>Total Units: {{ computedUnits }}</p>
+            <p>Total Collateral: {{ computedCollateral }}</p>
+            <p>Unit Price: {{ computedPrice }}</p>
           </div>
 
           <Steps
@@ -339,7 +339,7 @@
         <DataTable
           ref="dt"
           resizableColumns
-          :value="products"
+          :value="productList"
           v-model:expandedRows="selectedProducts"
           dataKey="id"
           :paginator="true"
@@ -354,7 +354,7 @@
             <div class="slots-header">
               <div class="slots-header-left">
                 <span>Product slots</span>
-                <span>Create and modify slots and more...</span>
+                <span>Create or modify slots and more...</span>
               </div>
 
               <span class="p-input-icon-left">
@@ -687,7 +687,7 @@ export default {
   data() {
     return {
       mediaHostURL: HOST + "/api/media/create-image",
-      products: null,
+      productList: null,
       isLoading: false,
       dialogCreateSlot: false,
       createSlotData: this.product,
@@ -836,7 +836,7 @@ export default {
     this.setupFilters();
   },
   mounted() {
-    this.products = this.getSlotsData;
+    this.productList = this.getSlotsData;
   },
   computed: {
     computedMode() {
@@ -1115,7 +1115,9 @@ export default {
     },
 
     deleteProduct() {
-      this.products = this.products.filter((val) => val.id !== this.product.id);
+      this.productList = this.productList.filter(
+        (val) => val.id !== this.product.id
+      );
 
       this.deleteProductDialog = false;
 
@@ -1150,7 +1152,7 @@ export default {
       this.deleteProductsDialog = true;
     },
     deleteSelectedProducts() {
-      this.products = this.products.filter(
+      this.productList = this.productList.filter(
         (value) => !this.selectedProducts.includes(value)
       );
       this.deleteProductsDialog = false;
@@ -1192,7 +1194,7 @@ export default {
 }
 
 .cs-wrap-form {
-  margin-bottom: 2rem;
+  margin-bottom: 0rem;
 }
 
 .column-block {
@@ -1217,11 +1219,13 @@ export default {
 }
 
 .cs-wrap-total {
-  border: 1px solid transparent;
-  border-radius: 4px;
+  border: 1px solid var(--border-a);
   color: var(--text-a);
   margin-top: 0rem;
   margin-bottom: 1rem;
+  background: var(--base-b);
+  border-radius: 8px;
+  padding: 1rem;
 }
 
 .cs-wrap-total p {
