@@ -110,7 +110,7 @@ export default {
 .card-body-price {
   font-weight: 600;
   text-align: left;
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-c);
   margin-bottom: 0.5rem;
   color: var(--text-a);
 }

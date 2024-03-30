@@ -192,7 +192,7 @@ export default {
 }
 
 .header-center-search {
-  background: var(--base-a);
+  background: var(--base-b);
   transition: var(--button-transition-a);
   cursor: text;
   display: flex;
