@@ -267,7 +267,8 @@
         >
           <template #body="slotProps">
             <InputSwitch
-              :modelValue="toBoolean(slotProps.data.actived)"
+              :disabled="slotProps.data.actived === 1"
+              :modelValue="slotProps.data.actived === 1"
               @change="
                 (event) =>
                   activateSlot(event.target.ariaChecked, slotProps.data.id)
@@ -910,7 +911,7 @@ export default {
       return e ? true : false;
     },
     async activateSlot(value, slotId) {
-      console.log(typeof value) ;
+      console.log(typeof value);
 
       if (value === "false") {
         const addr = await this.getLucid.wallet.address();
@@ -1228,8 +1229,8 @@ export default {
 }
 
 .cs-wrap-total p:nth-child(1) {
-  font-size: var(--text-size-e);
-  font-weight: 500;
+  font-size: var(--text-size-f);
+  font-weight: 600;
 }
 
 .product-image-main {
