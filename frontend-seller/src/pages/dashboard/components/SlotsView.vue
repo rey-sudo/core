@@ -885,7 +885,8 @@ export default {
     computedCollateral() {
       if (!this.createSlotForm.batch_mode) {
         let total =
-          this.productList[this.createSlotIndex].collateral * this.createSlotForm.product_units;
+          this.productList[this.createSlotIndex].collateral *
+          this.createSlotForm.product_units;
         return `${total} ADA`;
       }
 
@@ -1052,6 +1053,8 @@ export default {
             });
 
             this.createSlotDialogVisible = false;
+ 
+            this.openSlotListDialog(this.createSlotIndex);
           }
 
           if (res.response.success === false) {
