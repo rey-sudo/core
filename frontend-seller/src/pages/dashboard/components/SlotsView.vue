@@ -262,14 +262,20 @@
           sortable
         >
           <template #body="slotProps">
-            <InputSwitch
-              :disabled="switchValues[slotProps.data.id]"
-              :modelValue="slotProps.data.actived === 1"
-              @change="
-                (event) =>
-                  activateSlot(event.target.ariaChecked, slotProps.data.id)
-              "
-            />
+            <div class="switch-group">
+              <InputSwitch
+                :disabled="slotProps.data.actived === 1"
+                :modelValue="slotProps.data.actived === 1"
+                @change="
+                  (event) =>
+                    activeSlot(event.target.ariaChecked, slotProps.data.id)
+                "
+              />
+
+              <span @click="activeSlot('true', slotProps.data.id)">
+                <i class="pi pi-pen-to-square"
+              /></span>
+            </div>
           </template>
         </Column>
 
@@ -352,6 +358,9 @@
               <div class="slots-b-card-h-l">
                 <span>Product slots</span>
                 <span>Create or modify slots and more...</span>
+              
+                <span @click="runTX">x</span>
+              
               </div>
 
               <div class="slots-b-card-h-r">
@@ -500,6 +509,7 @@
 <script>
 import dashboardAPI from "@/pages/dashboard/api/index";
 import LoadingBars from "@/components/LoadingBars.vue";
+import { balanceTx } from "@/api/wallet-api";
 import { getAddressDetails } from "lucid-cardano";
 import { FilterMatchMode } from "primevue/api";
 import { HOST } from "@/api/index";
@@ -712,7 +722,6 @@ export default {
       descriptionLengthLimit: 1000,
       nameLengthLimit: 200,
       minProductImages: 5,
-      switchValues: {},
       slotListDialogVisible: false,
       slotListDialogIndex: null,
       customers: [
@@ -922,32 +931,26 @@ export default {
     },
   },
   methods: {
-    toBoolean(e) {
-      return e ? true : false;
-    },
-    async activateSlot(value, slotId) {
-      console.log(typeof value);
+    async runTX() {
+      const tx =
+        "84a400800181a300581d701bd4506c10bbe3f59ae2ab527ef49656b01383046532da9417573bf6011a00117e5c028201d818583cd8799f004777616974696e67d87980d87980d87980581c4068ce72a0f73e850f19899a10b82ec534a55a6d860e5c5267dca2b9d87a80191b581896ff02000e81581c4068ce72a0f73e850f19899a10b82ec534a55a6d860e5c5267dca2b9a0f5f6";
+      const res = await balanceTx(tx);
 
+      console.log(res);
+    },
+    async activeSlot(value, slotId) {
       if (value === "false") {
         const addr = await this.getLucid.wallet.address();
-        const details = await getAddressDetails(addr);
-        const pubKeyHash = details.paymentCredential.hash;
+        const address = await getAddressDetails(addr);
 
         const params = {
           slot_id: slotId,
-          seller_pubkeyhash: pubKeyHash,
+          seller_pubkeyhash: address.paymentCredential.hash,
         };
 
         this.startEndpoint(params)
-          .then((res) => {
-            console.log(res);
-
-            if (res.response.success) {
-              this.switchValues[slotId] = true;
-
-              console.log(this.switchValues);
-            }
-          })
+          .then((res) => balanceTx(res.response.payload.transaction))
+          .then((tx) => console.log(tx))
           .catch((err) => console.error(err));
       }
     },
@@ -1053,7 +1056,7 @@ export default {
             });
 
             this.createSlotDialogVisible = false;
- 
+
             this.openSlotListDialog(this.createSlotIndex);
           }
 
@@ -1208,6 +1211,17 @@ export default {
 <style lang="css" scoped>
 ::v-deep(.p-progressbar) {
   height: 4px;
+}
+
+.switch-group {
+  display: flex;
+  align-items: center;
+}
+
+.switch-group span {
+  margin-left: 0.5rem;
+  color: var(--text-b);
+  cursor: pointer;
 }
 
 .createslot-b-form {
