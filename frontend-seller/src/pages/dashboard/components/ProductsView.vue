@@ -22,7 +22,7 @@
 
     <Dialog
       v-model:visible="deleteProductDialog"
-      :style="{ width: '450px' }"
+      :style="{ width: '425px' }"
       header="Confirm"
       :modal="true"
     >
@@ -46,7 +46,7 @@
 
     <Dialog
       v-model:visible="deleteProductsDialog"
-      :style="{ width: '450px' }"
+      :style="{ width: '425px' }"
       header="Confirm"
       :modal="true"
     >
@@ -74,7 +74,7 @@
 
     <Dialog
       v-model:visible="productDialog"
-      :style="{ width: '500px' }"
+      :style="{ width: '425px' }"
       header="Product"
       :modal="true"
       :draggable="false"

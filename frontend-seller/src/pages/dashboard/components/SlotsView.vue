@@ -170,7 +170,7 @@
 
           <div class="createslot-b-total">
             <p>Total slots {{ computedSlots }}</p>
-            <p>Stock: {{ createSlotData.stock }}</p>
+            <p>Stock: {{ productList[createSlotIndex].stock }}</p>
             <p>Total Units: {{ computedUnits }}</p>
             <p>Total Collateral: {{ computedCollateral }}</p>
             <p>Unit Price: {{ computedPrice }}</p>
@@ -200,7 +200,7 @@
       :contentStyle="{ height: '80vw' }"
     >
       <DataTable
-        :value="slotListDialogData.slots"
+        :value="productList[slotListDialogIndex].slots"
         stripedRows
         scrollable
         scrollHeight="flex"
@@ -478,14 +478,15 @@
                   outlined
                   rounded
                   v-tooltip.top="'Enable a slot'"
-                  @click="openCreateSlotDialog(slotProps.data)"
+                  @click="openCreateSlotDialog(slotProps.index)"
                 />
                 <Button
                   class="table-button"
                   icon="pi pi-eye"
                   outlined
                   rounded
-                  @click="openSlotListDialog(slotProps.data)"
+                  :disabled="slotProps.data.slots_count < 1"
+                  @click="openSlotListDialog(slotProps.index)"
                 />
               </div>
             </template>
@@ -705,7 +706,7 @@ export default {
       mediaHostURL: HOST + "/api/media/create-image",
       isLoading: false,
       createSlotDialogVisible: false,
-      createSlotData: null,
+      createSlotIndex: null,
       deleteProductDialog: false,
       deleteProductsDialog: false,
       descriptionLengthLimit: 1000,
@@ -713,7 +714,7 @@ export default {
       minProductImages: 5,
       switchValues: {},
       slotListDialogVisible: false,
-      slotListDialogData: [],
+      slotListDialogIndex: null,
       customers: [
         {
           id: 1000,
@@ -884,14 +885,14 @@ export default {
     computedCollateral() {
       if (!this.createSlotForm.batch_mode) {
         let total =
-          this.createSlotData.collateral * this.createSlotForm.product_units;
+          this.productList[this.createSlotIndex].collateral * this.createSlotForm.product_units;
         return `${total} ADA`;
       }
 
       if (this.createSlotForm.batch_mode) {
         let units =
           this.createSlotForm.product_units * this.createSlotForm.batch_number;
-        let total = this.createSlotData.collateral * units;
+        let total = this.productList[this.createSlotIndex].collateral * units;
         return `${total} ADA`;
       }
 
@@ -900,12 +901,12 @@ export default {
 
     computedPrice() {
       if (!this.createSlotForm.batch_mode) {
-        let total = this.createSlotData.price;
+        let total = this.productList[this.createSlotIndex].price;
         return `${total} ADA`;
       }
 
       if (this.createSlotForm.batch_mode) {
-        let originalPrice = this.createSlotData.price;
+        let originalPrice = this.productList[this.createSlotIndex].price;
 
         let discountPercentage = this.createSlotForm.product_discount;
 
@@ -952,9 +953,9 @@ export default {
     progressBar(e) {
       return e * 20;
     },
-    openSlotListDialog(e) {
+    openSlotListDialog(productIndex) {
+      this.slotListDialogIndex = productIndex;
       this.slotListDialogVisible = true;
-      this.slotListDialogData = e;
     },
     onBeforeUpload() {
       if (this.product.image_set.length < this.maxProductImages) {
@@ -1032,7 +1033,7 @@ export default {
 
       const params = {
         wallet_id: "c08b3754a3fc2c4cb063e12295e903d14edc899d",
-        product_id: this.createSlotData.id,
+        product_id: this.productList[this.createSlotIndex].id,
         ...this.createSlotForm,
       };
 
@@ -1117,8 +1118,8 @@ export default {
       return false;
     },
 
-    openCreateSlotDialog(productData) {
-      this.createSlotData = productData;
+    openCreateSlotDialog(productIndex) {
+      this.createSlotIndex = productIndex;
       this.createSlotDialogVisible = true;
     },
 
