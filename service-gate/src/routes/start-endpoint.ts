@@ -8,6 +8,8 @@ import { BadRequestError } from "../errors";
 import { sleep } from "../utils/sleep";
 import { sendEvent } from "./get-events";
 
+const ADA_BASE: number = 1000000;
+
 interface instanceScheme {
   startDefault: {
     sWalletParam: string;
@@ -44,7 +46,7 @@ const startEndpointHandler = async (req: Request, res: Response) => {
     const SLOT = slots[0];
 
     ///////////////////////////////////
-    
+
     if (SLOT.actived) {
       return res.status(200).send({
         success: true,
@@ -58,8 +60,8 @@ const startEndpointHandler = async (req: Request, res: Response) => {
     const instanceScheme: instanceScheme = {
       startDefault: {
         sWalletParam: params.seller_pubkeyhash,
-        pPriceParam: SLOT.contract_price,
-        sCollateralParam: SLOT.contract_collateral,
+        pPriceParam: SLOT.contract_price * ADA_BASE,
+        sCollateralParam: SLOT.contract_collateral * ADA_BASE,
       },
     };
 

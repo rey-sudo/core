@@ -264,6 +264,7 @@
           <template #body="slotProps">
             <div class="switch-group">
               <InputSwitch
+                v-tooltip.left="'Generate the transaction to send to the network.'"
                 :disabled="slotProps.data.actived === 1"
                 :modelValue="slotProps.data.actived === 1"
                 @change="
@@ -272,9 +273,12 @@
                 "
               />
 
-              <span @click="activeSlot('true', slotProps.data.id)">
-                <i class="pi pi-pen-to-square"
-              /></span>
+              <span
+                @click="activeSlot('true', slotProps.data.id)"
+                v-tooltip.top="'⚠ Re-submit tx'"
+              >
+                <i class="pi pi-exclamation-triangle" />
+              </span>
             </div>
           </template>
         </Column>
@@ -358,9 +362,8 @@
               <div class="slots-b-card-h-l">
                 <span>Product slots</span>
                 <span>Create or modify slots and more...</span>
-              
+
                 <span @click="runTX">x</span>
-              
               </div>
 
               <div class="slots-b-card-h-r">
@@ -933,7 +936,7 @@ export default {
   methods: {
     async runTX() {
       const tx =
-        "84a400800181a300581d701bd4506c10bbe3f59ae2ab527ef49656b01383046532da9417573bf6011a00117e5c028201d818583cd8799f004777616974696e67d87980d87980d87980581c4068ce72a0f73e850f19899a10b82ec534a55a6d860e5c5267dca2b9d87a80191b581896ff02000e81581c4068ce72a0f73e850f19899a10b82ec534a55a6d860e5c5267dca2b9a0f5f6";
+        "84a400800181a300581d701fb4024cc499be27f67a2901b4d116dde050c0e5f6564222ed19adff011a08f0d180028201d8185845d8799f004777616974696e67d87980d87980d87980581c4068ce72a0f73e850f19899a10b82ec534a55a6d860e5c5267dca2b9d87a801b00000001a13b86001a08f0d180ff02000e81581c4068ce72a0f73e850f19899a10b82ec534a55a6d860e5c5267dca2b9a0f5f6";
       const res = await balanceTx(tx);
 
       console.log(res);
