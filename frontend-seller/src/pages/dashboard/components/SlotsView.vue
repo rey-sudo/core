@@ -263,7 +263,7 @@
         >
           <template #body="slotProps">
             <div class="switch-group">
-              <InputSwitch
+              <InputSwitch 
                 v-tooltip.left="'Generate the transaction to send to the network.'"
                 :disabled="slotProps.data.actived === 1"
                 :modelValue="slotProps.data.actived === 1"
@@ -277,7 +277,7 @@
                 @click="activeSlot('true', slotProps.data.id)"
                 v-tooltip.top="'⚠ Re-submit tx'"
               >
-                <i class="pi pi-exclamation-triangle" />
+                <i class="pi pi-replay" />
               </span>
             </div>
           </template>
@@ -286,7 +286,7 @@
         <Column
           field="contract_state"
           header="State"
-          style="min-width: 8rem"
+          style="min-width: 10rem"
           sortable
         >
           <template #body="slotProps">
