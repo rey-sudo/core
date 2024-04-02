@@ -5,10 +5,10 @@ import { Request, Response } from "express";
 import { requireAuth } from "../utils/required";
 import { sellerMiddleware } from "../utils/seller";
 import { BadRequestError } from "../errors";
-import { sleep } from "../utils/sleep";
 import { sendEvent } from "./get-events";
+import { sleep } from "../utils/sleep";
 
-const ADA_BASE: number = 1000000;
+const ADA_LOVELACE: number = 1000000;
 
 interface instanceScheme {
   startDefault: {
@@ -17,8 +17,6 @@ interface instanceScheme {
     sCollateralParam: number;
   };
 }
-
-///////////////////////////////////////////////
 
 const startEndpointMiddlewares: any = [sellerMiddleware, requireAuth];
 
@@ -45,36 +43,35 @@ const startEndpointHandler = async (req: Request, res: Response) => {
 
     const SLOT = slots[0];
 
-    ///////////////////////////////////
-
     if (SLOT.actived) {
-      return res.status(200).send({
-        success: true,
-        payload: {
-          transaction: SLOT.contract_state_0,
-        },
-      });
+      throw new Error("IS_ACTIVED");
     }
 
-    ///////////////////////////////////
+    ////////////////////////////////////////////////////
+
     const instanceScheme: instanceScheme = {
       startDefault: {
         sWalletParam: params.seller_pubkeyhash,
-        pPriceParam: SLOT.contract_price * ADA_BASE,
-        sCollateralParam: SLOT.contract_collateral * ADA_BASE,
+        pPriceParam: SLOT.contract_price * ADA_LOVELACE,
+        sCollateralParam: SLOT.contract_collateral * ADA_LOVELACE,
       },
     };
 
-    const getStatus = await API.post(
+    await API.post(
       `/api/contract/instance/${SLOT.contract_id}/endpoint/Start`,
       instanceScheme
     )
       .then((res) => assert.ok(res.status === 200))
-      .then(() => sleep(1000))
-      .then(() => API.get(`/api/contract/instance/${SLOT.contract_id}/status`))
-      .then((res) => {
-        console.log(res.data);
+      .catch(() => {
+        throw new Error("CID_FAILED");
+      });
 
+    await sleep(1000);
+
+    const getStatus = await API.get(
+      `/api/contract/instance/${SLOT.contract_id}/status`
+    )
+      .then((res) => {
         assert.ok(res.data.cicYieldedExportTxs.length !== 0);
 
         assert.ok(
