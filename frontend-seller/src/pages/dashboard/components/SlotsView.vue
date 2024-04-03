@@ -286,7 +286,7 @@
 
               <span
                 v-if="slotProps.data.actived === 1"
-                @click="activeSlot('true', slotProps.data.contract_state_0)"
+                @click="activeSlot('true', slotProps.data.contract_utx_0)"
                 v-tooltip.top="'⚠ Warning. Click to resend the transaction.'"
               >
                 <i class="pi pi-exclamation-triangle" />

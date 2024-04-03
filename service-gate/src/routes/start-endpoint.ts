@@ -94,11 +94,12 @@ const startEndpointHandler = async (req: Request, res: Response) => {
       UPDATE slots 
       SET actived = ?,
           contract_stage = ?,
-          contract_state_0 = ?
+          contract_status_0 = ?,
+          contract_utx_0 = ?
       WHERE id = ? AND seller_id = ?
       `;
 
-    const schemeValue = [true, "actived", getStatus, params.slot_id, SELLER.id];
+    const schemeValue = [true, "actived", getStatus, getStatus.cicYieldedExportTxs[0].transaction, params.slot_id, SELLER.id];
 
     await connection.execute(schemeData, schemeValue);
 
