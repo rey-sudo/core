@@ -66,12 +66,14 @@ const startEndpointHandler = async (req: Request, res: Response) => {
         throw new Error("CID_FAILED");
       });
 
-    await sleep(1000);
+    // await sleep(1000);
 
     const getStatus = await API.get(
       `/api/contract/instance/${SLOT.contract_id}/status`
     )
       .then((res) => {
+        console.log(res.data);
+        
         assert.ok(res.data.cicYieldedExportTxs.length !== 0);
 
         assert.ok(

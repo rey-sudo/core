@@ -31,6 +31,7 @@ const getSlotsHandler = async (req: Request, res: Response) => {
                 'contract_collateral', s.contract_collateral,
                 'contract_stage', s.contract_stage,
                 'contract_state', s.contract_state,
+                'contract_state_0', s.contract_state_0,
                 'product_price', s.product_price,
                 'product_collateral', s.product_collateral,
                 'product_discount', s.product_discount,

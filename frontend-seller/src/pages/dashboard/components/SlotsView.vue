@@ -285,7 +285,7 @@
               />
 
               <span
-                @click="activeSlot('true', slotProps.data.id)"
+                @click="activeSlot('true', slotProps.data.contract_state_0)"
                 v-tooltip.top="'⚠ Warning. Click to resend the transaction.'"
               >
                 <i class="pi pi-exclamation-triangle" />
@@ -950,13 +950,13 @@ export default {
 
       console.log(res);
     },
-    async activeSlot(value, slotId) {
-      if (value === "false") {
+    async activeSlot(actived, data) {
+      if (actived === "false") {
         const addr = await this.getLucid.wallet.address();
         const address = await getAddressDetails(addr);
 
         const params = {
-          slot_id: slotId,
+          slot_id: data,
           seller_pubkeyhash: address.paymentCredential.hash,
         };
 
@@ -964,6 +964,16 @@ export default {
           .then((res) => balanceTx(res.response.payload.transaction))
           .then((tx) => console.log(tx))
           .catch((err) => console.error(err));
+      }
+
+      if (actived === "true") {
+        console.log(data);
+
+        const tx = JSON.parse(data).cicYieldedExportTxs[0].transaction;
+
+        const txInfo = await balanceTx(tx);
+
+        console.log(txInfo);
       }
     },
     progressBar(e) {
