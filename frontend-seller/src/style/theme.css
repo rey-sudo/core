@@ -2002,12 +2002,12 @@
     font-size: var(--text-size-a);
   }
   .p-button:not(:disabled):hover {
-    background: #1e88e5;
+    background: var(--base-b);
     color: #ffffff;
     border-color: #1e88e5;
   }
   .p-button:not(:disabled):active {
-    background: #1976d2;
+    background: var(--base-c);
     color: #ffffff;
     border-color: #1976d2;
   }
@@ -2086,8 +2086,8 @@
   }
   .p-button .p-badge {
     margin-left: 0.5rem;
-    min-width: 1rem;
-    height: 1rem;
+    min-width: 0.5rem;
+    height: 0.5rem;
     line-height: 1rem;
     color: #2196f3;
     background-color: #ffffff;
@@ -6296,7 +6296,7 @@
     color: #ffffff;
   }
   .p-toast .p-toast-message.p-toast-message-success {
-    background: #43a047;
+    background: var(--green-a);
     border: 0 none;
     border-width: 0 0 0 4px;
     color: #ffffff;
@@ -6527,8 +6527,10 @@
     line-height: 1.5rem;
   }
   .p-badge.p-badge-secondary {
-    background-color: #607d8b;
-    color: #ffffff;
+    background-color: var(--blue-c);
+    color: var(--text-w);
+    font-weight: 500;
+    font-size: 10px;
   }
   .p-badge.p-badge-success {
     background-color: var(--green-a);

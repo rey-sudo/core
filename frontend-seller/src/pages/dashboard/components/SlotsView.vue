@@ -175,12 +175,6 @@
             <p>Total Collateral: {{ computedCollateral }}</p>
             <p>Unit Price: {{ computedPrice }}</p>
           </div>
-
-          <Steps
-            :model="createSlotSteps"
-            v-model:activeStep="createSlotStep"
-            :readonly="true"
-          />
         </div>
       </div>
 
@@ -285,11 +279,11 @@
               />
 
               <span
-                v-if="slotProps.data.actived === 1"
-                @click="activeSlot('true', slotProps.data.contract_utx_0)"
+                v-if="slotProps.data.contract_utx_0"
                 v-tooltip.top="'⚠ Warning. Click to resend the transaction.'"
+                @click="activeSlot('true', slotProps.data.contract_utx_0)"
               >
-                <i class="pi pi-exclamation-triangle" />
+                <i class="pi pi-replay" />
               </span>
             </div>
           </template>
@@ -504,12 +498,23 @@
                 />
                 <Button
                   class="table-button"
-                  icon="pi pi-eye"
+                  icon="pi pi-receipt"
                   outlined
                   rounded
                   :disabled="slotProps.data.slots_count < 1"
                   @click="openSlotListDialog(slotProps.index)"
-                />
+                >
+                  <i
+                    v-if="slotProps.data.slots_count > 0"
+                    v-badge.secondary
+                    class="pi pi-folder"
+                  />
+
+                  <i
+                    v-if="slotProps.data.slots_count < 1"
+                    class="pi pi-folder"
+                  />
+                </Button>
               </div>
             </template>
           </Column>
@@ -666,16 +671,6 @@ export default {
     const openSlotMenu = (event) => {
       slotMenuRef.value.toggle(event);
     };
-    const createSlotStep = ref(0);
-
-    const createSlotSteps = ref([
-      {
-        label: "Create",
-      },
-      {
-        label: "Active",
-      },
-    ]);
 
     const createSlotForm = ref({
       batch_mode: false,
@@ -694,8 +689,6 @@ export default {
     return {
       createSlotFormErrors,
       createSlotForm,
-      createSlotSteps,
-      createSlotStep,
       createSlot,
       productList,
       startEndpoint,
@@ -952,6 +945,8 @@ export default {
       console.log(res);
     },
     async activeSlot(actived, data) {
+      console.log(actived, data);
+
       if (actived === "false") {
         const addr = await this.getLucid.wallet.address();
         const address = await getAddressDetails(addr);
@@ -961,16 +956,14 @@ export default {
           seller_pubkeyhash: address.paymentCredential.hash,
         };
 
-        this.startEndpoint(params)
+        await this.startEndpoint(params)
           .then((res) => balanceTx(res.response.payload.transaction))
           .then((tx) => console.log(tx))
           .catch((err) => console.error(err));
       }
 
       if (actived === "true") {
-        const tx = JSON.parse(data).cicYieldedExportTxs[0].transaction;
-
-        const txInfo = await balanceTx(tx);
+        const txInfo = await balanceTx(data);
 
         console.log(txInfo);
       }
@@ -979,6 +972,10 @@ export default {
       return e * 20;
     },
     openSlotListDialog(productIndex) {
+      if (this.productList[productIndex].slots_count < 1) {
+        return;
+      }
+
       this.slotListDialogIndex = productIndex;
       this.slotListDialogVisible = true;
     },
@@ -1067,16 +1064,16 @@ export default {
       await this.createSlot(params)
         .then((res) => {
           if (res.response.success === true) {
-            this.$toast.add({
-              severity: "success",
-              summary: "Successful",
-              detail: "Slots Created",
-              life: 3000,
-            });
-
             this.createSlotDialogVisible = false;
 
             this.openSlotListDialog(this.createSlotIndex);
+
+            this.$toast.add({
+              severity: "success",
+              summary: "Successful",
+              detail: "Check the slot folder.",
+              life: 5000,
+            });
           }
 
           if (res.response.success === false) {
@@ -1241,6 +1238,7 @@ export default {
 .network-analyzer span {
   margin-left: 1rem;
   font-size: var(--text-size-a);
+  font-weight: 500;
 }
 
 .dialog-title {
@@ -1308,7 +1306,7 @@ export default {
 .createslot-b-total {
   color: var(--text-w);
   margin-top: 0rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0rem;
   background: var(--blue-c);
   border-radius: 8px;
   padding: 1rem;
