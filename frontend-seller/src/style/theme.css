@@ -1272,7 +1272,7 @@
     font-size: var(--text-size-b);
     color: var(--text-a);
     background: #ffffff;
-    padding: 0.75rem 0.5rem;
+    padding: 0.75rem;
     border: 1px solid #ced4da;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s,
       box-shadow 0.2s;
@@ -6693,7 +6693,7 @@
   .p-progress-spinner-circle {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: 0;
-    stroke: #ffffff;
+    stroke: red;
     animation: p-progress-spinner-dash 1.5s ease-in-out infinite,
       p-progress-spinner-color 6s ease-in-out infinite;
     stroke-linecap: round;

@@ -192,13 +192,22 @@
 
     <Dialog
       v-model:visible="slotListDialogVisible"
-      header="Product slots"
       :style="{ width: '90vw' }"
       maximizable
       modal
       :draggable="false"
       :contentStyle="{ height: '80vw' }"
     >
+      <template #header>
+        <div class="dialog-header">
+          <span class="dialog-title">Product slots</span>
+          <div class="network-analyzer">
+            <div class="loader" />
+            <span>Scanning network 5s</span>
+          </div>
+        </div>
+      </template>
+
       <DataTable
         :value="productList[slotListDialogIndex].slots"
         stripedRows
@@ -263,8 +272,10 @@
         >
           <template #body="slotProps">
             <div class="switch-group">
-              <InputSwitch 
-                v-tooltip.left="'Generate the transaction to send to the network.'"
+              <InputSwitch
+                v-tooltip.left="
+                  'Generate the transaction to send to the network.'
+                "
                 :disabled="slotProps.data.actived === 1"
                 :modelValue="slotProps.data.actived === 1"
                 @change="
@@ -275,9 +286,9 @@
 
               <span
                 @click="activeSlot('true', slotProps.data.id)"
-                v-tooltip.top="'⚠ Re-submit tx'"
+                v-tooltip.top="'⚠ Warning. Click to resend the transaction.'"
               >
-                <i class="pi pi-replay" />
+                <i class="pi pi-exclamation-triangle" />
               </span>
             </div>
           </template>
@@ -361,9 +372,7 @@
             <div class="slots-b-card-h">
               <div class="slots-b-card-h-l">
                 <span>Product slots</span>
-                <span>Create or modify slots and more...</span>
-
-                <span @click="runTX">x</span>
+                <span @click="runTX">Create or modify slots and more...</span>
               </div>
 
               <div class="slots-b-card-h-r">
@@ -1214,6 +1223,43 @@ export default {
 <style lang="css" scoped>
 ::v-deep(.p-progressbar) {
   height: 4px;
+}
+
+.network-analyzer {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.network-analyzer span {
+  margin-left: 1rem;
+  font-size: var(--text-size-a);
+}
+
+.dialog-title {
+  font-size: var(--text-size-f);
+  font-weight: bold;
+}
+
+.loader {
+  width: 10px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--blue-c);
+  box-shadow: 0 0 0 0 var(--blue-s);
+  animation: l1 1s infinite;
+}
+@keyframes l1 {
+  100% {
+    box-shadow: 0 0 0 20px #0000;
+  }
+}
+
+.dialog-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .switch-group {
