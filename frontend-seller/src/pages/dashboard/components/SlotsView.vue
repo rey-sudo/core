@@ -967,8 +967,7 @@ export default {
       }
 
       if (actived === "true") {
-        console.log(data);
-
+     
         const tx = JSON.parse(data).cicYieldedExportTxs[0].transaction;
 
         const txInfo = await balanceTx(tx);
@@ -1003,9 +1002,7 @@ export default {
       const mysqlDateString = e;
 
       const formattedDate = mysqlDateString.split(".")[0];
-
-      console.log(formattedDate);
-
+      
       return formattedDate;
     },
     closeAllModals() {
