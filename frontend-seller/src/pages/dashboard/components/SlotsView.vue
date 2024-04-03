@@ -285,6 +285,7 @@
               />
 
               <span
+                v-if="slotProps.data.actived === 1"
                 @click="activeSlot('true', slotProps.data.contract_state_0)"
                 v-tooltip.top="'⚠ Warning. Click to resend the transaction.'"
               >
@@ -967,7 +968,6 @@ export default {
       }
 
       if (actived === "true") {
-     
         const tx = JSON.parse(data).cicYieldedExportTxs[0].transaction;
 
         const txInfo = await balanceTx(tx);
@@ -1002,7 +1002,7 @@ export default {
       const mysqlDateString = e;
 
       const formattedDate = mysqlDateString.split(".")[0];
-      
+
       return formattedDate;
     },
     closeAllModals() {
@@ -1572,7 +1572,7 @@ img {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--border-a);
-  padding: 1rem 0;
+  padding: 0.5rem 0;
 }
 
 .slots-b-card-h-l {
