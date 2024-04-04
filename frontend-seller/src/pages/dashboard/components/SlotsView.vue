@@ -80,9 +80,9 @@
       :draggable="false"
     >
       <div class="createslot">
-        <LoadingBars v-if="isLoading" />
+        <LoadingBars v-if="createSlotLoader" />
 
-        <div class="createslot-wrap" v-if="!isLoading">
+        <div class="createslot-wrap" v-if="!createSlotLoader">
           <div class="field">
             <label for="batch_mode" class="field-label">
               <span>Batch Mode</span>
@@ -270,7 +270,7 @@
                 v-tooltip.left="
                   'Generate the transaction to send to the network.'
                 "
-                :disabled="slotProps.data.actived === 1"
+                :disabled="slotProps.data.actived === 1 || activeSlotLoader"
                 :modelValue="slotProps.data.actived === 1"
                 @change="
                   (event) =>
@@ -279,11 +279,13 @@
               />
 
               <span
-                v-if="slotProps.data.contract_utx_0"
+                v-if="slotProps.data.contract_utx_0 || activeSlotLoader"
                 v-tooltip.top="'⚠ Warning. Click to resend the transaction.'"
                 @click="activeSlot('true', slotProps.data.contract_utx_0)"
               >
-                <i class="pi pi-replay" />
+                <i v-if="activeSlotLoader" class="pi pi-spin pi-spinner" />
+
+                <i v-if="!activeSlotLoader" class="pi pi-replay" />
               </span>
             </div>
           </template>
@@ -510,10 +512,7 @@
                     class="pi pi-eye"
                   />
 
-                  <i
-                    v-if="slotProps.data.slots_count < 1"
-                    class="pi pi-eye"
-                  />
+                  <i v-if="slotProps.data.slots_count < 1" class="pi pi-eye" />
                 </Button>
               </div>
             </template>
@@ -720,7 +719,8 @@ export default {
   data() {
     return {
       mediaHostURL: HOST + "/api/media/create-image",
-      isLoading: false,
+      createSlotLoader: false,
+      activeSlotLoader: false,
       createSlotDialogVisible: false,
       createSlotIndex: null,
       deleteProductDialog: false,
@@ -945,7 +945,7 @@ export default {
       console.log(res);
     },
     async activeSlot(actived, data) {
-      console.log(actived, data);
+      this.activeSlotLoader = true;
 
       if (actived === "false") {
         const addr = await this.getLucid.wallet.address();
@@ -963,10 +963,12 @@ export default {
       }
 
       if (actived === "true") {
-        const txInfo = await balanceTx(data);
-
-        console.log(txInfo);
+        await balanceTx(data)
+          .then((tx) => console.log(tx))
+          .catch((err) => console.error(err));
       }
+
+      this.activeSlotLoader = false;
     },
     progressBar(e) {
       return e * 20;
@@ -996,11 +998,7 @@ export default {
       }
     },
     formatDate(e) {
-      const mysqlDateString = e;
-
-      const formattedDate = mysqlDateString.split(".")[0];
-
-      return formattedDate;
+      return e.split(".")[0];
     },
     closeAllModals() {
       this.messageModalVisible = false;
@@ -1024,7 +1022,9 @@ export default {
       }
     },
     formatCurrency(value) {
-      if (value) return value + " ADA";
+      if (value) {
+        return value + " ADA";
+      }
     },
     openProductDialog() {
       this.resetForm();
@@ -1059,7 +1059,7 @@ export default {
 
       console.log(params);
 
-      this.isLoading = true;
+      this.createSlotLoader = true;
 
       await this.createSlot(params)
         .then((res) => {
@@ -1094,7 +1094,7 @@ export default {
             life: 3000,
           });
         })
-        .finally(() => (this.isLoading = false));
+        .finally(() => (this.createSlotLoader = false));
     },
     checkUnitNumber(value) {
       if (!value) {
