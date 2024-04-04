@@ -273,13 +273,13 @@
                 :disabled="slotProps.data.actived === 1 || activeSlotLoader"
                 :modelValue="slotProps.data.actived === 1"
                 @change="
-                  (event) =>
-                    activeSlot(event.target.ariaChecked, slotProps.data.id)
+                  (e) => activeSlot(e.target.ariaChecked, slotProps.data.id)
                 "
               />
 
               <span
                 v-if="slotProps.data.contract_utx_0 || activeSlotLoader"
+                :class="{ disabled: activeSlotLoader }"
                 v-tooltip.top="'⚠ Warning. Click to resend the transaction.'"
                 @click="activeSlot('true', slotProps.data.contract_utx_0)"
               >
@@ -303,7 +303,7 @@
                 {{ slotProps.data.contract_stage }}
               </div>
               <ProgressBar
-                :value="progressBar(slotProps.data.contract_state)"
+                :value="getStateBarValue(slotProps.data.contract_state)"
                 :showValue="false"
               />
             </div>
@@ -970,7 +970,7 @@ export default {
 
       this.activeSlotLoader = false;
     },
-    progressBar(e) {
+    getStateBarValue(e) {
       return e * 20;
     },
     openSlotListDialog(productIndex) {
@@ -1227,6 +1227,10 @@ export default {
 <style lang="css" scoped>
 ::v-deep(.p-progressbar) {
   height: 4px;
+}
+
+.disabled {
+  pointer-events: none;
 }
 
 .network-analyzer {
