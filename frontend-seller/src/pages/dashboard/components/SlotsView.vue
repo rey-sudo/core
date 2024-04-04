@@ -299,8 +299,9 @@
         >
           <template #body="slotProps">
             <div class="column-block">
-              <div class="column-block-label">
-                {{ slotProps.data.contract_stage }}
+              <div class="column-block-row">
+                <span> {{ slotProps.data.contract_stage }}</span>
+                <span> 0 Confirmations</span>
               </div>
               <ProgressBar
                 :value="getStateBarValue(slotProps.data.contract_state)"
@@ -509,10 +510,12 @@
                   <i
                     v-if="slotProps.data.slots_count > 0"
                     v-badge.secondary
-                    class="pi pi-eye"
+                    class="pi pi-folder"
                   />
-
-                  <i v-if="slotProps.data.slots_count < 1" class="pi pi-eye" />
+                  <i
+                    v-if="slotProps.data.slots_count < 1"
+                    class="pi pi-folder"
+                  />
                 </Button>
               </div>
             </template>
@@ -1228,6 +1231,22 @@ export default {
 ::v-deep(.p-progressbar) {
   height: 4px;
 }
+
+.column-block-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.column-block-row span:nth-child(2) {
+  color: var(--text-b);
+  font-size: var(--text-size-a);
+  font-weight: 500;
+}
+
+
+
+
+
 
 .disabled {
   pointer-events: none;
