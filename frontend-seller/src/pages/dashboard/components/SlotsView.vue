@@ -507,12 +507,12 @@
                   <i
                     v-if="slotProps.data.slots_count > 0"
                     v-badge.secondary
-                    class="pi pi-folder"
+                    class="pi pi-eye"
                   />
 
                   <i
                     v-if="slotProps.data.slots_count < 1"
-                    class="pi pi-folder"
+                    class="pi pi-eye"
                   />
                 </Button>
               </div>
@@ -1239,6 +1239,7 @@ export default {
   margin-left: 1rem;
   font-size: var(--text-size-a);
   font-weight: 500;
+  color: var(--blue-c);
 }
 
 .dialog-title {
