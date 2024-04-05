@@ -961,14 +961,50 @@ export default {
 
         await this.startEndpoint(params)
           .then((res) => balanceTx(res.response.payload.transaction))
-          .then((tx) => console.log(tx))
-          .catch((err) => console.error(err));
+          .then((tx) => {
+            console.log(tx);
+
+            this.$toast.add({
+              severity: "success",
+              summary: "Successful",
+              detail: "Transaction sent to the network.",
+              life: 5000,
+            });
+          })
+          .catch((err) => {
+            console.error(err);
+
+            this.$toast.add({
+              severity: "error",
+              summary: "Error Message",
+              detail: "Try again later.",
+              life: 5000,
+            });
+          });
       }
 
       if (actived === "true") {
         await balanceTx(data)
-          .then((tx) => console.log(tx))
-          .catch((err) => console.error(err));
+          .then((tx) => {
+            console.log(tx);
+
+            this.$toast.add({
+              severity: "success",
+              summary: "Successful",
+              detail: "Transaction sent to the network.",
+              life: 5000,
+            });
+          })
+          .catch((err) => {
+            console.error(err);
+
+            this.$toast.add({
+              severity: "error",
+              summary: "Error Message",
+              detail: "Transaction canceled.",
+              life: 5000,
+            });
+          });
       }
 
       this.activeSlotLoader = false;
@@ -1083,7 +1119,7 @@ export default {
             this.$toast.add({
               severity: "error",
               summary: "Error Message",
-              detail: "Please try again later.",
+              detail: "Try again later.",
               life: 3000,
             });
           }
@@ -1242,11 +1278,6 @@ export default {
   font-size: var(--text-size-a);
   font-weight: 500;
 }
-
-
-
-
-
 
 .disabled {
   pointer-events: none;
