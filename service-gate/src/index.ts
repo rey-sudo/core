@@ -6,9 +6,6 @@ import { NotFoundError, errorMiddleware } from "./errors";
 import serviceProductListener from "./kafka/service-product";
 import compression from "compression";
 
-
-
-
 const main = async () => {
   try {
     if (!process.env.POD_TIMEOUT) {
@@ -74,6 +71,14 @@ const main = async () => {
       route.startEndpointHandler
     );
 
+    app.post(
+      "/api/gate/locking-endpoint",
+
+      route.lockingEndpointMiddlewares,
+
+      route.lockingEndpointHandler
+    );
+
     app.get(
       "/api/gate/get-slots",
 
@@ -81,7 +86,6 @@ const main = async () => {
 
       route.getSlotsHandler
     );
-
 
     app.get(
       "/api/gate/get-events",

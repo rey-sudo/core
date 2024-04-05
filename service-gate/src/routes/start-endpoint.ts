@@ -66,14 +66,12 @@ const startEndpointHandler = async (req: Request, res: Response) => {
         throw new Error("CID_FAILED");
       });
 
-    // await sleep(1000);
-
     const getStatus = await API.get(
       `/api/contract/instance/${SLOT.contract_id}/status`
     )
       .then((res) => {
         console.log(res.data);
-        
+
         assert.ok(res.data.cicYieldedExportTxs.length !== 0);
 
         assert.ok(
@@ -93,13 +91,22 @@ const startEndpointHandler = async (req: Request, res: Response) => {
     const schemeData = `
       UPDATE slots 
       SET actived = ?,
+          seller_pubkeyhash = ?,
           contract_stage = ?,
           contract_status_0 = ?,
           contract_utx_0 = ?
       WHERE id = ? AND seller_id = ?
       `;
 
-    const schemeValue = [true, "actived", getStatus, getStatus.cicYieldedExportTxs[0].transaction, params.slot_id, SELLER.id];
+    const schemeValue = [
+      true,
+      params.seller_pubkeyhash,
+      "actived",
+      getStatus,
+      getStatus.cicYieldedExportTxs[0].transaction,
+      params.slot_id,
+      SELLER.id,
+    ];
 
     await connection.execute(schemeData, schemeValue);
 

@@ -174,7 +174,7 @@ export default {
   text-align: left;
   font-size: var(--text-size-b);
   cursor: pointer;
-  color: var(--blue-a);
+  color: var(--blue-c);
   margin-top: 1rem;
   font-weight: 500;
   display: flex;
