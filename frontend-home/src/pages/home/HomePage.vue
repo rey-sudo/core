@@ -37,9 +37,9 @@
 <script>
 import MainHeader from "@/components/MainHeader.vue";
 import MobileHeader from "@/components/MobileHeader.vue";
-import GridWrap from "@/pages/store/components/GridWrap.vue";
-import MobileGrid from "@/pages/store/components/MobileGrid.vue";
-import storeAPI from "@/pages/store/composable/store-api";
+import GridWrap from "@/pages/home/components/GridWrap.vue";
+import MobileGrid from "@/pages/home/components/MobileGrid.vue";
+import storeAPI from "@/pages/home/composable/home-api";
 import { useRouter } from "vue-router";
 
 export default {
@@ -222,3 +222,4 @@ export default {
   }
 }
 </style>
+@/pages/home/composable/store-api

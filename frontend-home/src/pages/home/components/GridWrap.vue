@@ -4,12 +4,11 @@
       <div class="grid-item-title">{{ row.title }}</div>
 
       <div class="grid-row">
-        <!---->
         <div
           class="card"
           v-for="item in row.items"
           :key="item"
-          @click="handleClick(item.pid)"
+          @click="handleClick(item.id)"
         >
           <div class="card-header">
             <div class="card-image">
@@ -19,47 +18,57 @@
 
           <div class="card-body">
             <div class="card-body-name">
-              {{ item.name }}
+              <span> {{ item.name.slice(0, 50) }}...</span>
             </div>
             <div class="card-body-price">
               <span> {{ formatPrice(item.price) }}</span>
             </div>
-            <div
-              class="card-body-stock"
-              :class="{
-                white: item.stock_supply,
-                red: !item.stock_supply,
-              }"
-            >
-              <span> {{ item.stock_supply }} Stock</span>
-            </div>
 
             <div class="card-body-collateral">
-              <span> {{ item.collateral }} ADA Collateral</span>
+              <span> {{ item.collateral }} ADA Coll.</span>
+            </div>
+
+            <div class="card-body-seller">
+              <span>{{ item.discount_label }}</span>
+              <span>
+                <svg
+                  class="badge"
+                  viewBox="0 0 24 24"
+                  width="1rem"
+                  height="1rem"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M16.438 4.313L14.814 1.5 12 3.124 9.187 1.5 7.562 4.313H4.313v3.25L1.5 9.186 3.124 12 1.5 14.813l2.813 1.625v3.248h3.25L9.186 22.5 12 20.876l2.813 1.624 1.625-2.814h3.248v-3.248l2.814-1.624L20.876 12 22.5 9.187l-2.814-1.625V4.313h-3.248zm-.902 4.215l1.414 1.414-6.364 6.364L7.05 12.77l1.414-1.414 2.122 2.122 4.95-4.95z"
+                    fill="#F0B90B"
+                  ></path>
+                </svg>
+              </span>
             </div>
           </div>
         </div>
-        <!---->
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import storeAPI from "@/pages/store/composable/store-api";
+import homeAPI from "@/pages/home/composable/home-api";
 import { useRouter } from "vue-router";
 
 export default {
   setup() {
     const router = useRouter();
 
-    const { getter__allProducts } = storeAPI();
+    const { getter__allProducts } = homeAPI();
 
     return { router, getter__allProducts };
   },
   methods: {
-    handleClick(pid) {
-      this.router.push({ name: "land", params: { pid: pid } });
+    handleClick(id) {
+      this.router.push({ name: "product", params: { id } });
     },
 
     formatPrice(num) {
@@ -78,17 +87,51 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.card-body-seller {
+  text-align: left;
+  font-size: var(--text-size-b);
+  display: flex;
+  align-items: center;
+  color: var(--text-a);
+  line-height: 1.5rem;
+  font-weight: 500;
+}
+
+.card-body-collateral {
+  text-align: left;
+  font-size: var(--text-size-b);
+  display: flex;
+  align-items: center;
+  color: var(--text-b);
+}
+
+.card-body-price {
+  font-weight: 600;
+  text-align: left;
+  font-size: var(--text-size-c);
+  line-height: 2rem;
+  color: var(--text-a);
+}
+
+.grid-item-title {
+  font-size: var(--text-size-g);
+  font-weight: 700;
+  text-align: start;
+  line-height: 100px;
+  color: var(--text-a);
+  padding-left: 2rem;
+}
+
 .grid {
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-rows: minmax(100px, auto);
   gap: 20px;
-  padding: 0;
+  padding: 0 1rem;
   min-height: 100vh;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   background: var(--base-a);
-  display: none;
 }
 
 .grid-item {
@@ -96,56 +139,26 @@ export default {
   flex-direction: column;
 }
 
-.card-body-price {
-  font-weight: 600;
-  text-align: left;
-  font-size: var(--text-size-b);
-  color: var(--blue-a);
-  margin-top: 0.5rem;
-}
-
-.grid-item-title {
-  font-size: var(--text-size-c);
-  font-weight: 700;
-  text-align: start;
-  line-height: 75px;
-  color: var(--text-a);
-  padding-left: 0.75rem;
-  letter-spacing: -0.02em;
-}
-
 .grid-row {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 0rem;
 }
 
 .card {
-  width: calc(100% - 1.75rem);
-  height: 300px;
+  width: calc(300px - 2rem);
+  height: 600px;
+  border-radius: calc(1rem + 16px);
   transition: box-shadow 0.25s ease-in-out 0s, transform 0.25s ease 0s;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   cursor: pointer;
-  padding: 0;
+  padding: 1.25rem;
   padding-bottom: 0;
   margin: auto;
   line-height: 1.5rem;
   border: 1px solid transparent;
-}
-.card-body-stock {
-  text-align: left;
-  color: var(--text-b);
-  font-size: var(--text-size-a);
-}
-
-.card-body-collateral {
-  text-align: left;
-  font-size: var(--text-size-a);
-  display: flex;
-  align-items: center;
-  color: var(--text-b);
 }
 
 .card-header {
@@ -160,33 +173,33 @@ export default {
 }
 
 .card-image img {
-  width: 100%;
-  height: 100%;
-  min-width: 100%;
-  max-width: 100%;
+  width: calc(300px - 2rem);
+  height: calc(300px - 2rem);
+  min-width: calc(300px - 2rem);
+  max-width: calc(300px - 2rem);
   border-radius: 16px;
-  object-fit: cover;
 }
 
 .card-body {
-  flex-basis: 50%;
+  flex-basis: 45%;
 }
 
 .card-body-name {
   color: var(--text-a);
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   text-align: left;
+  display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 1rem;
+  margin-bottom: 1rem;
   font-weight: 400;
-  white-space: normal;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  text-transform: capitalize;
 }
+
+.card-body-name span {
+  text-align: inherit;
+}
+
 .card-body-name span::first-letter {
   text-transform: capitalize;
 }
@@ -200,8 +213,13 @@ export default {
   text-transform: capitalize;
 }
 
+.card-bottom {
+  flex-basis: 5%;
+}
+
 .badge {
   margin-left: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .card-badge {
@@ -224,6 +242,7 @@ export default {
   text-align: center;
   align-items: center;
   justify-content: center;
+  z-index: -1;
 }
 
 .card-badge::before,
@@ -233,6 +252,7 @@ export default {
   top: 0;
   width: 50%;
   height: 30px;
+  transition: box-shadow 0.1s ease-in-out 0s, transform 0.25s ease 0s;
 }
 
 .card-badge::before {
@@ -244,7 +264,8 @@ export default {
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
   border-right: transparent;
-  background: transparent;
+  background: var(--base-b);
+  z-index: -1;
 }
 
 .card-badge::after {
@@ -256,13 +277,15 @@ export default {
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
   border-right: transparent;
-  z-index: 1;
+  z-index: -2;
   background: transparent;
+  background: var(--base-b);
 }
 
 @media only screen and (max-width: 600px) {
   .grid {
-    display: grid;
+    display: none;
   }
 }
 </style>
+@/pages/home/composable/store-api

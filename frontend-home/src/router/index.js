@@ -1,12 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
-import storeRoute from "@/pages/store/router";
+import homeRoute from "@/pages/home/router";
+import productRoute from "@/pages/product/router";
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
       path: "/",
-      ...storeRoute
+      ...homeRoute
+    },
+    {
+      path: "/p/:id",
+      ...productRoute
     },
     { path: "/:notFound(.*)", redirect: "/" },
   ],

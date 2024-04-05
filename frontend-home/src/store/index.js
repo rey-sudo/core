@@ -1,9 +1,11 @@
 import { createStore } from "vuex";
-import { store } from "@/pages/store/store";
+import { home } from "@/pages/home/store";
+import { product } from "@/pages/product/store";
 
 const stores = createStore({
   modules: {
-    store
+    home,
+    product
   },
 });
 

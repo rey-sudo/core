@@ -4,7 +4,7 @@ import * as getters from './getters'
 import * as mutations from './mutations'
 
 
-const storeModule = {
+const productModule = {
     namespaced: true,
     actions,
     getters,
@@ -12,4 +12,4 @@ const storeModule = {
     state
 }
 
-export { storeModule as store }
+export { productModule as product } 
