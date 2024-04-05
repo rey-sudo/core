@@ -179,7 +179,7 @@ i {
   color: var(--text-a);
   font-size: var(--text-size-a);
   border: 3px solid transparent;
-  background: var(--base-b);
+  background: var(--base-a);
 }
 
 .header .header-center .header-center-search:focus-within {

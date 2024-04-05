@@ -25,12 +25,10 @@
             </div>
 
             <div class="card-body-collateral">
-              <span> {{ item.collateral }} ADA Collateral</span>
+              <span> {{ item.collateral }} ADA Coll.</span>
             </div>
-          </div>
 
-          <div class="card-bottom">
-            <div class="card-badge" :style="{ color: item.discount_color }">
+            <div class="card-body-seller">
               <span>{{ item.discount_label }}</span>
               <span>
                 <svg
@@ -40,7 +38,7 @@
                   width="1rem"
                   height="1rem"
                   role="img"
-                  fill="#0069f5"
+                  fill="#1a83ff"
                 >
                   <g>
                     <path
@@ -90,6 +88,41 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.card-body-seller {
+  text-align: left;
+  font-size: var(--text-size-b);
+  display: flex;
+  align-items: center;
+  color: var(--text-a);
+  line-height: 1.5rem;
+  font-weight: 600;
+}
+
+.card-body-collateral {
+  text-align: left;
+  font-size: var(--text-size-b);
+  display: flex;
+  align-items: center;
+  color: var(--text-b);
+}
+
+.card-body-price {
+  font-weight: 600;
+  text-align: left;
+  font-size: var(--text-size-c);
+  line-height: 2rem;
+  color: var(--text-a);
+}
+
+.grid-item-title {
+  font-size: var(--text-size-f);
+  font-weight: 700;
+  text-align: start;
+  line-height: 100px;
+  color: var(--text-a);
+  padding-left: 2rem;
+}
+
 .grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -107,28 +140,10 @@ export default {
   flex-direction: column;
 }
 
-.card-body-price {
-  font-weight: 600;
-  text-align: left;
-  font-size: var(--text-size-c);
-  margin-bottom: 0.5rem;
-  color: var(--text-a);
-}
-
-.grid-item-title {
-  font-size: var(--text-size-f);
-  font-weight: 700;
-  text-align: start;
-  line-height: 100px;
-  color: var(--text-a);
-  padding-left: 3rem;
-  letter-spacing: -0.02em;
-}
-
 .grid-row {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1rem;
+  gap: 0rem;
 }
 
 .card {
@@ -145,18 +160,6 @@ export default {
   margin: auto;
   line-height: 1.5rem;
   border: 1px solid transparent;
-}
-
-.card:hover {
-  transform: translateY(-0.1rem);
-}
-
-.card-body-collateral {
-  text-align: left;
-  font-size: var(--text-size-b);
-  display: flex;
-  align-items: center;
-  color: var(--text-b);
 }
 
 .card-header {
@@ -190,7 +193,7 @@ export default {
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-  font-weight: 500;
+  font-weight: 400;
   text-transform: capitalize;
 }
 
@@ -217,6 +220,7 @@ export default {
 
 .badge {
   margin-left: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .card-badge {

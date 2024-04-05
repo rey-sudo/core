@@ -192,7 +192,7 @@ export default {
 }
 
 .header-center-search {
-  background: var(--base-b);
+  background: var(--base-a);
   transition: var(--button-transition-a);
   cursor: text;
   display: flex;
@@ -204,9 +204,12 @@ export default {
   padding: 0.4rem;
   border: 1px solid #dddddd;
 }
+.header-center-search:focus-within {
+  background: var(--base-b);
+}
 
 .header-center-search-icon {
-  background: var(--blue-a);
+  background: var(--blue-c);
   color: var(--text-w);
   font-size: var(--text-size-b);
   border-radius: 999px;
@@ -300,7 +303,7 @@ i {
 }
 
 .counter {
-  background: var(--blue-a);
+  background: var(--blue-c);
   color: var(--text-w);
   font-weight: 700 !important;
   border-radius: 99px;
