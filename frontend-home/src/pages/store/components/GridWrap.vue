@@ -95,7 +95,7 @@ export default {
   align-items: center;
   color: var(--text-a);
   line-height: 1.5rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .card-body-collateral {
@@ -115,7 +115,7 @@ export default {
 }
 
 .grid-item-title {
-  font-size: var(--text-size-f);
+  font-size: var(--text-size-g);
   font-weight: 700;
   text-align: start;
   line-height: 100px;

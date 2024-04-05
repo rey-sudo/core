@@ -1,7 +1,7 @@
 export default () => ({
   allProducts: [
     {
-      title: "Best sellers",
+      title: "Cardano sellers",
       items: [
         {
           pid: "pid1",
