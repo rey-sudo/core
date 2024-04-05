@@ -200,7 +200,7 @@ const buildTx = async (
 const fetchProtocolParameters = () => {
   return fetch("https://cardano-preview.blockfrost.io/api/v0/blocks/latest", {
     headers: {
-      project_id: "-",
+      project_id: "previewXgODba40jVJAs1QgKTBOAuwhvNFHHMVo",
     },
   })
     .then((res) => res.json())
@@ -209,7 +209,7 @@ const fetchProtocolParameters = () => {
         `https://cardano-preview.blockfrost.io/api/v0/epochs/${latestBlock.epoch}/parameters`,
         {
           headers: {
-            project_id: "-",
+            project_id: "previewXgODba40jVJAs1QgKTBOAuwhvNFHHMVo",
           },
         }
       )

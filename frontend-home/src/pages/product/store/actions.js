@@ -1,12 +1,12 @@
 import axiosApi from "@/api/axios-api";
 
-
-const action__getAllProducts = async ({ commit }) => {
+const lockingEndpoint = async () => {
   try {
-    
-    const response = await axiosApi.get("/api/store/get-all-products");
+    const response = await axiosApi.get("/api/gate/locking-endpoint");
 
-    commit("commit__getAllProducts", response.data);
+    console.log(response.data);
+
+    //commit("lockingEndpoint", response.data);
 
     return { ok: true, response: response.data };
   } catch (error) {
@@ -14,7 +14,4 @@ const action__getAllProducts = async ({ commit }) => {
   }
 };
 
-
-
-
-export { action__getAllProducts };
+export { lockingEndpoint };
