@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       lucid: null,
-      slot_id: "SSRLQ4CLO0THYTLA",
+      slot_id: "S62L4K9237XM13DZ",
       buyer_pubkeyhash: "",
     };
   },

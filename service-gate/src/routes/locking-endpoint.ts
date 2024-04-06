@@ -3,7 +3,7 @@ import API from "../api";
 import assert from "assert";
 import { Request, Response } from "express";
 import { BadRequestError } from "../errors";
-import { sendEvent } from "./get-events";
+
 
 const ADA_LOVELACE: number = 1000000;
 
@@ -36,7 +36,7 @@ const lockingEndpointMiddlewares: any = [];
 const lockingEndpointHandler = async (req: Request, res: Response) => {
   const params = req.body;
 
-  const SELLER = req.sellerData;
+  
 
   let connection: any = null;
 
@@ -46,8 +46,8 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
     await connection.beginTransaction();
 
     const [slots] = await connection.execute(
-      "SELECT * FROM slots WHERE id = ? AND seller_id = ?",
-      [params.slot_id, SELLER.id]
+      "SELECT * FROM slots WHERE id = ?",
+      [params.slot_id]
     );
 
     if (slots.length === 0) {
@@ -94,15 +94,14 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
       SET contract_stage = ?,
           contract_status_1 = ?,
           contract_utx_1 = ?
-      WHERE id = ? AND seller_id = ?
+      WHERE id = ?
       `;
 
     const schemeValue = [
       "locking",
       contractStatus,
       contractStatus.cicYieldedExportTxs[0].transaction,
-      params.slot_id,
-      SELLER.id
+      params.slot_id
     ];
 
     await connection.execute(schemeData, schemeValue);
@@ -118,7 +117,7 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
       },
     });
 
-    sendEvent(SELLER.id, "slot:created");
+ 
   } catch (err: any) {
     await connection.rollback();
 

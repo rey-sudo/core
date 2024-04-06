@@ -1,8 +1,9 @@
 import axiosApi from "@/api/axios-api";
 
-const lockingEndpoint = async () => {
+const lockingEndpoint = async (_, params) => {
   try {
-    const response = await axiosApi.get("/api/gate/locking-endpoint");
+    console.log(params);
+    const response = await axiosApi.post("/api/gate/locking-endpoint", params);
 
     console.log(response.data);
 
