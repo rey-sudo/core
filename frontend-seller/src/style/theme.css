@@ -2108,7 +2108,7 @@
     margin: 0;
   }
   .p-button.p-button-icon-only.p-button-rounded {
-    border-radius: 4px;
+    border-radius: 50%;
     height: 2.357rem;
   }
   .p-button.p-button-sm {

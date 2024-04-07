@@ -1,6 +1,7 @@
 <template>
   <div>
     <span>{{ slot_id }} </span>
+    <span>---</span>
     <span>{{ buyer_pubkeyhash }} </span>
     <div style="cursor: pointer" @click="buyProduct">send</div>
   </div>
@@ -22,9 +23,17 @@ export default {
   data() {
     return {
       lucid: null,
-      slot_id: "S62L4K9237XM13DZ",
+      slot_id: "",
       buyer_pubkeyhash: "",
     };
+  },
+
+  created() {
+    this.$watch(
+      () => this.$route.params,
+      (e) => (this.slot_id = e.id),
+      { immediate: true }
+    )();
   },
   methods: {
     async setupLucid() {

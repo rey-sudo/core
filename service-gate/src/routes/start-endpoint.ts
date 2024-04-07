@@ -57,6 +57,8 @@ const startEndpointHandler = async (req: Request, res: Response) => {
       },
     };
 
+    console.log(instanceScheme);
+
     await API.post(
       `/api/contract/instance/${SLOT.contract_id}/endpoint/Start`,
       instanceScheme

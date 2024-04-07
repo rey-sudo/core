@@ -4,7 +4,6 @@ import assert from "assert";
 import { Request, Response } from "express";
 import { BadRequestError } from "../errors";
 
-
 const ADA_LOVELACE: number = 1000000;
 
 interface instanceScheme {
@@ -36,8 +35,6 @@ const lockingEndpointMiddlewares: any = [];
 const lockingEndpointHandler = async (req: Request, res: Response) => {
   const params = req.body;
 
-  
-
   let connection: any = null;
 
   try {
@@ -68,12 +65,18 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
       bWalletParam: params.buyer_pubkeyhash,
     };
 
+    console.log(instanceScheme);
+
     await API.post(
       `/api/contract/instance/${SLOT.contract_id}/endpoint/Locking`,
       instanceScheme
     )
-      .then((res) => assert.ok(res.status === 200))
-      .catch(() => {
+      .then((res) => {
+        console.log(res);
+        assert.ok(res.status === 200);
+      })
+      .catch((err) => {
+        console.log(err);
         throw new Error("CID_FAILED");
       });
 
@@ -101,7 +104,7 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
       "locking",
       contractStatus,
       contractStatus.cicYieldedExportTxs[0].transaction,
-      params.slot_id
+      params.slot_id,
     ];
 
     await connection.execute(schemeData, schemeValue);
@@ -116,8 +119,6 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
         transaction: contractStatus.cicYieldedExportTxs[0].transaction,
       },
     });
-
- 
   } catch (err: any) {
     await connection.rollback();
 
