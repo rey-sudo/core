@@ -68,7 +68,9 @@ const startEndpointHandler = async (req: Request, res: Response) => {
         throw new Error("CID_FAILED");
       });
 
-    const getStatus = await API.get(
+    await sleep(1000);
+
+    const contractStatus = await API.get(
       `/api/contract/instance/${SLOT.contract_id}/status`
     )
       .then((res) => {
@@ -104,8 +106,8 @@ const startEndpointHandler = async (req: Request, res: Response) => {
       true,
       params.seller_pubkeyhash,
       "actived",
-      getStatus,
-      getStatus.cicYieldedExportTxs[0].transaction,
+      contractStatus,
+      contractStatus.cicYieldedExportTxs[0].transaction,
       params.slot_id,
       SELLER.id,
     ];
@@ -119,7 +121,7 @@ const startEndpointHandler = async (req: Request, res: Response) => {
     res.status(200).send({
       success: true,
       payload: {
-        transaction: getStatus.cicYieldedExportTxs[0].transaction,
+        transaction: contractStatus.cicYieldedExportTxs[0].transaction,
       },
     });
 

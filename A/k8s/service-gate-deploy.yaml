@@ -30,7 +30,7 @@ spec:
             - name: EXPRESS_PORT
               value: "8000"
             - name: EXPRESS_TIMEOUT
-              value: "20000"                                                                  
+              value: "30000"                                                                  
             - name: BUS_STREAMING_URI  
               valueFrom:
                 configMapKeyRef:

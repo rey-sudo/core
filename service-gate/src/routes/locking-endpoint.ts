@@ -3,6 +3,7 @@ import API from "../api";
 import assert from "assert";
 import { Request, Response } from "express";
 import { BadRequestError } from "../errors";
+import { sleep } from "../utils/sleep";
 
 const ADA_LOVELACE: number = 1000000;
 
@@ -80,6 +81,7 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
         throw new Error("CID_FAILED");
       });
 
+    await sleep(1000);
     ////////////////////////////////////////////////////
 
     const contractStatus = await API.get(

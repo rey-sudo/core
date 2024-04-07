@@ -25,6 +25,7 @@ export default {
       lucid: null,
       slot_id: "",
       buyer_pubkeyhash: "",
+      tx: ""
     };
   },
 
