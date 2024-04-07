@@ -7,7 +7,6 @@ services:
       - shared_volume:/app/node
     ports:
       - "3001:3001"
-    mem_limit: 8Gib
     restart: always
     
   service-index:
@@ -17,7 +16,6 @@ services:
       - shared_volume:/app/node
     ports:
       - "9083:9083"
-    mem_limit: 8Gib
     depends_on:
       - service-node
     healthcheck:
@@ -35,7 +33,6 @@ services:
       - shared_volume:/app/node
     ports:
       - "9080:9080"
-    mem_limit: 8Gib
     depends_on:
       - service-node
       - service-index
