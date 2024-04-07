@@ -5256,6 +5256,11 @@ primeicons@^6.0.1:
   resolved "https://registry.npmjs.org/primeicons/-/primeicons-6.0.1.tgz"
   integrity sha512-KDeO94CbWI4pKsPnYpA1FPjo79EsY9I+M8ywoPBSf9XMXoe/0crjbUK7jcQEDHuc0ZMRIZsxH3TYLv4TUtHmAA==
 
+primevue@^3.51.0:
+  version "3.51.0"
+  resolved "https://registry.npmjs.org/primevue/-/primevue-3.51.0.tgz"
+  integrity sha512-BdMveidLSr0fNJ5+mxuke8mMCHyiXwvfDP4iwPr6R98rl3E0Wcm1u4/RKVrL7o0Iq606SXyhPQL3LGyAfXngcA==
+
 process-nextick-args@~2.0.0:
   version "2.0.1"
   resolved "https://registry.npmjs.org/process-nextick-args/-/process-nextick-args-2.0.1.tgz"
@@ -6317,7 +6322,7 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
-vue@*, "vue@^2 || ^3.2.13", "vue@^3.0.0-0 || ^2.6.0", vue@^3.2.0, vue@^3.2.13, vue@3.3.4:
+vue@*, "vue@^2 || ^3.2.13", vue@^3.0.0, "vue@^3.0.0-0 || ^2.6.0", vue@^3.2.0, vue@^3.2.13, vue@3.3.4:
   version "3.3.4"
   resolved "https://registry.npmjs.org/vue/-/vue-3.3.4.tgz"
   integrity sha512-VTyEYn3yvIeY1Py0WaYGZsXnz3y5UnGi62GjVEqvEGPl6nxbOrCXbVOTQWBEJUqAyTUk2uJ5JLVnYJ6ZzGbrSw==

@@ -16,6 +16,7 @@
     "core-js": "^3.8.3",
     "lucid-cardano": "^0.10.7",
     "primeicons": "^6.0.1",
+    "primevue": "3.51.0",
     "swiper": "^10.2.0",
     "vue": "^3.2.13",
     "vue-router": "^4.2.4",

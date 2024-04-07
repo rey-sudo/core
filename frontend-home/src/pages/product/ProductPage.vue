@@ -1,19 +1,20 @@
 <template>
-  <div>
-    <span>{{ slot_id }} </span>
-    <span>---</span>
-    <span>{{ buyer_pubkeyhash }} </span>
-    <div style="cursor: pointer" @click="buyProduct1('1')">send1</div>
-    <div style="cursor: pointer" @click="buyProduct1('2')">send2</div>
+  <div class="product">
+    <MainHeader />
+
   </div>
 </template>
 
 <script>
 import productAPI from "@/pages/product/api";
+import MainHeader from "@/components/MainHeader.vue";
 import { Lucid, getAddressDetails } from "lucid-cardano";
 import { balanceTx } from "@/api/wallet-api";
 
 export default {
+  components: {
+    MainHeader,
+  },
   setup() {
     const { lockingEndpoint } = productAPI();
 
@@ -92,4 +93,9 @@ export default {
 };
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+.product{
+
+}
+
+</style>
