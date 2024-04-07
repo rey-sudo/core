@@ -79,8 +79,8 @@ developmentOptions:
     #    { "tag" : "PointAtGenesis" }
     {
       "tag": "Point",
-      "pointBlockId": "8924da5a673210dea20c9be03706a65712d2151e5ad3167b981e2ed86c1fb1c8",
-      "pointSlot": { "getSlot": 45818449 },
+      "pointBlockId": "71280d6494b91e1281c98534ec2a3ddc0552cb36ddc39bdaf625f31a29b5a01a",
+      "pointSlot": { "getSlot": 45823002 },
     }
 
 # Optional EKG Server Config
