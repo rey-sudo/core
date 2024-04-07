@@ -3,7 +3,8 @@
     <span>{{ slot_id }} </span>
     <span>---</span>
     <span>{{ buyer_pubkeyhash }} </span>
-    <div style="cursor: pointer" @click="buyProduct">send</div>
+    <div style="cursor: pointer" @click="buyProduct1('1')">send1</div>
+    <div style="cursor: pointer" @click="buyProduct1('2')">send2</div>
   </div>
 </template>
 
@@ -25,7 +26,8 @@ export default {
       lucid: null,
       slot_id: "",
       buyer_pubkeyhash: "",
-      tx: ""
+      tx1: "84a400800181a300581d70ab4ba4eff892a2b20de9a00e3e8658e019f88c74d946eaa7d8776c1a011a01312d01028201d8185841d8799f004777616974696e67d87980d87980d87980581c4068ce72a0f73e850f19899a10b82ec534a55a6d860e5c5267dca2b9d87a801a01c9c3811a01312d01ff02000e81581c4068ce72a0f73e850f19899a10b82ec534a55a6d860e5c5267dca2b9a0f5f6",
+      tx2: "",
     };
   },
 
@@ -60,6 +62,25 @@ export default {
         .then((res) => balanceTx(res.response.payload.transaction))
         .then((tx) => console.log(tx))
         .catch((err) => console.log(err));
+    },
+
+    async buyProduct1(e) {
+      const addr = await this.lucid.wallet.address();
+      const address = await getAddressDetails(addr);
+
+      this.buyer_pubkeyhash = address.paymentCredential.hash;
+
+      if (e === "1") {
+        await balanceTx(this.tx1)
+          .then((tx) => console.log(tx))
+          .catch((err) => console.log(err));
+      }
+
+      if (e === "2") {
+        await balanceTx(this.tx2)
+          .then((tx) => console.log(tx))
+          .catch((err) => console.log(err));
+      }
     },
   },
 
