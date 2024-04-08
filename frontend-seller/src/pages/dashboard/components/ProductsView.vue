@@ -109,6 +109,7 @@
           <span>Thumbnail</span>
           <i class="pi pi-info-circle" v-tooltip.top="'First image.'" />
         </label>
+        
         <div id="mainImage" class="product-image-main">
           <div
             v-for="item in getImages(product)"
@@ -147,6 +148,7 @@
           long.</small
         >
       </div>
+
       <div class="field">
         <label for="description" class="field-label">
           <span>Description</span>

@@ -1,13 +1,49 @@
 <template>
   <div class="product">
     <MainHeader />
+    <div class="product-wrap">
+      <div class="product-wrap-top">
+        <div class="product-wrap-top-left">
+          <Galleria
+            :value="images"
+            :responsiveOptions="responsiveOptions"
+            :numVisible="5"
+            :circular="true"
+            :transitionInterval="1000"
+            containerStyle="max-width: 80%"
+            :showItemNavigators="true"
+            :showThumbnails="false"
+        
+          >
+            <template #item="slotProps">
+              <img
+                :src="slotProps.item.itemImageSrc"
+                :alt="slotProps.item.alt"
+                style="width: 100%; display: block"
+              />
+            </template>
+            <template #thumbnail="slotProps">
+              <img
+                :src="slotProps.item.thumbnailImageSrc"
+                :alt="slotProps.item.alt"
+                style="display: block"
+              />
+            </template>
+          </Galleria>
+        </div>
 
+        <div class="product-wrap-top-right">
+
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import productAPI from "@/pages/product/api";
 import MainHeader from "@/components/MainHeader.vue";
+import { ref } from "vue";
 import { Lucid, getAddressDetails } from "lucid-cardano";
 import { balanceTx } from "@/api/wallet-api";
 
@@ -18,8 +54,52 @@ export default {
   setup() {
     const { lockingEndpoint } = productAPI();
 
+    const images = ref([
+      {
+        itemImageSrc:
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6501/6501938_rd.jpg",
+        thumbnailImageSrc:
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6501/6501938_rd.jpg",
+        alt: "Description for Image 1",
+        title: "Title 1",
+      },
+      {
+        itemImageSrc:
+          "https://pisces.bbystatic.com/image1/BestBuy_US/images/products/6501/6501938_sd.jpg",
+        thumbnailImageSrc:
+          "https://pisces.bbystatic.com/image1/BestBuy_US/images/products/6501/6501938_sd.jpg",
+        alt: "Description for Image 2",
+        title: "Title 2",
+      },
+      {
+        itemImageSrc:
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6537/6537363_sd.jpg",
+        thumbnailImageSrc:
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6537/6537363_sd.jpg",
+        alt: "Description for Image 3",
+        title: "Title 3",
+      },
+    ]);
+
+    const responsiveOptions = ref([
+      {
+        breakpoint: "991px",
+        numVisible: 4,
+      },
+      {
+        breakpoint: "767px",
+        numVisible: 3,
+      },
+      {
+        breakpoint: "575px",
+        numVisible: 1,
+      },
+    ]);
+
     return {
+      images,
       lockingEndpoint,
+      responsiveOptions,
     };
   },
   data() {
@@ -94,8 +174,39 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.product{
-
+.product {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
 }
 
+.product-wrap {
+  width: 80%;
+  border: 1px solid var(--border-a);
+}
+
+.product-wrap-top-left {
+
+  height: inherit;
+  text-align: center;
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-wrap-top-right {
+  height: inherit;
+  background: var(--base-c);
+  text-align: center;
+  width: 40%;
+}
+
+.product-wrap-top {
+  height: 800px;
+  margin-top: 83px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 </style>
