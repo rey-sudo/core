@@ -29,7 +29,7 @@
 
     <div class="header-center">
       <div class="header-center-search">
-        <input type="text" maxlength="200" placeholder="Search products" />
+        <input type="text" maxlength="200" placeholder="What do you need to find today?" />
 
         <div class="header-center-search-icon">
           <i class="pi pi-search" />

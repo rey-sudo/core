@@ -9,11 +9,9 @@
             :responsiveOptions="responsiveOptions"
             :numVisible="5"
             :circular="true"
-            :transitionInterval="1000"
             containerStyle="max-width: 80%"
             :showItemNavigators="true"
             :showThumbnails="false"
-        
           >
             <template #item="slotProps">
               <img
@@ -33,7 +31,9 @@
         </div>
 
         <div class="product-wrap-top-right">
-
+          <div class="product-name">
+            LG - 65” Class UQ70 Series LED 4K UHD Smart webOS TV
+          </div>
         </div>
       </div>
     </div>
@@ -65,17 +65,17 @@ export default {
       },
       {
         itemImageSrc:
-          "https://pisces.bbystatic.com/image1/BestBuy_US/images/products/6501/6501938_sd.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6553/6553101_sd.jpg",
         thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image1/BestBuy_US/images/products/6501/6501938_sd.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6553/6553101_sd.jpg",
         alt: "Description for Image 2",
         title: "Title 2",
       },
       {
         itemImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6537/6537363_sd.jpg",
+          "https://pisces.bbystatic.com/image3/BestBuy_US/images/products/6537/6537363_sd.jpg",
         thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6537/6537363_sd.jpg",
+          "https://pisces.bbystatic.com/image3/BestBuy_US/images/products/6537/6537363_sd.jpg",
         alt: "Description for Image 3",
         title: "Title 3",
       },
@@ -182,11 +182,10 @@ export default {
 
 .product-wrap {
   width: 80%;
-  border: 1px solid var(--border-a);
+ 
 }
 
 .product-wrap-top-left {
-
   height: inherit;
   text-align: center;
   width: 60%;
@@ -197,16 +196,24 @@ export default {
 
 .product-wrap-top-right {
   height: inherit;
-  background: var(--base-c);
   text-align: center;
   width: 40%;
 }
 
 .product-wrap-top {
   height: 800px;
-  margin-top: 83px;
+  margin-top: 84px;
   display: flex;
   flex-wrap: wrap;
+  border: 1px solid var(--border-a);
   justify-content: space-between;
+}
+
+.product-name {
+  font-size: var(--text-size-g);
+  font-weight: 700;
+  margin-top: 4rem;
+  text-align: left;
+  
 }
 </style>
