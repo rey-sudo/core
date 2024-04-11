@@ -41,6 +41,7 @@ plutus-example-deploy --verbose \
     --passphrase pab123456789 \
     webserver
 
+#/////////////////////////////////////////////////////
 
 cabal exec plutus-example-deploy -- --verbose \
     --config bin/configuration/local/config.yaml \

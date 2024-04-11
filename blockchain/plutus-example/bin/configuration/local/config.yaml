@@ -1,7 +1,7 @@
 # Configuration for an SQLite file
 sqliteDB:
   dbConfigFile: ./bin/configuration/local/local.db
-  dbConfigPoolSize: 20
+  dbConfigPoolSize: 1
 
 #postgresDB:
 #  dbConfigUser: postgres
@@ -76,7 +76,6 @@ metadataServerConfig:
 developmentOptions:
   pabRollbackHistory: null
   pabResumeFrom:
-    #    { "tag" : "PointAtGenesis" }
     {
       "tag": "Point",
       "pointBlockId": "71280d6494b91e1281c98534ec2a3ddc0552cb36ddc39bdaf625f31a29b5a01a",
