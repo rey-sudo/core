@@ -1,7 +1,7 @@
 # Configuration for an SQLite file
 sqliteDB:
   dbConfigFile: ./bin/configuration/local/local.db
-  dbConfigPoolSize: 2
+  dbConfigPoolSize: 20
 
 #postgresDB:
 #  dbConfigUser: postgres
@@ -79,8 +79,8 @@ developmentOptions:
     #    { "tag" : "PointAtGenesis" }
     {
       "tag": "Point",
-      "pointBlockId": "893dd999b26a34cc827904366396c838c099db59aded45dc36bb2f2c76fd7168",
-      "pointSlot": { "getSlot": 37053296 },
+      "pointBlockId": "71280d6494b91e1281c98534ec2a3ddc0552cb36ddc39bdaf625f31a29b5a01a",
+      "pointSlot": { "getSlot": 45823002 },
     }
 
 # Optional EKG Server Config

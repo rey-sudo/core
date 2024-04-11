@@ -40,3 +40,16 @@ plutus-example-deploy --verbose \
     --log-config $config_path/log.yaml \
     --passphrase pab123456789 \
     webserver
+
+
+cabal exec plutus-example-deploy -- --verbose \
+    --config bin/configuration/local/config.yaml \
+    migrate
+      
+
+
+cabal exec plutus-example-deploy -- --verbose \
+    --config bin/configuration/local/config.yaml \
+    --log-config bin/configuration/local/log.yaml \
+    --passphrase pab123456789 \
+    webserver

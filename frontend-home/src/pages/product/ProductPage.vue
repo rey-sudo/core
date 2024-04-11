@@ -33,6 +33,9 @@
         <div class="product-wrap-top-right">
           <div class="product-name">
             LG - 65” Class UQ70 Series LED 4K UHD Smart webOS TV
+
+            <div @click="buyProduct1('1')">send1</div>
+            <div @click="buyProduct1('2')">send2</div>
           </div>
         </div>
       </div>
@@ -107,7 +110,7 @@ export default {
       lucid: null,
       slot_id: "",
       buyer_pubkeyhash: "",
-      tx1: "84a400800181a300581d70db457aaf29e54e6bdcb4ce9645982e3f19ac3f23187e91ce2a1f4b20011a01312d04028201d8185841d8799f004777616974696e67d87980d87980d87980581c4068ce72a0f73e850f19899a10b82ec534a55a6d860e5c5267dca2b9d87a801a01c9c3841a01312d04ff02000e81581c4068ce72a0f73e850f19899a10b82ec534a55a6d860e5c5267dca2b9a0f5f6",
+      tx1: "84a400800181a300581d705ffdd1d8e3322a75f16c6924b453742365a6687c10c18a936cebbb83011a01312d06028201d8185841d8799f004777616974696e67d87980d87980d87980581c4068ce72a0f73e850f19899a10b82ec534a55a6d860e5c5267dca2b9d87a801a01c9c3861a01312d06ff02000e81581c4068ce72a0f73e850f19899a10b82ec534a55a6d860e5c5267dca2b9a0f5f6",
       tx2: "",
     };
   },
