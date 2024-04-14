@@ -406,8 +406,8 @@
                   slotProps.data.image_main
                 "
                 :alt="slotProps.data.image_main"
-                width="60"
-                height="60"
+                width="70"
+                height="70"
                 imageStyle="border-radius: 4px;"
                 preview
               />
@@ -455,11 +455,7 @@
             </template>
           </Column>
 
-          <Column field="stock" header="Stock" sortable style="min-width: 8rem">
-            <template #body="slotProps">
-              {{ slotProps.data.stock }}
-            </template>
-          </Column>
+
 
           <Column
             field="slots_count"
@@ -472,6 +468,12 @@
             </template>
           </Column>
 
+          <Column field="stock" header="Stock" sortable style="min-width: 8rem">
+            <template #body="slotProps">
+              {{ slotProps.data.stock }}
+            </template>
+          </Column>
+          
           <Column :exportable="false" style="min-width: 8rem">
             <template #body="slotProps">
               <div class="table-buttons">

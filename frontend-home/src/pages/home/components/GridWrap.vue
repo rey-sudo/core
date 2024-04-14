@@ -94,7 +94,7 @@ export default {
   align-items: center;
   color: var(--text-a);
   line-height: 1.5rem;
-  font-weight: 600; 
+  font-weight: 500;
 }
 
 .card-body-collateral {
@@ -142,23 +142,20 @@ export default {
 .grid-row {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 0rem;
+  gap: 1rem;
 }
 
 .card {
-  width: calc(300px - 2rem);
+  width: 300px;
   height: 600px;
-  border-radius: calc(1rem + 16px);
   transition: box-shadow 0.25s ease-in-out 0s, transform 0.25s ease 0s;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   cursor: pointer;
-  padding: 1.25rem;
-  padding-bottom: 0;
+  padding: 1rem;
   margin: auto;
   line-height: 1.5rem;
-  border: 1px solid transparent;
 }
 
 .card-header {
@@ -167,18 +164,18 @@ export default {
 }
 
 .card-image {
-  height: 100%;
-  display: flex;
-  justify-content: center;
+
 }
 
 .card-image img {
-  width: calc(300px - 2rem);
-  height: calc(300px - 2rem);
-  min-width: calc(300px - 2rem);
-  max-width: calc(300px - 2rem);
-  border-radius: 16px;
+  width: 100%;
+  height: 257px;
+  display: flex;
+  justify-content: center;
+  border-radius: 12px;
+  overflow: hidden;
 }
+
 
 .card-body {
   flex-basis: 45%;

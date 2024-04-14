@@ -400,8 +400,8 @@
                   slotProps.data.image_main
                 "
                 :alt="slotProps.data.image_main"
-                width="60"
-                height="60"
+                width="70"
+                height="70"
                 imageStyle="border-radius: 6px;"
                 preview
               />
@@ -1013,6 +1013,7 @@ export default {
 img {
   border-radius: 8px;
 }
+
 .products {
   display: flex;
   justify-content: center;
