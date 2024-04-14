@@ -1,7 +1,7 @@
 # Configuration for an SQLite file
 sqliteDB:
   dbConfigFile: /app/pab/configuration/preview/preview.db
-  dbConfigPoolSize: 20
+  dbConfigPoolSize: 1
 
 #postgresDB:
 #  dbConfigUser: postgres
@@ -37,7 +37,7 @@ walletServerConfig:
 nodeServerConfig:
   pscNodeMode: AlonzoNode
   pscNodeServerConfig:
-    nscBaseUrl: http://localhost:3001
+    nscBaseUrl: http://192.168.65.9:3001
     nscSocketPath: /app/node/configuration/preview/db/node.socket
     nscKeptBlocks: 50
     nscNetworkId: 2
@@ -56,7 +56,7 @@ nodeServerConfig:
   # - NoChainSyncEvents (no node for chain sync events)
 
 chainIndexConfig:
-  ciBaseUrl: http://localhost:9083
+  ciBaseUrl: http://192.168.65.9:9083
   ciWatchedAddresses: []
 
 #blockfrostConfig:
@@ -78,8 +78,8 @@ developmentOptions:
   pabResumeFrom:
     {
       "tag": "Point",
-      "pointBlockId": "71280d6494b91e1281c98534ec2a3ddc0552cb36ddc39bdaf625f31a29b5a01a",
-      "pointSlot": { "getSlot": 45823002 },
+      "pointBlockId": "6d99968b729a56cf5ad1e3c860e947537fae938fb1e44aff10f91ffcf7820263",
+      "pointSlot": { "getSlot": 46367357 },
     }
 
 # Optional EKG Server Config
