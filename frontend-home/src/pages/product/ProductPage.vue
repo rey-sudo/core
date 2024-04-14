@@ -36,6 +36,7 @@
 
             <div @click="buyProduct1('1')">send1</div>
             <div @click="buyProduct1('2')">send2</div>
+            <div @click="buyProduct">Buy</div>
           </div>
         </div>
       </div>

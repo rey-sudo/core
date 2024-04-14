@@ -1636,7 +1636,7 @@ img {
 }
 
 .slots-b-card-h-l span:nth-child(1) {
-  font-weight: 600;
+  font-weight: 700;
   font-size: var(--text-size-g);
 }
 
