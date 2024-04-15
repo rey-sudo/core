@@ -173,7 +173,7 @@ export default {
       galleryImage,
       lockingEndpoint,
       responsiveOptions,
-      galleryImageIndex
+      galleryImageIndex,
     };
   },
   data() {
@@ -263,7 +263,6 @@ export default {
 .gallery-boxes-item.imageSelected {
   border: 1px solid black;
 }
-
 
 .product {
   display: flex;
@@ -360,7 +359,7 @@ export default {
 
 .product-wrap-top {
   min-height: 100vh;
-  padding-top: 84px;
+  padding-top: 79px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

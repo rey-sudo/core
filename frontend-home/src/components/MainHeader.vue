@@ -17,9 +17,7 @@
       </div>
 
       <div class="header-button left">
-        <label>
-          <i class="pi pi-tag" />
-        </label>
+        <label for=""> <img src="@/assets/store.svg" alt="" /></label>
         <div>
           <span>Sell a</span>
           <span>Product</span>
@@ -39,7 +37,7 @@
 
     <div class="header-right">
       <div class="header-button right">
-        <label> <i class="pi pi-gift"></i></label>
+        <label for=""> <img src="@/assets/gift.svg" alt="" /></label>
         <div>
           <span>Be a</span>
           <span>Mediator</span>
@@ -47,7 +45,7 @@
       </div>
 
       <div class="header-button right">
-        <label for=""> <img src="@/assets/car.svg" alt="" /></label>
+        <label for=""> <img src="@/assets/cart.svg" alt="" /></label>
 
         <div>
           <span class="counter">14</span>
@@ -55,8 +53,8 @@
         </div>
       </div>
 
-      <div class="header-button right border">
-        <label for=""> <i class="pi pi-user" /></label>
+      <div class="header-button right">
+        <label for=""> <img src="@/assets/user.svg" alt="" /></label> 
         <div @click="connectWallet">
           <span>Use</span>
           <span>Wallet</span>
@@ -180,7 +178,7 @@ export default {
 }
 
 .header-button.right {
-  margin-left: auto;
+  margin: auto;
 }
 
 .header .header-center {
@@ -246,22 +244,12 @@ export default {
   justify-content: flex-end;
 }
 
-/*------*/
+
 i {
   line-height: 0;
 }
 
-.border {
-  cursor: pointer;
-  border-radius: 32px;
-  padding: 0.25rem 1rem;
-  border: 1px solid var(--border-a);
-  transition: var(--transition-a);
-}
 
-.border:hover {
-  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
-}
 
 .header-button div {
   display: flex;
