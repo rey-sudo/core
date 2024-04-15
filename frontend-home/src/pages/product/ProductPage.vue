@@ -62,7 +62,11 @@
           <div class="product-bottom">
             <div class="product-bottom-button">Buy now</div>
 
-            <div class="product-bottom-bookmark">
+            <div class="product-bottom-bookmark" v-tooltip.top="'Add to cart'">
+              <i class="pi pi-plus" />
+            </div>
+
+            <div class="product-bottom-bookmark" v-tooltip.top="'Save publication'">
               <i class="pi pi-bookmark" />
             </div>
           </div>
@@ -257,7 +261,7 @@ export default {
 }
 
 .product-bottom-bookmark {
-  width: 20%;
+  width: 10%;
   cursor: pointer;
 }
 
