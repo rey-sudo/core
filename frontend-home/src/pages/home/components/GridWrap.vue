@@ -119,7 +119,7 @@ export default {
   text-align: start;
   line-height: 100px;
   color: var(--text-a);
-  padding-left: 2rem;
+  padding-left: 1rem;
 }
 
 .grid {
@@ -141,7 +141,7 @@ export default {
 
 .grid-row {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
   gap: 1rem;
 }
 
