@@ -28,6 +28,12 @@
               />
             </template>
           </Galleria>
+
+          <div class="gallery-boxes">
+            <div class="gallery-boxes-item" v-for="item in images" :key="item">
+              <img :src="item.thumbnailImageSrc" alt="" />
+            </div>
+          </div>
         </div>
 
         <div class="product-wrap-top-right">
@@ -66,7 +72,10 @@
               <i class="pi pi-plus" />
             </div>
 
-            <div class="product-bottom-bookmark" v-tooltip.top="'Save publication'">
+            <div
+              class="product-bottom-bookmark"
+              v-tooltip.top="'Save publication'"
+            >
               <i class="pi pi-bookmark" />
             </div>
           </div>
@@ -114,6 +123,23 @@ export default {
           "https://pisces.bbystatic.com/image3/BestBuy_US/images/products/6537/6537363_sd.jpg",
         alt: "Description for Image 3",
         title: "Title 3",
+      },
+      {
+        itemImageSrc:
+          "https://pisces.bbystatic.com/image4/BestBuy_US/images/products/6538/6537363_sd.jpg",
+        thumbnailImageSrc:
+          "https://pisces.bbystatic.com/image4/BestBuy_US/images/products/6538/6537363_sd.jpg",
+        alt: "Description for Image 4",
+        title: "Title 4",
+      },
+
+      {
+        itemImageSrc:
+          "https://pisces.bbystatic.com/image4/BestBuy_US/images/products/6538/6537363_sd.jpg",
+        thumbnailImageSrc:
+          "https://pisces.bbystatic.com/image4/BestBuy_US/images/products/6538/6537363_sd.jpg",
+        alt: "Description for Image 4",
+        title: "Title 4",
       },
     ]);
 
@@ -266,7 +292,7 @@ export default {
 }
 
 .product-bottom-bookmark i {
-  font-size: var(--text-size-e);
+  font-size: var(--text-size-f);
 }
 
 .product-wrap-top-left {
@@ -276,6 +302,31 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+
+.gallery-boxes {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 1rem;
+}
+
+.gallery-boxes-item {
+  border: 1px solid var(--border-b);
+  border-radius: 8px;
+  margin-right: 1rem;
+  padding: 0.25rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.gallery-boxes-item img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
 }
 
 .product-wrap-top-right {
@@ -285,7 +336,7 @@ export default {
 }
 
 .product-wrap-top {
-  height: 800px;
+  height: 900px;
   margin-top: 84px;
   display: flex;
   flex-wrap: wrap;

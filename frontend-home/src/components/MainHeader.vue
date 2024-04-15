@@ -305,7 +305,7 @@ i {
 .counter {
   background: var(--blue-c);
   color: var(--text-w);
-  font-weight: 700 !important;
+  font-weight: 600 !important;
   border-radius: 99px;
   text-align: center !important;
   font-size: var(--text-size-a) !important;
