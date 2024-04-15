@@ -60,7 +60,7 @@
           </div>
 
           <div class="product-bottom">
-            <div class="product-bottom-button">Buy</div>
+            <div class="product-bottom-button">Buy now</div>
 
             <div class="product-bottom-bookmark">
               <i class="pi pi-bookmark" />
