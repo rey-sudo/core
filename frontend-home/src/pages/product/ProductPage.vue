@@ -9,8 +9,9 @@
             :responsiveOptions="responsiveOptions"
             :numVisible="5"
             :circular="true"
-            containerStyle="max-width: 80%"
-            :showItemNavigators="true"
+            :transitionInterval="0"
+            containerStyle="  max-width: 80%;  max-height: 500px; background: red;"
+            :showItemNavigators="false"
             :showThumbnails="false"
           >
             <template #item="slotProps">
@@ -18,13 +19,6 @@
                 :src="slotProps.item.itemImageSrc"
                 :alt="slotProps.item.alt"
                 style="width: 100%; display: block"
-              />
-            </template>
-            <template #thumbnail="slotProps">
-              <img
-                :src="slotProps.item.thumbnailImageSrc"
-                :alt="slotProps.item.alt"
-                style="display: block"
               />
             </template>
           </Galleria>
@@ -308,7 +302,7 @@ export default {
 .gallery-boxes {
   display: flex;
   justify-content: flex-start;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .gallery-boxes-item {
@@ -336,7 +330,7 @@ export default {
 }
 
 .product-wrap-top {
-  height: 900px;
+  min-height: 100vh;
   margin-top: 84px;
   display: flex;
   flex-wrap: wrap;
