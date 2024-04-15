@@ -5,12 +5,12 @@
       <div class="product-wrap-top">
         <div class="product-wrap-top-left">
           <Galleria
-            :value="images"
+            :value="galleryImage"
             :responsiveOptions="responsiveOptions"
-            :numVisible="5"
+            :numVisible="1"
             :circular="true"
             :transitionInterval="0"
-            containerStyle="  max-width: 80%;  max-height: 500px; background: red;"
+            containerStyle="max-width: 80%;  max-height: 500px; background: red;"
             :showItemNavigators="false"
             :showThumbnails="false"
           >
@@ -24,7 +24,13 @@
           </Galleria>
 
           <div class="gallery-boxes">
-            <div class="gallery-boxes-item" v-for="item in images" :key="item">
+            <div
+              class="gallery-boxes-item"
+              v-for="(item, index) in images"
+              :key="item"
+              @click="changeGalleryImage(index)"
+              :class="{ imageSelected: isGalleryImage(index) }"
+            >
               <img :src="item.thumbnailImageSrc" alt="" />
             </div>
           </div>
@@ -93,6 +99,10 @@ export default {
   setup() {
     const { lockingEndpoint } = productAPI();
 
+    const galleryImage = ref([]);
+
+    const galleryImageIndex = ref(0);
+
     const images = ref([
       {
         itemImageSrc:
@@ -160,8 +170,10 @@ export default {
     return {
       images,
       product,
+      galleryImage,
       lockingEndpoint,
       responsiveOptions,
+      galleryImageIndex
     };
   },
   data() {
@@ -182,6 +194,16 @@ export default {
     )();
   },
   methods: {
+    isGalleryImage(index) {
+      return this.galleryImageIndex === index;
+    },
+    setupData() {
+      this.galleryImage[0] = this.images[0];
+    },
+    changeGalleryImage(index) {
+      this.galleryImageIndex = index;
+      this.galleryImage[0] = this.images[this.galleryImageIndex];
+    },
     async setupLucid() {
       this.lucid = await Lucid.new();
     },
@@ -228,6 +250,8 @@ export default {
   },
 
   mounted() {
+    this.setupData();
+
     this.setupLucid();
 
     this.setupWallet();
@@ -236,6 +260,11 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.gallery-boxes-item.imageSelected {
+  border: 1px solid black;
+}
+
+
 .product {
   display: flex;
   justify-content: center;
@@ -331,7 +360,7 @@ export default {
 
 .product-wrap-top {
   min-height: 100vh;
-  margin-top: 84px;
+  padding-top: 84px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
