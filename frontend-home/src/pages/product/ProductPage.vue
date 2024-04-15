@@ -33,10 +33,25 @@
         <div class="product-wrap-top-right">
           <div class="product-name">
             LG - 65” Class UQ70 Series LED 4K UHD Smart webOS TV
+          </div>
 
-            <div @click="buyProduct1('1')">send1</div>
-            <div @click="buyProduct1('2')">send2</div>
-            <div @click="buyProduct">Buy</div>
+          <div class="product-sub">
+            <span>Model: 8430288C2C</span>
+
+            <span>ID: P9C3KC93CK</span>
+          </div>
+
+          <div class="product-rating">
+            <span>{{ product.rating_count }}</span>
+
+            <Rating
+              :modelValue="product.rating_count"
+              :stars="5"
+              :readonly="true"
+              :cancel="false"
+              style="margin: 0 1rem"
+            />
+            <span>({{ product.review_count }})</span>
           </div>
         </div>
       </div>
@@ -100,8 +115,14 @@ export default {
       },
     ]);
 
+    const product = ref({
+      rating_count: 4.8,
+      review_count: 80,
+    });
+
     return {
       images,
+      product,
       lockingEndpoint,
       responsiveOptions,
     };
@@ -191,7 +212,7 @@ export default {
 .product-wrap-top-left {
   height: inherit;
   text-align: center;
-  width: 60%;
+  width: 65%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -200,7 +221,7 @@ export default {
 .product-wrap-top-right {
   height: inherit;
   text-align: center;
-  width: 40%;
+  width: 35%;
 }
 
 .product-wrap-top {
@@ -208,7 +229,6 @@ export default {
   margin-top: 84px;
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid var(--border-a);
   justify-content: space-between;
 }
 
@@ -217,5 +237,27 @@ export default {
   font-weight: 700;
   margin-top: 4rem;
   text-align: left;
+}
+
+.product-sub {
+  text-align: left;
+  font-size: var(--text-size-b);
+  margin-top: 1rem;
+}
+
+.product-sub span {
+  margin-right: 1rem;
+}
+
+.product-rating {
+  margin-top: 1rem;
+  display: flex;
+}
+
+.product-rating {
+  margin-right: 0.5rem;
+  font-size: var(--text-size-b);
+  color: var(--text-b);
+  align-items: center;
 }
 </style>
