@@ -53,6 +53,19 @@
             />
             <span>({{ product.review_count }})</span>
           </div>
+
+          <div class="product-price">
+            <div class="ada-label">₳</div>
+            1.258
+          </div>
+
+          <div class="product-bottom">
+            <div class="product-bottom-button">Buy</div>
+
+            <div class="product-bottom-bookmark">
+              <i class="pi pi-bookmark" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -205,8 +218,51 @@ export default {
   min-height: 100vh;
 }
 
+.product-price {
+  text-align: left;
+  margin-top: 1rem;
+  font-size: var(--text-size-i);
+  font-weight: 600;
+  display: flex;
+  align-items: baseline;
+}
+
+.ada-label {
+  font-weight: 400;
+  color: var(--text-b);
+  font-size: var(--text-size-g);
+  margin-right: 0.5rem;
+}
+
 .product-wrap {
   width: 80%;
+}
+
+.product-bottom {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-top: 2rem;
+  justify-content: space-between;
+}
+
+.product-bottom-button {
+  width: 80%;
+  background: var(--blue-c);
+  padding: 0.75rem;
+  border-radius: 8px;
+  color: var(--text-w);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.product-bottom-bookmark {
+  width: 20%;
+  cursor: pointer;
+}
+
+.product-bottom-bookmark i {
+  font-size: var(--text-size-e);
 }
 
 .product-wrap-top-left {
@@ -256,7 +312,7 @@ export default {
 
 .product-rating {
   margin-right: 0.5rem;
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-c);
   color: var(--text-b);
   align-items: center;
 }
