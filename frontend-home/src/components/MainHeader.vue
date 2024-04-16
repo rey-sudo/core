@@ -206,7 +206,6 @@ export default {
   width: 100%;
   align-items: center;
   background: var(--blue-a);
- 
   color: var(--text-w);
 }
 

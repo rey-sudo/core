@@ -10,7 +10,7 @@
             :numVisible="1"
             :circular="true"
             :transitionInterval="0"
-            containerStyle="max-width: 70%; min-height: 500px; max-height: 500px; margin-top: 8rem;"
+            containerStyle="max-width: 70%; min-height: 500px; max-height: 500px; margin-top: 10rem;"
             :showItemNavigators="false"
             :showThumbnails="false"
           >
@@ -35,7 +35,7 @@
             </div>
           </div>
 
-          <Accordion :multiple="true" :activeIndex="[0]">
+          <Accordion :multiple="true" :activeIndex="[0]" style="width: 100%">
             <AccordionTab header="Description">
               <p class="accordionParagraph">
                 Welcome to our cutting-edge e-commerce platform where innovation
@@ -370,7 +370,7 @@ export default {
 
 .product-bottom-button {
   width: 80%;
-  background: var(--blue-c);
+  background: black;
   padding: 0.75rem;
   border-radius: 8px;
   color: var(--text-w);
