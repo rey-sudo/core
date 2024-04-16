@@ -197,7 +197,7 @@ export default {
 .submenu {
   padding: 0.125rem;
   padding-left: 2rem;
-  margin-top: 9px;
+  margin-top: 7px;
   z-index: 100;
   display: flex;
   position: fixed;
@@ -205,7 +205,7 @@ export default {
   left: 0;
   width: 100%;
   align-items: center;
-  background: var(--blue-a);
+  background: var(--text-a);
   color: var(--text-w);
 }
 
@@ -326,11 +326,11 @@ export default {
   cursor: text;
   display: flex;
   align-items: center;
-  border-radius: 999px;
+  border-radius: 8px;
   width: 100%;
   color: var(--text-a);
   font-size: var(--text-size-b);
-  padding: 0.4rem;
+  padding: 0.25rem;
   border: 1px solid #dddddd;
 }
 .header-center-search:focus-within {
@@ -338,10 +338,8 @@ export default {
 }
 
 .header-center-search-icon {
-  background: var(--blue-c);
-  color: var(--text-w);
+  color: var(--text-a);
   font-size: var(--text-size-b);
-  border-radius: 999px;
   display: flex;
   align-items: center;
   padding: 1rem;
@@ -349,7 +347,7 @@ export default {
 }
 
 .header-center-search-icon i {
-  font-weight: bold !important;
+  font-weight: bold;
 }
 
 .header-center-search input {
@@ -360,7 +358,7 @@ export default {
   font-size: var(--text-size-b);
   color: inherit;
   margin: 0 1rem;
-  padding: 0.25rem;
+  padding: 0.5rem;
 }
 
 .header-center-search input::placeholder {
