@@ -178,7 +178,7 @@ export default {
 }
 
 .header-button.right {
-  margin: auto;
+  margin-left: auto;
 }
 
 .header .header-center {

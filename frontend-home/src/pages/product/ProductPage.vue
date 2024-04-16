@@ -10,7 +10,7 @@
             :numVisible="1"
             :circular="true"
             :transitionInterval="0"
-            containerStyle="max-width: 80%;  max-height: 500px; background: red;"
+            containerStyle="max-width: 80%;  max-height: 500px;"
             :showItemNavigators="false"
             :showThumbnails="false"
           >
