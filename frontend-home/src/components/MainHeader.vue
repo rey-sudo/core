@@ -205,7 +205,7 @@ export default {
   left: 0;
   width: 100%;
   align-items: center;
-  background: var(--text-a);
+  background: var(--blue-a);
   color: var(--text-w);
 }
 
@@ -335,7 +335,7 @@ export default {
 }
 
 .header-center-search:focus-within {
-  background: var(--base-b);
+  background: var(--base-a);
   border: 1px solid var(--blue-a);
 }
 
