@@ -401,6 +401,7 @@ export default {
   display: flex;
   justify-content: flex-start;
   margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .gallery-boxes-item {
@@ -429,7 +430,7 @@ export default {
 
 .product-wrap-top {
   min-height: 100vh;
-  padding-top: 79px;
+  margin-top: 121px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

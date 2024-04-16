@@ -27,7 +27,11 @@
 
     <div class="header-center">
       <div class="header-center-search">
-        <input type="text" maxlength="200" placeholder="What do you need to find today?" />
+        <input
+          type="text"
+          maxlength="200"
+          placeholder="What do you need to find today?"
+        />
 
         <div class="header-center-search-icon">
           <i class="pi pi-search" />
@@ -54,12 +58,35 @@
       </div>
 
       <div class="header-button right">
-        <label for=""> <img src="@/assets/user.svg" alt="" /></label> 
+        <label for=""> <img src="@/assets/user.svg" alt="" /></label>
         <div @click="connectWallet">
           <span>Use</span>
           <span>Wallet</span>
         </div>
       </div>
+    </div>
+
+    <!--SUBMENU-->
+
+    <div class="submenu">
+      <div class="submenu-column left">
+        <div class="submenu-button">
+          <i class="pi pi-bars" />
+        </div>
+
+        <div class="submenu-nav">
+          <div
+            v-for="item in navTabs"
+            :key="item"
+            :class="{ active: selectedTab === item.value }"
+          >
+            {{ item.label }}
+          </div>
+        </div>
+      </div>
+
+      <div class="submenu-column center"></div>
+      <div class="submenu-column right"></div>
     </div>
   </header>
 </template>
@@ -78,6 +105,39 @@ export default {
   data() {
     return {
       isScrolled: false,
+      navTabs: [
+        {
+          label: "All",
+          value: "all",
+          badge: false,
+          badgeLabel: "",
+        },
+        {
+          label: "New",
+          value: "new",
+          badge: false,
+          badgeLabel: "",
+        },
+        {
+          label: "Offers",
+          value: "offers",
+          badge: false,
+          badgeLabel: "",
+        },
+        {
+          label: "Docs",
+          value: "docs",
+          badge: false,
+          badgeLabel: "",
+        },
+
+        {
+          label: "Help",
+          value: "help",
+          badge: false,
+          badgeLabel: "",
+        },
+      ],
     };
   },
   methods: {
@@ -134,6 +194,77 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.submenu {
+  padding-left: 2rem;
+  margin-top: 9px;
+  z-index: 100;
+  display: flex;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  align-items: center;
+  background: var(--base-b);
+  border-top: 1px solid var(--border-a);
+  border-bottom: 1px solid var(--border-a);
+}
+
+.submenu .submenu-column {
+  flex-basis: 33.33%;
+}
+
+.submenu .submenu-column.left {
+  flex-basis: 33.33%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.submenu .submenu-column.right {
+  flex-basis: 33.33%;
+  display: flex;
+  justify-content: center;
+}
+
+.submenu .submenu-column.center {
+  flex-basis: 66.66%;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submenu .submenu-column .submenu-nav {
+  display: flex;
+  align-items: center;
+}
+
+.submenu .submenu-column .submenu-button {
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.submenu .submenu-column .submenu-button img {
+  width: var(--text-size-e);
+}
+
+.submenu .submenu-column .submenu-nav div {
+  font-size: var(--text-size-a);
+  white-space: nowrap;
+  cursor: pointer;
+  padding: 0 1rem;
+  line-height: 40px;
+  font-weight: 500;
+  margin-right: 1rem;
+  color: var(--text-a);
+  background: transparent;
+  border-radius: 999px;
+}
+
+.submenu .submenu-column .submenu-nav div:hover {
+  font-weight: 600;
+}
+
 .header {
   padding: 1rem 2rem;
   display: flex;
@@ -244,12 +375,9 @@ export default {
   justify-content: flex-end;
 }
 
-
 i {
   line-height: 0;
 }
-
-
 
 .header-button div {
   display: flex;
