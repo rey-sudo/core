@@ -60,7 +60,7 @@
       <div class="header-button right">
         <label for=""> <img src="@/assets/user.svg" alt="" /></label>
         <div @click="connectWallet">
-          <span>Use</span>
+          <span>Conn</span>
           <span>Wallet</span>
         </div>
       </div>
@@ -195,6 +195,7 @@ export default {
 
 <style lang="css" scoped>
 .submenu {
+  padding: 0.125rem;
   padding-left: 2rem;
   margin-top: 9px;
   z-index: 100;
@@ -204,9 +205,9 @@ export default {
   left: 0;
   width: 100%;
   align-items: center;
-  background: var(--base-b);
-  border-top: 1px solid var(--border-a);
-  border-bottom: 1px solid var(--border-a);
+  background: var(--blue-a);
+ 
+  color: var(--text-w);
 }
 
 .submenu .submenu-column {
@@ -254,15 +255,15 @@ export default {
   cursor: pointer;
   padding: 0 1rem;
   line-height: 40px;
-  font-weight: 500;
+  font-weight: 600;
   margin-right: 1rem;
-  color: var(--text-a);
+  color: inherit;
   background: transparent;
   border-radius: 999px;
 }
 
 .submenu .submenu-column .submenu-nav div:hover {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .header {
