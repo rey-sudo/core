@@ -390,7 +390,7 @@ export default {
 .product-wrap-top-left {
   height: inherit;
   text-align: center;
-  width: 65%;
+  width: 67%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -425,7 +425,7 @@ export default {
 .product-wrap-top-right {
   height: inherit;
   text-align: center;
-  width: 35%;
+  width: 33%;
 }
 
 .product-wrap-top {
