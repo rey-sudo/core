@@ -370,7 +370,7 @@ export default {
 
 .product-bottom-button {
   width: 80%;
-  background: black;
+  background: var(--blue-a);
   padding: 0.75rem;
   border-radius: 8px;
   color: var(--text-w);

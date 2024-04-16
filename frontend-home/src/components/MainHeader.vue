@@ -9,10 +9,10 @@
       />
 
       <div class="header-button left">
-        <label>🇺🇸</label>
+        <label for=""> <img src="@/assets/location.svg" alt="" /></label> 
         <div>
           <span>EN</span>
-          <span>USA</span>
+          <span>🇺🇸</span>
         </div>
       </div>
 
@@ -331,10 +331,12 @@ export default {
   color: var(--text-a);
   font-size: var(--text-size-b);
   padding: 0.25rem;
-  border: 1px solid #dddddd;
+  border: 1px solid var(--border-b);
 }
+
 .header-center-search:focus-within {
   background: var(--base-b);
+  border: 1px solid var(--blue-a);
 }
 
 .header-center-search-icon {
