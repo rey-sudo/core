@@ -60,7 +60,7 @@
       <div class="header-button right">
         <label for=""> <img src="@/assets/user.svg" alt="" /></label>
         <div @click="connectWallet">
-          <span>Conn</span>
+          <span>Use</span>
           <span>Wallet</span>
         </div>
       </div>

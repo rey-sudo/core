@@ -338,7 +338,6 @@ export default {
   display: flex;
   justify-content: center;
   min-height: 100vh;
-  background: var(--base-b);
 }
 
 .product-price {
@@ -359,7 +358,6 @@ export default {
 
 .product-wrap {
   width: 90%;
-  padding: 2rem;
 }
 
 .product-bottom {
@@ -433,13 +431,11 @@ export default {
 
 .product-wrap-top {
   min-height: 150vh;
-  margin-top: 121px;
+  margin-top: 123px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  background: var(--base-a);
   padding: 1rem;
-  border-radius: 28px;
 }
 
 .product-name {
