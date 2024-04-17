@@ -205,9 +205,13 @@ export default {
   left: 0;
   width: 100%;
   align-items: center;
-  background: var(--blue-a);
-  color: var(--text-w);
+  background: var(--base-a);
+  color: var(--text-a);
+  border-top: 1px solid var(--border-a);
+  border-bottom: 1px solid var(--border-a);
 }
+
+
 
 .submenu .submenu-column {
   flex-basis: 33.33%;
@@ -254,7 +258,7 @@ export default {
   cursor: pointer;
   padding: 0 1rem;
   line-height: 40px;
-  font-weight: 600;
+  font-weight: 500;
   margin-right: 1rem;
   color: inherit;
   background: transparent;
@@ -262,7 +266,7 @@ export default {
 }
 
 .submenu .submenu-column .submenu-nav div:hover {
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .header {

@@ -94,7 +94,7 @@ export default {
   align-items: center;
   color: var(--text-a);
   line-height: 1.5rem;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .card-body-collateral {
