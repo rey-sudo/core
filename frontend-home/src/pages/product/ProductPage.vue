@@ -359,7 +359,7 @@ export default {
 
 .product-wrap {
   width: 90%;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .product-bottom {
