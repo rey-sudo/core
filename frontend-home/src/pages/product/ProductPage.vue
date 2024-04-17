@@ -357,7 +357,7 @@ export default {
 }
 
 .product-wrap {
-  width: 90%;
+  width: 85%;
 }
 
 .product-bottom {
@@ -439,9 +439,9 @@ export default {
 }
 
 .product-name {
-  font-size: var(--text-size-g);
+  font-size: var(--text-size-h);
   font-weight: 700;
-  margin-top: 5rem;
+  margin-top: 2rem;
   text-align: left;
 }
 
