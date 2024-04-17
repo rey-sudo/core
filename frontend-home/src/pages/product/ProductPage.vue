@@ -370,7 +370,7 @@ export default {
 
 .product-bottom-button {
   width: 80%;
-  background: black;
+  background: var(--blue-a);
   padding: 0.75rem;
   border-radius: 8px;
   color: var(--text-w);
@@ -429,8 +429,8 @@ export default {
 }
 
 .product-wrap-top {
-  min-height: 100vh;
-  margin-top: 124px;
+  min-height: 150vh;
+  margin-top: 121px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
