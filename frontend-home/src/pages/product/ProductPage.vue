@@ -358,7 +358,7 @@ export default {
 }
 
 .product-wrap {
-  width: 80%;
+  width: 90%;
   padding: 1rem;
 }
 
@@ -437,12 +437,12 @@ export default {
   flex-wrap: wrap;
   justify-content: space-between;
   background: var(--base-a);
-  padding: 1rem;
+  padding: 2rem;
   border-radius: 28px;
 }
 
 .product-name {
-  font-size: var(--text-size-g);
+  font-size: var(--text-size-h);
   font-weight: 700;
   margin-top: 5rem;
   text-align: left;
