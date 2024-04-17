@@ -258,7 +258,7 @@ export default {
   cursor: pointer;
   padding: 0 1rem;
   line-height: 40px;
-  font-weight: 500;
+  font-weight: 600;
   margin-right: 1rem;
   color: inherit;
   background: transparent;
@@ -266,7 +266,7 @@ export default {
 }
 
 .submenu .submenu-column .submenu-nav div:hover {
-  font-weight: 600;
+  opacity: 0.8;
 }
 
 .header {
