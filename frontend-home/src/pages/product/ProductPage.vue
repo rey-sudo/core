@@ -428,6 +428,7 @@ export default {
   height: inherit;
   text-align: center;
   width: 33%;
+  padding: 1rem;
 }
 
 .product-wrap-top {
@@ -437,12 +438,12 @@ export default {
   flex-wrap: wrap;
   justify-content: space-between;
   background: var(--base-a);
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 28px;
 }
 
 .product-name {
-  font-size: var(--text-size-h);
+  font-size: var(--text-size-g);
   font-weight: 700;
   margin-top: 5rem;
   text-align: left;
