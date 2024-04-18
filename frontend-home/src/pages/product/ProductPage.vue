@@ -426,7 +426,6 @@ export default {
   height: inherit;
   text-align: center;
   width: 33%;
-  padding: 1rem;
 }
 
 .product-wrap-top {
