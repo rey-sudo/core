@@ -9,7 +9,7 @@
       />
 
       <div class="header-button left">
-        <label for=""> <img src="@/assets/location.svg" alt="" /></label> 
+        <label for=""> <img src="@/assets/location.svg" alt="" /></label>
         <div>
           <span>EN</span>
           <span>🇺🇸</span>
@@ -57,18 +57,26 @@
         </div>
       </div>
 
-      <div class="header-button right">
-        <label for=""> <img src="@/assets/user.svg" alt="" /></label>
-        <div @click="connectWallet">
-          <span>Use</span>
-          <span>Wallet</span>
-        </div>
+      <div data-v-4f11bcd6="" class="header-button right">
+        <span
+          @click="connectWallet"
+          data-v-4f11bcd6=""
+          style="
+            border: 1px solid;
+            border-radius: 999px;
+            padding: 0.5rem 1rem;
+            background: var(--blue-c);
+            color: var(--text-w);
+          "
+        >
+          Connect Wallet</span
+        >
       </div>
     </div>
 
     <!--SUBMENU-->
 
-    <div class="submenu">
+    <div class="submenu" :class="{ blue: currentRoute === 'product' }">
       <div class="submenu-column left">
         <div class="submenu-button">
           <i class="pi pi-bars" />
@@ -105,6 +113,7 @@ export default {
   data() {
     return {
       isScrolled: false,
+      currentRoute: "",
       navTabs: [
         {
           label: "All",
@@ -130,7 +139,12 @@ export default {
           badge: false,
           badgeLabel: "",
         },
-
+        {
+          label: "Bounties",
+          value: "bounties",
+          badge: false,
+          badgeLabel: "",
+        },
         {
           label: "Help",
           value: "help",
@@ -139,6 +153,13 @@ export default {
         },
       ],
     };
+  },
+  created() {
+    this.$watch(
+      () => this.$route.name,
+      (name) => (this.currentRoute = name),
+      { immediate: true }
+    )();
   },
   methods: {
     connectWallet() {
@@ -195,7 +216,7 @@ export default {
 
 <style lang="css" scoped>
 .submenu {
-  padding: 0.125rem;
+  padding: 0.25rem;
   padding-left: 2rem;
   margin-top: 7px;
   z-index: 100;
@@ -209,9 +230,15 @@ export default {
   color: var(--text-a);
   border-top: 1px solid var(--border-a);
   border-bottom: 1px solid var(--border-a);
+  font-weight: 500;
 }
 
-
+.submenu.blue {
+  color: var(--text-w);
+  background: var(--blue-c);
+  font-weight: 600;
+  border-bottom: 1px solid transparent;
+}
 
 .submenu .submenu-column {
   flex-basis: 33.33%;
@@ -258,7 +285,7 @@ export default {
   cursor: pointer;
   padding: 0 1rem;
   line-height: 40px;
-  font-weight: 600;
+  font-weight: inherit;
   margin-right: 1rem;
   color: inherit;
   background: transparent;
@@ -309,7 +336,7 @@ export default {
 }
 
 .header-button.left {
-  margin: auto;
+  margin-right: auto;
 }
 
 .header-button.right {
@@ -325,12 +352,12 @@ export default {
 }
 
 .header-center-search {
-  background: var(--base-a);
+  background: var(--base-b);
   transition: var(--button-transition-a);
   cursor: text;
   display: flex;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 999px;
   width: 100%;
   color: var(--text-a);
   font-size: var(--text-size-b);

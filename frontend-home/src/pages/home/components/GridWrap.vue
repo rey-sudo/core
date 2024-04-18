@@ -18,7 +18,7 @@
 
           <div class="card-body">
             <div class="card-body-name">
-              <span> {{ item.name.slice(0, 50) }}...</span>
+              <span> {{ item.name.slice(0, 60) }}...</span>
             </div>
             <div class="card-body-price">
               <span> {{ formatPrice(item.price) }}</span>
