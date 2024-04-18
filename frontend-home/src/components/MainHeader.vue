@@ -17,7 +17,7 @@
       </div>
 
       <div class="header-button left">
-        <label for=""> <img src="@/assets/store.svg" alt="" /></label>
+        <label for=""> <img src="@/assets/store.svg"  alt="" /></label>
         <div>
           <span>Sell a</span>
           <span>Product</span>
@@ -227,7 +227,7 @@ export default {
   color: var(--text-a);
   border-top: 1px solid var(--border-a);
   border-bottom: 1px solid var(--border-a);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .submenu.blue {
@@ -368,12 +368,14 @@ export default {
 }
 
 .header-center-search-icon {
-  color: var(--text-a);
+  color: var(--text-w);
   font-size: var(--text-size-b);
   display: flex;
   align-items: center;
   padding: 1rem;
   cursor: pointer;
+  background: var(--blue-c);
+  border-radius: 999px;
 }
 
 .header-center-search-icon i {
@@ -428,8 +430,8 @@ i {
 }
 
 .header-button img {
-  width: 2rem;
-  height: 2rem;
+  width: var(--text-size-g);
+  height: var(--text-size-g);
 }
 
 .header-button label {
