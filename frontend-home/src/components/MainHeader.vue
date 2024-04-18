@@ -52,7 +52,7 @@
         <label for=""> <img src="@/assets/cart.svg" alt="" /></label>
 
         <div>
-          <span class="counter">14</span>
+          <span class="counter">0</span>
           <span>Items</span>
         </div>
       </div>
@@ -451,7 +451,7 @@ i {
 }
 
 .counter {
-  background: black;
+  background: var(--text-b);
   color: var(--text-w);
   font-weight: 600 !important;
   border-radius: 99px;
