@@ -451,13 +451,19 @@ i {
 }
 
 .counter {
-  background: var(--text-b);
+  background: var(--text-a);
   color: var(--text-w);
   font-weight: 600 !important;
   border-radius: 99px;
   text-align: center !important;
   font-size: var(--text-size-a) !important;
 }
+
+
+
+
+
+
 
 @media only screen and (max-width: 600px) {
   header {
