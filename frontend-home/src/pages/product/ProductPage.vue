@@ -127,7 +127,7 @@
           </div>
 
           <div class="product-bottom">
-            <div class="product-bottom-button">Buy now</div>
+            <div class="product-bottom-button" @click="buyProduct">Buy now</div>
 
             <div class="product-bottom-bookmark" v-tooltip.top="'Add to cart'">
               <i class="pi pi-plus" />
