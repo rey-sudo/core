@@ -439,7 +439,7 @@ export default {
 }
 
 .product-name {
-  font-size: var(--text-size-h);
+  font-size: var(--text-size-g);
   font-weight: 700;
   margin-top: 2rem;
   text-align: left;
