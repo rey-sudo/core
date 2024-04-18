@@ -216,7 +216,7 @@ export default {
 
 <style lang="css" scoped>
 .submenu {
-  padding: 0.25rem;
+  padding: 0.2rem;
   padding-left: 2rem;
   margin-top: 7px;
   z-index: 100;
@@ -352,7 +352,7 @@ export default {
 }
 
 .header-center-search {
-  background: var(--base-a);
+  background: var(--base-b);
   transition: var(--button-transition-a);
   cursor: text;
   display: flex;
@@ -367,7 +367,7 @@ export default {
 
 .header-center-search:focus-within {
   background: var(--base-a);
-  border: 1px solid var(--blue-a);
+  border: 1px solid var(--border-b);
 }
 
 .header-center-search-icon {
