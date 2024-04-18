@@ -230,7 +230,7 @@ export default {
   color: var(--text-a);
   border-top: 1px solid var(--border-a);
   border-bottom: 1px solid var(--border-a);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .submenu.blue {
@@ -352,7 +352,7 @@ export default {
 }
 
 .header-center-search {
-  background: var(--base-b);
+  background: var(--base-a);
   transition: var(--button-transition-a);
   cursor: text;
   display: flex;
