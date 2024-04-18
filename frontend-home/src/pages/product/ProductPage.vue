@@ -431,7 +431,7 @@ export default {
 
 .product-wrap-top {
   min-height: 150vh;
-  margin-top: 123px;
+  margin-top: 200px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -441,7 +441,6 @@ export default {
 .product-name {
   font-size: var(--text-size-g);
   font-weight: 700;
-  margin-top: 2rem;
   text-align: left;
 }
 
