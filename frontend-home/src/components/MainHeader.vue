@@ -58,17 +58,7 @@
       </div>
 
       <div data-v-4f11bcd6="" class="header-button right">
-        <span
-          @click="connectWallet"
-          data-v-4f11bcd6=""
-          style="
-            border: 1px solid;
-            border-radius: 999px;
-            padding: 0.5rem 1rem;
-            background: var(--blue-c);
-            color: var(--text-w);
-          "
-        >
+        <span @click="connectWallet" data-v-4f11bcd6="" class="wallet-button">
           Connect Wallet</span
         >
       </div>
@@ -215,6 +205,13 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.wallet-button {
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  background: var(--blue-c);
+  color: var(--text-w);
+}
+
 .submenu {
   padding: 0.2rem;
   padding-left: 2rem;
