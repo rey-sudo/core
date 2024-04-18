@@ -17,7 +17,7 @@
       </div>
 
       <div class="header-button left">
-        <label for=""> <img src="@/assets/store.svg"  alt="" /></label>
+        <label for=""> <img src="@/assets/store.svg" alt="" /></label>
         <div>
           <span>Sell a</span>
           <span>Product</span>
@@ -58,8 +58,8 @@
       </div>
 
       <div data-v-4f11bcd6="" class="header-button right">
-        <span @click="connectWallet" data-v-4f11bcd6="" class="wallet-button">
-          Connect Wallet</span
+        <button @click="connectWallet" data-v-4f11bcd6="" class="wallet-button">
+          Wallet</button
         >
       </div>
     </div>
@@ -210,6 +210,9 @@ export default {
   padding: 0.5rem 1rem;
   background: var(--blue-c);
   color: var(--text-w);
+  font-weight: 500;
+  border: none;
+  font-size: var(--text-size-a);
 }
 
 .submenu {
@@ -319,7 +322,6 @@ export default {
 .header .header-left .header-left-logo {
   cursor: pointer;
   image-rendering: optimizeQuality;
-  height: 40px;
 }
 
 .header-button {
@@ -430,8 +432,8 @@ i {
 }
 
 .header-button img {
-  width: var(--text-size-g);
-  height: var(--text-size-g);
+  width: var(--text-size-h);
+  height: var(--text-size-h);
 }
 
 .header-button label {
@@ -449,7 +451,7 @@ i {
 }
 
 .counter {
-  background: var(--blue-c);
+  background: black;
   color: var(--text-w);
   font-weight: 600 !important;
   border-radius: 99px;
