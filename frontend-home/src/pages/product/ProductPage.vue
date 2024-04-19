@@ -4,13 +4,21 @@
     <div class="product-wrap">
       <div class="product-wrap-top">
         <div class="product-wrap-top-left">
+          <div class="bread">
+            <Breadcrumb :home="home" :model="breadItems">
+              <template #separator>
+                <div class="arrow"/>
+              </template>
+            </Breadcrumb>
+          </div>
+
           <Galleria
             :value="galleryImage"
             :responsiveOptions="responsiveOptions"
             :numVisible="1"
             :circular="true"
             :transitionInterval="0"
-            containerStyle="max-width: 70%; min-height: 500px; max-height: 500px; margin-top: 5rem;"
+            containerStyle="max-width: 70%; min-height: 600px;  margin-top: 4rem;"
             :showItemNavigators="false"
             :showThumbnails="false"
           >
@@ -230,9 +238,15 @@ export default {
       review_count: 80,
     });
 
+    const breadItems = ref([
+      { label: "Electronics" },
+      { label: "TV & Accessories" },
+      { label: "TVs" }
+    ]);
     return {
       images,
       product,
+      breadItems,
       galleryImage,
       lockingEndpoint,
       responsiveOptions,
@@ -323,6 +337,26 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
+
+.arrow::before {
+  border-bottom: 4px solid #0000;
+  border-left: 4px solid var(--text-b);
+  border-top: 4px solid #0000;
+  content: " ";
+  display: inline-block;
+  align-items: center;
+  height: 0;
+  margin: 0 2px;
+  width: 0;
+}
+
+.bread {
+  display: flex;
+  justify-content: flex-start;
+  width: inherit;
+}
+
 .accordionParagraph {
   text-align: left;
   line-height: 1.5rem;
@@ -357,7 +391,7 @@ export default {
 }
 
 .product-wrap {
-  width: 85%;
+  width: 90%;
 }
 
 .product-bottom {
@@ -388,11 +422,10 @@ export default {
 }
 
 .product-wrap-top-left {
-  height: inherit;
   text-align: center;
   width: 67%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
 }
@@ -400,8 +433,8 @@ export default {
 .gallery-boxes {
   display: flex;
   justify-content: flex-start;
-  margin-top: 2rem;
   margin-bottom: 2rem;
+  position: relative;
 }
 
 .gallery-boxes-item {
@@ -434,7 +467,6 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 1rem;
 }
 
 .product-name {

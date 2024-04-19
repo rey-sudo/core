@@ -216,6 +216,7 @@ export default {
   font-weight: 500;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .wallet-button img {
@@ -458,13 +459,14 @@ i {
 }
 
 .counter {
-  background: var(--base-b);
-  color: var(--text-a);
+  background: var(--blue-c);
+  color: var(--text-w);
   font-weight: 600 !important;
   border-radius: 99px;
   text-align: center !important;
   font-size: var(--text-size-a) !important;
 }
+
 
 @media only screen and (max-width: 600px) {
   header {
