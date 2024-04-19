@@ -210,7 +210,7 @@ export default {
   padding: 0.5rem;
   color: var(--text-a);
   background: var(--base-a);
-  border: 1px solid var(--border-b);
+  border: none;
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -224,7 +224,7 @@ export default {
 .submenu {
   padding: 0.25rem;
   padding-left: 2rem;
-  margin-top: 4px;
+  margin-top: 2px;
   z-index: 100;
   display: flex;
   position: fixed;
