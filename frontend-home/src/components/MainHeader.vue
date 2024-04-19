@@ -40,7 +40,7 @@
 
     <div class="header-right">
       <div class="header-button right">
-        <label for=""> <img src="@/assets/gift.svg" alt="" /></label>
+        <label v-badge.secondary for=""> <img src="@/assets/gift.svg"    alt="" /></label>
         <div>
           <span>Be a</span>
           <span>Mediator</span>
@@ -395,8 +395,7 @@ export default {
   width: 100%;
   font-size: var(--text-size-b);
   color: inherit;
-  margin: 0 1rem;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
 }
 
 .header-center-search input::placeholder {

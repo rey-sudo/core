@@ -10434,11 +10434,11 @@
     line-height: 1.5rem;
   }
   .p-badge.p-badge-secondary {
-    background-color: #607d8b;
+    background-color: var(--red-a);
     color: #ffffff;
   }
   .p-badge.p-badge-success {
-    background-color: #4caf50;
+    background-color: var(--blue-c);
     color: #ffffff;
   }
   .p-badge.p-badge-info {
