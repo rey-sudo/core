@@ -18,7 +18,7 @@
             :numVisible="1"
             :circular="true"
             :transitionInterval="0"
-            containerStyle="max-width: 70%; min-height: 600px;  margin-top: 4rem;"
+            containerStyle="max-width: 60%; min-height: 500px;  margin-top: 4rem;"
             :showItemNavigators="false"
             :showThumbnails="false"
           >
@@ -404,7 +404,7 @@ export default {
 
 .product-bottom-button {
   width: 80%;
-  background: var(--blue-c);
+  background: var(--blue-a);
   padding: 0.75rem;
   border-radius: 8px;
   color: var(--text-w);

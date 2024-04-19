@@ -224,7 +224,7 @@ export default {
 }
 
 .submenu {
-  padding: 0.2rem;
+  padding: 0.125rem;
   padding-left: 2rem;
   margin-top: 7px;
   z-index: 100;
