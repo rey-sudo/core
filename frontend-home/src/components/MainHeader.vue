@@ -58,9 +58,10 @@
       </div>
 
       <div data-v-4f11bcd6="" class="header-button right">
-        <button @click="connectWallet" data-v-4f11bcd6="" class="wallet-button">
-          Wallet</button
-        >
+        <button class="wallet-button" data-v-4f11bcd6="" @click="connectWallet">
+          <i class="pi pi-bars" />
+          <img src="@/assets/user.svg" alt="" />
+        </button>
       </div>
     </div>
 
@@ -206,13 +207,19 @@ export default {
 
 <style lang="css" scoped>
 .wallet-button {
-  border-radius: 999px;
-  padding: 0.5rem 1rem;
-  background: var(--blue-c);
-  color: var(--text-w);
-  font-weight: 500;
-  border: none;
   font-size: var(--text-size-a);
+  border-radius: 999px;
+  padding: 0.5rem;
+  color: var(--text-a);
+  background: var(--base-a);
+  border: 1px solid var(--border-a);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.wallet-button img {
+  margin-left: 1rem;
 }
 
 .submenu {
@@ -451,19 +458,13 @@ i {
 }
 
 .counter {
-  background: var(--text-a);
-  color: var(--text-w);
+  background: var(--base-b);
+  color: var(--text-a);
   font-weight: 600 !important;
   border-radius: 99px;
   text-align: center !important;
   font-size: var(--text-size-a) !important;
 }
-
-
-
-
-
-
 
 @media only screen and (max-width: 600px) {
   header {
