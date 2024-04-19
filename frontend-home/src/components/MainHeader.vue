@@ -12,12 +12,11 @@
         <label for=""> <img src="@/assets/location.svg" alt="" /></label>
         <div>
           <span>EN</span>
-          <span>🇺🇸</span>
+          <span>United States</span>
         </div>
       </div>
 
       <div class="header-button left">
-        <label for=""> <img src="@/assets/store.svg" alt="" /></label>
         <div>
           <span>Sell a</span>
           <span>Product</span>
@@ -51,9 +50,8 @@
       <div class="header-button right">
         <label for=""> <img src="@/assets/cart.svg" alt="" /></label>
 
-        <div>
-          <span class="counter">0</span>
-          <span>Items</span>
+        <div class="counter">
+          <span>1</span>
         </div>
       </div>
 
@@ -226,7 +224,7 @@ export default {
 .submenu {
   padding: 0.125rem;
   padding-left: 2rem;
-  margin-top: 7px;
+  margin-top: 4px;
   z-index: 100;
   display: flex;
   position: fixed;
@@ -305,7 +303,7 @@ export default {
 }
 
 .header {
-  padding: 1rem 2rem;
+  padding: 0.75rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -316,9 +314,12 @@ export default {
   box-sizing: border-box;
   background: initial;
   color: var(--text-a);
-  background: white;
+  background: var(--base-a);
   box-shadow: var(--border-shadow);
 }
+
+
+
 
 .header .header-left {
   flex-basis: 33.33%;
@@ -333,7 +334,7 @@ export default {
 }
 
 .header-button {
-  font-weight: 600;
+  font-weight: 500;
   font-size: var(--text-size-d);
   display: flex;
   align-items: center;
@@ -378,13 +379,12 @@ export default {
 }
 
 .header-center-search-icon {
-  color: var(--text-w);
+  color: var(--text-a);
   font-size: var(--text-size-b);
   display: flex;
   align-items: center;
   padding: 1rem;
   cursor: pointer;
-  background: var(--blue-c);
   border-radius: 999px;
 }
 
@@ -437,11 +437,10 @@ i {
 
 .header-button span:nth-child(1) {
   font-weight: 400;
+  font-size: var(--text-size-a);
 }
 
 .header-button img {
-  width: var(--text-size-h);
-  height: var(--text-size-h);
 }
 
 .header-button label {
@@ -460,13 +459,20 @@ i {
 
 .counter {
   background: var(--blue-c);
+  font-size: var(--text-size-a);
   color: var(--text-w);
-  font-weight: 600 !important;
-  border-radius: 99px;
-  text-align: center !important;
-  font-size: var(--text-size-a) !important;
+  border-radius: 50%;
+  text-align: center;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.counter span {
+  font-weight: 700 !important;
+}
 
 @media only screen and (max-width: 600px) {
   header {
