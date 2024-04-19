@@ -222,7 +222,7 @@ export default {
 }
 
 .submenu {
-  padding: 0.125rem;
+  padding: 0.25rem;
   padding-left: 2rem;
   margin-top: 4px;
   z-index: 100;
@@ -232,14 +232,12 @@ export default {
   left: 0;
   width: 100%;
   align-items: center;
-  background: var(--base-a);
-  color: var(--text-a);
-  border-top: 1px solid var(--border-a);
-  border-bottom: 1px solid var(--border-a);
+  background: var(--base-e);
+  color: var(--text-w);
   font-weight: 500;
 }
 
-.submenu.blue {
+.submenu.bluex {
   color: var(--text-w);
   background: var(--blue-c);
   font-weight: 600;
@@ -286,7 +284,7 @@ export default {
 }
 
 .submenu .submenu-column .submenu-nav div {
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   white-space: nowrap;
   cursor: pointer;
   padding: 0 1rem;
@@ -314,12 +312,9 @@ export default {
   box-sizing: border-box;
   background: initial;
   color: var(--text-a);
-  background: var(--base-a);
+  background: var(--base-d);
   box-shadow: var(--border-shadow);
 }
-
-
-
 
 .header .header-left {
   flex-basis: 33.33%;
@@ -340,6 +335,7 @@ export default {
   align-items: center;
   white-space: nowrap;
   cursor: pointer;
+  color: var(--text-w);
   transition: var(--button-transition-a);
 }
 
@@ -365,7 +361,7 @@ export default {
   cursor: text;
   display: flex;
   align-items: center;
-  border-radius: 999px;
+  border-radius: 8px;
   width: 100%;
   color: var(--text-a);
   font-size: var(--text-size-b);
@@ -423,6 +419,7 @@ i {
   display: flex;
   flex-direction: column;
   margin-left: 1rem;
+  color: var(--text-w);
 }
 
 .header-button div:hover {
@@ -441,6 +438,7 @@ i {
 }
 
 .header-button img {
+  filter: invert(1);
 }
 
 .header-button label {
@@ -458,9 +456,8 @@ i {
 }
 
 .counter {
-  background: var(--blue-c);
+  background: var(--base-a);
   font-size: var(--text-size-a);
-  color: var(--text-w);
   border-radius: 50%;
   text-align: center;
   width: 32px;
@@ -472,6 +469,7 @@ i {
 
 .counter span {
   font-weight: 700 !important;
+  color: var(--text-a) !important;
 }
 
 @media only screen and (max-width: 600px) {
