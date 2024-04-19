@@ -212,7 +212,7 @@ export default {
   padding: 0.5rem;
   color: var(--text-a);
   background: var(--base-a);
-  border: 1px solid var(--border-a);
+  border: 1px solid var(--border-b);
   font-weight: 500;
   display: flex;
   align-items: center;
