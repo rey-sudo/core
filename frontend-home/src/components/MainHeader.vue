@@ -361,7 +361,7 @@ export default {
   cursor: text;
   display: flex;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 999px;
   width: 100%;
   color: var(--text-a);
   font-size: var(--text-size-b);

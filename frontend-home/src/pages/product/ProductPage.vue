@@ -406,7 +406,7 @@ export default {
   width: 80%;
   background: var(--blue-c);
   padding: 0.75rem;
-  border-radius: 8px;
+  border-radius: 999px;
   color: var(--text-w);
   font-weight: 500;
   cursor: pointer;
