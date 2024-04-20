@@ -241,7 +241,7 @@ export default {
   left: 0;
   width: 100%;
   align-items: center;
-  background: var(--base-e);
+  background: var(--blue-a);
   color: var(--text-w);
   font-weight: 500;
 }
@@ -293,7 +293,7 @@ export default {
 }
 
 .submenu .submenu-column .submenu-nav div {
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
   white-space: nowrap;
   cursor: pointer;
   padding: 0 1rem;
@@ -321,7 +321,7 @@ export default {
   box-sizing: border-box;
   background: initial;
   color: var(--text-a);
-  background: var(--base-d);
+  background: var(--blue-b);
   box-shadow: var(--border-shadow);
 }
 
@@ -370,12 +370,12 @@ export default {
   cursor: text;
   display: flex;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 999px;
   width: 100%;
   color: var(--text-a);
   font-size: var(--text-size-b);
   padding: 0.25rem;
-  border: 1px solid var(--border-b);
+  border: 1px solid transparent;
 }
 
 .header-center-search:focus-within {

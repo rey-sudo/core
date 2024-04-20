@@ -395,7 +395,7 @@ export default {
 }
 
 .product-wrap {
-  width: 90%;
+  width: 85%;
 }
 
 .product-bottom {

@@ -55,7 +55,7 @@ export default {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--blue-a);
+  background: var(--blue-b);
 }
 
 .store .top {

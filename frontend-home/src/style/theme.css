@@ -10434,7 +10434,7 @@
     line-height: 1.5rem;
   }
   .p-badge.p-badge-secondary {
-    background-color: var(--red-a);
+    background-color: var(--yellow-a);
     color: #ffffff;
   }
   .p-badge.p-badge-success {
