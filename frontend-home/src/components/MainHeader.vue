@@ -241,7 +241,7 @@ export default {
   left: 0;
   width: 100%;
   align-items: center;
-  background: var(--blue-a);
+  background: var(--blue-b);
   color: var(--text-w);
   font-weight: 500;
   border-top: 1px solid rgba(255,255,255,0.25);
@@ -377,7 +377,7 @@ export default {
   width: 100%;
   color: var(--text-a);
   font-size: var(--text-size-b);
-  padding: 0.25rem;
+  padding: 0.125rem;
   border: 2px solid transparent;
 }
 

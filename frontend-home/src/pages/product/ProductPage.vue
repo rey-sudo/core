@@ -41,6 +41,15 @@
             >
               <img :src="item.thumbnailImageSrc" alt="" />
             </div>
+
+            <div class="gallery-boxes-item">
+              <span class="mask">+15</span>
+            </div>
+            <div class="gallery-boxes-item">
+              <span class="mask">
+                <i class="pi pi-play-circle" />
+              </span>
+            </div>
           </div>
 
           <Accordion :multiple="true" :activeIndex="[0]" style="width: 100%">
@@ -141,10 +150,7 @@
               <i class="pi pi-share-alt" />
             </div>
 
-            <div
-              class="product-bottom-bookmark"
-              v-tooltip.top="'Save'"
-            >
+            <div class="product-bottom-bookmark" v-tooltip.top="'Save'">
               <i class="pi pi-heart" />
             </div>
           </div>
@@ -411,7 +417,7 @@ export default {
   width: 80%;
   background: var(--blue-c);
   padding: 0.75rem;
-  border-radius: 999px;
+  border-radius: 8px;
   color: var(--text-w);
   font-weight: 600;
   cursor: pointer;
@@ -457,11 +463,26 @@ export default {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  width: 70px;
+  height: 70px;
+}
+
+.mask {
+  background: #55555a;
+  border-radius: 4px;
+  color: var(--text-w);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  opacity: 0.9;
 }
 
 .gallery-boxes-item img {
-  width: 60px;
-  height: 60px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
