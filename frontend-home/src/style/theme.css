@@ -5796,7 +5796,7 @@
     border: 1px solid #dee2e6;
     color: var(--text-a);
     background: var(--base-a);
-    font-weight: 600;
+    font-weight: 700;
     border-radius: 3px;
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
     outline-color: transparent;

@@ -244,7 +244,10 @@ export default {
   background: var(--blue-a);
   color: var(--text-w);
   font-weight: 500;
+  border-top: 1px solid rgba(255,255,255,0.25);
 }
+
+
 
 .submenu.bluex {
   color: var(--text-w);
@@ -375,12 +378,12 @@ export default {
   color: var(--text-a);
   font-size: var(--text-size-b);
   padding: 0.25rem;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
 }
 
 .header-center-search:focus-within {
   background: var(--base-a);
-  border: 1px solid var(--border-b);
+  border: 2px solid var(--border-b);
 }
 
 .header-center-search-icon {
