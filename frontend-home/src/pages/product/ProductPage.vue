@@ -7,7 +7,7 @@
           <div class="bread">
             <Breadcrumb :home="home" :model="breadItems">
               <template #separator>
-                <div class="arrow"/>
+                <div class="arrow" />
               </template>
             </Breadcrumb>
           </div>
@@ -137,15 +137,21 @@
           <div class="product-bottom">
             <div class="product-bottom-button" @click="buyProduct">Buy now</div>
 
-            <div class="product-bottom-bookmark" v-tooltip.top="'Add to cart'">
-              <i class="pi pi-plus" />
+            <div class="product-bottom-bookmark" v-tooltip.top="'Share'">
+              <i class="pi pi-share-alt" />
             </div>
 
             <div
               class="product-bottom-bookmark"
-              v-tooltip.top="'Save publication'"
+              v-tooltip.top="'Save'"
             >
-              <i class="pi pi-bookmark" />
+              <i class="pi pi-heart" />
+            </div>
+          </div>
+
+          <div class="product-bottom">
+            <div class="product-bottom-outline" @click="buyProduct">
+              Add to cart
             </div>
           </div>
         </div>
@@ -241,7 +247,7 @@ export default {
     const breadItems = ref([
       { label: "Electronics" },
       { label: "TV & Accessories" },
-      { label: "TVs" }
+      { label: "TVs" },
     ]);
     return {
       images,
@@ -337,8 +343,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-
-
 .arrow::before {
   border-bottom: 4px solid #0000;
   border-left: 4px solid var(--text-b);
@@ -398,18 +402,24 @@ export default {
   display: flex;
   width: 100%;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
   justify-content: space-between;
 }
 
-.product-bottom-button {
+.product-bottom-button,
+.product-bottom-outline {
   width: 80%;
   background: var(--blue-c);
   padding: 0.75rem;
   border-radius: 999px;
   color: var(--text-w);
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
+}
+
+.product-bottom-outline {
+  background: var(--blue-s);
+  color: var(--blue-c);
 }
 
 .product-bottom-bookmark {
