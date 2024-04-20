@@ -40,7 +40,9 @@
 
     <div class="header-right">
       <div class="header-button right">
-        <label v-badge.secondary for=""> <img src="@/assets/gift.svg"    alt="" /></label>
+        <label v-badge.secondary for="">
+          <img src="@/assets/gift.svg" alt=""
+        /></label>
         <div>
           <span>Be a</span>
           <span>Mediator</span>
@@ -134,7 +136,6 @@ export default {
           badge: false,
           badgeLabel: "",
         },
-
         {
           label: "P2P",
           value: "p2p",
