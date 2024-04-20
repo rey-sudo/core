@@ -219,6 +219,7 @@ export default {
 
 .wallet-button img {
   margin-left: 1rem;
+  filter: brightness(0) !important;
 }
 
 .submenu {
@@ -361,7 +362,7 @@ export default {
   cursor: text;
   display: flex;
   align-items: center;
-  border-radius: 999px;
+  border-radius: 8px;
   width: 100%;
   color: var(--text-a);
   font-size: var(--text-size-b);
