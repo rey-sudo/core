@@ -134,6 +134,13 @@ export default {
           badge: false,
           badgeLabel: "",
         },
+
+        {
+          label: "P2P",
+          value: "p2p",
+          badge: false,
+          badgeLabel: "",
+        },
         {
           label: "Help",
           value: "help",

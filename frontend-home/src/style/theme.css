@@ -7319,7 +7319,7 @@
   .p-breadcrumb {
     background: #ffffff;
     border-radius: 3px;
-    font-size: var(--text-size-b);
+    font-size: var(--text-size-a);
   }
 
   .p-breadcrumb .p-breadcrumb-list li .p-menuitem-link {
