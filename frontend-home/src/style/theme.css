@@ -5792,7 +5792,7 @@
     line-height: 1;
   }
   .p-accordion .p-accordion-header .p-accordion-header-link {
-    padding: 2rem;
+    padding: 2rem 1rem;
     border: 1px solid #dee2e6;
     color: var(--text-a);
     background: var(--base-a);

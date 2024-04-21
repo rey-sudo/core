@@ -56,8 +56,12 @@
               </div>
             </div>
 
-            <Accordion :multiple="true" :activeIndex="[0]" style="width: 100%">
-              <AccordionTab header="Description">
+            <Accordion
+              :multiple="true"
+              :activeIndex="[0]"
+              class="accordionStyle"
+            >
+              <AccordionTab header="Specifications">
                 <p class="accordionParagraph">
                   Welcome to our cutting-edge e-commerce platform where
                   innovation meets convenience! Step into the future of
@@ -358,6 +362,13 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.accordionStyle {
+  width: 100%;
+  border-top: 1px solid var(--border-a);
+  margin-top: 2rem;
+}
+
+
 .product-wrap-flex {
   display: flex;
   margin-top: 2rem;
@@ -487,9 +498,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  border-bottom: 1px solid var(--border-a);
 }
-
 
 .mask {
   background: #55555a;
