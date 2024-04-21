@@ -401,8 +401,8 @@ export default {
 .product-price {
   text-align: left;
   margin-top: 1rem;
-  font-size: var(--text-size-i);
-  font-weight: 600;
+  font-size: var(--text-size-h);
+  font-weight: 700;
   display: flex;
   align-items: baseline;
 }
@@ -514,7 +514,7 @@ export default {
 
 .product-wrap-top {
   min-height: 150vh;
-  margin-top: 150px;
+  margin-top: 200px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
