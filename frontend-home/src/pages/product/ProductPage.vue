@@ -360,6 +360,7 @@ export default {
 <style lang="css" scoped>
 .product-wrap-flex {
   display: flex;
+  margin-top: 2rem;
 }
 
 .arrow::before {
@@ -486,7 +487,10 @@ export default {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  border-bottom: 1px solid var(--border-a);
 }
+
+
 .mask {
   background: #55555a;
   border-radius: 4px;
@@ -514,7 +518,7 @@ export default {
 
 .product-wrap-top {
   min-height: 150vh;
-  margin-top: 200px;
+  margin-top: 150px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
