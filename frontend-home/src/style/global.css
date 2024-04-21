@@ -21,9 +21,9 @@
   --base-e: #232f3e;
 
   --blue-a: #0069f5;
-  --blue-b: #0036C2;
+  --blue-b: #005CE8;
   --blue-c: #1a83ff;
-  --blue-s: rgba(0, 105, 245, 0.1);
+  --blue-s: hsla(214, 100%, 48%, 0.1);
 
   --red-a: #ff385c;
   --red-s: rgba(255, 56, 92, 0.1);
@@ -31,7 +31,7 @@
   --orange-a: #ff5c38;
   --orange-s: rgba(255, 92, 56, 0.1);
 
-  --yellow-a: #f6ff00;
+  --yellow-a: #FFE600;
   --yellow-s: rgba(255, 242, 0, 0.1);
 
   --green-a: #27b46a;

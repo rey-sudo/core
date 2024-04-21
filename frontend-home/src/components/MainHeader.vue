@@ -227,11 +227,11 @@ export default {
 
 .wallet-button img {
   margin-left: 1rem;
-  filter: brightness(0) !important;
+
 }
 
 .submenu {
-  padding: 0.25rem;
+  padding: 0.125rem;
   padding-left: 2rem;
   margin-top: 2px;
   z-index: 100;
@@ -241,7 +241,7 @@ export default {
   left: 0;
   width: 100%;
   align-items: center;
-  background: var(--blue-b);
+  background: var(--blue-a);
   color: var(--text-w);
   font-weight: 500;
   border-top: 1px solid rgba(255,255,255,0.25);
