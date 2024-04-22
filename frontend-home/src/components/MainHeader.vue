@@ -77,7 +77,7 @@
           <div
             v-for="item in navTabs"
             :key="item"
-            :class="{ active: selectedTab === item.value }"
+            :class="{ selected: selectedTab === item.value }"
           >
             {{ item.label }}
           </div>
@@ -105,6 +105,7 @@ export default {
     return {
       isScrolled: false,
       currentRoute: "",
+      selectedTab: "all", 
       navTabs: [
         {
           label: "All",
@@ -227,12 +228,11 @@ export default {
 
 .wallet-button img {
   margin-left: 1rem;
-
 }
 
 .submenu {
-  padding: 0.125rem;
-  padding-left: 2rem;
+  padding: 0.1rem;
+  padding-left: 3rem;
   margin-top: 2px;
   z-index: 100;
   display: flex;
@@ -241,13 +241,11 @@ export default {
   left: 0;
   width: 100%;
   align-items: center;
-  background: var(--blue-a);
+  background: var(--blue-b);
   color: var(--text-w);
   font-weight: 500;
-  border-top: 1px solid rgba(255,255,255,0.25);
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
 }
-
-
 
 .submenu.bluex {
   color: var(--text-w);
@@ -305,7 +303,12 @@ export default {
   margin-right: 1rem;
   color: inherit;
   background: transparent;
-  border-radius: 999px;
+  border-bottom: 2px solid transparent;
+}
+
+.submenu .submenu-column .submenu-nav div.selected {
+  border-bottom: 2px solid var(--yellow-a);
+
 }
 
 .submenu .submenu-column .submenu-nav div:hover {
@@ -313,7 +316,7 @@ export default {
 }
 
 .header {
-  padding: 0.75rem 2rem;
+  padding: 0.75rem 3rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -378,12 +381,12 @@ export default {
   color: var(--text-a);
   font-size: var(--text-size-b);
   padding: 0.125rem;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
 }
 
 .header-center-search:focus-within {
   background: var(--base-a);
-  border: 2px solid var(--border-b);
+  border: 1px solid rgba(0, 0, 0, 0.8);
 }
 
 .header-center-search-icon {

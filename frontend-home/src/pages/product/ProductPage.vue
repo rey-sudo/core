@@ -368,7 +368,6 @@ export default {
   margin-top: 2rem;
 }
 
-
 .product-wrap-flex {
   display: flex;
   margin-top: 2rem;
@@ -441,7 +440,7 @@ export default {
 .product-bottom-button,
 .product-bottom-outline {
   width: 80%;
-  background: var(--blue-c);
+  background: var(--blue-b);
   padding: 0.75rem;
   border-radius: 8px;
   color: var(--text-w);
@@ -450,8 +449,9 @@ export default {
 }
 
 .product-bottom-outline {
-  background: var(--blue-s);
-  color: var(--blue-c);
+  background: transparent;
+  color: var(--blue-b);
+  border: 1px solid var(--blue-b);
 }
 
 .product-bottom-bookmark {
