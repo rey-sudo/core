@@ -355,11 +355,11 @@ export default {
 }
 
 .header-button.left {
-  margin-right: auto;
+  margin: auto;
 }
 
 .header-button.right {
-  margin-left: auto;
+  margin: auto;
 }
 
 .header .header-center {
@@ -377,7 +377,7 @@ export default {
   display: flex;
   align-items: center;
   border-radius: 4px;
-  width: 100%;
+  width: 80%;
   color: var(--text-a);
   font-size: var(--text-size-b);
   padding: 0.125rem;
