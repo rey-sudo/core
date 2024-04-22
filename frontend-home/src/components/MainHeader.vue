@@ -54,7 +54,7 @@
         <label for=""> <img src="@/assets/cart.svg" alt="" /></label>
 
         <div class="counter">
-          <span>1</span>
+          <span>0</span>
         </div>
       </div>
 
@@ -452,7 +452,7 @@ i {
 }
 
 .header-button img {
-  filter: invert(1);
+
 }
 
 .header-button label {
@@ -470,8 +470,7 @@ i {
 }
 
 .counter {
-  background: var(--base-a);
-  font-size: var(--text-size-a);
+  background: transparent;
   border-radius: 50%;
   text-align: center;
   width: 32px;
@@ -483,7 +482,7 @@ i {
 
 .counter span {
   font-weight: 700 !important;
-  color: var(--text-a) !important;
+  font-size: var(--text-size-e) !important;
 }
 
 @media only screen and (max-width: 600px) {
