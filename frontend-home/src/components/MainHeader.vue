@@ -17,7 +17,6 @@
       </div>
 
       <div class="header-button left">
-    
         <div>
           <span>Sell a</span>
           <span>Product</span>
@@ -232,7 +231,7 @@ export default {
 }
 
 .submenu {
-  padding: 0.1rem;
+  padding: 0.25rem;
   padding-left: 3rem;
   margin-top: 2px;
   z-index: 100;
@@ -245,7 +244,8 @@ export default {
   background: var(--blue-b);
   color: var(--text-w);
   font-weight: 500;
-  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  border-top: 1px solid #0d76ff;
+  border-bottom: 1px solid #ffffff;
 }
 
 .submenu.bluex {
@@ -304,11 +304,6 @@ export default {
   margin-right: 1rem;
   color: inherit;
   background: transparent;
-  border-bottom: 2px solid transparent;
-}
-
-.submenu .submenu-column .submenu-nav div.selected {
-  border-bottom: 2px solid var(--yellow-a);
 }
 
 .submenu .submenu-column .submenu-nav div:hover {
@@ -452,7 +447,6 @@ i {
 }
 
 .header-button img {
-
 }
 
 .header-button label {

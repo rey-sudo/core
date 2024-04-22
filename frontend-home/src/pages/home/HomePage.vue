@@ -43,7 +43,6 @@ export default {
   data() {
     return {
       selectedTab: "all",
-      
     };
   },
 };
@@ -55,7 +54,7 @@ export default {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--blue-b);
+  background-image: var(--gradient-a);
 }
 
 .store .top {
@@ -88,7 +87,6 @@ export default {
 }
 
 @media only screen and (max-width: 600px) {
-
   .store .top {
     height: 300px;
     min-height: 300px;
