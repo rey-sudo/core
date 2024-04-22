@@ -17,6 +17,7 @@
       </div>
 
       <div class="header-button left">
+    
         <div>
           <span>Sell a</span>
           <span>Product</span>
@@ -105,7 +106,7 @@ export default {
     return {
       isScrolled: false,
       currentRoute: "",
-      selectedTab: "all", 
+      selectedTab: "all",
       navTabs: [
         {
           label: "All",
@@ -308,7 +309,6 @@ export default {
 
 .submenu .submenu-column .submenu-nav div.selected {
   border-bottom: 2px solid var(--yellow-a);
-
 }
 
 .submenu .submenu-column .submenu-nav div:hover {
