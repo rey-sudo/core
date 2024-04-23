@@ -1,4 +1,92 @@
 <template>
+  <Dialog
+    v-model:visible="visible"
+    modal
+    :draggable="false"
+    autoZIndex
+    header="Country"
+    :style="{ width: '23rem' }"
+  >
+    <div class="country">
+      <div class="country-title">
+        Choose a country to search and deliver products.
+      </div>
+
+      <Dropdown
+        v-model="selectedCountry"
+        :options="countries"
+        filter
+        optionLabel="name"
+        placeholder="Country"
+        class="country-dropdown"
+      >
+        <template #value="slotProps">
+          <div v-if="slotProps.value" class="country-dropdown-item">
+            <img
+              :alt="slotProps.value.label"
+              src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
+              :class="`mr-2 flag flag-${slotProps.value.code.toLowerCase()}`"
+            />
+            <div>{{ slotProps.value.name }}</div>
+          </div>
+          <span v-else>
+            {{ slotProps.placeholder }}
+          </span>
+        </template>
+        <template #option="slotProps">
+          <div class="country-dropdown-item">
+            <img
+              :alt="slotProps.option.label"
+              src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
+              :class="`mr-2 flag flag-${slotProps.option.code.toLowerCase()}`"
+            />
+            <div>{{ slotProps.option.name }}</div>
+          </div>
+        </template>
+      </Dropdown>
+
+      <Dropdown
+        v-model="selectedLanguage"
+        :options="languages"
+        filter
+        optionLabel="name"
+        placeholder="Country"
+        class="country-dropdown"
+      >
+        <template #value="slotProps">
+          <div v-if="slotProps.value" class="country-dropdown-item">
+            <div>{{ slotProps.value.name }}</div>
+          </div>
+          <span v-else>
+            {{ slotProps.placeholder }}
+          </span>
+        </template>
+        <template #option="slotProps">
+          <div class="country-dropdown-item">
+            <div>{{ slotProps.option.name }}</div>
+          </div>
+        </template>
+      </Dropdown>
+    </div>
+
+    <template #footer>
+      <Button
+        label="Cancel"
+        text
+        severity="secondary"
+        @click="visible = false"
+        autofocus
+      />
+      <Button
+        label="Save"
+        outlined
+        severity="secondary"
+        @click="visible = false"
+        autofocus
+      />
+    </template>
+  </Dialog>
+
   <header class="header responsive">
     <div class="header-left">
       <img
@@ -8,11 +96,11 @@
         alt="logo"
       />
 
-      <div class="header-button left">
+      <div class="header-button left" @click="visible = true">
         <label for=""> <img src="@/assets/location.svg" alt="" /></label>
         <div>
-          <span>EN</span>
-          <span>United States</span>
+          <span>{{ selectedLanguage.code }}</span>
+          <span>{{ selectedCountry.name }}</span>
         </div>
       </div>
 
@@ -88,26 +176,45 @@
         </div>
       </div>
 
-      <div class="submenu-column center"/>
-      <div class="submenu-column right"/>
+      <div class="submenu-column center" />
+      <div class="submenu-column right" />
     </div>
   </header>
 </template>
 
 <script>
 import { walletAPI, CardanoWasm, balanceTx } from "@/api/wallet-api";
+import { ref } from "vue";
 
 export default {
   setup() {
     const wallet = walletAPI();
+    const selectedCountry = ref({ name: "United States", code: "US" });
+    const countries = ref([
+      { name: "United States", code: "US" },
+      { name: "Ecuador", code: "EC" },
+      { name: "Colombia", code: "CO" },
+    ]);
+
+    const selectedLanguage = ref({ name: "English", code: "EN" });
+    const languages = ref([
+      { name: "English", code: "EN" },
+      { name: "Spanish", code: "EC" },
+      { name: "Chinese", code: "CO" },
+    ]);
 
     return {
       wallet,
+      selectedCountry,
+      countries,
+      selectedLanguage,
+      languages,
     };
   },
   data() {
     return {
       isScrolled: false,
+      visible: true,
       currentRoute: "",
       selectedTab: "all",
       navTabs: [
@@ -221,6 +328,30 @@ i {
   line-height: 0;
 }
 
+.country {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.5rem;
+}
+
+.country-title {
+  font-size: var(--text-size-a);
+}
+
+.country-dropdown {
+  margin-top: 1rem;
+}
+
+.country-dropdown-item {
+  display: flex;
+  align-items: center;
+  font-size: var(--text-size-b);
+  font-weight: 600;
+}
+
+.country-dropdown-item img {
+  margin-right: 1rem;
+}
 .header {
   padding: 0.75rem 3rem;
   display: flex;
@@ -385,7 +516,7 @@ i {
 }
 
 .submenu {
-  padding: 0.15rem;
+  padding: 0.175rem;
   padding-left: 3rem;
   margin-top: 2px;
   z-index: 100;

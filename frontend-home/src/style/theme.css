@@ -1539,7 +1539,7 @@
     border: 1px solid #ced4da;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s,
       box-shadow 0.2s;
-    border-radius: 3px;
+    border-radius: 4px;
     outline-color: transparent;
   }
   .p-dropdown:not(.p-disabled):hover {
@@ -1548,7 +1548,7 @@
   .p-dropdown:not(.p-disabled).p-focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem #bfd1f6;
+  
     border-color: #2196f3;
   }
   .p-dropdown.p-variant-filled {
@@ -1600,9 +1600,9 @@
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1);
   }
   .p-dropdown-panel .p-dropdown-header {
-    padding: 0.5rem 1rem;
+    padding: 1rem;
     border-bottom: 0 none;
-    color: #495057;
+    color: var(--border-a);
     background: #f8f9fa;
     margin: 0;
     border-top-right-radius: 3px;
@@ -1621,7 +1621,7 @@
   }
   .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
     margin: 0;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1rem;
     border: 0 none;
     color: #495057;
     background: transparent;
@@ -2001,14 +2001,14 @@
     font-family: var(--font-family);
     font-feature-settings: var(--font-feature-settings, normal);
     font-size: 1rem;
-    color: #495057;
+    color: var(--text-a);
     background: #ffffff;
-    padding: 0.5rem 0.5rem;
+    padding: 0.75rem 1rem;
     border: 1px solid #ced4da;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s,
       box-shadow 0.2s;
     appearance: none;
-    border-radius: 3px;
+    border-radius: 4px;
     outline-color: transparent;
   }
   .p-inputtext:enabled:hover {
@@ -3093,7 +3093,7 @@
     font-size: 1rem;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s,
       box-shadow 0.2s;
-    border-radius: 3px;
+    border-radius: 8px;
     outline-color: transparent;
   }
   .p-button:not(:disabled):hover {
@@ -6682,6 +6682,7 @@
   .p-dialog {
     max-height: 90%;
     transform: scale(1);
+    border-radius: 8px;
   }
   .p-dialog-content {
     overflow-y: auto;
@@ -6801,14 +6802,14 @@
   .p-dialog .p-dialog-header {
     border-bottom: 1px solid #dee2e6;
     background: #ffffff;
-    color: #495057;
-    padding: 1.5rem;
-    border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
+    color: var(--text-a);
+    padding: 1rem;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
   }
   .p-dialog .p-dialog-header .p-dialog-title {
-    font-weight: 600;
-    font-size: 1.25rem;
+    font-weight: 700;
+    font-size: var(--text-size-e);
   }
   .p-dialog .p-dialog-header .p-dialog-header-icon {
     width: 2rem;
@@ -6837,7 +6838,6 @@
   .p-dialog .p-dialog-content {
     background: #ffffff;
     color: #495057;
-    padding: 0 1.5rem;
   }
   .p-dialog .p-dialog-content:last-of-type {
     border-bottom-right-radius: 3px;
@@ -6847,12 +6847,12 @@
     border-top: 1px solid #dee2e6;
     background: #ffffff;
     color: #495057;
-    padding: 1.5rem;
+    padding: 1rem;
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
   }
   .p-dialog.p-confirm-dialog .p-confirm-dialog-icon {
     font-size: 2rem;

@@ -6,7 +6,7 @@ import { createApp } from 'vue';
 import  { walletAPI }  from '@/api/wallet-api';
 import 'primeicons/primeicons.css';
 import './style/theme.css';
-
+import './style/flags.css';
 
 import AutoComplete from "primevue/autocomplete";
 import Accordion from "primevue/accordion";
