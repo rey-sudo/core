@@ -1,11 +1,11 @@
 <template>
-  <header class="header mobile">
+  <header class="header responsive">
     <div class="header-left">
       <img
         class="header-left-logo"
         @click="reloadPage"
         src="@/assets/logo.png"
-        alt=""
+        alt="logo"
       />
 
       <div class="header-button left">
@@ -24,6 +24,8 @@
       </div>
     </div>
 
+    <!--///-->
+
     <div class="header-center">
       <div class="header-center-search">
         <input
@@ -32,11 +34,13 @@
           placeholder="What do you need to find today?"
         />
 
-        <div class="header-center-search-icon">
+        <div>
           <i class="pi pi-search" />
         </div>
       </div>
     </div>
+
+    <!--///-->
 
     <div class="header-right">
       <div class="header-button right">
@@ -58,7 +62,7 @@
       </div>
 
       <div data-v-4f11bcd6="" class="header-button right">
-        <button class="wallet-button" data-v-4f11bcd6="" @click="connectWallet">
+        <button data-v-4f11bcd6="" @click="connectWallet">
           <i class="pi pi-bars" />
           <img src="@/assets/user.svg" alt="" />
         </button>
@@ -84,8 +88,8 @@
         </div>
       </div>
 
-      <div class="submenu-column center"></div>
-      <div class="submenu-column right"></div>
+      <div class="submenu-column center"/>
+      <div class="submenu-column right"/>
     </div>
   </header>
 </template>
@@ -213,7 +217,157 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.wallet-button {
+i {
+  line-height: 0;
+}
+
+.header {
+  padding: 0.75rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  box-sizing: border-box;
+  background: initial;
+  color: var(--text-a);
+  background: var(--blue-b);
+  box-shadow: var(--border-shadow);
+}
+
+.header .header-left {
+  flex-basis: 33.33%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.header .header-left .header-left-logo {
+  cursor: pointer;
+  image-rendering: optimizeQuality;
+}
+
+.header-button {
+  font-weight: 500;
+  font-size: var(--text-size-d);
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--text-w);
+  transition: var(--button-transition-a);
+}
+
+.header-button.left {
+  margin: auto;
+}
+
+.header-button.right {
+  margin: auto;
+}
+
+.header-button div {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  color: var(--text-w);
+}
+
+.header-button div:hover {
+  transition: var(--button-transition-a);
+}
+
+.header-button span {
+  font-size: var(--text-size-b);
+  line-height: 1.25rem;
+  text-align: left;
+}
+
+.header-button span:nth-child(1) {
+  font-weight: 400;
+  font-size: var(--text-size-a);
+}
+
+.header-button label {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header-button i {
+  width: 2rem;
+}
+
+.header .header-center {
+  flex-basis: 66.66%;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header .header-center .header-center-search {
+  background: var(--base-b);
+  transition: var(--button-transition-a);
+  cursor: text;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  width: 90%;
+  color: var(--text-a);
+  font-size: var(--text-size-b);
+  padding: 0.125rem;
+  border: 1px solid transparent;
+}
+
+.header .header-center .header-center-search:focus-within {
+  background: var(--base-a);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+.header .header-center .header-center-search div {
+  color: var(--text-a);
+  font-size: var(--text-size-b);
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+  border-radius: 999px;
+}
+
+.header .header-center .header-center-search div i {
+  font-weight: bold;
+}
+
+.header .header-center .header-center-search input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: var(--text-size-b);
+  color: inherit;
+  padding: 0.5rem 1rem;
+}
+
+.header .header-center .header-center-search input::placeholder {
+  color: inherit;
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+.header .header-right {
+  flex-basis: 33.33%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header .header-right button {
   font-size: var(--text-size-a);
   border-radius: 999px;
   padding: 0.5rem;
@@ -226,12 +380,12 @@ export default {
   cursor: pointer;
 }
 
-.wallet-button img {
+.header .header-right button img {
   margin-left: 1rem;
 }
 
 .submenu {
-  padding: 0.25rem;
+  padding: 0.15rem;
   padding-left: 3rem;
   margin-top: 2px;
   z-index: 100;
@@ -310,159 +464,6 @@ export default {
   opacity: 0.8;
 }
 
-.header {
-  padding: 0.75rem 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: fixed;
-  top: 0;
-  z-index: 1000;
-  width: 100%;
-  box-sizing: border-box;
-  background: initial;
-  color: var(--text-a);
-  background: var(--blue-b);
-  box-shadow: var(--border-shadow);
-}
-
-.header .header-left {
-  flex-basis: 33.33%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.header .header-left .header-left-logo {
-  cursor: pointer;
-  image-rendering: optimizeQuality;
-}
-
-.header-button {
-  font-weight: 500;
-  font-size: var(--text-size-d);
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  cursor: pointer;
-  color: var(--text-w);
-  transition: var(--button-transition-a);
-}
-
-.header-button.left {
-  margin: auto;
-}
-
-.header-button.right {
-  margin: auto;
-}
-
-.header .header-center {
-  flex-basis: 66.66%;
-  width: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.header-center-search {
-  background: var(--base-b);
-  transition: var(--button-transition-a);
-  cursor: text;
-  display: flex;
-  align-items: center;
-  border-radius: 4px;
-  width: 90%;
-  color: var(--text-a);
-  font-size: var(--text-size-b);
-  padding: 0.125rem;
-  border: 1px solid transparent;
-}
-
-.header-center-search:focus-within {
-  background: var(--base-a);
-  border: 1px solid rgba(0, 0, 0, 0.8);
-}
-
-.header-center-search-icon {
-  color: var(--text-a);
-  font-size: var(--text-size-b);
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  cursor: pointer;
-  border-radius: 999px;
-}
-
-.header-center-search-icon i {
-  font-weight: bold;
-}
-
-.header-center-search input {
-  background-color: transparent;
-  border: none;
-  outline: none;
-  width: 100%;
-  font-size: var(--text-size-b);
-  color: inherit;
-  padding: 0.5rem 1rem;
-}
-
-.header-center-search input::placeholder {
-  color: inherit;
-  font-weight: 400;
-  opacity: 0.6;
-}
-
-.header .header-right {
-  flex-basis: 33.33%;
-  display: flex;
-  justify-content: flex-end;
-}
-
-i {
-  line-height: 0;
-}
-
-.header-button div {
-  display: flex;
-  flex-direction: column;
-  margin-left: 1rem;
-  color: var(--text-w);
-}
-
-.header-button div:hover {
-  transition: var(--button-transition-a);
-}
-
-.header-button span {
-  font-size: var(--text-size-b);
-  line-height: 1.25rem;
-  text-align: left;
-}
-
-.header-button span:nth-child(1) {
-  font-weight: 400;
-  font-size: var(--text-size-a);
-}
-
-.header-button img {
-}
-
-.header-button label {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 3px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.header-button i {
-  width: 2rem;
-}
-
 .counter {
   background: transparent;
   border-radius: 50%;
@@ -484,7 +485,7 @@ i {
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  .mobile {
+  .responsive {
     display: none !important;
   }
 
