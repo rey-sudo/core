@@ -372,7 +372,7 @@ export default {
   display: flex;
   align-items: center;
   border-radius: 4px;
-  width: 80%;
+  width: 90%;
   color: var(--text-a);
   font-size: var(--text-size-b);
   padding: 0.125rem;
