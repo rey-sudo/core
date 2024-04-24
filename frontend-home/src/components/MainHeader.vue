@@ -88,6 +88,38 @@
     </template>
   </Dialog>
 
+  <Dialog
+    v-model:visible="walletVisible"
+    modal
+    :draggable="false"
+    :baseZIndex="10"
+    dismissableMask
+    closeOnEscape
+    header="Wallet"
+    :style="{ width: '23rem' }"
+  >
+    <div class="wallet">
+      <div class="wallet-title">Choose a Cardano wallet.</div>
+
+      <div class="wallet-grid">
+        <div class="wallet-icon" @click="connectWallet('nami')">
+          <img src="@/assets/nami.svg" alt="logo" /> 
+        </div>
+      </div>
+    </div>
+
+    <template #footer>
+      <Button
+        label="Done"
+        severity="secondary"
+        @click="walletVisible = false"
+        autofocus
+      />
+    </template>
+  </Dialog>
+
+  <!---HEADER-->
+
   <header class="header responsive">
     <div class="header-left">
       <img
@@ -151,7 +183,7 @@
       </div>
 
       <div data-v-4f11bcd6="" class="header-button right">
-        <button data-v-4f11bcd6="" @click="connectWallet">
+        <button data-v-4f11bcd6="" @click="openWalletDialog">
           <i class="pi pi-bars" />
           <img src="@/assets/user.svg" alt="" />
         </button>
@@ -200,7 +232,7 @@ export default {
     const selectedLanguage = ref({ name: "English", code: "EN" });
     const languages = ref([
       { name: "English", code: "EN" },
-      { name: "Spanish", code: "ES" }
+      { name: "Spanish", code: "ES" },
     ]);
 
     return {
@@ -214,7 +246,8 @@ export default {
   data() {
     return {
       isScrolled: false,
-      visible: true,
+      visible: false,
+      walletVisible: false,
       currentRoute: "",
       selectedTab: "all",
       navTabs: [
@@ -271,8 +304,12 @@ export default {
     )();
   },
   methods: {
-    connectWallet() {
-      this.wallet.connect("nami");
+    connectWallet(e) {
+      this.wallet.connect(e);
+    },
+
+    openWalletDialog() {
+      this.walletVisible = true;
     },
 
     async getPubKeyHash() {
@@ -328,7 +365,46 @@ i {
   line-height: 0;
 }
 
-.country {
+.wallet-title {
+  font-size: var(--text-size-a);
+}
+
+.wallet-icon {
+  cursor: pointer;
+  border: 1px solid var(--border-a);
+  border-radius: 8px;
+}
+.wallet-icon img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.wallet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(3rem, 1fr));
+  gap: 20px;
+  margin-top: 1rem;
+}
+
+.wallet-icon {
+  background: var(--base-a);
+  border: 1px solid var(--border-b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 3rem;
+  height: 3rem;
+}
+
+@media screen and (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+.country,
+.wallet {
   display: flex;
   flex-direction: column;
   padding: 1rem 1.5rem;
