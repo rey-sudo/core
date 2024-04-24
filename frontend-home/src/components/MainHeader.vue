@@ -3,7 +3,9 @@
     v-model:visible="visible"
     modal
     :draggable="false"
-    autoZIndex
+    :baseZIndex="10"
+    dismissableMask
+    closeOnEscape
     header="Country"
     :style="{ width: '23rem' }"
   >
@@ -79,7 +81,6 @@
       />
       <Button
         label="Save"
-        outlined
         severity="secondary"
         @click="visible = false"
         autofocus
@@ -199,8 +200,7 @@ export default {
     const selectedLanguage = ref({ name: "English", code: "EN" });
     const languages = ref([
       { name: "English", code: "EN" },
-      { name: "Spanish", code: "EC" },
-      { name: "Chinese", code: "CO" },
+      { name: "Spanish", code: "ES" }
     ]);
 
     return {
