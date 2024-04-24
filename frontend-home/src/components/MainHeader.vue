@@ -606,7 +606,7 @@ i {
   color: var(--text-w);
   font-weight: 500;
   border-top: 1px solid #0d76ff;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: 2px solid var(--base-c);
 }
 
 .submenu.bluex {
