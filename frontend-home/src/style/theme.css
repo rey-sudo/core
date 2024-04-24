@@ -174,6 +174,11 @@
   --primary-900: #0d3c61;
 }
 
+.p-overflow-hidden{
+  overflow: initial !important;
+  padding-right: initial !important;
+}
+
 .p-editor-container .p-editor-toolbar {
   background: #f8f9fa;
   border-top-right-radius: 3px;
@@ -2681,7 +2686,7 @@
     box-shadow: 0 0 0 0.2rem #bfd1f6;
   }
   .p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
-    color: var(--yellow-a);
+    color: var(--blue-c);
   }
   .p-rating:not(.p-disabled):not(.p-readonly)
     .p-rating-item:hover
@@ -3245,6 +3250,7 @@
     color: var(--text-w);
     background: var(--blue-c);
     border: 1px solid var(--blue-c);
+    font-size: var(--text-size-b);
   }
   .p-button.p-button-secondary:not(:disabled):hover,
   .p-button-group.p-button-secondary > .p-button:not(:disabled):hover,
