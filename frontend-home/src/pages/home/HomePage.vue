@@ -94,5 +94,4 @@ export default {
 }
 </style>
 
-
-<style src="./css/query.css"/>
+<style src="./css/query.css" />

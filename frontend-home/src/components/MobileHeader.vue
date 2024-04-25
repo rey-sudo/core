@@ -1,64 +1,241 @@
 <template>
-  <header class="header">
+  <Dialog
+    v-model:visible="visible"
+    modal
+    :draggable="false"
+    :baseZIndex="10"
+    dismissableMask
+    closeOnEscape
+    header="Country"
+    :style="{ width: '23rem' }"
+  >
+    <div class="country">
+      <div class="country-title">
+        Choose a country to search and deliver products.
+      </div>
+
+      <Dropdown
+        v-model="selectedCountry"
+        :options="countries"
+        filter
+        optionLabel="name"
+        placeholder="Country"
+        class="country-dropdown"
+      >
+        <template #value="slotProps">
+          <div v-if="slotProps.value" class="country-dropdown-item">
+            <img
+              :alt="slotProps.value.label"
+              src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
+              :class="`mr-2 flag flag-${slotProps.value.code.toLowerCase()}`"
+            />
+            <div>{{ slotProps.value.name }}</div>
+          </div>
+          <span v-else>
+            {{ slotProps.placeholder }}
+          </span>
+        </template>
+        <template #option="slotProps">
+          <div class="country-dropdown-item">
+            <img
+              :alt="slotProps.option.label"
+              src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
+              :class="`mr-2 flag flag-${slotProps.option.code.toLowerCase()}`"
+            />
+            <div>{{ slotProps.option.name }}</div>
+          </div>
+        </template>
+      </Dropdown>
+
+      <Dropdown
+        v-model="selectedLanguage"
+        :options="languages"
+        filter
+        optionLabel="name"
+        placeholder="Country"
+        class="country-dropdown"
+      >
+        <template #value="slotProps">
+          <div v-if="slotProps.value" class="country-dropdown-item">
+            <div>{{ slotProps.value.name }}</div>
+          </div>
+          <span v-else>
+            {{ slotProps.placeholder }}
+          </span>
+        </template>
+        <template #option="slotProps">
+          <div class="country-dropdown-item">
+            <div>{{ slotProps.option.name }}</div>
+          </div>
+        </template>
+      </Dropdown>
+    </div>
+
+    <template #footer>
+      <Button
+        label="Cancel"
+        text
+        severity="secondary"
+        @click="visible = false"
+        autofocus
+      />
+      <Button
+        label="Save"
+        severity="secondary"
+        @click="visible = false"
+        autofocus
+      />
+    </template>
+  </Dialog>
+
+  <Dialog
+    v-model:visible="walletVisible"
+    modal
+    :draggable="false"
+    :baseZIndex="10"
+    dismissableMask
+    closeOnEscape
+    header="Wallet"
+    :style="{ width: '23rem' }"
+  >
+    <div class="wallet">
+      <div class="wallet-title">Choose a Cardano wallet.</div>
+
+      <div class="wallet-grid">
+        <div class="wallet-icon" @click="connectWallet('nami')">
+          <img src="@/assets/nami.svg" alt="logo" />
+        </div>
+      </div>
+    </div>
+
+    <template #footer>
+      <Button
+        label="Done"
+        severity="secondary"
+        @click="walletVisible = false"
+        autofocus
+      />
+    </template>
+  </Dialog>
+
+  <!---HEADER-->
+
+  <header class="header mobile">
     <div class="header-left">
       <img
         class="header-left-logo"
         @click="reloadPage"
-        src="@/assets/logo.svg"
-        alt=""
+        src="@/assets/logo-white.svg"
+        alt="logo"
       />
-      <div class="header-left-item">
-        <i class="pi pi-user" />
-      </div>
-      <div class="header-left-item right">
-        <i class="pi pi-shopping-cart" />
-      </div>
+
+
     </div>
 
+    <!--CENTER-->
+
     <div class="header-center">
+      <div class="header-button right">
+        <label> <img src="@/assets/menu.svg" alt="" /></label>
+      </div>
+
       <div class="header-center-search">
-        <input type="text" maxlength="200" placeholder="Search products" />
+        <input
+          type="text"
+          maxlength="200"
+          placeholder="What do you need to find today?"
+        />
 
         <div>
           <i class="pi pi-search" />
         </div>
       </div>
+
+      <div class="header-button right">
+        <label> <img src="@/assets/cart.svg" alt="" /></label>
+      </div>
     </div>
 
+    <!--CENTER-END-->
+
     <div class="header-right">
-      <div class="header-right-nav">
-        <div class="header-right-nav-button">
+
+      <div class="header-button left" @click="visible = true">
+        <label> <img src="@/assets/location.svg" alt="" /></label>
+        <div>
+          <span>{{ selectedLanguage.code }}</span>
+          <span>{{ selectedCountry.name }}</span>
+        </div>
+      </div>
+      
+      <div class="header-button right">
+        <label v-badge.secondary> <img src="@/assets/gift.svg" alt="" /></label>
+        <div>
+          <span>Be a</span>
+          <span>Mediator</span>
+        </div>
+      </div>
+    </div>
+
+    <!--SUBMENU-->
+
+    <div class="header-menu" :class="{ blue: currentRoute === 'product' }">
+      <div class="header-menu-col left">
+        <div class="header-menu-button">
           <i class="pi pi-bars" />
         </div>
 
-        <div class="header-right-nav-item">
+        <div class="header-menu-nav">
           <div
             v-for="item in navTabs"
             :key="item"
-            :class="{ active: selectedTab === item.value }"
+            :class="{ selected: selectedTab === item.value }"
           >
             {{ item.label }}
           </div>
         </div>
       </div>
+
+      <div class="header-menu-col center" />
+      <div class="header-menu-col right" />
     </div>
   </header>
 </template>
 
 <script>
-import { walletAPI } from "@/api/wallet-api";
+import { walletAPI, CardanoWasm, balanceTx } from "@/api/wallet-api";
+import { ref } from "vue";
 
 export default {
   setup() {
     const wallet = walletAPI();
+    const selectedCountry = ref({ name: "United States", code: "US" });
+    const countries = ref([
+      { name: "United States", code: "US" },
+      { name: "Ecuador", code: "EC" },
+      { name: "Colombia", code: "CO" },
+    ]);
+
+    const selectedLanguage = ref({ name: "English", code: "EN" });
+    const languages = ref([
+      { name: "English", code: "EN" },
+      { name: "Spanish", code: "ES" },
+    ]);
 
     return {
       wallet,
+      selectedCountry,
+      countries,
+      selectedLanguage,
+      languages,
     };
   },
   data() {
     return {
       isScrolled: false,
+      visible: false,
+      walletVisible: false,
+      currentRoute: "",
       selectedTab: "all",
       navTabs: [
         {
@@ -85,7 +262,18 @@ export default {
           badge: false,
           badgeLabel: "",
         },
-
+        {
+          label: "Bounties",
+          value: "bounties",
+          badge: false,
+          badgeLabel: "",
+        },
+        {
+          label: "P2P",
+          value: "p2p",
+          badge: false,
+          badgeLabel: "",
+        },
         {
           label: "Help",
           value: "help",
@@ -95,9 +283,56 @@ export default {
       ],
     };
   },
+  created() {
+    this.$watch(
+      () => this.$route.name,
+      (name) => (this.currentRoute = name),
+      { immediate: true }
+    )();
+  },
   methods: {
-    connectWallet() {
-      this.wallet.connect("nami");
+    connectWallet(e) {
+      this.wallet.connect(e);
+    },
+
+    openWalletDialog() {
+      this.walletVisible = true;
+    },
+
+    async getPubKeyHash() {
+      const usedAddr = await window.cardano.getUsedAddresses();
+
+      const addrMap = usedAddr.map((hexAddr) => {
+        let byteAddr = CardanoWasm.Address.from_hex(hexAddr);
+        // eslint-disable-next-line
+        let pkh = CardanoWasm.BaseAddress.from_address(byteAddr)
+          .payment_cred()
+          .to_keyhash()
+          .to_hex();
+
+        return {
+          address: byteAddr.to_bech32(),
+        };
+      });
+
+      const contractAddr = "-";
+
+      const contractAdd = CardanoWasm.Address.from_bech32(contractAddr);
+
+      const contractPkh = CardanoWasm.BaseAddress.from_address(contractAdd)
+        .payment_cred()
+        .to_keyhash()
+        .to_hex();
+
+      console.log(JSON.stringify(addrMap));
+      console.log("contractAddr", JSON.stringify(contractPkh));
+    },
+
+    async deploy() {
+      const tx = "-";
+
+      const result = await balanceTx(tx);
+      console.log(result);
     },
   },
   mounted() {
@@ -113,11 +348,9 @@ export default {
 </script>
 
 <style lang="css" scoped>
-i {
-  line-height: 0;
-}
 .header {
-  padding: 0 0.75rem;
+  padding: 0.75rem 3rem;
+  display: flex;
   align-items: center;
   justify-content: space-between;
   position: fixed;
@@ -127,37 +360,22 @@ i {
   box-sizing: border-box;
   background: initial;
   color: var(--text-a);
-  background: white;
+  background: var(--blue-b);
   box-shadow: var(--border-shadow);
-  display: none;
 }
 
 .header .header-left {
   flex-basis: 33.33%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  height: 50px;
 }
 
 .header .header-left .header-left-logo {
   cursor: pointer;
-  height: 38px;
-}
-
-.header .header-left .header-left-item {
-  position: relative;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  font-size: var(--text-size-e);
-  width: 2rem;
-  height: 2rem;
-}
-
-.header .header-left .header-left-item.right {
-  margin-left: 1rem;
+  image-rendering: auto;
+  display: initial;
+  height: 40px;
 }
 
 .header .header-center {
@@ -166,39 +384,39 @@ i {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
 }
 
 .header .header-center .header-center-search {
+  background: var(--base-b);
   transition: var(--button-transition-a);
   cursor: text;
   display: flex;
   align-items: center;
-  border-radius: 999px;
+  border-radius: 4px;
   width: 100%;
   color: var(--text-a);
-  font-size: var(--text-size-a);
-  border: 3px solid transparent;
-  background: var(--base-a);
+  font-size: var(--text-size-b);
+  margin: 0 1rem;
+  border: 1px solid transparent;
 }
 
 .header .header-center .header-center-search:focus-within {
-  border: 3px solid var(--border-a);
+  background: var(--base-a);
+  border: 1px solid rgba(0, 0, 0, 0.8);
 }
 
 .header .header-center .header-center-search div {
-  background: transparent;
   color: var(--text-a);
-  border-radius: 8px;
+  font-size: var(--text-size-b);
   display: flex;
   align-items: center;
-  padding: 1.25rem 1rem;
+  padding: 1rem;
   cursor: pointer;
-  margin-right: -1px;
+  border-radius: 999px;
 }
 
 .header .header-center .header-center-search div i {
-  font-size: var(--text-size-c);
+  font-weight: bold;
 }
 
 .header .header-center .header-center-search input {
@@ -208,8 +426,7 @@ i {
   width: 100%;
   font-size: var(--text-size-b);
   color: inherit;
-  margin: 0 0.5rem;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
 }
 
 .header .header-center .header-center-search input::placeholder {
@@ -221,53 +438,269 @@ i {
 .header .header-right {
   flex-basis: 33.33%;
   display: flex;
-  justify-content: flex-start;
-  height: 50px;
+  justify-content: flex-end;
 }
 
-.header .header-right .header-right-nav {
+.header .header-right button {
+  font-size: var(--text-size-a);
+  border-radius: 999px;
+  padding: 0.5rem;
+  color: var(--text-a);
+  background: var(--base-a);
+  border: none;
+  font-weight: 500;
   display: flex;
   align-items: center;
-  width: 100%;
+  cursor: pointer;
 }
 
-.header .header-right .header-right-nav-button {
+.header .header-right button img {
+  margin-left: 1rem;
+}
+
+.header .header-button {
+  font-weight: 500;
+  font-size: var(--text-size-d);
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
   cursor: pointer;
+  color: var(--text-w);
+  transition: var(--button-transition-a);
+}
+
+.header .header-button.left {
+  margin-left: auto;
+}
+
+.header .header-button.right {
+  margin: auto;
+}
+
+.header .header-button div {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  color: var(--text-w);
+}
+
+.header .header-button div:hover {
+  transition: var(--button-transition-a);
+}
+
+.header .header-button span {
+  font-size: var(--text-size-a);
+  line-height: 1.25rem;
+  text-align: left;
+}
+
+.header .header-button span:nth-child(1) {
+  font-weight: 400;
+  font-size: var(--text-size-a);
+}
+
+.header .header-button label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header .header-button img {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.header .header-button i {
+  width: 2rem;
+}
+
+i {
   line-height: 0;
 }
 
-.header .header-right .header-right-nav-button img {
+.header-menu {
+  padding: 0.175rem;
+  padding-left: 3rem;
+  margin-top: 2px;
+  z-index: 100;
+  display: flex;
+  position: fixed;
+  top: 150px;
+  left: 0;
+  width: 100%;
+  align-items: center;
+  background: var(--blue-b);
+  color: var(--text-w);
+  font-weight: 500;
+  border-top: 1px solid #0d76ff;
+  border-bottom: 1px solid var(--base-c);
+}
+
+.header-menu.bluex {
+  color: var(--text-w);
+  background: var(--blue-c);
+  font-weight: 600;
+  border-bottom: 1px solid transparent;
+}
+
+.header-menu .header-menu-col {
+  flex-basis: 33.33%;
+}
+
+.header-menu .header-menu-col.left {
+  flex-basis: 33.33%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.header-menu .header-menu-col.right {
+  flex-basis: 33.33%;
+  display: flex;
+  justify-content: center;
+}
+
+.header-menu .header-menu-col.center {
+  flex-basis: 66.66%;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-menu .header-menu-col .header-menu-nav {
+  display: flex;
+  align-items: center;
+}
+
+.header-menu .header-menu-col .header-menu-button {
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.header-menu .header-menu-col .header-menu-button img {
   width: var(--text-size-e);
 }
 
-.header .header-right .header-right-nav-item {
-  display: flex;
-  align-items: center;
-  width: inherit;
-}
-
-.header .header-right .header-right-nav-item div {
-  font-size: var(--text-size-b);
+.header-menu .header-menu-col .header-menu-nav div {
+  font-size: var(--text-size-a);
   white-space: nowrap;
   cursor: pointer;
-  font-weight: 600;
-  margin: auto;
-  color: var(--text-a);
+  padding: 0 1rem;
+  line-height: 40px;
+  font-weight: inherit;
+  margin-right: 1rem;
+  color: inherit;
   background: transparent;
-  border-radius: 999px;
 }
 
-.header .header-right .header-right-nav-item div:hover {
-  color: var(--text-a);
-  background: var(--base-b);
+.header-menu .header-menu-col .header-menu-nav div:hover {
+  opacity: 0.8;
 }
-@media only screen and (max-width: 600px) {
+
+.country,
+.wallet {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.5rem;
+}
+
+.country .country-title {
+  font-size: var(--text-size-a);
+}
+
+.country .country-dropdown {
+  margin-top: 1rem;
+}
+
+.country .country-dropdown .country-dropdown-item {
+  display: flex;
+  align-items: center;
+  font-size: var(--text-size-b);
+  font-weight: 600;
+}
+
+.country .country-dropdown .country-dropdown-item img {
+  margin-right: 1rem;
+}
+
+.wallet-title {
+  font-size: var(--text-size-a);
+}
+
+.wallet-icon {
+  cursor: pointer;
+  border: 1px solid var(--border-a);
+  border-radius: 8px;
+}
+.wallet-icon img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.wallet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(3rem, 1fr));
+  gap: 20px;
+  margin-top: 1rem;
+}
+
+.wallet-icon {
+  background: var(--base-a);
+  border: 1px solid var(--border-b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 3rem;
+  height: 3rem;
+}
+
+/* Mobile devices (portrait and landscape) */
+
+@media only screen and (max-width: 767px) {
+  .wallet-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
   .header {
-    display: block;
+    padding: 0 1rem;
+  }
+
+  .mobile {
+    display: initial;
+  }
+
+  .header-menu {
   }
 
   .header-left {
     justify-content: space-between;
+    padding: 0.5rem 0;
   }
+
+  .header-right {
+    padding: 0.5rem 0;
+  }
+
+  .header-left-logo {
+    display: none;
+  }
+}
+
+/* Tablets and small desktops */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  /* CSS rules for tablets and small desktops */
+}
+
+/* Medium desktops */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  /* CSS rules for medium desktops */
+}
+
+/* Large desktops and widescreen monitors */
+@media only screen and (min-width: 1200px) {
+  /* CSS rules for large desktops and widescreen monitors */
 }
 </style>
