@@ -103,7 +103,7 @@
 
       <div class="wallet-grid">
         <div class="wallet-icon" @click="connectWallet('nami')">
-          <img src="@/assets/nami.svg" alt="logo" /> 
+          <img src="@/assets/nami.svg" alt="logo" />
         </div>
       </div>
     </div>
@@ -123,9 +123,16 @@
   <header class="header responsive">
     <div class="header-left">
       <img
-        class="header-left-logo"
+        class="header-left-logo white"
         @click="reloadPage"
-        src="@/assets/logo.png"
+        src="@/assets/logo-white.png"
+        alt="logo"
+      />
+
+      <img
+        class="header-left-logo blue"
+        @click="reloadPage"
+        src="@/assets/logo-blue.png"
         alt="logo"
       />
 
@@ -145,7 +152,7 @@
       </div>
     </div>
 
-    <!--///-->
+    <!--CENTER-->
 
     <div class="header-center">
       <div class="header-center-search">
@@ -161,7 +168,7 @@
       </div>
     </div>
 
-    <!--///-->
+    <!--CENTER-END-->
 
     <div class="header-right">
       <div class="header-button right">
@@ -177,13 +184,13 @@
       <div class="header-button right">
         <label for=""> <img src="@/assets/cart.svg" alt="" /></label>
 
-        <div class="counter">
+        <div class="header-right-count">
           <span>0</span>
         </div>
       </div>
 
-      <div data-v-4f11bcd6="" class="header-button right">
-        <button data-v-4f11bcd6="" @click="openWalletDialog">
+      <div class="header-button right">
+        <button @click="openWalletDialog">
           <i class="pi pi-bars" />
           <img src="@/assets/user.svg" alt="" />
         </button>
@@ -192,13 +199,13 @@
 
     <!--SUBMENU-->
 
-    <div class="submenu" :class="{ blue: currentRoute === 'product' }">
-      <div class="submenu-column left">
-        <div class="submenu-button">
+    <div class="header-menu" :class="{ blue: currentRoute === 'product' }">
+      <div class="header-menu-col left">
+        <div class="header-menu-button">
           <i class="pi pi-bars" />
         </div>
 
-        <div class="submenu-nav">
+        <div class="header-menu-nav">
           <div
             v-for="item in navTabs"
             :key="item"
@@ -209,8 +216,8 @@
         </div>
       </div>
 
-      <div class="submenu-column center" />
-      <div class="submenu-column right" />
+      <div class="header-menu-col center" />
+      <div class="header-menu-col right" />
     </div>
   </header>
 </template>
@@ -361,73 +368,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-i {
-  line-height: 0;
-}
-
-.wallet-title {
-  font-size: var(--text-size-a);
-}
-
-.wallet-icon {
-  cursor: pointer;
-  border: 1px solid var(--border-a);
-  border-radius: 8px;
-}
-.wallet-icon img {
-  width: 2rem;
-  height: 2rem;
-}
-
-.wallet-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(3rem, 1fr));
-  gap: 20px;
-  margin-top: 1rem;
-}
-
-.wallet-icon {
-  background: var(--base-a);
-  border: 1px solid var(--border-b);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 3rem;
-  height: 3rem;
-}
-
-@media screen and (max-width: 768px) {
-  .grid-container {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-}
-
-.country,
-.wallet {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem 1.5rem;
-}
-
-.country-title {
-  font-size: var(--text-size-a);
-}
-
-.country-dropdown {
-  margin-top: 1rem;
-}
-
-.country-dropdown-item {
-  display: flex;
-  align-items: center;
-  font-size: var(--text-size-b);
-  font-weight: 600;
-}
-
-.country-dropdown-item img {
-  margin-right: 1rem;
-}
 .header {
   padding: 0.75rem 3rem;
   display: flex;
@@ -454,61 +394,11 @@ i {
 .header .header-left .header-left-logo {
   cursor: pointer;
   image-rendering: optimizeQuality;
+  display: initial;
 }
 
-.header-button {
-  font-weight: 500;
-  font-size: var(--text-size-d);
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  cursor: pointer;
-  color: var(--text-w);
-  transition: var(--button-transition-a);
-}
-
-.header-button.left {
-  margin: auto;
-}
-
-.header-button.right {
-  margin: auto;
-}
-
-.header-button div {
-  display: flex;
-  flex-direction: column;
-  margin-left: 1rem;
-  color: var(--text-w);
-}
-
-.header-button div:hover {
-  transition: var(--button-transition-a);
-}
-
-.header-button span {
-  font-size: var(--text-size-b);
-  line-height: 1.25rem;
-  text-align: left;
-}
-
-.header-button span:nth-child(1) {
-  font-weight: 400;
-  font-size: var(--text-size-a);
-}
-
-.header-button label {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 3px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.header-button i {
-  width: 2rem;
+.header .header-left .header-left-logo.blue {
+  display: none;
 }
 
 .header .header-center {
@@ -591,7 +481,82 @@ i {
   margin-left: 1rem;
 }
 
-.submenu {
+.header-right-count {
+  background: transparent;
+  border-radius: 50%;
+  text-align: center;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-right-count span {
+  font-weight: 700 !important;
+  font-size: var(--text-size-e) !important;
+}
+
+.header .header-button {
+  font-weight: 500;
+  font-size: var(--text-size-d);
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--text-w);
+  transition: var(--button-transition-a);
+}
+
+.header .header-button.left {
+  margin: auto;
+}
+
+.header .header-button.right {
+  margin: auto;
+}
+
+.header .header-button div {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  color: var(--text-w);
+}
+
+.header .header-button div:hover {
+  transition: var(--button-transition-a);
+}
+
+.header .header-button span {
+  font-size: var(--text-size-b);
+  line-height: 1.25rem;
+  text-align: left;
+}
+
+.header .header-button span:nth-child(1) {
+  font-weight: 400;
+  font-size: var(--text-size-a);
+}
+
+.header .header-button label {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header .header-button i {
+  width: 2rem;
+}
+
+i {
+  line-height: 0;
+}
+
+.header-menu {
   padding: 0.175rem;
   padding-left: 3rem;
   margin-top: 2px;
@@ -609,31 +574,31 @@ i {
   border-bottom: 1px solid var(--base-c);
 }
 
-.submenu.bluex {
+.header-menu.bluex {
   color: var(--text-w);
   background: var(--blue-c);
   font-weight: 600;
   border-bottom: 1px solid transparent;
 }
 
-.submenu .submenu-column {
+.header-menu .header-menu-col {
   flex-basis: 33.33%;
 }
 
-.submenu .submenu-column.left {
+.header-menu .header-menu-col.left {
   flex-basis: 33.33%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.submenu .submenu-column.right {
+.header-menu .header-menu-col.right {
   flex-basis: 33.33%;
   display: flex;
   justify-content: center;
 }
 
-.submenu .submenu-column.center {
+.header-menu .header-menu-col.center {
   flex-basis: 66.66%;
   width: auto;
   display: flex;
@@ -641,21 +606,21 @@ i {
   justify-content: center;
 }
 
-.submenu .submenu-column .submenu-nav {
+.header-menu .header-menu-col .header-menu-nav {
   display: flex;
   align-items: center;
 }
 
-.submenu .submenu-column .submenu-button {
+.header-menu .header-menu-col .header-menu-button {
   cursor: pointer;
   margin-right: 1rem;
 }
 
-.submenu .submenu-column .submenu-button img {
+.header-menu .header-menu-col .header-menu-button img {
   width: var(--text-size-e);
 }
 
-.submenu .submenu-column .submenu-nav div {
+.header-menu .header-menu-col .header-menu-nav div {
   font-size: var(--text-size-a);
   white-space: nowrap;
   cursor: pointer;
@@ -667,27 +632,77 @@ i {
   background: transparent;
 }
 
-.submenu .submenu-column .submenu-nav div:hover {
+.header-menu .header-menu-col .header-menu-nav div:hover {
   opacity: 0.8;
 }
 
-.counter {
-  background: transparent;
-  border-radius: 50%;
-  text-align: center;
-  width: 32px;
-  height: 32px;
+.country,
+.wallet {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.5rem;
+}
+
+.country .country-title {
+  font-size: var(--text-size-a);
+}
+
+.country .country-dropdown {
+  margin-top: 1rem;
+}
+
+.country .country-dropdown .country-dropdown-item {
+  display: flex;
+  align-items: center;
+  font-size: var(--text-size-b);
+  font-weight: 600;
+}
+
+.country .country-dropdown .country-dropdown-item img {
+  margin-right: 1rem;
+}
+
+.wallet-title {
+  font-size: var(--text-size-a);
+}
+
+.wallet-icon {
+  cursor: pointer;
+  border: 1px solid var(--border-a);
+  border-radius: 8px;
+}
+.wallet-icon img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.wallet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(3rem, 1fr));
+  gap: 20px;
+  margin-top: 1rem;
+}
+
+.wallet-icon {
+  background: var(--base-a);
+  border: 1px solid var(--border-b);
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  width: 3rem;
+  height: 3rem;
 }
+</style>
 
-.counter span {
-  font-weight: 700 !important;
-  font-size: var(--text-size-e) !important;
-}
+<style>
+/* Mobile devices (portrait and landscape) */
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 767px) {
+  .wallet-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
   header {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -699,5 +714,27 @@ i {
   .header-left {
     justify-content: space-between;
   }
+  .header-left-logo.white {
+    display: none;
+  }
+
+  .header-left-logo.blue {
+    display: initial;
+  }
+}
+
+/* Tablets and small desktops */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  /* CSS rules for tablets and small desktops */
+}
+
+/* Medium desktops */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  /* CSS rules for medium desktops */
+}
+
+/* Large desktops and widescreen monitors */
+@media only screen and (min-width: 1200px) {
+  /* CSS rules for large desktops and widescreen monitors */
 }
 </style>

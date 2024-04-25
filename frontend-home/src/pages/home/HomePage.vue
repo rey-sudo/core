@@ -93,4 +93,6 @@ export default {
   }
 }
 </style>
-@/pages/home/composable/store-api
+
+
+<style src="./css/query.css"/>
