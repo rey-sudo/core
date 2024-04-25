@@ -153,7 +153,7 @@
         <input
           type="text"
           maxlength="200"
-          placeholder="What do you need to find today?"
+          placeholder="Search"
         />
 
         <div>
