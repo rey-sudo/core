@@ -19,8 +19,8 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="17.964932"
-     inkscape:cx="18.842265"
-     inkscape:cy="18.786601"
+     inkscape:cx="18.842264"
+     inkscape:cy="18.7866"
      inkscape:window-width="1920"
      inkscape:window-height="1011"
      inkscape:window-x="1920"
@@ -36,40 +36,40 @@
      id="title1">menu</title>
   <g
      id="rect1"
-     style="fill:#f9f9f9;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
-     transform="translate(0,0.5)">
+     style="fill:#ffffff;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+     transform="translate(-3.5,0.5)">
     <path
-       style="color:#000000;fill:#f9f9f9;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       style="color:#000000;fill:#ffffff;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
        d="M 4,6 H 28 V 8 H 4 Z"
        id="path4" />
     <path
-       style="color:#000000;fill:#f9f9f9;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       style="color:#000000;fill:#ffffff;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
        d="m 3.5,5.5 v 3 h 25 v -3 z m 1,1 h 23 v 1 h -23 z"
        id="path5" />
   </g>
   <g
      id="rect3"
-     style="fill:#f9f9f9;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
-     transform="translate(0,2.5)">
+     style="fill:#ffffff;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+     transform="translate(-3.5,2.5)">
     <path
-       style="color:#000000;fill:#f9f9f9;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       style="color:#000000;fill:#ffffff;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
        d="m 4,12 h 24 v 2 H 4 Z"
        id="path6" />
     <path
-       style="color:#000000;fill:#f9f9f9;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       style="color:#000000;fill:#ffffff;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
        d="m 3.5,11.5 v 3 h 25 v -3 z m 1,1 h 23 v 1 h -23 z"
        id="path7" />
   </g>
   <g
      id="rect4"
-     style="fill:#f9f9f9;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
-     transform="translate(0,4.5)">
+     style="fill:#ffffff;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+     transform="translate(-3.5,4.5)">
     <path
-       style="color:#000000;fill:#f9f9f9;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       style="color:#000000;fill:#ffffff;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
        d="m 4,18 h 24 v 2 H 4 Z"
        id="path8" />
     <path
-       style="color:#000000;fill:#f9f9f9;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       style="color:#000000;fill:#ffffff;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
        d="m 3.5,17.5 v 3 h 25 v -3 z m 1,1 h 23 v 1 h -23 z"
        id="path9" />
   </g>

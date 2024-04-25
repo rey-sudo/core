@@ -121,15 +121,25 @@
   <!---HEADER-->
 
   <header class="header mobile">
-    <div class="header-left">
+    <div class="header-top">
       <img
-        class="header-left-logo"
+        class="header-top-logo"
         @click="reloadPage"
         src="@/assets/logo-white.svg"
         alt="logo"
       />
 
+      <div class="header-button left" @click="visible = true">
+        <label> <img src="@/assets/location.svg" alt="" /></label>
+        <div>
+          <span>{{ selectedLanguage.code }}</span>
+          <span>{{ selectedCountry.name }}</span>
+        </div>
+      </div>
 
+      <div class="header-button left">
+        <label v-badge.secondary> <img src="@/assets/gift.svg" alt="" /></label>
+      </div>
     </div>
 
     <!--CENTER-->
@@ -158,34 +168,9 @@
 
     <!--CENTER-END-->
 
-    <div class="header-right">
-
-      <div class="header-button left" @click="visible = true">
-        <label> <img src="@/assets/location.svg" alt="" /></label>
-        <div>
-          <span>{{ selectedLanguage.code }}</span>
-          <span>{{ selectedCountry.name }}</span>
-        </div>
-      </div>
-      
-      <div class="header-button right">
-        <label v-badge.secondary> <img src="@/assets/gift.svg" alt="" /></label>
-        <div>
-          <span>Be a</span>
-          <span>Mediator</span>
-        </div>
-      </div>
-    </div>
-
-    <!--SUBMENU-->
-
-    <div class="header-menu" :class="{ blue: currentRoute === 'product' }">
-      <div class="header-menu-col left">
-        <div class="header-menu-button">
-          <i class="pi pi-bars" />
-        </div>
-
-        <div class="header-menu-nav">
+    <div class="header-bottom">
+      <div class="menu" :class="{ blue: currentRoute === 'product' }">
+        <div class="menu-nav">
           <div
             v-for="item in navTabs"
             :key="item"
@@ -195,10 +180,9 @@
           </div>
         </div>
       </div>
-
-      <div class="header-menu-col center" />
-      <div class="header-menu-col right" />
     </div>
+
+    <!--SUBMENU-->
   </header>
 </template>
 
@@ -349,7 +333,7 @@ export default {
 
 <style lang="css" scoped>
 .header {
-  padding: 0.75rem 3rem;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -362,28 +346,33 @@ export default {
   color: var(--text-a);
   background: var(--blue-b);
   box-shadow: var(--border-shadow);
+  display: none;
 }
 
-.header .header-left {
-  flex-basis: 33.33%;
+.header .header-top {
   display: flex;
-  justify-content: flex-start;
+  flex-basis: 33.33%;
+  padding: 0.5rem 1rem;
   align-items: center;
+  border-bottom: 1px solid var(--blue-c);
+  justify-content: space-between;
 }
 
-.header .header-left .header-left-logo {
+.header .header-top .header-top-logo {
   cursor: pointer;
   image-rendering: auto;
   display: initial;
-  height: 40px;
+  height: 38px;
 }
 
 .header .header-center {
   flex-basis: 66.66%;
+  padding: 0.5rem 1rem;
   width: auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-bottom: 1px solid var(--blue-c);
 }
 
 .header .header-center .header-center-search {
@@ -435,13 +424,13 @@ export default {
   opacity: 0.6;
 }
 
-.header .header-right {
+.header .header-bottom {
   flex-basis: 33.33%;
   display: flex;
   justify-content: flex-end;
 }
 
-.header .header-right button {
+.header .header-bottom button {
   font-size: var(--text-size-a);
   border-radius: 999px;
   padding: 0.5rem;
@@ -454,7 +443,7 @@ export default {
   cursor: pointer;
 }
 
-.header .header-right button img {
+.header .header-bottom button img {
   margin-left: 1rem;
 }
 
@@ -490,7 +479,7 @@ export default {
 
 .header .header-button span {
   font-size: var(--text-size-a);
-  line-height: 1.25rem;
+ 
   text-align: left;
 }
 
@@ -519,83 +508,46 @@ i {
   line-height: 0;
 }
 
-.header-menu {
-  padding: 0.175rem;
-  padding-left: 3rem;
-  margin-top: 2px;
+.menu {
   z-index: 100;
   display: flex;
-  position: fixed;
-  top: 150px;
   left: 0;
   width: 100%;
   align-items: center;
   background: var(--blue-b);
   color: var(--text-w);
   font-weight: 500;
-  border-top: 1px solid #0d76ff;
-  border-bottom: 1px solid var(--base-c);
 }
 
-.header-menu.bluex {
-  color: var(--text-w);
-  background: var(--blue-c);
-  font-weight: 600;
-  border-bottom: 1px solid transparent;
-}
-
-.header-menu .header-menu-col {
-  flex-basis: 33.33%;
-}
-
-.header-menu .header-menu-col.left {
-  flex-basis: 33.33%;
+.menu .menu-nav {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+  scroll-behavior: smooth;
 }
 
-.header-menu .header-menu-col.right {
-  flex-basis: 33.33%;
-  display: flex;
-  justify-content: center;
-}
-
-.header-menu .header-menu-col.center {
-  flex-basis: 66.66%;
-  width: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.header-menu .header-menu-col .header-menu-nav {
-  display: flex;
-  align-items: center;
-}
-
-.header-menu .header-menu-col .header-menu-button {
+.menu .menu-button {
   cursor: pointer;
   margin-right: 1rem;
 }
 
-.header-menu .header-menu-col .header-menu-button img {
+.menu .menu-button img {
   width: var(--text-size-e);
 }
 
-.header-menu .header-menu-col .header-menu-nav div {
+.menu .menu-nav div {
   font-size: var(--text-size-a);
   white-space: nowrap;
   cursor: pointer;
-  padding: 0 1rem;
-  line-height: 40px;
+  padding: 0.75rem 1rem;
   font-weight: inherit;
-  margin-right: 1rem;
   color: inherit;
-  background: transparent;
 }
 
-.header-menu .header-menu-col .header-menu-nav div:hover {
+.menu .menu-nav div:hover {
   opacity: 0.8;
 }
 
@@ -664,28 +616,14 @@ i {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 
-  .header {
-    padding: 0 1rem;
-  }
-
   .mobile {
     display: initial;
   }
 
-  .header-menu {
+  .menu {
   }
 
-  .header-left {
-    justify-content: space-between;
-    padding: 0.5rem 0;
-  }
-
-  .header-right {
-    padding: 0.5rem 0;
-  }
-
-  .header-left-logo {
-    display: none;
+  .header-top {
   }
 }
 
