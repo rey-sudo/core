@@ -25,7 +25,7 @@ export default () => ({
           price_diff: 200,
           price: 600,
           image:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6541/6541285_sd.jpg",
+            "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6541/6541285_sd.jpg",
           payment_type: "10 Slots",
           stock_supply: 10,
           collateral: 20,
@@ -175,8 +175,7 @@ export default () => ({
           name: "Men College School Bag Laptop Backpack For Men 17.3''Large-capacity Backpack USB Port Bag Business Backpack Oxford Waterproof",
           price_diff: 200,
           price: 220,
-          image:
-            "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
+          image: "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
           payment_type: "10 Slots",
           stock_supply: 20,
           collateral: 20,
@@ -191,8 +190,7 @@ export default () => ({
           name: "Thermaltake S100 Tempered Glass Snow Edition Micro-ATX mini-Tower Computer Case with 120mm Rear Fan Pre-Installed CA-1Q9-00S6WN-00, White",
           price_diff: 200,
           price: 600,
-          image:
-          "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
+          image: "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
           payment_type: "10 Slots",
           stock_supply: 10,
           collateral: 20,
@@ -207,8 +205,7 @@ export default () => ({
           name: "Cotton Oxford Man Leisure Embroidered Horse Shirts Streetwear Oversized Men Shirt Floral Long Sleeve Casual Plus Size",
           price_diff: 330,
           price: 330,
-          image:
-            "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
+          image: "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
           payment_type: "10 Slots",
           stock_supply: 50,
           collateral: 15,
@@ -224,8 +221,7 @@ export default () => ({
           name: "Aluminum Bathroom Shelves Corner Shower Shelf Wall Mount Shampoo Storage Rack Holders No Drill Kitchen Bathroom Accessories",
           price_diff: 200,
           price: 150,
-          image:
-            "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
+          image: "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
           payment_type: "2 Slots",
           stock_supply: 5,
           collateral: 30,
@@ -241,8 +237,7 @@ export default () => ({
           name: "Durable Silicone Soft Accessories Handle Case Protective Case Protect Shell Gamepad Game Controller Cover For PS5",
           price_diff: 200,
           price: 125,
-          image:
-            "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
+          image: "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
           payment_type: "3 Slots",
           stock_supply: 5,
           collateral: 17,
@@ -258,8 +253,7 @@ export default () => ({
           name: "Men's Sneakers Casual Sports Shoes for Men Lightweight PU Leather Breathable Shoe Mens Flat White Tenis Shoes",
           price_diff: 200,
           price: 200,
-          image:
-            "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
+          image: "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
           payment_type: "10 Slots",
           stock_supply: 20,
           collateral: 30,
@@ -274,8 +268,7 @@ export default () => ({
           name: "Elastic Shoes for Men Trend Casual Brand Leather Shoes 2023 New Sneakers Men Comfortable Walking Flats Slip on Man Loafers",
           price_diff: 200,
           price: 140,
-          image:
-            "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
+          image: "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
           payment_type: "10 Slots",
           stock_supply: 15,
           collateral: 20,
@@ -290,8 +283,7 @@ export default () => ({
           name: "Astronaut Figure Statue Figurine Spaceman Sculpture Educational Toy Desktop Home Decoration Astronaut Model For Kids Gift",
           price_diff: 200,
           price: 170,
-          image:
-            "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
+          image: "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
           payment_type: "10 Slots",
           stock_supply: 20,
           collateral: 20,
@@ -307,8 +299,7 @@ export default () => ({
           name: "RZX DDR4 RAM Memoria 32GB 8GB 16GB 2400MHz 2666MHz 3200MHz DIMM Desktop Computer Memory Rams",
           price_diff: 200,
           price: 100,
-          image:
-            "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
+          image: "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
           payment_type: "10 Slots",
           stock_supply: 20,
           collateral: 20,
@@ -324,8 +315,7 @@ export default () => ({
           name: "Waterproof Laptop Backpack Men USB 18 Inch Backpacks Oxford Black Solid Color Large Capacity Rucksacks Teen Student School Bags",
           price_diff: 200,
           price: 210,
-          image:
-            "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
+          image: "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
           payment_type: "10 Slots",
           stock_supply: 20,
           collateral: 20,

@@ -620,11 +620,6 @@ i {
     display: initial;
   }
 
-  .menu {
-  }
-
-  .header-top {
-  }
 }
 
 /* Tablets and small desktops */

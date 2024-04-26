@@ -24,15 +24,7 @@
             <div class="card-body-price">
               <span> {{ formatPrice(item.price) }}</span>
             </div>
-            <div
-              class="card-body-stock"
-              :class="{
-                white: item.stock_supply,
-                red: !item.stock_supply,
-              }"
-            >
-              <span> {{ item.stock_supply }} Stock</span>
-            </div>
+
 
             <div class="card-body-collateral">
               <span> {{ item.collateral }} ADA Collateral</span>
@@ -97,10 +89,10 @@ export default {
 }
 
 .card-body-price {
-  font-weight: 600;
+  font-weight: 700;
   text-align: left;
   font-size: var(--text-size-b);
-  color: var(--blue-a);
+  color: var(--text-a);
   margin-top: 0.5rem;
 }
 
@@ -260,10 +252,26 @@ export default {
   background: transparent;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 767px) {
   .grid {
     display: grid;
+    border-radius: initial;
   }
+}
+
+/* Tablets and small deskbanners */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  /* CSS rules for tablets and small deskbanners */
+}
+
+/* Medium deskbanners */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  /* CSS rules for medium deskbanners */
+}
+
+/* Large deskbanners and widescreen monitors */
+@media only screen and (min-width: 1200px) {
+  /* CSS rules for large deskbanners and widescreen monitors */
 }
 </style>
 @/pages/home/composable/store-api

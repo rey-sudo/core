@@ -1,11 +1,12 @@
 <template>
   <div class="store">
-    <div class="top">
-      <MainHeader />
-      <MobileHeader />
-      <div class="top-mask" />
+    <MainHeader />
+    <MobileHeader />
 
-      <div class="top-banner"></div>
+    <div class="banner">
+      <div class="banner-mask" />
+
+      <div class="banner-screen"></div>
     </div>
 
     <GridWrap />
@@ -57,10 +58,10 @@ export default {
   background-image: var(--gradient-a);
 }
 
-.store .top {
+.store .banner {
   width: inherit;
-  height: 600px;
-  min-height: 600px;
+  height: 625px;
+  min-height: 625px;
   z-index: 1;
   position: relative;
   inset: 0px 0px -1px;
@@ -69,7 +70,7 @@ export default {
   flex-direction: column;
 }
 
-.store .top .top-mask {
+.store .banner .banner-mask {
   width: inherit;
   height: inherit;
   z-index: 2;
@@ -78,7 +79,7 @@ export default {
   background: linear-gradient(180deg, transparent 90%, rgba(0, 0, 0, 0.1) 100%);
 }
 
-.store .top .top-banner {
+.store .banner .banner-screen {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 2rem;
@@ -86,11 +87,34 @@ export default {
   padding: 0 4rem;
 }
 
-@media only screen and (max-width: 600px) {
-  .store .top {
-    height: 300px;
-    min-height: 300px;
+@media only screen and (max-width: 767px) {
+  .store {
+    background: var(--base-b);
   }
+
+  .store .banner {
+    height: 400px;
+    min-height: 400px;
+  }
+
+  .store .banner .banner-mask {
+    display: none;
+  }
+}
+
+/* Tablets and small deskbanners */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  /* CSS rules for tablets and small deskbanners */
+}
+
+/* Medium deskbanners */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  /* CSS rules for medium deskbanners */
+}
+
+/* Large deskbanners and widescreen monitors */
+@media only screen and (min-width: 1200px) {
+  /* CSS rules for large deskbanners and widescreen monitors */
 }
 </style>
 

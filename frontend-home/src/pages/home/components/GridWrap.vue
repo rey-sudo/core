@@ -25,7 +25,7 @@
             </div>
 
             <div class="card-body-collateral">
-              <span> {{ item.collateral }} ADA Coll.</span>
+              <span> {{ formatPrice(item.collateral) }} Coll.</span>
             </div>
 
             <div class="card-body-seller">
@@ -94,7 +94,8 @@ export default {
   align-items: center;
   color: var(--text-a);
   line-height: 1.5rem;
-  font-weight: 400;
+  font-weight: 300;
+  display: none;
 }
 
 .card-body-collateral {
@@ -108,18 +109,17 @@ export default {
 .card-body-price {
   font-weight: 600;
   text-align: left;
-  font-size: var(--text-size-c);
+  font-size: var(--text-size-e);
   line-height: 2rem;
   color: var(--text-a);
 }
 
 .grid-item-title {
-  font-size: var(--text-size-g);
+  font-size: var(--text-size-h);
   font-weight: 700;
   text-align: start;
   line-height: 100px;
   color: var(--text-a);
-  padding-left: 1rem;
 }
 
 .grid {
@@ -127,7 +127,7 @@ export default {
   grid-template-columns: 1fr;
   grid-auto-rows: minmax(100px, auto);
   gap: 20px;
-  padding: 0 1rem;
+  padding: 0 2rem;
   min-height: 100vh;
   border-top-left-radius: 28px;
   border-top-right-radius: 28px;
@@ -156,6 +156,7 @@ export default {
   padding: 1rem;
   margin: auto;
   line-height: 1.5rem;
+  border: 1px solid var(--border-b);
 }
 
 .card-header {
@@ -164,7 +165,6 @@ export default {
 }
 
 .card-image {
-
 }
 
 .card-image img {
@@ -177,13 +177,16 @@ export default {
   object-fit: contain;
 }
 
-
 .card-body {
   flex-basis: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
 }
 
 .card-body-name {
-  color: var(--text-a);
+  color: var(--blue-a);
   font-size: var(--text-size-b);
   text-align: left;
   display: flex;
