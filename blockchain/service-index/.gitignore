@@ -1,5 +1,4 @@
 *.db
 *.db-shm
 *.db-wal
-plutus-chain-index
 tmp
