@@ -1,11 +1,13 @@
 #!/bin/bash
 WORKDIR=$(pwd)
 NETWORK=preview
+version="8.9.2"
 config_url="https://book.world.dev.cardano.org"
-node_filename="cardano-node-8.7.1-linux.tar.gz"
-node_bin_url="https://github.com/IntersectMBO/cardano-node/releases/download/8.7.1-pre/$node_filename"
+node_filename="cardano-node-$version-linux.tar.gz"
+node_bin_url="https://github.com/IntersectMBO/cardano-node/releases/download/$version/$node_filename"
 node_path="$WORKDIR/bin/"
 node_config_path="$WORKDIR/bin/configuration/$NETWORK"
+
 
 
 export PATH=$PATH:$node_path
@@ -24,9 +26,7 @@ fi
 
 if [ ! -d "$node_path" ]; then
 
-    mkdir -p "$node_path"
-    
-    tar -zxvf "$node_filename" -C "$node_path"
+    tar -xzf "$node_filename"
 
     echo "Directory created: $node_path"
 else
@@ -37,6 +37,8 @@ fi
 if [ ! -d "$node_config_path" ]; then
 
     mkdir -p "$node_config_path"
+
+     echo Downloading node config
 
     curl -s $config_url/environments/$NETWORK/config.json > $node_config_path/config.json
     curl -s $config_url/environments/$NETWORK/db-sync-config.json  > $node_config_path/db-sync-config.json
@@ -53,6 +55,8 @@ else
 fi
 
 wait
+
+echo "INIT"
 
 cardano-node run \
     --config $node_config_path/config.json \
