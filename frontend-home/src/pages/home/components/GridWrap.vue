@@ -92,11 +92,11 @@ export default {
   font-size: var(--text-size-b);
   display: flex;
   align-items: center;
-  color: var(--text-a);
-  line-height: 1.5rem;
-  font-weight: 300;
-  display: none;
+  color: var(--text-b);
+  font-weight: 500;
+  margin-top: 1rem;
 }
+
 
 .card-body-collateral {
   text-align: left;
