@@ -525,7 +525,7 @@ i {
   align-items: center;
   overflow-x: scroll;
   overflow-y: hidden;
-  padding: 0.25rem 0;
+  padding: 0.125rem 0;
   scroll-behavior: smooth;
 }
 

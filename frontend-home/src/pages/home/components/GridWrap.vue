@@ -174,6 +174,7 @@ export default {
   justify-content: center;
   border-radius: 12px;
   overflow: hidden;
+  object-fit: contain;
 }
 
 

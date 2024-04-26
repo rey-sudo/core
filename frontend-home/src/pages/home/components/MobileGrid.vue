@@ -165,7 +165,7 @@ export default {
   min-width: 100%;
   max-width: 100%;
   border-radius: 16px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .card-body {

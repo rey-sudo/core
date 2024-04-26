@@ -9,7 +9,7 @@ export default () => ({
           price_diff: 200,
           price: 220,
           image:
-            "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
+            "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6537/6537363_sd.jpg",
           payment_type: "10 Slots",
           stock_supply: 20,
           collateral: 20,
@@ -25,7 +25,7 @@ export default () => ({
           price_diff: 200,
           price: 600,
           image:
-          "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6541/6541285_sd.jpg",
           payment_type: "10 Slots",
           stock_supply: 10,
           collateral: 20,
@@ -41,7 +41,7 @@ export default () => ({
           price_diff: 330,
           price: 330,
           image:
-            "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
+            "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/4901/4901809_sd.jpg",
           payment_type: "10 Slots",
           stock_supply: 50,
           collateral: 15,
@@ -57,7 +57,7 @@ export default () => ({
           price_diff: 200,
           price: 150,
           image:
-            "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
+            "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6565/6565842_sd.jpg",
           payment_type: "2 Slots",
           stock_supply: 5,
           collateral: 30,
@@ -73,7 +73,7 @@ export default () => ({
           price_diff: 200,
           price: 150,
           image:
-            "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
+            "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6562/6562576_sd.jpg",
           payment_type: "2 Slots",
           stock_supply: 5,
           collateral: 30,
@@ -90,7 +90,7 @@ export default () => ({
           price_diff: 200,
           price: 125,
           image:
-            "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
+            "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6562/6562576_rd.jpg",
           payment_type: "3 Slots",
           stock_supply: 5,
           collateral: 17,
@@ -107,7 +107,7 @@ export default () => ({
           price_diff: 200,
           price: 200,
           image:
-            "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
+            "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6569/6569024_sd.jpg",
           payment_type: "10 Slots",
           stock_supply: 20,
           collateral: 30,
@@ -123,7 +123,7 @@ export default () => ({
           price_diff: 200,
           price: 140,
           image:
-            "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
+            "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6469/6469978_sd.jpg",
           payment_type: "10 Slots",
           stock_supply: 15,
           collateral: 20,
@@ -139,7 +139,7 @@ export default () => ({
           price_diff: 200,
           price: 170,
           image:
-            "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
+            "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6494/6494238_sd.jpg",
           payment_type: "10 Slots",
           stock_supply: 20,
           collateral: 20,
@@ -155,7 +155,7 @@ export default () => ({
           price_diff: 200,
           price: 100,
           image:
-            "https://pairfy.dev/api/media/get-image/z9hZxd7n3PM7Ig1qVld8",
+            "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6428/6428324_sd.jpg",
           payment_type: "10 Slots",
           stock_supply: 20,
           collateral: 20,
