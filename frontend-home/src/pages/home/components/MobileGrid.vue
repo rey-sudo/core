@@ -25,9 +25,8 @@
               <span> {{ formatPrice(item.price) }}</span>
             </div>
 
-
             <div class="card-body-collateral">
-              <span> {{ item.collateral }} ADA Collateral</span>
+              <span> {{ item.collateral }} ADA Coll.</span>
             </div>
           </div>
         </div>
@@ -89,15 +88,15 @@ export default {
 }
 
 .card-body-price {
-  font-weight: 700;
+  font-weight: 600;
   text-align: left;
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-c);
   color: var(--text-a);
   margin-top: 0.5rem;
 }
 
 .grid-item-title {
-  font-size: var(--text-size-c);
+  font-size: var(--text-size-f);
   font-weight: 700;
   text-align: start;
   line-height: 75px;
