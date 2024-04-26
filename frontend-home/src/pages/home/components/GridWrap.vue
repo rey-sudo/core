@@ -93,7 +93,7 @@ export default {
   display: flex;
   align-items: center;
   color: var(--text-b);
-  font-weight: 500;
+  font-weight: 400;
   margin-top: 1rem;
 }
 
@@ -104,14 +104,15 @@ export default {
   display: flex;
   align-items: center;
   color: var(--text-b);
+  margin-top: 0.25rem;
 }
 
 .card-body-price {
   font-weight: 600;
   text-align: left;
   font-size: var(--text-size-e);
-  line-height: 2rem;
   color: var(--text-a);
+  margin-top: 1rem;
 }
 
 .grid-item-title {
@@ -192,7 +193,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem;
   font-weight: 400;
   text-transform: capitalize;
 }
