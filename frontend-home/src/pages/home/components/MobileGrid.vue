@@ -18,9 +18,7 @@
           </div>
 
           <div class="card-body">
-            <div class="card-body-name">
-              {{ item.name }}
-            </div>
+            <div class="card-body-name">{{ item.name.slice(0, 40) }}...</div>
             <div class="card-body-price">
               <span> {{ formatPrice(item.price) }}</span>
             </div>
@@ -173,10 +171,6 @@ export default {
   font-weight: 400;
   white-space: normal;
   display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .card-body-name span::first-letter {

@@ -153,7 +153,7 @@
         <input
           type="text"
           maxlength="200"
-          placeholder="Search"
+          placeholder="What do you need today?"
         />
 
         <div>
@@ -518,6 +518,7 @@ i {
   background: var(--blue-b);
   color: var(--text-w);
   font-weight: 500;
+  
 }
 
 .menu .menu-nav {
