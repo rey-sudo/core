@@ -416,7 +416,7 @@ export default {
   width: 100%;
   font-size: var(--text-size-b);
   color: inherit;
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 1rem;
 }
 
 .header .header-center .header-center-search input::placeholder {
