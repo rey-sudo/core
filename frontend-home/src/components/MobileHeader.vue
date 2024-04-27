@@ -125,7 +125,7 @@
       <img
         class="header-top-logo"
         @click="reloadPage"
-        src="@/assets/logo-white.svg"
+        src="@/assets/logo-white.svg"  
         alt="logo"
       />
 
@@ -363,6 +363,7 @@ export default {
   image-rendering: auto;
   display: initial;
   height: 38px;
+  image-rendering: crisp-edges;
 }
 
 .header .header-center {
@@ -386,7 +387,7 @@ export default {
   color: var(--text-a);
   font-size: var(--text-size-b);
   margin: 0 1rem;
-  border: 1px solid transparent;
+  border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
 .header .header-center .header-center-search:focus-within {

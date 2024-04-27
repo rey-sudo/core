@@ -164,7 +164,7 @@ export default {
 }
 
 .card-body-name {
-  color: var(--text-a);
+  color: var(--blue-a);
   font-size: var(--text-size-a);
   text-align: left;
   align-items: center;
@@ -178,6 +178,7 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .card-body-name span::first-letter {
   text-transform: capitalize;
 }
