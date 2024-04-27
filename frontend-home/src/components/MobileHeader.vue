@@ -479,7 +479,7 @@ export default {
 }
 
 .header .header-button span {
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
  
   text-align: left;
 }
