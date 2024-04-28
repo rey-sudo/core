@@ -142,11 +142,13 @@ export default {
 }
 
 .grid-item-title {
-  font-size: var(--text-size-h);
-  font-weight: 700;
+  font-size: var(--text-size-g);
+  font-weight: bold;
   text-align: start;
-  line-height: 100px;
   color: var(--text-a);
+  border-bottom: 1px solid var(--border-b);
+  padding: 1rem 0;
+  margin: 1rem 0;
 }
 
 .grid {

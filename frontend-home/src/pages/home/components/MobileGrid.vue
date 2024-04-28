@@ -118,12 +118,12 @@ export default {
 
 .grid-item-title {
   font-size: var(--text-size-f);
-  font-weight: 700;
+  font-weight: bold;
   text-align: start;
   color: var(--text-a);
-  padding: 1rem;
-  letter-spacing: -0.02em;
-  border-bottom: 1px solid var(--border-a);
+  border-bottom: 1px solid var(--border-b);
+  padding: 1rem 0;
+  margin: 1rem;
 }
 
 .grid-row {
