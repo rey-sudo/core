@@ -164,7 +164,7 @@ export default {
 }
 
 .card-header {
-  flex-basis: 50%;
+  flex-basis: 55%;
   overflow: hidden;
 }
 
@@ -184,7 +184,11 @@ export default {
 }
 
 .card-body {
-  flex-basis: 50%;
+  flex-basis: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
 }
 
 .card-body-name {
