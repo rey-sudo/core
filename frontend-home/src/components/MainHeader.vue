@@ -385,7 +385,7 @@ export default {
 }
 
 .header .header-left {
-  flex-basis: 33.33%;
+  flex-basis: 25%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -402,7 +402,7 @@ export default {
 }
 
 .header .header-center {
-  flex-basis: 66.66%;
+  flex-basis: 50%;
   width: auto;
   display: flex;
   align-items: center;
@@ -459,7 +459,7 @@ export default {
 }
 
 .header .header-right {
-  flex-basis: 33.33%;
+  flex-basis: 25%;
   display: flex;
   justify-content: flex-end;
 }
@@ -506,6 +506,7 @@ export default {
   cursor: pointer;
   color: var(--text-w);
   transition: var(--button-transition-a);
+  padding: 0 1rem;
 }
 
 .header .header-button.left {
@@ -693,9 +694,7 @@ i {
   width: 3rem;
   height: 3rem;
 }
-</style>
 
-<style>
 /* Mobile devices (portrait and landscape) */
 
 @media only screen and (max-width: 767px) {
@@ -723,18 +722,27 @@ i {
   }
 }
 
-/* Tablets and small desktops */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  /* CSS rules for tablets and small desktops */
 }
 
-/* Medium desktops */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  /* CSS rules for medium desktops */
 }
 
-/* Large desktops and widescreen monitors */
 @media only screen and (min-width: 1200px) {
-  /* CSS rules for large desktops and widescreen monitors */
+  .header .header-center .header-center-search {
+    width: 90%;
+  }
+
+  .header-left {
+    flex-basis: 30%;
+  }
+
+  .header-center {
+    flex-basis: 40%;
+  }
+
+  .header-right {
+    flex-basis: 30%;
+  }
 }
 </style>
