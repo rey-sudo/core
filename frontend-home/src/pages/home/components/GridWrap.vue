@@ -20,6 +20,17 @@
             <div class="card-body-name">
               <span> {{ item.name.slice(0, 60) }}...</span>
             </div>
+
+            <div class="card-body-rating">
+              <Rating
+                :modelValue="item.rating_count"
+                :stars="5"
+                :readonly="true"
+                :cancel="false"
+              />
+              <span>({{ item.review_count }})</span>
+            </div>
+
             <div class="card-body-price">
               <span> {{ formatPrice(item.price) }}</span>
             </div>
@@ -89,28 +100,43 @@ export default {
 <style lang="css" scoped>
 .card-body-seller {
   text-align: left;
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
   display: flex;
   align-items: center;
-  color: var(--text-b);
-  font-weight: 400;
+  color: var(--text-a);
+  font-weight: 200;
+  margin-top: 1rem;
+  border: 1px solid var(--border-a);
+  padding: 0 0.5rem;
+  display: none;
+}
+
+.card-body-rating {
+  display: flex;
+  align-items: center;
   margin-top: 1rem;
 }
 
+.card-body-rating span {
+  font-size: var(--text-size-a);
+  margin-left: 0.5rem;
+  color: var(--blue-a);
+}
 
 .card-body-collateral {
   text-align: left;
   font-size: var(--text-size-b);
   display: flex;
   align-items: center;
-  color: var(--text-b);
+  font-weight: 400;
+  color: var(--text-a);
   margin-top: 0.25rem;
 }
 
 .card-body-price {
   font-weight: 600;
   text-align: left;
-  font-size: var(--text-size-e);
+  font-size: var(--text-size-d);
   color: var(--text-a);
   margin-top: 1rem;
 }
@@ -195,6 +221,10 @@ export default {
   justify-content: center;
   font-weight: 400;
   text-transform: capitalize;
+}
+
+.card-body-name:hover {
+  text-decoration: underline;
 }
 
 .card-body-name span {

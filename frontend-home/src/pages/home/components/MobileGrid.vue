@@ -19,6 +19,17 @@
 
           <div class="card-body">
             <div class="card-body-name">{{ item.name.slice(0, 40) }}...</div>
+
+            <div class="card-body-rating">
+              <Rating
+                :modelValue="item.rating_count"
+                :stars="5"
+                :readonly="true"
+                :cancel="false"
+              />
+              <span>({{ item.review_count }})</span>
+            </div>
+
             <div class="card-body-price">
               <span> {{ formatPrice(item.price) }}</span>
             </div>
@@ -67,6 +78,18 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.card-body-rating {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.card-body-rating span {
+  font-size: var(--text-size-a);
+  margin-left: 0.5rem;
+  color: var(--blue-a);
+}
+
 .grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -97,21 +120,22 @@ export default {
   font-size: var(--text-size-f);
   font-weight: 700;
   text-align: start;
-  line-height: 75px;
   color: var(--text-a);
-  padding-left: 0.75rem;
+  padding: 1rem;
   letter-spacing: -0.02em;
+  border-bottom: 1px solid var(--border-a);
 }
 
 .grid-row {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 0rem;
+  gap: 1rem;
+  padding: 1rem;
 }
 
 .card {
-  width: calc(100% - 1.75rem);
-  height: 300px;
+  width: 100%;
+  height: 400px;
   transition: box-shadow 0.25s ease-in-out 0s, transform 0.25s ease 0s;
   display: flex;
   flex-direction: column;
@@ -121,7 +145,9 @@ export default {
   padding-bottom: 0;
   margin: auto;
   line-height: 1.5rem;
-  border: 1px solid transparent;
+  padding: 1rem;
+  border: 1px solid var(--border-a);
+  
 }
 .card-body-stock {
   text-align: left;

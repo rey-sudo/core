@@ -2661,14 +2661,14 @@
     cursor: default;
   }
   .p-rating {
-    gap: 0.5rem;
+    gap: 0.25rem;
   }
   .p-rating .p-rating-item {
     outline-color: transparent;
     border-radius: 50%;
   }
   .p-rating .p-rating-item .p-rating-icon {
-    color: #495057;
+    color: var(--text-b);
     transition: background-color 0.2s, color 0.2s, border-color 0.2s,
       box-shadow 0.2s;
     font-size: 1.143rem;
