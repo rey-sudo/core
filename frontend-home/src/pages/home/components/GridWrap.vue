@@ -125,7 +125,7 @@ export default {
 .card-body-rating span {
   font-size: var(--text-size-a);
   margin-left: 0.5rem;
-  color: var(--blue-c);
+  color: var(--blue-a);
 }
 
 .card-body-collateral {
@@ -219,7 +219,7 @@ export default {
 }
 
 .card-body-name {
-  color: var(--blue-c);
+  color: var(--blue-a);
   font-size: var(--text-size-b);
   text-align: left;
   display: flex;
