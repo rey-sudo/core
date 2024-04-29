@@ -61,6 +61,8 @@
               :multiple="true"
               :activeIndex="[0]"
               class="accordionStyle"
+              expandIcon="x"
+              collapseIcon="x"
             >
               <AccordionTab header="Specifications">
                 <p class="accordionParagraph">
@@ -570,7 +572,7 @@ export default {
 
 .product-rating {
   margin-right: 0.5rem;
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-c);
   color: var(--text-b);
   align-items: center;
 }
