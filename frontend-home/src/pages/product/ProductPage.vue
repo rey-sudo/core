@@ -146,7 +146,7 @@
                 :cancel="false"
                 style="margin: 0 1rem"
               />
-              <span>({{ product.review_count }})</span>
+              <span>({{ product.review_count }} Reviews)</span>
             </div>
 
             <div class="product-price">
@@ -570,7 +570,7 @@ export default {
 
 .product-rating {
   margin-right: 0.5rem;
-  font-size: var(--text-size-c);
+  font-size: var(--text-size-b);
   color: var(--text-b);
   align-items: center;
 }

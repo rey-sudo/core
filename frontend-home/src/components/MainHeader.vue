@@ -421,11 +421,15 @@ export default {
   font-size: var(--text-size-b);
   padding: 0.125rem;
   border: 1px solid transparent;
+  box-shadow: 0 0 5px var(--blue-c), 0 0 5px var(--blue-c),
+    0 0 5px var(--blue-c);
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 .header .header-center .header-center-search:focus-within {
   background: var(--base-a);
   border: 1px solid rgba(0, 0, 0, 0.8);
+  box-shadow: initial;
 }
 
 .header .header-center .header-center-search div {
