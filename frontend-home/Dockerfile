@@ -1,6 +1,6 @@
-FROM node:19 as build-stage
+FROM node:lts as build-stage
 
-WORKDIR /frontend-home
+WORKDIR /app
 
 COPY package.json ./
 
@@ -18,7 +18,7 @@ RUN npm run build
 
 FROM nginx:alpine  as production-stage
 
-COPY --from=build-stage /frontend-home/dist /usr/share/nginx/html
+COPY --from=build-stage /app/dist /usr/share/nginx/html
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
