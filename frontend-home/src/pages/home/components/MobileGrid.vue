@@ -78,6 +78,11 @@ export default {
 </script>
 
 <style lang="css" scoped>
+::v-deep(.p-rating-icon) {
+  width: var(--text-size-a);
+  height: var(--text-size-a);
+}
+
 .card-body-rating {
   display: flex;
   align-items: center;

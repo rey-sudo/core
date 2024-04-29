@@ -707,7 +707,7 @@ i {
     padding-right: 1rem;
   }
   .responsive {
-    display: none !important;
+    display: none;
   }
 
   .header-left {
@@ -723,9 +723,15 @@ i {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
+  .responsive {
+    display: none;
+  }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .responsive {
+    display: none;
+  }
 }
 
 @media only screen and (min-width: 1200px) {

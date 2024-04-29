@@ -1,6 +1,7 @@
 <template>
   <div class="product">
     <MainHeader />
+    <MobileHeader />
     <div class="product-wrap">
       <div class="product-wrap-top">
         <div class="bread">
@@ -157,19 +158,21 @@
               <div class="product-bottom-button" @click="buyProduct">
                 Buy now
               </div>
-
-              <div class="product-bottom-bookmark" v-tooltip.top="'Share'">
-                <i class="pi pi-share-alt" />
-              </div>
-
-              <div class="product-bottom-bookmark" v-tooltip.top="'Save'">
-                <i class="pi pi-heart" />
-              </div>
             </div>
 
             <div class="product-bottom">
               <div class="product-bottom-outline" @click="buyProduct">
                 Add to cart
+              </div>
+            </div>
+
+            <div class="product-bottom">
+              <div class="product-bottom-bookmark" v-tooltip.top="'Share'">
+                <i class="pi pi-share-alt" />
+              </div>
+
+              <div class="product-bottom-bookmark" v-tooltip.top="'Save'">
+                <i class="pi pi-bookmark" />
               </div>
             </div>
           </div>
@@ -184,6 +187,7 @@
 <script>
 import productAPI from "@/pages/product/api";
 import MainHeader from "@/components/MainHeader.vue";
+import MobileHeader from "@/components/MobileHeader.vue";
 import { ref } from "vue";
 import { Lucid, getAddressDetails } from "lucid-cardano";
 import { balanceTx } from "@/api/wallet-api";
@@ -191,6 +195,7 @@ import { balanceTx } from "@/api/wallet-api";
 export default {
   components: {
     MainHeader,
+    MobileHeader,
   },
   setup() {
     const { lockingEndpoint } = productAPI();
@@ -260,7 +265,7 @@ export default {
 
     const product = ref({
       rating_count: 4.8,
-      review_count: 80,
+      review_count: 756,
     });
 
     const breadItems = ref([
@@ -310,9 +315,13 @@ export default {
       this.lucid = await Lucid.new();
     },
     async setupWallet() {
-      const api = await window.cardano.nami.enable();
+      try {
+        const api = await window.cardano.nami.enable();
 
-      this.lucid.selectWallet(api);
+        this.lucid.selectWallet(api);
+      } catch (err) {
+        console.error(err);
+      }
     },
     async buyProduct() {
       const addr = await this.lucid.wallet.address();
@@ -434,12 +443,11 @@ export default {
   width: 100%;
   align-items: center;
   margin-top: 1rem;
-  justify-content: space-between;
 }
 
 .product-bottom-button,
 .product-bottom-outline {
-  width: 80%;
+  width: 100%;
   background: var(--blue-b);
   padding: 0.75rem;
   border-radius: 8px;
@@ -465,7 +473,7 @@ export default {
 
 .product-wrap-top-left {
   text-align: center;
-  width: 67%;
+  width: 72%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -522,7 +530,7 @@ export default {
 .product-wrap-top-right {
   height: inherit;
   text-align: center;
-  width: 33%;
+  width: 28%;
 }
 
 .product-wrap-top {

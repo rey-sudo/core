@@ -125,20 +125,24 @@
       <img
         class="header-top-logo"
         @click="reloadPage"
-        src="@/assets/logo-white.svg"  
+        src="@/assets/logo-white.svg"
         alt="logo"
       />
 
-      <div class="header-button left" @click="visible = true">
-        <label> <img src="@/assets/location.svg" alt="" /></label>
-        <div>
-          <span>{{ selectedLanguage.code }}</span>
-          <span>{{ selectedCountry.name }}</span>
+      <div class="right-buttons">
+        <div class="header-button left" @click="visible = true">
+          <label> <img src="@/assets/location.svg" alt="" /></label>
+          <div>
+            <span>{{ selectedLanguage.code }}</span>
+            <span>{{ selectedCountry.name }}</span>
+          </div>
         </div>
-      </div>
 
-      <div class="header-button left">
-        <label v-badge.secondary> <img src="@/assets/gift.svg" alt="" /></label>
+        <div class="header-button left">
+          <label v-badge.secondary>
+            <img src="@/assets/gift.svg" alt=""
+          /></label>
+        </div>
       </div>
     </div>
 
@@ -150,11 +154,7 @@
       </div>
 
       <div class="header-center-search">
-        <input
-          type="text"
-          maxlength="200"
-          placeholder="Search"
-        />
+        <input type="text" maxlength="200" placeholder="Search" />
 
         <div>
           <i class="pi pi-search" />
@@ -332,6 +332,11 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.right-buttons {
+  display: flex;
+  align-items: center;
+}
+
 .header {
   padding: 0;
   display: flex;
@@ -460,7 +465,7 @@ export default {
 }
 
 .header .header-button.left {
-  margin-left: auto;
+  margin-left: 1rem;
 }
 
 .header .header-button.right {
@@ -480,7 +485,7 @@ export default {
 
 .header .header-button span {
   font-size: var(--text-size-b);
- 
+
   text-align: left;
 }
 
@@ -518,7 +523,6 @@ i {
   background: var(--blue-b);
   color: var(--text-w);
   font-weight: 500;
-  
 }
 
 .menu .menu-nav {
@@ -621,17 +625,20 @@ i {
   .mobile {
     display: initial;
   }
-
 }
 
 /* Tablets and small desktops */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  /* CSS rules for tablets and small desktops */
+  .mobile {
+    display: initial;
+  }
 }
 
 /* Medium desktops */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  /* CSS rules for medium desktops */
+  .mobile {
+    display: initial;
+  }
 }
 
 /* Large desktops and widescreen monitors */
