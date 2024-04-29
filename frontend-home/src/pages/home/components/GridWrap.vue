@@ -98,6 +98,11 @@ export default {
 </script>
 
 <style lang="css" scoped>
+::v-deep(.p-rating-icon) {
+  width: var(--text-size-a);
+  height: var(--text-size-a);
+}
+
 .card-body-seller {
   text-align: left;
   font-size: var(--text-size-a);
@@ -146,7 +151,6 @@ export default {
   font-weight: bold;
   text-align: start;
   color: var(--text-a);
-  border-bottom: 1px solid var(--border-b);
   padding: 1rem 0;
   margin: 1rem 0;
 }
@@ -158,8 +162,8 @@ export default {
   gap: 20px;
   padding: 0 2rem;
   min-height: 100vh;
-  border-top-left-radius: 28px;
-  border-top-right-radius: 28px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
   background: var(--base-a);
 }
 
