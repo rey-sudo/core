@@ -19,7 +19,7 @@ import MainHeader from "@/components/MainHeader.vue";
 import MobileHeader from "@/components/MobileHeader.vue";
 import GridWrap from "@/pages/home/components/GridWrap.vue";
 import MobileGrid from "@/pages/home/components/MobileGrid.vue";
-import storeAPI from "@/pages/home/composable/home-api";
+//import storeAPI from "@/pages/home/composable/home-api";
 import { useRouter } from "vue-router";
 
 export default {
@@ -33,13 +33,7 @@ export default {
   setup() {
     const router = useRouter();
 
-    const { action__getAllProducts } = storeAPI();
-
-    action__getAllProducts()
-      .then(() => {})
-      .catch((err) => console.error(err));
-
-    return { router, action__getAllProducts };
+    return { router };
   },
   data() {
     return {
