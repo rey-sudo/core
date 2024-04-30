@@ -68,4 +68,19 @@ export default {
 };
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+
+.accordionStyle {
+  width: 100%;
+  border-top: 1px solid var(--border-a);
+  margin-top: 2rem;
+}
+
+.accordionParagraph {
+  text-align: left;
+  line-height: 1.5rem;
+  color: var(--text-b);
+  font-weight: 300;
+}
+
+</style>

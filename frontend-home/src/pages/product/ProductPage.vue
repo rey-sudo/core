@@ -13,6 +13,7 @@
         </div>
 
         <HeadView />
+    
       </div>
 
       <div class="product-wrap-body"></div>
@@ -25,6 +26,8 @@ import productAPI from "@/pages/product/api";
 import MainHeader from "@/components/MainHeader.vue";
 import MobileHeader from "@/components/MobileHeader.vue";
 import HeadView from "@/pages/product/components/HeadView.vue";
+
+
 import { ref } from "vue";
 import { Lucid, getAddressDetails } from "lucid-cardano";
 import { balanceTx } from "@/api/wallet-api";
@@ -34,6 +37,7 @@ export default {
     MainHeader,
     MobileHeader,
     HeadView,
+   
   },
   setup() {
     const { lockingEndpoint } = productAPI();
@@ -141,11 +145,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.accordionStyle {
-  width: 100%;
-  border-top: 1px solid var(--border-a);
-  margin-top: 2rem;
-}
+
 
 .arrow::before {
   border-bottom: 4px solid #0000;
@@ -170,12 +170,6 @@ export default {
   padding: 1rem 0;
 }
 
-.accordionParagraph {
-  text-align: left;
-  line-height: 1.5rem;
-  color: var(--text-b);
-  font-weight: 300;
-}
 
 .product {
   display: flex;

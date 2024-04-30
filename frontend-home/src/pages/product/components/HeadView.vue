@@ -43,6 +43,9 @@
           </Galleria>
         </div>
       </div>
+
+      <DescriptionView/>
+
     </div>
 
     <div class="head-right">
@@ -99,10 +102,14 @@
 
 <script>
 import productAPI from "@/pages/product/api";
-
+import DescriptionView from "./DescriptionView.vue";
 import { ref } from "vue";
 
+
 export default {
+  components: {
+    DescriptionView
+  },
   setup() {
     const { lockingEndpoint } = productAPI();
 
