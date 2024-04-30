@@ -418,6 +418,9 @@ export default {
   display: flex;
   justify-content: center;
   min-height: 100vh;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
 }
 
 .product-price {
@@ -449,7 +452,7 @@ export default {
 
 .product-bottom-button,
 .product-bottom-outline {
-  width: 100%;
+  width: 90%;
   background: var(--blue-b);
   padding: 0.75rem;
   border-radius: 8px;
@@ -475,7 +478,7 @@ export default {
 
 .product-wrap-top-left {
   text-align: center;
-  width: 72%;
+  width: 70%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -532,7 +535,7 @@ export default {
 .product-wrap-top-right {
   height: inherit;
   text-align: center;
-  width: 28%;
+  width: 30%;
 }
 
 .product-wrap-top {

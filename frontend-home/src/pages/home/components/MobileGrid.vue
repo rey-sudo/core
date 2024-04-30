@@ -9,7 +9,7 @@
           class="card"
           v-for="item in row.items"
           :key="item"
-          @click="handleClick(item.pid)"
+          @click="handleClick(item.id)"
         >
           <div class="card-header">
             <div class="card-image">
@@ -58,8 +58,8 @@ export default {
     return { router, getter__allProducts };
   },
   methods: {
-    handleClick(pid) {
-      this.router.push({ name: "land", params: { pid: pid } });
+    handleClick(id) {
+      this.router.push({ name: "product", params: { id } });
     },
 
     formatPrice(num) {
