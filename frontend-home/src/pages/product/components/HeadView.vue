@@ -288,23 +288,23 @@ export default {
   width: 30%;
 }
 
-.head  .head-name {
+.head .head-name {
   font-size: var(--text-size-g);
   font-weight: 700;
   text-align: left;
 }
 
-.head  .head-legend {
+.head .head-legend {
   text-align: left;
   font-size: var(--text-size-b);
   margin-top: 1rem;
 }
 
-.head  .head-legend span {
+.head .head-legend span {
   margin-right: 1rem;
 }
 
-.head  .head-rating {
+.head .head-rating {
   margin-right: 0.5rem;
   font-size: var(--text-size-b);
   color: var(--text-b);
@@ -313,7 +313,7 @@ export default {
   display: flex;
 }
 
-.head  .head-price {
+.head .head-price {
   text-align: left;
   margin-top: 1rem;
   font-size: var(--text-size-h);
@@ -322,14 +322,14 @@ export default {
   align-items: baseline;
 }
 
-.head  .head-price .ada-label {
+.head .head-price .ada-label {
   font-weight: 400;
   color: var(--text-b);
   font-size: var(--text-size-g);
   margin-right: 0.5rem;
 }
 
-.head  .head-button {
+.head .head-button {
   background: var(--blue-b);
   width: 90%;
   border-radius: 8px;
