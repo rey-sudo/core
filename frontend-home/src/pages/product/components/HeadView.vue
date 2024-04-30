@@ -220,91 +220,27 @@ export default {
   margin-top: 2rem;
 }
 
-.ada-label {
-  font-weight: 400;
-  color: var(--text-b);
-  font-size: var(--text-size-g);
-  margin-right: 0.5rem;
-}
-
-.head-price {
-  text-align: left;
-  margin-top: 1rem;
-  font-size: var(--text-size-h);
-  font-weight: 700;
-  display: flex;
-  align-items: baseline;
-}
-
-.head-button {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  margin-top: 1rem;
-}
-
-.head-button {
-  background: var(--blue-b);
-  width: 90%;
-  border-radius: 8px;
-  color: var(--text-w);
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem;
+.head .head-left {
   text-align: center;
-}
-
-.head-button.outline {
-  background: transparent;
-  color: var(--blue-b);
-  border: 1px solid var(--blue-b);
-}
-
-.head-right {
-  height: inherit;
-  text-align: center;
-  width: 30%;
-}
-
-.head-gallery-boxes-item.imageSelected {
-  border: 1px solid black;
-}
-
-.head-gallery-boxes {
+  width: 70%;
   display: flex;
   justify-content: flex-start;
-  position: relative;
+  align-items: center;
   flex-direction: column;
 }
 
-.head-gallery-boxes div {
-  border: 1px solid var(--border-b);
-  border-radius: 8px;
-  margin-bottom: 0.5rem;
-  padding: 0.25rem;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  width: 70px;
-  height: 70px;
-}
-
-.head-gallery-boxes div img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.head-gallery {
+.head .head-gallery {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+}
+
+.head .head-gallery .head-gallery-boxes {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  flex-direction: column;
 }
 
 .mask {
@@ -320,46 +256,97 @@ export default {
   opacity: 0.9;
 }
 
-.head-left {
-  text-align: center;
-  width: 70%;
+.head .head-gallery .head-gallery-boxes div {
+  border: 1px solid var(--border-b);
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  padding: 0.25rem;
+  overflow: hidden;
   display: flex;
-  justify-content: flex-start;
   align-items: center;
-  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  width: 70px;
+  height: 70px;
 }
 
-.head-gallery-image {
+.head .head-gallery .head-gallery-boxes div img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.head .head-gallery .head-gallery-image {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.head-name {
+.head .head-right {
+  height: inherit;
+  text-align: center;
+  width: 30%;
+}
+
+.head  .head-name {
   font-size: var(--text-size-g);
   font-weight: 700;
   text-align: left;
 }
 
-.head-legend {
+.head  .head-legend {
   text-align: left;
   font-size: var(--text-size-b);
   margin-top: 1rem;
 }
 
-.head-legend span {
+.head  .head-legend span {
   margin-right: 1rem;
 }
 
-.head-rating {
-  margin-top: 1rem;
-  display: flex;
-}
-
-.head-rating {
+.head  .head-rating {
   margin-right: 0.5rem;
   font-size: var(--text-size-b);
   color: var(--text-b);
   align-items: center;
+  margin-top: 1rem;
+  display: flex;
+}
+
+.head  .head-price {
+  text-align: left;
+  margin-top: 1rem;
+  font-size: var(--text-size-h);
+  font-weight: 700;
+  display: flex;
+  align-items: baseline;
+}
+
+.head  .head-price .ada-label {
+  font-weight: 400;
+  color: var(--text-b);
+  font-size: var(--text-size-g);
+  margin-right: 0.5rem;
+}
+
+.head  .head-button {
+  background: var(--blue-b);
+  width: 90%;
+  border-radius: 8px;
+  color: var(--text-w);
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.head .head-button.outline {
+  background: transparent;
+  color: var(--blue-b);
+  border: 1px solid var(--blue-b);
 }
 </style>
