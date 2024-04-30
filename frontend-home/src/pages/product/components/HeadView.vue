@@ -1,5 +1,6 @@
 <template>
   <div class="head">
+    <!--LEFT-->
     <div class="head-left">
       <div class="head-gallery">
         <div class="head-gallery-boxes">
@@ -44,10 +45,10 @@
         </div>
       </div>
 
-      <DescriptionView/>
-
+      <DescriptionView />
     </div>
 
+    <!--RIGHT-->
     <div class="head-right">
       <div class="head-name">
         LG - 65” Class UQ70 Series LED 4K UHD Smart webOS TV
@@ -77,24 +78,12 @@
         3.258
       </div>
 
-      <div class="head-row">
-        <div class="head-button" @click="buyProduct">Buy now</div>
+      <div class="head-button">
+        <div @click="buyProduct">Buy now</div>
       </div>
 
-      <div class="head-row">
-        <div class="head-row-outline" @click="buyProduct">
-          Add to cart
-        </div>
-      </div>
-
-      <div class="head-row">
-        <div class="head-row-bookmark" v-tooltip.top="'Share'">
-          <i class="pi pi-share-alt" />
-        </div>
-
-        <div class="head-row-bookmark" v-tooltip.top="'Save'">
-          <i class="pi pi-bookmark" />
-        </div>
+      <div class="head-button outline">
+        <div @click="buyProduct">Add to cart</div>
       </div>
     </div>
   </div>
@@ -105,10 +94,9 @@ import productAPI from "@/pages/product/api";
 import DescriptionView from "./DescriptionView.vue";
 import { ref } from "vue";
 
-
 export default {
   components: {
-    DescriptionView
+    DescriptionView,
   },
   setup() {
     const { lockingEndpoint } = productAPI();
@@ -213,7 +201,7 @@ export default {
     },
     setupData() {
       this.galleryImage[0] = this.images[0];
-    }, 
+    },
     changeGalleryImage(index) {
       this.galleryImageIndex = index;
       this.galleryImage[0] = this.images[this.galleryImageIndex];
@@ -232,15 +220,6 @@ export default {
   margin-top: 2rem;
 }
 
-
-
-.head-row {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  margin-top: 1rem;
-}
-
 .ada-label {
   font-weight: 400;
   color: var(--text-b);
@@ -257,30 +236,31 @@ export default {
   align-items: baseline;
 }
 
-.head-button,
-.head-row-outline {
-  width: 90%;
+.head-button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.head-button {
   background: var(--blue-b);
-  padding: 0.75rem;
+  width: 90%;
   border-radius: 8px;
   color: var(--text-w);
   font-weight: 600;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  text-align: center;
 }
 
-.head-row-outline {
+.head-button.outline {
   background: transparent;
   color: var(--blue-b);
   border: 1px solid var(--blue-b);
-}
-
-.head-row-bookmark {
-  width: 10%;
-  cursor: pointer;
-}
-
-.head-row-bookmark i {
-  font-size: var(--text-size-e);
 }
 
 .head-right {
