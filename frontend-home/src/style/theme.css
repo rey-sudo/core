@@ -175,7 +175,7 @@
 }
 
 .p-overflow-hidden{
-  overflow: initial !important;
+  overflow: hidden !important;
   padding-right: initial !important;
 }
 

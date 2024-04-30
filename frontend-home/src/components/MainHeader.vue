@@ -656,14 +656,14 @@ i {
   margin-top: 1rem;
 }
 
-.country .country-dropdown .country-dropdown-item {
+.country-dropdown-item {
   display: flex;
   align-items: center;
   font-size: var(--text-size-b);
   font-weight: 600;
 }
 
-.country .country-dropdown .country-dropdown-item img {
+.country-dropdown-item img.flag {
   margin-right: 1rem;
 }
 
