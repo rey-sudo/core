@@ -207,6 +207,7 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  display: none;
 }
 
 .head .head-gallery {

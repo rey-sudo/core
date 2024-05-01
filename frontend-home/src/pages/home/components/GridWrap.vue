@@ -219,7 +219,7 @@ export default {
 }
 
 .card-body-name {
-  color: var(--blue-a);
+  color: var(--blue-c);
   font-size: var(--text-size-b);
   text-align: left;
   display: flex;

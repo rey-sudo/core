@@ -488,8 +488,7 @@ export default {
 }
 
 .header .header-button span {
-  font-size: var(--text-size-b);
-
+  font-size: var(--text-size-a);
   text-align: left;
 }
 
@@ -506,8 +505,8 @@ export default {
 }
 
 .header .header-button img {
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .header .header-button i {
