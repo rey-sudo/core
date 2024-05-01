@@ -1,91 +1,79 @@
 <template>
   <div class="head mobile">
     <!--LEFT-->
-    <div class="head-left">
-      <div class="head-gallery">
-        <div class="head-gallery-boxes">
-          <div
-            v-for="(item, index) in images"
-            :key="item"
-            @click="changeGalleryImage(index)"
-            :class="{ imageSelected: isGalleryImage(index) }"
-          >
-            <img :src="item.thumbnailImageSrc" alt="" />
-          </div>
-
-          <div>
-            <span class="mask">+15</span>
-          </div>
-
-          <div>
-            <span class="mask">
-              <i class="pi pi-play-circle" />
-            </span>
-          </div>
-        </div>
-        <div class="head-gallery-image">
-          <Galleria
-            :value="galleryImage"
-            :responsiveOptions="responsiveOptions"
-            :numVisible="1"
-            :circular="true"
-            :transitionInterval="0"
-            containerStyle="max-width: 60%; min-height: 500px;  margin-top: 4rem;"
-            :showItemNavigators="false"
-            :showThumbnails="false"
-          >
-            <template #item="slotProps">
-              <img
-                :src="slotProps.item.itemImageSrc"
-                :alt="slotProps.item.alt"
-                style="width: 100%; display: block"
-              />
-            </template>
-          </Galleria>
-        </div>
-      </div>
-
-      <DescriptionView />
+    <div class="head-name">
+      LG - 65” Class UQ70 Series LED 4K UHD Smart webOS TV
     </div>
 
-    <!--RIGHT-->
-    <div class="head-right">
-      <div class="head-name">
-        LG - 65” Class UQ70 Series LED 4K UHD Smart webOS TV
+    <div class="head-legend">
+      <span>Model: 8430288C2C</span>
+
+      <span>ID: P9C3KC93CK</span>
+    </div>
+
+    <div class="head-rating">
+      <span>{{ product.rating_count }}</span>
+
+      <Rating
+        :modelValue="product.rating_count"
+        :stars="5"
+        :readonly="true"
+        :cancel="false"
+        style="margin: 0 1rem"
+      />
+      <span>({{ product.review_count }} Reviews)</span>
+    </div>
+
+    <div class="head-gallery">
+      <div class="head-gallery-image">
+        <Galleria
+          :value="galleryImage"
+          :responsiveOptions="responsiveOptions"
+          :numVisible="1"
+          :circular="true"
+          :transitionInterval="0"
+          containerStyle="max-width: 60%; min-height: 200px;  margin-top: 4rem;"
+          :showItemNavigators="false"
+          :showThumbnails="false"
+        >
+          <template #item="slotProps">
+            <img
+              :src="slotProps.item.itemImageSrc"
+              :alt="slotProps.item.alt"
+              style="width: 100%; display: block"
+            />
+          </template>
+        </Galleria>
       </div>
 
-      <div class="head-legend">
-        <span>Model: 8430288C2C</span>
+      <div class="head-gallery-boxes">
+        <div
+          v-for="(item, index) in images"
+          :key="item"
+          @click="changeGalleryImage(index)"
+          :class="{ imageSelected: isGalleryImage(index) }"
+        >
+          <img :src="item.thumbnailImageSrc" alt="" />
+        </div>
 
-        <span>ID: P9C3KC93CK</span>
-      </div>
+        <div>
+          <span class="mask">+15</span>
+        </div>
 
-      <div class="head-rating">
-        <span>{{ product.rating_count }}</span>
-
-        <Rating
-          :modelValue="product.rating_count"
-          :stars="5"
-          :readonly="true"
-          :cancel="false"
-          style="margin: 0 1rem"
-        />
-        <span>({{ product.review_count }} Reviews)</span>
+        <div>
+          <span class="mask">
+            <i class="pi pi-play-circle" />
+          </span>
+        </div>
       </div>
 
       <div class="head-price">
         <div class="ada-label">₳</div>
         3.258
       </div>
-
-      <div class="head-button">
-        <div @click="buyProduct">Buy now</div>
-      </div>
-
-      <div class="head-button outline">
-        <div @click="buyProduct">Add to cart</div>
-      </div>
     </div>
+
+    <DescriptionView />
   </div>
 </template>
 
@@ -217,20 +205,14 @@ export default {
 <style lang="css" scoped>
 .head {
   display: flex;
-  margin-top: 2rem;
-}
-
-.head .head-left {
-  text-align: center;
-  width: 70%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
   flex-direction: column;
+  margin-top: 1rem;
+  padding: 1rem;
 }
 
 .head .head-gallery {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   width: 100%;
@@ -240,7 +222,8 @@ export default {
   display: flex;
   justify-content: flex-start;
   position: relative;
-  flex-direction: column;
+  overflow-x: scroll;
+  
 }
 
 .mask {
@@ -259,15 +242,15 @@ export default {
 .head .head-gallery .head-gallery-boxes div {
   border: 1px solid var(--border-b);
   border-radius: 8px;
-  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
   padding: 0.25rem;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  width: 70px;
-  height: 70px;
+  width: 40px;
+  height: 40px;
 }
 
 .head .head-gallery .head-gallery-boxes div img {
@@ -280,12 +263,6 @@ export default {
   width: 100%;
   display: flex;
   justify-content: center;
-}
-
-.head .head-right {
-  height: inherit;
-  text-align: center;
-  width: 30%;
 }
 
 .head .head-name {
@@ -316,7 +293,7 @@ export default {
 .head .head-price {
   text-align: left;
   margin-top: 1rem;
-  font-size: var(--text-size-h);
+  font-size: var(--text-size-i);
   font-weight: 700;
   display: flex;
   align-items: baseline;

@@ -14,7 +14,6 @@
 
         <HeadView />
         <MobileHeadView />
-
       </div>
 
       <div class="product-wrap-body"></div>
@@ -38,8 +37,7 @@ export default {
     MainHeader,
     MobileHeader,
     HeadView,
-    MobileHeadView
-   
+    MobileHeadView,
   },
   setup() {
     const { lockingEndpoint } = productAPI();
@@ -147,8 +145,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-
-
 .arrow::before {
   border-bottom: 4px solid #0000;
   border-left: 4px solid var(--text-b);
@@ -172,7 +168,6 @@ export default {
   padding: 1rem 0;
 }
 
-
 .product {
   display: flex;
   justify-content: center;
@@ -188,5 +183,30 @@ export default {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+}
+
+@media only screen and (max-width: 767px) {
+  .product-wrap {
+    width: 100%;
+  }
+
+  .bread {
+    padding: 1rem;
+  }
+}
+
+/* Tablets and small deskbanners */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  /* CSS rules for tablets and small deskbanners */
+}
+
+/* Medium deskbanners */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  /* CSS rules for medium deskbanners */
+}
+
+/* Large deskbanners and widescreen monitors */
+@media only screen and (min-width: 1200px) {
+  /* CSS rules for large deskbanners and widescreen monitors */
 }
 </style>
