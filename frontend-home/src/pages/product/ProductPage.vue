@@ -13,7 +13,8 @@
         </div>
 
         <HeadView />
-    
+        <MobileHeadView />
+
       </div>
 
       <div class="product-wrap-body"></div>
@@ -26,7 +27,7 @@ import productAPI from "@/pages/product/api";
 import MainHeader from "@/components/MainHeader.vue";
 import MobileHeader from "@/components/MobileHeader.vue";
 import HeadView from "@/pages/product/components/HeadView.vue";
-
+import MobileHeadView from "@/pages/product/components/MobileHeadView.vue";
 
 import { ref } from "vue";
 import { Lucid, getAddressDetails } from "lucid-cardano";
@@ -37,6 +38,7 @@ export default {
     MainHeader,
     MobileHeader,
     HeadView,
+    MobileHeadView
    
   },
   setup() {

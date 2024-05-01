@@ -352,7 +352,7 @@ export default {
 
 @media only screen and (max-width: 767px) {
   .mobile {
-    display: none;
+    display: initial;
   }
 }
 
