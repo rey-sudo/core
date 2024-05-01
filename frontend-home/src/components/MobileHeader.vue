@@ -121,7 +121,7 @@
   <!---HEADER-->
 
   <header class="header mobile">
-    <div class="header-top">
+    <div class="header-top" :class="{ mobile: currentRoute === 'product' }">
       <img
         class="header-top-logo"
         @click="reloadPage"
@@ -361,6 +361,10 @@ export default {
   align-items: center;
   border-bottom: 1px solid var(--blue-c);
   justify-content: space-between;
+}
+
+.header-top.mobile {
+  display: none;
 }
 
 .header .header-top .header-top-logo {

@@ -206,7 +206,6 @@ export default {
 .head {
   display: flex;
   flex-direction: column;
-  margin-top: 1rem;
   padding: 1rem;
 }
 
@@ -223,7 +222,6 @@ export default {
   justify-content: flex-start;
   position: relative;
   overflow-x: scroll;
-  
 }
 
 .mask {
@@ -266,15 +264,16 @@ export default {
 }
 
 .head .head-name {
-  font-size: var(--text-size-g);
+  font-size: var(--text-size-f);
   font-weight: 700;
   text-align: left;
 }
 
 .head .head-legend {
   text-align: left;
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
   margin-top: 1rem;
+  color: var(--text-b);
 }
 
 .head .head-legend span {
@@ -284,7 +283,7 @@ export default {
 .head .head-rating {
   margin-right: 0.5rem;
   font-size: var(--text-size-b);
-  color: var(--text-b);
+  color: var(--blue-a);
   align-items: center;
   margin-top: 1rem;
   display: flex;
@@ -297,6 +296,8 @@ export default {
   font-weight: 700;
   display: flex;
   align-items: baseline;
+  width: 100%;
+  padding: 1rem;
 }
 
 .head .head-price .ada-label {

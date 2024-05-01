@@ -193,6 +193,10 @@ export default {
   .bread {
     padding: 1rem;
   }
+
+  .product-wrap-top{
+    margin-top: 100px;
+  }
 }
 
 /* Tablets and small deskbanners */

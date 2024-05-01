@@ -7330,7 +7330,7 @@
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
     border-radius: 3px;
     outline-color: transparent;
-    color: var(--blue-c);
+    color: var(--blue-a);
   }
   .p-breadcrumb .p-breadcrumb-list li .p-menuitem-link:focus-visible {
     outline: 0 none;
@@ -7347,7 +7347,7 @@
     margin: 0 0.5rem 0 0.5rem;
   }
   .p-breadcrumb .p-breadcrumb-list li:last-child .p-menuitem-text {
-    color: var(--blue-c);
+    color: var(--blue-a);
   }
   .p-breadcrumb .p-breadcrumb-list li:last-child .p-menuitem-icon {
     color: #6c757d;
