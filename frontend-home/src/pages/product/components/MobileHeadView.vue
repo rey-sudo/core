@@ -303,8 +303,8 @@ export default {
 
 .head .head-price .ada-label {
   font-weight: 400;
-  color: var(--text-b);
-  font-size: var(--text-size-g);
+  color: var(--text-a);
+  font-size: var(--text-size-e);
   margin-right: 0.5rem;
 }
 

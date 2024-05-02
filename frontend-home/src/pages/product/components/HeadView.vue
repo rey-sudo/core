@@ -78,6 +78,13 @@
         3.258
       </div>
 
+      <div class="head-collateral">
+        <MeterGroup :value="collateralBar" />
+
+        <div class="ada-label">₳</div>
+        3.258
+      </div>
+
       <div class="head-button">
         <div @click="buyProduct">Buy now</div>
       </div>
@@ -104,6 +111,11 @@ export default {
     const galleryImage = ref([]);
 
     const galleryImageIndex = ref(0);
+
+    const collateralBar = ref([
+      { label: "Collateral 500 ADA", color: "#34d399", value: 30, icon: "pi pi-table" },
+      { label: "Protected", color: "#fbbf24", value: 100, icon: "pi pi-box" },
+    ]);
 
     const images = ref([
       {
@@ -174,6 +186,7 @@ export default {
       product,
       galleryImage,
       lockingEndpoint,
+      collateralBar,
       responsiveOptions,
       galleryImageIndex,
     };
@@ -215,6 +228,11 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.head-collateral {
+  width: 50%;
+  margin-top: 1rem;
+}
+
 .head {
   display: flex;
   margin-top: 2rem;
@@ -324,7 +342,7 @@ export default {
 
 .head .head-price .ada-label {
   font-weight: 400;
-  color: var(--text-b);
+  color: var(--text-a);
   font-size: var(--text-size-g);
   margin-right: 0.5rem;
 }

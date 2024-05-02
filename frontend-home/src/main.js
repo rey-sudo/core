@@ -108,7 +108,7 @@ import VirtualScroller from "primevue/virtualscroller";
 import ConfirmationService from "primevue/confirmationservice";
 import ToastService from "primevue/toastservice";
 import DialogService from "primevue/dialogservice";
-
+import MeterGroup from 'primevue/metergroup';
 
 const app = createApp(App)
 
@@ -129,6 +129,7 @@ app.directive("focustrap", FocusTrap);
 app.directive("animateonscroll", AnimateOnScroll);
 
 /* eslint-disable */
+app.component("MeterGroup", MeterGroup);
 app.component("Accordion", Accordion);
 app.component("AccordionTab", AccordionTab);
 app.component("AutoComplete", AutoComplete);

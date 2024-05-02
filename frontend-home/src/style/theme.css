@@ -10596,7 +10596,12 @@
   }
   .p-metergroup .p-metergroup-meters {
     background: #dee2e6;
-    border-radius: 3px;
+    border-radius: 1px;
+  }
+
+  .p-metergroup-label-text{
+    font-size: var(--text-size-a);
+    color: var(--text-b);
   }
   .p-metergroup .p-metergroup-meter {
     border: 0 none;
