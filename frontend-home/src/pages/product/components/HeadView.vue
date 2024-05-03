@@ -251,7 +251,7 @@ export default {
 
 .head .head-left {
   text-align: center;
-  width: 70%;
+  width: 67%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -314,7 +314,7 @@ export default {
 .head .head-right {
   height: inherit;
   text-align: center;
-  width: 30%;
+  width: 33%;
 }
 
 .head .head-name {
