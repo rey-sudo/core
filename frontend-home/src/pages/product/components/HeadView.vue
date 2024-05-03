@@ -90,6 +90,13 @@
         <div @click="buyProduct">Add to cart</div>
       </div>
 
+
+
+
+
+
+
+
       <div class="head-seller">
         <div class="head-seller-top">
 
@@ -326,7 +333,7 @@ export default {
 
 .head .head-legend {
   text-align: left;
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
   margin-top: 1rem;
 }
 

@@ -6,7 +6,7 @@
     expandIcon="x"
     collapseIcon="x"
   >
-    <AccordionTab header="Specifications">
+    <AccordionTab header="Features">
       <p class="accordionParagraph">
         Welcome to our cutting-edge e-commerce platform where innovation meets
         convenience! Step into the future of entertainment with the LG 65” Class

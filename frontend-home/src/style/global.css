@@ -86,6 +86,7 @@
   font-optical-sizing: auto;
   font-style: normal;
   font-family: "Open Sans", sans-serif;
+  letter-spacing: -0.2px;
 }
 
 #app {
