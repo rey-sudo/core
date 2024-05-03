@@ -158,7 +158,7 @@ export default {
 }
 
 .product-wrap {
-  width: 80%;
+  width: 77%;
 }
 
 .bread {
