@@ -321,6 +321,7 @@ export default {
   font-size: var(--text-size-g);
   font-weight: 700;
   text-align: left;
+  width: 90%;
 }
 
 .head .head-legend {
