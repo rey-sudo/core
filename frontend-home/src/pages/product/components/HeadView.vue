@@ -90,20 +90,9 @@
         <div @click="buyProduct">Add to cart</div>
       </div>
 
-
-
-
-
-
-
-
       <div class="head-seller">
-        <div class="head-seller-top">
-
-        </div>
-        <div class="head-seller-bottom">
-
-        </div>
+        <div class="head-seller-top"></div>
+        <div class="head-seller-bottom"></div>
       </div>
     </div>
   </div>
@@ -128,11 +117,16 @@ export default {
     const collateralBar = ref([
       {
         label: "Collateral 500 ADA",
-        color: '#1a83ff',
+        color: "#f0b90b",
         value: 30,
         icon: "pi pi-crown",
       },
-      { label: "Protected Purchase", color:  "#34d399", value: 100, icon: "pi pi-box" },
+      {
+        label: "Protected Purchase",
+        color: "#34d399",
+        value: 100,
+        icon: "pi pi-box",
+      },
     ]);
 
     const images = ref([
@@ -246,6 +240,14 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.head-seller {
+  width: 90%;
+  height: 100px;
+  margin-top: 1rem;
+  border: 1px solid var(--border-a);
+  border-radius: 8px;
+}
+
 .head-collateral {
   width: 50%;
   margin-top: 1rem;
@@ -328,7 +330,6 @@ export default {
   font-size: var(--text-size-g);
   font-weight: 700;
   text-align: left;
- 
 }
 
 .head .head-legend {
@@ -344,7 +345,7 @@ export default {
 .head .head-rating {
   margin-right: 0.5rem;
   font-size: var(--text-size-b);
-  color: var(--text-b);
+  color: var(--blue-a);
   align-items: center;
   margin-top: 1rem;
   display: flex;
