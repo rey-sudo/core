@@ -80,9 +80,6 @@
 
       <div class="head-collateral">
         <MeterGroup :value="collateralBar" />
-
-        <div class="ada-label">₳</div>
-        3.258
       </div>
 
       <div class="head-button">
@@ -91,6 +88,15 @@
 
       <div class="head-button outline">
         <div @click="buyProduct">Add to cart</div>
+      </div>
+
+      <div class="head-seller">
+        <div class="head-seller-top">
+
+        </div>
+        <div class="head-seller-bottom">
+
+        </div>
       </div>
     </div>
   </div>
@@ -113,8 +119,13 @@ export default {
     const galleryImageIndex = ref(0);
 
     const collateralBar = ref([
-      { label: "Collateral 500 ADA", color: "#34d399", value: 30, icon: "pi pi-table" },
-      { label: "Protected", color: "#fbbf24", value: 100, icon: "pi pi-box" },
+      {
+        label: "Collateral 500 ADA",
+        color: "#fbbf24",
+        value: 30,
+        icon: "pi pi-crown",
+      },
+      { label: "Protected Purchase", color:  "#34d399", value: 100, icon: "pi pi-box" },
     ]);
 
     const images = ref([
