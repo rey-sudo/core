@@ -72,7 +72,6 @@ export default {
 
 .accordionStyle {
   width: 100%;
-  border-top: 1px solid var(--border-a);
   margin-top: 2rem;
 }
 
