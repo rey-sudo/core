@@ -345,7 +345,7 @@ export default {
 .head .head-rating {
   margin-right: 0.5rem;
   font-size: var(--text-size-b);
-  color: var(--blue-a);
+  color: var(--text-b);
   align-items: center;
   margin-top: 1rem;
   display: flex;
