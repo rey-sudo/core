@@ -10596,7 +10596,7 @@
   }
   .p-metergroup .p-metergroup-meters {
     background: #dee2e6;
-    border-radius: 1px;
+    border-radius: 0px;
   }
 
   .p-metergroup-label-text{
@@ -10630,15 +10630,15 @@
     flex-direction: column;
   }
   .p-metergroup.p-metergroup-horizontal .p-metergroup-meters {
-    height: 0.25rem;
+    height: 0.5rem;
   }
   .p-metergroup.p-metergroup-horizontal .p-metergroup-meter:first-of-type {
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
   }
   .p-metergroup.p-metergroup-horizontal .p-metergroup-meter:last-of-type {
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
   }
   .p-metergroup.p-metergroup-vertical {
     flex-direction: row;

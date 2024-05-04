@@ -117,7 +117,7 @@ export default {
     const collateralBar = ref([
       {
         label: "Collateral 500 ADA",
-        color: "#f0b90b",
+        color: '#60a5fa',
         value: 30,
         icon: "pi pi-crown",
       },
