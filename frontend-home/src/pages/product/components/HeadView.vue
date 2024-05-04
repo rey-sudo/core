@@ -67,7 +67,7 @@
           :stars="5"
           :readonly="true"
           :cancel="false"
-          style="margin-right: 0.5rem"
+          style="margin-right: 1rem"
         />
         <span>{{ product.rating_count }}</span>
 
