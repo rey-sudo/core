@@ -166,6 +166,7 @@ export default {
   justify-content: flex-start;
   width: inherit;
   padding: 2rem 0;
+  margin-top: 2rem;
 }
 
 .product {
@@ -179,7 +180,7 @@ export default {
 
 .product-wrap-top {
   min-height: 150vh;
-  margin-top: 150px;
+  margin-top: 120px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -194,7 +195,7 @@ export default {
     padding: 1rem;
   }
 
-  .product-wrap-top{
+  .product-wrap-top {
     margin-top: 100px;
   }
 }

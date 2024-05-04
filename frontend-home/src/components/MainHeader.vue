@@ -419,7 +419,6 @@ export default {
   width: 90%;
   color: var(--text-a);
   font-size: var(--text-size-b);
-  padding: 0.125rem;
   border: 1px solid transparent;
   box-shadow: 0 0 5px var(--blue-c), 0 0 5px var(--blue-c),
     0 0 5px var(--blue-c);
@@ -453,7 +452,7 @@ export default {
   width: 100%;
   font-size: var(--text-size-b);
   color: inherit;
-  padding: 0.5rem 1rem;
+  padding: calc(0.5rem + 0.125rem) 1rem;
 }
 
 .header .header-center .header-center-search input::placeholder {
@@ -562,13 +561,11 @@ i {
 }
 
 .header-menu {
-  padding: 0.175rem;
   padding-left: 5%;
-  margin-top: 2px;
   z-index: 100;
   display: flex;
   position: fixed;
-  top: 70px;
+  top: 72px;
   left: 0;
   width: 100%;
   align-items: center;
@@ -629,8 +626,7 @@ i {
   font-size: var(--text-size-a);
   white-space: nowrap;
   cursor: pointer;
-  padding: 0 1rem;
-  line-height: 40px;
+  padding: calc(0.75rem + 0.125rem) 1rem;
   font-weight: inherit;
   margin-right: 1rem;
   color: inherit;
