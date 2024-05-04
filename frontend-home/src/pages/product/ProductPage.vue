@@ -158,14 +158,14 @@ export default {
 }
 
 .product-wrap {
-  width: 77%;
+  width: 80%;
 }
 
 .bread {
   display: flex;
   justify-content: flex-start;
   width: inherit;
-  padding: 1rem 0;
+  padding: 2rem 0;
 }
 
 .product {

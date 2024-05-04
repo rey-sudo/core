@@ -8,6 +8,7 @@
             v-for="(item, index) in images"
             :key="item"
             @click="changeGalleryImage(index)"
+            @mouseover="changeGalleryImage(index)"
             :class="{ imageSelected: isGalleryImage(index) }"
           >
             <img :src="item.thumbnailImageSrc" alt="" />
@@ -156,9 +157,9 @@ export default {
       },
       {
         itemImageSrc:
-          "https://pisces.bbystatic.com/image4/BestBuy_US/images/products/6538/6537363_sd.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6566/6566196_sd.jpg",
         thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image4/BestBuy_US/images/products/6538/6537363_sd.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6566/6566196_sd.jpg",
         alt: "Description for Image 4",
         title: "Title 4",
       },
@@ -240,7 +241,7 @@ export default {
 }
 
 .head-collateral {
-  width: 50%;
+  width: 90%;
   margin-top: 1rem;
 }
 
@@ -300,6 +301,11 @@ export default {
   height: 70px;
 }
 
+
+.head .head-gallery .head-gallery-boxes div.imageSelected{
+  outline: 2px solid black;
+}
+
 .head .head-gallery .head-gallery-boxes div img {
   width: 100%;
   height: 100%;
@@ -322,6 +328,7 @@ export default {
   font-size: var(--text-size-g);
   font-weight: 700;
   text-align: left;
+  width: 90%;
 }
 
 .head .head-legend {
@@ -345,7 +352,7 @@ export default {
 .head .head-rating span {
   margin-right: 0.25rem;
   font-size: var(--text-size-b);
-  color: var(--blue-t);
+  color: var(--text-b);
   font-weight: 700;
 }
 
@@ -356,7 +363,7 @@ export default {
 .head .head-price {
   text-align: left;
   margin-top: 1rem;
-  font-size: var(--text-size-h);
+  font-size: var(--text-size-i);
   font-weight: 700;
   display: flex;
   align-items: baseline;

@@ -369,7 +369,7 @@ export default {
 
 <style lang="css" scoped>
 .header {
-  padding: 0.75rem 3rem;
+  padding: 0.75rem 5%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -563,7 +563,7 @@ i {
 
 .header-menu {
   padding: 0.175rem;
-  padding-left: 3rem;
+  padding-left: 5%;
   margin-top: 2px;
   z-index: 100;
   display: flex;
