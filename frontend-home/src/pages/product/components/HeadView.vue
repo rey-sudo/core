@@ -61,15 +61,15 @@
       </div>
 
       <div class="head-rating">
-        <span>{{ product.rating_count }}</span>
-
         <Rating
           :modelValue="product.rating_count"
           :stars="5"
           :readonly="true"
           :cancel="false"
-          style="margin: 0 1rem"
+          style="margin-right: 0.5rem"
         />
+        <span>{{ product.rating_count }}</span>
+
         <span>({{ product.review_count }} Reviews)</span>
       </div>
 
@@ -117,7 +117,7 @@ export default {
     const collateralBar = ref([
       {
         label: "Collateral 500 ADA",
-        color: '#60a5fa',
+        color: "#60a5fa",
         value: 30,
         icon: "pi pi-crown",
       },
@@ -154,15 +154,6 @@ export default {
         alt: "Description for Image 3",
         title: "Title 3",
       },
-      {
-        itemImageSrc:
-          "https://pisces.bbystatic.com/image4/BestBuy_US/images/products/6538/6537363_sd.jpg",
-        thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image4/BestBuy_US/images/products/6538/6537363_sd.jpg",
-        alt: "Description for Image 4",
-        title: "Title 4",
-      },
-
       {
         itemImageSrc:
           "https://pisces.bbystatic.com/image4/BestBuy_US/images/products/6538/6537363_sd.jpg",
@@ -279,6 +270,7 @@ export default {
   justify-content: flex-start;
   position: relative;
   flex-direction: column;
+  height: 100%;
 }
 
 .mask {
@@ -345,10 +337,20 @@ export default {
 .head .head-rating {
   margin-right: 0.5rem;
   font-size: var(--text-size-b);
-  color: var(--text-b);
   align-items: center;
   margin-top: 1rem;
   display: flex;
+}
+
+.head .head-rating span {
+  margin-right: 0.25rem;
+  font-size: var(--text-size-b);
+  color: var(--blue-a);
+  font-weight: 700;
+}
+
+.head .head-rating span:nth-child(3) {
+  font-weight: 400;
 }
 
 .head .head-price {
