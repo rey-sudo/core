@@ -92,7 +92,17 @@
       </div>
 
       <div class="head-seller">
-        <div class="head-seller-top"></div>
+        <div class="head-seller-head">
+          <img
+            src="https://http2.mlstatic.com/D_NQ_NP_984015-MLA74975093699_032024-G.jpg"
+            alt=""
+          />
+
+          <div>
+            <span>Samsung</span>
+            <span>1000+ sales completed</span>
+          </div>
+        </div>
         <div class="head-seller-bottom"></div>
       </div>
     </div>
@@ -240,6 +250,36 @@ export default {
   border-radius: 8px;
 }
 
+.head-seller-head {
+  display: flex;
+  padding: 1rem;
+}
+
+.head-seller-head img {
+  width: 3rem;
+  height: 3rem;
+  outline: 1px solid var(--border-b);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.head-seller-head div {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-left: 1rem;
+}
+
+.head-seller-head div span:nth-child(1) {
+  font-weight: 500;
+}
+
+.head-seller-head div span:nth-child(2) {
+  font-weight: 400;
+  font-size: var(--text-size-a);
+  color: var(--text-b);
+}
+
 .head-collateral {
   width: 90%;
   margin-top: 1rem;
@@ -301,8 +341,7 @@ export default {
   height: 70px;
 }
 
-
-.head .head-gallery .head-gallery-boxes div.imageSelected{
+.head .head-gallery .head-gallery-boxes div.imageSelected {
   outline: 2px solid black;
 }
 
