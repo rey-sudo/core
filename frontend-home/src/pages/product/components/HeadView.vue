@@ -345,7 +345,7 @@ export default {
 .head .head-rating span {
   margin-right: 0.25rem;
   font-size: var(--text-size-b);
-  color: var(--blue-a);
+  color: var(--blue-t);
   font-weight: 700;
 }
 
