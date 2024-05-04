@@ -328,7 +328,7 @@ export default {
   font-size: var(--text-size-g);
   font-weight: 700;
   text-align: left;
-  width: 90%;
+  width: 100%;
 }
 
 .head .head-legend {
@@ -363,7 +363,7 @@ export default {
 .head .head-price {
   text-align: left;
   margin-top: 1rem;
-  font-size: var(--text-size-i);
+  font-size: var(--text-size-h);
   font-weight: 700;
   display: flex;
   align-items: baseline;
