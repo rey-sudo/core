@@ -72,7 +72,6 @@ export default {
 
 .accordionStyle {
   width: 100%;
-  margin-top: 2rem;
 }
 
 .accordionParagraph {

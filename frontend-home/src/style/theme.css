@@ -10597,11 +10597,13 @@
   .p-metergroup .p-metergroup-meters {
     background: #dee2e6;
     border-radius: 0px;
+    opacity: 0.5;
   }
 
   .p-metergroup-label-text{
     font-size: var(--text-size-a);
     color: var(--text-b);
+    font-weight: 400;
   }
   .p-metergroup .p-metergroup-meter {
     border: 0 none;

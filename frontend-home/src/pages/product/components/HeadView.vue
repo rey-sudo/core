@@ -103,7 +103,17 @@
             <span>1000+ sales completed</span>
           </div>
         </div>
-        <div class="head-seller-bottom"></div>
+        <div class="head-seller-bottom">
+          <div class="head-seller-badge">
+            <i class="pi pi-clock" />
+            <span> Products delivered on time. </span>
+          </div>
+
+          <div class="head-seller-badge">
+            <i class="pi pi-arrow-right-arrow-left" />
+            <span> Good communication </span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -192,12 +202,20 @@ export default {
 
     const product = ref({
       rating_count: 4.8,
-      review_count: 756,
+      review_count: 80,
+    });
+
+    const seller = ref({
+      name: "Samsung",
+      sales_completed: 1000,
+      delivered_on_time: 80,
+      good_communication: 4,
     });
 
     return {
       images,
       product,
+      seller,
       galleryImage,
       lockingEndpoint,
       collateralBar,
@@ -244,7 +262,6 @@ export default {
 <style lang="css" scoped>
 .head-seller {
   width: 90%;
-  height: 100px;
   margin-top: 1rem;
   border: 1px solid var(--border-a);
   border-radius: 8px;
@@ -253,6 +270,8 @@ export default {
 .head-seller-head {
   display: flex;
   padding: 1rem;
+  align-items: center;
+  border-bottom: 1px solid var(--border-a);
 }
 
 .head-seller-head img {
@@ -283,6 +302,21 @@ export default {
 .head-collateral {
   width: 90%;
   margin-top: 1rem;
+}
+
+.head-seller-bottom {
+}
+
+.head-seller-badge {
+  display: flex;
+  padding: 1rem;
+  color: var(--text-b);
+}
+
+.head-seller-badge span {
+  font-size: var(--text-size-a);
+  margin-left: 1rem;
+  font-weight: 200;
 }
 
 .head {
@@ -392,7 +426,7 @@ export default {
   margin-right: 0.25rem;
   font-size: var(--text-size-b);
   color: var(--text-b);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .head .head-rating span:nth-child(3) {
