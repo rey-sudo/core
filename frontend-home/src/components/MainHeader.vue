@@ -228,6 +228,21 @@ import { ref } from "vue";
 
 export default {
   setup() {
+    window.addEventListener(
+      "scroll",
+      function () {
+        let currentScroll =
+          window.scrollY || document.documentElement.scrollTop;
+
+        if (currentScroll <= 0) {
+          document.querySelector(".header-menu").style.display = "flex";
+        } else {
+          document.querySelector(".header-menu").style.display =  "none";
+        }
+      },
+      false
+    );
+
     const wallet = walletAPI();
     const selectedCountry = ref({ name: "United States", code: "US" });
     const countries = ref([
@@ -306,7 +321,7 @@ export default {
   created() {
     this.$watch(
       () => this.$route.name,
-      (name) => (this.currentRoute = name),
+      (e) => (this.currentRoute = e),
       { immediate: true }
     )();
   },
@@ -572,8 +587,7 @@ i {
   background: var(--blue-b);
   color: var(--text-w);
   font-weight: 500;
-  border-top: 1px solid #0d76ff;
-  border-bottom: 1px solid var(--base-c);
+  border-top: 1px solid #1A83FF;
 }
 
 .header-menu.bluex {
