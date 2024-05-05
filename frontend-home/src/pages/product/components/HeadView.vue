@@ -67,7 +67,7 @@
           :stars="5"
           :readonly="true"
           :cancel="false"
-          style="margin-right: 1rem"
+          style="margin-right: 0.5rem"
         />
         <span>{{ product.rating_count }}</span>
 
@@ -272,6 +272,7 @@ export default {
   padding: 1rem;
   align-items: center;
   border-bottom: 1px solid var(--border-a);
+  background: var(--base-b);
 }
 
 .head-seller-head img {
@@ -300,11 +301,8 @@ export default {
 }
 
 .head-collateral {
-  width: 90%;
+  width: 50%;
   margin-top: 1rem;
-}
-
-.head-seller-bottom {
 }
 
 .head-seller-badge {
@@ -329,7 +327,7 @@ export default {
   width: 70%;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
 }
 

@@ -1,7 +1,6 @@
 <template>
   <Accordion
     :multiple="true"
-    :activeIndex="[0]"
     class="accordionStyle"
     expandIcon="x"
     collapseIcon="x"
@@ -71,7 +70,7 @@ export default {
 <style lang="css" scoped>
 
 .accordionStyle {
-  width: 100%;
+  width: 90%;
 }
 
 .accordionParagraph {
