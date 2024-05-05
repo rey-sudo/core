@@ -10,7 +10,7 @@
   "dependencies": {
     "@cardano-foundation/cardano-connect-with-wallet-core": "^0.2.4",
     "@emurgo/cardano-serialization-lib-browser": "^11.5.0",
-    "@vueuse/core": "^10.5.0",
+    "@vueuse/core": "^10.9.0",
     "axios": "^1.5.1",
     "buffer": "^6.0.3",
     "core-js": "^3.8.3",

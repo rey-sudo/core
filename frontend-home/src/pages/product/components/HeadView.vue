@@ -136,6 +136,7 @@
 <script>
 import productAPI from "@/pages/product/api";
 import DescriptionView from "./DescriptionView.vue";
+
 import { ref } from "vue";
 
 export default {
@@ -143,6 +144,7 @@ export default {
     DescriptionView,
   },
   setup() {
+
     const { lockingEndpoint } = productAPI();
 
     const galleryImage = ref([]);
@@ -506,7 +508,7 @@ export default {
 }
 
 .head .head-button {
-  background: var(--blue-c);
+  background: var(--blue-b);
   width: 90%;
   border-radius: 8px;
   color: var(--text-w);
@@ -522,8 +524,8 @@ export default {
 
 .head .head-button.outline {
   background: transparent;
-  color: var(--blue-c);
-  border: 1px solid var(--blue-c);
+  color: var(--blue-b);
+  border: 1px solid var(--blue-b);
 }
 
 @media only screen and (max-width: 767px) {
