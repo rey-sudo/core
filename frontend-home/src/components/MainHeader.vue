@@ -750,7 +750,7 @@ i {
 
 @media only screen and (min-width: 1200px) {
   .header .header-center .header-center-search {
-    width: 90%;
+    width: 80%;
   }
 
   .header-left {

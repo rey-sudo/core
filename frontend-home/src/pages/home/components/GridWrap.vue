@@ -162,8 +162,8 @@ export default {
   gap: 20px;
   padding: 0 2rem;
   min-height: 100vh;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
   background: var(--base-a);
 }
 
@@ -219,7 +219,7 @@ export default {
 }
 
 .card-body-name {
-  color: var(--blue-t);
+  color: var(--blue-c);
   font-size: var(--text-size-b);
   text-align: left;
   display: flex;
