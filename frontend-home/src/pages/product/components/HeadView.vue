@@ -58,7 +58,7 @@
       <div class="head-legend">
         <span>Model: 8430288C2C</span>
 
-        <span>ID: P9C3KC93CK</span>
+        <span>SKU: P9C3KC93CK</span>
       </div>
 
       <div class="head-rating">
@@ -107,11 +107,25 @@
           <div class="head-seller-badge">
             <i class="pi pi-clock" />
             <span> Products delivered on time. </span>
+            <ul class="meter">
+              <li />
+              <li />
+              <li />
+              <li />
+              <li />
+            </ul>
           </div>
 
           <div class="head-seller-badge">
             <i class="pi pi-arrow-right-arrow-left" />
-            <span> Good communication </span>
+            <span> Good communication. </span>
+            <ul class="meter">
+              <li />
+              <li />
+              <li />
+              <li />
+              <li />
+            </ul>
           </div>
         </div>
       </div>
@@ -264,9 +278,22 @@ export default {
   display: none;
 }
 
+.meter {
+  display: flex;
+  margin-left: auto;
+}
+
+.meter li {
+  width: 1rem;
+  height: 0.5rem;
+  background: var(--base-c);
+  margin-left: 0.25rem;
+  list-style: none;
+}
+
 .head-seller {
   width: 90%;
-  margin-top: 1rem;
+  margin-top: 2rem;
   border: 1px solid var(--border-b);
   border-radius: 8px;
 }
@@ -455,7 +482,7 @@ export default {
 }
 
 .head .head-button {
-  background: var(--blue-b);
+  background: var(--text-a);
   width: 90%;
   border-radius: 8px;
   color: var(--text-w);
@@ -471,8 +498,8 @@ export default {
 
 .head .head-button.outline {
   background: transparent;
-  color: var(--blue-b);
-  border: 1px solid var(--blue-b);
+  color: var(--text-a);
+  border: 1px solid var(--text-a);
 }
 
 @media only screen and (max-width: 767px) {
