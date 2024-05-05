@@ -5796,7 +5796,7 @@
     line-height: 1;
   }
   .p-accordion .p-accordion-header .p-accordion-header-link {
-    padding: 1.75rem 0;
+    padding: 1.5rem 0;
     border: 1px solid var(--border-b);
     color: var(--text-a);
     background: var(--base-a);
@@ -5817,6 +5817,7 @@
     .p-accordion-toggle-icon {
     margin-right: 0.5rem;
   }
+
   .p-accordion
     .p-accordion-header:not(.p-disabled)
     .p-accordion-header-link:focus-visible {
@@ -5848,8 +5849,7 @@
     color: var(--text-a);
   }
   .p-accordion .p-accordion-content {
-    padding: 1rem;
-    background: #ffffff;
+    background: var(--base-a);
     color: var(--text-a);
     border-top: 0;
     border-top-right-radius: 0;

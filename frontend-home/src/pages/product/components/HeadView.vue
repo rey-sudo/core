@@ -260,6 +260,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
+::v-deep(.p-accordion-toggle-icon) {
+  display: none;
+}
+
 .head-seller {
   width: 90%;
   margin-top: 1rem;
@@ -434,7 +438,7 @@ export default {
 .head .head-price {
   text-align: left;
   margin-top: 1rem;
-  font-size: var(--text-size-h);
+  font-size: var(--text-size-i);
   font-weight: 700;
   display: flex;
   align-items: baseline;
