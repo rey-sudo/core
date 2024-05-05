@@ -237,7 +237,7 @@ export default {
         if (currentScroll <= 0) {
           document.querySelector(".header-menu").style.display = "flex";
         } else {
-          document.querySelector(".header-menu").style.display =  "none";
+          document.querySelector(".header-menu").style.display = "none";
         }
       },
       false
@@ -587,10 +587,11 @@ i {
   background: var(--blue-b);
   color: var(--text-w);
   font-weight: 500;
-  border-top: 1px solid #1A83FF;
+  border-top: 1px solid #1a83ff;
+  border-bottom: 1px solid var(--base-c);
 }
 
-.header-menu.bluex {
+.header-menu.main {
   color: var(--text-w);
   background: var(--blue-c);
   font-weight: 600;
