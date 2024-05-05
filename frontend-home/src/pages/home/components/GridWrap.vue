@@ -162,8 +162,8 @@ export default {
   gap: 20px;
   padding: 0 2rem;
   min-height: 100vh;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   background: var(--base-a);
 }
 

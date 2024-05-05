@@ -10634,7 +10634,7 @@
     flex-direction: column;
   }
   .p-metergroup.p-metergroup-horizontal .p-metergroup-meters {
-    height: 0.5rem;
+    height: 0.4rem;
   }
   .p-metergroup.p-metergroup-horizontal .p-metergroup-meter:first-of-type {
     border-top-left-radius: 0px;
