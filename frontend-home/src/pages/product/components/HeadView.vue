@@ -108,11 +108,11 @@
             <i class="pi pi-clock" />
             <span> Products delivered on time. </span>
             <ul class="meter">
-              <li />
-              <li />
-              <li />
-              <li />
-              <li />
+              <li class="level-1" :class="{ actived: false }" />
+              <li class="level-2" :class="{ actived: false }" />
+              <li class="level-3" :class="{ actived: false }" />
+              <li class="level-4" :class="{ actived: false }" />
+              <li class="level-5" :class="{ actived: true }" />
             </ul>
           </div>
 
@@ -222,7 +222,7 @@ export default {
     const seller = ref({
       name: "Samsung",
       sales_completed: 1000,
-      delivered_on_time: 80,
+      delivered_on_time: 5,
       good_communication: 4,
     });
 
@@ -289,6 +289,30 @@ export default {
   background: var(--base-c);
   margin-left: 0.25rem;
   list-style: none;
+}
+
+.meter .level-1 {
+  background: #fff0f0;
+}
+
+.meter .level-2 {
+  background: #fff5e8;
+}
+
+.meter .level-3 {
+  background: #fffcda;
+}
+
+.meter .level-4 {
+  background: #f1fdd7;
+}
+
+.meter .level-5 {
+  background: #edf8ee;
+}
+
+.meter .level-5.actived {
+  background: #39b54a;
 }
 
 .head-seller {
@@ -482,7 +506,7 @@ export default {
 }
 
 .head .head-button {
-  background: var(--blue-b);
+  background: var(--blue-c);
   width: 90%;
   border-radius: 8px;
   color: var(--text-w);
@@ -498,8 +522,8 @@ export default {
 
 .head .head-button.outline {
   background: transparent;
-  color: var(--blue-b);
-  border: 1px solid var(--blue-b);
+  color: var(--blue-c);
+  border: 1px solid var(--blue-c);
 }
 
 @media only screen and (max-width: 767px) {
