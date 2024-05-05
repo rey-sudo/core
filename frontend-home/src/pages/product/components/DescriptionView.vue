@@ -1,6 +1,7 @@
 <template>
   <Accordion
     :multiple="true"
+    :activeIndex="[2]"
     class="accordionStyle"
     expandIcon="x"
     collapseIcon="x"
