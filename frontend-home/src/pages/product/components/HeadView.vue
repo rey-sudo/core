@@ -76,7 +76,7 @@
 
       <div class="head-price">
         <div class="ada-label">₳</div>
-       <span> 3.258</span>
+        <span> 3.258</span>
       </div>
 
       <div class="head-collateral">
@@ -311,6 +311,7 @@ export default {
 
 .head-seller-badge {
   display: flex;
+  align-items: center;
   padding: 1rem;
   color: var(--text-b);
 }
