@@ -52,7 +52,7 @@
     <!--RIGHT-->
     <div class="head-right">
       <div class="head-name">
-        LG - 65” Class UQ70 Series LED 4K UHD Smart webOS TV
+        Samsung - Galaxy Tab S9 FE+ - 12.4" 128GB - Wi-Fi - with S-Pen - Gray
       </div>
 
       <div class="head-legend">
@@ -76,7 +76,7 @@
 
       <div class="head-price">
         <div class="ada-label">₳</div>
-        <span> 3.258</span>
+        <span> 1,720</span>
       </div>
 
       <div class="head-collateral">
@@ -144,7 +144,6 @@ export default {
     DescriptionView,
   },
   setup() {
-
     const { lockingEndpoint } = productAPI();
 
     const galleryImage = ref([]);
