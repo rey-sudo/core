@@ -421,7 +421,7 @@ export default {
 .head .head-gallery .head-gallery-boxes div {
   border: 1px solid var(--border-b);
   border-radius: 8px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   padding: 0.25rem;
   overflow: hidden;
   display: flex;
@@ -493,7 +493,7 @@ export default {
 .head .head-price {
   text-align: left;
   margin-top: 1rem;
-  font-size: var(--text-size-i);
+  font-size: var(--text-size-h);
   font-weight: 700;
   display: flex;
   align-items: baseline;
