@@ -576,7 +576,7 @@ i {
 }
 
 .header-menu {
-  padding-left: 5%;
+  padding: 0 5%;
   z-index: 100;
   display: flex;
   position: fixed;
