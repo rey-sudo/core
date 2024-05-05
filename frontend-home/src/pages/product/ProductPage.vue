@@ -165,8 +165,10 @@ export default {
   display: flex;
   justify-content: flex-start;
   width: inherit;
-  padding: 2rem 0;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   margin-top: 2rem;
+  border-top: 1px solid var(--border-b);
 }
 
 .product {
