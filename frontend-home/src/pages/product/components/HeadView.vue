@@ -76,7 +76,7 @@
 
       <div class="head-price">
         <div class="ada-label">₳</div>
-        3.258
+       <span> 3.258</span>
       </div>
 
       <div class="head-collateral">
@@ -449,6 +449,7 @@ export default {
   color: var(--text-a);
   font-size: var(--text-size-g);
   margin-right: 0.5rem;
+  margin-bottom: 2px;
 }
 
 .head .head-button {
