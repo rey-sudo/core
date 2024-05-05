@@ -76,7 +76,7 @@
 
       <div class="head-price">
         <div class="ada-label">₳</div>
-        <span> 1,720</span>
+        <span> 1.720</span>
       </div>
 
       <div class="head-collateral">
