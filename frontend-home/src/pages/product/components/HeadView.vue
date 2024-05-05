@@ -267,7 +267,7 @@ export default {
 .head-seller {
   width: 90%;
   margin-top: 1rem;
-  border: 1px solid var(--border-a);
+  border: 1px solid var(--border-b);
   border-radius: 8px;
 }
 
@@ -285,6 +285,7 @@ export default {
   outline: 1px solid var(--border-b);
   outline-offset: 2px;
   border-radius: 4px;
+  object-fit: contain;
 }
 
 .head-seller-head div {
