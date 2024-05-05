@@ -294,7 +294,7 @@ export default {
 .head-seller {
   width: 90%;
   margin-top: 2rem;
-  border: 1px solid var(--border-b);
+  border: 1px solid var(--border-a);
   border-radius: 8px;
 }
 
