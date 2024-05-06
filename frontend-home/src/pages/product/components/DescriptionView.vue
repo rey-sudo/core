@@ -81,14 +81,15 @@ export default {};
 
 .keywords {
   list-style: none;
-  display: flex;
-  justify-content: flex-start;
   margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
+  max-width: 600px;
 }
 
 .keywords li {
   padding: 0.5rem 1rem;
-  margin-right: 1rem;
   border-radius: 8px;
   color: var(--text-b);
   font-size: var(--text-size-b);
