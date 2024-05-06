@@ -382,7 +382,7 @@ export default {
 
 .head .head-left {
   text-align: center;
-  width: 67%;
+  width: 70%;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -450,7 +450,7 @@ export default {
 .head .head-right {
   height: inherit;
   text-align: center;
-  width: 33%;
+  width: 30%;
 }
 
 .head .head-name {
