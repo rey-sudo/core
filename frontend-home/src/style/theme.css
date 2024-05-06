@@ -10599,7 +10599,7 @@
   .p-metergroup .p-metergroup-meters {
     background: #dee2e6;
     border-radius: 0px;
-    opacity: 1;
+    opacity: 0.5;
   }
 
   .p-metergroup-label-text {
