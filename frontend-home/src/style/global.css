@@ -108,7 +108,11 @@ body {
 }
 
 ul {
-  margin: 0rem;
+  margin: initial;
+}
+
+p {
+  margin: initial;
 }
 
 .green {

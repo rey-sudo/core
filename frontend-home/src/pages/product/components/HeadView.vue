@@ -469,7 +469,7 @@ export default {
   font-size: var(--text-size-g);
   font-weight: 700;
   text-align: left;
-  width: 90%;
+  width: 100%;
 }
 
 .head .head-legend {

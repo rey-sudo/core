@@ -100,5 +100,6 @@ export default {};
   line-height: 1.75rem;
   color: var(--text-b);
   font-weight: 300;
+  margin-top: 1rem;
 }
 </style>
