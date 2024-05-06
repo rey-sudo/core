@@ -4,14 +4,6 @@
     <MobileHeader />
     <div class="product-wrap">
       <div class="product-wrap-top">
-        <div class="bread">
-          <Breadcrumb :home="home" :model="breadItems">
-            <template #separator>
-              <div class="arrow" />
-            </template>
-          </Breadcrumb>
-        </div>
-
         <HeadView />
         <MobileHeadView />
       </div>
@@ -47,15 +39,10 @@ export default {
       review_count: 756,
     });
 
-    const breadItems = ref([
-      { label: "Electronics" },
-      { label: "TV & Accessories" },
-      { label: "TVs" },
-    ]);
 
     return {
       product,
-      breadItems,
+    
       lockingEndpoint,
     };
   },
@@ -145,31 +132,11 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.arrow::before {
-  border-bottom: 4px solid #0000;
-  border-left: 4px solid var(--text-b);
-  border-top: 4px solid #0000;
-  content: " ";
-  display: inline-block;
-  align-items: center;
-  height: 0;
-  margin: 0 2px;
-  width: 0;
-}
 
 .product-wrap {
   width: calc(80% - 2rem);
 }
 
-.bread {
-  display: flex;
-  justify-content: flex-start;
-  width: inherit;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  margin-top: 2rem;
-  border-top: 1px solid var(--border-b);
-}
 
 .product {
   display: flex;
@@ -191,10 +158,6 @@ export default {
 @media only screen and (max-width: 767px) {
   .product-wrap {
     width: 100%;
-  }
-
-  .bread {
-    padding: 1rem;
   }
 
   .product-wrap-top {

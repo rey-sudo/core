@@ -1,135 +1,146 @@
 <template>
   <div class="head mobile">
     <!--LEFT-->
-    <div class="head-left">
-      <div class="head-gallery">
-        <div class="head-gallery-boxes">
-          <div
-            v-for="(item, index) in images"
-            :key="item"
-            @click="changeGalleryImage(index)"
-            @mouseover="changeGalleryImage(index)"
-            :class="{ imageSelected: isGalleryImage(index) }"
-          >
-            <img :src="item.thumbnailImageSrc" alt="" />
-          </div>
 
-          <div>
-            <span class="mask">+15</span>
-          </div>
-
-          <div>
-            <span class="mask">
-              <i class="pi pi-play-circle" />
-            </span>
-          </div>
-        </div>
-        <div class="head-gallery-image">
-          <Galleria
-            :value="galleryImage"
-            :responsiveOptions="responsiveOptions"
-            :numVisible="1"
-            :circular="true"
-            :transitionInterval="0"
-            containerStyle="max-width: 60%; min-height: 500px;  margin-top: 4rem;"
-            :showItemNavigators="false"
-            :showThumbnails="false"
-          >
-            <template #item="slotProps">
-              <img
-                :src="slotProps.item.itemImageSrc"
-                :alt="slotProps.item.alt"
-                style="width: 100%; display: block"
-              />
-            </template>
-          </Galleria>
-        </div>
-      </div>
-
-      <DescriptionView />
+    <div class="bread">
+      <Breadcrumb :home="home" :model="breadItems">
+        <template #separator>
+          <div class="arrow" />
+        </template>
+      </Breadcrumb>
     </div>
 
-    <!--RIGHT-->
-    <div class="head-right">
-      <div class="head-name">
-        Samsung - Galaxy Tab S9 FE - 10.9" 128GB - Wi-Fi - with S-Pen - Gray
-      </div>
+    <div class="head-body">
+      <div class="head-left">
+        <div class="head-gallery">
+          <div class="head-gallery-boxes">
+            <div
+              v-for="(item, index) in images"
+              :key="item"
+              @click="changeGalleryImage(index)"
+              @mouseover="changeGalleryImage(index)"
+              :class="{ imageSelected: isGalleryImage(index) }"
+            >
+              <img :src="item.thumbnailImageSrc" alt="" />
+            </div>
 
-      <div class="head-legend">
-        <span>Model: 8430288C2C</span>
+            <div>
+              <span class="mask">+15</span>
+            </div>
 
-        <span>SKU: P9C3KC93CK</span>
-      </div>
-
-      <div class="head-rating">
-        <Rating
-          :modelValue="product.rating_count"
-          :stars="5"
-          :readonly="true"
-          :cancel="false"
-          style="margin-right: 0.5rem"
-        />
-        <span>{{ product.rating_count }}</span>
-
-        <span>({{ product.review_count }} Reviews)</span>
-      </div>
-
-      <div class="head-price">
-        <div class="ada-label">₳</div>
-        <span> 1.720</span>
-      </div>
-
-      <div class="head-collateral">
-        <MeterGroup :value="collateralBar" />
-      </div>
-
-      <div class="head-stock">
-        <span>10 available / 20 in stock</span>
-      </div>
-
-      <div class="head-button">
-        <div @click="buyProduct">Buy now</div>
-      </div>
-
-      <div class="head-button outline">
-        <div @click="buyProduct">Add to cart</div>
-      </div>
-
-      <div class="head-seller">
-        <div class="head-seller-head">
-          <img
-            src="https://http2.mlstatic.com/D_NQ_NP_984015-MLA74975093699_032024-G.jpg"
-            alt=""
-          />
-
-          <div>
-            <span>Samsung</span>
-            <span>1000+ sales completed</span>
+            <div>
+              <span class="mask">
+                <i class="pi pi-play-circle" />
+              </span>
+            </div>
+          </div>
+          <div class="head-gallery-image">
+            <Galleria
+              :value="galleryImage"
+              :responsiveOptions="responsiveOptions"
+              :numVisible="1"
+              :circular="true"
+              :transitionInterval="0"
+              containerStyle="max-width: 60%; min-height: 500px;  margin-top: 4rem;"
+              :showItemNavigators="false"
+              :showThumbnails="false"
+            >
+              <template #item="slotProps">
+                <img
+                  :src="slotProps.item.itemImageSrc"
+                  :alt="slotProps.item.alt"
+                  style="width: 100%; display: block"
+                />
+              </template>
+            </Galleria>
           </div>
         </div>
-        <div class="head-seller-bottom">
-          <div class="head-seller-badge">
-            <i class="pi pi-clock" />
-            <span> Products delivered on time. </span>
-            <ul class="meter">
-              <li class="level-1" :class="{ actived: false }" />
-              <li class="level-2" :class="{ actived: false }" />
-              <li class="level-3" :class="{ actived: false }" />
-              <li class="level-4" :class="{ actived: false }" />
-              <li class="level-5" :class="{ actived: true }" />
-            </ul>
-          </div>
 
-          <div class="head-seller-badge">
-            <i class="pi pi-arrow-right-arrow-left" />
-            <span> Good communication. </span>
-            <ul class="meter">
-              <li />
-              <li />
-              <li />
-              <li />
-              <li />
-            </ul>
+        <DescriptionView />
+      </div>
+
+      <!--RIGHT-->
+      <div class="head-right">
+        <div class="head-name">
+          Samsung - Galaxy Tab S9 FE - 10.9" 128GB - Wi-Fi - with S-Pen - Gray
+        </div>
+
+        <div class="head-legend">
+          <span>Model: 8430288C2C</span>
+
+          <span>SKU: P9C3KC93CK</span>
+        </div>
+
+        <div class="head-rating">
+          <Rating
+            :modelValue="product.rating_count"
+            :stars="5"
+            :readonly="true"
+            :cancel="false"
+            style="margin-right: 0.5rem"
+          />
+          <span>{{ product.rating_count }}</span>
+
+          <span>({{ product.review_count }} Reviews)</span>
+        </div>
+
+        <div class="head-price">
+          <div class="ada-label">₳</div>
+          <span> 1.720</span>
+        </div>
+
+        <div class="head-stock">
+          <span>10 available / 20 in stock</span>
+        </div>
+
+        <div class="head-collateral">
+          <MeterGroup :value="collateralBar" />
+        </div>
+
+        <div class="head-button">
+          <div @click="buyProduct">Buy now</div>
+        </div>
+
+        <div class="head-button outline">
+          <div @click="buyProduct">Add to cart</div>
+        </div>
+
+        <div class="head-seller">
+          <div class="head-seller-head">
+            <img
+              src="https://http2.mlstatic.com/D_NQ_NP_984015-MLA74975093699_032024-G.jpg"
+              alt=""
+            />
+
+            <div>
+              <span>Samsung</span>
+              <span>1000+ sales completed</span>
+            </div>
+          </div>
+          <div class="head-seller-bottom">
+            <div class="head-seller-badge">
+              <i class="pi pi-clock" />
+              <span> Products delivered on time. </span>
+              <ul class="meter">
+                <li class="level-1" :class="{ actived: false }" />
+                <li class="level-2" :class="{ actived: false }" />
+                <li class="level-3" :class="{ actived: false }" />
+                <li class="level-4" :class="{ actived: false }" />
+                <li class="level-5" :class="{ actived: true }" />
+              </ul>
+            </div>
+
+            <div class="head-seller-badge">
+              <i class="pi pi-arrow-right-arrow-left" />
+              <span> Good communication. </span>
+              <ul class="meter">
+                <li />
+                <li />
+                <li />
+                <li />
+                <li />
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -231,10 +242,17 @@ export default {
       good_communication: 4,
     });
 
+    const breadItems = ref([
+      { label: "Electronics" },
+      { label: "TV & Accessories" },
+      { label: "TVs" },
+    ]);
+
     return {
       images,
       product,
       seller,
+      breadItems,
       galleryImage,
       lockingEndpoint,
       collateralBar,
@@ -281,6 +299,16 @@ export default {
 <style lang="css" scoped>
 ::v-deep(.p-accordion-toggle-icon) {
   display: none;
+}
+
+.bread {
+  display: flex;
+  justify-content: flex-start;
+  width: inherit;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--border-b);
 }
 
 .head-stock {
@@ -389,8 +417,25 @@ export default {
 
 .head {
   display: flex;
-  margin-top: 2rem;
+  flex-direction: column;
 }
+
+.head-body{
+  display: flex;
+}
+
+.arrow::before {
+  border-bottom: 4px solid #0000;
+  border-left: 4px solid var(--text-b);
+  border-top: 4px solid #0000;
+  content: " ";
+  display: inline-block;
+  align-items: center;
+  height: 0;
+  margin: 0 2px;
+  width: 0;
+}
+
 
 .head .head-left {
   text-align: center;
@@ -543,6 +588,10 @@ export default {
 @media only screen and (max-width: 767px) {
   .mobile {
     display: none;
+  }
+
+  .bread {
+    padding: 1rem;
   }
 }
 

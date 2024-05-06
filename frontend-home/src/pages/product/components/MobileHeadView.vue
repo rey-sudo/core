@@ -74,13 +74,15 @@
         3.258
       </div>
 
+      <div class="head-stock">
+        <span>10 Available / 20 in Stock</span>
+      </div>
+
       <div class="head-collateral">
         <MeterGroup :value="collateralBar" />
       </div>
 
-      <div class="head-stock">
-        <span>10 available / 20 in stock</span>
-      </div>
+
     </div>
 
     <DescriptionView />
@@ -130,18 +132,9 @@ export default {
       },
       {
         itemImageSrc:
-          "https://pisces.bbystatic.com/image4/BestBuy_US/images/products/6538/6537363_sd.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6566/6566196_sd.jpg",
         thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image4/BestBuy_US/images/products/6538/6537363_sd.jpg",
-        alt: "Description for Image 4",
-        title: "Title 4",
-      },
-
-      {
-        itemImageSrc:
-          "https://pisces.bbystatic.com/image4/BestBuy_US/images/products/6538/6537363_sd.jpg",
-        thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image4/BestBuy_US/images/products/6538/6537363_sd.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6566/6566196_sd.jpg",
         alt: "Description for Image 4",
         title: "Title 4",
       },
