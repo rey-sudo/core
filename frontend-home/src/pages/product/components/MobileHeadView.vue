@@ -256,6 +256,7 @@ export default {
   justify-content: flex-start;
   position: relative;
   overflow-x: scroll;
+  width: 100%;
 }
 
 .mask {
@@ -301,6 +302,7 @@ export default {
   font-size: var(--text-size-f);
   font-weight: 700;
   text-align: left;
+  margin-top: 2rem;
 }
 
 .head .head-legend {
