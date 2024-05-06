@@ -162,7 +162,7 @@ export default {
         color: "#34d399",
         value: 100,
         icon: "pi pi-box",
-      },
+      }
     ]);
 
     const images = ref([

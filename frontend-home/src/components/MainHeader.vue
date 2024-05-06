@@ -201,10 +201,6 @@
 
     <div class="header-menu" :class="{ blue: currentRoute === 'product' }">
       <div class="header-menu-col left">
-        <div class="header-menu-button">
-          <i class="pi pi-bars" />
-        </div>
-
         <div class="header-menu-nav">
           <div
             v-for="item in navTabs"
@@ -274,38 +270,38 @@ export default {
       selectedTab: "all",
       navTabs: [
         {
-          label: "All",
-          value: "all",
+          label: "All Products",
+          value: "all-products",
           badge: false,
           badgeLabel: "",
         },
         {
-          label: "New",
-          value: "new",
+          label: "Last Discounts",
+          value: "last-discounts",
           badge: false,
           badgeLabel: "",
         },
         {
-          label: "Offers",
-          value: "offers",
+          label: "Best Sellers",
+          value: "best-sellers",
           badge: false,
           badgeLabel: "",
         },
         {
-          label: "Docs",
-          value: "docs",
-          badge: false,
-          badgeLabel: "",
-        },
-        {
-          label: "Bounties",
-          value: "bounties",
+          label: "Documentation",
+          value: "documentation",
           badge: false,
           badgeLabel: "",
         },
         {
           label: "P2P",
           value: "p2p",
+          badge: false,
+          badgeLabel: "",
+        },
+        {
+          label: "Bounties",
+          value: "bounties",
           badge: false,
           badgeLabel: "",
         },
@@ -643,9 +639,13 @@ i {
   cursor: pointer;
   padding: calc(0.75rem + 0.125rem) 1rem;
   font-weight: inherit;
-  margin-right: 1rem;
   color: inherit;
   background: transparent;
+  font-weight: 400;
+}
+
+.header-menu .header-menu-col .header-menu-nav div:nth-child(1) {
+  padding-left: initial;
 }
 
 .header-menu .header-menu-col .header-menu-nav div:hover {

@@ -76,7 +76,7 @@ export default {
 
 .accordionParagraph {
   text-align: left;
-  line-height: 1.5rem;
+  line-height: 1.75rem;
   color: var(--text-b);
   font-weight: 300;
 }
