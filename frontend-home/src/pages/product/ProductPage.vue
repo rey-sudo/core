@@ -2,13 +2,13 @@
   <div class="product">
     <MainHeader />
     <MobileHeader />
-    <div class="product-wrap">
-      <div class="product-wrap-top">
+    <div class="product-body">
+      <div class="product-body-top">
         <HeadView />
         <MobileHeadView />
       </div>
 
-      <div class="product-wrap-body"></div>
+      <div class="product-body-body"></div>
     </div>
   </div>
 </template>
@@ -133,7 +133,7 @@ export default {
 
 <style lang="css" scoped>
 
-.product-wrap {
+.product-body {
   width: calc(80% - 2rem);
 }
 
@@ -147,7 +147,7 @@ export default {
   align-items: center;
 }
 
-.product-wrap-top {
+.product-body-top {
   min-height: 150vh;
   margin-top: 120px;
   display: flex;
@@ -156,23 +156,35 @@ export default {
 }
 
 @media only screen and (max-width: 767px) {
-  .product-wrap {
+  .product-body {
     width: 100%;
   }
 
-  .product-wrap-top {
+  .product-body-top {
     margin-top: 100px;
   }
 }
 
 /* Tablets and small deskbanners */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  /* CSS rules for tablets and small deskbanners */
+  .product-body {
+    width: 100%;
+  }
+
+  .product-body-top {
+    margin-top: 100px;
+  }
 }
 
 /* Medium deskbanners */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  /* CSS rules for medium deskbanners */
+  .product-body {
+    width: 100%;
+  }
+
+  .product-body-top {
+    margin-top: 100px;
+  }
 }
 
 /* Large deskbanners and widescreen monitors */

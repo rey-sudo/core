@@ -398,7 +398,7 @@ export default {
 }
 
 .head-collateral {
-  width: 50%;
+  width: 90%;
   margin-top: 1rem;
 }
 
@@ -597,12 +597,16 @@ export default {
 
 /* Tablets and small deskbanners */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  /* CSS rules for tablets and small deskbanners */
+  .mobile {
+    display: none;
+  }
 }
 
 /* Medium deskbanners */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  /* CSS rules for medium deskbanners */
+  .mobile {
+    display: none;
+  }
 }
 
 /* Large deskbanners and widescreen monitors */

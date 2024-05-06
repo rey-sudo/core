@@ -11,7 +11,6 @@
       <span>ID: P9C3KC93CK</span>
     </div>
 
-
     <div class="head-rating">
       <Rating
         :modelValue="product.rating_count"
@@ -24,7 +23,6 @@
 
       <span>({{ product.review_count }} Reviews)</span>
     </div>
-
 
     <div class="head-gallery">
       <div class="head-gallery-image">
@@ -81,8 +79,6 @@
       <div class="head-collateral">
         <MeterGroup :value="collateralBar" />
       </div>
-
-
     </div>
 
     <DescriptionView />
@@ -239,7 +235,8 @@ export default {
 }
 
 .head-collateral {
-  width: 100%;
+  width: 70%;
+  margin-right: auto;
   margin-top: 1rem;
 }
 
@@ -256,7 +253,7 @@ export default {
   justify-content: flex-start;
   position: relative;
   overflow-x: scroll;
-  width: 100%;
+  margin-top: 1rem;
 }
 
 .mask {
@@ -275,15 +272,17 @@ export default {
 .head .head-gallery .head-gallery-boxes div {
   border: 1px solid var(--border-b);
   border-radius: 8px;
-  margin-right: 0.5rem;
+  margin-right: 0.75rem;
   padding: 0.25rem;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
+  width: 10vw;
+  height: 10vw;
+  max-width: 70px;
+  max-height: 70px;
 }
 
 .head .head-gallery .head-gallery-boxes div img {
@@ -381,16 +380,19 @@ export default {
 
 /* Tablets and small deskbanners */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  /* CSS rules for tablets and small deskbanners */
+  .mobile {
+    display: initial;
+  }
 }
 
 /* Medium deskbanners */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  /* CSS rules for medium deskbanners */
+  .mobile {
+    display: initial;
+  }
 }
 
 /* Large deskbanners and widescreen monitors */
 @media only screen and (min-width: 1200px) {
-  /* CSS rules for large deskbanners and widescreen monitors */
 }
 </style>
