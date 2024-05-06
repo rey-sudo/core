@@ -1,12 +1,20 @@
 <template>
   <Accordion
     :multiple="true"
-    :activeIndex="[2]"
+    :activeIndex="[0]"
     class="accordionStyle"
     expandIcon="x"
     collapseIcon="x"
   >
     <AccordionTab header="Features">
+      <div class="keywords">
+        <li>New</li>
+        <li>Cheap</li>
+        <li>Quality</li>
+        <li>Multicolor</li>
+        <li>Electrical</li>
+      </div>
+
       <p class="accordionParagraph">
         Welcome to our cutting-edge e-commerce platform where innovation meets
         convenience! Step into the future of entertainment with the LG 65” Class
@@ -63,15 +71,28 @@
 </template>
 
 <script>
-export default {
-    
-};
+export default {};
 </script>
 
 <style lang="css" scoped>
-
 .accordionStyle {
   width: 90%;
+}
+
+.keywords {
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 1rem;
+}
+
+.keywords li {
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+  border-radius: 8px;
+  color: var(--text-b);
+  font-size: var(--text-size-b);
+  border: 1px solid var(--border-b);
 }
 
 .accordionParagraph {
@@ -80,5 +101,4 @@ export default {
   color: var(--text-b);
   font-weight: 300;
 }
-
 </style>

@@ -52,7 +52,7 @@
     <!--RIGHT-->
     <div class="head-right">
       <div class="head-name">
-        Samsung - Galaxy Tab S9 FE+ - 12.4" 128GB - Wi-Fi - with S-Pen - Gray
+        Samsung - Galaxy Tab S9 FE - 10.9" 128GB - Wi-Fi - with S-Pen - Gray
       </div>
 
       <div class="head-legend">
@@ -285,7 +285,7 @@ export default {
 
 .head-stock {
   font-size: var(--text-size-a);
-  font-weight: 600;
+  font-weight: 500;
   text-align: left;
   margin-top: 1rem;
   color: var(--text-b);
@@ -469,7 +469,7 @@ export default {
   font-size: var(--text-size-g);
   font-weight: 700;
   text-align: left;
-  width: 100%;
+  width: 90%;
 }
 
 .head .head-legend {
@@ -484,7 +484,7 @@ export default {
 
 .head .head-rating {
   margin-right: 0.5rem;
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-c);
   align-items: center;
   margin-top: 1rem;
   display: flex;
