@@ -508,7 +508,7 @@ export default {
 
 .head .head-button {
   background: var(--blue-b);
-  width: 90%;
+  width: 80%;
   border-radius: 8px;
   color: var(--text-w);
   font-weight: 600;
