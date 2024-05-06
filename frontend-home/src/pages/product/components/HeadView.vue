@@ -83,6 +83,10 @@
         <MeterGroup :value="collateralBar" />
       </div>
 
+      <div class="head-stock">
+        <span>(10 available) - 20 in stock</span>
+      </div>
+
       <div class="head-button">
         <div @click="buyProduct">Buy now</div>
       </div>
@@ -162,7 +166,7 @@ export default {
         color: "#34d399",
         value: 100,
         icon: "pi pi-box",
-      }
+      },
     ]);
 
     const images = ref([
@@ -277,6 +281,14 @@ export default {
 <style lang="css" scoped>
 ::v-deep(.p-accordion-toggle-icon) {
   display: none;
+}
+
+.head-stock {
+  font-size: var(--text-size-a);
+  font-weight: 600;
+  text-align: left;
+  margin-top: 1rem;
+  color: var(--text-b);
 }
 
 .meter {
