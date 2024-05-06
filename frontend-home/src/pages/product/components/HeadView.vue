@@ -84,7 +84,7 @@
       </div>
 
       <div class="head-stock">
-        <span>(10 available) - 20 in stock</span>
+        <span>10 available / 20 in stock</span>
       </div>
 
       <div class="head-button">
@@ -285,7 +285,7 @@ export default {
 
 .head-stock {
   font-size: var(--text-size-a);
-  font-weight: 500;
+  font-weight: 400;
   text-align: left;
   margin-top: 1rem;
   color: var(--text-b);
@@ -530,12 +530,13 @@ export default {
   justify-content: center;
   padding: 0.75rem;
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .head .head-button.outline {
   background: transparent;
   color: var(--blue-b);
+  margin-top: 1rem;
   border: 1px solid var(--blue-b);
 }
 

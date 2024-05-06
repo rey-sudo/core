@@ -71,6 +71,10 @@
         <div class="ada-label">₳</div>
         3.258
       </div>
+      <div class="head-collateral">
+        <MeterGroup :value="collateralBar" />
+      </div>
+
     </div>
 
     <DescriptionView />
@@ -157,6 +161,21 @@ export default {
       review_count: 756,
     });
 
+    const collateralBar = ref([
+      {
+        label: "Collateral 500 ADA",
+        color: "#60a5fa",
+        value: 30,
+        icon: "pi pi-crown",
+      },
+      {
+        label: "Protected Purchase",
+        color: "#34d399",
+        value: 100,
+        icon: "pi pi-box",
+      },
+    ]);
+
     return {
       images,
       product,
@@ -164,6 +183,7 @@ export default {
       lockingEndpoint,
       responsiveOptions,
       galleryImageIndex,
+      collateralBar
     };
   },
   data() {
@@ -208,6 +228,12 @@ export default {
   flex-direction: column;
   padding: 1rem;
   display: none;
+}
+
+
+.head-collateral {
+  width: 100%;
+  margin-top: 1rem;
 }
 
 .head .head-gallery {
@@ -298,7 +324,7 @@ export default {
   display: flex;
   align-items: baseline;
   width: 100%;
-  padding: 1rem;
+
 }
 
 .head .head-price .ada-label {

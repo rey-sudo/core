@@ -102,4 +102,37 @@ export default {};
   font-weight: 300;
   margin-top: 1rem;
 }
+
+@media only screen and (max-width: 767px) {
+  .keywords {
+    width: 80vw;
+    padding: 1rem 0;
+    margin: initial;
+    overflow-x: scroll;
+  }
+
+  .accordionStyle {
+    width: 100%;
+  }
+
+  .accordionParagraph {
+    text-align: left;
+    font-size: var(--text-size-b);
+  }
+}
+
+/* Tablets and small deskbanners */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  /* CSS rules for tablets and small deskbanners */
+}
+
+/* Medium deskbanners */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  /* CSS rules for medium deskbanners */
+}
+
+/* Large deskbanners and widescreen monitors */
+@media only screen and (min-width: 1200px) {
+  /* CSS rules for large deskbanners and widescreen monitors */
+}
 </style>
