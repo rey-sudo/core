@@ -11,18 +11,20 @@
       <span>ID: P9C3KC93CK</span>
     </div>
 
-    <div class="head-rating">
-      <span>{{ product.rating_count }}</span>
 
+    <div class="head-rating">
       <Rating
         :modelValue="product.rating_count"
         :stars="5"
         :readonly="true"
         :cancel="false"
-        style="margin: 0 1rem"
+        style="margin-right: 0.5rem"
       />
+      <span>{{ product.rating_count }}</span>
+
       <span>({{ product.review_count }} Reviews)</span>
     </div>
+
 
     <div class="head-gallery">
       <div class="head-gallery-image">
@@ -71,10 +73,14 @@
         <div class="ada-label">₳</div>
         3.258
       </div>
+
       <div class="head-collateral">
         <MeterGroup :value="collateralBar" />
       </div>
 
+      <div class="head-stock">
+        <span>10 available / 20 in stock</span>
+      </div>
     </div>
 
     <DescriptionView />
@@ -183,7 +189,7 @@ export default {
       lockingEndpoint,
       responsiveOptions,
       galleryImageIndex,
-      collateralBar
+      collateralBar,
     };
   },
   data() {
@@ -230,6 +236,14 @@ export default {
   display: none;
 }
 
+.head-stock {
+  font-size: var(--text-size-a);
+  font-weight: 400;
+  text-align: left;
+  margin-top: 1rem;
+  width: 100%;
+  color: var(--text-b);
+}
 
 .head-collateral {
   width: 100%;
@@ -309,11 +323,21 @@ export default {
 
 .head .head-rating {
   margin-right: 0.5rem;
-  font-size: var(--text-size-b);
-  color: var(--blue-a);
+  font-size: var(--text-size-c);
   align-items: center;
   margin-top: 1rem;
   display: flex;
+}
+
+.head .head-rating span {
+  margin-right: 0.25rem;
+  font-size: var(--text-size-b);
+  color: var(--text-b);
+  font-weight: 600;
+}
+
+.head .head-rating span:nth-child(3) {
+  font-weight: 400;
 }
 
 .head .head-price {
@@ -324,7 +348,6 @@ export default {
   display: flex;
   align-items: baseline;
   width: 100%;
-
 }
 
 .head .head-price .ada-label {
