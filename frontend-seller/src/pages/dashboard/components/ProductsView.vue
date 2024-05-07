@@ -138,6 +138,7 @@
         </label>
         <InputText
           id="name"
+          placeholder="Name"
           v-model="product.name"
           required="true"
           autofocus
@@ -197,8 +198,8 @@
             v-model="product.category"
             :options="categories"
             id="category"
+            placeholder="Select One"
             optionLabel="name"
-            placeholder=""
             :class="{ invalid: invalidProductCategory }"
             :highlightOnSelect="false"
           />
@@ -220,6 +221,7 @@
             v-model="product.price"
             showButtons
             integeronly
+            placeholder="Price in ADA"
             suffix=" ADA"
             locale="en-US"
             :min="1"
@@ -235,7 +237,7 @@
             <span>Collateral</span>
             <i
               class="pi pi-info-circle"
-              v-tooltip.top="'Assign an ADA amount as a guarantee.'"
+              v-tooltip.top="'Assign an ADA amount as your compliance guarantee.'"
             />
           </label>
           <InputNumber
@@ -243,6 +245,7 @@
             v-model="product.collateral"
             showButtons
             integeronly
+            placeholder="Collateral in ADA"
             suffix=" ADA"
             locale="en-US"
             :min="1"
@@ -252,6 +255,7 @@
             >The collateral is required.
           </small>
         </div>
+
         <div class="field col">
           <label for="quantity" class="field-label">
             <span>Stock</span>
@@ -262,6 +266,7 @@
           </label>
           <InputNumber
             id="quantity"
+            placeholder="Current Stock"
             v-model="product.stock"
             integeronly
             :min="0"
@@ -710,7 +715,7 @@ export default {
     },
     formatCurrency(value) {
       if (value) {
-        return  value + " ADA";
+        return value + " ADA";
       }
     },
     newProduct() {
