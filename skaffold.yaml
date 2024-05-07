@@ -22,6 +22,14 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .  
+    - image: pairfy/frontend-seller
+      context: frontend-seller
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .              
     - image: pairfy/service-seller
       context: service-seller
       docker:

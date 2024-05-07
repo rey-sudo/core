@@ -1,5 +1,7 @@
 CREATE DATABASE service_gate;
 
+use service_gate;
+
 create table if not exists slots(
   id varchar(20) not null,
   mode varchar(20) not null,

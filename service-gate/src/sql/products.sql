@@ -1,4 +1,4 @@
-CREATE DATABASE service_gate;
+use service_gate;
 
 create table if not exists products(
   id varchar(20) not null,
@@ -23,3 +23,4 @@ create table if not exists products(
   schema_v int unsigned not null,
   primary key(id)
 ) ENGINE=InnoDB;
+

@@ -1,5 +1,6 @@
 CREATE DATABASE service_media;
 
+use service_media;
 
 create table if not exists media(
   media_id varchar(20) not null,
