@@ -183,9 +183,9 @@ export default {
     const images = ref([
       {
         itemImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6501/6501938_rd.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6557/6557718_sd.jpg",
         thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6501/6501938_rd.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6557/6557718_sd.jpg",
         alt: "Description for Image 1",
         title: "Title 1",
       },
