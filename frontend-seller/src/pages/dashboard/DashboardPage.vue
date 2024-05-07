@@ -13,7 +13,7 @@
         @click="selectTab(item.name)"
       >
         <i :class="item.icon" />
-        <span>{{ item.label }}</span>
+        <span>{{ item.text }}</span>
       </div>
 
       <div class="dashboard-nav-item" @click="getPubKeyHash">
@@ -97,33 +97,33 @@ export default {
   },
   data() {
     return {
-      selectedNav: "slots",
+      selectedNav: "products",  
       lucidClient: null,
       navTabs: [
         {
           name: "home",
-          label: "Home",
+          text: "Home",
           icon: "pi pi-home",
           index: 0,
           path: "",
         },
         {
           name: "products",
-          label: "Products",
+          text: "Products",
           icon: "pi pi-table",
           index: 1,
           path: "",
         },
         {
           name: "slots",
-          label: "Slots",
+          text: "Slots",
           icon: "pi pi-folder",
           index: 1,
           path: "",
         },
         {
           name: "configuration",
-          label: "Configuration",
+          text: "Configuration",
           icon: "pi pi-cog",
           index: 1,
           path: "",
@@ -144,9 +144,9 @@ export default {
   },
 
   async mounted() {
-    const api = await window.cardano.nami.enable();
+  //  const api = await window.cardano.nami.enable();
 
-    this.getLucid.selectWallet(api);
+   // this.getLucid.selectWallet(api);
   },
 };
 </script>

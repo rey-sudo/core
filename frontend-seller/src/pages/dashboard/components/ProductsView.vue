@@ -74,8 +74,8 @@
 
     <Dialog
       v-model:visible="productDialog"
-      :style="{ width: '425px' }"
-      header="Product"
+      :style="{ width: '450px' }"
+      header="Product details"
       :modal="true"
       :draggable="false"
       class="p-fluid"
@@ -109,7 +109,7 @@
           <span>Thumbnail</span>
           <i class="pi pi-info-circle" v-tooltip.top="'First image.'" />
         </label>
-        
+
         <div id="mainImage" class="product-image-main">
           <div
             v-for="item in getImages(product)"
@@ -220,7 +220,7 @@
             v-model="product.price"
             showButtons
             integeronly
-            prefix="ADA "
+            suffix=" ADA"
             locale="en-US"
             :min="1"
             :class="{ invalid: invalidProductPrice }"
@@ -243,7 +243,7 @@
             v-model="product.collateral"
             showButtons
             integeronly
-            prefix="ADA "
+            suffix=" ADA"
             locale="en-US"
             :min="1"
             :class="{ invalid: invalidProductCollateral }"
@@ -280,7 +280,7 @@
             :allowDuplicate="false"
             separator=","
             :max="3"
-            placeholder="Separate with , or  ↵"
+            placeholder="Separate with (,) or  ↵"
             :class="{ invalid: invalidProductKeywords }"
           />
           <small class="p-error" v-if="invalidProductKeywords"
@@ -709,7 +709,9 @@ export default {
       }
     },
     formatCurrency(value) {
-      if (value) return value + " ADA";
+      if (value) {
+        return  value + " ADA";
+      }
     },
     newProduct() {
       this.resetForm();
@@ -1173,7 +1175,7 @@ img {
 .field-label {
   line-height: 40px;
   color: var(--text-a);
-  font-weight: 600;
+  font-weight: 500;
   display: flex;
   align-items: center;
 }
