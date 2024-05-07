@@ -3,6 +3,7 @@ import multer from "multer";
 const storage = multer.memoryStorage();
 
 const uploadMiddleware = multer({
+  limits: { fileSize: 10 * 1024 * 1024 },
   storage: storage,
   fileFilter: function (req, file, callback) {
   

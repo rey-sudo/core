@@ -1993,7 +1993,7 @@
     color: var(--blue-c);
     background: var(--base-a);
     border: 1px solid var(--blue-c);
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1rem;
     font-size: 1rem;
     transition: 0.1s cubic-bezier(0.08, 0.52, 0.52, 1);
     border-radius: 4px;

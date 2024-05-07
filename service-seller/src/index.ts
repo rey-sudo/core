@@ -38,7 +38,7 @@ const main = async () => {
       password: "password",
       database: "service_seller",
     });
-/*
+    /*
     const { Kafka } = require("kafkajs");
 
     const kafka = new Kafka({
@@ -108,6 +108,10 @@ const main = async () => {
 
       route.logoutHandler
     );
+
+    app.get("/api/seller/healthcheck", (req, res) => {
+      res.status(200).send('Test OK');
+    });
 
     app.all("*", (_req, _res) => {
       throw new NotFoundError();

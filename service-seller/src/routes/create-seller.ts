@@ -12,11 +12,15 @@ const createSellerHandler = async (req: Request, res: Response) => {
   let connection = null;
 
   const params = req.body;
+  
+  console.log("1");
 
   try {
     connection = await DB.client.getConnection();
 
     await connection.beginTransaction();
+
+    console.log("2");
 
     const token = createToken({
       role: "create-seller",
@@ -62,7 +66,7 @@ const createSellerHandler = async (req: Request, res: Response) => {
 
     await connection.commit();
 
-    res.status(200).send({ success: true, message:  "Successfully registered" });
+    res.status(200).send({ success: true, message: "Successfully registered" });
   } catch (err) {
     await connection.rollback();
 

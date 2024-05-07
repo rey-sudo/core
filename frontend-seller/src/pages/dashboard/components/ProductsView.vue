@@ -198,7 +198,7 @@
             v-model="product.category"
             :options="categories"
             id="category"
-            placeholder="Select One"
+            placeholder="Select"
             optionLabel="name"
             :class="{ invalid: invalidProductCategory }"
             :highlightOnSelect="false"
@@ -221,7 +221,7 @@
             v-model="product.price"
             showButtons
             integeronly
-            placeholder="Price in ADA"
+            placeholder="Select"
             suffix=" ADA"
             locale="en-US"
             :min="1"
@@ -237,7 +237,9 @@
             <span>Collateral</span>
             <i
               class="pi pi-info-circle"
-              v-tooltip.top="'Assign an ADA amount as your compliance guarantee.'"
+              v-tooltip.top="
+                'Assign an ADA amount as your compliance guarantee.'
+              "
             />
           </label>
           <InputNumber
@@ -245,7 +247,7 @@
             v-model="product.collateral"
             showButtons
             integeronly
-            placeholder="Collateral in ADA"
+            placeholder="Select"
             suffix=" ADA"
             locale="en-US"
             :min="1"
@@ -294,6 +296,7 @@
         </div>
       </div>
 
+      <!--FILEUPLOAD-->
       <div class="field">
         <div class="product-upload">
           <label for="fileupload" class="field-label">
@@ -304,29 +307,151 @@
             />
           </label>
           <Toast />
+
           <FileUpload
-            id="fileupload"
             name="image"
-            :url="mediaHostURL"
-            @upload="onAdvancedUpload($event)"
-            @before-upload="onBeforeUpload($event)"
-            :multiple="true"
-            accept="image/*"
-            :fileLimit="5"
-            :maxFileSize="1000000"
-            :withCredentials="true"
+            :customUpload="true"
             :disabled="disableUpload"
+            :multiple="true"
+            :fileLimit="5"
+            accept="image/*"
+            :maxFileSize="1000000"
+            @select="onSelectedFiles"
           >
+            <template
+              #header="{ chooseCallback, uploadCallback, clearCallback, files }"
+            >
+              <div
+                class="flex flex-wrap justify-content-between align-items-center flex-1 gap-2"
+              >
+                <div class="flex gap-2">
+                  <Button
+                    @click="chooseCallback()"
+                    icon="pi pi-images"
+                    rounded
+                    outlined
+                  ></Button>
+                  <Button
+                    @click="uploadEvent(uploadCallback, files)"
+                    icon="pi pi-cloud-upload"
+                    rounded
+                    outlined
+                    severity="success"
+                    :disabled="!files || files.length === 0"
+                  ></Button>
+                  <Button
+                    @click="clearCallback()"
+                    icon="pi pi-times"
+                    rounded
+                    outlined
+                    severity="danger"
+                    :disabled="!files || files.length === 0"
+                  ></Button>
+                </div>
+                <ProgressBar
+                  :value="totalSizePercent"
+                  :showValue="false"
+                  :class="[
+                    'md:w-20rem h-1rem w-full md:ml-auto',
+                    { 'exceeded-progress-bar': totalSizePercent > 100 },
+                  ]"
+                  ><span class="white-space-nowrap"
+                    >{{ totalSize }}B / 1Mb</span
+                  ></ProgressBar
+                >
+              </div>
+            </template>
+            <template
+              #content="{
+                files,
+                uploadedFiles,
+                removeUploadedFileCallback,
+                removeFileCallback,
+              }"
+            >
+              <div v-if="files.length > 0">
+                <h5>Pending</h5>
+                <div class="flex flex-wrap p-0 sm:p-5 gap-5">
+                  <div
+                    v-for="(file, index) of files"
+                    :key="file.name + file.type + file.size"
+                    class="card m-0 px-6 flex flex-column border-1 surface-border align-items-center gap-3"
+                  >
+                    <div>
+                      <img
+                        role="presentation"
+                        :alt="file.name"
+                        :src="file.objectURL"
+                        width="100"
+                        height="50"
+                      />
+                    </div>
+                    <span class="font-semibold">{{ file.name }}</span>
+                    <div>{{ formatSize(file.size) }}</div>
+                    <Badge value="Pending" severity="warning" />
+                    <Button
+                      icon="pi pi-times"
+                      @click="
+                        onRemoveTemplatingFile(file, removeFileCallback, index)
+                      "
+                      outlined
+                      rounded
+                      severity="danger"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div v-if="uploadedFiles.length > 0">
+                <h5>Completed</h5>
+                <div class="flex flex-wrap p-0 sm:p-5 gap-5">
+                  <div
+                    v-for="(file, index) of uploadedFiles"
+                    :key="file.name + file.type + file.size"
+                    class="card m-0 px-6 flex flex-column border-1 surface-border align-items-center gap-3"
+                  >
+                    <div>
+                      <img
+                        role="presentation"
+                        :alt="file.name"
+                        :src="file.objectURL"
+                        width="100"
+                        height="50"
+                      />
+                    </div>
+                    <span class="font-semibold">{{ file.name }}</span>
+                    <div>{{ formatSize(file.size) }}</div>
+                    <Badge value="Completed" class="mt-3" severity="success" />
+                    <Button
+                      icon="pi pi-times"
+                      @click="removeUploadedFileCallback(index)"
+                      outlined
+                      rounded
+                      severity="danger"
+                    />
+                  </div>
+                </div>
+              </div>
+            </template>
             <template #empty>
-              <p>Drag and drop images to here to upload.</p>
+              <div
+                class="flex align-items-center justify-content-center flex-column"
+              >
+                <i
+                  class="pi pi-cloud-upload border-2 border-circle p-5 text-8xl text-400 border-400"
+                />
+                <p class="mt-4 mb-0">Drag and drop files to here to upload.</p>
+              </div>
             </template>
           </FileUpload>
+
           <small class="invalid" v-if="invalidProductImages">
             {{ product.image_set.length }} / {{ minProductImages }} images are
             required.
           </small>
         </div>
       </div>
+      <!--FILEUPLOAD-->
 
       <template #footer>
         <Button label="Cancel" icon="pi pi-times" text @click="hideDialog" />
@@ -533,10 +658,12 @@ import dashboardAPI from "@/pages/dashboard/api/index";
 import { FilterMatchMode } from "primevue/api";
 import { HOST } from "@/api/index";
 import { ref } from "vue";
+import { usePrimeVue } from "primevue/config";
+import { useToast } from "primevue/usetoast";
 
 export default {
   setup() {
-    const { getProductsData, createProduct } = dashboardAPI();
+    const { getProductsData, createProduct, createImages } = dashboardAPI();
 
     let product = ref({
       id: null,
@@ -616,7 +743,104 @@ export default {
       disableUpload.value = false;
     };
 
+    const totalSize = ref(0);
+    const totalSizePercent = ref(0);
+    const files = ref([]);
+
+    const onRemoveTemplatingFile = (file, removeFileCallback, index) => {
+      removeFileCallback(index);
+      totalSize.value -= parseInt(formatSize(file.size));
+      totalSizePercent.value = totalSize.value / 10;
+    };
+
+    const onClearTemplatingUpload = (clear) => {
+      clear();
+      totalSize.value = 0;
+      totalSizePercent.value = 0;
+    };
+
+    const onSelectedFiles = (event) => {
+      files.value = event.files;
+      files.value.forEach((file) => {
+        totalSize.value += parseInt(formatSize(file.size));
+      });
+    };
+
+    const maxProductImages = ref(5);
+
+    const uploadEvent = async (callback, files) => {
+      totalSizePercent.value = totalSize.value / 10;
+
+      if (files.length < maxProductImages.value) {
+        return toast.add({
+          severity: "error",
+          summary: "Try Again",
+          detail: "Select at least (5) images",
+          life: 10000,
+        });
+      }
+
+      if (files.length > maxProductImages.value) {
+        return toast.add({
+          severity: "error",
+          summary: "Try Again",
+          detail: "Select only (5) images",
+          life: 10000,
+        });
+      }
+
+      const formData = new FormData();
+
+      files.forEach((file, index) => {
+        console.log(index);
+
+        formData.append(`image`, file, file.name);
+      });
+
+      await createImages(formData).then((res) => {
+        const data = res.response;
+
+        if (data.success === true) {
+          product.value.image_set.push(...data.payload);
+          disableUpload.value = true;
+          callback();
+
+          toast.add({
+            severity: "info",
+            summary: "Success",
+            detail: "File Uploadedx",
+            life: 5000,
+          });
+        }
+      });
+    };
+
+    const formatSize = (bytes) => {
+      const k = 1024;
+      const dm = 3;
+      const sizes = $primevue.config.locale.fileSizeTypes;
+
+      if (bytes === 0) {
+        return `0 ${sizes[0]}`;
+      }
+
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      const formattedSize = parseFloat((bytes / Math.pow(k, i)).toFixed(dm));
+
+      return `${formattedSize} ${sizes[i]}`;
+    };
+
+    const $primevue = usePrimeVue();
+
+    const toast = useToast();
+
     return {
+      onRemoveTemplatingFile,
+      onClearTemplatingUpload,
+      onSelectedFiles,
+      usePrimeVue,
+      formatSize,
+      uploadEvent,
       product,
       disableUpload,
       resetForm,
@@ -625,6 +849,7 @@ export default {
       errorModal,
       getProductsData,
       createProduct,
+      createImages,
       invalidProductName,
       invalidProductDescription,
       invalidProductCategory,
@@ -645,7 +870,7 @@ export default {
       descriptionLengthLimit: 1000,
       nameLengthLimit: 200,
       minProductImages: 5,
-      maxProductImages: 5,
+
       selectedProducts: null,
       filters: {},
       categories: [
@@ -676,11 +901,6 @@ export default {
     this.products = this.getProductsData;
   },
   methods: {
-    onBeforeUpload() {
-      if (this.product.image_set.length < this.maxProductImages) {
-        this.disableUpload = false;
-      }
-    },
     handleMessage(type, message) {
       this.messageModalVisible = true;
 
@@ -695,22 +915,26 @@ export default {
     hideModals() {
       this.messageModalVisible = false;
     },
-    onAdvancedUpload(e) {
+    onSelectedFilesx(e) {
+      console.log(e.files.length);
+    },
+    onBeforeUpload() {},
+    onFileRemoved(e) {
+      console.log(e.files.length);
+
+      if (e.files.length < this.maxProductImages) {
+        this.disableUpload = false;
+      }
+    },
+    onUpload(e) {
       const response = JSON.parse(e.xhr.response);
 
       if (response.success === true) {
-        this.product.image_set.push(...response.payload);
-
-        if (this.product.image_set.length >= this.maxProductImages) {
+        if (this.product.image_set.length < this.maxProductImages) {
+          this.product.image_set.push(...response.payload);
+        } else {
           this.disableUpload = true;
         }
-
-        this.$toast.add({
-          severity: "info",
-          summary: "Success",
-          detail: this.product.image_set.length + " File Uploaded",
-          life: 3000,
-        });
       }
     },
     formatCurrency(value) {

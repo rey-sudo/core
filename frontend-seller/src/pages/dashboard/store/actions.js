@@ -1,4 +1,5 @@
 import axiosAPI from "@/api/axios-api";
+import { HOST } from "@/api";
 
 const createProduct = async (_, params) => {
   try {
@@ -9,6 +10,23 @@ const createProduct = async (_, params) => {
     return { ok: true, response: response.data };
   } catch (error) {
     throw { ok: false, response: error.response.data };
+  }
+};
+
+const createImages = async (_, params) => {
+  try {
+    const response = await fetch(HOST + "/api/media/create-image", {
+      method: "POST",
+      body: params,
+      credentials: "include",
+    });
+
+ 
+    //"Content-Type": "multipart/form-data"
+
+    return { ok: true, response: await response.json() };
+  } catch (error) {
+    throw { ok: false, response: error.response };
   }
 };
 
@@ -65,4 +83,12 @@ const getSlots = async ({ commit }, params) => {
   }
 };
 
-export { startEndpoint, setupLucid, createProduct, getProducts, createSlot, getSlots };
+export {
+  startEndpoint,
+  setupLucid,
+  createProduct,
+  createImages,
+  getProducts,
+  createSlot,
+  getSlots,
+};

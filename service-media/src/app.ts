@@ -38,7 +38,7 @@ app.use(getPublicAddress);
 
 app.use(urlencoded({ extended: true, parameterLimit: 15 }));
 
-app.use(json({ limit: 5000000 }));
+app.use(json({ limit: 10485760 }));
 
 app.use(cookieSession(sessionOptions));
 

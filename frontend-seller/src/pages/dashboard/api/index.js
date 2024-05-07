@@ -10,6 +10,9 @@ const dashboardAPI = () => {
   const createProduct = async (params) =>
     await store.dispatch("dashboard/createProduct", params);
 
+  const createImages = async (params) =>
+    await store.dispatch("dashboard/createImages", params);
+
   const createSlot = async (params) =>
     await store.dispatch("dashboard/createSlot", params);
 
@@ -38,6 +41,7 @@ const dashboardAPI = () => {
     getProducts,
     createSlot,
     setupLucid,
+    createImages,
     getSlots,
     sleep,
   };
