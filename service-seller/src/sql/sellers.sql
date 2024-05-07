@@ -1,5 +1,6 @@
 CREATE DATABASE service_seller;
 
+use service_seller;
 
 create table if not exists sellers(
   id varchar(20) not null,
