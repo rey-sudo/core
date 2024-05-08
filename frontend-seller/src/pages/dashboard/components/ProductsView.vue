@@ -136,7 +136,7 @@
             v-tooltip.top="'Declarative and descriptive name of the product.'"
           />
         </label>
-        {{ formValidator.value.name }}
+     
         <InputText
           id="name"
           placeholder="Name"
@@ -146,10 +146,9 @@
           :class="{ invalid: formValidator.value.name }"
         />
 
-        <small class="p-error" v-if="formValidator.value.name"
-          >The name is required and max {{ nameLengthLimit }} characters
-          long.</small
-        >
+        <small class="p-error" v-if="formValidator.value.name">{{
+          formValidatorText.value.name
+        }}</small>
       </div>
 
       <div class="field">
@@ -842,7 +841,24 @@ export default {
 
     const toast = useToast();
 
+    const nameLengthLimit = ref(200);
+
+    const formValidatorText = ref({
+      name:
+        "The name is required and max" +
+        nameLengthLimit.value +
+        "characters long.",
+      description: false,
+      category: false,
+      price: false,
+      collateral: false,
+      stock: false,
+      keywords: false,
+      images: false,
+    });
+
     return {
+      formValidatorText,
       onRemoveTemplatingFile,
       onClearTemplatingUpload,
       onSelectedFiles,
@@ -861,6 +877,7 @@ export default {
       createProduct,
       createImages,
       minProductImages,
+      nameLengthLimit,
     };
   },
   data() {
@@ -871,7 +888,6 @@ export default {
       deleteProductDialog: false,
       deleteProductsDialog: false,
       descriptionLengthLimit: 1000,
-      nameLengthLimit: 200,
       selectedProducts: null,
       filters: {},
       categories: [
