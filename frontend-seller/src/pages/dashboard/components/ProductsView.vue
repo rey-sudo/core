@@ -28,8 +28,8 @@
     >
       <div class="confirmation-content">
         <i class="pi pi-exclamation-triangle" style="font-size: 2rem" />
-        <span v-if="product"
-          >Are you sure you want to delete <b>{{ product.name }}</b
+        <span v-if="productData"
+          >Are you sure you want to delete <b>{{ productData.name }}</b
           >?</span
         >
       </div>
@@ -52,7 +52,7 @@
     >
       <div class="confirmation-content">
         <i class="pi pi-exclamation-triangle" style="font-size: 2rem" />
-        <span v-if="product"
+        <span v-if="productData"
           >Are you sure you want to delete the selected products?</span
         >
       </div>
@@ -81,8 +81,8 @@
       class="p-fluid"
     >
       <Carousel
-        v-if="product.image_base"
-        :value="getImages(product)"
+        v-if="productData.image_base"
+        :value="getImages(productData)"
         :numVisible="1"
         :numScroll="1"
         orientation="horizontal"
@@ -104,7 +104,7 @@
         </template>
       </Carousel>
 
-      <div v-if="product.image_base" class="field">
+      <div v-if="productData.image_base" class="field">
         <label for="mainImage" class="field-label">
           <span>Thumbnail</span>
           <i class="pi pi-info-circle" v-tooltip.top="'First image.'" />
@@ -112,7 +112,7 @@
 
         <div id="mainImage" class="product-image-main">
           <div
-            v-for="item in getImages(product)"
+            v-for="item in getImages(productData)"
             :key="item"
             :class="{ mainImage: isMainImage(item.id) }"
             @click="setMainImage(item.id)"
@@ -139,7 +139,7 @@
         <InputText
           id="name"
           placeholder="Name"
-          v-model="product.name"
+          v-model="productData.name"
           required="true"
           autofocus
           :class="{ invalid: invalidProductName }"
@@ -160,7 +160,7 @@
         </label>
         <Textarea
           id="description"
-          v-model="product.description"
+          v-model="productData.description"
           required="true"
           rows="3"
           cols="20"
@@ -170,11 +170,11 @@
         <small
           class="p-counter"
           :class="{
-            invalid: product.description.length > descriptionLengthLimit,
+            invalid: productData.description.length > descriptionLengthLimit,
           }"
           v-if="!invalidProductDescription"
         >
-          {{ product.description.length }} / {{ descriptionLengthLimit }}
+          {{ productData.description.length }} / {{ descriptionLengthLimit }}
         </small>
 
         <small class="p-error" v-if="invalidProductDescription"
@@ -195,7 +195,7 @@
             />
           </label>
           <Dropdown
-            v-model="product.category"
+            v-model="productData.category"
             :options="categories"
             id="category"
             placeholder="Select"
@@ -218,7 +218,7 @@
           </label>
           <InputNumber
             id="price"
-            v-model="product.price"
+            v-model="productData.price"
             showButtons
             integeronly
             placeholder="Select"
@@ -244,7 +244,7 @@
           </label>
           <InputNumber
             id="collateral"
-            v-model="product.collateral"
+            v-model="productData.collateral"
             showButtons
             integeronly
             placeholder="Select"
@@ -269,7 +269,7 @@
           <InputNumber
             id="quantity"
             placeholder="Current Stock"
-            v-model="product.stock"
+            v-model="productData.stock"
             integeronly
             :min="0"
             :class="{ invalid: invalidProductStock }"
@@ -283,7 +283,7 @@
           <label for="keywords" class="field-label">Keywords</label>
           <Chips
             id="keywords"
-            v-model="product.keywords"
+            v-model="productData.keywords"
             :allowDuplicate="false"
             separator=","
             :max="3"
@@ -446,7 +446,7 @@
           </FileUpload>
 
           <small class="invalid" v-if="invalidProductImages">
-            {{ product.image_set.length }} / {{ minProductImages }} images are
+            {{ productData.image_set.length }} / {{ minProductImages }} images are
             required.
           </small>
         </div>
@@ -665,7 +665,7 @@ export default {
   setup() {
     const { getProductsData, createProduct, createImages } = dashboardAPI();
 
-    let product = ref({
+    let productData = ref({
       id: null,
       seller_id: null,
       name: null,
@@ -704,7 +704,7 @@ export default {
     let disableUpload = ref(false);
 
     const resetForm = () => {
-      product.value = {
+      productData.value = {
         id: null,
         seller_id: null,
         name: null,
@@ -801,7 +801,7 @@ export default {
         const data = res.response;
 
         if (data.success === true) {
-          product.value.image_set.push(...data.payload);
+          productData.value.image_set.push(...data.payload);
           disableUpload.value = true;
           callback();
 
@@ -841,7 +841,7 @@ export default {
       usePrimeVue,
       formatSize,
       uploadEvent,
-      product,
+      productData,
       disableUpload,
       resetForm,
       messageModalVisible,
@@ -930,8 +930,8 @@ export default {
       const response = JSON.parse(e.xhr.response);
 
       if (response.success === true) {
-        if (this.product.image_set.length < this.maxProductImages) {
-          this.product.image_set.push(...response.payload);
+        if (this.productData.image_set.length < this.maxProductImages) {
+          this.productData.image_set.push(...response.payload);
         } else {
           this.disableUpload = true;
         }
@@ -951,27 +951,27 @@ export default {
     },
     async handleSubmit() {
       const productForm = [
-        (this.invalidProductName = !this.checkProductName(this.product.name)),
+        (this.invalidProductName = !this.checkProductName(this.productData.name)),
         (this.invalidProductDescription = !this.checkProductDescription(
-          this.product.description
+          this.productData.description
         )),
         (this.invalidProductCategory = !this.checkProductCategory(
-          this.product.category
+          this.productData.category
         )),
         (this.invalidProductPrice = !this.checkProductPrice(
-          this.product.price
+          this.productData.price
         )),
         (this.invalidProductCollateral = !this.checkProductCollateral(
-          this.product.collateral
+          this.productData.collateral
         )),
         (this.invalidProductStock = !this.checkProductStock(
-          this.product.stock
+          this.productData.stock
         )),
         (this.invalidProductKeywords = !this.checkProductKeywords(
-          this.product.keywords
+          this.productData.keywords
         )),
         (this.invalidProductImages = !this.checkProductImages(
-          this.product.image_set
+          this.productData.image_set
         )),
       ];
 
@@ -980,14 +980,14 @@ export default {
       }
 
       const params = {
-        name: this.product.name,
-        description: this.product.description,
-        category: this.product.category.code,
-        price: this.product.price,
-        collateral: this.product.collateral,
-        stock: this.product.stock,
-        keywords: this.product.keywords.join(","),
-        image_set: this.product.image_set.join(","),
+        name: this.productData.name,
+        description: this.productData.description,
+        category: this.productData.category.code,
+        price: this.productData.price,
+        collateral: this.productData.collateral,
+        stock: this.productData.stock,
+        keywords: this.productData.keywords.join(","),
+        image_set: this.productData.image_set.join(","),
       };
 
       await this.createProduct(params).then((res) => {
@@ -1054,7 +1054,7 @@ export default {
         return false;
       }
 
-      if (this.product.image_set.length < this.minProductImages) {
+      if (this.productData.image_set.length < this.minProductImages) {
         return false;
       }
 
@@ -1068,39 +1068,39 @@ export default {
         return "Published";
       }
     },
-    editProduct(product) {
-      product.keywords =
-        typeof product.keywords === "string"
-          ? product.keywords.split(",")
-          : product.keywords;
+    editProduct(productData) {
+      productData.keywords =
+        typeof productData.keywords === "string"
+          ? productData.keywords.split(",")
+          : productData.keywords;
 
-      product.image_set =
-        typeof product.image_set === "string"
-          ? product.image_set.split(",")
-          : product.image_set;
+      productData.image_set =
+        typeof productData.image_set === "string"
+          ? productData.image_set.split(",")
+          : productData.image_set;
 
-      let categoryCode = product.category;
+      let categoryCode = productData.category;
 
       let categoryName =
         categoryCode.charAt(0).toUpperCase() + categoryCode.slice(1);
 
-      product.category = {
+      productData.category = {
         name: categoryName,
         code: categoryCode,
       };
 
-      this.product = product;
+      this.productData = productData;
 
       this.productDialog = true;
     },
 
-    confirmDeleteProduct(product) {
-      this.product = product;
+    confirmDeleteProduct(productData) {
+      this.productData = productData;
       this.deleteProductDialog = true;
     },
 
     deleteProduct() {
-      this.products = this.products.filter((val) => val.id !== this.product.id);
+      this.products = this.products.filter((val) => val.id !== this.productData.id);
 
       this.deleteProductDialog = false;
 
@@ -1114,18 +1114,18 @@ export default {
       });
     },
     isMainImage(e) {
-      return this.product.image_main === e;
+      return this.productData.image_main === e;
     },
     setMainImage(e) {
-      this.product.image_main = e;
+      this.productData.image_main = e;
     },
-    getImages(product) {
-      const data = product.image_set;
+    getImages(productData) {
+      const data = productData.image_set;
 
       return data.map((imageId) => ({
-        main: product.image_main,
+        main: productData.image_main,
         id: imageId,
-        image: product.image_base + product.image_path + imageId,
+        image: productData.image_base + productData.image_path + imageId,
       }));
     },
     exportCSV() {
