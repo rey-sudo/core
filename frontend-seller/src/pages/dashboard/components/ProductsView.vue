@@ -136,7 +136,7 @@
             v-tooltip.top="'Declarative and descriptive name of the product.'"
           />
         </label>
-
+        {{ formValidator.value.name }}
         <InputText
           id="name"
           placeholder="Name"
@@ -145,7 +145,7 @@
           autofocus
           :class="{ invalid: formValidator.value.name }"
         />
-   
+
         <small class="p-error" v-if="formValidator.value.name"
           >The name is required and max {{ nameLengthLimit }} characters
           long.</small
@@ -853,6 +853,7 @@ export default {
       messageModalVisible,
       messageModal,
       errorModal,
+      totalSizePercent,
       formValidator,
       getProductsData,
       createProduct,
@@ -949,7 +950,7 @@ export default {
       this.productDialog = false;
     },
     async submitForm() {
-      this.formValidator = {
+      this.formValidator.value = {
         name: !this.validateName(this.productData.name),
         description: !this.validateDescription(this.productData.description),
         category: !this.validateCategory(this.productData.category),
@@ -962,7 +963,9 @@ export default {
 
       console.log(this.formValidator);
 
-      if (Object.values(this.formValidator).includes(true)) {
+      const formValues = Object.values(this.formValidator);
+
+      if (formValues.includes(true)) {
         return;
       }
 
