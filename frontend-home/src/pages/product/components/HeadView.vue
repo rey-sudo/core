@@ -398,7 +398,7 @@ export default {
 }
 
 .head-collateral {
-  width: 90%;
+  width: 50%;
   margin-top: 1rem;
 }
 
@@ -532,6 +532,7 @@ export default {
   align-items: center;
   margin-top: 1rem;
   display: flex;
+
 }
 
 .head .head-rating span {
