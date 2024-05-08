@@ -10605,7 +10605,7 @@
   .p-metergroup-label-text {
     font-size: var(--text-size-a);
     color: var(--text-b);
-    font-weight: 400;
+    font-weight: 200;
   }
   .p-metergroup .p-metergroup-meter {
     border: 0 none;
@@ -10634,7 +10634,7 @@
     flex-direction: column;
   }
   .p-metergroup.p-metergroup-horizontal .p-metergroup-meters {
-    height: 0.4rem;
+    height: 0.5rem;
   }
   .p-metergroup.p-metergroup-horizontal .p-metergroup-meter:first-of-type {
     border-top-left-radius: 0px;

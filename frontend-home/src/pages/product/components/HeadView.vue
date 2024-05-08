@@ -232,7 +232,7 @@ export default {
 
     const product = ref({
       rating_count: 4.8,
-      review_count: 80,
+      review_count: 558,
     });
 
     const seller = ref({
@@ -353,7 +353,7 @@ export default {
 }
 
 .meter .level-5.actived {
-  background: #39b54a;
+  background: var(--green-c);
 }
 
 .head-seller {
@@ -420,7 +420,7 @@ export default {
   flex-direction: column;
 }
 
-.head-body{
+.head-body {
   display: flex;
 }
 
@@ -435,7 +435,6 @@ export default {
   margin: 0 2px;
   width: 0;
 }
-
 
 .head .head-left {
   text-align: center;
@@ -514,7 +513,7 @@ export default {
   font-size: var(--text-size-g);
   font-weight: 700;
   text-align: left;
-  width: 100%;
+  width: 90%;
 }
 
 .head .head-legend {
@@ -538,12 +537,13 @@ export default {
 .head .head-rating span {
   margin-right: 0.25rem;
   font-size: var(--text-size-b);
-  color: var(--text-b);
+  color: var(--blue-a);
   font-weight: 600;
 }
 
 .head .head-rating span:nth-child(3) {
   font-weight: 400;
+  font-size: var(--text-size-a);
 }
 
 .head .head-price {

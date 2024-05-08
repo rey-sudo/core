@@ -136,7 +136,7 @@
             v-tooltip.top="'Declarative and descriptive name of the product.'"
           />
         </label>
-     
+
         <InputText
           id="name"
           placeholder="Name"
@@ -146,9 +146,9 @@
           :class="{ invalid: formValidator.value.name }"
         />
 
-        <small class="p-error" v-if="formValidator.value.name">{{
-          formValidatorText.value.name
-        }}</small>
+        <small class="p-error" v-if="formValidator.value.name">
+          {{ formValidatorText.name }}
+        </small>
       </div>
 
       <div class="field">
@@ -162,6 +162,7 @@
         <Textarea
           id="description"
           v-model="productData.description"
+          placeholder="..."
           required="true"
           rows="3"
           cols="20"
@@ -222,7 +223,7 @@
             v-model="productData.price"
             showButtons
             integeronly
-            placeholder="Select"
+            placeholder="ADA"
             suffix=" ADA"
             locale="en-US"
             :min="1"
@@ -248,7 +249,7 @@
             v-model="productData.collateral"
             showButtons
             integeronly
-            placeholder="Select"
+            placeholder="ADA"
             suffix=" ADA"
             locale="en-US"
             :min="1"
@@ -845,9 +846,9 @@ export default {
 
     const formValidatorText = ref({
       name:
-        "The name is required and max" +
+        "The name is required and max " +
         nameLengthLimit.value +
-        "characters long.",
+        " characters long.",
       description: false,
       category: false,
       price: false,
