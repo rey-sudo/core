@@ -162,7 +162,7 @@
         <Textarea
           id="description"
           v-model="productData.description"
-          placeholder="..."
+          placeholder=""
           required="true"
           rows="3"
           cols="20"
@@ -172,16 +172,15 @@
         <small
           class="p-counter"
           :class="{
-            invalid: productData.description.length > descriptionLengthLimit,
+            invalid: productData.description.length > descriptionLimit,
           }"
           v-if="!formValidator.value.description"
         >
-          {{ productData.description.length }} / {{ descriptionLengthLimit }}
+          {{ productData.description.length }} / {{ descriptionLimit }}
         </small>
 
         <small class="p-error" v-if="formValidator.value.description"
-          >The description is required and
-          {{ descriptionLengthLimit }} characters long.
+          >{{ formValidatorText.description }}
         </small>
       </div>
 
@@ -206,7 +205,7 @@
             :highlightOnSelect="false"
           />
           <small class="p-error" v-if="formValidator.value.category"
-            >The category is required.
+            >{{ formValidatorText.category }}
           </small>
         </div>
 
@@ -229,9 +228,9 @@
             :min="1"
             :class="{ invalid: formValidator.value.price }"
           />
-          <small class="p-error" v-if="formValidator.value.price"
-            >The price is required.</small
-          >
+          <small class="p-error" v-if="formValidator.value.price">{{
+            formValidatorText.price
+          }}</small>
         </div>
 
         <div class="field col">
@@ -256,7 +255,7 @@
             :class="{ invalid: formValidator.value.collateral }"
           />
           <small class="p-error" v-if="formValidator.value.collateral"
-            >The collateral is required.
+            >{{ formValidatorText.collateral }}
           </small>
         </div>
 
@@ -270,15 +269,16 @@
           </label>
           <InputNumber
             id="quantity"
-            placeholder="Current Stock"
+            placeholder="Stock"
             v-model="productData.stock"
             integeronly
             :min="0"
+            :max="1000000"
             :class="{ invalid: formValidator.value.stock }"
           />
 
           <small class="p-error" v-if="formValidator.value.stock"
-            >The stock is required.
+            >{{ formValidatorText.stock }}
           </small>
         </div>
         <div class="field col">
@@ -292,8 +292,8 @@
             placeholder="Separate with (,) or  ↵"
             :class="{ invalid: formValidator.value.keywords }"
           />
-          <small class="p-error" v-if="formValidator.value.keywords"
-            >3 keywords are required.
+          <small class="p-error" v-if="formValidator.value.keywords">
+            {{ formValidatorText.keywords }}
           </small>
         </div>
       </div>
@@ -448,8 +448,7 @@
           </FileUpload>
 
           <small class="invalid" v-if="formValidator.value.images">
-            {{ productData.image_set.length }} / {{ minProductImages }} images
-            are required.
+            {{ formValidatorText.images }}
           </small>
         </div>
       </div>
@@ -842,23 +841,32 @@ export default {
 
     const toast = useToast();
 
-    const nameLengthLimit = ref(200);
+    const nameLimit = ref(200);
+
+    const descriptionLimit = ref(200);
 
     const formValidatorText = ref({
       name:
-        "The name is required and max " +
-        nameLengthLimit.value +
+        "The name is required and max " + nameLimit.value + " characters long.",
+      description:
+        "The description is required and " +
+        descriptionLimit.value +
         " characters long.",
-      description: false,
-      category: false,
-      price: false,
-      collateral: false,
-      stock: false,
-      keywords: false,
-      images: false,
+
+      category: "The category is required.",
+      price: "The price is required.",
+      collateral: "The collateral is required.",
+      stock: "The current stock is required.",
+      keywords: "3 keywords are required.",
+      images:
+        productData.value.image_set.length +
+        " / " +
+        minProductImages.value +
+        "images are required.",
     });
 
     return {
+      descriptionLimit,
       formValidatorText,
       onRemoveTemplatingFile,
       onClearTemplatingUpload,
@@ -878,7 +886,7 @@ export default {
       createProduct,
       createImages,
       minProductImages,
-      nameLengthLimit,
+      nameLimit,
     };
   },
   data() {
@@ -888,7 +896,6 @@ export default {
       productDialog: false,
       deleteProductDialog: false,
       deleteProductsDialog: false,
-      descriptionLengthLimit: 1000,
       selectedProducts: null,
       filters: {},
       categories: [
@@ -1116,14 +1123,14 @@ export default {
     validateName(value) {
       if (!value) return false;
 
-      if (value.length > this.nameLengthLimit) return false;
+      if (value.length > this.nameLimit) return false;
 
       return true;
     },
     validateDescription(value) {
       if (!value) return false;
 
-      if (value.length > this.descriptionLengthLimit) return false;
+      if (value.length > this.descriptionLimit) return false;
 
       return true;
     },
