@@ -136,15 +136,17 @@
             v-tooltip.top="'Declarative and descriptive name of the product.'"
           />
         </label>
+
         <InputText
           id="name"
           placeholder="Name"
           v-model="productData.name"
           required="true"
           autofocus
-          :class="{ invalid: invalidProductName }"
+          :class="{ invalid: formValidator.value.name }"
         />
-        <small class="p-error" v-if="invalidProductName"
+   
+        <small class="p-error" v-if="formValidator.value.name"
           >The name is required and max {{ nameLengthLimit }} characters
           long.</small
         >
@@ -165,19 +167,19 @@
           rows="3"
           cols="20"
           autoResize
-          :class="{ invalid: invalidProductDescription }"
+          :class="{ invalid: formValidator.value.description }"
         />
         <small
           class="p-counter"
           :class="{
             invalid: productData.description.length > descriptionLengthLimit,
           }"
-          v-if="!invalidProductDescription"
+          v-if="!formValidator.value.description"
         >
           {{ productData.description.length }} / {{ descriptionLengthLimit }}
         </small>
 
-        <small class="p-error" v-if="invalidProductDescription"
+        <small class="p-error" v-if="formValidator.value.description"
           >The description is required and
           {{ descriptionLengthLimit }} characters long.
         </small>
@@ -200,10 +202,10 @@
             id="category"
             placeholder="Select"
             optionLabel="name"
-            :class="{ invalid: invalidProductCategory }"
+            :class="{ invalid: formValidator.value.category }"
             :highlightOnSelect="false"
           />
-          <small class="p-error" v-if="invalidProductCategory"
+          <small class="p-error" v-if="formValidator.value.category"
             >The category is required.
           </small>
         </div>
@@ -225,9 +227,9 @@
             suffix=" ADA"
             locale="en-US"
             :min="1"
-            :class="{ invalid: invalidProductPrice }"
+            :class="{ invalid: formValidator.value.price }"
           />
-          <small class="p-error" v-if="invalidProductPrice"
+          <small class="p-error" v-if="formValidator.value.price"
             >The price is required.</small
           >
         </div>
@@ -251,9 +253,9 @@
             suffix=" ADA"
             locale="en-US"
             :min="1"
-            :class="{ invalid: invalidProductCollateral }"
+            :class="{ invalid: formValidator.value.collateral }"
           />
-          <small class="p-error" v-if="invalidProductCollateral"
+          <small class="p-error" v-if="formValidator.value.collateral"
             >The collateral is required.
           </small>
         </div>
@@ -272,10 +274,10 @@
             v-model="productData.stock"
             integeronly
             :min="0"
-            :class="{ invalid: invalidProductStock }"
+            :class="{ invalid: formValidator.value.stock }"
           />
 
-          <small class="p-error" v-if="invalidProductStock"
+          <small class="p-error" v-if="formValidator.value.stock"
             >The stock is required.
           </small>
         </div>
@@ -288,9 +290,9 @@
             separator=","
             :max="3"
             placeholder="Separate with (,) or  ↵"
-            :class="{ invalid: invalidProductKeywords }"
+            :class="{ invalid: formValidator.value.keywords }"
           />
-          <small class="p-error" v-if="invalidProductKeywords"
+          <small class="p-error" v-if="formValidator.value.keywords"
             >3 keywords are required.
           </small>
         </div>
@@ -445,9 +447,9 @@
             </template>
           </FileUpload>
 
-          <small class="invalid" v-if="invalidProductImages">
-            {{ productData.image_set.length }} / {{ minProductImages }} images are
-            required.
+          <small class="invalid" v-if="formValidator.value.images">
+            {{ productData.image_set.length }} / {{ minProductImages }} images
+            are required.
           </small>
         </div>
       </div>
@@ -455,7 +457,7 @@
 
       <template #footer>
         <Button label="Cancel" icon="pi pi-times" text @click="hideDialog" />
-        <Button label="Save" icon="pi pi-check" text @click="handleSubmit" />
+        <Button label="Save" icon="pi pi-check" text @click="submitForm" />
       </template>
     </Dialog>
     <!--DIALOG SECTION-->
@@ -689,14 +691,16 @@ export default {
       schema_v: null,
     });
 
-    let invalidProductName = ref(false);
-    let invalidProductDescription = ref(false);
-    let invalidProductCategory = ref(false);
-    let invalidProductPrice = ref(false);
-    let invalidProductCollateral = ref(false);
-    let invalidProductStock = ref(false);
-    let invalidProductKeywords = ref(false);
-    let invalidProductImages = ref(false);
+    let formValidator = ref({
+      name: false,
+      description: false,
+      category: false,
+      price: false,
+      collateral: false,
+      stock: false,
+      keywords: false,
+      images: false,
+    });
 
     let messageModalVisible = ref(false);
     let messageModal = ref(null);
@@ -728,14 +732,16 @@ export default {
         schema_v: null,
       };
 
-      invalidProductName.value = false;
-      invalidProductDescription.value = false;
-      invalidProductCategory.value = false;
-      invalidProductPrice.value = false;
-      invalidProductCollateral.value = false;
-      invalidProductStock.value = false;
-      invalidProductKeywords.value = false;
-      invalidProductImages.value = false;
+      formValidator.value = ref({
+        name: false,
+        description: false,
+        category: false,
+        price: false,
+        collateral: false,
+        stock: false,
+        keywords: false,
+        images: false,
+      });
 
       messageModalVisible.value = false;
       messageModal.value = null;
@@ -847,17 +853,10 @@ export default {
       messageModalVisible,
       messageModal,
       errorModal,
+      formValidator,
       getProductsData,
       createProduct,
       createImages,
-      invalidProductName,
-      invalidProductDescription,
-      invalidProductCategory,
-      invalidProductPrice,
-      invalidProductCollateral,
-      invalidProductStock,
-      invalidProductKeywords,
-      invalidProductImages,
     };
   },
   data() {
@@ -949,33 +948,21 @@ export default {
     hideDialog() {
       this.productDialog = false;
     },
-    async handleSubmit() {
-      const productForm = [
-        (this.invalidProductName = !this.checkProductName(this.productData.name)),
-        (this.invalidProductDescription = !this.checkProductDescription(
-          this.productData.description
-        )),
-        (this.invalidProductCategory = !this.checkProductCategory(
-          this.productData.category
-        )),
-        (this.invalidProductPrice = !this.checkProductPrice(
-          this.productData.price
-        )),
-        (this.invalidProductCollateral = !this.checkProductCollateral(
-          this.productData.collateral
-        )),
-        (this.invalidProductStock = !this.checkProductStock(
-          this.productData.stock
-        )),
-        (this.invalidProductKeywords = !this.checkProductKeywords(
-          this.productData.keywords
-        )),
-        (this.invalidProductImages = !this.checkProductImages(
-          this.productData.image_set
-        )),
-      ];
+    async submitForm() {
+      this.formValidator = {
+        name: !this.validateName(this.productData.name),
+        description: !this.validateDescription(this.productData.description),
+        category: !this.validateCategory(this.productData.category),
+        price: !this.validatePrice(this.productData.price),
+        collateral: !this.validateCollateral(this.productData.collateral),
+        stock: !this.validateStock(this.productData.stock),
+        keywords: !this.validateKeywords(this.productData.keywords),
+        images: !this.validateImages(this.productData.image_set),
+      };
 
-      if (productForm.includes(true)) {
+      console.log(this.formValidator);
+
+      if (Object.values(this.formValidator).includes(true)) {
         return;
       }
 
@@ -1004,52 +991,52 @@ export default {
         }
       });
     },
-    checkProductName(value) {
+    validateName(value) {
       if (!value) return false;
 
       if (value.length > this.nameLengthLimit) return false;
 
       return true;
     },
-    checkProductDescription(value) {
+    validateDescription(value) {
       if (!value) return false;
 
       if (value.length > this.descriptionLengthLimit) return false;
 
       return true;
     },
-    checkProductCategory(value) {
+    validateCategory(value) {
       return !value ? false : true;
     },
-    checkProductPrice(value) {
+    validatePrice(value) {
       if (typeof value !== "number") {
         return false;
       }
 
       return Number.isInteger(value) && value > 0;
     },
-    checkProductCollateral(value) {
+    validateCollateral(value) {
       if (typeof value !== "number") {
         return false;
       }
 
       return Number.isInteger(value) && value > 0;
     },
-    checkProductStock(value) {
+    validateStock(value) {
       if (typeof value !== "number") {
         return false;
       }
 
       return Number.isInteger(value) && value >= 0;
     },
-    checkProductKeywords(value) {
+    validateKeywords(value) {
       if (!value || value.length < 3) {
         return false;
       }
 
       return true;
     },
-    checkProductImages(value) {
+    validateImages(value) {
       if (!value.length) {
         return false;
       }
@@ -1100,7 +1087,9 @@ export default {
     },
 
     deleteProduct() {
-      this.products = this.products.filter((val) => val.id !== this.productData.id);
+      this.products = this.products.filter(
+        (val) => val.id !== this.productData.id
+      );
 
       this.deleteProductDialog = false;
 
