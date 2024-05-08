@@ -774,6 +774,8 @@ export default {
 
     const maxProductImages = ref(5);
 
+    const minProductImages = ref(5);
+
     const uploadEvent = async (callback, files) => {
       totalSizePercent.value = totalSize.value / 10;
 
@@ -858,6 +860,7 @@ export default {
       getProductsData,
       createProduct,
       createImages,
+      minProductImages,
     };
   },
   data() {
@@ -869,8 +872,6 @@ export default {
       deleteProductsDialog: false,
       descriptionLengthLimit: 1000,
       nameLengthLimit: 200,
-      minProductImages: 5,
-
       selectedProducts: null,
       filters: {},
       categories: [
@@ -963,9 +964,7 @@ export default {
 
       console.log(this.formValidator);
 
-      const formValues = Object.values(this.formValidator);
-
-      if (formValues.includes(true)) {
+      if (Object.values(this.formValidator).includes(true)) {
         return;
       }
 
@@ -994,70 +993,7 @@ export default {
         }
       });
     },
-    validateName(value) {
-      if (!value) return false;
 
-      if (value.length > this.nameLengthLimit) return false;
-
-      return true;
-    },
-    validateDescription(value) {
-      if (!value) return false;
-
-      if (value.length > this.descriptionLengthLimit) return false;
-
-      return true;
-    },
-    validateCategory(value) {
-      return !value ? false : true;
-    },
-    validatePrice(value) {
-      if (typeof value !== "number") {
-        return false;
-      }
-
-      return Number.isInteger(value) && value > 0;
-    },
-    validateCollateral(value) {
-      if (typeof value !== "number") {
-        return false;
-      }
-
-      return Number.isInteger(value) && value > 0;
-    },
-    validateStock(value) {
-      if (typeof value !== "number") {
-        return false;
-      }
-
-      return Number.isInteger(value) && value >= 0;
-    },
-    validateKeywords(value) {
-      if (!value || value.length < 3) {
-        return false;
-      }
-
-      return true;
-    },
-    validateImages(value) {
-      if (!value.length) {
-        return false;
-      }
-
-      if (this.productData.image_set.length < this.minProductImages) {
-        return false;
-      }
-
-      return true;
-    },
-    checkModerated(e) {
-      if (e === 0) {
-        return "Pending";
-      }
-      if (e === 1) {
-        return "Published";
-      }
-    },
     editProduct(productData) {
       productData.keywords =
         typeof productData.keywords === "string"
@@ -1157,6 +1093,71 @@ export default {
 
         default:
           return null;
+      }
+    },
+
+    validateName(value) {
+      if (!value) return false;
+
+      if (value.length > this.nameLengthLimit) return false;
+
+      return true;
+    },
+    validateDescription(value) {
+      if (!value) return false;
+
+      if (value.length > this.descriptionLengthLimit) return false;
+
+      return true;
+    },
+    validateCategory(value) {
+      return !value ? false : true;
+    },
+    validatePrice(value) {
+      if (typeof value !== "number") {
+        return false;
+      }
+
+      return Number.isInteger(value) && value > 0;
+    },
+    validateCollateral(value) {
+      if (typeof value !== "number") {
+        return false;
+      }
+
+      return Number.isInteger(value) && value > 0;
+    },
+    validateStock(value) {
+      if (typeof value !== "number") {
+        return false;
+      }
+
+      return Number.isInteger(value) && value >= 0;
+    },
+    validateKeywords(value) {
+      if (!value || value.length < 3) {
+        return false;
+      }
+
+      return true;
+    },
+    validateImages(value) {
+      if (!value.length) {
+        return false;
+      }
+
+      if (this.productData.image_set.length < this.minProductImages) {
+        return false;
+      }
+
+      return true;
+    },
+    checkModerated(e) {
+      if (e === 0) {
+        return "Pending";
+      }
+      if (e === 1) {
+        return "Published";
       }
     },
   },
