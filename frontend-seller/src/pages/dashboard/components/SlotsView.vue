@@ -351,7 +351,7 @@
 
     <!---CONTENT-->
     <div class="slots-wrap">
-      <div class="slots-b-card">
+      <div class="slots-card">
         <DataTable
           ref="productListTable"
           resizableColumns
@@ -367,14 +367,14 @@
         >
           <template #expansion> x </template>
           <template #header>
-            <div class="slots-b-card-h">
-              <div class="slots-b-card-h-l">
+            <div class="slots-header">
+              <div class="slots-header-left">
                 <span>Product slots</span>
                 <span @click="runTX">Create or modify slots and more...</span>
               </div>
 
-              <div class="slots-b-card-h-r">
-                <div class="slots-b-card-h-r-search">
+              <div class="slots-header-right">
+                <div class="slots-header-right-search">
                   <i class="pi pi-search" />
                   <InputText
                     v-model="filters['global'].value"
@@ -1581,7 +1581,7 @@ img {
   padding: 1rem 2rem;
 }
 
-.slots-b-card {
+.slots-card {
   width: inherit;
   border-radius: 18px;
   box-shadow: var(--shadow-a);
@@ -1622,7 +1622,7 @@ img {
   margin-top: 3px;
 }
 
-.slots-b-card-h {
+.slots-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1630,36 +1630,90 @@ img {
   padding: 0.5rem 0;
 }
 
-.slots-b-card-h-l {
+.slots-header-left {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 1rem 0;
 }
 
-.slots-b-card-h-l span:nth-child(1) {
+.slots-header-left span:nth-child(1) {
   font-weight: 700;
-  font-size: var(--text-size-g);
+  font-size: var(--text-size-f);
 }
 
-.slots-b-card-h-l span:nth-child(2) {
+.slots-header-left span:nth-child(2) {
   font-weight: 400;
   line-height: 2rem;
   font-size: var(--text-size-c);
 }
 
-.slots-b-card-h-r-search {
+.slots-header-right-search {
   display: flex;
   align-items: center;
   position: relative;
 }
 
-.slots-b-card-h-r-search i {
+.slots-header-right-search i {
   right: 0;
   position: absolute;
   margin-right: 1rem;
 }
+
 ::v-deep(.p-dropdown) {
   width: initial;
+}
+
+
+
+
+@media only screen and (max-width: 767px) {
+  .slots-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .slots-card {
+    padding: 0 1rem;
+  }
+
+  .slots-wrap{
+    padding: 1rem;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .slots-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .slots-card {
+    padding: 0 1rem;
+  }
+
+  .slots-wrap{
+    padding: 1rem;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .slots-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .slots-card {
+    padding: 0 1rem;
+  }
+
+  .slots-wrap{
+    padding: 1rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+
+
 }
 </style>
