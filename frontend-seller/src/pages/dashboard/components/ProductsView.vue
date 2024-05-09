@@ -841,15 +841,15 @@ export default {
 
     const nameLimit = ref(200);
 
-    const descriptionLimit = ref(200);
+    const descriptionLimit = ref(1000);
 
     const formValidatorText = ref({
       name:
         "The name is required and max " + nameLimit.value + " characters long.",
       description:
-        "The description is required and " +
+        "The description is required and no maximum " +
         descriptionLimit.value +
-        " characters long.",
+        " characters.",
 
       category: "The category is required.",
       price: "The price is required.",
