@@ -938,14 +938,14 @@ export default {
     },
     async submitForm() {
       this.formValidator.value = {
-        name: !this.validateName(this.productData.name),
-        description: !this.validateDescription(this.productData.description),
-        category: !this.validateCategory(this.productData.category),
-        price: !this.validatePrice(this.productData.price),
-        collateral: !this.validateCollateral(this.productData.collateral),
-        stock: !this.validateStock(this.productData.stock),
-        keywords: !this.validateKeywords(this.productData.keywords),
-        images: !this.validateImages(this.productData.image_set),
+        name: this.validateName(this.productData.name),
+        description: this.validateDescription(this.productData.description),
+        category: this.validateCategory(this.productData.category),
+        price: this.validatePrice(this.productData.price),
+        collateral: this.validateCollateral(this.productData.collateral),
+        stock: this.validateStock(this.productData.stock),
+        keywords: this.validateKeywords(this.productData.keywords),
+        images: this.validateImages(this.productData.image_set),
       };
 
       console.log(this.formValidator);
@@ -1082,61 +1082,105 @@ export default {
       }
     },
 
-    validateName(value) {
-      if (!value) return false;
-
-      if (value.length > this.nameLimit) return false;
-
-      return true;
-    },
-    validateDescription(value) {
-      if (!value) return false;
-
-      if (value.length > this.descriptionLimit) return false;
-
-      return true;
-    },
-    validateCategory(value) {
-      return !value ? false : true;
-    },
-    validatePrice(value) {
-      if (typeof value !== "number") {
-        return false;
+    validateName(e) {
+      if (!e) {
+        return true;
       }
 
-      return Number.isInteger(value) && value > 0;
+      if (e.length > this.nameLimit) {
+        return true;
+      }
+
+      return false;
     },
-    validateCollateral(value) {
-      if (typeof value !== "number") {
-        return false;
+    validateDescription(e) {
+      if (!e) {
+        return true;
       }
 
-      return Number.isInteger(value) && value > 0;
+      if (e.length < 1) {
+        return true;
+      }
+
+      if (e.length > this.descriptionLimit) {
+        return true;
+      }
+
+      return false;
     },
-    validateStock(value) {
-      if (typeof value !== "number") {
-        return false;
-      }
 
-      return Number.isInteger(value) && value >= 0;
+    validateCategory(e) {
+      return !e ? true : false;
     },
-    validateKeywords(value) {
-      if (!value || value.length < 3) {
-        return false;
+
+    validatePrice(e) {
+      if (typeof e !== "number") {
+        return true;
       }
 
-      return true;
+      if (!Number.isInteger(e)) {
+        return true;
+      }
+
+      if (e < 1) {
+        return true;
+      }
+
+      return false;
     },
-    validateImages(value) {
-      if (!value.length) {
-        return false;
+    validateCollateral(e) {
+      if (typeof e !== "number") {
+        return true;
       }
 
-      if (this.productData.image_set.length < this.minProductImages) {
-        return false;
+      if (!Number.isInteger(e)) {
+        return true;
       }
 
-      return true;
+      if (e < 1) {
+        return true;
+      }
+
+      return false;
+    },
+    validateStock(e) {
+      if (typeof e !== "number") {
+        return true;
+      }
+
+      if (!Number.isInteger(e)) {
+        return true;
+      }
+
+      if (e < 1) {
+        return true;
+      }
+
+      return false;
+    },
+    validateKeywords(e) {
+      if (!e) {
+        return true;
+      }
+
+      if (e.length < 3) {
+        return true;
+      }
+
+      return false;
+    },
+    validateImages(e) {
+      console.log(e, "a");
+
+      if (!e) {
+        return true;
+      }
+
+      if (e.length < this.minProductImages) {
+        return true;
+      }
+
+      return false;
     },
     checkModerated(e) {
       if (e === 0) {
