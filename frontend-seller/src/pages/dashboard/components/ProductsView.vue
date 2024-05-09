@@ -357,6 +357,10 @@
                 ></ProgressBar
               >
             </template>
+
+
+
+
             <template
               #content="{
                 files,
@@ -365,6 +369,7 @@
                 removeFileCallback,
               }"
             >
+          
               <div v-if="files.length > 0">
                 <div class="upload-list">
                   <div
@@ -440,6 +445,8 @@
                   </div>
                 </div>
               </div>
+
+
             </template>
             <template #empty>
               <div class="upload-banner">
