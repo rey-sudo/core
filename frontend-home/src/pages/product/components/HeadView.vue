@@ -476,7 +476,7 @@ export default {
 .head .head-gallery .head-gallery-boxes div {
   border: 1px solid var(--border-b);
   border-radius: 8px;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
   padding: 0.25rem;
   overflow: hidden;
   display: flex;

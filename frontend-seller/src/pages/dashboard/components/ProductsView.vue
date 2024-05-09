@@ -323,45 +323,39 @@
             <template
               #header="{ chooseCallback, uploadCallback, clearCallback, files }"
             >
-              <div
-                class="flex flex-wrap justify-content-between align-items-center flex-1 gap-2"
-              >
-                <div class="flex gap-2">
-                  <Button
-                    @click="chooseCallback()"
-                    icon="pi pi-images"
-                    rounded
-                    outlined
-                  ></Button>
-                  <Button
-                    @click="uploadEvent(uploadCallback, files)"
-                    icon="pi pi-cloud-upload"
-                    rounded
-                    outlined
-                    severity="success"
-                    :disabled="!files || files.length === 0"
-                  ></Button>
-                  <Button
-                    @click="clearCallback()"
-                    icon="pi pi-times"
-                    rounded
-                    outlined
-                    severity="danger"
-                    :disabled="!files || files.length === 0"
-                  ></Button>
+              <div class="upload-buttons">
+                <div class="upload-button" @click="chooseCallback()">
+                  <i class="pi pi pi-images" />
                 </div>
-                <ProgressBar
-                  :value="totalSizePercent"
-                  :showValue="false"
-                  :class="[
-                    'md:w-20rem h-1rem w-full md:ml-auto',
-                    { 'exceeded-progress-bar': totalSizePercent > 100 },
-                  ]"
-                  ><span class="white-space-nowrap"
-                    >{{ totalSize }}B / 1Mb</span
-                  ></ProgressBar
+
+                <div
+                  class="upload-button"
+                  :class="{ desactived: !files || files.length === 0 }"
+                  @click="uploadEvent(uploadCallback, files)"
                 >
+                  <i class="pi pi-cloud-upload" />
+                </div>
+
+                <div
+                  class="upload-button"
+                  :class="{ desactived: !files || files.length === 0 }"
+                  @click="clearCallback()"
+                >
+                  <i class="pi pi-times" />
+                </div>
               </div>
+
+              <ProgressBar
+                :value="totalSizePercent"
+                :showValue="false"
+                :class="[
+                  'md:w-20rem h-1rem w-full md:ml-auto',
+                  { 'exceeded-progress-bar': totalSizePercent > 100 },
+                ]"
+                ><span class="white-space-nowrap"
+                  >{{ totalSize }}B / 1Mb</span
+                ></ProgressBar
+              >
             </template>
             <template
               #content="{
@@ -372,7 +366,7 @@
               }"
             >
               <div v-if="files.length > 0">
-                <h5>Pending</h5>
+            
                 <div class="flex flex-wrap p-0 sm:p-5 gap-5">
                   <div
                     v-for="(file, index) of files"
@@ -1189,6 +1183,18 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.upload-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.upload-button {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  margin-right: 1rem;
+  border: 1px solid var(--border-a);
+}
+
 .product-image-main {
   display: flex;
   align-items: center;
