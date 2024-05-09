@@ -957,7 +957,7 @@
     margin-left: 0.5rem;
   }
   .p-chips .p-chips-multiple-container .p-chips-input-token {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
   }
   .p-chips .p-chips-multiple-container .p-chips-input-token input {
     font-size: var(--text-size-b) !important;

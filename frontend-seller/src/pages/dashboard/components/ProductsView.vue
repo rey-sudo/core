@@ -366,7 +366,7 @@
               }"
             >
               <div v-if="files.length > 0">
-                <div class="upload-pending">
+                <div class="upload-list">
                   <div
                     v-for="(file, index) of files"
                     :key="file.name + file.type + file.size"
@@ -407,32 +407,36 @@
               </div>
 
               <div v-if="uploadedFiles.length > 0">
-                <h5>Completed</h5>
-                <div class="flex flex-wrap p-0 sm:p-5 gap-5">
+                <div class="upload-list">
                   <div
                     v-for="(file, index) of uploadedFiles"
                     :key="file.name + file.type + file.size"
-                    class="card m-0 px-6 flex flex-column border-1 surface-border align-items-center gap-3"
+                    class="upload-box"
                   >
-                    <div>
-                      <img
-                        role="presentation"
-                        :alt="file.name"
-                        :src="file.objectURL"
-                        width="100"
-                        height="50"
-                      />
-                    </div>
-                    <span class="font-semibold">{{ file.name }}</span>
-                    <div>{{ formatSize(file.size) }}</div>
-                    <Badge value="Completed" class="mt-3" severity="success" />
-                    <Button
-                      icon="pi pi-times"
-                      @click="removeUploadedFileCallback(index)"
-                      outlined
-                      rounded
-                      severity="danger"
+                    <img
+                      role="presentation"
+                      :alt="file.name"
+                      :src="file.objectURL"
+                      width="100"
+                      height="50"
                     />
+
+                    <span class="filename">{{ file.name }}</span>
+
+                    <div class="filename">{{ formatSize(file.size) }}</div>
+
+                    <div class="upload-control">
+                      <div class="completed-badge">
+                        <span>Completed</span>
+                      </div>
+
+                      <div
+                        class="upload-remove"
+                        @click="removeUploadedFileCallback(index)"
+                      >
+                        Delete
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -453,8 +457,8 @@
       <!--FILEUPLOAD-->
 
       <template #footer>
-        <Button label="Cancel" icon="pi pi-times" text @click="hideDialog" />
-        <Button label="Save" icon="pi pi-check" text @click="submitForm" />
+        <Button label="Cancel" text @click="hideDialog" />
+        <Button label="Save" text @click="submitForm" />
       </template>
     </Dialog>
     <!--DIALOG SECTION-->
@@ -1187,7 +1191,23 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.upload-pending {
+
+.pending-badge, .completed-badge {
+  background: var(--yellow-b);
+  text-align: center;
+  border-radius: 999px;
+  font-size: var(--text-size-a);
+  padding: 0.25rem;
+  width: 100px;
+}
+
+
+.completed-badge{
+  background: var(--green-a);
+
+}
+
+.upload-list {
   display: flex;
   flex-direction: column;
 }
@@ -1202,14 +1222,6 @@ export default {
   flex-direction: column;
 }
 
-.pending-badge {
-  background: var(--yellow-b);
-  text-align: center;
-  border-radius: 999px;
-  font-size: var(--text-size-a);
-  padding: 0.25rem;
-  width: 100px;
-}
 
 .upload-control {
   display: flex;
