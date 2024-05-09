@@ -2002,15 +2002,15 @@
     font-size: var(--text-size-a);
   }
   .p-button:not(:disabled):hover {
-    background: var(--base-b);
-    color: #ffffff;
-    border-color: #1e88e5;
+    background: var(--blue-c);
+    color: var(--text-w);
   }
+  
   .p-button:not(:disabled):active {
-    background: var(--base-c);
-    color: #ffffff;
-    border-color: #1976d2;
+    background: var(--blue-c);
+    color: var(--text-w);
   }
+
   .p-button.p-button-outlined {
     background-color: transparent;
     color: var(--blue-c);
@@ -2033,10 +2033,12 @@
   .p-button.p-button-outlined.p-button-plain:not(:disabled):hover {
     background: #e9ecef;
     color: #6c757d;
+   
   }
   .p-button.p-button-outlined.p-button-plain:not(:disabled):active {
     background: #dee2e6;
     color: #6c757d;
+  
   }
   .p-button.p-button-text {
     background-color: transparent;
@@ -2047,11 +2049,13 @@
     background: rgba(33, 150, 243, 0.04);
     color: #2196f3;
     border-color: transparent;
+    
   }
   .p-button.p-button-text:not(:disabled):active {
     background: rgba(33, 150, 243, 0.16);
     color: #2196f3;
     border-color: transparent;
+    
   }
   .p-button.p-button-text.p-button-plain {
     color: #6c757d;
@@ -2059,15 +2063,18 @@
   .p-button.p-button-text.p-button-plain:not(:disabled):hover {
     background: #e9ecef;
     color: #6c757d;
+   
   }
   .p-button.p-button-text.p-button-plain:not(:disabled):active {
     background: #dee2e6;
     color: #6c757d;
+    
   }
   .p-button:focus-visible {
     outline: 0 none;
     outline-offset: 0;
     box-shadow: 0 0 0 0.2rem #bfd1f6;
+    
   }
   .p-button .p-button-label {
     transition-duration: 0.2s;
@@ -2603,8 +2610,9 @@
   }
   .p-button.p-button-link:not(:disabled):active {
     background: transparent;
-    color: #1976d2;
+    color: red;
     border-color: transparent;
+  
   }
   .p-speeddial-button.p-button.p-button-icon-only {
     width: 4rem;
