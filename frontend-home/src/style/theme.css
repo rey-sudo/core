@@ -2688,7 +2688,7 @@
   }
   .p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
     color: var(--yellow-b);
-    filter: drop-shadow(0px 0px 1px transparent);
+    filter: drop-shadow(0px 1px 0px rgba(0,0,0,0.2));
   }
   .p-rating:not(.p-disabled):not(.p-readonly)
     .p-rating-item:hover
