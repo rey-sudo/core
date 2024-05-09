@@ -459,7 +459,7 @@
                 <Button
                   label="Delete"
                   icon="pi pi-trash"
-                  style="margin: 0 1rem"
+                  style="margin-left: 1rem"
                   @click="confirmDeleteSelected"
                   :disabled="!selectedProducts || !selectedProducts.length"
                 />
@@ -1549,9 +1549,56 @@ img {
 .products-header-left span:nth-child(2) {
   font-weight: 400;
   font-size: var(--text-size-c);
+  text-align: left;
 }
 
 ::v-deep(.p-dropdown) {
   width: initial;
+}
+
+@media only screen and (max-width: 767px) {
+  .products-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .products-card {
+    padding: 0 1rem;
+  }
+
+  .products-wrap{
+    padding: 1rem;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .products-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+
+
+  .products-wrap{
+    padding: 1rem;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .products-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+
+
+  .products-wrap{
+    padding: 1rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+
+
 }
 </style>
