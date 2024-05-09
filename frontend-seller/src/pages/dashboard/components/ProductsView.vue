@@ -559,6 +559,20 @@
           </Column>
 
           <Column
+            field="stock_status"
+            header="Stock"
+            sortable
+            style="min-width: 8rem"
+          >
+            <template #body="slotProps">
+              <Tag
+                :value="slotProps.data.stock_status"
+                :severity="getStatusLabel(slotProps.data.stock_status)"
+              />
+            </template>
+          </Column>
+
+          <Column
             field="rating"
             header="Reviews"
             sortable
@@ -569,20 +583,6 @@
                 :modelValue="slotProps.data.rating"
                 :readonly="true"
                 :cancel="false"
-              />
-            </template>
-          </Column>
-
-          <Column
-            field="stock_status"
-            header="Stock"
-            sortable
-            style="min-width: 8rem"
-          >
-            <template #body="slotProps">
-              <Tag
-                :value="slotProps.data.stock_status"
-                :severity="getStatusLabel(slotProps.data.stock_status)"
               />
             </template>
           </Column>
@@ -979,8 +979,6 @@ export default {
     },
 
     editProduct(productData) {
-     
-
       productData.keywords =
         typeof productData.keywords === "string"
           ? productData.keywords.split(",")

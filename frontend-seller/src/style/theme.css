@@ -1713,7 +1713,7 @@
     border-color: #ffffff;
   }
   .p-rating {
-    gap: 0.5rem;
+    gap: 0.25rem;
   }
   .p-rating .p-rating-item {
     outline-color: transparent;

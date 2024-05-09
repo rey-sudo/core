@@ -55,7 +55,9 @@ spec:
               service:
                 name: service-media
                 port:
-                  number: 8000                   
+                  number: 8000        
+                  
+                             
     - host: dashboard.pairfy.dev
       http:
         paths:
