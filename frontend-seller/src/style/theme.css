@@ -1319,8 +1319,8 @@
   }
   .p-input-icon-right > svg:last-of-type,
   .p-input-icon-right > i:last-of-type {
-    right: 0.5rem;
-    color: #495057;
+    right: 1rem;
+    color: var(--text-a);
   }
   .p-input-icon-right > .p-inputtext {
     padding-right: 2rem;
@@ -2005,7 +2005,7 @@
     background: var(--blue-c);
     color: var(--text-w);
   }
-  
+
   .p-button:not(:disabled):active {
     background: var(--blue-c);
     color: var(--text-w);
@@ -2033,12 +2033,10 @@
   .p-button.p-button-outlined.p-button-plain:not(:disabled):hover {
     background: #e9ecef;
     color: #6c757d;
-   
   }
   .p-button.p-button-outlined.p-button-plain:not(:disabled):active {
     background: #dee2e6;
     color: #6c757d;
-  
   }
   .p-button.p-button-text {
     background-color: transparent;
@@ -2049,13 +2047,11 @@
     background: rgba(33, 150, 243, 0.04);
     color: #2196f3;
     border-color: transparent;
-    
   }
   .p-button.p-button-text:not(:disabled):active {
     background: rgba(33, 150, 243, 0.16);
     color: #2196f3;
     border-color: transparent;
-    
   }
   .p-button.p-button-text.p-button-plain {
     color: #6c757d;
@@ -2063,18 +2059,15 @@
   .p-button.p-button-text.p-button-plain:not(:disabled):hover {
     background: #e9ecef;
     color: #6c757d;
-   
   }
   .p-button.p-button-text.p-button-plain:not(:disabled):active {
     background: #dee2e6;
     color: #6c757d;
-    
   }
   .p-button:focus-visible {
     outline: 0 none;
     outline-offset: 0;
     box-shadow: 0 0 0 0.2rem #bfd1f6;
-    
   }
   .p-button .p-button-label {
     transition-duration: 0.2s;
@@ -2153,16 +2146,14 @@
   .p-button.p-button-secondary,
   .p-buttonset.p-button-secondary > .p-button,
   .p-splitbutton.p-button-secondary > .p-button {
-    color: #ffffff;
-    background: #607d8b;
-    border: 1px solid #607d8b;
+    color: var(--text-w);
+    background: var(--blue-c);
+    border: 1px solid var(--blue-c);
   }
   .p-button.p-button-secondary:not(:disabled):hover,
   .p-buttonset.p-button-secondary > .p-button:not(:disabled):hover,
   .p-splitbutton.p-button-secondary > .p-button:not(:disabled):hover {
-    background: #546e7a;
-    color: #ffffff;
-    border-color: #546e7a;
+    opacity: 0.9;
   }
   .p-button.p-button-secondary:not(:disabled):focus,
   .p-buttonset.p-button-secondary > .p-button:not(:disabled):focus,
@@ -2612,7 +2603,6 @@
     background: transparent;
     color: red;
     border-color: transparent;
-  
   }
   .p-speeddial-button.p-button.p-button-icon-only {
     width: 4rem;

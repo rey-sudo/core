@@ -143,6 +143,10 @@ export default {
 <style src="../assets/flags.css" />
 
 <style lang="css" scoped>
+.legend span:hover {
+  text-decoration: underline;
+}
+
 .invalid {
   border: 1px solid red;
 }

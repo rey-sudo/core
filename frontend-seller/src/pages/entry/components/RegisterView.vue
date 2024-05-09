@@ -24,7 +24,7 @@
       modal
       :draggable="false"
       header="Terms of use"
-      :style="{ width: '35rem' }"
+      :style="{ width: '33rem' }"
       :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
     >
       <p>
@@ -299,7 +299,7 @@ export default {
       console.log(params);
 
       await this.createUser(params)
-        .then(() => this.handleMode('email'))
+        .then(() => this.handleMode("email"))
         .catch((err) => this.handleMessage("error", err));
     },
     validateEmail(value) {
@@ -327,6 +327,10 @@ export default {
 <style src="../assets/flags.css" />
 
 <style lang="css" scoped>
+.legend span:hover {
+  text-decoration: underline;
+}
+
 .invalid {
   border: 1px solid red;
 }
