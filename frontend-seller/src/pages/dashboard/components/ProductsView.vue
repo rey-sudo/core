@@ -78,6 +78,7 @@
       header="Product details"
       :modal="true"
       :draggable="false"
+      :closeOnEscape="false"
       class="p-fluid"
     >
       <Carousel
@@ -773,7 +774,7 @@ export default {
           toast.add({
             severity: "info",
             summary: "Success",
-            detail: "File Uploaded",
+            detail: "Files Uploaded",
             life: 5000,
           });
         }
