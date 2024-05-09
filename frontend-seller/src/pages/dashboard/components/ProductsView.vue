@@ -383,13 +383,24 @@
                     <span class="filename">{{ file.name }}</span>
 
                     <div class="filename">{{ formatSize(file.size) }}</div>
-                    <Badge value="Pending" severity="warning" />
-                    <div
-                      @click="
-                        onRemoveTemplatingFile(file, removeFileCallback, index)
-                      "
-                    >
-                      <i class="pi pi-times" />
+
+                    <div class="upload-control">
+                      <div class="pending-badge">
+                        <span>Pending</span>
+                      </div>
+
+                      <div
+                        class="upload-remove"
+                        @click="
+                          onRemoveTemplatingFile(
+                            file,
+                            removeFileCallback,
+                            index
+                          )
+                        "
+                      >
+                        Delete
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -427,13 +438,9 @@
               </div>
             </template>
             <template #empty>
-              <div
-                class="flex align-items-center justify-content-center flex-column"
-              >
-                <i
-                  class="pi pi-cloud-upload border-2 border-circle p-5 text-8xl text-400 border-400"
-                />
-                <p class="mt-4 mb-0">Drag and drop files to here to upload.</p>
+              <div class="upload-banner">
+                <i class="pi pi-cloud-upload" />
+                <span>Drag and drop files to here to upload.</span>
               </div>
             </template>
           </FileUpload>
@@ -806,7 +813,7 @@ export default {
           toast.add({
             severity: "info",
             summary: "Success",
-            detail: "File Uploadedx",
+            detail: "File Uploaded",
             life: 5000,
           });
         }
@@ -1195,6 +1202,46 @@ export default {
   flex-direction: column;
 }
 
+.pending-badge {
+  background: var(--yellow-b);
+  text-align: center;
+  border-radius: 999px;
+  font-size: var(--text-size-a);
+  padding: 0.25rem;
+  width: 100px;
+}
+
+.upload-control {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.upload-remove {
+  padding: 0.25rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-b);
+  margin-left: 0.5rem;
+  font-size: var(--text-size-a);
+  cursor: pointer;
+}
+
+.upload-banner {
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-banner i {
+  font-size: 4rem;
+}
+
+.upload-banner span {
+  margin-top: 1rem;
+}
+
 .upload-box img {
   border: 1px solid var(--border-a);
   border-radius: 8px;
@@ -1206,6 +1253,7 @@ export default {
 
 .upload-box .filename {
   font-size: var(--text-size-a);
+  margin-top: 0.5rem;
 }
 
 .upload-buttons {
