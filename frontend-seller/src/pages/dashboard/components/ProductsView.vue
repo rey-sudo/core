@@ -313,7 +313,6 @@
           <FileUpload
             name="image"
             :customUpload="true"
-            :disabled="disableUpload"
             :multiple="true"
             :fileLimit="5"
             accept="image/*"
@@ -324,13 +323,17 @@
               #header="{ chooseCallback, uploadCallback, clearCallback, files }"
             >
               <div class="upload-buttons">
-                <div class="upload-button" @click="chooseCallback()">
+                <div
+                  class="upload-button"
+                  :class="{ disabled: disableUpload }"
+                  @click="chooseCallback()"
+                >
                   <i class="pi pi pi-images" />
                 </div>
 
                 <div
                   class="upload-button"
-                  :class="{ desactived: !files || files.length === 0 }"
+                  :class="{ disabled: !files || files.length === 0 }"
                   @click="uploadEvent(uploadCallback, files)"
                 >
                   <i class="pi pi-cloud-upload" />
@@ -338,38 +341,15 @@
 
                 <div
                   class="upload-button"
-                  :class="{ desactived: !files || files.length === 0 }"
+                  :class="{ disabled: !files || files.length === 0 }"
                   @click="clearCallback()"
                 >
                   <i class="pi pi-times" />
                 </div>
               </div>
-
-              <ProgressBar
-                :value="totalSizePercent"
-                :showValue="false"
-                :class="[
-                  'md:w-20rem h-1rem w-full md:ml-auto',
-                  { 'exceeded-progress-bar': totalSizePercent > 100 },
-                ]"
-                ><span class="white-space-nowrap"
-                  >{{ totalSize }}B / 1Mb</span
-                ></ProgressBar
-              >
             </template>
 
-
-
-
-            <template
-              #content="{
-                files,
-                uploadedFiles,
-                removeUploadedFileCallback,
-                removeFileCallback,
-              }"
-            >
-          
+            <template #content="{ files, removeFileCallback }">
               <div v-if="files.length > 0">
                 <div class="upload-list">
                   <div
@@ -410,48 +390,16 @@
                   </div>
                 </div>
               </div>
-
-              <div v-if="uploadedFiles.length > 0">
-                <div class="upload-list">
-                  <div
-                    v-for="(file, index) of uploadedFiles"
-                    :key="file.name + file.type + file.size"
-                    class="upload-box"
-                  >
-                    <img
-                      role="presentation"
-                      :alt="file.name"
-                      :src="file.objectURL"
-                      width="100"
-                      height="50"
-                    />
-
-                    <span class="filename">{{ file.name }}</span>
-
-                    <div class="filename">{{ formatSize(file.size) }}</div>
-
-                    <div class="upload-control">
-                      <div class="completed-badge">
-                        <span>Completed</span>
-                      </div>
-
-                      <div
-                        class="upload-remove"
-                        @click="removeUploadedFileCallback(index)"
-                      >
-                        Delete
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
             </template>
             <template #empty>
-              <div class="upload-banner">
+              <div v-if="filesUploaded === false" class="upload-banner">
                 <i class="pi pi-cloud-upload" />
                 <span>Drag and drop files to here to upload.</span>
+              </div>
+
+              <div v-if="filesUploaded === true" class="upload-banner">
+                <i class="pi pi-cloud-upload" style="color: var(--green-a)" />
+                <span>Successfully completed</span>
               </div>
             </template>
           </FileUpload>
@@ -819,6 +767,7 @@ export default {
         if (data.success === true) {
           productData.value.image_set.push(...data.payload);
           disableUpload.value = true;
+          filesUploaded.value = true;
           callback();
 
           toast.add({
@@ -854,6 +803,8 @@ export default {
 
     const descriptionLimit = ref(1000);
 
+    const filesUploaded = ref(false);
+
     const formValidatorText = ref({
       name:
         "The name is required and max " + nameLimit.value + " characters long.",
@@ -876,6 +827,7 @@ export default {
 
     return {
       descriptionLimit,
+      filesUploaded,
       formValidatorText,
       onRemoveTemplatingFile,
       onClearTemplatingUpload,
@@ -1198,8 +1150,8 @@ export default {
 </script>
 
 <style lang="css" scoped>
-
-.pending-badge, .completed-badge {
+.pending-badge,
+.completed-badge {
   background: var(--yellow-b);
   text-align: center;
   border-radius: 999px;
@@ -1208,10 +1160,8 @@ export default {
   width: 100px;
 }
 
-
-.completed-badge{
+.completed-badge {
   background: var(--green-a);
-
 }
 
 .upload-list {
@@ -1228,7 +1178,6 @@ export default {
   padding: 1rem;
   flex-direction: column;
 }
-
 
 .upload-control {
   display: flex;
@@ -1278,6 +1227,11 @@ export default {
 .upload-buttons {
   display: flex;
   align-items: center;
+}
+
+.upload-button.disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .upload-button {
