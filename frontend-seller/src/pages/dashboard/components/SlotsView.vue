@@ -408,7 +408,7 @@
                 :alt="slotProps.data.image_main"
                 width="70"
                 height="70"
-                imageStyle="border-radius: 4px;"
+                imageStyle="border-radius: 4px; object-fit: contain;"
                 preview
               />
             </template>
@@ -455,8 +455,6 @@
             </template>
           </Column>
 
-
-
           <Column
             field="slots_count"
             header="Slots"
@@ -473,7 +471,7 @@
               {{ slotProps.data.stock }}
             </template>
           </Column>
-          
+
           <Column :exportable="false" style="min-width: 8rem">
             <template #body="slotProps">
               <div class="table-buttons">
@@ -512,11 +510,11 @@
                   <i
                     v-if="slotProps.data.slots_count > 0"
                     v-badge.secondary
-                    class="pi pi-folder"
+                    class="pi pi-eye"
                   />
                   <i
                     v-if="slotProps.data.slots_count < 1"
-                    class="pi pi-folder"
+                    class="pi pi-eye"
                   />
                 </Button>
               </div>
@@ -1635,6 +1633,7 @@ img {
   flex-direction: column;
   align-items: flex-start;
   padding: 1rem 0;
+  text-align: left;
 }
 
 .slots-header-left span:nth-child(1) {
@@ -1664,9 +1663,6 @@ img {
   width: initial;
 }
 
-
-
-
 @media only screen and (max-width: 767px) {
   .slots-header {
     flex-direction: column;
@@ -1677,7 +1673,7 @@ img {
     padding: 0 1rem;
   }
 
-  .slots-wrap{
+  .slots-wrap {
     padding: 1rem;
   }
 }
@@ -1692,7 +1688,7 @@ img {
     padding: 0 1rem;
   }
 
-  .slots-wrap{
+  .slots-wrap {
     padding: 1rem;
   }
 }
@@ -1707,13 +1703,11 @@ img {
     padding: 0 1rem;
   }
 
-  .slots-wrap{
+  .slots-wrap {
     padding: 1rem;
   }
 }
 
 @media only screen and (min-width: 1200px) {
-
-
 }
 </style>

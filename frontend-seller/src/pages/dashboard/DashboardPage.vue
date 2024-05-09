@@ -144,9 +144,9 @@ export default {
   },
 
   async mounted() {
-  //  const api = await window.cardano.nami.enable();
+    const api = await window.cardano.nami.enable();
 
-   // this.getLucid.selectWallet(api);
+    this.getLucid.selectWallet(api);
   },
 };
 </script>
