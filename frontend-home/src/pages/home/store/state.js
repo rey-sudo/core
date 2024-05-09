@@ -14,7 +14,7 @@ export default () => ({
           stock_supply: 20,
           collateral: 20,
           rating_count: 4,
-          review_count: 883, 
+          review_count: 883,
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
@@ -45,7 +45,7 @@ export default () => ({
           price_diff: 330,
           price: 330,
           image:
-            "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/4901/4901809_sd.jpg",
+            "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6557/6557718_sd.jpg",
           payment_type: "10 Slots",
           stock_supply: 50,
           collateral: 15,
@@ -81,7 +81,7 @@ export default () => ({
           price_diff: 200,
           price: 150,
           image:
-            "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6562/6562576_sd.jpg",
+            "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6562/6562576_rd.jpg",
           payment_type: "2 Slots",
           stock_supply: 5,
           collateral: 30,
@@ -100,7 +100,7 @@ export default () => ({
           price_diff: 200,
           price: 125,
           image:
-            "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6562/6562576_rd.jpg",
+            " https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6562/6562576_sd.jpg",
           payment_type: "3 Slots",
           stock_supply: 5,
           collateral: 17,
@@ -201,7 +201,7 @@ export default () => ({
           stock_supply: 20,
           collateral: 20,
           rating_count: 4,
-          review_count: 883, 
+          review_count: 883,
           shipping_tax: false,
           shipping_label: "Free shipping",
           shipping_icon: "pi user",
@@ -372,7 +372,6 @@ export default () => ({
           discount_color: "var(--text-a)",
           discount_label: "TheRock77",
         },
-        
       ],
     },
   ],

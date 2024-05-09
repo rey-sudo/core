@@ -366,34 +366,31 @@
               }"
             >
               <div v-if="files.length > 0">
-            
-                <div class="flex flex-wrap p-0 sm:p-5 gap-5">
+                <div class="upload-pending">
                   <div
                     v-for="(file, index) of files"
                     :key="file.name + file.type + file.size"
-                    class="card m-0 px-6 flex flex-column border-1 surface-border align-items-center gap-3"
+                    class="upload-box"
                   >
-                    <div>
-                      <img
-                        role="presentation"
-                        :alt="file.name"
-                        :src="file.objectURL"
-                        width="100"
-                        height="50"
-                      />
-                    </div>
-                    <span class="font-semibold">{{ file.name }}</span>
-                    <div>{{ formatSize(file.size) }}</div>
+                    <img
+                      role="presentation"
+                      :alt="file.name"
+                      :src="file.objectURL"
+                      width="100"
+                      height="50"
+                    />
+
+                    <span class="filename">{{ file.name }}</span>
+
+                    <div class="filename">{{ formatSize(file.size) }}</div>
                     <Badge value="Pending" severity="warning" />
-                    <Button
-                      icon="pi pi-times"
+                    <div
                       @click="
                         onRemoveTemplatingFile(file, removeFileCallback, index)
                       "
-                      outlined
-                      rounded
-                      severity="danger"
-                    />
+                    >
+                      <i class="pi pi-times" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1183,12 +1180,41 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.upload-pending {
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-box {
+  border: 1px solid var(--border-a);
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  padding: 1rem;
+  flex-direction: column;
+}
+
+.upload-box img {
+  border: 1px solid var(--border-a);
+  border-radius: 8px;
+  height: 125px;
+  object-fit: contain;
+  width: 125px;
+  padding: 0.5rem;
+}
+
+.upload-box .filename {
+  font-size: var(--text-size-a);
+}
+
 .upload-buttons {
   display: flex;
   align-items: center;
 }
 
 .upload-button {
+  cursor: pointer;
   padding: 0.5rem 1rem;
   border-radius: 8px;
   margin-right: 1rem;

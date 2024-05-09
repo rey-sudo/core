@@ -939,7 +939,7 @@
     border-color: #2196f3;
   }
   .p-chips .p-chips-multiple-container {
-    padding: 0.3rem;
+    padding: 0.2rem;
     outline-color: transparent;
   }
   .p-chips .p-chips-multiple-container .p-chips-token {
@@ -957,7 +957,7 @@
     margin-left: 0.5rem;
   }
   .p-chips .p-chips-multiple-container .p-chips-input-token {
-    padding: 0.25rem 0;
+    padding: 0.5rem 1rem;
   }
   .p-chips .p-chips-multiple-container .p-chips-input-token input {
     font-size: var(--text-size-b) !important;
@@ -1272,7 +1272,7 @@
     font-size: var(--text-size-b);
     color: var(--text-a);
     background: #ffffff;
-    padding: 0.6rem;
+    padding: 0.7rem;
     border: 1px solid #ced4da;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s,
       box-shadow 0.2s;

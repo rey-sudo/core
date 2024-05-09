@@ -576,7 +576,7 @@ export default {
   justify-content: center;
   padding: 0.75rem;
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 4rem;
 }
 
 .head .head-button.outline {
