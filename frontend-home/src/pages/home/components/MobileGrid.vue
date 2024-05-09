@@ -124,7 +124,7 @@ export default {
 .grid-item-title {
   font-size: var(--text-size-f);
   font-weight: bold;
-  text-align: start;
+  text-align: left;
   color: var(--text-a);
   border-bottom: 1px solid var(--border-b);
   padding: 1rem 0;
@@ -152,7 +152,6 @@ export default {
   line-height: 1.5rem;
   padding: 1rem;
   border: 1px solid var(--border-a);
-  
 }
 .card-body-stock {
   text-align: left;
@@ -191,7 +190,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .card-body-name {
