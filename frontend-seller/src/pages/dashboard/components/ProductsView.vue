@@ -95,6 +95,7 @@
             <div class="product-image-preview">
               <Image
                 :src="slotProps.data.image"
+                imageStyle="object-fit: contain;"
                 alt="Image"
                 width="300"
                 height="300"
@@ -120,7 +121,7 @@
           >
             <Image
               :src="item.image"
-              imageStyle="border-radius: 6px;display: flex;align-items: center;"
+              imageStyle="border-radius: 6px;display: flex;align-items: center; object-fit: contain;"
               alt="Image"
               width="50"
               height="50"
@@ -491,7 +492,7 @@
                 :alt="slotProps.data.image_main"
                 width="70"
                 height="70"
-                imageStyle="border-radius: 6px;"
+                imageStyle="border-radius: 6px; object-fit: contain;"
                 preview
               />
             </template>
@@ -902,10 +903,7 @@ export default {
     hideModals() {
       this.messageModalVisible = false;
     },
-    onSelectedFilesx(e) {
-      console.log(e.files.length);
-    },
-    onBeforeUpload() {},
+
     onFileRemoved(e) {
       console.log(e.files.length);
 
@@ -948,9 +946,9 @@ export default {
         images: this.validateImages(this.productData.image_set),
       };
 
-      console.log(this.formValidator);
+      console.log(this.formValidator.value);
 
-      if (Object.values(this.formValidator).includes(true)) {
+      if (Object.values(this.formValidator.value).includes(true)) {
         return;
       }
 
@@ -981,6 +979,8 @@ export default {
     },
 
     editProduct(productData) {
+     
+
       productData.keywords =
         typeof productData.keywords === "string"
           ? productData.keywords.split(",")
@@ -1050,7 +1050,7 @@ export default {
     },
     deleteSelectedProducts() {
       this.products = this.products.filter(
-        (value) => !this.selectedProducts.includes(value)
+        (e) => !this.selectedProducts.includes(e)
       );
       this.deleteProductsDialog = false;
       this.selectedProducts = null;
@@ -1170,8 +1170,6 @@ export default {
       return false;
     },
     validateImages(e) {
-      console.log(e, "a");
-
       if (!e) {
         return true;
       }
