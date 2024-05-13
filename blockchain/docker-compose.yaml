@@ -8,6 +8,10 @@ services:
     ports:
       - "3001:3001"
     restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 16G
     
   service-index:
     build:
@@ -25,6 +29,10 @@ services:
       retries: 5
       start_period: 60s          
     restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 16G 
 
   service-pab:
     build:
@@ -43,7 +51,10 @@ services:
       retries: 5
       start_period: 60s 
     restart: always
-
+    deploy:
+      resources:
+        limits:
+          memory: 30G
 
 volumes:
   shared_volume:

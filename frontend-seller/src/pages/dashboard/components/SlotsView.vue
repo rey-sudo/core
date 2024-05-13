@@ -267,7 +267,7 @@
           <template #body="slotProps">
             <div class="switch-group">
               <InputSwitch
-                v-tooltip.left="
+                v-tooltip.top="
                   'Generate the transaction to send to the network.'
                 "
                 :disabled="slotProps.data.actived === 1 || activeSlotLoader"
@@ -653,7 +653,7 @@ export default {
             icon: "",
           },
           {
-            label: "Archive",
+            label: "Delete",
             icon: "",
           },
           {
