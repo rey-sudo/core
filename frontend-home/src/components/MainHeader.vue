@@ -145,7 +145,7 @@
       </div>
 
       <div class="header-button left">
-        <label for=""> <img src="@/assets/store.svg" alt="" /></label>
+
         <div>
           <span>Sell a</span>
           <span>Product</span>
@@ -413,7 +413,7 @@ export default {
 }
 
 .header .header-center {
-  flex-basis: 40%;
+  flex-basis: 50%;
   width: auto;
   display: flex;
   align-items: center;

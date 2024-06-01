@@ -90,7 +90,7 @@
         </div>
 
         <div class="head-stock">
-          <span>10 available / 20 in stock</span>
+          <span>10 available • 20 in stock</span>
         </div>
 
         <div class="head-collateral">
@@ -532,20 +532,19 @@ export default {
   align-items: center;
   margin-top: 1rem;
   display: flex;
-
 }
 
 .head .head-rating span {
   margin-right: 0.5rem;
   font-size: var(--text-size-c);
-  color: var(--blue-b);
+  color: var(--blue-c);
   font-weight: 600;
 }
 
 .head .head-rating span:nth-child(3) {
   font-weight: 400;
   font-size: var(--text-size-a);
-  color: var(--blue-b);
+  color: var(--blue-c);
 }
 
 .head .head-price {
