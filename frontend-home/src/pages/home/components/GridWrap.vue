@@ -190,6 +190,7 @@ export default {
   margin: auto;
   line-height: 1.5rem;
   border: 1px solid var(--border-b);
+  border-radius: 28px;
 }
 
 .card-header {

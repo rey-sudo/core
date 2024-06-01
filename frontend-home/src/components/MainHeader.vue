@@ -137,7 +137,6 @@
       />
 
       <div class="header-button left" @click="visible = true">
-        <label for=""> <img src="@/assets/location.svg" alt="" /></label>
         <div>
           <span>{{ selectedLanguage.code }}</span>
           <span>{{ selectedCountry.name }}</span>
@@ -145,6 +144,7 @@
       </div>
 
       <div class="header-button left">
+        <label for=""> <img src="@/assets/store.svg" alt="" /></label>
         <div>
           <span>Sell a</span>
           <span>Product</span>
@@ -390,8 +390,7 @@ export default {
   width: 100%;
   box-sizing: border-box;
   background: initial;
-  color: var(--text-a);
-  background: var(--blue-b);
+  background: var(--base-a);
   box-shadow: var(--border-shadow);
 }
 
@@ -427,18 +426,17 @@ export default {
   display: flex;
   align-items: center;
   border-radius: 4px;
-  width: 90%;
+  width: 100%;
   color: var(--text-a);
   font-size: var(--text-size-b);
-  border: 1px solid transparent;
-  box-shadow: 0 0 5px var(--blue-c), 0 0 5px var(--blue-c),
-    0 0 5px var(--blue-c);
+  border: 1px solid var(--border-b);
+  box-shadow: initial;
   transition: box-shadow 0.3s ease-in-out;
 }
 
 .header .header-center .header-center-search:focus-within {
   background: var(--base-a);
-  border: 1px solid rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--text-a);
   box-shadow: initial;
 }
 
@@ -489,6 +487,7 @@ export default {
   display: flex;
   align-items: center;
   cursor: pointer;
+  border: 1px solid var(--border-b);
 }
 
 .header .header-right button img {
@@ -535,7 +534,7 @@ export default {
   display: flex;
   flex-direction: column;
   margin-left: 1rem;
-  color: var(--text-w);
+  color: var(--text-a);
 }
 
 .header .header-button div:hover {
@@ -580,11 +579,11 @@ i {
   left: 0;
   width: 100%;
   align-items: center;
-  background: var(--blue-b);
+  background: var(--blue-a);
   color: var(--text-w);
   font-weight: 500;
   border-top: 1px solid #1a83ff;
-  border-bottom: 1px solid var(--base-c);
+  border-bottom: 1px solid var(--blue-c);
 }
 
 .header-menu.main {
