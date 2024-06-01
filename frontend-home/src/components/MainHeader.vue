@@ -145,7 +145,7 @@
       </div>
 
       <div class="header-button left">
-
+        <label for=""> <img src="@/assets/store.svg" alt="" /></label> 
         <div>
           <span>Sell a</span>
           <span>Product</span>
@@ -421,7 +421,7 @@ export default {
 }
 
 .header .header-center .header-center-search {
-  background: var(--base-b);
+  background: var(--base-a);
   transition: var(--button-transition-a);
   cursor: text;
   display: flex;
@@ -462,7 +462,7 @@ export default {
   width: 100%;
   font-size: var(--text-size-b);
   color: inherit;
-  padding: calc(0.5rem + 0.125rem) 1rem;
+  padding: 0.75rem 1rem;
 }
 
 .header .header-center .header-center-search input::placeholder {
@@ -521,7 +521,6 @@ export default {
   cursor: pointer;
   color: var(--text-w);
   transition: var(--button-transition-a);
-  padding: 0 1rem;
 }
 
 .header .header-button.left {
@@ -584,8 +583,6 @@ i {
   background: var(--blue-a);
   color: var(--text-w);
   font-weight: 500;
-  border-top: 1px solid #1a83ff;
-  border-bottom: 1px solid var(--blue-c);
 }
 
 .header-menu.main {

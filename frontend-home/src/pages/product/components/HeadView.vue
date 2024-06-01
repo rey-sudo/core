@@ -69,6 +69,8 @@
           <span>Model: 8430288C2C</span>
 
           <span>SKU: P9C3KC93CK</span>
+
+          <span>Date: 24/11/2024</span>
         </div>
 
         <div class="head-rating">
@@ -537,14 +539,14 @@ export default {
 
 .head .head-rating span {
   margin-right: 0.5rem;
-  font-size: var(--text-size-c);
+  font-size: var(--text-size-b);
   color: var(--blue-a);
   font-weight: 600;
 }
 
 .head .head-rating span:nth-child(3) {
   font-weight: 400;
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   color: var(--blue-a);
 }
 
