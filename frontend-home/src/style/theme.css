@@ -2688,7 +2688,7 @@
   }
   .p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
     color: var(--yellow-b);
-    filter: drop-shadow(0px 1px 0px rgba(0,0,0,0.2));
+    filter: drop-shadow(0px 1px 0px rgba(0, 0, 0, 0.2));
   }
   .p-rating:not(.p-disabled):not(.p-readonly)
     .p-rating-item:hover
@@ -5817,7 +5817,6 @@
     .p-accordion-header
     .p-accordion-header-link
     .p-accordion-toggle-icon {
-   
   }
 
   .p-accordion
@@ -10599,7 +10598,7 @@
   .p-metergroup .p-metergroup-meters {
     background: #dee2e6;
     border-radius: 0px;
-    opacity: 0.8;
+    opacity: 1;
   }
 
   .p-metergroup-label-text {
@@ -10636,6 +10635,7 @@
   .p-metergroup.p-metergroup-horizontal .p-metergroup-meters {
     height: 0.4rem;
   }
+
   .p-metergroup.p-metergroup-horizontal .p-metergroup-meter:first-of-type {
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;

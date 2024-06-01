@@ -90,7 +90,7 @@
         </div>
 
         <div class="head-stock">
-          <span>10 available • 20 in stock</span>
+          <span>10 available (20 stock)</span>
         </div>
 
         <div class="head-collateral">
@@ -399,7 +399,7 @@ export default {
 
 .head-collateral {
   width: 50%;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .head-seller-badge {
@@ -518,7 +518,7 @@ export default {
 
 .head .head-legend {
   text-align: left;
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   margin-top: 1rem;
 }
 
@@ -537,14 +537,14 @@ export default {
 .head .head-rating span {
   margin-right: 0.5rem;
   font-size: var(--text-size-c);
-  color: var(--blue-c);
+  color: var(--blue-a);
   font-weight: 600;
 }
 
 .head .head-rating span:nth-child(3) {
   font-weight: 400;
   font-size: var(--text-size-a);
-  color: var(--blue-c);
+  color: var(--blue-a);
 }
 
 .head .head-price {
@@ -576,7 +576,7 @@ export default {
   justify-content: center;
   padding: 0.75rem;
   text-align: center;
-  margin-top: 4rem;
+  margin-top: 1rem;
 }
 
 .head .head-button.outline {
