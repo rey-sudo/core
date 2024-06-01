@@ -137,6 +137,7 @@
       />
 
       <div class="header-button left" @click="visible = true">
+        <label for=""> <img src="@/assets/location.svg" alt="" /></label>
         <div>
           <span>{{ selectedLanguage.code }}</span>
           <span>{{ selectedCountry.name }}</span>
@@ -395,7 +396,7 @@ export default {
 }
 
 .header .header-left {
-  flex-basis: 25%;
+  flex-basis: 30%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -412,7 +413,7 @@ export default {
 }
 
 .header .header-center {
-  flex-basis: 50%;
+  flex-basis: 40%;
   width: auto;
   display: flex;
   align-items: center;
@@ -471,7 +472,7 @@ export default {
 }
 
 .header .header-right {
-  flex-basis: 25%;
+  flex-basis: 30%;
   display: flex;
   justify-content: flex-end;
 }
@@ -503,11 +504,12 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--base-b);
 }
 
 .header-right-count span {
   font-weight: 700 !important;
-  font-size: var(--text-size-e) !important;
+  font-size: var(--text-size-d) !important;
 }
 
 .header .header-button {
@@ -523,11 +525,11 @@ export default {
 }
 
 .header .header-button.left {
-  margin: auto;
+  margin-left: auto;
 }
 
 .header .header-button.right {
-  margin: auto;
+  margin-left: auto;
 }
 
 .header .header-button div {
@@ -640,7 +642,7 @@ i {
   font-weight: inherit;
   color: inherit;
   background: transparent;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .header-menu .header-menu-col .header-menu-nav div:nth-child(1) {
