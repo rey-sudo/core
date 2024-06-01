@@ -5799,14 +5799,13 @@
   }
   .p-accordion .p-accordion-header .p-accordion-header-link {
     padding: 1.5rem 0;
-    border: 1px solid var(--border-b);
     color: var(--text-a);
     background: var(--base-a);
     font-weight: 700;
     border-radius: 3px;
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
     outline-color: transparent;
-    border-bottom: 1px solid var(--border-a);
+    border-bottom: 1px solid var(--border-b);
     border-top: none;
     border-left: none;
     border-right: none;
