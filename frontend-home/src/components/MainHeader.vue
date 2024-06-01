@@ -635,7 +635,7 @@ i {
   font-size: var(--text-size-a);
   white-space: nowrap;
   cursor: pointer;
-  padding: calc(0.75rem + 0.125rem) 1rem;
+  padding: 0.75rem 1rem;
   font-weight: inherit;
   color: inherit;
   background: transparent;
