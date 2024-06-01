@@ -518,8 +518,9 @@ export default {
 
 .head .head-legend {
   text-align: left;
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
   margin-top: 1rem;
+  font-weight: 300;
 }
 
 .head .head-legend span {
