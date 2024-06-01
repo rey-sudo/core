@@ -41,7 +41,7 @@
               :numVisible="1"
               :circular="true"
               :transitionInterval="0"
-              containerStyle="max-width: 60%; min-height: 500px;  margin-top: 4rem;"
+              containerStyle="max-width: 60%;   margin-top: 4rem; "
               :showItemNavigators="false"
               :showThumbnails="false"
             >
@@ -49,7 +49,13 @@
                 <img
                   :src="slotProps.item.itemImageSrc"
                   :alt="slotProps.item.alt"
-                  style="width: 100%; display: block"
+                  style="
+                    width: 100%;
+                    display: block;
+                    min-height: 500px;
+                    max-height: 500px;
+                    object-fit: contain;
+                  "
                 />
               </template>
             </Galleria>
@@ -62,7 +68,7 @@
       <!--RIGHT-->
       <div class="head-right">
         <div class="head-name">
-          Samsung - Galaxy Tab S9 FE - 10.9" 128GB - Wi-Fi - with S-Pen - Gray
+          Sony Interactive Entertainment - PlayStation 5 Slim Console - White
         </div>
 
         <div class="head-legend">
@@ -201,9 +207,9 @@ export default {
       },
       {
         itemImageSrc:
-          "https://pisces.bbystatic.com/image3/BestBuy_US/images/products/6537/6537363_sd.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6566/6566039_rd.jpg",
         thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image3/BestBuy_US/images/products/6537/6537363_sd.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6566/6566039_rd.jpg",
         alt: "Description for Image 3",
         title: "Title 3",
       },

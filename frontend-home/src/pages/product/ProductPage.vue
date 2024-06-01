@@ -149,7 +149,7 @@ export default {
 
 .product-body-top {
   min-height: 150vh;
-  margin-top: 120px;
+  margin-top: 150px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
