@@ -538,14 +538,14 @@ export default {
 .head .head-rating span {
   margin-right: 0.5rem;
   font-size: var(--text-size-c);
-  color: var(--text-b);
+  color: var(--blue-b);
   font-weight: 600;
 }
 
 .head .head-rating span:nth-child(3) {
   font-weight: 400;
   font-size: var(--text-size-a);
-  color: var(--blue-a);
+  color: var(--blue-b);
 }
 
 .head .head-price {

@@ -56,10 +56,11 @@ export default {};
   display: flex;
   justify-content: space-between;
   align-items: center;
+  line-height: 2rem;
 }
 
 .session-header-top span:nth-child(1) {
-  font-size: var(--text-size-e);
+  font-size: var(--text-size-f);
   font-weight: 600;
 }
 
