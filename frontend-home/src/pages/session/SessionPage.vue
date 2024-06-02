@@ -96,6 +96,7 @@ export default {
   justify-content: center;
   align-items: start;
   line-height: 2rem;
+  font-weight: 700;
 }
 
 .session-header-timer span {
@@ -104,7 +105,7 @@ export default {
   padding: 0.25rem 0.75rem;
   margin: 0 0.25rem;
   color: var(--text-w);
-  font-weight: 700;
+
   border: none;
 }
 
