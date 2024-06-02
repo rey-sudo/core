@@ -26,11 +26,31 @@
       <div class="session-top">
         <!---LEFT-->
         <div class="session-top-left">
-          <div class="session-top-left-top">
-            price slot etc... slot information
+          <div class="session-top-left-title">Product info</div>
+          <div class="session-top-left-price">
+            <div>
+              <label
+                >Price
+
+                <i class="pi pi-info-circle" />
+              </label>
+              <span>3.240</span>
+            </div>
+            <div>
+              <label>Collateral <i class="pi pi-info-circle" /></label>
+              <span>500</span>
+            </div>
+            <div>
+              <label>Discount <i class="pi pi-info-circle" /></label>
+              <span>0</span>
+            </div>
           </div>
-          <div class="session-top-left-body">negotiation information</div>
-          <div class="session-top-left-bottom">payment received</div>
+
+          <div class="session-top-left-timeline">
+
+
+            
+          </div>
         </div>
         <!---LEFT-->
 
@@ -60,6 +80,41 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.session-top-left-title {
+  font-size: var(--text-size-e);
+  text-align: start;
+  font-weight: 600;
+}
+
+.session-top-left-price {
+  display: flex;
+  align-items: center;
+  text-align: start;
+  margin-top: 2rem;
+}
+
+.session-top-left-price div {
+  margin-right: 4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.session-top-left-price div label {
+  font-size: var(--text-size-c);
+  color: var(--text-b);
+  display: flex;
+  align-items: center;
+}
+
+.session-top-left-price div label i {
+  margin-left: 0.5rem;
+}
+
+.session-top-left-price div span {
+  line-height: 3rem;
+  font-size: var(--text-size-f);
+}
+
 .session {
 }
 
@@ -126,6 +181,7 @@ export default {
 
 .session-top-left {
   width: 50%;
+  padding: 2rem;
 }
 
 .session-top-right {
@@ -159,8 +215,5 @@ export default {
 .session-bottom {
   height: 50vh;
   background: rgba(0, 128, 0, 0);
-}
-
-.session-top-left-top {
 }
 </style>
