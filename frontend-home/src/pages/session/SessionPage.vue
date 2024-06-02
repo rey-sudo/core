@@ -56,7 +56,18 @@
             </div>
           </div>
 
-          <div class="session-top-left-timeline"></div>
+          <div class="session-top-left-timeline">
+            <Timeline :value="events" layout="horizontal" align="top">
+              <template #opposite="slotProps">
+                <small class="p-text-secondary">{{
+                  slotProps.item.date
+                }}</small>
+              </template>
+              <template #content="slotProps">
+                {{ slotProps.item.status }}
+              </template>
+            </Timeline>
+          </div>
         </div>
         <!---LEFT-->
 
@@ -77,10 +88,43 @@
 
 <script>
 import MainHeader from "@/components/MainHeader.vue";
+import { ref } from "vue";
 
 export default {
   components: {
     MainHeader,
+  },
+
+  setup() {
+    const events = ref([
+      {
+        status: "Waiting",
+        date: "15/10/2020 10:30",
+        icon: "pi pi-shopping-cart",
+        color: "#9C27B0",
+      },
+      {
+        status: "Locking",
+        date: "N/A",
+        icon: "pi pi-cog",
+        color: "#673AB7",
+      },
+      {
+        status: "Delivered",
+        date: "N/A",
+        icon: "pi pi-shopping-cart",
+        color: "#FF9800",
+      },
+      {
+        status: "Received",
+        date: "N/A",
+        icon: "pi pi-check",
+        color: "#607D8B",
+      },
+    ]);
+    return {
+      events,
+    };
   },
 };
 </script>
@@ -90,6 +134,10 @@ export default {
   font-size: var(--text-size-e);
   text-align: start;
   font-weight: 600;
+}
+
+.session-top-left-timeline {
+  margin-top: 4rem;
 }
 
 .session-top-left-price {
@@ -186,12 +234,12 @@ export default {
 }
 
 .session-top-left {
-  width: 50%;
+  width: 60%;
   padding: 2rem;
 }
 
 .session-top-right {
-  width: 50%;
+  width: 40%;
 }
 
 .session-top-right-chat {
