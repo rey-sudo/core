@@ -97,7 +97,7 @@ export default {
   },
   data() {
     return {
-      selectedNav: "slots",  
+      selectedNav: "products",  
       lucidClient: null,
       navTabs: [
         {
