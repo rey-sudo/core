@@ -391,7 +391,7 @@ export default {
   width: 100%;
   box-sizing: border-box;
   background: initial;
-  background: var(--base-a);
+  background: var(--blue-b);
   box-shadow: var(--border-shadow);
 }
 
@@ -504,7 +504,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--base-b);
+  background: var(--blue-c);
 }
 
 .header-right-count span {
@@ -535,7 +535,7 @@ export default {
   display: flex;
   flex-direction: column;
   margin-left: 1rem;
-  color: var(--text-a);
+
 }
 
 .header .header-button div:hover {
