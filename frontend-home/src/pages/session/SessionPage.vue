@@ -6,7 +6,7 @@
       <div class="session-header">
         <div class="session-header-top">
           <span>Negotiation Session</span>
-          <span>Slot: S78CAIKJXBRCXV </span>
+          <span>ID: S78CAIXOWL540 </span>
         </div>
 
         <div class="session-header-bottom">
@@ -40,11 +40,6 @@
           <div class="session-top-left-title">Product info</div>
           <div class="session-top-left-price">
             <div>
-              <label>Type <i class="pi pi-info-circle" /></label>
-              <span>Batch</span>
-            </div>
-
-            <div>
               <label
                 >Price
 
@@ -56,9 +51,15 @@
               <label>Collateral <i class="pi pi-info-circle" /></label>
               <span>500</span>
             </div>
+
+            <div>
+              <label>Type <i class="pi pi-info-circle" /></label>
+              <span>Batch</span>
+            </div>
+
             <div>
               <label>Discount <i class="pi pi-info-circle" /></label>
-              <span>340</span>
+              <span>40</span>
             </div>
 
             <div>
