@@ -29,6 +29,11 @@
           <div class="session-top-left-title">Product info</div>
           <div class="session-top-left-price">
             <div>
+              <label>Type <i class="pi pi-info-circle" /></label>
+              <span>Batch</span>
+            </div>
+
+            <div>
               <label
                 >Price
 
@@ -42,15 +47,16 @@
             </div>
             <div>
               <label>Discount <i class="pi pi-info-circle" /></label>
-              <span>0</span>
+              <span>340</span>
+            </div>
+
+            <div>
+              <label>Units <i class="pi pi-info-circle" /></label>
+              <span>2</span>
             </div>
           </div>
 
-          <div class="session-top-left-timeline">
-
-
-            
-          </div>
+          <div class="session-top-left-timeline"></div>
         </div>
         <!---LEFT-->
 
