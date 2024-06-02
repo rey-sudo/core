@@ -11,7 +11,18 @@
 
         <div class="session-header-bottom">
           <span>Space for bilateral negotiation </span>
-          <span>Time Created: may 27 8008 :80:am</span>
+          <span>Time Created: may 27 07:20:am</span>
+        </div>
+
+        <div class="session-top-left-timeline">
+          <Timeline :value="events" layout="horizontal" align="top">
+            <template #opposite="slotProps">
+              <small class="p-text-secondary">{{ slotProps.item.date }}</small>
+            </template>
+            <template #content="slotProps">
+              {{ slotProps.item.status }}
+            </template>
+          </Timeline>
         </div>
 
         <div class="session-header-timer">
@@ -54,19 +65,6 @@
               <label>Units <i class="pi pi-info-circle" /></label>
               <span>2</span>
             </div>
-          </div>
-
-          <div class="session-top-left-timeline">
-            <Timeline :value="events" layout="horizontal" align="top">
-              <template #opposite="slotProps">
-                <small class="p-text-secondary">{{
-                  slotProps.item.date
-                }}</small>
-              </template>
-              <template #content="slotProps">
-                {{ slotProps.item.status }}
-              </template>
-            </Timeline>
           </div>
         </div>
         <!---LEFT-->
@@ -137,7 +135,6 @@ export default {
 }
 
 .session-top-left-timeline {
-  margin-top: 4rem;
 }
 
 .session-top-left-price {
@@ -180,7 +177,6 @@ export default {
 }
 
 .session-header {
-  height: 150px;
   background: var(--base-b);
   display: flex;
   flex-direction: column;
@@ -248,7 +244,7 @@ export default {
   height: 700px;
   border-radius: 28px;
   margin-left: auto;
-  border: 2px solid var(--border-b);
+  border: 2px solid var(--blue-c);
   display: flex;
   flex-direction: column;
   overflow: hidden;
