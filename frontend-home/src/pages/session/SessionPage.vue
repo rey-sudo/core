@@ -60,7 +60,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-
 .session {
 }
 
@@ -70,7 +69,6 @@ export default {
   min-height: 100vh;
   padding: 0 10%;
 }
-
 
 .session-header {
   height: 150px;
@@ -119,13 +117,11 @@ export default {
   font-weight: 600;
 }
 
-
-
 .session-top {
   width: 100%;
   display: flex;
   align-items: flex-start;
-  padding: 1rem;
+  margin-top: 1rem;
 }
 
 .session-top-left {
