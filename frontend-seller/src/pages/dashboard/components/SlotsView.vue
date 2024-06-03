@@ -83,13 +83,21 @@
         <LoadingBars v-if="createSlotLoader" />
 
         <div class="createslot-wrap" v-if="!createSlotLoader">
+          <div class="createslot-b-total">
+            <p>Total slots {{ computedSlots }}</p>
+            <p>Stock: {{ productList[createSlotIndex].stock }}</p>
+            <p>Total Units: {{ computedUnits }}</p>
+            <p>Total Collateral: {{ computedCollateral }}</p>
+            <p>Unit Price: {{ computedPrice }}</p>
+          </div>
+
           <div class="field">
             <label for="batch_mode" class="field-label">
-              <span>Batch Mode</span>
+              <span>Batch</span>
               <i
                 class="pi pi-info-circle"
                 v-tooltip.top="
-                  'Allows to add discounts for the purchase of multiple units.'
+                  'Batch mode allows to add discounts for multiple units.'
                 "
               />
             </label>
@@ -163,17 +171,9 @@
               :max="100"
               :class="{ invalid: createSlotFormErrors.product_discount }"
             />
-            <small class="p-error" v-if="createSlotFormErrors.product_discount"
-              >The discount is required.</small
+            <small class="p-error" v-if="createSlotFormErrors.product_discount">
+              The discount must be greater than 0.</small
             >
-          </div>
-
-          <div class="createslot-b-total">
-            <p>Total slots {{ computedSlots }}</p>
-            <p>Stock: {{ productList[createSlotIndex].stock }}</p>
-            <p>Total Units: {{ computedUnits }}</p>
-            <p>Total Collateral: {{ computedCollateral }}</p>
-            <p>Unit Price: {{ computedPrice }}</p>
           </div>
         </div>
       </div>
@@ -197,7 +197,7 @@
           <span class="dialog-title">Enable slots</span>
           <div class="network-analyzer">
             <div class="loader" />
-            <span>Scanning network 5s</span>
+            <span>Scanning network</span>
           </div>
         </div>
       </template>
@@ -371,7 +371,7 @@
             <div class="slots-header">
               <div class="slots-header-left">
                 <span>Enable slots</span>
-                <span @click="runTX">Create and modify sales orders.</span>
+                <span @click="runTX">Manage product availability.</span>
               </div>
 
               <div class="slots-header-right">
@@ -669,9 +669,9 @@ export default {
 
     const createSlotForm = ref({
       batch_mode: false,
-      product_units: 0,
-      batch_number: 0,
-      product_discount: 0,
+      product_units: undefined,
+      batch_number: undefined,
+      product_discount: undefined,
     });
 
     const createSlotFormErrors = ref({
@@ -840,23 +840,68 @@ export default {
       selectedProducts: null,
       filters: {},
       categories: [
-        { name: "Home", code: "home" },
-        { name: "Electronics", code: "electronics" },
-        { name: "Fashion", code: "fashion" },
-        { name: "Beauty", code: "beauty" },
-        { name: "Toys", code: "toys" },
-        { name: "Tools", code: "tools" },
-        { name: "Sports", code: "sports" },
-        { name: "Health", code: "health" },
-        { name: "Books", code: "books" },
-        { name: "Automotive", code: "automotive" },
-        { name: "Appliances", code: "appliances" },
-        { name: "Furniture", code: "furniture" },
+        {
+          name: "Home",
+          code: "home",
+        },
+        {
+          name: "Electronics",
+          code: "electronics",
+        },
+        {
+          name: "Fashion",
+          code: "fashion",
+        },
+        {
+          name: "Beauty",
+          code: "beauty",
+        },
+        {
+          name: "Toys",
+          code: "toys",
+        },
+        {
+          name: "Tools",
+          code: "tools",
+        },
+        {
+          name: "Sports",
+          code: "sports",
+        },
+        {
+          name: "Health",
+          code: "health",
+        },
+        {
+          name: "Books",
+          code: "books",
+        },
+        {
+          name: "Automotive",
+          code: "automotive",
+        },
+        {
+          name: "Appliances",
+          code: "appliances",
+        },
+        {
+          name: "Furniture",
+          code: "furniture",
+        },
       ],
       statuses: [
-        { label: "STOCK", value: "stock" },
-        { label: "LOW", value: "low" },
-        { label: "OUT", value: "out" },
+        {
+          label: "STOCK",
+          value: "stock",
+        },
+        {
+          label: "LOW",
+          value: "low",
+        },
+        {
+          label: "OUT",
+          value: "out",
+        },
       ],
     };
   },
@@ -1066,16 +1111,17 @@ export default {
       this.createSlotDialogVisible = false;
     },
     async createSlots() {
-      this.createSlotFormErrors.product_units = this.checkUnitNumber(
+      this.createSlotFormErrors.product_units = this.unitNumber(
         this.createSlotForm.product_units
       );
 
-      this.createSlotFormErrors.batch_number = this.checkBatchNumber(
+      this.createSlotFormErrors.batch_number = this.batchNumber(
         this.createSlotForm.batch_mode,
         this.createSlotForm.batch_number
       );
 
-      this.createSlotFormErrors.product_discount = this.checkProductDiscount(
+      this.createSlotFormErrors.product_discount = this.productDiscount(
+        this.createSlotForm.batch_mode,
         this.createSlotForm.product_discount
       );
 
@@ -1128,7 +1174,7 @@ export default {
         })
         .finally(() => (this.createSlotLoader = false));
     },
-    checkUnitNumber(value) {
+    unitNumber(value) {
       if (!value) {
         return true;
       }
@@ -1143,7 +1189,7 @@ export default {
 
       return false;
     },
-    checkBatchNumber(batchMode, value) {
+    batchNumber(batchMode, value) {
       if (batchMode === true) {
         if (!value) {
           return true;
@@ -1160,12 +1206,16 @@ export default {
 
       return false;
     },
-    checkProductDiscount(value) {
-      if (value < 0) {
+    productDiscount(batchMode, value) {
+      if (batchMode === true && value === undefined) {
         return true;
       }
 
-      if (typeof value !== "number") {
+      if (batchMode === true && value < 1) {
+        return true;
+      }
+
+      if (batchMode === true && typeof value !== "number") {
         return true;
       }
 
@@ -1234,7 +1284,10 @@ export default {
     },
     setupFilters() {
       this.filters = {
-        global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        global: {
+          value: null,
+          matchMode: FilterMatchMode.CONTAINS,
+        },
       };
     },
     getStatusLabel(status) {
@@ -1302,6 +1355,7 @@ export default {
   box-shadow: 0 0 0 0 var(--blue-s);
   animation: l1 1s infinite;
 }
+
 @keyframes l1 {
   100% {
     box-shadow: 0 0 0 20px #0000;
@@ -1339,12 +1393,12 @@ export default {
   font-weight: 400;
   font-size: var(--text-size-b);
 }
+
 .createslot {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  min-height: 685px;
 }
 
 .createslot-wrap {
@@ -1352,13 +1406,13 @@ export default {
 }
 
 .createslot-b-total {
-  color: var(--text-w);
+  color: var(--text-a);
   margin-top: 0rem;
   margin-bottom: 0rem;
-  background: var(--blue-c);
   border-radius: 8px;
+  background: var(--base-b);
   padding: 1rem;
-  box-shadow: var(--shadow-b);
+  border: 1px solid var(--border-a);
 }
 
 .createslot-b-total p {
@@ -1376,6 +1430,7 @@ export default {
   align-items: center;
   height: 80px;
 }
+
 .product-image-main div {
   padding: 0.25rem;
   border: 1px solid transparent;
@@ -1389,9 +1444,11 @@ export default {
 .product-image-main div.mainImage {
   border: 1px solid var(--blue-a);
 }
+
 .product-image-wrap {
   display: block;
 }
+
 .product-image-preview {
   display: flex;
   justify-content: center;
@@ -1412,6 +1469,7 @@ export default {
 .confirmation-content span {
   margin-left: 1rem;
 }
+
 .table-tag {
   padding: 0.5rem 0;
 }
@@ -1420,20 +1478,24 @@ export default {
   width: 80px;
   height: 80px;
 }
+
 .table-buttons {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .product-upload small {
   padding: 5px;
   line-height: 50px;
 }
+
 .p-counter {
   font-weight: 500;
   text-align: right;
   padding: 1px 5px;
 }
+
 .invalid {
   border: 1px solid red;
   color: red;
@@ -1443,6 +1505,7 @@ export default {
 img {
   border-radius: 8px;
 }
+
 .slots {
   display: flex;
   justify-content: center;
@@ -1584,6 +1647,7 @@ img {
 .product-upload {
   margin-top: 1rem;
 }
+
 .table-button {
   margin-left: 1rem;
 }
@@ -1591,6 +1655,7 @@ img {
 .field {
   margin-bottom: 1rem;
 }
+
 .field-radiobutton {
   display: flex;
   align-items: center;
@@ -1599,6 +1664,7 @@ img {
 .field-radiobutton label {
   margin-left: 0.25rem;
 }
+
 .field-label {
   line-height: 40px;
   color: var(--text-a);
