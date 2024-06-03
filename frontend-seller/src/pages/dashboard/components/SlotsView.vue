@@ -224,8 +224,15 @@
           field="mode"
           header="Mode"
           sortable
-          style="max-width: 5rem"
+          style="max-width: 5rem; text-transform: uppercase; font-weight: 600;"
         ></Column>
+
+        <Column
+        field="contract_units"
+        header="Units"
+        sortable
+        style="max-width: 5rem"
+      ></Column>
 
         <Column
           field="status"
@@ -234,12 +241,7 @@
           sortable
         ></Column>
 
-        <Column
-          field="contract_units"
-          header="Units"
-          sortable
-          style="max-width: 5rem"
-        ></Column>
+
 
         <Column field="contract_price" header="Price" sortable>
           <template #body="slotProps">
@@ -333,7 +335,7 @@
 
               <Button
                 class="table-button"
-                icon="pi pi-eye"
+                icon="pi pi-folder"
                 v-tooltip.top="'Show session'"
                 outlined
                 rounded
@@ -1419,8 +1421,8 @@ export default {
 }
 
 .createslot-b-total p:nth-child(1) {
-  font-size: var(--text-size-e);
-  font-weight: 700;
+  font-size: var(--text-size-f);
+  font-weight: 600;
 }
 
 .product-image-main {
