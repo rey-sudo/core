@@ -1,8 +1,6 @@
 <template>
   <div class="p-loading">
-   <div class="p-loading-wrap">
-    <span class="bars"/>
-   </div>
+    <span class="loader"></span>
   </div>
 </template>
 
@@ -11,7 +9,7 @@ export default {};
 </script>
 
 <style lang="css" scoped>
-.p-loading{
+.p-loading {
   width: 100%;
   height: 100%;
   display: flex;
@@ -19,43 +17,26 @@ export default {};
   align-items: center;
   margin: auto;
   position: absolute;
+  padding: 2rem;
 }
 
-.p-loading-wrap{
-    width: 100px;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.bars {
-  width: 8px;
-  height: 40px;
+.loader {
+  width: 38px;
+  height: 38px;
+  border: 4px solid var(--blue-c);
+  border-bottom-color: transparent;
+  border-radius: 50%;
   display: inline-block;
-  position: relative;
-  left: calc(50% - 90px);
-  top: 0;
-  border-radius: 4px;
-  color: var(--base-c);
   box-sizing: border-box;
-  animation: animbars 0.6s linear infinite;
+  animation: rotation 1s linear infinite;
 }
 
-@keyframes animbars {
+@keyframes rotation {
   0% {
-    box-shadow: 20px -10px, 40px 10px, 60px 0px;
-  }
-  25% {
-    box-shadow: 20px 0px, 40px 0px, 60px 10px;
-  }
-  50% {
-    box-shadow: 20px 10px, 40px -10px, 60px 0px;
-  }
-  75% {
-    box-shadow: 20px 0px, 40px 0px, 60px -10px;
+    transform: rotate(0deg);
   }
   100% {
-    box-shadow: 20px -10px, 40px 10px, 60px 0px;
+    transform: rotate(360deg);
   }
 }
 </style>
