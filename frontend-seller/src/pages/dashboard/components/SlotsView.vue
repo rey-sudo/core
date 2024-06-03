@@ -1407,11 +1407,11 @@ export default {
 }
 
 .createslot-b-total {
-  color: var(--text-a);
+  color: var(--text-w);
   margin-top: 0rem;
   margin-bottom: 0rem;
   border-radius: 8px;
-  background: var(--base-b);
+  background: var(--blue-c);
   padding: 1rem;
   border: 1px solid var(--border-a);
 }
