@@ -74,7 +74,7 @@
 
     <Dialog
       v-model:visible="createSlotDialogVisible"
-      :style="{ width: '425px' }"
+      :style="{ width: '400px' }"
       header="Enable slots"
       :modal="true"
       :draggable="false"
@@ -1419,8 +1419,8 @@ export default {
 }
 
 .createslot-b-total p:nth-child(1) {
-  font-size: var(--text-size-f);
-  font-weight: 600;
+  font-size: var(--text-size-e);
+  font-weight: 700;
 }
 
 .product-image-main {

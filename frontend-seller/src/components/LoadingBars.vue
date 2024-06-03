@@ -21,8 +21,8 @@ export default {};
 }
 
 .loader {
-  width: 38px;
-  height: 38px;
+  width: 34px;
+  height: 34px;
   border: 4px solid var(--blue-c);
   border-bottom-color: transparent;
   border-radius: 50%;
