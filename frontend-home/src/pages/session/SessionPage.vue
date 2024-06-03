@@ -164,7 +164,7 @@ export default {
 
 .session-top-left-price div span {
   line-height: 3rem;
-  font-size: var(--text-size-f);
+  font-size: var(--text-size-e);
 }
 
 .session {
