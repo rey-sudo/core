@@ -194,7 +194,7 @@
     >
       <template #header>
         <div class="dialog-header">
-          <span class="dialog-title">Product slots</span>
+          <span class="dialog-title">Enable slots</span>
           <div class="network-analyzer">
             <div class="loader" />
             <span>Scanning network 5s</span>
@@ -370,8 +370,8 @@
           <template #header>
             <div class="slots-header">
               <div class="slots-header-left">
-                <span>Product slots</span>
-                <span @click="runTX">Create or modify slots and more...</span>
+                <span>Enable slots</span>
+                <span @click="runTX">Create and modify sales orders.</span>
               </div>
 
               <div class="slots-header-right">
@@ -497,7 +497,7 @@
                   icon="pi pi-plus"
                   outlined
                   rounded
-                  v-tooltip.top="'Enable product slots'"
+                  v-tooltip.top="'Enable slots'"
                   @click="openCreateSlotDialog(slotProps.index)"
                 />
                 <Button
