@@ -45,11 +45,11 @@
 
                 <i class="pi pi-info-circle" />
               </label>
-              <span>3.240</span>
+              <span>3.240 ADA</span>
             </div>
             <div>
               <label>Collateral <i class="pi pi-info-circle" /></label>
-              <span>500</span>
+              <span>500 ADA</span>
             </div>
 
             <div>
@@ -59,7 +59,7 @@
 
             <div>
               <label>Discount <i class="pi pi-info-circle" /></label>
-              <span>40</span>
+              <span>40 ADA</span>
             </div>
 
             <div>
@@ -146,7 +146,7 @@ export default {
 }
 
 .session-top-left-price div {
-  margin-right: 4rem;
+  margin-right: auto;
   display: flex;
   flex-direction: column;
 }
@@ -204,12 +204,11 @@ export default {
 }
 
 .session-header-timer span {
-  background: var(--blue-c);
+  background: black;
   border-radius: 8px;
   padding: 0.25rem 0.75rem;
   margin: 0 0.25rem;
   color: var(--text-w);
-
   border: none;
 }
 
