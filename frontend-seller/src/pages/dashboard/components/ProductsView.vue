@@ -441,7 +441,7 @@
             <div class="products-header">
               <div class="products-header-left">
                 <span>Products</span>
-                <span>Create and modify product and more...</span>
+                <span>Create and modify product and more.</span>
               </div>
 
               <span class="p-input-icon-left">
@@ -510,7 +510,19 @@
               {{ slotProps.data.name.slice(0, 50) }}...
             </template>
           </Column>
-
+          <Column
+            field="stock_status"
+            header="Stock"
+            sortable
+            style="min-width: 8rem"
+          >
+            <template #body="slotProps">
+              <Tag
+                :value="slotProps.data.stock_status"
+                :severity="getStatusLabel(slotProps.data.stock_status)"
+              />
+            </template>
+          </Column>
           <Column
             field="category"
             header="Category"
@@ -519,23 +531,6 @@
           >
             <template #body="slotProps">
               {{ slotProps.data.category.code || slotProps.data.category }}
-            </template>
-          </Column>
-
-          <Column field="price" header="Price" sortable style="min-width: 8rem">
-            <template #body="slotProps">
-              {{ formatCurrency(slotProps.data.price) }}
-            </template>
-          </Column>
-
-          <Column
-            field="collateral"
-            header="Collateral"
-            sortable
-            style="min-width: 8rem"
-          >
-            <template #body="slotProps">
-              {{ formatCurrency(slotProps.data.collateral) }}
             </template>
           </Column>
 
@@ -558,19 +553,24 @@
             </template>
           </Column>
 
+          <Column field="price" header="Price" sortable style="min-width: 8rem">
+            <template #body="slotProps">
+              {{ formatCurrency(slotProps.data.price) }}
+            </template>
+          </Column>
+
           <Column
-            field="stock_status"
-            header="Stock"
+            field="collateral"
+            header="Collateral"
             sortable
             style="min-width: 8rem"
           >
             <template #body="slotProps">
-              <Tag
-                :value="slotProps.data.stock_status"
-                :severity="getStatusLabel(slotProps.data.stock_status)"
-              />
+              {{ formatCurrency(slotProps.data.collateral) }}
             </template>
           </Column>
+
+
 
           <Column
             field="rating"
@@ -1482,7 +1482,7 @@ img {
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: 1rem 2rem;
+  padding: 2rem;
 }
 
 .products-card {
@@ -1566,7 +1566,7 @@ img {
     padding: 0 1rem;
   }
 
-  .products-wrap{
+  .products-wrap {
     padding: 1rem;
   }
 }
@@ -1577,9 +1577,7 @@ img {
     align-items: flex-start;
   }
 
-
-
-  .products-wrap{
+  .products-wrap {
     padding: 1rem;
   }
 }
@@ -1590,15 +1588,11 @@ img {
     align-items: flex-start;
   }
 
-
-
-  .products-wrap{
+  .products-wrap {
     padding: 1rem;
   }
 }
 
 @media only screen and (min-width: 1200px) {
-
-
 }
 </style>

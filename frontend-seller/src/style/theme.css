@@ -2108,7 +2108,7 @@
     margin: 0;
   }
   .p-button.p-button-icon-only.p-button-rounded {
-    border-radius: 50%;
+    border-radius: 8px;
     height: 2.357rem;
   }
   .p-button.p-button-sm {
@@ -2775,7 +2775,7 @@
     padding: 1rem 1rem;
     color: var(--text-a);
     border-width: 0 0 1px 0;
-    font-weight: 500;
+    font-weight: 600;
     font-size: var(--text-size-b);
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
@@ -2832,6 +2832,7 @@
   .p-datatable .p-datatable-tbody > tr {
     background: #ffffff;
     color: var(--text-a);
+    font-weight: 400;
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
   .p-datatable .p-datatable-tbody > tr > td {

@@ -75,7 +75,7 @@
     <Dialog
       v-model:visible="createSlotDialogVisible"
       :style="{ width: '425px' }"
-      header="Create slots"
+      header="Enable slots"
       :modal="true"
       :draggable="false"
     >
@@ -334,6 +334,7 @@
               <Button
                 class="table-button"
                 icon="pi pi-eye"
+                v-tooltip.top="'Show session'"
                 outlined
                 rounded
                 @click="openSlotListDialog(slotProps.data)"
@@ -496,7 +497,7 @@
                   icon="pi pi-plus"
                   outlined
                   rounded
-                  v-tooltip.top="'Enable a slot'"
+                  v-tooltip.top="'Enable product slots'"
                   @click="openCreateSlotDialog(slotProps.index)"
                 />
                 <Button
@@ -507,15 +508,7 @@
                   :disabled="slotProps.data.slots_count < 1"
                   @click="openSlotListDialog(slotProps.index)"
                 >
-                  <i
-                    v-if="slotProps.data.slots_count > 0"
-                    v-badge.secondary
-                    class="pi pi-eye"
-                  />
-                  <i
-                    v-if="slotProps.data.slots_count < 1"
-                    class="pi pi-eye"
-                  />
+                  <i class="pi pi-folder" />
                 </Button>
               </div>
             </template>
@@ -1576,7 +1569,7 @@ img {
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: 1rem 2rem;
+  padding: 2rem;
 }
 
 .slots-card {
