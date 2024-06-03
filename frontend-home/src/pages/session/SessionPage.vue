@@ -73,9 +73,9 @@
         <!---RIGHT-->
         <div class="session-top-right">
           <div class="session-top-right-chat">
-            <div>x</div>
-
-            <div>text</div>
+            <div class="session-top-right-chat-top">1</div>
+            <div class="session-top-right-chat-body">2</div>
+            <div class="session-top-right-chat-bottom">3</div>
           </div>
         </div>
         <!---RIGHT-->
@@ -251,16 +251,28 @@ export default {
   overflow: hidden;
 }
 
-.session-top-right-chat div:nth-child(1) {
-  height: 100px;
+.session-top-right-chat-top {
+  height: 150px;
+  background: red;
   border-bottom: 1px solid var(--border-a);
 }
 
-.session-top-right-chat div:nth-child(2) {
-  background: var(--base-a);
-  min-height: 700px;
+.session-top-right-chat-body {
+  height: 100%;
+  background: blue;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+.session-top-right-chat-bottom {
+  height: 50px;
+  background: green;
+}
+
+.session-top-right-chat-top {
+  height: 150px;
+  background: red;
+  border-bottom: 1px solid var(--border-a);
 }
 
 .session-bottom {
