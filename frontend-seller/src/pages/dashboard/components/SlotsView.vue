@@ -1552,7 +1552,7 @@ img {
 }
 
 .field {
-  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 .field-radiobutton {
