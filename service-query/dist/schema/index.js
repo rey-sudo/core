@@ -11,7 +11,7 @@ const books = [
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
 // your data.
-export const typeDefs = `#graphql
+const typeDefs = `#graphql
   # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
 
   # This "Book" type defines the queryable fields for every book in our data source.
@@ -29,8 +29,9 @@ export const typeDefs = `#graphql
 `;
 // Resolvers define how to fetch the types defined in your schema.
 // This resolver retrieves books from the "books" array above.
-export const resolvers = {
+const resolvers = {
     Query: {
         books: () => books,
     },
 };
+export { typeDefs, resolvers };
