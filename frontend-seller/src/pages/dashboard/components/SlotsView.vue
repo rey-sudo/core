@@ -1411,7 +1411,7 @@ export default {
   margin-top: 0rem;
   margin-bottom: 0rem;
   border-radius: 8px;
-  padding: 1rem;
+  padding: 0.75rem;
   border: 1px solid var(--blue-c);
 }
 

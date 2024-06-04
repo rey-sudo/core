@@ -1202,11 +1202,11 @@
     color: var(--text-a);
   }
   .p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-up {
-    border-bottom: 1px solid var(--border-a) !important;
+    border-bottom: 1px solid var(--border-b) !important;
   }
 
   .p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-down {
-    border-top: 1px solid var(--border-a) !important;
+    border-top: 1px solid var(--border-b) !important;
   }
   .p-inputswitch {
     width: 3rem;
@@ -4311,8 +4311,8 @@
     background: #ffffff;
     color: var(--text-a);
     padding: 1rem;
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
   }
   .p-dialog .p-dialog-header .p-dialog-title {
     font-weight: 700;
@@ -4374,8 +4374,8 @@
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
-    border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
   }
   .p-dialog.p-confirm-dialog .p-confirm-dialog-icon {
     font-size: 2rem;
