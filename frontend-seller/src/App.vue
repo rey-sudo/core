@@ -1,29 +1,33 @@
 <template>
-  <main>
+<main>
     <router-view />
-  </main>
+</main>
 </template>
 
 <script>
 import entryAPI from "@/pages/entry/api";
-import { eventMachine } from "@/api/event";
+import {
+    eventMachine
+} from "@/api/event";
 
 export default {
-  name: "App",
-  setup() {
-    const { getUser } = entryAPI();
+    name: "App",
+    setup() {
+        const {
+            getUser
+        } = entryAPI();
 
-    return {
-      getUser,
-    };
-  },
-  mounted() {
-    this.getUser()
-      .then(() => eventMachine.setup())
-      .catch((err) => {
-        console.error(err);
-      });
-  },
+        return {
+            getUser,
+        };
+    },
+    mounted() {
+        this.getUser()
+            .then(() => eventMachine.setup())
+            .catch((err) => {
+                console.error(err);
+            });
+    },
 };
 </script>
 

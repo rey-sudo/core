@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="content"></div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+      const productEvents = new EventSource(
+        "http://localhost:8000/api/query/get-events"
+      );
+
+      productEvents.onopen = function () {
+        console.log("SSE connection opened.");
+        const div = document.getElementById("content");
+        const li = document.createElement("li");
+        li.textContent = "Connected";
+        div.appendChild(li);
+      };
+
+      productEvents.onerror = function (error) {
+        console.error("SSE connection error:", error);
+        const div = document.getElementById("content");
+        const li = document.createElement("li");
+        li.textContent = "Error";
+        div.appendChild(li);
+      };
+
+      productEvents.onmessage = function (event) {
+        const datum = JSON.parse(event.data);
+
+        const sendEvent = new CustomEvent("productEvents", {
+          detail: {
+            data: datum,
+          },
+        });
+
+        document.dispatchEvent(sendEvent);
+      };
+    </script>
+  </body>
+</html>
