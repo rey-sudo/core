@@ -33,7 +33,7 @@ const main = async () => {
       throw new Error("TOKEN_EXPIRATION error");
     }
 
-   /* DB.connect({
+    /* DB.connect({
       host: "mysql",
       port: 3306,
       user: "marketplace",
@@ -62,6 +62,14 @@ const main = async () => {
       route.getEventsMiddlewares,
 
       route.getEventsHandler
+    );
+
+    app.post(
+      "/api/query/send-event",
+
+      route.sendEventsMiddlewares,
+
+      route.sendEventsHandler
     );
 
     app.get("/healthcheck", (req, res) => {
