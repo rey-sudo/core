@@ -6,9 +6,9 @@ import { Request, Response } from "express";
 import { getSlotId } from "../utils/nano";
 import { sellerMiddleware } from "../utils/seller";
 import { requireAuth } from "../utils/required";
-import { sendEvent } from "./get-events";
 import { getContractCollateral, getContractPrice } from "../utils/other";
 import { _ } from "../utils/pino";
+import { sendEvent } from "../db/redis";
 
 ///////////////////////////////////////////////
 
@@ -168,7 +168,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
 
     await connection.commit();
 
-    sendEvent(SELLER.id, "slot:created");
+    sendEvent(SELLER.id, "slot:updated");
 
     res.status(200).send({ success: true });
   } catch (err: any) {

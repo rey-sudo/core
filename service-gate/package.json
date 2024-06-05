@@ -37,7 +37,8 @@
     "mysql2": "^3.7.0",
     "nanoid": "^3.3.7",
     "pino": "^8.17.2",
-    "postgres": "^3.4.3"
+    "postgres": "^3.4.3",
+    "redis": "^4.6.14"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",

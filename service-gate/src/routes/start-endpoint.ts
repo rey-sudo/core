@@ -5,8 +5,8 @@ import { Request, Response } from "express";
 import { requireAuth } from "../utils/required";
 import { sellerMiddleware } from "../utils/seller";
 import { BadRequestError } from "../errors";
-import { sendEvent } from "./get-events";
 import { sleep } from "../utils/sleep";
+import { sendEvent } from "../db/redis";
 
 const ADA_LOVELACE: number = 1000000;
 
@@ -125,7 +125,7 @@ const startEndpointHandler = async (req: Request, res: Response) => {
       },
     });
 
-    sendEvent(SELLER.id, "slot:created");
+    sendEvent(SELLER.id, "slot:updated");
   } catch (err: any) {
     await connection.rollback();
 
