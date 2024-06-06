@@ -37,7 +37,7 @@
       <div class="session-body">
         <!---LEFT-->
         <div class="session-body-left">
-          <div class="session-body-left-title">Product info</div>
+          <div class="session-body-left-title">Order Information</div>
           <div class="session-body-left-price">
             <div>
               <label
@@ -144,6 +144,9 @@ export default {
   align-items: center;
   text-align: start;
   margin-top: 2rem;
+  background: var(--blue-c);
+  border-radius: 8px;
+  padding: 1rem;
 }
 
 .session-body-left-price div {
@@ -155,7 +158,7 @@ export default {
   display: flex;
   align-items: baseline;
   font-size: var(--text-size-b);
-  color: var(--text-b);
+  color: var(--text-w);
 }
 
 .session-body-left-price div label i {
@@ -166,6 +169,7 @@ export default {
 .session-body-left-price div span {
   line-height: 3rem;
   font-size: var(--text-size-f);
+  color: var(--text-w);
 }
 
 .session {
@@ -233,6 +237,8 @@ export default {
 .session-body-left {
   width: 60%;
   padding: 2rem;
+  background: var(--base-b);
+  border-radius: 28px;
 }
 
 .session-body-right {
