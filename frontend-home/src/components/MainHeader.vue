@@ -582,7 +582,6 @@ i {
   color: var(--text-w);
   font-weight: 500;
   border-top: 1px solid var(--blue-c);
-  border-bottom: 1px solid var(--blue-c);
 }
 
 .header-menu.main {

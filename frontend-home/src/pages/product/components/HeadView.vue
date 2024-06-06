@@ -97,12 +97,12 @@
           <span> 1.720</span>
         </div>
 
-        <div class="head-stock">
-          <span>10 available (20 stock)</span>
-        </div>
-
         <div class="head-collateral">
           <MeterGroup :value="collateralBar" />
+        </div>
+
+        <div class="head-stock">
+          <span>5 available and 20 in stock</span>
         </div>
 
         <div class="head-button">
@@ -320,10 +320,10 @@ export default {
 }
 
 .head-stock {
-  font-size: var(--text-size-a);
-  font-weight: 400;
+  font-size: var(--text-size-b);
+  font-weight: 300;
   text-align: left;
-  margin-top: 1rem;
+  margin-top: 2rem;
   color: var(--text-b);
 }
 
@@ -407,7 +407,7 @@ export default {
 
 .head-collateral {
   width: 50%;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .head-seller-badge {
@@ -585,7 +585,7 @@ export default {
   justify-content: center;
   padding: 0.75rem;
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .head .head-button.outline {
