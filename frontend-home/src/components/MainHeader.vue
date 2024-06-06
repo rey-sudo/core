@@ -504,7 +504,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--blue-c);
 }
 
 .header-right-count span {
