@@ -69,4 +69,12 @@ build:
       sync:
         manual:
           - src: 'src/**/*.ts'
-            dest: .               
+            dest: .
+    - image: pairfy/service-event
+      context: service-event
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .                           

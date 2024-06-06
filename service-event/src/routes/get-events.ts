@@ -3,6 +3,7 @@ import { sellerMiddleware } from "../utils/seller";
 import { requireAuth } from "../utils/required";
 import { BadRequestError } from "../errors";
 import { _ } from "../utils/pino";
+import { eventBus } from "../db/redis";
 
 const clients: any = {};
 
@@ -22,13 +23,12 @@ const sendEvent = (clientId: string, type: string, payload?: any) => {
 
 const getEventsMiddlewares: any = [];
 
-
 const getEventsHandler = async (req: Request, res: Response) => {
   try {
     console.log("YES");
 
     const SELLER = {
-      id: "KD6HQNRE00PNVJGU5M58"
+      id: "KD6HQNRE00PNVJGU5M58",
     };
 
     if (clients.hasOwnProperty(SELLER.id)) {
@@ -59,6 +59,12 @@ const getEventsHandler = async (req: Request, res: Response) => {
       delete clients[SELLER.id];
       clearInterval(sendPing);
     });
+
+    const listener = (message: any, channel: any) => {
+      console.log(message, channel);
+    };
+
+    await eventBus.client.psubscribe(SELLER.id, listener);
   } catch (err) {
     _.error(err);
     throw new BadRequestError("failed");

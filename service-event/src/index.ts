@@ -6,6 +6,7 @@ import { NotFoundError, errorMiddleware } from "./errors";
 import serviceProductListener from "./kafka/service-product";
 import compression from "compression";
 import "dotenv/config";
+import { eventBus, listenEvents } from "./db/redis";
 
 const main = async () => {
   try {
@@ -33,6 +34,10 @@ const main = async () => {
       throw new Error("TOKEN_EXPIRATION error");
     }
 
+    if (!process.env.EVENT_BUS_URI) {
+      throw new Error("EVENT_BUS_URI error");
+    }
+
     /* DB.connect({
       host: "mysql",
       port: 3306,
@@ -42,6 +47,15 @@ const main = async () => {
     });
 */
     //serviceProductListener();
+
+    await eventBus
+      .connect({
+        url: process.env.EVENT_BUS_URI,
+        connectTimeout: 100000,
+        keepAlive: 100000,
+      })
+      .then(() => console.log("eventBus connected"))
+      .catch((err: any) => catcher(err));
 
     checkpoint("ready");
 
