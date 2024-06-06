@@ -31,7 +31,7 @@ spec:
               value: "8000"
             - name: EXPRESS_TIMEOUT
               value: "30000"                                                                  
-            - name: BUS_STREAMING_URI  
+            - name: EVENT_BUS_URI  
               valueFrom:
                 configMapKeyRef:
                   name: streaming-config

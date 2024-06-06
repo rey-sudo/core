@@ -176,7 +176,7 @@ export default {
     const collateralBar = ref([
       {
         label: "Collateral 500 ADA",
-        color: "#60a5fa",
+        color: "var(--blue-c)",
         value: 30,
         icon: "pi pi-crown",
       },
@@ -545,14 +545,14 @@ export default {
 .head .head-rating span {
   margin-right: 0.5rem;
   font-size: var(--text-size-b);
-  color: var(--blue-a);
+  color: var(--blue-c);
   font-weight: 600;
 }
 
 .head .head-rating span:nth-child(3) {
   font-weight: 400;
   font-size: var(--text-size-b);
-  color: var(--blue-a);
+  color: var(--blue-c);
 }
 
 .head .head-price {
