@@ -315,8 +315,7 @@ export default {
   width: inherit;
   padding-top: 2rem;
   padding-bottom: 4rem;
-  margin-top: 2rem;
-  border-top: 1px solid var(--border-b);
+ border-top: 1px solid var(--border-b);
 }
 
 .head-stock {
