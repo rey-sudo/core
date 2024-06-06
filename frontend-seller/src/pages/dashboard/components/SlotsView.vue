@@ -83,7 +83,7 @@
         <LoadingBars v-if="createSlotLoader" />
 
         <div class="createslot-wrap" v-if="!createSlotLoader">
-          <div class="createslot-b-total">
+          <div class="createslot-total">
             <p>Total slots {{ computedSlots }}</p>
             <p>Stock: {{ productList[createSlotIndex].stock }}</p>
             <p>Total Units: {{ computedUnits }}</p>
@@ -116,6 +116,7 @@
               id="units"
               v-model="createSlotForm.product_units"
               showButtons
+              placeholder="Product Units"
               integeronly
               locale="en-US"
               :min="0"
@@ -140,6 +141,7 @@
               id="batch"
               v-model="createSlotForm.batch_number"
               showButtons
+              placeholder="Batch Number"
               :disabled="!createSlotForm.batch_mode"
               integeronly
               locale="en-US"
@@ -163,6 +165,7 @@
               id="unitDiscount"
               v-model="createSlotForm.product_discount"
               showButtons
+              placeholder="Select A Percentage"
               :disabled="!createSlotForm.batch_mode"
               integeronly
               suffix=" % OFF"
@@ -224,15 +227,15 @@
           field="mode"
           header="Mode"
           sortable
-          style="max-width: 5rem; text-transform: uppercase; font-weight: 600;"
+          style="max-width: 5rem; text-transform: uppercase; font-weight: 600"
         ></Column>
 
         <Column
-        field="contract_units"
-        header="Units"
-        sortable
-        style="max-width: 5rem"
-      ></Column>
+          field="contract_units"
+          header="Units"
+          sortable
+          style="max-width: 5rem"
+        ></Column>
 
         <Column
           field="status"
@@ -240,8 +243,6 @@
           style="max-width: 5rem"
           sortable
         ></Column>
-
-
 
         <Column field="contract_price" header="Price" sortable>
           <template #body="slotProps">
@@ -1406,21 +1407,22 @@ export default {
   width: 100%;
 }
 
-.createslot-b-total {
+.createslot-total {
   color: var(--text-a);
   margin-top: 0rem;
   margin-bottom: 0rem;
   border-radius: 8px;
   padding: 0.75rem;
-  border: 1px solid var(--blue-c);
+  border: 1px solid var(--border-b);
+  background: var(--base-b);
 }
 
-.createslot-b-total p {
+.createslot-total p {
   line-height: 1rem;
 }
 
-.createslot-b-total p:nth-child(1) {
-  font-size: var(--text-size-f);
+.createslot-total p:nth-child(1) {
+  font-size: var(--text-size-e);
   font-weight: 600;
 }
 

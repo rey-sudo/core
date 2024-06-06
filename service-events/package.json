@@ -1,5 +1,5 @@
 {
-  "name": "service-query",
+  "name": "service-events",
   "version": "1.0.0",
   "description": "CRUD",
   "main": "index.js",

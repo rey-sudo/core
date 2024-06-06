@@ -10642,12 +10642,12 @@
   }
 
   .p-metergroup.p-metergroup-horizontal .p-metergroup-meter:first-of-type {
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
   }
   .p-metergroup.p-metergroup-horizontal .p-metergroup-meter:last-of-type {
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
   }
   .p-metergroup.p-metergroup-vertical {
     flex-direction: row;

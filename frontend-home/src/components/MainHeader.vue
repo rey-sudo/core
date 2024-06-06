@@ -145,7 +145,7 @@
       </div>
 
       <div class="header-button left">
-        <label for=""> <img src="@/assets/store.svg" alt="" /></label> 
+        <label for=""> <img src="@/assets/store.svg" alt="" /></label>
         <div>
           <span>Sell a</span>
           <span>Product</span>
@@ -535,7 +535,6 @@ export default {
   display: flex;
   flex-direction: column;
   margin-left: 1rem;
-
 }
 
 .header .header-button div:hover {
@@ -580,9 +579,11 @@ i {
   left: 0;
   width: 100%;
   align-items: center;
-  background: var(--blue-a);
+  background: var(--blue-b);
   color: var(--text-w);
   font-weight: 500;
+  border-top: 1px solid var(--blue-c);
+  border-bottom: 1px solid var(--blue-c);
 }
 
 .header-menu.main {
