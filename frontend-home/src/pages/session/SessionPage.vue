@@ -144,7 +144,7 @@ export default {
   align-items: center;
   text-align: start;
   margin-top: 2rem;
-  background: var(--blue-c);
+  background: var(--base-a);
   border-radius: 8px;
   padding: 1rem;
 }
@@ -158,7 +158,7 @@ export default {
   display: flex;
   align-items: baseline;
   font-size: var(--text-size-b);
-  color: var(--text-w);
+  color: var(--text-a);
 }
 
 .session-body-left-price div label i {
@@ -169,7 +169,7 @@ export default {
 .session-body-left-price div span {
   line-height: 3rem;
   font-size: var(--text-size-f);
-  color: var(--text-w);
+  color: var(--text-a);
 }
 
 .session {
