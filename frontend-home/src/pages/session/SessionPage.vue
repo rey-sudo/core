@@ -40,11 +40,6 @@
           <div class="session-body-left-title">Product info</div>
           <div class="session-body-left-price">
             <div>
-              <label>Type <i class="pi pi-info-circle" /></label>
-              <span>Batch</span>
-            </div>
-
-            <div>
               <label
                 >Price
 
@@ -59,13 +54,18 @@
             </div>
 
             <div>
-              <label>Units <i class="pi pi-info-circle" /></label>
-              <span>2</span>
+              <label>Discount <i class="pi pi-info-circle" /></label>
+              <span>₳ 40</span>
             </div>
 
             <div>
-              <label>Discount <i class="pi pi-info-circle" /></label>
-              <span>₳ 40</span>
+              <label>Type <i class="pi pi-info-circle" /></label>
+              <span>Batch</span>
+            </div>
+
+            <div>
+              <label>Units <i class="pi pi-info-circle" /></label>
+              <span>2</span>
             </div>
           </div>
         </div>
@@ -147,7 +147,7 @@ export default {
 }
 
 .session-body-left-price div {
-  margin-right: auto;
+  margin-right: 4rem;
   display: block;
 }
 
@@ -165,7 +165,7 @@ export default {
 
 .session-body-left-price div span {
   line-height: 3rem;
-  font-size: var(--text-size-e);
+  font-size: var(--text-size-f);
 }
 
 .session {
