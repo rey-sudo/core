@@ -46,12 +46,12 @@ export default {};
   border-bottom: 1px solid var(--border-a);
 }
 
-.chat-top div:nth-child(1) {
+.chat-top div {
   border-radius: 50%;
   width: 40px;
   height: 40px;
   border: 1px solid var(--border-b);
-  background: black;
+  background: var(--base-a);
 }
 
 .chat-top span {
