@@ -67,6 +67,10 @@
 
       <!--RIGHT-->
       <div class="head-right">
+        <div class="head-info">
+          <span>5 available and 20 in stock</span>
+        </div>
+
         <div class="head-name">
           Sony Interactive Entertainment - PlayStation 5 Slim Console - White
         </div>
@@ -99,10 +103,6 @@
 
         <div class="head-collateral">
           <MeterGroup :value="collateralBar" />
-        </div>
-
-        <div class="head-stock">
-          <span>5 available and 20 in stock</span>
         </div>
 
         <div class="head-button">
@@ -315,14 +315,13 @@ export default {
   width: inherit;
   padding-top: 2rem;
   padding-bottom: 4rem;
- border-top: 1px solid var(--border-b);
+  border-top: 1px solid var(--border-b);
 }
 
-.head-stock {
+.head-info {
   font-size: var(--text-size-b);
   font-weight: 300;
   text-align: left;
-  margin-top: 2rem;
   color: var(--text-b);
 }
 
@@ -521,6 +520,7 @@ export default {
   font-weight: 700;
   text-align: left;
   width: 90%;
+  margin-top: 1rem;
 }
 
 .head .head-legend {
@@ -585,7 +585,7 @@ export default {
   justify-content: center;
   padding: 0.75rem;
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 4rem;
 }
 
 .head .head-button.outline {
