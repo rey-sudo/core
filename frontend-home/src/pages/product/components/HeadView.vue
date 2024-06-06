@@ -393,6 +393,10 @@ export default {
   margin-left: 1rem;
 }
 
+.head-seller-head div span {
+  line-height: 1.5rem;
+}
+
 .head-seller-head div span:nth-child(1) {
   font-weight: 500;
 }

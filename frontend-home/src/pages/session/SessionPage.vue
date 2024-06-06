@@ -73,11 +73,7 @@
 
         <!---RIGHT-->
         <div class="session-body-right">
-          <div class="session-body-right-chat">
-            <div class="session-body-right-chat-top">1</div>
-            <div class="session-body-right-chat-body">2</div>
-            <div class="session-body-right-chat-bottom">3</div>
-          </div>
+          <TwoChat />
         </div>
         <!---RIGHT-->
       </div>
@@ -88,11 +84,13 @@
 
 <script>
 import MainHeader from "@/components/MainHeader.vue";
+import TwoChat from "@/pages/session/components/TwoChat.vue";
 import { ref } from "vue";
 
 export default {
   components: {
     MainHeader,
+    TwoChat,
   },
 
   setup() {
@@ -243,35 +241,6 @@ export default {
 
 .session-body-right {
   width: 40%;
-}
-
-.session-body-right-chat {
-  background: var(--base-b);
-  width: 400px;
-  height: 700px;
-  border-radius: 28px;
-  margin-left: auto;
-  border: 1px solid var(--border-b);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.session-body-right-chat-body {
-  height: 100%;
-  background: var(--base-a);
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-
-.session-body-right-chat-bottom {
-  height: 50px;
-  background: green;
-}
-
-.session-body-right-chat-top {
-  height: 150px;
-  border-bottom: 1px solid var(--border-a);
 }
 
 .session-bottom {
