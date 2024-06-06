@@ -551,7 +551,7 @@ export default {
 
 .head .head-rating span:nth-child(3) {
   font-weight: 400;
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
   color: var(--blue-c);
 }
 
