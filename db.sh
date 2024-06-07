@@ -19,5 +19,3 @@ FROM performance_schema.global_variables WHERE variable_name='log_bin';
 
 
 FLUSH PRIVILEGES;
-
-CREATE DATABASE service_seller;

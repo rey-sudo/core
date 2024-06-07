@@ -6,7 +6,7 @@ import { NotFoundError, errorMiddleware } from "./errors";
 import serviceProductListener from "./kafka/service-product";
 import compression from "compression";
 import "dotenv/config";
-import { eventBus, listenEvents } from "./db/redis";
+import { eventBus } from "./db/redis";
 
 const main = async () => {
   try {
