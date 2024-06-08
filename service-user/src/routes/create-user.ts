@@ -1,63 +1,42 @@
-import { hashPassword } from "../utils/password";
 import { BadRequestError } from "../errors";
 import { Request, Response } from "express";
 import { getSellerId } from "../utils/nano";
-import { createToken } from "../utils/token";
 import { _ } from "../utils/pino";
 import DB from "../db";
 
-const createSellerMiddlewares: any = [];
+const createUserMiddlewares: any = [];
 
-const createSellerHandler = async (req: Request, res: Response) => {
+const createUserHandler = async (req: Request, res: Response) => {
   let connection = null;
 
   const params = req.body;
-  
-  console.log("1");
 
   try {
     connection = await DB.client.getConnection();
 
     await connection.beginTransaction();
 
-    console.log("2");
-
-    const token = createToken({
-      role: "create-seller",
-      entity: "seller",
-      email: params.email,
-      username: params.username,
-    });
-
-    const password = await hashPassword(params.password);
-
     const schemeData = `
-    INSERT INTO sellers (
+    INSERT INTO users (
       id,
       username,
-      email,
-      password_hash,
-      verified,
+      wallet,
+      signed_tx,
       country,
       trade_terms,
       terms_accepted,
-      avatar_base,
-      avatar_path,
       public_ip,
       schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const schemeValue = [
       getSellerId(),
       params.username,
-      params.email,
-      password,
-      false,
+      params.wallet,
+      params.signed_tx,
       params.country,
-      "Terms and conditions: Provide correct data for effective shipping.",
+      "Terms and conditions acepted.",
       params.terms_accepted,
-      "https://example.com",
-      "/avatar.jpg",
       "192.168.1.1",
       0,
     ];
@@ -72,10 +51,10 @@ const createSellerHandler = async (req: Request, res: Response) => {
 
     _.error(err);
 
-    throw new BadRequestError("invalid username or email");
+    throw new BadRequestError("invalid username or wallet");
   } finally {
     connection.release();
   }
 };
 
-export { createSellerMiddlewares, createSellerHandler };
+export { createUserMiddlewares, createUserHandler };

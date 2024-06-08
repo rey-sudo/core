@@ -76,6 +76,14 @@ const main = async () => {
       route.currentSellerHandler
     );
 
+    app.post(
+      "/api/seller/delete-user",
+
+      route.createSellerMiddlewares,
+
+      route.createSellerHandler
+    );
+
     app.get(
       "/api/seller/logout",
 

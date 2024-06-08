@@ -2,10 +2,10 @@ import { Request, Response, NextFunction } from "express";
 import { _ } from "./pino";
 import jwt from "jsonwebtoken";
 
-interface SellerToken {
+interface UserToken {
   id: string;
   role: string;
-  email: string;
+  wallet: string;
   avatar: string;
   country: string;
   username: string;
@@ -14,12 +14,12 @@ interface SellerToken {
 declare global {
   namespace Express {
     interface Request {
-      sellerData: SellerToken;
+      userData: UserToken;
     }
   }
 }
 
-const sellerMiddleware = (req: Request, res: Response, next: NextFunction) => {
+const userMiddleware = (req: Request, res: Response, next: NextFunction) => {
   if (!req.session?.jwt) {
     return next();
   }
@@ -27,14 +27,14 @@ const sellerMiddleware = (req: Request, res: Response, next: NextFunction) => {
   try {
     const sessionData = jwt.verify(
       req.session.jwt,
-      process.env.SELLER_JWT_KEY!
-    ) as SellerToken;
+      process.env.USER_JWT_KEY!
+    ) as UserToken;
 
-    if (sessionData.role !== "SELLER") {
+    if (sessionData.role !== "USER") {
       return next();
     }
 
-    req.sellerData = sessionData;
+    req.userData = sessionData;
   } catch (err) {
     _.error(err);
   }
@@ -42,4 +42,4 @@ const sellerMiddleware = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
-export { sellerMiddleware, SellerToken };
+export { userMiddleware, UserToken };
