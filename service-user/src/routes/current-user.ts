@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { sellerMiddleware } from "../utils/user";
+import { userMiddleware } from "../utils/user";
 
-const currentSellerMiddlewares: any = [sellerMiddleware];
+const currentUserMiddlewares: any = [userMiddleware];
 
-const currentSellerHandler = async (req: Request, res: Response) => {
-  res.send({ sellerData: req.sellerData || null });
+const currentUserHandler = async (req: Request, res: Response) => {
+  res.send({ userData: req.userData || null });
 };
 
-export { currentSellerMiddlewares, currentSellerHandler };
+export { currentUserMiddlewares, currentUserHandler };

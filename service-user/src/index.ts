@@ -53,44 +53,44 @@ const main = async () => {
     errorEvents.forEach((e: string) => process.on(e, (err) => catcher(err)));
 
     app.post(
-      "/api/seller/create-user",
+      "/api/user/create-user",
 
-      route.createSellerMiddlewares,
+      route.createUserMiddlewares,
 
-      route.createSellerHandler
+      route.createUserHandler
     );
 
     app.post(
-      "/api/seller/login-seller",
+      "/api/user/login-user",
 
-      route.loginSellerMiddlewares,
+      route.loginUserMiddlewares,
 
-      route.loginSellerHandler
+      route.loginUserHandler
     );
 
     app.get(
-      "/api/seller/current-seller",
+      "/api/user/current-user",
 
-      route.currentSellerMiddlewares,
+      route.currentUserMiddlewares,
 
-      route.currentSellerHandler
+      route.currentUserHandler
     );
 
     app.post(
-      "/api/seller/delete-user",
+      "/api/user/delete-user",
 
-      route.createSellerMiddlewares,
+      route.createUserMiddlewares,
 
-      route.createSellerHandler
+      route.createUserHandler
     );
 
     app.get(
-      "/api/seller/logout",
+      "/api/user/logout",
 
       route.logoutHandler
     );
 
-    app.get("/api/seller/healthcheck", (req, res) => {
+    app.get("/api/user/healthcheck", (req, res) => {
       res.status(200).send('Test OK');
     });
 
