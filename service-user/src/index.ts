@@ -36,7 +36,7 @@ const main = async () => {
       port: 3306,
       user: "marketplace",
       password: "password",
-      database: "service_seller",
+      database: "service_user",
     });
 
     checkpoint("ready");
