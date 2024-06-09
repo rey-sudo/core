@@ -1,5 +1,4 @@
 import { BadRequestError } from "../errors";
-import { comparePassword } from "../utils/password";
 import { Request, Response } from "express";
 import { createToken } from "../utils/token";
 import { UserToken, userMiddleware } from "../utils/user";
@@ -28,13 +27,6 @@ const loginUserHandler = async (req: Request, res: Response) => {
     }
 
     const USER = rows[0];
-
-    const passwordsMatch = await comparePassword(
-      USER.password_hash,
-      params.password
-    );
-
-    if (!passwordsMatch) throw new BadRequestError("failed");
 
 
     const userData: UserToken = {
