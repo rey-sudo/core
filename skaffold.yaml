@@ -78,3 +78,11 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .                           
+    - image: pairfy/service-user
+      context: service-user
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .              
