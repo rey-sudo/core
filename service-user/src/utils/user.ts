@@ -6,7 +6,6 @@ interface UserToken {
   id: string;
   role: string;
   wallet: string;
-  avatar: string;
   country: string;
   username: string;
 }

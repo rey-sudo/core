@@ -16,6 +16,8 @@ const createUserHandler = async (req: Request, res: Response) => {
 
     await connection.beginTransaction();
 
+    console.log(req.body);
+
     const schemeData = `
     INSERT INTO users (
       id,
@@ -23,11 +25,10 @@ const createUserHandler = async (req: Request, res: Response) => {
       wallet,
       signed_tx,
       country,
-      trade_terms,
       terms_accepted,
       public_ip,
       schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const schemeValue = [
       getUserId(),
@@ -35,7 +36,6 @@ const createUserHandler = async (req: Request, res: Response) => {
       params.wallet,
       params.signed_tx,
       params.country,
-      "Terms and conditions acepted.",
       params.terms_accepted,
       "192.168.1.1",
       0,
@@ -51,7 +51,7 @@ const createUserHandler = async (req: Request, res: Response) => {
 
     _.error(err);
 
-    throw new BadRequestError("invalid username or wallet");
+    throw new BadRequestError("User created or invalid username/wallet");
   } finally {
     connection.release();
   }

@@ -36,15 +36,11 @@ const loginUserHandler = async (req: Request, res: Response) => {
 
     if (!passwordsMatch) throw new BadRequestError("failed");
 
-    if (USER.verified !== 1) {
-      throw new Error("unverified");
-    }
 
     const userData: UserToken = {
       id: USER.id,
       role: "USER",
       wallet: USER.wallet,
-      avatar: USER.avatar_base + USER.avatar_path,
       country: USER.country,
       username: USER.username,
     };
@@ -61,7 +57,7 @@ const loginUserHandler = async (req: Request, res: Response) => {
 
     _.error(err);
 
-    throw new BadRequestError("invalid credentials or unverified check your wallet");
+    throw new BadRequestError("Invalid credentials or check your wallet");
   } finally {
     connection.release();
   }
