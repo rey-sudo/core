@@ -1,6 +1,6 @@
 import { BadRequestError } from "../errors";
 import { Request, Response } from "express";
-import { getSellerId } from "../utils/nano";
+import { getUserId } from "../utils/nano";
 import { _ } from "../utils/pino";
 import DB from "../db";
 
@@ -30,7 +30,7 @@ const createUserHandler = async (req: Request, res: Response) => {
      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const schemeValue = [
-      getSellerId(),
+      getUserId(),
       params.username,
       params.wallet,
       params.signed_tx,

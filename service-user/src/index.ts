@@ -23,8 +23,8 @@ const main = async () => {
       throw new Error("CORS_DOMAINS error");
     }
 
-    if (!process.env.SELLER_JWT_KEY) {
-      throw new Error("SELLER_JWT_KEY error");
+    if (!process.env.USER_JWT_KEY) {
+      throw new Error("USER_JWT_KEY error");
     }
 
     if (!process.env.TOKEN_EXPIRATION) {

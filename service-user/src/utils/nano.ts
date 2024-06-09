@@ -1,5 +1,5 @@
 import { customAlphabet } from "nanoid";
 
-const getSellerId = customAlphabet("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", 20);
+const getUserId = customAlphabet("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", 20);
 
-export { getSellerId};
+export { getUserId};
