@@ -437,6 +437,14 @@
             </template>
           </Column>
 
+
+
+          <Column field="price" header="Price" sortable style="min-width: 8rem">
+            <template #body="slotProps">
+              {{ formatCurrency(slotProps.data.price) }}
+            </template>
+          </Column>
+          
           <Column
           field="collateral"
           header="Collateral"
@@ -448,12 +456,6 @@
           </template>
         </Column>
 
-
-          <Column field="price" header="Price" sortable style="min-width: 8rem">
-            <template #body="slotProps">
-              {{ formatCurrency(slotProps.data.price) }}
-            </template>
-          </Column>
 
 
 
@@ -485,7 +487,7 @@
               {{ slotProps.data.category }}
             </template>
           </Column>
-          
+
           <Column :exportable="false" style="min-width: 8rem">
             <template #body="slotProps">
               <div class="table-buttons">
