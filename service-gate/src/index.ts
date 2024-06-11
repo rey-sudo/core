@@ -3,7 +3,7 @@ import DB from "./db";
 import { app } from "./app";
 import { catcher, check, checkpoint } from "./pod/index";
 import { NotFoundError, errorMiddleware } from "./errors";
-import serviceProductListener from "./kafka/service-product";
+import serviceProductListener from "./kafka/products";
 import compression from "compression";
 import { eventBus } from "./db/redis";
 

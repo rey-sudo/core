@@ -17,7 +17,7 @@ const serviceProductListener = async () => {
         fromBeginning: true,
       });
 
-      _.info("TOPIC" + TOPIC_NAME);
+      _.info("TOPIC " + TOPIC_NAME);
     })
     .then(() =>
       consumer.run({

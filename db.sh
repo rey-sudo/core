@@ -19,3 +19,5 @@ FROM performance_schema.global_variables WHERE variable_name='log_bin';
 
 
 FLUSH PRIVILEGES;
+
+SET GLOBAL binlog_expire_logs_seconds = 604800;
