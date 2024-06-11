@@ -2775,7 +2775,7 @@
     padding: 1rem 1rem;
     color: var(--text-a);
     border-width: 0 0 1px 0;
-    font-weight: 600;
+    font-weight: 700;
     font-size: var(--text-size-b);
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
   }

@@ -438,15 +438,16 @@
           </Column>
 
           <Column
-            field="category"
-            header="Category"
-            sortable
-            style="min-width: 8rem; text-transform: capitalize"
-          >
-            <template #body="slotProps">
-              {{ slotProps.data.category }}
-            </template>
-          </Column>
+          field="collateral"
+          header="Collateral"
+          sortable
+          style="min-width: 8rem"
+        >
+          <template #body="slotProps">
+            {{ formatCurrency(slotProps.data.collateral) }}
+          </template>
+        </Column>
+
 
           <Column field="price" header="Price" sortable style="min-width: 8rem">
             <template #body="slotProps">
@@ -454,16 +455,7 @@
             </template>
           </Column>
 
-          <Column
-            field="collateral"
-            header="Collateral"
-            sortable
-            style="min-width: 8rem"
-          >
-            <template #body="slotProps">
-              {{ formatCurrency(slotProps.data.collateral) }}
-            </template>
-          </Column>
+
 
           <Column
             field="slots_count"
@@ -482,6 +474,18 @@
             </template>
           </Column>
 
+                  
+          <Column
+            field="category"
+            header="Category"
+            sortable
+            style="min-width: 8rem; text-transform: capitalize"
+          >
+            <template #body="slotProps">
+              {{ slotProps.data.category }}
+            </template>
+          </Column>
+          
           <Column :exportable="false" style="min-width: 8rem">
             <template #body="slotProps">
               <div class="table-buttons">
