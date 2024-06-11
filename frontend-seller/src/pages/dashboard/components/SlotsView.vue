@@ -228,11 +228,12 @@
         </Column>
 
         <Column
-          field="mode"
-          header="Mode"
+          field="status"
+          header="Status"
+          style="max-width: 5rem"
           sortable
-          style="max-width: 5rem; text-transform: uppercase; font-weight: 600"
         ></Column>
+
 
         <Column
           field="contract_units"
@@ -242,11 +243,12 @@
         ></Column>
 
         <Column
-          field="status"
-          header="Status"
-          style="max-width: 5rem"
-          sortable
-        ></Column>
+        field="mode"
+        header="Mode"
+        sortable
+        style="max-width: 5rem;  font-weight: 600"
+      ></Column>
+
 
         <Column field="contract_price" header="Price" sortable>
           <template #body="slotProps">
@@ -1336,10 +1338,11 @@ export default {
 .column-block-row {
   display: flex;
   justify-content: space-between;
+  font-size: var(--text-size-a); 
 }
 
-.column-block-row span:nth-child(2) {
-  font-size: var(--text-size-a);
+.column-block-row span{
+font-size: var(--text-size-a); 
 }
 
 .disabled {
