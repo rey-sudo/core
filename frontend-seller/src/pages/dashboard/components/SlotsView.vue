@@ -342,8 +342,8 @@
 
               <Button
                 class="table-button"
-                icon="pi pi-folder"
-                v-tooltip.top="'Show session'"
+                icon="pi pi-arrow-up-right"
+                v-tooltip.top="'Show the negotiation session.'"
                 outlined
                 rounded
                 @click="openSlotListDialog(slotProps.data)"

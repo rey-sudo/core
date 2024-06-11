@@ -129,7 +129,7 @@ export default {
 
 <style lang="css" scoped>
 .session-body-left-title {
-  font-size: var(--text-size-e);
+  font-size: var(--text-size-f);
   text-align: start;
   font-weight: 600;
 }
@@ -142,9 +142,8 @@ export default {
   align-items: center;
   text-align: start;
   margin-top: 2rem;
-  background: var(--base-a);
   border-radius: 8px;
-  padding: 1rem;
+
 }
 
 .session-body-left-price div {
@@ -234,9 +233,9 @@ export default {
 
 .session-body-left {
   width: 60%;
-  padding: 2rem;
   background: var(--base-b);
   border-radius: 28px;
+  padding: 2rem;
 }
 
 .session-body-right {
