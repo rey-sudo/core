@@ -71,7 +71,7 @@ const main = async () => {
     errorEvents.forEach((e: string) => process.on(e, (err) => catcher(err)));
 
     app.get(
-      "/api/query/get-events",
+      "/api/event/get-events",
 
       route.getEventsMiddlewares,
 
@@ -79,14 +79,14 @@ const main = async () => {
     );
 
     app.post(
-      "/api/query/send-event",
+      "/api/event/send-event",
 
       route.sendEventsMiddlewares,
 
       route.sendEventsHandler
     );
 
-    app.get("/healthcheck", (req, res) => {
+    app.get("/api/event/healthcheck", (req, res) => {
       res.status(200).json({ status: "Test OK" });
     });
 

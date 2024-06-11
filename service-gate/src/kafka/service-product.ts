@@ -11,12 +11,14 @@ const serviceProductListener = async () => {
 
   await consumer
     .connect()
-    .then(() =>
-      consumer.subscribe({
+    .then(() => {
+      const status = consumer.subscribe({
         topic: TOPIC_NAME,
         fromBeginning: true,
-      })
-    )
+      });
+
+      console.log(status);
+    })
     .then(() =>
       consumer.run({
         eachMessage: async ({ topic, partition, message }: any) => {
@@ -131,7 +133,7 @@ const handleUpdate = async (
   { topic, partition, message }: any
 ) => {
   const payload = data.after;
-  
+
   payload.created_at = stringToTimestamp(payload.created_at);
   payload.schema_t = stringToTimestamp(payload.schema_t);
 

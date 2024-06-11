@@ -20,6 +20,7 @@ spec:
     schema.history.internal.kafka.bootstrap.servers: "streaming-kafka-bootstrap:9092,streaming-kafka-bootstrap:9092,streaming-kafka-bootstrap:9092"
     schema.history.internal.kafka.topic: "schemahistory.fullfillment"
     include.schema.changes: "true"     
-    tasks.max: 1 
-
+    tasks.max: 1,
+    snapshot.mode: "initial"
+    snapshot.locking.mode: "minimal"
     

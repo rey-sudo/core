@@ -2,7 +2,7 @@ import { HOST } from "@/api";
 
 const eventMachine = {
   setup: () => {
-    const productEvents = new EventSource(HOST + "/api/product/get-events", {
+    const productEvents = new EventSource(HOST + "/api/event/get-events", {
       withCredentials: true,
     });
 
@@ -28,7 +28,7 @@ const eventMachine = {
 
     /////
 
-    const gateEvents = new EventSource(HOST + "/api/gate/get-events", {
+    const gateEvents = new EventSource(HOST + "/api/event/get-events", {
       withCredentials: true,
     });
 
