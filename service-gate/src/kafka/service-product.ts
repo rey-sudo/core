@@ -11,13 +11,13 @@ const serviceProductListener = async () => {
 
   await consumer
     .connect()
-    .then(() => {
-      const status = consumer.subscribe({
+    .then(async () => {
+      await consumer.subscribe({
         topic: TOPIC_NAME,
         fromBeginning: true,
       });
 
-      console.log(status);
+      _.info("TOPIC" + TOPIC_NAME);
     })
     .then(() =>
       consumer.run({
