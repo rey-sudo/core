@@ -437,27 +437,22 @@
             </template>
           </Column>
 
-
-
           <Column field="price" header="Price" sortable style="min-width: 8rem">
             <template #body="slotProps">
               {{ formatCurrency(slotProps.data.price) }}
             </template>
           </Column>
-          
+
           <Column
-          field="collateral"
-          header="Collateral"
-          sortable
-          style="min-width: 8rem"
-        >
-          <template #body="slotProps">
-            {{ formatCurrency(slotProps.data.collateral) }}
-          </template>
-        </Column>
-
-
-
+            field="collateral"
+            header="Collateral"
+            sortable
+            style="min-width: 8rem"
+          >
+            <template #body="slotProps">
+              {{ formatCurrency(slotProps.data.collateral) }}
+            </template>
+          </Column>
 
           <Column
             field="slots_count"
@@ -476,7 +471,6 @@
             </template>
           </Column>
 
-                  
           <Column
             field="category"
             header="Category"
@@ -1152,9 +1146,12 @@ export default {
       }
 
       const params = {
+        batch_mode: this.slotForm.batchMode,
+        product_units: this.slotForm.productUnits,
+        batch_number: this.slotForm.batchNumber,
+        product_discount: this.slotForm.productDiscount, 
         wallet_id: "c08b3754a3fc2c4cb063e12295e903d14edc899d",
         product_id: this.productList[this.createSlotIndex].id,
-        ...this.slotForm,
       };
 
       console.log(params);
