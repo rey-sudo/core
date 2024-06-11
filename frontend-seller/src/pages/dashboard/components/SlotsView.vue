@@ -75,7 +75,7 @@
     <Dialog
       v-model:visible="createSlotDialogVisible"
       :style="{ width: '400px' }"
-      header="Enable slots"
+      header="Availability"
       :modal="true"
       :draggable="false"
     >
@@ -85,10 +85,10 @@
         <div class="createslot-wrap" v-if="!createSlotLoader">
           <div class="total">
             <p>Total orders {{ computedSlots }}</p>
-            <p>Product stock=> {{ productList[createSlotIndex].stock }}</p>
-            <p>Product Units=> {{ computedUnits }}</p>
-            <p>Product Collateral=> {{ computedCollateral }}</p>
-            <p>Product Price=> {{ computedPrice }}</p>
+            <p>Stock: {{ productList[createSlotIndex].stock }}</p>
+            <p>Units: {{ computedUnits }}</p>
+            <p>Collateral: {{ computedCollateral }}</p>
+            <p>Price: {{ computedPrice }}</p>
           </div>
 
           <div class="field">
@@ -101,7 +101,11 @@
                 "
               />
             </label>
-            <InputSwitch id="batchMode" v-model="slotForm.batch_mode" />
+            <InputSwitch
+              id="batchMode"
+              v-model="slotForm.batchMode"
+              @change="() => resetSlotForm()"
+            />
           </div>
 
           <div class="field">
@@ -142,7 +146,7 @@
               v-model="slotForm.batchNumber"
               showButtons
               placeholder=""
-              :disabled="!slotForm.batch_mode"
+              :disabled="!slotForm.batchMode"
               integeronly
               locale="en-US"
               :min="0"
@@ -166,7 +170,7 @@
               v-model="slotForm.productDiscount"
               showButtons
               placeholder="Select A Percentage"
-              :disabled="!slotForm.batch_mode"
+              :disabled="!slotForm.batchMode"
               integeronly
               suffix=" % OFF"
               locale="en-US"
@@ -374,7 +378,9 @@
             <div class="slots-header">
               <div class="slots-header-left">
                 <span>Enable slots</span>
-                <span @click="runTX">Manage product availability.</span>
+                <span
+                  >Choose the product and the quantity available for sale.</span
+                >
               </div>
 
               <div class="slots-header-right">
@@ -672,10 +678,19 @@ export default {
 
     const slotForm = ref({
       batchMode: false,
-      productUnits: undefined,
-      batchNumber: undefined,
+      productUnits: 1,
+      batchNumber: 0,
       productDiscount: undefined,
     });
+
+    const resetSlotForm = () => {
+      slotForm.value = {
+        batchMode: slotForm.value.batchMode,
+        productUnits: 1,
+        batchNumber: 0,
+        productDiscount: undefined,
+      };
+    };
 
     const slotFormErrors = ref({
       batchMode: false,
@@ -688,6 +703,7 @@ export default {
       slotFormErrors,
       slotForm,
       createSlot,
+      resetSlotForm,
       productList,
       startEndpoint,
       getLucid,
@@ -933,9 +949,7 @@ export default {
       }
 
       if (this.slotForm.batchMode) {
-        return (
-          this.slotForm.productUnits * this.slotForm.batchNumber
-        );
+        return this.slotForm.productUnits * this.slotForm.batchNumber;
       }
 
       return 0;
@@ -950,8 +964,7 @@ export default {
       }
 
       if (this.slotForm.batchMode) {
-        let units =
-          this.slotForm.productUnits * this.slotForm.batchNumber;
+        let units = this.slotForm.productUnits * this.slotForm.batchNumber;
         let total = this.productList[this.createSlotIndex].collateral * units;
         return `${total} ADA`;
       }
