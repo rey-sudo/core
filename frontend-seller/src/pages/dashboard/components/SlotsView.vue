@@ -220,7 +220,7 @@
           field="created_at"
           header="Date"
           sortable
-          style="max-width: 8rem"
+          style="max-width: 6rem"
         >
           <template #body="slotProps">
             {{ formatDate(slotProps.data.created_at) }}
@@ -230,27 +230,22 @@
         <Column
           field="status"
           header="Status"
-          style="max-width: 5rem"
+          style="max-width: 4rem"
           sortable
         ></Column>
 
+        <Column field="mode" header="Mode" sortable style="max-width: 4rem">
+          <template #body="slotProps">
+            <span style="font-weight: 600">{{ slotProps.data.mode }}</span>
+          </template>
+        </Column>
 
         <Column
-          field="contract_units"
-          header="Units"
+          field="contract_price"
+          header="Price"
           sortable
-          style="max-width: 5rem"
-        ></Column>
-
-        <Column
-        field="mode"
-        header="Mode"
-        sortable
-        style="max-width: 5rem;  font-weight: 600"
-      ></Column>
-
-
-        <Column field="contract_price" header="Price" sortable>
+          style="max-width: 4rem"
+        >
           <template #body="slotProps">
             {{ formatCurrency(slotProps.data.contract_price) }}
           </template>
@@ -259,7 +254,7 @@
         <Column
           field="contract_collateral"
           header="Collateral"
-          style="max-width: 5rem"
+          style="max-width: 4rem"
           sortable
         >
           <template #body="slotProps">
@@ -268,9 +263,16 @@
         </Column>
 
         <Column
+          field="contract_units"
+          header="Units"
+          sortable
+          style="max-width: 4rem"
+        ></Column>
+
+        <Column
           field="actived"
           header="Actived"
-          style="max-width: 5rem"
+          style="max-width: 4rem"
           sortable
         >
           <template #body="slotProps">
@@ -303,7 +305,7 @@
         <Column
           field="contract_state"
           header="State"
-          style="min-width: 10rem"
+          style="min-width: 8rem; max-width: 8rem"
           sortable
         >
           <template #body="slotProps">
@@ -1151,7 +1153,7 @@ export default {
         batch_mode: this.slotForm.batchMode,
         product_units: this.slotForm.productUnits,
         batch_number: this.slotForm.batchNumber,
-        product_discount: this.slotForm.productDiscount, 
+        product_discount: this.slotForm.productDiscount,
         wallet_id: "c08b3754a3fc2c4cb063e12295e903d14edc899d",
         product_id: this.productList[this.createSlotIndex].id,
       };
@@ -1338,11 +1340,11 @@ export default {
 .column-block-row {
   display: flex;
   justify-content: space-between;
-  font-size: var(--text-size-a); 
+  font-size: var(--text-size-a);
 }
 
-.column-block-row span{
-font-size: var(--text-size-a); 
+.column-block-row span {
+  font-size: var(--text-size-a);
 }
 
 .disabled {
