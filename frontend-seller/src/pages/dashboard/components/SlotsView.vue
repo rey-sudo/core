@@ -1363,7 +1363,6 @@ export default {
   margin-left: 1rem;
   font-size: var(--text-size-a);
   font-weight: 500;
-  color: var(--blue-c);
 }
 
 .dialog-title {
@@ -1436,8 +1435,7 @@ export default {
   margin-bottom: 0rem;
   border-radius: 8px;
   padding: 0.75rem;
-  border: 1px solid var(--border-b);
-  background: var(--base-b);
+  border: 1px solid var(--blue-a);
   font-weight: 500;
 }
 
