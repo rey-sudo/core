@@ -310,7 +310,7 @@
         >
           <template #body="slotProps">
             <div class="column-block">
-              <div class="column-block-row">
+              <div>
                 <span> {{ slotProps.data.contract_stage }}</span>
                 <span> 0 Confirmations</span>
               </div>
@@ -485,6 +485,12 @@
             </template>
           </Column>
 
+          <Column field="stock" header="Stock" sortable style="min-width: 8rem">
+            <template #body="slotProps">
+              {{ slotProps.data.stock }}
+            </template>
+          </Column>
+
           <Column
             field="slots_count"
             header="Slots"
@@ -493,12 +499,6 @@
           >
             <template #body="slotProps">
               {{ slotProps.data.slots_count }}
-            </template>
-          </Column>
-
-          <Column field="stock" header="Stock" sortable style="min-width: 8rem">
-            <template #body="slotProps">
-              {{ slotProps.data.stock }}
             </template>
           </Column>
 
@@ -719,7 +719,6 @@ export default {
       batchNumber: false,
       productDiscount: false,
     });
-
 
     const { text, copy, copied, isSupported } = useClipboard();
 
@@ -1144,7 +1143,7 @@ export default {
     },
     formatCurrency(value) {
       if (value) {
-        return value + " ADA";
+        return value + " ₳";
       }
     },
     openProductDialog() {
@@ -1361,9 +1360,16 @@ export default {
   height: 4px;
 }
 
-.column-block-row {
+.column-block {
+  display: block;
+}
+
+.column-block div:nth-child(1) {
   display: flex;
   justify-content: space-between;
+  color: var(--text-b);
+  line-height: 3rem;
+  font-weight: 400;
   font-size: var(--text-size-a);
 }
 
@@ -1427,16 +1433,6 @@ export default {
 
 .createslot-b-form {
   margin-bottom: 0rem;
-}
-
-.column-block {
-  display: block;
-}
-
-.column-block div:nth-child(1) {
-  line-height: 3rem;
-  font-weight: 400;
-  font-size: var(--text-size-b);
 }
 
 .createslot {
