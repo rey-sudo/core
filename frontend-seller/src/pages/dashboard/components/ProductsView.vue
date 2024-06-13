@@ -507,7 +507,7 @@
             style="max-width: 16rem; white-space: break-spaces"
           >
             <template #body="slotProps">
-              {{ slotProps.data.name.slice(0, 50) }}...
+              {{ slotProps.data.name.slice(0, 30) }}...
             </template>
           </Column>
           <Column

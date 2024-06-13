@@ -409,7 +409,7 @@
             </Toolbar>
           </template>
 
-          <Column expander style="width: 3rem" :exportable="false" />
+          <Column  style="width: 3rem" :exportable="false" />
 
           <Column header="Image" style="max-width: 8rem">
             <template #body="slotProps">
@@ -440,6 +440,17 @@
               {{ slotProps.data.name.slice(0, 30) }}...
             </template>
           </Column>
+
+          <Column
+          field="category"
+          header="Category"
+          sortable
+          style="min-width: 8rem; text-transform: capitalize"
+        >
+          <template #body="slotProps">
+            {{ slotProps.data.category }}
+          </template>
+        </Column>
 
           <Column field="price" header="Price" sortable style="min-width: 8rem">
             <template #body="slotProps">
@@ -475,16 +486,7 @@
             </template>
           </Column>
 
-          <Column
-            field="category"
-            header="Category"
-            sortable
-            style="min-width: 8rem; text-transform: capitalize"
-          >
-            <template #body="slotProps">
-              {{ slotProps.data.category }}
-            </template>
-          </Column>
+
 
           <Column :exportable="false" style="min-width: 8rem">
             <template #body="slotProps">
