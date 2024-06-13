@@ -409,7 +409,7 @@
             </Toolbar>
           </template>
 
-          <Column  style="width: 3rem" :exportable="false" />
+          <Column style="width: 3rem" :exportable="false" />
 
           <Column header="Image" style="max-width: 8rem">
             <template #body="slotProps">
@@ -422,13 +422,23 @@
                 :alt="slotProps.data.image_main"
                 width="70"
                 height="70"
-                imageStyle="border-radius: 4px; object-fit: contain;"
+                imageStyle="border-radius: 8px; object-fit: contain; border: 1px solid var(--border-a);"
                 preview
               />
             </template>
           </Column>
 
-          <Column field="id" header="Code" sortable />
+          <Column field="id" header="Code" sortable>
+            <template #body="slotProps">
+              <div
+                v-tooltip.top="'Copy'"
+                style="cursor: pointer"
+                @click="copy(slotProps.data.id)"
+              >
+                {{ slotProps.data.id.slice(0, 10) }}...
+              </div>
+            </template>
+          </Column>
 
           <Column
             field="name"
@@ -437,20 +447,26 @@
             style="max-width: 16rem; white-space: break-spaces"
           >
             <template #body="slotProps">
-              {{ slotProps.data.name.slice(0, 30) }}...
+              <div
+                v-tooltip.top="'Copy'"
+                style="cursor: pointer"
+                @click="copy(slotProps.data.name)"
+              >
+                {{ slotProps.data.name.slice(0, 30) }}...
+              </div>
             </template>
           </Column>
 
           <Column
-          field="category"
-          header="Category"
-          sortable
-          style="min-width: 8rem; text-transform: capitalize"
-        >
-          <template #body="slotProps">
-            {{ slotProps.data.category }}
-          </template>
-        </Column>
+            field="category"
+            header="Category"
+            sortable
+            style="min-width: 8rem; text-transform: capitalize"
+          >
+            <template #body="slotProps">
+              {{ slotProps.data.category }}
+            </template>
+          </Column>
 
           <Column field="price" header="Price" sortable style="min-width: 8rem">
             <template #body="slotProps">
@@ -485,8 +501,6 @@
               {{ slotProps.data.stock }}
             </template>
           </Column>
-
-
 
           <Column :exportable="false" style="min-width: 8rem">
             <template #body="slotProps">
@@ -542,6 +556,7 @@ import { getAddressDetails } from "lucid-cardano";
 import { FilterMatchMode } from "primevue/api";
 import { HOST } from "@/api/index";
 import { ref } from "vue";
+import { useClipboard } from "@vueuse/core";
 
 export default {
   components: {
@@ -705,7 +720,14 @@ export default {
       productDiscount: false,
     });
 
+
+    const { text, copy, copied, isSupported } = useClipboard();
+
     return {
+      text,
+      copy,
+      copied,
+      isSupported,
       slotFormErrors,
       slotForm,
       createSlot,
