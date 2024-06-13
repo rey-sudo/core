@@ -216,65 +216,37 @@
         scrollHeight="flex"
         tableStyle="min-width: 50rem;"
       >
-        <Column
-          field="created_at"
-          header="Date"
-          sortable
-          style="max-width: 6rem"
-        >
+        <Column field="created_at" header="Date" sortable>
           <template #body="slotProps">
             {{ formatDate(slotProps.data.created_at) }}
           </template>
         </Column>
 
-        <Column
-          field="status"
-          header="Status"
-          style="max-width: 4rem"
-          sortable
-        ></Column>
+        <Column field="status" header="Status" sortable></Column>
 
-        <Column field="mode" header="Mode" sortable style="max-width: 4rem">
+        <Column field="contract_stage" header="Stage" sortable></Column>
+
+        <Column field="mode" header="Mode" sortable>
           <template #body="slotProps">
-            <span style="font-weight: 600">{{ slotProps.data.mode }}</span>
+            <span>{{ slotProps.data.mode }}</span>
           </template>
         </Column>
 
-        <Column
-          field="contract_price"
-          header="Price"
-          sortable
-          style="max-width: 4rem"
-        >
+        <Column field="contract_units" header="Units" sortable></Column>
+
+        <Column field="contract_price" header="Price" sortable>
           <template #body="slotProps">
             {{ formatCurrency(slotProps.data.contract_price) }}
           </template>
         </Column>
 
-        <Column
-          field="contract_collateral"
-          header="Collateral"
-          style="max-width: 4rem"
-          sortable
-        >
+        <Column field="contract_collateral" header="Collateral" sortable>
           <template #body="slotProps">
             {{ formatCurrency(slotProps.data.contract_collateral) }}
           </template>
         </Column>
 
-        <Column
-          field="contract_units"
-          header="Units"
-          sortable
-          style="max-width: 4rem"
-        ></Column>
-
-        <Column
-          field="actived"
-          header="Actived"
-          style="max-width: 4rem"
-          sortable
-        >
+        <Column field="actived" header="Actived" sortable>
           <template #body="slotProps">
             <div class="switch-group">
               <InputSwitch
@@ -305,15 +277,11 @@
         <Column
           field="contract_state"
           header="State"
-          style="min-width: 8rem; max-width: 8rem"
+          style="min-width: 8rem"
           sortable
         >
           <template #body="slotProps">
             <div class="column-block">
-              <div>
-                <span> {{ slotProps.data.contract_stage }}</span>
-                <span> 0 Confirmations</span>
-              </div>
               <ProgressBar
                 :value="getStateBarValue(slotProps.data.contract_state)"
                 :showValue="false"
@@ -322,7 +290,7 @@
           </template>
         </Column>
 
-        <Column :exportable="false">
+        <Column :exportable="false" header="Actions">
           <template #body="">
             <div class="table-buttons">
               <Button
@@ -502,7 +470,7 @@
             </template>
           </Column>
 
-          <Column :exportable="false" style="min-width: 8rem">
+          <Column :exportable="false" style="min-width: 8rem" header="Actions">
             <template #body="slotProps">
               <div class="table-buttons">
                 <Button
@@ -1143,7 +1111,7 @@ export default {
     },
     formatCurrency(value) {
       if (value) {
-        return value + " ₳";
+        return value + " ADA";
       }
     },
     openProductDialog() {
@@ -1357,7 +1325,7 @@ export default {
 
 <style lang="css" scoped>
 ::v-deep(.p-progressbar) {
-  height: 4px;
+  height: 0.5rem;
 }
 
 .column-block {
@@ -1367,7 +1335,6 @@ export default {
 .column-block div:nth-child(1) {
   display: flex;
   justify-content: space-between;
-  color: var(--text-b);
   line-height: 3rem;
   font-weight: 400;
   font-size: var(--text-size-a);
@@ -1429,6 +1396,15 @@ export default {
   margin-left: 0.5rem;
   color: var(--text-b);
   cursor: pointer;
+}
+
+.table-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.table-button {
+  margin-right: 1rem;
 }
 
 .createslot-b-form {
@@ -1521,12 +1497,6 @@ export default {
   height: 80px;
 }
 
-.table-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .product-upload small {
   padding: 5px;
   line-height: 50px;
@@ -1588,10 +1558,6 @@ img {
 
 .product-upload {
   margin-top: 1rem;
-}
-
-.table-button {
-  margin-left: 1rem;
 }
 
 .field {
