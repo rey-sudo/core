@@ -45,17 +45,17 @@
 
                 <i class="pi pi-info-circle" />
               </label>
-              <span>₳ 3.240</span>
+              <span>3.240 ₳</span>
             </div>
 
             <div>
               <label>Collateral <i class="pi pi-info-circle" /></label>
-              <span>₳ 500</span>
+              <span>500 ₳</span>
             </div>
 
             <div>
               <label>Discount <i class="pi pi-info-circle" /></label>
-              <span>₳ 40</span>
+              <span>40 ₳</span>
             </div>
 
             <div>
