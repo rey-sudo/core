@@ -89,6 +89,7 @@
             <p>Units = {{ computedUnits }}</p>
             <p>Collateral = {{ computedCollateral }}</p>
             <p>Price = {{ computedPrice }}</p>
+            <p>Fee = 1 ADA</p>
           </div>
 
           <div class="field">
