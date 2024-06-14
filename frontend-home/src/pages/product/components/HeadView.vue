@@ -541,7 +541,7 @@ export default {
 .head .head-rating {
   margin-right: 0.5rem;
   font-size: var(--text-size-c);
-  align-items: baseline;
+  align-items: center;
   margin-top: 1rem;
   display: flex;
 }
