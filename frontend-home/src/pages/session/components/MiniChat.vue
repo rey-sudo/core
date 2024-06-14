@@ -4,7 +4,7 @@
       <div></div>
       <span>CHEAPKING700</span>
     </div>
-    <div class="chat-body">2</div>
+    <div class="chat-body"></div>
     <div class="chat-bottom">3</div>
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {};
   height: 700px;
   border-radius: 28px;
   margin-left: auto;
-  border: 1px solid var(--border-b);
+  border: 1px solid var(--border-a);
   display: flex;
   flex-direction: column;
   overflow: hidden;

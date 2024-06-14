@@ -84,7 +84,7 @@
 
 <script>
 import MainHeader from "@/components/MainHeader.vue";
-import TwoChat from "@/pages/session/components/TwoChat.vue";
+import TwoChat from "@/pages/session/components/MiniChat.vue";
 import { ref } from "vue";
 
 export default {

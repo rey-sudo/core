@@ -320,7 +320,7 @@ export default {
 
 .head-info {
   font-size: var(--text-size-b);
-  font-weight: 300;
+  font-weight: 400;
   text-align: left;
   color: var(--text-b);
 }
