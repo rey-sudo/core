@@ -74,7 +74,7 @@
 
     <Dialog
       v-model:visible="createSlotDialogVisible"
-      :style="{ width: '400px' }"
+      :style="{ width: '380px' }"
       header="Availability"
       :modal="true"
       :draggable="false"
@@ -85,10 +85,10 @@
         <div class="createslot-wrap" v-if="!createSlotLoader">
           <div class="total">
             <p>Total orders {{ computedSlots }}</p>
-            <p>Stock: {{ productList[createSlotIndex].stock }}</p>
-            <p>Units: {{ computedUnits }}</p>
-            <p>Collateral: {{ computedCollateral }}</p>
-            <p>Price: {{ computedPrice }}</p>
+            <p>Stock = {{ productList[createSlotIndex].stock }}</p>
+            <p>Units = {{ computedUnits }}</p>
+            <p>Collateral = {{ computedCollateral }}</p>
+            <p>Price = {{ computedPrice }}</p>
           </div>
 
           <div class="field">

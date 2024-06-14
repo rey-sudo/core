@@ -313,7 +313,7 @@ export default {
   display: flex;
   justify-content: flex-start;
   width: inherit;
-  padding-top: 2rem;
+  padding-top: 4rem;
   padding-bottom: 2rem;
   border-top: 1px solid var(--border-b);
 }
