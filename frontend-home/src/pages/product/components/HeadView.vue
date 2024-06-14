@@ -52,8 +52,8 @@
                   style="
                     width: 100%;
                     display: block;
-                    min-height: 500px;
-                    max-height: 500px;
+                    min-height: 400px;
+                    max-height: 400px;
                     object-fit: contain;
                   "
                 />
@@ -580,7 +580,7 @@ export default {
   background: var(--blue-b);
   border: 1px solid var(--blue-b);
   width: 90%;
-  border-radius: 8px;
+  border-radius: 6px;
   color: var(--text-w);
   font-weight: 600;
   cursor: pointer;
