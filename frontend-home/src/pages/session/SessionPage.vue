@@ -206,8 +206,8 @@ export default {
 }
 
 .session-head-timer span {
-  background: var(--blue-c);
-  border-radius: 8px;
+  background: #000000;
+  border-radius: 6px;
   padding: 0.25rem 0.75rem;
   margin: 0 0.25rem;
   color: var(--text-w);
@@ -233,7 +233,7 @@ export default {
 
 .session-body-left {
   width: 60%;
-  background: var(--base-b);
+  background: var(--base-a);
   border-radius: 28px;
   padding: 2rem;
 }

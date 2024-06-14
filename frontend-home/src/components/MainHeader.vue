@@ -271,13 +271,19 @@ export default {
       selectedTab: "all",
       navTabs: [
         {
-          label: "All Products",
-          value: "all-products",
+          label: "News",
+          value: "news",
           badge: false,
           badgeLabel: "",
         },
         {
-          label: "Last Discounts",
+          label: "Categories",
+          value: "categories",
+          badge: false,
+          badgeLabel: "",
+        },
+        {
+          label: "Discounts",
           value: "last-discounts",
           badge: false,
           badgeLabel: "",
@@ -422,17 +428,16 @@ export default {
 
 .header .header-center .header-center-search {
   background: var(--base-a);
-  transition: var(--button-transition-a);
   cursor: text;
   display: flex;
   align-items: center;
-  border-radius: 4px;
+  border-radius: 6px;
   width: 100%;
   color: var(--text-a);
   font-size: var(--text-size-b);
   border: 1px solid var(--border-b);
   box-shadow: initial;
-  transition: box-shadow 0.3s ease-in-out;
+  transition: var(--transition-b);
 }
 
 .header .header-center .header-center-search:focus-within {

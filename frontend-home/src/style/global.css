@@ -67,6 +67,7 @@
   --secondary-e: #ffffff;
 
   --transition-a: box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1);
+  --transition-b: box-shadow 0.3s ease-in-out;
 
   --shadow-a: 0 3px 12px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
 
