@@ -232,7 +232,7 @@
           </template>
         </Column>
 
-        <Column field="contract_units" header="Units" sortable></Column>
+   
 
         <Column field="contract_price" header="Price" sortable>
           <template #body="slotProps">
@@ -245,6 +245,27 @@
             {{ formatCurrency(slotProps.data.contract_collateral) }}
           </template>
         </Column>
+        
+        <Column field="contract_units" header="Units" sortable></Column>
+
+
+        <Column
+          field="contract_state"
+          header="State"
+          style="min-width: 8rem"
+          sortable
+        >
+          <template #body="slotProps">
+            <div class="column-block">
+              <ProgressBar
+                :value="getStateBarValue(slotProps.data.contract_state)"
+                :showValue="false"
+              />
+            </div>
+          </template>
+        </Column>
+
+
 
         <Column field="actived" header="Actived" sortable>
           <template #body="slotProps">
@@ -274,21 +295,10 @@
           </template>
         </Column>
 
-        <Column
-          field="contract_state"
-          header="State"
-          style="min-width: 8rem"
-          sortable
-        >
-          <template #body="slotProps">
-            <div class="column-block">
-              <ProgressBar
-                :value="getStateBarValue(slotProps.data.contract_state)"
-                :showValue="false"
-              />
-            </div>
-          </template>
-        </Column>
+
+
+
+
 
         <Column :exportable="false" header="Actions">
           <template #body="">
@@ -1424,13 +1434,13 @@ export default {
 }
 
 .total {
-  color: var(--text-a);
+  color: var(--text-w);
   margin-top: 0rem;
   margin-bottom: 0rem;
   border-radius: 8px;
   padding: 0.75rem;
-  border: 1px solid var(--blue-a);
   font-weight: 500;
+  background: black;
 }
 
 .total p {
