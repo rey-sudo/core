@@ -68,7 +68,7 @@
       <!--RIGHT-->
       <div class="head-right">
         <div class="head-info">
-          <span>5 available ⁃ 20 stock</span>
+          <span>5 available • 20 stock</span>
         </div>
 
         <div class="head-name">
