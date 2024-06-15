@@ -10608,7 +10608,7 @@
   .p-metergroup-label-text {
     font-size: var(--text-size-a);
     color: var(--text-b);
-    font-weight: 200;
+   
   }
   .p-metergroup .p-metergroup-meter {
     border: 0 none;
