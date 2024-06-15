@@ -143,7 +143,6 @@ export default {
   text-align: start;
   margin-top: 2rem;
   border-radius: 8px;
-
 }
 
 .session-body-left-price div {
@@ -180,7 +179,8 @@ export default {
 }
 
 .session-head {
-  background: var(--base-b);
+  background: var(--base-a);
+  border: 1px solid var(--border-b);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -206,7 +206,7 @@ export default {
 }
 
 .session-head-timer span {
-  background: #000000;
+  background: var(--blue-c);
   border-radius: 6px;
   padding: 0.25rem 0.75rem;
   margin: 0 0.25rem;
