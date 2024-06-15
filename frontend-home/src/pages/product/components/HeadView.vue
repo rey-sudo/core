@@ -366,8 +366,9 @@ export default {
 .head-seller {
   width: 90%;
   margin-top: 2rem;
-  border: 1px solid var(--border-a);
-  border-radius: 8px;
+  border: 1px solid var(--border-b);
+  border-radius: 6px;
+  overflow: hidden
 }
 
 .head-seller-head {
