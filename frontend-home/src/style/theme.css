@@ -2687,7 +2687,7 @@
     box-shadow: 0 0 0 0.2rem #bfd1f6;
   }
   .p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
-    color: var(--blue-a);
+    color: var(--blue-c);
   }
   .p-rating:not(.p-disabled):not(.p-readonly)
     .p-rating-item:hover
@@ -10608,7 +10608,6 @@
   .p-metergroup-label-text {
     font-size: var(--text-size-a);
     color: var(--text-b);
-   
   }
   .p-metergroup .p-metergroup-meter {
     border: 0 none;
