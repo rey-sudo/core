@@ -68,11 +68,12 @@
       <!--RIGHT-->
       <div class="head-right">
         <div class="head-info">
-          <span>5 available and 20 in stock</span>
+          <span>5 available ⁃ 20 stock</span>
         </div>
 
         <div class="head-name">
-          Apple - MacBook Pro 14" Laptop - M3 Pro chip - 18GB Memory - 14-core GPU - 512GB SSD - Space Black
+          Apple - MacBook Pro 14" Laptop - M3 Pro chip - 18GB Memory - 14-core
+          GPU - 512GB SSD - Space Black
         </div>
 
         <div class="head-legend">
@@ -322,7 +323,7 @@ export default {
   font-size: var(--text-size-b);
   font-weight: 400;
   text-align: left;
-  color: var(--blue-c);
+  color: var(--blue-a);
 }
 
 .meter {
