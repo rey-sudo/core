@@ -225,11 +225,19 @@ import { ref } from "vue";
 
 export default {
   setup() {
+    let currentRoute = ref("");
+
     window.addEventListener(
       "scroll",
       function () {
         let currentScroll =
           window.scrollY || document.documentElement.scrollTop;
+
+        if (currentRoute.value === "session") {
+          document.querySelector(".header-menu").style.display = "none";
+
+          return;
+        }
 
         if (currentScroll <= 0) {
           document.querySelector(".header-menu").style.display = "flex";
@@ -255,6 +263,7 @@ export default {
     ]);
 
     return {
+      currentRoute,
       wallet,
       selectedCountry,
       countries,
@@ -267,7 +276,7 @@ export default {
       isScrolled: false,
       visible: false,
       walletVisible: false,
-      currentRoute: "",
+
       selectedTab: "all",
       navTabs: [
         {

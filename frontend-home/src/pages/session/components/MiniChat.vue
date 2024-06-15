@@ -20,7 +20,7 @@ export default {};
   height: 700px;
   border-radius: 28px;
   margin-left: auto;
-  border: 1px solid var(--border-a);
+  border: 1px solid var(--border-b);
   display: flex;
   flex-direction: column;
   overflow: hidden;
