@@ -72,7 +72,7 @@
         </div>
 
         <div class="head-name">
-          Sony Interactive Entertainment - PlayStation 5 Slim Console - White
+          Apple - MacBook Pro 14" Laptop - M3 Pro chip - 18GB Memory - 14-core GPU - 512GB SSD - Space Black
         </div>
 
         <div class="head-legend">
@@ -191,33 +191,33 @@ export default {
     const images = ref([
       {
         itemImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6557/6557718_sd.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615_sd.jpg",
         thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6557/6557718_sd.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615_sd.jpg",
         alt: "Description for Image 1",
         title: "Title 1",
       },
       {
         itemImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6553/6553101_sd.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615cv11d.jpg",
         thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6553/6553101_sd.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615cv11d.jpg",
         alt: "Description for Image 2",
         title: "Title 2",
       },
       {
         itemImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6566/6566039_rd.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615cv12d.jpg",
         thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6566/6566039_rd.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615cv12d.jpg",
         alt: "Description for Image 3",
         title: "Title 3",
       },
       {
         itemImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6566/6566196_sd.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615cv13d.jpg",
         thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6566/6566196_sd.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615cv13d.jpg",
         alt: "Description for Image 4",
         title: "Title 4",
       },
@@ -322,7 +322,7 @@ export default {
   font-size: var(--text-size-b);
   font-weight: 400;
   text-align: left;
-  color: var(--text-b);
+  color: var(--blue-c);
 }
 
 .meter {
@@ -531,7 +531,7 @@ export default {
   text-align: left;
   font-size: var(--text-size-a);
   margin-top: 1rem;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .head .head-legend span {
