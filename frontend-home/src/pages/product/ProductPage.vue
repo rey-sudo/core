@@ -134,7 +134,7 @@ export default {
 <style lang="css" scoped>
 
 .product-body {
-  width: calc(80% - 2rem);
+  width: calc(80% - 4rem);
 }
 
 
