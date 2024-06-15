@@ -1336,7 +1336,7 @@ export default {
 
 <style lang="css" scoped>
 ::v-deep(.p-progressbar) {
-  height: 0.5rem;
+  height: 0.4rem;
 }
 
 .column-block {
