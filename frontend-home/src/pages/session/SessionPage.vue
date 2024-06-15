@@ -40,6 +40,11 @@
           <div class="session-body-left-title">Order Information</div>
           <div class="session-body-left-price">
             <div>
+              <label>Type <i class="pi pi-info-circle" /></label>
+              <span>Batch</span>
+            </div>
+            
+            <div>
               <label
                 >Price
 
@@ -63,10 +68,7 @@
               <span>2</span>
             </div>
 
-            <div>
-              <label>Type <i class="pi pi-info-circle" /></label>
-              <span>Batch</span>
-            </div>
+
           </div>
         </div>
         <!---LEFT-->
@@ -185,7 +187,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   padding: 2rem;
-  margin-top: 150px;
+  margin-top: 100px;
   border-radius: 28px;
 }
 

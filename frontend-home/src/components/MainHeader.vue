@@ -200,7 +200,7 @@
 
     <!--SUBMENU-->
 
-    <div class="header-menu" :class="{ blue: currentRoute === 'product' }">
+    <div class="header-menu" :class="{ hide: currentRoute === 'session' }">
       <div class="header-menu-col left">
         <div class="header-menu-nav">
           <div
@@ -594,6 +594,10 @@ i {
   background: var(--blue-c);
   font-weight: 600;
   border-bottom: 1px solid transparent;
+}
+
+.header-menu.hide {
+  display: none;
 }
 
 .header-menu .header-menu-col {
