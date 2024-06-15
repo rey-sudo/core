@@ -639,7 +639,7 @@ i {
   font-size: var(--text-size-a);
   white-space: nowrap;
   cursor: pointer;
-  padding: 0.75rem 1rem;
+  padding: 14px;
   font-weight: inherit;
   color: inherit;
   background: transparent;
