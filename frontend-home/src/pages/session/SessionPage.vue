@@ -59,13 +59,13 @@
             </div>
 
             <div>
-              <label>Type <i class="pi pi-info-circle" /></label>
-              <span>Batch</span>
+              <label>Units <i class="pi pi-info-circle" /></label>
+              <span>2</span>
             </div>
 
             <div>
-              <label>Units <i class="pi pi-info-circle" /></label>
-              <span>2</span>
+              <label>Type <i class="pi pi-info-circle" /></label>
+              <span>Batch</span>
             </div>
           </div>
         </div>
@@ -164,7 +164,7 @@ export default {
 
 .session-body-left-price div span {
   line-height: 3rem;
-  font-size: var(--text-size-f);
+  font-size: var(--text-size-e);
   color: var(--text-a);
 }
 
@@ -179,7 +179,7 @@ export default {
 }
 
 .session-head {
-  background: var(--base-a);
+  background: var(--base-b);
   border: 1px solid var(--border-b);
   display: flex;
   flex-direction: column;
@@ -206,7 +206,7 @@ export default {
 }
 
 .session-head-timer span {
-  background: var(--blue-c);
+  background: #000000;
   border-radius: 6px;
   padding: 0.25rem 0.75rem;
   margin: 0 0.25rem;
