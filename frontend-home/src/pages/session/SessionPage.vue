@@ -43,7 +43,7 @@
               <label>Type <i class="pi pi-info-circle" /></label>
               <span>Batch</span>
             </div>
-            
+
             <div>
               <label
                 >Price
@@ -67,8 +67,6 @@
               <label>Units <i class="pi pi-info-circle" /></label>
               <span>2</span>
             </div>
-
-
           </div>
         </div>
         <!---LEFT-->
@@ -208,7 +206,7 @@ export default {
 }
 
 .session-head-timer span {
-  background: #000000;
+  background: var(--blue-c);
   border-radius: 6px;
   padding: 0.25rem 0.75rem;
   margin: 0 0.25rem;
