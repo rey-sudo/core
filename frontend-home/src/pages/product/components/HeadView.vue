@@ -190,8 +190,8 @@ export default {
       {
         label: "Pairfy discount",
         color: "var(--yellow-b)",
-        value: 10,
-        icon: "pi pi-trophy",
+        value: 0,
+        icon: "pi pi-circle",
       },
     ]);
 
