@@ -179,13 +179,19 @@ export default {
         label: "Collateral 500 ADA",
         color: "var(--blue-c)",
         value: 30,
-        icon: "pi pi-crown",
+        icon: "pi pi-building-columns",
       },
       {
-        label: "Protected Purchase",
+        label: "Protected purchase",
         color: "#34d399",
         value: 100,
-        icon: "pi pi-box",
+        icon: "pi pi-shopping-bag",
+      },
+      {
+        label: "Pairfy discount",
+        color: "var(--yellow-b)",
+        value: 10,
+        icon: "pi pi-trophy",
       },
     ]);
 
@@ -307,6 +313,10 @@ export default {
 
 <style lang="css" scoped>
 ::v-deep(.p-accordion-toggle-icon) {
+  display: none;
+}
+
+::v-deep(.p-metergroup-meters) {
   display: none;
 }
 
@@ -593,6 +603,7 @@ export default {
   text-align: center;
   margin-top: 4rem;
 }
+
 .head .head-button:hover {
   opacity: 0.9;
 }

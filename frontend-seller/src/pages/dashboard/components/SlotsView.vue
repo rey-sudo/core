@@ -202,7 +202,7 @@
     >
       <template #header>
         <div class="dialog-header">
-          <span class="dialog-title">Enable slots</span>
+          <span class="dialog-title">Product slots</span>
           <div class="network-analyzer">
             <div class="loader" />
             <span>Scanning network</span>
