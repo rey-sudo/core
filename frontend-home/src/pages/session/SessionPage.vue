@@ -6,7 +6,7 @@
       <div class="session-head">
         <div class="session-head-top">
           <span>Negotiation Session</span>
-          <span>ID: S78CAIXOWL540 </span>
+          <span>ID: AC9ED0C243F44C </span>
         </div>
 
         <div class="session-head-bottom">
