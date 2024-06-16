@@ -46,7 +46,7 @@ const main = async () => {
       database: "service_gate",
     });
 
-    */
+   
     await eventBus
       .connect({
         url: process.env.EVENT_BUS_URI,
@@ -55,6 +55,7 @@ const main = async () => {
       })
       .then(() => console.log("eventBus connected"))
       .catch((err: any) => catcher(err));
+ */
 
     serviceGateListener();
 
