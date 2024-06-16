@@ -2,7 +2,9 @@
   <div class="stepper">
     <div class="stepper-row">
       <div class="stepper-column">
-        <div>1</div>
+        <div>
+          <i class="pi pi-compass" />
+        </div>
         <span></span>
       </div>
       <div class="stepper-body">
@@ -11,6 +13,11 @@
           <div>
             <label>Type</label>
             <span>Batch</span>
+          </div>
+
+          <div>
+            <label>Units</label>
+            <span>2</span>
           </div>
 
           <div>
@@ -27,12 +34,19 @@
             <label>Discount </label>
             <span>40 ADA</span>
           </div>
-
-          <div>
-            <label>Units</label>
-            <span>2</span>
-          </div>
         </div>
+      </div>
+    </div>
+
+    <!--///-->
+
+    <div class="stepper-row">
+      <div class="stepper-column">
+        <div><i class="pi pi-desktop" /></div>
+        <span></span>
+      </div>
+      <div class="stepper-body">
+        <div class="stepper-title">Product</div>
       </div>
     </div>
   </div>
@@ -98,12 +112,7 @@
   display: flex;
   align-items: baseline;
   font-size: var(--text-size-b);
-  color: var(--text-a);
-}
-
-.stepper-price div label i {
-  margin-left: 0.5rem;
-  font-size: var(--text-size-a);
+  color: var(--text-b);
 }
 
 .stepper-price div span {
@@ -117,10 +126,6 @@
 }
 
 .stepper-body {
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: baseline;
-  justify-content: center;
+  padding: 0.5rem;
 }
 </style>
