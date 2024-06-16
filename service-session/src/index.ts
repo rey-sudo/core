@@ -1,10 +1,10 @@
 import * as route from "./routes";
 import DB from "./db";
+import serviceGateListener from "./kafka/service-gate-listener";
+import compression from "compression";
 import { app } from "./app";
 import { catcher, check, checkpoint } from "./pod/index";
 import { NotFoundError, errorMiddleware } from "./errors";
-import serviceProductListener from "./kafka/products";
-import compression from "compression";
 import { eventBus } from "./db/redis";
 
 const main = async () => {
@@ -37,6 +37,7 @@ const main = async () => {
       throw new Error("EVENT_BUS_URI error");
     }
 
+    /*
     DB.connect({
       host: "mysql",
       port: 3306,
@@ -45,6 +46,7 @@ const main = async () => {
       database: "service_gate",
     });
 
+    */
     await eventBus
       .connect({
         url: process.env.EVENT_BUS_URI,
@@ -54,7 +56,7 @@ const main = async () => {
       .then(() => console.log("eventBus connected"))
       .catch((err: any) => catcher(err));
 
-    serviceProductListener();
+    serviceGateListener();
 
     checkpoint("ready");
 
@@ -77,22 +79,6 @@ const main = async () => {
       route.createSlotHandler
     );
 
-    app.post(
-      "/api/gate/start-endpoint",
-
-      route.startEndpointMiddlewares,
-
-      route.startEndpointHandler
-    );
-
-    app.post(
-      "/api/gate/locking-endpoint",
-
-      route.lockingEndpointMiddlewares,
-
-      route.lockingEndpointHandler
-    );
-
     app.get(
       "/api/gate/get-slots",
 
@@ -100,6 +86,10 @@ const main = async () => {
 
       route.getSlotsHandler
     );
+
+    app.get("/api/session/healthcheck", (req, res) => {
+      res.status(200).json({ status: "Test OK" });
+    });
 
     app.all("*", (_req, _res) => {
       throw new NotFoundError();

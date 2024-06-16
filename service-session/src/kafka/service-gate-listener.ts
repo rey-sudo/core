@@ -3,22 +3,21 @@ import kafka from "./client";
 import { _ } from "../utils/pino";
 import { stringToTimestamp } from "../utils/other";
 
-const TOPIC_NAME = "fullfillment.service_product.products";
-const CONSUMER_GROUP = "service-gate-group";
+const TOPIC_NAME = "fullfillment.service_gate.slots";
+const CONSUMER_GROUP = "service-session-group";
 
-const serviceProductListener = async () => {
+const serviceGateListenerListener = async () => {
   const consumer = kafka.consumer({ groupId: CONSUMER_GROUP });
 
   await consumer
     .connect()
-    .then(async () => {
-      await consumer.subscribe({
+    .then(() =>
+      consumer.subscribe({
         topic: TOPIC_NAME,
         fromBeginning: true,
-      });
-
-      _.info("TOPIC " + TOPIC_NAME);
-    })
+      })
+    )
+    .then(() => _.info("SERVICE_GATE_LISTENER" + " => " + TOPIC_NAME))
     .then(() =>
       consumer.run({
         eachMessage: async ({ topic, partition, message }: any) => {
@@ -29,33 +28,20 @@ const serviceProductListener = async () => {
           console.log(payload);
 
           if (payload.op === "c") {
-            await handleCreate(payload, consumer, {
-              topic,
-              partition,
-              message,
-            });
           }
 
           if (payload.op === "u") {
-            await handleUpdate(payload, consumer, {
-              topic,
-              partition,
-              message,
-            });
           }
 
           if (payload.op === "d") {
-            await handleDelete(payload, consumer, {
-              topic,
-              partition,
-              message,
-            });
           }
         },
       })
     )
     .catch((err: any) => _.error(err));
 };
+
+////////////////////////////////////////HANDLERS////////////////////////////////////////
 
 const handleCreate = async (
   data: any,
@@ -227,4 +213,4 @@ const handleDelete = async (
   }
 };
 
-export default serviceProductListener;
+export default serviceGateListenerListener;
