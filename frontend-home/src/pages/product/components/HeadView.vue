@@ -368,7 +368,7 @@ export default {
   margin-top: 2rem;
   border: 1px solid var(--border-b);
   border-radius: 6px;
-  overflow: hidden
+  overflow: hidden;
 }
 
 .head-seller-head {
