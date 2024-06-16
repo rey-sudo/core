@@ -7,7 +7,7 @@ import { sleep } from "../utils/sleep";
 
 const ADA_LOVELACE: number = 1000000;
 
-interface instanceScheme {
+interface LockingEndpoint {
   lockingDefault: {
     sWalletParam: string;
     pPriceParam: number;
@@ -56,7 +56,7 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
 
     ////////////////////////////////////////////////////
 
-    const instanceScheme: instanceScheme = {
+    const lockingEndpoint: LockingEndpoint = {
       lockingDefault: {
         sWalletParam: SLOT.seller_pubkeyhash,
         pPriceParam: SLOT.contract_price * ADA_LOVELACE,
@@ -66,11 +66,12 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
       bWalletParam: params.buyer_pubkeyhash,
     };
 
-    console.log(instanceScheme);
+    
+    console.log(lockingEndpoint);
 
     await API.post(
       `/api/contract/instance/${SLOT.contract_id}/endpoint/Locking`,
-      instanceScheme
+      lockingEndpoint
     )
       .then((res) => {
         console.log(res);
