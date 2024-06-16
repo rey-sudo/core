@@ -14,7 +14,7 @@ spec:
     database.port: 3306
     database.user: "marketplace"
     database.password: "password"
-    database.server.id: "50001"
+    database.server.id: "50002"
     database.include.list: "service_gate"
     topic.prefix: "fullfillment"
     schema.history.internal.kafka.bootstrap.servers: "streaming-kafka-bootstrap:9092,streaming-kafka-bootstrap:9092,streaming-kafka-bootstrap:9092"
