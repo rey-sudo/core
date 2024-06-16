@@ -29,7 +29,7 @@
       <span>0</span>
     </div>
 
-    <div class="timeline-note">Deploy the script to the blockchain.</div>
+    <div class="timeline-note">Deploy the script to the blockchain</div>
   </div>
 </template>
 
