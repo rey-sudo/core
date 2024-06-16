@@ -118,5 +118,9 @@
 
 .stepper-body {
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  justify-content: center;
 }
 </style>
