@@ -579,8 +579,8 @@ export default {
 }
 
 .head .head-button {
-  background: var(--blue-b);
-  border: 1px solid var(--blue-b);
+  background: var(--blue-a);
+  border: 1px solid var(--blue-a);
   width: 90%;
   border-radius: 6px;
   color: var(--text-w);
@@ -599,13 +599,12 @@ export default {
 
 .head .head-button.outline {
   background: transparent;
-  color: var(--blue-b);
+  color: var(--blue-a);
   margin-top: 1rem;
-  border: 1px solid var(--blue-b);
+  border: 1px solid var(--blue-a);
 }
 
 .head .head-button.outline {
-
 }
 
 @media only screen and (max-width: 767px) {

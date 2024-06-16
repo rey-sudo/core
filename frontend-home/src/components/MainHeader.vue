@@ -406,7 +406,7 @@ export default {
   width: 100%;
   box-sizing: border-box;
   background: initial;
-  background: var(--blue-b);
+  background: var(--black-a);
   box-shadow: var(--border-shadow);
 }
 
@@ -592,10 +592,10 @@ i {
   left: 0;
   width: 100%;
   align-items: center;
-  background: var(--blue-b);
+  background: var(--black-b);
   color: var(--text-w);
   font-weight: 500;
-  border-top: 1px solid var(--blue-c);
+ 
 }
 
 .header-menu.main {
