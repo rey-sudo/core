@@ -101,7 +101,7 @@ export default {
 }
 
 .timeline-timer span {
-  background: var(--blue-c);
+  background: black;
   border-radius: 6px;
   padding: 0.25rem 0.75rem;
   margin: 0 0.25rem;
