@@ -9,31 +9,27 @@
         <div class="stepper-title">Order Information</div>
         <div class="stepper-price">
           <div>
-            <label>Type <i class="pi pi-info-circle" /></label>
+            <label>Type</label>
             <span>Batch</span>
           </div>
 
           <div>
-            <label
-              >Price
-
-              <i class="pi pi-info-circle" />
-            </label>
+            <label>Price </label>
             <span>3.240 ADA</span>
           </div>
 
           <div>
-            <label>Collateral <i class="pi pi-info-circle" /></label>
+            <label>Collateral</label>
             <span>500 ADA</span>
           </div>
 
           <div>
-            <label>Discount <i class="pi pi-info-circle" /></label>
+            <label>Discount </label>
             <span>40 ADA</span>
           </div>
 
           <div>
-            <label>Units <i class="pi pi-info-circle" /></label>
+            <label>Units</label>
             <span>2</span>
           </div>
         </div>
