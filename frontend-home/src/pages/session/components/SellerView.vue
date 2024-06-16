@@ -79,7 +79,7 @@
 }
 
 .stepper-column span {
-  width: 4px;
+  width: 3px;
   height: 100%;
   background: var(--blue-c);
 }
