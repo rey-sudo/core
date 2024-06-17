@@ -166,7 +166,7 @@
 
 .stepper {
   background: var(--base-a);
-  margin: 1rem 0;
+ 
 }
 
 .stepper-price {
