@@ -9,23 +9,23 @@
         <div class="stepper-title">Order Information</div>
         <div class="stepper-price">
           <div>
-            <label>Type</label>
-            <span>Batch</span>
-          </div>
-
-          <div>
             <label>Price </label>
-            <span>3.240 ₳</span>
+            <span>5240 ADA</span>
           </div>
 
           <div>
             <label>Collateral</label>
-            <span>500 ₳</span>
+            <span>500 ADA</span>
           </div>
 
           <div>
             <label>Discount </label>
-            <span>40 ₳</span>
+            <span>40 ADA</span>
+          </div>
+
+          <div>
+            <label>Type</label>
+            <span>Batch</span>
           </div>
 
           <div>
@@ -75,7 +75,6 @@
       <div class="stepper-body">
         <div class="stepper-buttons">
           <button>Active</button>
-         
         </div>
       </div>
     </div>
@@ -93,7 +92,7 @@
   border: 1px solid var(--blue-c);
   background: var(--blue-c);
   padding: 0.5rem 1rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text-w);
   margin-right: 1rem;
   border-radius: 6px;
@@ -154,7 +153,7 @@
 }
 
 .stepper-column span {
-  width: 3px;
+  width: 2px;
   height: 100%;
   background: var(--blue-c);
 }
@@ -167,7 +166,6 @@
 
 .stepper {
   background: var(--base-a);
-
 }
 
 .stepper-price {
@@ -175,7 +173,9 @@
   align-items: center;
   text-align: start;
   margin-top: 2rem;
-  border-radius: 8px;
+  border-radius: 6px;
+  border: 1px dashed var(--border-b);
+  padding: 1rem;
 }
 
 .stepper-price div {
@@ -194,6 +194,8 @@
   line-height: 3rem;
   font-size: var(--text-size-e);
   color: var(--text-a);
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .stepper-row {
