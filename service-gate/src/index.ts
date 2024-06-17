@@ -101,6 +101,14 @@ const main = async () => {
       route.getSlotsHandler
     );
 
+    app.get(
+      "/api/gate/get-slot/:id",
+
+      route.getSlotMiddlewares,
+
+      route.getSlotHandler
+    );
+
     app.all("*", (_req, _res) => {
       throw new NotFoundError();
     });
