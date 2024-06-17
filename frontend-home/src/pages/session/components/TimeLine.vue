@@ -13,7 +13,11 @@
     <div class="timeline-body">
       <Timeline :value="eventData" layout="horizontal" align="top">
         <template #opposite="slotProps">
-          <small class="p-text-secondary">{{ slotProps.item.date }}</small>
+          <div class="transaction">
+            <span>{{ slotProps.item.date }}</span>
+
+            <button><i class="pi pi-copy" /></button>
+          </div>
         </template>
         <template #content="slotProps">
           {{ slotProps.item.status }}
@@ -41,7 +45,7 @@ export default {
     const eventData = ref([
       {
         status: "Waiting",
-        date: "15/10/2020 10:30",
+        date: "4d4602f8..1ad94ef7",
         icon: "pi pi-shopping-cart",
         color: "#9C27B0",
       },
@@ -72,6 +76,18 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.transaction {
+  display: flex;
+  align-items: center;
+}
+
+.transaction button {
+  margin-left: 0.5rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
 .timeline {
   background: var(--base-b);
   border: 1px solid var(--border-b);

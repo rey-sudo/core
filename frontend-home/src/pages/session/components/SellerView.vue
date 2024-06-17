@@ -173,13 +173,11 @@
   align-items: center;
   text-align: start;
   margin-top: 2rem;
-  border-radius: 6px;
-  border: 1px dashed var(--border-b);
-  padding: 1rem;
+  max-width: 600px;
 }
 
 .stepper-price div {
-  margin-right: 4rem;
+  margin-right: auto;
   display: block;
 }
 
