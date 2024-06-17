@@ -81,7 +81,6 @@
 
           <span>SKU: P9C3KC93CK</span>
 
-          <span>Date: 24/11/2024</span>
         </div>
 
         <div class="head-rating">
@@ -183,15 +182,15 @@ export default {
       },
       {
         label: "Protected purchase",
-        color: "#34d399",
+        color: "var(--blue-c)",
         value: 100,
         icon: "pi pi-shopping-bag",
       },
       {
         label: "Pairfy discount",
-        color: "var(--yellow-b)",
+        color: "var(--blue-c)",
         value: 0,
-        icon: "pi pi-circle",
+        icon: "pi pi-crown",
       },
     ]);
 
