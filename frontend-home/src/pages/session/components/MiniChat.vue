@@ -35,7 +35,6 @@ export default {};
 
 .chat-bottom {
   height: 100px;
-  background: green;
 }
 
 .chat-top {

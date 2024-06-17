@@ -15,17 +15,17 @@
 
           <div>
             <label>Price </label>
-            <span>3.240 ADA</span>
+            <span>3.240 ₳</span>
           </div>
 
           <div>
             <label>Collateral</label>
-            <span>500 ADA</span>
+            <span>500 ₳</span>
           </div>
 
           <div>
             <label>Discount </label>
-            <span>40 ADA</span>
+            <span>40 ₳</span>
           </div>
 
           <div>
@@ -97,6 +97,7 @@
   color: var(--text-w);
   margin-right: 1rem;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .sku,
@@ -166,7 +167,7 @@
 
 .stepper {
   background: var(--base-a);
- 
+
 }
 
 .stepper-price {
