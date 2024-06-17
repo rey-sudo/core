@@ -161,7 +161,7 @@
 .stepper-title {
   font-size: var(--text-size-e);
   text-align: start;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .stepper {
@@ -192,7 +192,6 @@
   line-height: 3rem;
   font-size: var(--text-size-e);
   color: var(--text-a);
-  font-weight: 500;
   white-space: nowrap;
 }
 
