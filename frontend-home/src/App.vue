@@ -5,13 +5,22 @@
 </template>
 
 <script>
+import { sellerAPI } from "@/components/composable/seller";
 
 export default {
   name: "App",
-};
 
+  setup() {
+    const { currentSeller } = sellerAPI();
+
+    return { currentSeller };
+  },
+
+  mounted() {
+    const { currentSeller } = sellerAPI();
+    currentSeller().catch((err) => console.error(err)); 
+  },
+};
 </script>
 
-<style src="./style/global.css"/>
-
-
+<style src="./style/global.css" />
