@@ -9,18 +9,13 @@
         <div class="stepper-title">Order Information</div>
         <div class="stepper-price">
           <div>
-            <label>Price </label>
+            <label>Total Price </label>
             <span>5240 ADA</span>
           </div>
 
           <div>
-            <label>Collateral</label>
+            <label>Total Collateral</label>
             <span>500 ADA</span>
-          </div>
-
-          <div>
-            <label>Discount </label>
-            <span>40 ADA</span>
           </div>
 
           <div>
@@ -161,7 +156,7 @@
 .stepper-title {
   font-size: var(--text-size-e);
   text-align: start;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .stepper {
