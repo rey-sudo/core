@@ -19,7 +19,7 @@
           </div>
 
           <div>
-            <label>Type</label>
+            <label>Mode</label>
             <span>Batch</span>
           </div>
 
