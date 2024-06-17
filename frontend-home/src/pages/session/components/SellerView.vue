@@ -57,9 +57,9 @@
             Apple - MacBook Pro 14" Laptop - M3 Pro chip - 18GB Memory - 14-core
             GPU - 512GB SSD - Space Black
 
-            <span> | </span>
+            <span> » </span>
             <span class="sku">SKU: P9C3KC93CK</span>
-            <span> | </span>
+            <span> » </span>
             <span class="model"> Model: 8430288C2C</span>
           </div>
         </div>
@@ -91,7 +91,7 @@
   display: flex;
   align-items: center;
   width: 100%;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .stepper-product-image {
@@ -108,9 +108,8 @@
 .stepper-product-title {
   font-size: var(--text-size-e);
   text-align: left;
-  font-weight: 500;
   max-width: 500px;
-  padding: 1rem;
+  padding-left: 2rem;
 }
 
 .stepper-column {
