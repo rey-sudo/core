@@ -73,7 +73,10 @@
         <div>3</div>
       </div>
       <div class="stepper-body">
-        <div class="stepper-title">Order Information</div>
+        <div class="stepper-buttons">
+          <button>Active</button>
+         
+        </div>
       </div>
     </div>
   </div>
@@ -82,6 +85,20 @@
 <script setup></script>
 
 <style lang="css" scoped>
+.stepper-buttons {
+  display: flex;
+}
+
+.stepper-buttons button {
+  border: 1px solid var(--blue-c);
+  background: var(--blue-c);
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  color: var(--text-w);
+  margin-right: 1rem;
+  border-radius: 6px;
+}
+
 .sku,
 .model {
   color: var(--text-b);
@@ -184,7 +201,7 @@
 }
 
 .stepper-body {
-  padding: 0.5rem;
+  padding: 0.25rem;
   width: 100%;
 }
 </style>
