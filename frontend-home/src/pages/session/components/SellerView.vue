@@ -10,22 +10,22 @@
         <div class="stepper-price">
           <div>
             <label>Total Price </label>
-            <span>5240 ADA</span>
+            <span>{{ getSlotData?.contract_price }} ADA</span>
           </div>
 
           <div>
             <label>Total Collateral</label>
-            <span>500 ADA</span>
+            <span>{{ getSlotData?.contract_collateral }} ADA</span>
           </div>
 
           <div>
             <label>Mode</label>
-            <span>Batch</span>
+            <span>{{ getSlotData?.mode }}</span>
           </div>
 
           <div>
             <label>Units</label>
-            <span>2</span>
+            <span> {{ getSlotData?.contract_units }}</span>
           </div>
         </div>
       </div>
@@ -49,11 +49,11 @@
           />
 
           <div class="stepper-product-title">
-            Apple - MacBook Pro 14" Laptop - M3 Pro chip - 18GB Memory - 14-core
-            GPU - 512GB SSD - Space Black
-
+            {{ getSlotData?.product_details.product_name }}
             <span> » </span>
-            <span class="sku">SKU: P9C3KC93CK</span>
+            <span class="sku"
+              >SKU: {{ getSlotData?.product_details.product_id }}</span
+            >
             <span> » </span>
             <span class="model"> Model: 8430288C2C</span>
           </div>
@@ -76,7 +76,19 @@
   </div>
 </template>
 
-<script setup></script>
+<script>
+import { sessionAPI } from "@/pages/session/api";
+
+export default {
+  setup() {
+    const { getSlotData } = sessionAPI();
+
+    return {
+      getSlotData,
+    };
+  },
+};
+</script>
 
 <style lang="css" scoped>
 .stepper-buttons {
@@ -188,6 +200,7 @@
   font-size: var(--text-size-e);
   color: var(--text-a);
   white-space: nowrap;
+  text-transform: capitalize;
 }
 
 .stepper-row {

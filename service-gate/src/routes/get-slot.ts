@@ -48,7 +48,7 @@ const getSlotHandler = async (req: Request, res: Response) => {
 
     await connection.commit();
 
-    res.status(200).send({ success: true, payload: slots });
+    res.status(200).send({ success: true, payload: slots[0] });
   } catch (err: any) {
     await connection.rollback();
 

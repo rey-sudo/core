@@ -26,6 +26,7 @@ import TimeLine from "@/pages/session/components/TimeLine.vue";
 import MiniChat from "@/pages/session/components/MiniChat.vue";
 import SellerView from "@/pages/session/components/SellerView.vue";
 import { ref } from "vue";
+import { sessionAPI } from "@/pages/session/api";
 
 export default {
   components: {
@@ -37,14 +38,21 @@ export default {
   setup() {
     let currentRoute = ref("");
 
+    const { getSlot } = sessionAPI();
+
     return {
       currentRoute,
+      getSlot,
     };
   },
   created() {
     this.$watch(
-      () => this.$route.name,
-      (e) => (this.currentRoute = e),
+      () => this.$route,
+      (route) => {
+        this.getSlot({ id: route.params.id }).catch((err) =>
+          console.error(err)
+        );
+      },
       { immediate: true }
     )();
   },
@@ -81,6 +89,4 @@ export default {
   height: 50vh;
   background: rgba(0, 128, 0, 0);
 }
-
-
 </style>
