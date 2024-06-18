@@ -6,26 +6,28 @@ import { requireAuth } from "../utils/required";
 import { sellerMiddleware } from "../utils/seller";
 import { BadRequestError } from "../errors";
 import { sleep } from "../utils/sleep";
-import { sendEvent } from "../db/redis";
 
 const ADA_LOVELACE: number = 1000000;
 
-interface instanceScheme {
+interface InstanceScheme {
   startDefault: {
     sWalletParam: string;
     pPriceParam: number;
     sCollateralParam: number;
   };
 }
+////////////////////////////////////////////////////MIDDLEWARES
 
 const startEndpointMiddlewares: any = [sellerMiddleware, requireAuth];
 
+////////////////////////////////////////////////////
+
 const startEndpointHandler = async (req: Request, res: Response) => {
+  let connection: any = null;
+
   const params = req.body;
 
   const SELLER = req.sellerData;
-
-  let connection: any = null;
 
   try {
     connection = await DB.client.getConnection();
@@ -38,7 +40,7 @@ const startEndpointHandler = async (req: Request, res: Response) => {
     );
 
     if (slots.length === 0) {
-      throw new Error("NOT_SLOT");
+      throw new Error("NO_SLOT");
     }
 
     const SLOT = slots[0];
@@ -49,7 +51,7 @@ const startEndpointHandler = async (req: Request, res: Response) => {
 
     ////////////////////////////////////////////////////
 
-    const instanceScheme: instanceScheme = {
+    const instanceScheme: InstanceScheme = {
       startDefault: {
         sWalletParam: params.seller_pubkeyhash,
         pPriceParam: SLOT.contract_price * ADA_LOVELACE,
@@ -59,36 +61,30 @@ const startEndpointHandler = async (req: Request, res: Response) => {
 
     console.log(instanceScheme);
 
+    //////////////////////////////////////////////
+
+    let contractStatus: any = null;
+
     await API.post(
       `/api/contract/instance/${SLOT.contract_id}/endpoint/Start`,
       instanceScheme
     )
       .then((res) => assert.ok(res.status === 200))
-      .catch(() => {
-        throw new Error("CID_FAILED");
-      });
-
-    await sleep(1000);
-
-    const contractStatus = await API.get(
-      `/api/contract/instance/${SLOT.contract_id}/status`
-    )
+      .then(() => sleep(2000))
+      .then(() => API.get(`/api/contract/instance/${SLOT.contract_id}/status`))
       .then((res) => {
-        console.log(res.data);
-
         assert.ok(res.data.cicYieldedExportTxs.length !== 0);
-
         assert.ok(
           res.data.cicYieldedExportTxs[0].hasOwnProperty("transaction")
         );
-
         assert.ok(res.data.cicYieldedExportTxs[0].transaction.length !== 0);
-
-        return res.data;
+        contractStatus = res.data;
       })
       .catch(() => {
         throw new Error("CID_FAILED");
       });
+
+    console.log(contractStatus);
 
     //////////////////////////////////////////////
 
@@ -97,16 +93,14 @@ const startEndpointHandler = async (req: Request, res: Response) => {
       SET actived = ?,
           seller_pubkeyhash = ?,
           contract_stage = ?,
-          contract_status_0 = ?,
-          contract_utx_0 = ?
+          contract_0_utx = ?
       WHERE id = ? AND seller_id = ?
       `;
 
     const schemeValue = [
       true,
       params.seller_pubkeyhash,
-      "actived",
-      contractStatus,
+      "start",
       contractStatus.cicYieldedExportTxs[0].transaction,
       params.slot_id,
       SELLER.id,
@@ -124,8 +118,6 @@ const startEndpointHandler = async (req: Request, res: Response) => {
         transaction: contractStatus.cicYieldedExportTxs[0].transaction,
       },
     });
-
-    sendEvent(SELLER.id, "slot:updated");
   } catch (err: any) {
     await connection.rollback();
 
