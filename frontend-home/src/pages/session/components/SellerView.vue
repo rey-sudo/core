@@ -69,7 +69,7 @@
       </div>
       <div class="stepper-body">
         <div class="stepper-buttons">
-          <button>Active</button>
+          <button v-if="getSlotData?.actived === 0">Active</button>
         </div>
       </div>
     </div>
