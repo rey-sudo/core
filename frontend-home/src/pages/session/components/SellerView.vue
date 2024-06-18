@@ -138,7 +138,7 @@ export default {
 
 .stepper-column {
   width: 100px;
-  height: 250px;
+  height: 225px;
   display: flex;
   justify-content: start;
   flex-direction: column;
