@@ -278,15 +278,15 @@
                 :disabled="slotProps.data.actived === 1 || activeSlotLoader"
                 :modelValue="slotProps.data.actived === 1"
                 @change="
-                  (e) => activeSlot(e.target.ariaChecked, slotProps.data.id)
+                  (e) => createTransaction(e.target.ariaChecked, slotProps.data.id)
                 "
               />
 
               <span
-                v-if="slotProps.data.contract_utx_0 || activeSlotLoader"
+                v-if="slotProps.data.contract_0_utx || activeSlotLoader"
                 :class="{ disabled: activeSlotLoader }"
                 v-tooltip.top="'⚠ Warning. Click to resend the transaction.'"
-                @click="activeSlot('true', slotProps.data.contract_utx_0)"
+                @click="createTransaction('true', slotProps.data.contract_0_utx)"
               >
                 <i v-if="activeSlotLoader" class="pi pi-spin pi-spinner" />
 
@@ -1007,7 +1007,7 @@ export default {
 
       console.log(res);
     },
-    async activeSlot(actived, data) {
+    async createTransaction(actived, data) {
       this.activeSlotLoader = true;
 
       if (actived === "false") {
