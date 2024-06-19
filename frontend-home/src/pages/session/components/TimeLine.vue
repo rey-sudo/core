@@ -148,7 +148,7 @@ export default {
   justify-content: center;
   padding: 2rem;
   padding-bottom: 1rem;
-  margin-top: 100px;
+  margin-top: 1rem;
   border-radius: 28px;
 }
 
