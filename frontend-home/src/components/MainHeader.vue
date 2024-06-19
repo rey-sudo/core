@@ -663,7 +663,7 @@ i {
   font-weight: inherit;
   color: inherit;
   background: transparent;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .header-menu .header-menu-col .header-menu-nav div:nth-child(1) {
