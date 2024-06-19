@@ -1,5 +1,36 @@
 <template>
   <div class="stepper">
+
+    <div class="stepper-row">
+      <div class="stepper-column">
+        <div>2</div>
+        <span></span>
+      </div>
+      <div class="stepper-body">
+        <div class="stepper-title">Product</div>
+
+        <div class="stepper-product">
+          <img
+            class="stepper-product-image"
+            src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615_sd.jpg"
+            alt=""
+          />
+
+          <div class="stepper-product-title">
+            {{ getSlotData?.product_details.product_name }}
+            <span> » </span>
+            <span class="sku"
+              >SKU: {{ getSlotData?.product_details.product_id }}</span
+            >
+            <span> » </span>
+            <span class="model"> Model: 8430288C2C</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--///-->
     <div class="stepper-row">
       <div class="stepper-column">
         <div>1</div>
@@ -33,33 +64,7 @@
 
     <!--///-->
 
-    <div class="stepper-row">
-      <div class="stepper-column">
-        <div>2</div>
-        <span></span>
-      </div>
-      <div class="stepper-body">
-        <div class="stepper-title">Product</div>
 
-        <div class="stepper-product">
-          <img
-            class="stepper-product-image"
-            src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615_sd.jpg"
-            alt=""
-          />
-
-          <div class="stepper-product-title">
-            {{ getSlotData?.product_details.product_name }}
-            <span> » </span>
-            <span class="sku"
-              >SKU: {{ getSlotData?.product_details.product_id }}</span
-            >
-            <span> » </span>
-            <span class="model"> Model: 8430288C2C</span>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!--///-->
 
@@ -140,7 +145,7 @@ export default {
 
 .stepper-column {
   width: 100px;
-  height: 225px;
+  height: 250px;
   display: flex;
   justify-content: start;
   flex-direction: column;
