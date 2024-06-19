@@ -100,7 +100,7 @@ export default {
     const { copy } = useClipboard();
     return {
       eventData,
-      getSlotData, 
+      getSlotData,
       copy,
     };
   },
@@ -169,7 +169,7 @@ export default {
 }
 
 .timeline-timer span {
-  background: black;
+  background: var(--black-b);
   border-radius: 6px;
   padding: 0.25rem 0.75rem;
   margin: 0 0.25rem;
