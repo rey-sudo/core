@@ -95,7 +95,7 @@
     :baseZIndex="10"
     dismissableMask
     closeOnEscape
-    header="Wallet"
+    header="Sign In"
     :style="{ width: '23rem' }"
   >
     <div class="wallet">

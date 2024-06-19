@@ -3,7 +3,7 @@
 
     <div class="stepper-row">
       <div class="stepper-column">
-        <div>2</div>
+        <div>1</div>
         <span></span>
       </div>
       <div class="stepper-body">
@@ -33,7 +33,7 @@
     <!--///-->
     <div class="stepper-row">
       <div class="stepper-column">
-        <div>1</div>
+        <div>2</div>
         <span></span>
       </div>
       <div class="stepper-body">
