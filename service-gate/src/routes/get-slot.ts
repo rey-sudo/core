@@ -24,6 +24,7 @@ const getSlotHandler = async (req: Request, res: Response) => {
       slots.status,
       slots.actived,
       slots.seller_id,
+      slots.contract_stage,
       slots.contract_units, 
       slots.contract_price,
       slots.contract_collateral,

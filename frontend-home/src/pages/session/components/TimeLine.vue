@@ -70,20 +70,17 @@ export default {
       {
         status: "Locking",
         text: "N/A",
-        icon: "pi pi-cog",
-        color: "#673AB7",
+        data: "",
       },
       {
         status: "Delivered",
         text: "N/A",
-        icon: "pi pi-shopping-cart",
-        color: "#FF9800",
+        data: "",
       },
       {
         status: "Received",
         text: "N/A",
-        icon: "pi pi-check",
-        color: "#607D8B",
+        data: "",
       },
     ]);
 
