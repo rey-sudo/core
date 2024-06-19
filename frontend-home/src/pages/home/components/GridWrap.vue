@@ -10,10 +10,8 @@
           :key="item"
           @click="handleClick(item.id)"
         >
-          <div class="card-header">
-            
-              <img class="card-image" :src="item.image" alt="" />
-            
+          <div class="card-header">          
+              <img class="card-image" :src="item.image" alt="" />           
           </div>
 
           <div class="card-body">
