@@ -656,14 +656,14 @@ i {
 }
 
 .header-menu .header-menu-col .header-menu-nav div {
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   white-space: nowrap;
   cursor: pointer;
-  padding: 14px;
+  padding: 0.75rem;
   font-weight: inherit;
   color: inherit;
   background: transparent;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .header-menu .header-menu-col .header-menu-nav div:nth-child(1) {

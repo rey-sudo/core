@@ -190,8 +190,9 @@ export default {
   padding: 1rem;
   margin: auto;
   line-height: 1.5rem;
-  border: 1px solid transparent;
+  border: 1px solid var(--border-a);
   border-radius: 28px;
+
 }
 
 .card-header {
@@ -204,7 +205,7 @@ export default {
 
 .card-image img {
   width: 100%;
-  height: 257px;
+  height: 200px;
   display: flex;
   justify-content: center;
   border-radius: 12px;
@@ -222,7 +223,7 @@ export default {
 
 .card-body-name {
   color: var(--blue-c);
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-c);
   text-align: left;
   display: flex;
   align-items: center;
