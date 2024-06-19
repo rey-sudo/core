@@ -11,9 +11,9 @@
           @click="handleClick(item.id)"
         >
           <div class="card-header">
-            <div class="card-image">
-              <img :src="item.image" alt="" />
-            </div>
+            
+              <img class="card-image" :src="item.image" alt="" />
+            
           </div>
 
           <div class="card-body">
@@ -197,13 +197,17 @@ export default {
 .card-header {
   flex-basis: 50%;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-image {
+
 }
 
-.card-image img {
-  width: 100%;
+.card-image  {
+  width: 200px;;
   height: 200px;
   display: flex;
   justify-content: center;
