@@ -101,7 +101,7 @@ export default {
 ::v-deep(.p-rating-icon) {
   width: var(--text-size-a);
   height: var(--text-size-a);
-  color: var(--blue-c);
+
 }
 
 .card-body-seller {
@@ -120,7 +120,7 @@ export default {
 .card-body-rating {
   display: flex;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .card-body-rating span {
@@ -142,9 +142,9 @@ export default {
 .card-body-price {
   font-weight: 600;
   text-align: left;
-  font-size: var(--text-size-d);
+  font-size: var(--text-size-e);
   color: var(--text-a);
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .grid-item-title {
@@ -222,7 +222,7 @@ export default {
 
 .card-body-name {
   color: var(--blue-c);
-  font-size: var(--text-size-c);
+  font-size: var(--text-size-b);
   text-align: left;
   display: flex;
   align-items: center;
