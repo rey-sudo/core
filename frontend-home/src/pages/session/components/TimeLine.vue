@@ -7,7 +7,7 @@
 
     <div class="timeline-subtitle">
       <span>Space for bilateral negotiation </span>
-      <span>Time Created: {{ getSlotData?.created_at }}</span>
+      <span> {{ getSlotData?.created_at }}</span>
     </div>
 
     <div class="timeline-body">
@@ -97,14 +97,11 @@ export default {
       },
     ]);
 
-    const { text, copy, copied, isSupported } = useClipboard();
+    const { copy } = useClipboard();
     return {
       eventData,
-      getSlotData,
-      text,
+      getSlotData, 
       copy,
-      copied,
-      isSupported,
     };
   },
 
