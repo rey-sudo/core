@@ -2688,7 +2688,7 @@
   }
 
   .p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
-    color: var(--blue-c);
+    color: var(--yellow-b);
   }
 
   .p-rating:not(.p-disabled):not(.p-readonly)

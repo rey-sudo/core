@@ -124,14 +124,14 @@
     <div class="header-left">
       <img
         class="header-left-logo white"
-        @click="reloadPage"
+        @click="openHome"
         src="@/assets/logo-white.png"
         alt="logo"
       />
 
       <img
         class="header-left-logo blue"
-        @click="reloadPage"
+        @click="openHome"
         src="@/assets/logo-blue.png"
         alt="logo"
       />
@@ -344,6 +344,14 @@ export default {
 
     openWalletDialog() {
       this.walletVisible = true;
+    },
+
+    openHome() {
+      if (this.currentRoute === "home") {
+        return location.reload();
+      }
+      
+      this.$router.push({ name: "home" });
     },
 
     async getPubKeyHash() {
@@ -595,7 +603,6 @@ i {
   background: var(--black-b);
   color: var(--text-w);
   font-weight: 500;
- 
 }
 
 .header-menu.main {

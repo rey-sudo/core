@@ -68,7 +68,7 @@
       <!--RIGHT-->
       <div class="head-right">
         <div class="head-info">
-          <span>5 available • 20 stock</span>
+          <span>5 available • 23 sold</span>
         </div>
 
         <div class="head-name">
@@ -431,7 +431,7 @@ export default {
 .head-seller-badge span {
   font-size: var(--text-size-a);
   margin-left: 1rem;
-  font-weight: 200;
+  font-weight: 400;
 }
 
 .head {

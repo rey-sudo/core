@@ -71,7 +71,6 @@ export default {
   position: absolute;
   backdrop-filter: blur(0px);
   background: linear-gradient(180deg, transparent 90%, rgba(0, 0, 0, 0.1) 100%);
-  background-image: var(--gradient-a);
 }
 
 .store .banner .banner-screen {

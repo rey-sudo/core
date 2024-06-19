@@ -190,7 +190,7 @@ export default {
   padding: 1rem;
   margin: auto;
   line-height: 1.5rem;
-  border: 1px solid var(--border-b);
+  border: 1px solid transparent;
   border-radius: 28px;
 }
 
