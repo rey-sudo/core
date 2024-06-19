@@ -27,6 +27,10 @@ const getSlotHandler = async (req: Request, res: Response) => {
       slots.contract_units, 
       slots.contract_price,
       slots.contract_collateral,
+      slots.contract_0_tx,
+      slots.contract_1_tx,
+      slots.contract_2_tx,
+      slots.contract_3_tx,
       JSON_OBJECT(
           'product_id', products.id,
           'product_name', products.name,

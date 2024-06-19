@@ -11,10 +11,15 @@
     </div>
 
     <div class="timeline-body">
-      <Timeline :value="eventData" layout="horizontal" align="top">
+      <Timeline
+        v-if="getSlotData"
+        :value="eventData"
+        layout="horizontal"
+        align="top"
+      >
         <template #opposite="slotProps">
           <div class="transaction">
-            <span>{{ slotProps.item.date }}</span>
+            <span>{{ slotProps.item.text }}</span>
 
             <button><i class="pi pi-copy" /></button>
           </div>
@@ -38,39 +43,59 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed } from "vue";
+import { sessionAPI } from "@/pages/session/api";
 
 export default {
   setup() {
-    const eventData = ref([
+    const { getSlotData } = sessionAPI();
+
+    const formatHash = (str, maxLength) => {
+      if (str.length <= maxLength) {
+        return str;
+      }
+
+      const ellipsis = "...";
+      const halfLength = Math.floor((maxLength - ellipsis.length) / 2);
+
+      return str.slice(0, halfLength) + ellipsis + str.slice(-halfLength);
+    };
+
+    const eventData = computed(() => [
       {
         status: "Waiting",
-        date: "4d4602f8..1ad94ef7",
-        icon: "pi pi-shopping-cart",
-        color: "#9C27B0",
+        text: formatHash(getSlotData.value.contract_0_tx, 20),
+        data: getSlotData.value.contract_0_tx,
       },
       {
         status: "Locking",
-        date: "N/A",
+        text: "N/A",
         icon: "pi pi-cog",
         color: "#673AB7",
       },
       {
         status: "Delivered",
-        date: "N/A",
+        text: "N/A",
         icon: "pi pi-shopping-cart",
         color: "#FF9800",
       },
       {
         status: "Received",
-        date: "N/A",
+        text: "N/A",
         icon: "pi pi-check",
         color: "#607D8B",
       },
     ]);
+
     return {
       eventData,
+      getSlotData,
     };
+  },
+
+  mounted() {
+    //console.log(this.getSlotData?.contract_0_tx);
+    // this.eventData[0].text = this.getSlotData?.contract_0_tx;
   },
 };
 </script>

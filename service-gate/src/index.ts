@@ -109,6 +109,14 @@ const main = async () => {
       route.getSlotHandler
     );
 
+    app.post(
+      "/api/gate/start-tx",
+
+      route.startTxMiddlewares,
+
+      route.startTxHandler
+    );
+
     app.all("*", (_req, _res) => {
       throw new NotFoundError();
     });

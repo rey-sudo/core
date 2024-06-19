@@ -233,8 +233,6 @@
           </template>
         </Column>
 
-   
-
         <Column field="contract_price" header="Price" sortable>
           <template #body="slotProps">
             {{ formatCurrency(slotProps.data.contract_price) }}
@@ -246,9 +244,8 @@
             {{ formatCurrency(slotProps.data.contract_collateral) }}
           </template>
         </Column>
-        
-        <Column field="contract_units" header="Units" sortable></Column>
 
+        <Column field="contract_units" header="Units" sortable></Column>
 
         <Column
           field="contract_state"
@@ -266,8 +263,6 @@
           </template>
         </Column>
 
-
-
         <Column field="actived" header="Actived" sortable>
           <template #body="slotProps">
             <div class="switch-group">
@@ -278,7 +273,12 @@
                 :disabled="slotProps.data.actived === 1 || activeSlotLoader"
                 :modelValue="slotProps.data.actived === 1"
                 @change="
-                  (e) => createTransaction(e.target.ariaChecked, slotProps.data.id)
+                  (e) =>
+                    createTransaction(
+                      e.target.ariaChecked,
+                      slotProps.data.id,
+                      null
+                    )
                 "
               />
 
@@ -286,7 +286,13 @@
                 v-if="slotProps.data.contract_0_utx || activeSlotLoader"
                 :class="{ disabled: activeSlotLoader }"
                 v-tooltip.top="'⚠ Warning. Click to resend the transaction.'"
-                @click="createTransaction('true', slotProps.data.contract_0_utx)"
+                @click="
+                  createTransaction(
+                    'true',
+                    slotProps.data.id,
+                    slotProps.data.contract_0_utx
+                  )
+                "
               >
                 <i v-if="activeSlotLoader" class="pi pi-spin pi-spinner" />
 
@@ -295,11 +301,6 @@
             </div>
           </template>
         </Column>
-
-
-
-
-
 
         <Column :exportable="false" header="Actions">
           <template #body="">
@@ -542,8 +543,14 @@ export default {
     LoadingBars,
   },
   setup() {
-    const { getSlotsData, createProduct, createSlot, getLucid, startEndpoint } =
-      dashboardAPI();
+    const {
+      getSlotsData,
+      startTx,
+      createProduct,
+      createSlot,
+      getLucid,
+      startEndpoint,
+    } = dashboardAPI();
 
     const productList = ref(getSlotsData.value);
 
@@ -706,6 +713,7 @@ export default {
       copy,
       copied,
       isSupported,
+      startTx,
       slotFormErrors,
       slotForm,
       createSlot,
@@ -1007,23 +1015,20 @@ export default {
 
       console.log(res);
     },
-    async createTransaction(actived, data) {
+    async createTransaction(actived, slotId, utx) {
       this.activeSlotLoader = true;
 
       if (actived === "false") {
         const addr = await this.getLucid.wallet.address();
         const address = await getAddressDetails(addr);
 
-        const params = {
-          slot_id: data,
+        await this.startEndpoint({
+          slot_id: slotId,
           seller_pubkeyhash: address.paymentCredential.hash,
-        };
-
-        await this.startEndpoint(params)
+        })
           .then((res) => balanceTx(res.response.payload.transaction))
-          .then((tx) => {
-            console.log(tx);
-
+          .then((txHash) => this.startTx({ tx_hash: txHash, slot_id: slotId }))
+          .then(() => {
             this.$toast.add({
               severity: "success",
               summary: "Successful",
@@ -1044,10 +1049,9 @@ export default {
       }
 
       if (actived === "true") {
-        await balanceTx(data)
-          .then((tx) => {
-            console.log(tx);
-
+        await balanceTx(utx)
+          .then((txHash) => this.startTx({ tx_hash: txHash, slot_id: slotId }))
+          .then(() => {
             this.$toast.add({
               severity: "success",
               summary: "Successful",
@@ -1168,8 +1172,6 @@ export default {
         .then((res) => {
           if (res.response.success === true) {
             this.createSlotDialogVisible = false;
-
-            this.openSlotListDialog(this.createSlotIndex);
 
             this.$toast.add({
               severity: "success",

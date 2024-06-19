@@ -13,6 +13,20 @@ const createProduct = async (_, params) => {
   }
 };
 
+const startTx = async (_, params) => {
+  try {
+    const response = await axiosAPI.post("/api/gate/start-tx", params);
+
+    console.log(response);
+
+    //commit("createProduct", response.data.payload);
+
+    return { ok: true, response: response.data };
+  } catch (error) {
+    throw { ok: false, response: error.response.data };
+  }
+};
+
 const createImages = async (_, params) => {
   try {
     const response = await fetch(HOST + "/api/media/create-image", {
@@ -21,7 +35,6 @@ const createImages = async (_, params) => {
       credentials: "include",
     });
 
- 
     //"Content-Type": "multipart/form-data"
 
     return { ok: true, response: await response.json() };
@@ -88,6 +101,7 @@ export {
   setupLucid,
   createProduct,
   createImages,
+  startTx,
   getProducts,
   createSlot,
   getSlots,
