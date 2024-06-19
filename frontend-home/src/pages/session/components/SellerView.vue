@@ -69,7 +69,9 @@
       </div>
       <div class="stepper-body">
         <div class="stepper-buttons">
-          <button v-if="getSlotData?.actived === 0">Active</button>
+          <button v-if="getSlotData?.contract_stage === 'inactive'">
+            Active
+          </button>
         </div>
       </div>
     </div>

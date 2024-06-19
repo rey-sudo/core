@@ -2,12 +2,12 @@
   <div class="timeline">
     <div class="timeline-title">
       <span>Negotiation Session</span>
-      <span>ID: 4148CA6B3865ACE </span>
+      <span>ID: {{ getSlotData?.id }} </span>
     </div>
 
     <div class="timeline-subtitle">
       <span>Space for bilateral negotiation </span>
-      <span>Time Created: may 27 07:20:am</span>
+      <span>Time Created: {{ getSlotData?.created_at }}</span>
     </div>
 
     <div class="timeline-body">
@@ -19,9 +19,16 @@
       >
         <template #opposite="slotProps">
           <div class="transaction">
-            <span>{{ slotProps.item.text }}</span>
+            <span @click="openCardanoScan(slotProps.item.data)">{{
+              slotProps.item.text
+            }}</span>
 
-            <button><i class="pi pi-copy" /></button>
+            <button
+              v-if="slotProps.item.data"
+              @click="copy(slotProps.item.data)"
+            >
+              <i class="pi pi-copy" />
+            </button>
           </div>
         </template>
         <template #content="slotProps">
@@ -45,12 +52,18 @@
 <script>
 import { computed } from "vue";
 import { sessionAPI } from "@/pages/session/api";
+import { useClipboard } from "@vueuse/core";
+import { NETWORK } from "@/api";
 
 export default {
   setup() {
     const { getSlotData } = sessionAPI();
 
     const formatHash = (str, maxLength) => {
+      if (!str) {
+        return "N/A";
+      }
+
       if (str.length <= maxLength) {
         return str;
       }
@@ -84,15 +97,22 @@ export default {
       },
     ]);
 
+    const { text, copy, copied, isSupported } = useClipboard();
     return {
       eventData,
       getSlotData,
+      text,
+      copy,
+      copied,
+      isSupported,
     };
   },
 
-  mounted() {
-    //console.log(this.getSlotData?.contract_0_tx);
-    // this.eventData[0].text = this.getSlotData?.contract_0_tx;
+  methods: {
+    openCardanoScan(txHash) {
+      const internalUrl = `https://${NETWORK}.cardanoscan.io/transaction/${txHash}`;
+      window.open(internalUrl, "_blank");
+    },
   },
 };
 </script>
@@ -104,10 +124,23 @@ export default {
 }
 
 .transaction button {
-  margin-left: 0.5rem;
+  margin-left: 0.25rem;
   border-radius: 6px;
   border: none;
   cursor: pointer;
+  background: initial;
+}
+
+.transaction button:hover {
+  color: var(--blue-c);
+}
+
+.transaction span {
+  cursor: pointer;
+}
+
+.transaction span:hover {
+  text-decoration: underline;
 }
 
 .timeline {
@@ -154,7 +187,7 @@ export default {
 
 .timeline-title span:nth-child(2) {
   font-size: var(--text-size-e);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .timeline-body {
