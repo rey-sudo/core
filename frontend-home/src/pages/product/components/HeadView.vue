@@ -174,21 +174,23 @@ export default {
     const collateralBar = ref([
       {
         label: "Collateral 500 ADA",
-        color: "var(--blue-c)",
+        color: "#3b95ef",
         value: 30,
+        icon: "pi pi-crown",
+      },
+
+      {
+        label: "Treasury discount",
+        color: "var(--blue-c)",
+        value: 10,
         icon: "pi pi-building-columns",
       },
+
       {
         label: "Protected purchase",
-        color: "var(--blue-c)",
+        color: "#15c6c1",
         value: 100,
         icon: "pi pi-shopping-bag",
-      },
-      {
-        label: "Pairfy discount",
-        color: "var(--blue-c)",
-        value: 0,
-        icon: "pi pi-crown",
       },
     ]);
 
@@ -314,7 +316,6 @@ export default {
 }
 
 ::v-deep(.p-metergroup-meters) {
-  display: none;
 }
 
 .bread {
