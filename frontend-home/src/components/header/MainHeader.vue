@@ -199,54 +199,23 @@
 
     <!--SUBMENU-->
 
-    <div class="header-menu" :class="{ hide: currentRoute === 'session' }">
-      <div class="header-menu-col left">
-        <div class="header-menu-nav">
-          <div
-            v-for="item in navTabs"
-            :key="item"
-            :class="{ selected: selectedTab === item.value }"
-          >
-            {{ item.label }}
-          </div>
-        </div>
-      </div>
-
-      <div class="header-menu-col center" />
-      <div class="header-menu-col right" />
-    </div>
+    <NavWrap />
   </header>
 </template>
 
 <script>
 import { walletAPI, CardanoWasm, balanceTx } from "@/api/wallet-api";
 import { ref } from "vue";
+import NavWrap from "./components/NavWrap.vue";
 
 export default {
+  components: {
+    NavWrap,
+  },
   setup() {
+
     let currentRoute = ref("");
-
-    window.addEventListener(
-      "scroll",
-      function () {
-        let currentScroll =
-          window.scrollY || document.documentElement.scrollTop;
-
-        if (currentRoute.value === "session") {
-          document.querySelector(".header-menu").style.display = "none";
-
-          return;
-        }
-
-        if (currentScroll <= 0) {
-          document.querySelector(".header-menu").style.display = "flex";
-        } else {
-          document.querySelector(".header-menu").style.display = "none";
-        }
-      },
-      false
-    );
-
+      
     const wallet = walletAPI();
     const selectedCountry = ref({ name: "United States", code: "US" });
     const countries = ref([
@@ -275,52 +244,6 @@ export default {
       isScrolled: false,
       visible: false,
       walletVisible: false,
-
-      selectedTab: "all",
-      navTabs: [
-        {
-          label: "Categories",
-          value: "categories",
-          badge: false,
-          badgeLabel: "",
-        },
-        {
-          label: "Discounts",
-          value: "last-discounts",
-          badge: false,
-          badgeLabel: "",
-        },
-        {
-          label: "Best Sellers",
-          value: "best-sellers",
-          badge: false,
-          badgeLabel: "",
-        },
-        {
-          label: "Documentation",
-          value: "documentation",
-          badge: false,
-          badgeLabel: "",
-        },
-        {
-          label: "P2P",
-          value: "p2p",
-          badge: false,
-          badgeLabel: "",
-        },
-        {
-          label: "Bounties",
-          value: "bounties",
-          badge: false,
-          badgeLabel: "",
-        },
-        {
-          label: "Help",
-          value: "help",
-          badge: false,
-          badgeLabel: "",
-        },
-      ],
     };
   },
   created() {
@@ -329,7 +252,7 @@ export default {
       (e) => (this.currentRoute = e),
       { immediate: true }
     )();
-  },
+  }, 
   methods: {
     connectWallet(e) {
       this.wallet.connect(e);
@@ -583,90 +506,6 @@ export default {
 
 i {
   line-height: 0;
-}
-
-.header-menu {
-  padding: 0 5%;
-  z-index: 100;
-  display: flex;
-  position: fixed;
-  top: 74px;
-  left: 0;
-  width: 100%;
-  align-items: center;
-  background: var(--blue-b);
-  color: var(--text-w);
-  font-weight: 500;
-  border-top: 1px solid var(--blue-a);
-}
-
-.header-menu.main {
-  color: var(--text-w);
-  background: var(--blue-c);
-  font-weight: 600;
-  border-bottom: 1px solid transparent;
-}
-
-.header-menu.hide {
-  display: none;
-}
-
-.header-menu .header-menu-col {
-  flex-basis: 33.33%;
-}
-
-.header-menu .header-menu-col.left {
-  flex-basis: 33.33%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.header-menu .header-menu-col.right {
-  flex-basis: 33.33%;
-  display: flex;
-  justify-content: center;
-}
-
-.header-menu .header-menu-col.center {
-  flex-basis: 66.66%;
-  width: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.header-menu .header-menu-col .header-menu-nav {
-  display: flex;
-  align-items: center;
-}
-
-.header-menu .header-menu-col .header-menu-button {
-  cursor: pointer;
-  margin-right: 1rem;
-}
-
-.header-menu .header-menu-col .header-menu-button img {
-  width: var(--text-size-e);
-}
-
-.header-menu .header-menu-col .header-menu-nav div {
-  font-size: var(--text-size-b);
-  white-space: nowrap;
-  cursor: pointer;
-  padding: 0.75rem;
-  font-weight: inherit;
-  color: inherit;
-  background: transparent;
-  font-weight: 400;
-}
-
-.header-menu .header-menu-col .header-menu-nav div:nth-child(1) {
-  padding-left: initial;
-}
-
-.header-menu .header-menu-col .header-menu-nav div:hover {
-  opacity: 0.8;
 }
 
 .country,
