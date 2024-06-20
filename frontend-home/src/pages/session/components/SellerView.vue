@@ -1,6 +1,5 @@
 <template>
   <div class="stepper">
-
     <div class="stepper-row">
       <div class="stepper-column">
         <div>1</div>
@@ -17,7 +16,14 @@
           />
 
           <div class="stepper-product-title">
-            {{ getSlotData?.product_details.product_name }}
+            <a
+              :href="'/p/' + getSlotData?.product_details.product_id"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {{ getSlotData?.product_details.product_name }}</a
+            >
+
             <span> » </span>
             <span class="sku"
               >SKU: {{ getSlotData?.product_details.product_id }}</span
@@ -28,7 +34,6 @@
         </div>
       </div>
     </div>
-
 
     <!--///-->
     <div class="stepper-row">
@@ -63,8 +68,6 @@
     </div>
 
     <!--///-->
-
-
 
     <!--///-->
 
@@ -141,6 +144,11 @@ export default {
   text-align: left;
   max-width: 600px;
   padding-left: 2rem;
+}
+
+.stepper-product-title a {
+  color: var(--text-a);
+  font-weight: 400;
 }
 
 .stepper-column {

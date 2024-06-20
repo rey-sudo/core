@@ -77,7 +77,7 @@
         </div>
 
         <div class="head-legend">
-          <span>Model: 8430288C2C</span>
+          <span>Model: PLACCOG7OQVQY2BX </span>
           <span>SKU: P9C3KC93CK</span>
         </div>
 
