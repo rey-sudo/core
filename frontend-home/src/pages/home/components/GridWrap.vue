@@ -19,16 +19,6 @@
               <span> {{ item.name.slice(0, 60) }}...</span>
             </div>
 
-            <div class="card-body-rating">
-              <Rating
-                :modelValue="item.rating_count"
-                :stars="5"
-                :readonly="true"
-                :cancel="false"
-              />
-              <span>({{ item.review_count }})</span>
-            </div>
-
             <div class="card-body-price">
               <span> {{ formatPrice(item.price) }}</span>
             </div>

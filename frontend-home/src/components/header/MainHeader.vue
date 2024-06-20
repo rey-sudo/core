@@ -600,7 +600,7 @@ i {
   left: 0;
   width: 100%;
   align-items: center;
-  background: var(--black-b);
+  background: var(--black-a);
   color: var(--text-w);
   font-weight: 500;
 }

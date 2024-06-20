@@ -3987,7 +3987,7 @@
   .p-carousel .p-carousel-indicators .p-carousel-indicator button {
     background-color: #e9ecef;
     width: 2rem;
-    height: 0.5rem;
+    height: 0.25rem;
     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
     border-radius: 0;
   }
@@ -3995,7 +3995,7 @@
     background: #dee2e6;
   }
   .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
-    background: #2196f3;
+    background: var(--blue-c);
     color: #ffffff;
   }
   .p-datatable {
