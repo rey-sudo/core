@@ -10637,7 +10637,7 @@
   }
   .p-metergroup.p-metergroup-horizontal .p-metergroup-meters {
     height: 0.4rem;
-    opacity: 0.8;
+    opacity: 1;
   }
 
   .p-metergroup.p-metergroup-horizontal .p-metergroup-meter:first-of-type {

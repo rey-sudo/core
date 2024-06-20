@@ -99,16 +99,16 @@
           <span> 3,024</span>
         </div>
 
+        <div class="head-icons">
+          <MeterGroup :value="collateralBar" />
+        </div>
+
         <div class="head-button withMargin">
           <div @click="buyProduct">Buy now</div>
         </div>
-
-
-        <div class="head-collateral">
-          <MeterGroup :value="collateralBar" />
+        <div class="head-button">
+          <div @click="buyProduct">Add to cart</div>
         </div>
-        
-
 
         <div class="head-seller">
           <div class="head-seller-head">
@@ -313,6 +313,7 @@ export default {
 }
 
 ::v-deep(.p-metergroup-meters) {
+
 }
 
 .bread {
@@ -414,9 +415,9 @@ export default {
   color: var(--text-b);
 }
 
-.head-collateral {
-  width: 90%;
-  margin-top: 1rem;
+.head-icons {
+  width: 50%;
+  margin-top: 2rem;
 }
 
 .head-seller-badge {
