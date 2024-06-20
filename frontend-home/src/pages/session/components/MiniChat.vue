@@ -1,7 +1,11 @@
 <template>
   <div class="chat">
     <div class="chat-top">
-      <div></div>
+      <img
+        src="https://api.dicebear.com/9.x/icons/svg?seed=asdasdasxokxxxz8x"
+        alt=""
+      />
+
       <span>CHEAPKING700</span>
     </div>
     <div class="chat-body"></div>
@@ -45,11 +49,11 @@ export default {};
   border-bottom: 1px solid var(--border-a);
 }
 
-.chat-top div {
+.chat-top img {
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  border: 1px solid var(--border-b);
+  border: 1px solid var(--border-a);
   background: var(--base-a);
 }
 
