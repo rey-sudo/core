@@ -2,7 +2,7 @@
   <div class="chat">
     <div class="chat-top">
       <img
-        src="https://api.dicebear.com/9.x/lorelei-neutral/svg?seed=cheapking800"
+        src="https://api.dicebear.com/9.x/initials/svg?seed=cheapking700"
         alt=""
       />
 
