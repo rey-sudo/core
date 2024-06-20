@@ -96,18 +96,18 @@
 
         <div class="head-price">
           <div class="ada-label">₳</div>
-          <span> 1.720</span>
+          <span> 3024</span>
         </div>
 
         <div class="head-collateral">
           <MeterGroup :value="collateralBar" />
         </div>
 
-        <div class="head-button">
+        <div class="head-button withMargin">
           <div @click="buyProduct">Buy now</div>
         </div>
 
-        <div class="head-button outline">
+        <div class="head-button">
           <div @click="buyProduct">Add to cart</div>
         </div>
 
@@ -330,7 +330,7 @@ export default {
   font-size: var(--text-size-b);
   font-weight: 400;
   text-align: left;
-  color: var(--blue-a);
+  color: var(--blue-c);
 }
 
 .meter {
@@ -418,7 +418,7 @@ export default {
 
 .head-collateral {
   width: 50%;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .head-seller-badge {
@@ -570,7 +570,7 @@ export default {
 
 .head .head-price {
   text-align: left;
-  margin-top: 2rem;
+  margin-top: 1rem;
   font-size: var(--text-size-h);
   font-weight: 700;
   display: flex;
@@ -586,11 +586,11 @@ export default {
 }
 
 .head .head-button {
-  background: var(--blue-c);
+  background: transparent;
   border: 1px solid var(--blue-c);
   width: 90%;
   border-radius: 6px;
-  color: var(--text-w);
+  color: var(--blue-c);
   font-weight: 600;
   cursor: pointer;
   display: flex;
@@ -598,21 +598,18 @@ export default {
   justify-content: center;
   padding: 0.75rem;
   text-align: center;
-  margin-top: 4rem;
+  margin-top: 1rem;
+  transition: var(--transition-a);
 }
 
 .head .head-button:hover {
   opacity: 0.9;
+  background: var(--blue-c);
+  color: var(--text-w);
 }
 
-.head .head-button.outline {
-  background: transparent;
-  color: var(--blue-c);
-  margin-top: 1rem;
-  border: 1px solid var(--blue-c);
-}
-
-.head .head-button.outline {
+.head .head-button.withMargin {
+  margin-top: 4rem;
 }
 
 @media only screen and (max-width: 767px) {

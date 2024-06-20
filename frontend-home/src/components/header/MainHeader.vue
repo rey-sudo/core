@@ -597,6 +597,7 @@ i {
   background: var(--blue-b);
   color: var(--text-w);
   font-weight: 500;
+  border-top: 1px solid var(--blue-a);
 }
 
 .header-menu.main {
