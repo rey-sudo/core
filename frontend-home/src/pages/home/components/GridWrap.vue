@@ -10,8 +10,8 @@
           :key="item"
           @click="handleClick(item.id)"
         >
-          <div class="card-header">          
-              <img class="card-image" :src="item.image" alt="" />           
+          <div class="card-header">
+            <img class="card-image" :src="item.image" alt="" />
           </div>
 
           <div class="card-body">
@@ -99,7 +99,7 @@ export default {
 ::v-deep(.p-rating-icon) {
   width: var(--text-size-a);
   height: var(--text-size-a);
-
+  color: var(--yellow-b);
 }
 
 .card-body-seller {
@@ -201,11 +201,10 @@ export default {
 }
 
 .card-image {
-
 }
 
-.card-image  {
-  width: 200px;;
+.card-image {
+  width: 200px;
   height: 200px;
   display: flex;
   justify-content: center;
