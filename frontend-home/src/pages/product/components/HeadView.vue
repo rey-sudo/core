@@ -174,19 +174,19 @@ export default {
     const collateralBar = ref([
       {
         label: "Collateral 500 ADA",
-        color: "#3b95ef",
+        color: "#147DFF",
         value: 30,
         icon: "pi pi-crown",
       },
       {
         label: "Treasury discount",
-        color: "var(--blue-c)",
+        color: "#47B0FF",
         value: 10,
         icon: "pi pi-building-columns",
       },
       {
         label: "Protected purchase",
-        color: "#15c6c1",
+        color: "#7AE3FF",
         value: 100,
         icon: "pi pi-shopping-bag",
       },
