@@ -609,7 +609,7 @@ export default {
 }
 
 .head .head-button.withMargin {
-  margin-top: 4rem;
+  margin-top: 2rem;
 }
 
 @media only screen and (max-width: 767px) {
