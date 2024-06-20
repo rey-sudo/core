@@ -96,20 +96,19 @@
 
         <div class="head-price">
           <div class="ada-label">₳</div>
-          <span> 3024</span>
-        </div>
-
-        <div class="head-collateral">
-          <MeterGroup :value="collateralBar" />
+          <span> 3,024</span>
         </div>
 
         <div class="head-button withMargin">
           <div @click="buyProduct">Buy now</div>
         </div>
 
-        <div class="head-button">
-          <div @click="buyProduct">Add to cart</div>
+
+        <div class="head-collateral">
+          <MeterGroup :value="collateralBar" />
         </div>
+        
+
 
         <div class="head-seller">
           <div class="head-seller-head">
@@ -416,7 +415,7 @@ export default {
 }
 
 .head-collateral {
-  width: 50%;
+  width: 90%;
   margin-top: 1rem;
 }
 
