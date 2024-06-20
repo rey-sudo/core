@@ -178,14 +178,12 @@ export default {
         value: 30,
         icon: "pi pi-crown",
       },
-
       {
         label: "Treasury discount",
         color: "var(--blue-c)",
         value: 10,
         icon: "pi pi-building-columns",
       },
-
       {
         label: "Protected purchase",
         color: "#15c6c1",
