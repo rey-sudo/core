@@ -39,10 +39,9 @@ export default {
       review_count: 756,
     });
 
-
     return {
       product,
-    
+
       lockingEndpoint,
     };
   },
@@ -64,6 +63,12 @@ export default {
     )();
   },
   methods: {
+    scrollTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    },
     isGalleryImage(index) {
       return this.galleryImageIndex === index;
     },
@@ -124,6 +129,8 @@ export default {
   },
 
   mounted() {
+    this.scrollTop();
+
     this.setupLucid();
 
     this.setupWallet();
@@ -132,11 +139,9 @@ export default {
 </script>
 
 <style lang="css" scoped>
-
 .product-body {
   width: calc(80% - 4rem);
 }
-
 
 .product {
   display: flex;

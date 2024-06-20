@@ -145,7 +145,6 @@
       </div>
 
       <div class="header-button left">
-        <label for=""> <img src="@/assets/store.svg" alt="" /></label>
         <div>
           <span>Sell a</span>
           <span>Product</span>
@@ -279,12 +278,6 @@ export default {
 
       selectedTab: "all",
       navTabs: [
-        {
-          label: "News",
-          value: "news",
-          badge: false,
-          badgeLabel: "",
-        },
         {
           label: "Categories",
           value: "categories",
@@ -563,9 +556,10 @@ export default {
 }
 
 .header .header-button span {
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-c);
   line-height: 1.25rem;
   text-align: left;
+  font-weight: 600;
 }
 
 .header .header-button span:nth-child(1) {
@@ -596,7 +590,7 @@ i {
   z-index: 100;
   display: flex;
   position: fixed;
-  top: 72px;
+  top: 74px;
   left: 0;
   width: 100%;
   align-items: center;
