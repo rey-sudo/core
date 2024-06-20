@@ -350,7 +350,7 @@ export default {
       if (this.currentRoute === "home") {
         return location.reload();
       }
-      
+
       this.$router.push({ name: "home" });
     },
 
@@ -414,7 +414,7 @@ export default {
   width: 100%;
   box-sizing: border-box;
   background: initial;
-  background: var(--black-a);
+  background: var(--blue-b);
   box-shadow: var(--border-shadow);
 }
 
@@ -600,7 +600,7 @@ i {
   left: 0;
   width: 100%;
   align-items: center;
-  background: var(--black-a);
+  background: var(--blue-b);
   color: var(--text-w);
   font-weight: 500;
 }
