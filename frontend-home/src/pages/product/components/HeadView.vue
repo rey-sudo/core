@@ -180,13 +180,13 @@ export default {
       },
       {
         label: "Treasury discount",
-        color: "#47B0FF",
+        color: "#339CFF",
         value: 10,
         icon: "pi pi-building-columns",
       },
       {
         label: "Protected purchase",
-        color: "#7AE3FF",
+        color: "#51BAFF",
         value: 100,
         icon: "pi pi-shopping-bag",
       },
@@ -417,7 +417,7 @@ export default {
 
 .head-collateral {
   width: 50%;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .head-seller-badge {
@@ -569,7 +569,7 @@ export default {
 
 .head .head-price {
   text-align: left;
-  margin-top: 1rem;
+  margin-top: 2rem;
   font-size: var(--text-size-h);
   font-weight: 700;
   display: flex;
