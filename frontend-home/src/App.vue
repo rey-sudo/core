@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { sellerAPI } from "@/components/composable/seller";
+import { sellerAPI } from "@/components/header/composable/seller";
 
 export default {
   name: "App",

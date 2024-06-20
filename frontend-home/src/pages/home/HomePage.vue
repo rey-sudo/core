@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import MainHeader from "@/components/MainHeader.vue";
-import MobileHeader from "@/components/MobileHeader.vue";
+import MainHeader from "@/components/header/MainHeader.vue";
+import MobileHeader from "@/components/header/MobileHeader.vue";
 import GridWrap from "@/pages/home/components/GridWrap.vue";
 import MobileGrid from "@/pages/home/components/MobileGrid.vue";
 //import storeAPI from "@/pages/home/composable/home-api";

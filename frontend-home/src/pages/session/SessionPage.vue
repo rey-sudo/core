@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import MainHeader from "@/components/MainHeader.vue";
+import MainHeader from "@/components/header/MainHeader.vue";
 import TimeLine from "@/pages/session/components/TimeLine.vue";
 import MiniChat from "@/pages/session/components/MiniChat.vue";
 import SellerView from "@/pages/session/components/SellerView.vue";

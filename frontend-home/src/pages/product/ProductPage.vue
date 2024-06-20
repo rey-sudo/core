@@ -15,8 +15,8 @@
 
 <script>
 import productAPI from "@/pages/product/api";
-import MainHeader from "@/components/MainHeader.vue";
-import MobileHeader from "@/components/MobileHeader.vue";
+import MainHeader from "@/components/header/MainHeader.vue";
+import MobileHeader from "@/components/header/MobileHeader.vue";
 import HeadView from "@/pages/product/components/HeadView.vue";
 import MobileHeadView from "@/pages/product/components/MobileHeadView.vue";
 
