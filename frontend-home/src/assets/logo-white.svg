@@ -29,7 +29,7 @@
      showgrid="false"
      inkscape:zoom="8.6774773"
      inkscape:cx="44.425354"
-     inkscape:cy="11.120744"
+     inkscape:cy="11.235984"
      inkscape:window-width="1689"
      inkscape:window-height="809"
      inkscape:window-x="2016"
@@ -54,7 +54,7 @@
      style="display:inline">
     <g
        aria-label="pαirfy"
-       transform="matrix(0.87435342,0,0,0.87778272,31.517608,2.5984292)"
+       transform="matrix(0.87435342,0,0,0.87778272,34.517608,2.5984292)"
        id="text2212"
        style="font-size:24px;line-height:1.25;font-family:Manrope;-inkscape-font-specification:Manrope;letter-spacing:-0.25px;opacity:1;fill:#f2f2f2;fill-opacity:1;stroke:#f2f2f2;stroke-width:0.399513;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:7;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers">
       <path
@@ -86,7 +86,7 @@
     <circle
        style="display:inline;opacity:1;fill:#f2f2f2;fill-opacity:1;stroke:#f2f2f2;stroke-width:0.722551;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:7;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
        id="path20348-4"
-       cx="59.34013"
+       cx="62.34013"
        cy="6.664134"
        r="1.251457" />
   </g>
@@ -101,15 +101,15 @@
      inkscape:label="Layer 3"
      style="display:inline">
     <path
-       style="display:inline;fill:#f2f2f2;fill-opacity:1;stroke:#f2f2f2;stroke-width:0.595;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-       d="m 24.495716,10.903571 -1.504588,5.615198 -7.693644,3.966305 1.768177,-6.599178 z"
+       style="display:inline;fill:#f2f2f2;fill-opacity:1;stroke:#f2f2f2;stroke-width:0.675193;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       d="m 27.66242,11.564464 -1.707373,6.372003 -8.730578,4.500875 2.006488,-7.488601 z"
        id="path9322-1-5-3"
        inkscape:export-filename="/home/debian/Documents/GitHub/pairfy/frontend-home/src/assets/path9322-1.png"
        inkscape:export-xdpi="121.6"
        inkscape:export-ydpi="121.6" />
     <path
-       style="display:inline;fill:#f2f2f2;fill-opacity:1;stroke:#f2f2f2;stroke-width:0.595;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-       d="m 1.2974856,10.903571 1.5045878,5.615198 7.6936436,3.966305 -1.7681767,-6.599179 z"
+       style="display:inline;fill:#f2f2f2;fill-opacity:1;stroke:#f2f2f2;stroke-width:0.675193;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       d="m 1.3375801,11.564464 1.707373,6.372003 8.7305759,4.500875 -2.0064869,-7.488602 z"
        id="path9322-1-5-3-2"
        inkscape:export-filename="/home/debian/Documents/GitHub/pairfy/frontend-home/src/assets/path9322-1.png"
        inkscape:export-xdpi="121.6"
@@ -117,9 +117,9 @@
     <circle
        style="display:inline;fill:#ffe600;fill-opacity:1;stroke:#f2f2f2;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:7;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
        id="path20348-4-6-9"
-       cx="12.9"
-       cy="8.5"
-       r="2.5" />
+       cx="14.503857"
+       cy="8.8369446"
+       r="2.8369446" />
   </g>
   <g
      inkscape:groupmode="layer"
