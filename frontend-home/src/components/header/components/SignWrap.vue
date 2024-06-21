@@ -6,7 +6,7 @@
     :blockScroll="true"
   >
     <p>
-      Select a Cardano wallet to enter pairfy.
+      Select a Cardano wallet of your preference.
     </p>
   </Sidebar>
 </template>
