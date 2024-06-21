@@ -559,14 +559,14 @@ export default {
 .head .head-rating span {
   margin-right: 0.25rem;
   font-size: var(--text-size-c);
-  color: var(--blue-c);
+  color: var(--text-a);
   font-weight: 600;
 }
 
 .head .head-rating span:nth-child(3) {
   font-weight: 400;
   font-size: var(--text-size-a);
-  color: var(--blue-c);
+  color: var(--text-b);
 }
 
 .head .head-price {
