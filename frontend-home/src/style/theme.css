@@ -10607,7 +10607,7 @@
   }
 
   .p-metergroup-label-text {
-    font-size: var(--text-size-a);
+    font-size: var(--text-size-b);
     color: var(--text-b);
   }
   .p-metergroup .p-metergroup-meter {
