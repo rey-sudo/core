@@ -194,6 +194,8 @@
           <i class="pi pi-bars" />
           <img src="@/assets/user.svg" alt="" />
         </button>
+
+        <SignWrap />
       </div>
     </div>
 
@@ -207,15 +209,16 @@
 import { walletAPI, CardanoWasm, balanceTx } from "@/api/wallet-api";
 import { ref } from "vue";
 import NavWrap from "./components/NavWrap.vue";
+import SignWrap from "./components/SignWrap.vue";
 
 export default {
   components: {
     NavWrap,
+    SignWrap,
   },
   setup() {
-
     let currentRoute = ref("");
-      
+
     const wallet = walletAPI();
     const selectedCountry = ref({ name: "United States", code: "US" });
     const countries = ref([
@@ -252,7 +255,7 @@ export default {
       (e) => (this.currentRoute = e),
       { immediate: true }
     )();
-  }, 
+  },
   methods: {
     connectWallet(e) {
       this.wallet.connect(e);

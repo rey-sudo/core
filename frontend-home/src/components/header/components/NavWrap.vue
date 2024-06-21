@@ -178,7 +178,7 @@ export default {
   font-weight: inherit;
   color: inherit;
   background: transparent;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .nav .nav-column .nav-body div:nth-child(1) {

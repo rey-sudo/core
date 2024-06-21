@@ -7046,7 +7046,7 @@
     height: 100%;
   }
   .p-sidebar-right .p-sidebar {
-    width: 20rem;
+    width: 25rem;
     height: 100%;
   }
   .p-sidebar-top .p-sidebar {
@@ -7335,7 +7335,7 @@
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
     border-radius: 3px;
     outline-color: transparent;
-    color: var(--blue-a);
+    color: var(--blue-c);
   }
   .p-breadcrumb .p-breadcrumb-list li .p-menuitem-link:focus-visible {
     outline: 0 none;
@@ -7352,7 +7352,7 @@
     margin: 0 0.5rem 0 0.5rem;
   }
   .p-breadcrumb .p-breadcrumb-list li:last-child .p-menuitem-text {
-    color: var(--blue-a);
+    color: var(--blue-c);
   }
   .p-breadcrumb .p-breadcrumb-list li:last-child .p-menuitem-icon {
     color: #6c757d;

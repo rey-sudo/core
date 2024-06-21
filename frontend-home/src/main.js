@@ -110,7 +110,6 @@ import DialogService from "primevue/dialogservice";
 import MeterGroup from "primevue/metergroup";
 
 
-
 const app = createApp(App);
 
 app.use(stores);
@@ -129,6 +128,7 @@ app.directive("focustrap", FocusTrap);
 app.directive("animateonscroll", AnimateOnScroll);
 
 /* eslint-disable */
+
 app.component("MeterGroup", MeterGroup);
 app.component("Accordion", Accordion);
 app.component("AccordionTab", AccordionTab);
