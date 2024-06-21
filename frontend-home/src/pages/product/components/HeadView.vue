@@ -106,9 +106,11 @@
         <div class="head-button withMargin">
           <div @click="buyProduct">Buy now</div>
         </div>
+
         <div class="head-button">
           <div @click="buyProduct">Add to cart</div>
         </div>
+
 
         <div class="head-seller">
           <div class="head-seller-head">
@@ -313,7 +315,7 @@ export default {
 }
 
 ::v-deep(.p-metergroup-meters) {
-
+  display: none;
 }
 
 .bread {
@@ -416,7 +418,7 @@ export default {
 }
 
 .head-icons {
-  width: 50%;
+  width: 90%;
   margin-top: 2rem;
 }
 
@@ -557,14 +559,14 @@ export default {
 .head .head-rating span {
   margin-right: 0.25rem;
   font-size: var(--text-size-c);
-  color: var(--text-a);
+  color: var(--blue-c);
   font-weight: 600;
 }
 
 .head .head-rating span:nth-child(3) {
   font-weight: 400;
   font-size: var(--text-size-a);
-  color: var(--text-b);
+  color: var(--blue-c);
 }
 
 .head .head-price {
