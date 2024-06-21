@@ -7046,7 +7046,7 @@
     height: 100%;
   }
   .p-sidebar-right .p-sidebar {
-    width: 25rem;
+    width: 23rem;
     height: 100%;
   }
   .p-sidebar-top .p-sidebar {
@@ -9206,12 +9206,13 @@
   }
   .p-steps .p-steps-item .p-menuitem-link .p-steps-number {
     color: #495057;
-    border: 1px solid #c8c8c8;
+    border: 1px solid var(--border-b);
     background: #ffffff;
     min-width: 2rem;
+    font-weight: 500;
     height: 2rem;
     line-height: 2rem;
-    font-size: 1.143rem;
+    font-size: var(--text-size-b);
     z-index: 1;
     border-radius: 50%;
   }
@@ -9225,7 +9226,7 @@
     box-shadow: 0 0 0 0.2rem #bfd1f6;
   }
   .p-steps .p-steps-item.p-highlight .p-steps-number {
-    background: #2196f3;
+    background: var(--blue-c);
     color: #ffffff;
   }
   .p-steps .p-steps-item.p-highlight .p-steps-title {
@@ -10638,7 +10639,6 @@
   .p-metergroup.p-metergroup-horizontal .p-metergroup-meters {
     height: 0.4rem;
     opacity: 1;
-
   }
 
   .p-metergroup.p-metergroup-horizontal .p-metergroup-meter:first-of-type {

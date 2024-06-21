@@ -35,7 +35,7 @@
      inkscape:window-x="2016"
      inkscape:window-y="62"
      inkscape:window-maximized="0"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer1"
      inkscape:pageshadow="2"
      showguides="false" />
   <defs
@@ -89,6 +89,12 @@
        cx="62.34013"
        cy="6.664134"
        r="1.251457" />
+    <circle
+       style="display:inline;fill:#f2f2f2;fill-opacity:1;stroke:#f2f2f2;stroke-width:0.722551;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:7;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="path20348-4-6"
+       cx="12.499999"
+       cy="17.611713"
+       r="1.251457" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -101,25 +107,19 @@
      inkscape:label="Layer 3"
      style="display:inline">
     <path
-       style="display:inline;fill:#f2f2f2;fill-opacity:1;stroke:#f2f2f2;stroke-width:0.675193;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-       d="m 27.66242,11.564464 -1.707373,6.372003 -8.730578,4.500875 2.006488,-7.488601 z"
+       style="display:inline;fill:#f2f2f2;fill-opacity:1;stroke:#f2f2f2;stroke-width:0.575164;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       d="m 23.712431,11.514453 -1.454428,5.428003 -7.437159,3.834078 1.709231,-6.379179 z"
        id="path9322-1-5-3"
        inkscape:export-filename="/home/debian/Documents/GitHub/pairfy/frontend-home/src/assets/path9322-1.png"
        inkscape:export-xdpi="121.6"
        inkscape:export-ydpi="121.6" />
     <path
-       style="display:inline;fill:#f2f2f2;fill-opacity:1;stroke:#f2f2f2;stroke-width:0.675193;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-       d="m 1.3375801,11.564464 1.707373,6.372003 8.7305759,4.500875 -2.0064869,-7.488602 z"
+       style="display:inline;fill:#f2f2f2;fill-opacity:1;stroke:#f2f2f2;stroke-width:0.575164;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       d="m 1.2875682,11.514453 1.4544288,5.428003 7.437158,3.834078 -1.7092303,-6.379179 z"
        id="path9322-1-5-3-2"
        inkscape:export-filename="/home/debian/Documents/GitHub/pairfy/frontend-home/src/assets/path9322-1.png"
        inkscape:export-xdpi="121.6"
        inkscape:export-ydpi="121.6" />
-    <circle
-       style="display:inline;fill:#ffe600;fill-opacity:1;stroke:#f2f2f2;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:7;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
-       id="path20348-4-6-9"
-       cx="14.503857"
-       cy="8.8369446"
-       r="2.8369446" />
   </g>
   <g
      inkscape:groupmode="layer"

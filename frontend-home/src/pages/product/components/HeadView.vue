@@ -96,7 +96,7 @@
 
         <div class="head-price">
           <div class="ada-label">₳</div>
-          <span> 3,024</span>
+          <span> 3024</span>
         </div>
 
         <div class="head-icons">
@@ -418,7 +418,7 @@ export default {
 }
 
 .head-icons {
-  width: 90%;
+  width: 50%;
   margin-top: 2rem;
 }
 
