@@ -27,9 +27,9 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
      showgrid="false"
-     inkscape:zoom="19.941403"
-     inkscape:cx="17.175321"
-     inkscape:cy="11.107543"
+     inkscape:zoom="8.6774773"
+     inkscape:cx="44.425354"
+     inkscape:cy="11.120744"
      inkscape:window-width="1689"
      inkscape:window-height="809"
      inkscape:window-x="2016"
@@ -102,14 +102,14 @@
      style="display:inline">
     <path
        style="display:inline;fill:#f2f2f2;fill-opacity:1;stroke:#f2f2f2;stroke-width:0.595;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-       d="m 24.495716,11.903569 -1.504588,5.615198 -7.693644,3.966305 1.768177,-6.599178 z"
+       d="m 24.495716,10.903571 -1.504588,5.615198 -7.693644,3.966305 1.768177,-6.599178 z"
        id="path9322-1-5-3"
        inkscape:export-filename="/home/debian/Documents/GitHub/pairfy/frontend-home/src/assets/path9322-1.png"
        inkscape:export-xdpi="121.6"
        inkscape:export-ydpi="121.6" />
     <path
        style="display:inline;fill:#f2f2f2;fill-opacity:1;stroke:#f2f2f2;stroke-width:0.595;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-       d="m 1.2974856,11.903569 1.5045878,5.615198 7.6936436,3.966305 -1.7681767,-6.599179 z"
+       d="m 1.2974856,10.903571 1.5045878,5.615198 7.6936436,3.966305 -1.7681767,-6.599179 z"
        id="path9322-1-5-3-2"
        inkscape:export-filename="/home/debian/Documents/GitHub/pairfy/frontend-home/src/assets/path9322-1.png"
        inkscape:export-xdpi="121.6"
@@ -118,7 +118,7 @@
        style="display:inline;fill:#ffe600;fill-opacity:1;stroke:#f2f2f2;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:7;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
        id="path20348-4-6-9"
        cx="12.9"
-       cy="9.5"
+       cy="8.5"
        r="2.5" />
   </g>
   <g
