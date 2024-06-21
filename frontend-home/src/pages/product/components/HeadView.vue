@@ -419,7 +419,7 @@ export default {
 
 .head-icons {
   width: 50%;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .head-seller-badge {
