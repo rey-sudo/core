@@ -7,15 +7,15 @@
   >
     <Steps v-model:activeStep="active" :model="items" :readonly="false" />
     <div class="grid-container">
-      <div class="grid-item">1</div>
-      <div class="grid-item">2</div>
-      <div class="grid-item">3</div>
-      <div class="grid-item">4</div>
-      <div class="grid-item">5</div>
-      <div class="grid-item">6</div>
-      <div class="grid-item">7</div>
-      <div class="grid-item">8</div>
-      <div class="grid-item">9</div>
+      <div class="grid-item"><img src="@/assets/nami.svg" alt="logo" /></div>
+      <div class="grid-item"><img src="@/assets/eternl.png" alt="logo" /></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
     </div>
   </Sidebar>
 </template>
@@ -46,7 +46,7 @@ export default {
 <style lang="css" scoped>
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
   gap: 1rem;
   padding: 10px;
   margin-top: 1rem;
@@ -54,16 +54,27 @@ export default {
 
 .grid-item {
   background: var(--base-b);
-  color: white;
   border: 1px solid transparent;
-  padding: 20px;
   text-align: center;
+  height: 60px;
+  width: 60px;
   border-radius: 6px;
   cursor: pointer;
   border: 1px solid var(--border-b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-a);
 }
 
-/* Media Queries for Responsive Design */
+.grid-item:hover {
+  border: 1px solid var(--blue-c);
+}
+.grid-item img {
+  width: 40px;
+  height: 40px;
+}
+
 @media (max-width: 600px) {
   .grid-item {
     font-size: 1.2em;
