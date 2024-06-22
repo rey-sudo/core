@@ -190,7 +190,7 @@
       </div>
 
       <div class="header-button right">
-        <button @click="openWalletDialog">
+        <button @click="setupWallet(true)">
           <i class="pi pi-bars" />
           <img src="@/assets/user.svg" alt="" />
         </button>
@@ -208,6 +208,7 @@
 <script>
 import { CardanoWasm, balanceTx } from "@/api/wallet-api";
 import { ref } from "vue";
+import { headerAPI } from "./composable/header-api";
 import NavWrap from "./components/NavWrap.vue";
 import SignWrap from "./components/SignWrap.vue";
 
@@ -219,6 +220,8 @@ export default {
   setup() {
     let currentRoute = ref("");
 
+    const { setupWallet } = headerAPI();
+
     const selectedCountry = ref({ name: "United States", code: "US" });
 
     const countries = ref([
@@ -228,7 +231,7 @@ export default {
     ]);
 
     const selectedLanguage = ref({ name: "English", code: "EN" });
-    
+
     const languages = ref([
       { name: "English", code: "EN" },
       { name: "Spanish", code: "ES" },
@@ -240,6 +243,7 @@ export default {
       countries,
       selectedLanguage,
       languages,
+      setupWallet,
     };
   },
   data() {
@@ -252,7 +256,7 @@ export default {
   created() {
     this.$watch(
       () => this.$route.name,
-      (e) => (this.currentRoute = e),
+      (routeName) => (this.currentRoute = routeName),
       { immediate: true }
     )();
   },

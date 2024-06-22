@@ -5,20 +5,22 @@
 </template>
 
 <script>
-import { sellerAPI } from "@/components/header/composable/seller";
+import { headerAPI } from "@/components/header/composable/header-api";
 
 export default {
   name: "App",
 
   setup() {
-    const { currentSeller } = sellerAPI();
+    const { currentSeller } = headerAPI();
 
-    return { currentSeller };
+    return {
+      currentSeller,
+    };
   },
 
   mounted() {
-    const { currentSeller } = sellerAPI();
-    currentSeller().catch((err) => console.error(err)); 
+    const { currentSeller } = headerAPI();
+    currentSeller().catch((err) => console.error(err));
   },
 };
 </script>

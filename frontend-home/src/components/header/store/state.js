@@ -1,3 +1,4 @@
 export default () => ({
-    sellerData: null
+  sellerData: null,
+  displaySetupWallet: false,
 });

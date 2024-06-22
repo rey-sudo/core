@@ -14,7 +14,6 @@ const currentSeller = async ({ commit }) => {
   }
 };
 
-
 const loginSeller = async ({ commit }, params) => {
   try {
     const response = await axiosAPI.post("/api/seller/login-seller", params);
@@ -29,4 +28,7 @@ const loginSeller = async ({ commit }, params) => {
   }
 };
 
-export { currentSeller, loginSeller };
+const setupWallet = async ({ commit }, params) => {
+  commit("setupWallet", params);
+};
+export { currentSeller, loginSeller, setupWallet };

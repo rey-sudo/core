@@ -3,9 +3,10 @@
     v-model:visible="visible"
     header="Setup Wallet"
     position="right"
-    :blockScroll="true"
+    blockScroll
+    :dismissable="false"
   >
-    <Steps v-model:activeStep="active" :model="items" :readonly="false" />
+    <Steps v-model:activeStep="active" :model="steps" :readonly="false" />
 
     <p class="legend">
       Select the cardano wallet of your preference. Please note that each wallet
@@ -32,18 +33,32 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { walletAPI } from "@/api/wallet-api";
+import { headerAPI } from "../composable/header-api";
 
 export default {
   setup() {
-    const visible = ref(true);
+    const { getSetupWallet, setupWallet } = headerAPI();
 
+    const visible = ref(false);
+
+    watch(getSetupWallet, (newValue) => {
+      if (newValue === true) {
+        visible.value = true;
+      }
+    });
+
+    watch(visible, (newValue) => {
+      if (newValue === false) {
+        setupWallet(false);
+      }
+    });
     const wallet = walletAPI();
 
     const active = ref(0);
 
-    const items = ref([
+    const steps = ref([
       {
         label: "Connect",
       },
@@ -56,7 +71,15 @@ export default {
       wallet.connect(e);
     };
 
-    return { visible, items, active, wallet, connectWallet };
+    return {
+      visible,
+      steps,
+      active,
+      wallet,
+      connectWallet,
+      getSetupWallet,
+      setupWallet,
+    };
   },
 };
 </script>
@@ -69,6 +92,7 @@ export default {
   margin-top: 2rem;
   background: var(--base-b);
   line-height: 1.75rem;
+  font-size: var(--text-size-b);
 }
 
 .grid-container {
