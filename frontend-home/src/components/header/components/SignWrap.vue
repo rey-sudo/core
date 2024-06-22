@@ -6,7 +6,7 @@
     blockScroll
     :dismissable="false"
   >
-    <Steps v-model:activeStep="active" :model="steps" :readonly="false" />
+    <Steps v-model:activeStep="active" :model="steps"   readonly/>
 
     <p class="legend">
       Select the Cardano wallet of your preference. Please note that each wallet
