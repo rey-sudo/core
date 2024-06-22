@@ -2,7 +2,7 @@ import { Wallet } from "@cardano-foundation/cardano-connect-with-wallet-core";
 
 import * as CardanoWasm from "@emurgo/cardano-serialization-lib-browser";
 
-const Buffer = require('buffer/').Buffer
+const Buffer = require("buffer/").Buffer;
 
 const walletAPI = () => {
   return {
@@ -20,9 +20,10 @@ const connect = async (walletName) => {
 };
 
 const setup = () => {
-  Wallet.addEventListener("enabled", async (e) => {
-    console.log("enabled", e, await window.cardano.isEnabled());
+  Wallet.addEventListener("enabled", (e) => {
+    console.log("enabled", e);
   });
+
   Wallet.addEventListener("connecting", (e) => {
     console.log("connecting", e);
   });
@@ -32,7 +33,7 @@ const setup = () => {
   });
 
   Wallet.addEventListener("enabledWallet", async (e) => {
-    console.log("enabledW", e, await window.cardano.isEnabled());
+    console.log("enabledWallet", e, await window.cardano.isEnabled());
   });
 
   Wallet.addEventListener("accountBalance", (e) => {
@@ -99,7 +100,6 @@ const balanceTx = (unbalancedTx) => {
     );
 
     /////////////
-  
 
     const transactionWitnessSet = CardanoWasm.TransactionWitnessSet.new();
 
@@ -177,8 +177,6 @@ const buildTx = async (
 
   if (auxiliaryData) txBuilder.set_auxiliary_data(auxiliaryData);
 
-
-
   const utxosCore = CardanoWasm.TransactionUnspentOutputs.new();
 
   utxos.forEach((utxo) => utxosCore.add(utxo));
@@ -192,7 +190,6 @@ const buildTx = async (
   txBuilder.add_change_if_needed(
     CardanoWasm.Address.from_bech32(account.paymentAddr)
   );
-
 
   return txBuilder.build();
 };
