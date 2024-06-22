@@ -220,6 +220,7 @@ export default {
     let currentRoute = ref("");
 
     const selectedCountry = ref({ name: "United States", code: "US" });
+
     const countries = ref([
       { name: "United States", code: "US" },
       { name: "Ecuador", code: "EC" },
@@ -227,6 +228,7 @@ export default {
     ]);
 
     const selectedLanguage = ref({ name: "English", code: "EN" });
+    
     const languages = ref([
       { name: "English", code: "EN" },
       { name: "Spanish", code: "ES" },

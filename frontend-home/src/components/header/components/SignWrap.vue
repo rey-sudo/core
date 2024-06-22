@@ -6,6 +6,13 @@
     :blockScroll="true"
   >
     <Steps v-model:activeStep="active" :model="items" :readonly="false" />
+
+    <p class="legend">
+      Select the cardano wallet of your preference. Please note that each wallet
+      can have one or more accounts. If you are going to make purchase
+      operations, you must use a single account throughout the entire process.
+    </p>
+
     <div class="grid-container">
       <div @click="connectWallet('nami')" class="grid-item">
         <img src="@/assets/nami.svg" alt="logo" />
@@ -55,6 +62,15 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.legend {
+  padding: 1rem;
+  border: 1px solid var(--border-b);
+  border-radius: 12px;
+  margin-top: 2rem;
+  background: var(--base-b);
+  line-height: 1.75rem;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
