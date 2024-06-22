@@ -9,14 +9,24 @@ const walletAPI = () => {
     setup,
     stop,
     connect,
+    check,
   };
 };
 
 const connect = async (walletName) => {
-  await Wallet.connect(walletName, "testnet", () => {
-    console.log("connect call");
-    window.cardano.enable();
+  await Wallet.connect(walletName, "testnet", async () => {
+    console.log("connect call", walletName);
+
+    const walletAPI = await window.cardano[walletName].enable();
+
+    console.log(walletAPI)
   });
+};
+
+const check = async () => {
+  const resu = await Wallet.checkEnabled('testnet');
+
+  console.log(resu);
 };
 
 const setup = () => {
