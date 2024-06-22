@@ -1,7 +1,7 @@
 <template>
   <Sidebar
     v-model:visible="visible"
-    header="Setup Cardano Wallet"
+    header="Setup Wallet"
     position="right"
     :blockScroll="true"
   >

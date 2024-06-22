@@ -7107,7 +7107,8 @@
   }
   .p-sidebar .p-sidebar-header .p-sidebar-header-content {
     font-weight: 600;
-    font-size: 1.25rem;
+    font-size: var(--text-size-e);
+    color: var(--text-a);
   }
   .p-sidebar .p-sidebar-header .p-sidebar-close,
   .p-sidebar .p-sidebar-header .p-sidebar-icon {

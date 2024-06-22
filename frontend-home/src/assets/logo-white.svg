@@ -27,15 +27,15 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
      showgrid="false"
-     inkscape:zoom="8.6774773"
-     inkscape:cx="44.425354"
-     inkscape:cy="11.235984"
-     inkscape:window-width="1689"
-     inkscape:window-height="809"
-     inkscape:window-x="2016"
-     inkscape:window-y="62"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="layer1"
+     inkscape:zoom="11.526089"
+     inkscape:cx="47.457553"
+     inkscape:cy="11.23538"
+     inkscape:window-width="1920"
+     inkscape:window-height="1043"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer3"
      inkscape:pageshadow="2"
      showguides="false" />
   <defs
@@ -89,12 +89,6 @@
        cx="62.34013"
        cy="6.664134"
        r="1.251457" />
-    <circle
-       style="display:inline;fill:#f2f2f2;fill-opacity:1;stroke:#f2f2f2;stroke-width:0.722551;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:7;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
-       id="path20348-4-6"
-       cx="12.499999"
-       cy="17.611713"
-       r="1.251457" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -106,20 +100,45 @@
      id="layer3"
      inkscape:label="Layer 3"
      style="display:inline">
-    <path
-       style="display:inline;fill:#f2f2f2;fill-opacity:1;stroke:#f2f2f2;stroke-width:0.575164;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-       d="m 23.712431,11.514453 -1.454428,5.428003 -7.437159,3.834078 1.709231,-6.379179 z"
-       id="path9322-1-5-3"
-       inkscape:export-filename="/home/debian/Documents/GitHub/pairfy/frontend-home/src/assets/path9322-1.png"
-       inkscape:export-xdpi="121.6"
-       inkscape:export-ydpi="121.6" />
-    <path
-       style="display:inline;fill:#f2f2f2;fill-opacity:1;stroke:#f2f2f2;stroke-width:0.575164;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-       d="m 1.2875682,11.514453 1.4544288,5.428003 7.437158,3.834078 -1.7092303,-6.379179 z"
-       id="path9322-1-5-3-2"
-       inkscape:export-filename="/home/debian/Documents/GitHub/pairfy/frontend-home/src/assets/path9322-1.png"
-       inkscape:export-xdpi="121.6"
-       inkscape:export-ydpi="121.6" />
+    <g
+       id="path9322-1-5-3-3"
+       transform="matrix(0.97973967,0,0,0.97973967,4.1048637,1.0025053)"
+       style="fill:#f2f2f2;fill-opacity:1">
+      <path
+         style="color:#000000;fill:#f2f2f2;fill-opacity:1;stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none;paint-order:stroke fill markers"
+         d="m 24.535156,6.6113281 a 0.14380538,0.14380538 0 0 0 -0.105469,0.00195 l -3.589843,1.4414063 a 0.14380538,0.14380538 0 0 0 -0.08594,0.095703 l -0.855469,3.1894536 a 0.14380538,0.14380538 0 0 0 0.205079,0.166015 l 3.71875,-1.9179686 a 0.14380538,0.14380538 0 0 0 0.07422,-0.089844 l 0.726563,-2.7148438 a 0.14380538,0.14380538 0 0 0 -0.08789,-0.171875 z m -0.263672,0.3769531 -0.636718,2.3730469 -3.373047,1.7402349 0.751953,-2.8066411 z"
+         id="path3" />
+      <path
+         style="color:#000000;fill:#f2f2f2;fill-opacity:1;stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none;paint-order:stroke fill markers"
+         d="M 24.484078,6.7468057 23.756864,9.4608072 20.038285,11.377846 20.8929,8.1882567 Z"
+         id="path4" />
+    </g>
+    <g
+       id="path9322-1-5-3-3-7"
+       transform="matrix(0.97973967,0,0,0.97973967,-2.2145808,13.95328)"
+       style="display:inline;fill:#f2f2f2;fill-opacity:1">
+      <path
+         style="color:#000000;fill:#f2f2f2;fill-opacity:1;stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none;paint-order:stroke fill markers"
+         d="m 24.535156,6.6113281 a 0.14380538,0.14380538 0 0 0 -0.105469,0.00195 l -3.589843,1.4414063 a 0.14380538,0.14380538 0 0 0 -0.08594,0.095703 l -0.855469,3.1894536 a 0.14380538,0.14380538 0 0 0 0.205079,0.166015 l 3.71875,-1.9179686 a 0.14380538,0.14380538 0 0 0 0.07422,-0.089844 l 0.726563,-2.7148438 a 0.14380538,0.14380538 0 0 0 -0.08789,-0.171875 z m -0.263672,0.3769531 -0.636718,2.3730469 -3.373047,1.7402349 0.751953,-2.8066411 z"
+         id="path3-0" />
+      <path
+         style="color:#000000;fill:#f2f2f2;fill-opacity:1;stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none;paint-order:stroke fill markers"
+         d="M 24.484078,6.7468057 23.756864,9.4608072 20.038285,11.377846 20.8929,8.1882567 Z"
+         id="path4-9" />
+    </g>
+    <g
+       id="path9322-1-5-3-3-9"
+       transform="matrix(1.9594793,0,0,1.9594793,-20.725244,-1.4627623)"
+       style="display:inline;fill:#f2f2f2;fill-opacity:1">
+      <path
+         style="color:#000000;fill:#f2f2f2;fill-opacity:1;stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none;paint-order:stroke fill markers"
+         d="m 24.535156,6.6113281 a 0.14380538,0.14380538 0 0 0 -0.105469,0.00195 l -3.589843,1.4414063 a 0.14380538,0.14380538 0 0 0 -0.08594,0.095703 l -0.855469,3.1894536 a 0.14380538,0.14380538 0 0 0 0.205079,0.166015 l 3.71875,-1.9179686 a 0.14380538,0.14380538 0 0 0 0.07422,-0.089844 l 0.726563,-2.7148438 a 0.14380538,0.14380538 0 0 0 -0.08789,-0.171875 z m -0.263672,0.3769531 -0.636718,2.3730469 -3.373047,1.7402349 0.751953,-2.8066411 z"
+         id="path3-1" />
+      <path
+         style="color:#000000;fill:#f2f2f2;fill-opacity:1;stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none;paint-order:stroke fill markers"
+         d="M 24.484078,6.7468057 23.756864,9.4608072 20.038285,11.377846 20.8929,8.1882567 Z"
+         id="path4-2" />
+    </g>
   </g>
   <g
      inkscape:groupmode="layer"
