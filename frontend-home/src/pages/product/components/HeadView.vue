@@ -561,12 +561,14 @@ export default {
   font-size: var(--text-size-c);
   color: var(--text-a);
   font-weight: 600;
+  
 }
 
 .head .head-rating span:nth-child(3) {
   font-weight: 400;
   font-size: var(--text-size-a);
-  color: var(--text-b);
+  color: var(--text-a);
+
 }
 
 .head .head-price {
