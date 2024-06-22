@@ -7,8 +7,12 @@
   >
     <Steps v-model:activeStep="active" :model="items" :readonly="false" />
     <div class="grid-container">
-      <div class="grid-item"><img src="@/assets/nami.svg" alt="logo" /></div>
-      <div class="grid-item"><img src="@/assets/eternl.png" alt="logo" /></div>
+      <div @click="connectWallet('nami')" class="grid-item">
+        <img src="@/assets/nami.svg" alt="logo" />
+      </div>
+      <div @click="connectWallet('eternl')" class="grid-item">
+        <img src="@/assets/eternl.png" alt="logo" />
+      </div>
       <div class="grid-item"></div>
       <div class="grid-item"></div>
       <div class="grid-item"></div>
@@ -22,10 +26,13 @@
 
 <script>
 import { ref } from "vue";
+import { walletAPI } from "@/api/wallet-api";
 
 export default {
   setup() {
     const visible = ref(true);
+
+    const wallet = walletAPI();
 
     const active = ref(0);
 
@@ -38,7 +45,11 @@ export default {
       },
     ]);
 
-    return { visible, items, active };
+    const connectWallet = (e) => {
+      wallet.connect(e);
+    };
+
+    return { visible, items, active, wallet, connectWallet };
   },
 };
 </script>

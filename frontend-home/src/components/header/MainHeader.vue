@@ -102,7 +102,7 @@
       <div class="wallet-title">Choose a Cardano wallet.</div>
 
       <div class="wallet-grid">
-        <div class="wallet-icon" @click="connectWallet('nami')">
+        <div class="wallet-icon">
           <img src="@/assets/nami.svg" alt="logo" />
         </div>
       </div>
@@ -206,7 +206,7 @@
 </template>
 
 <script>
-import { walletAPI, CardanoWasm, balanceTx } from "@/api/wallet-api";
+import { CardanoWasm, balanceTx } from "@/api/wallet-api";
 import { ref } from "vue";
 import NavWrap from "./components/NavWrap.vue";
 import SignWrap from "./components/SignWrap.vue";
@@ -219,7 +219,6 @@ export default {
   setup() {
     let currentRoute = ref("");
 
-    const wallet = walletAPI();
     const selectedCountry = ref({ name: "United States", code: "US" });
     const countries = ref([
       { name: "United States", code: "US" },
@@ -235,7 +234,6 @@ export default {
 
     return {
       currentRoute,
-      wallet,
       selectedCountry,
       countries,
       selectedLanguage,
@@ -257,10 +255,6 @@ export default {
     )();
   },
   methods: {
-    connectWallet(e) {
-      this.wallet.connect(e);
-    },
-
     openWalletDialog() {
       this.walletVisible = true;
     },
