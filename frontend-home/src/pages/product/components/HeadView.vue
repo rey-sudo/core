@@ -384,7 +384,7 @@ export default {
   padding: 1rem;
   align-items: center;
   border-bottom: 1px solid var(--border-a);
-  background: var(--base-b);
+ 
 }
 
 .head-seller-head img {
@@ -392,7 +392,7 @@ export default {
   height: 3rem;
   outline: 1px solid var(--border-b);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 6px;
   object-fit: contain;
 }
 

@@ -9,9 +9,9 @@
     <Steps v-model:activeStep="active" :model="steps" :readonly="false" />
 
     <p class="legend">
-      Select the cardano wallet of your preference. Please note that each wallet
+      Select the Cardano wallet of your preference. Please note that each wallet
       can have one or more accounts. If you are going to make purchase
-      operations, you must use a single account throughout the entire process.
+      operations you must use a single account throughout the entire process.
     </p>
 
     <div class="grid-container">
@@ -63,7 +63,7 @@ export default {
         label: "Connect",
       },
       {
-        label: "Select",
+        label: "Account",
       },
     ]);
 
