@@ -4,6 +4,8 @@ import * as CardanoWasm from "@emurgo/cardano-serialization-lib-browser";
 
 const Buffer = require("buffer/").Buffer;
 
+let WALLETAPI = null;
+
 const walletAPI = () => {
   return {
     setup,
@@ -17,14 +19,14 @@ const connect = async (walletName) => {
   await Wallet.connect(walletName, "testnet", async () => {
     console.log("connect call", walletName);
 
-    const walletAPI = await window.cardano[walletName].enable();
+    WALLETAPI = await window.cardano[walletName].enable();
 
-    console.log(walletAPI)
+    console.log(WALLETAPI);
   });
 };
 
 const check = async () => {
-  const resu = await Wallet.checkEnabled('testnet');
+  const resu = await Wallet.checkEnabled("testnet");
 
   console.log(resu);
 };
@@ -42,8 +44,16 @@ const setup = () => {
     console.log("connected", e);
   });
 
-  Wallet.addEventListener("enabledWallet", async (e) => {
-    console.log("enabledWallet", e, await window.cardano.isEnabled());
+  Wallet.addEventListener("lastConnectedWallet", (e) => {
+    console.log("lastConnectedWallet", e);
+  });
+
+  Wallet.addEventListener("enabledWallet", async (walletName) => {
+    console.log(
+      "enabledWallet",
+      walletName,
+      await window.cardano[walletName].isEnabled()
+    );
   });
 
   Wallet.addEventListener("accountBalance", (e) => {
@@ -80,8 +90,8 @@ const stop = () => {
 
 const balanceTx = (unbalancedTx) => {
   return Promise.all([
-    window.cardano.getChangeAddress(),
-    window.cardano.getUtxos(),
+    WALLETAPI.getChangeAddress(),
+    WALLETAPI.getUtxos(),
     fetchProtocolParameters(),
   ]).then(async (promises) => {
     const changeAddrCbor = promises[0];
@@ -120,7 +130,7 @@ const balanceTx = (unbalancedTx) => {
       )
     );
     console.log("yes");
-    let txVkeyWitnesses = await window.cardano.signTx(
+    let txVkeyWitnesses = await WALLETAPI.signTx(
       Buffer.from(tx.to_bytes(), "utf8").toString("hex"),
       true
     );
@@ -136,7 +146,7 @@ const balanceTx = (unbalancedTx) => {
       transactionWitnessSet
     );
 
-    return window.cardano.submitTx(
+    return WALLETAPI.submitTx(
       Buffer.from(signedTx.to_bytes(), "utf8").toString("hex")
     );
   });

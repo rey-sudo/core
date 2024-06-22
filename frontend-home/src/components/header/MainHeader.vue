@@ -145,7 +145,7 @@
       </div>
 
       <div class="header-button left">
-        <div>
+        <div @click="testTx">
           <span>Sell a</span>
           <span>Product</span>
         </div>
@@ -302,8 +302,9 @@ export default {
       console.log("contractAddr", JSON.stringify(contractPkh));
     },
 
-    async deploy() {
-      const tx = "-";
+    async testTx() {
+      const tx =
+        "84a400800181a300581d70ff49af5f0b974c5308fb4de7e368b48f3f107fd5cd1a8733515510b6011a016e3600028201d8185841d8799f004777616974696e67d87980d87980d87980581c6912b354ae3ec8d49eb684e1acc2c09cc109ede3768492835c40c925d87a801ab43e94001a016e3600ff02000e81581c6912b354ae3ec8d49eb684e1acc2c09cc109ede3768492835c40c925a0f5f6";
 
       const result = await balanceTx(tx);
       console.log(result);
@@ -334,6 +335,7 @@ export default {
   box-sizing: border-box;
   background: initial;
   background: var(--blue-b);
+  background: var(--black-a);
   box-shadow: var(--border-shadow);
 }
 
