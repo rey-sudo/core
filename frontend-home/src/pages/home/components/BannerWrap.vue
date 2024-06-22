@@ -48,7 +48,7 @@ export default {
       {
         name: "4",
         image:
-          "https://www.asus.com/WebsitesBanner/CO/banners/igrmmwificl0pn4g/igrmmwificl0pn4g-0_0_desktop_0_1X.jpg",
+        "https://www.asus.com/WebsitesBanner/CO/banners/8felhnrqucxog5m7/8felhnrqucxog5m7-0_0_desktop_0_1X.jpg",
       },
     ]);
     const responsiveOptions = ref([
