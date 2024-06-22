@@ -1,7 +1,7 @@
 <template>
   <Sidebar
     v-model:visible="visible"
-    header="Cardano Wallet"
+    header="Setup Cardano Wallet"
     position="right"
     :blockScroll="true"
   >
@@ -48,7 +48,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
   gap: 1rem;
-  padding: 10px;
+  padding: 1rem;
   margin-top: 1rem;
 }
 
