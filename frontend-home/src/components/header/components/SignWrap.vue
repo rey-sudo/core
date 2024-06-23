@@ -123,8 +123,8 @@ export default {
   border: 1px solid var(--blue-c);
 }
 .grid-item img {
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
 }
 
 @media (max-width: 600px) {

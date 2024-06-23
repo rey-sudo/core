@@ -111,7 +111,6 @@
           <div @click="buyProduct">Add to cart</div>
         </div>
 
-
         <div class="head-seller">
           <div class="head-seller-head">
             <img
@@ -255,6 +254,8 @@ export default {
       good_communication: 4,
     });
 
+    const home = ref({ label: "Pairfy" });
+
     const breadItems = ref([
       { label: "Electronics" },
       { label: "TV & Accessories" },
@@ -264,6 +265,7 @@ export default {
     return {
       images,
       product,
+      home,
       seller,
       breadItems,
       galleryImage,
@@ -384,7 +386,6 @@ export default {
   padding: 1rem;
   align-items: center;
   border-bottom: 1px solid var(--border-a);
- 
 }
 
 .head-seller-head img {
@@ -561,14 +562,12 @@ export default {
   font-size: var(--text-size-c);
   color: var(--text-a);
   font-weight: 600;
-  
 }
 
 .head .head-rating span:nth-child(3) {
   font-weight: 400;
   font-size: var(--text-size-a);
   color: var(--text-a);
-
 }
 
 .head .head-price {
