@@ -28,7 +28,7 @@
      inkscape:document-units="px"
      showgrid="false"
      inkscape:zoom="11.526089"
-     inkscape:cx="39.909461"
+     inkscape:cx="-3.9909461"
      inkscape:cy="20.08487"
      inkscape:window-width="1392"
      inkscape:window-height="749"
@@ -99,34 +99,7 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Layer 3"
-     style="display:inline">
-    <g
-       id="path9322-1-5-3-3-7"
-       transform="matrix(-1.0560068,0,0,-1.0560068,43.824695,32.373909)"
-       style="display:inline;fill:#f2f2f2;fill-opacity:1">
-      <path
-         style="color:#000000;fill:#f2f2f2;fill-opacity:1;stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none;paint-order:stroke fill markers"
-         d="m 24.535156,6.6113281 a 0.14380538,0.14380538 0 0 0 -0.105469,0.00195 l -3.589843,1.4414063 a 0.14380538,0.14380538 0 0 0 -0.08594,0.095703 l -0.855469,3.1894536 a 0.14380538,0.14380538 0 0 0 0.205079,0.166015 l 3.71875,-1.9179686 a 0.14380538,0.14380538 0 0 0 0.07422,-0.089844 l 0.726563,-2.7148438 a 0.14380538,0.14380538 0 0 0 -0.08789,-0.171875 z m -0.263672,0.3769531 -0.636718,2.3730469 -3.373047,1.7402349 0.751953,-2.8066411 z"
-         id="path3-0" />
-      <path
-         style="color:#000000;fill:#f2f2f2;fill-opacity:1;stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none;paint-order:stroke fill markers"
-         d="M 24.484078,6.7468057 23.756864,9.4608072 20.038285,11.377846 20.8929,8.1882567 Z"
-         id="path4-9" />
-    </g>
-    <g
-       id="path9322-1-5-3-3-9"
-       transform="matrix(-2.1120136,0,0,-2.1120136,69.832028,34.139521)"
-       style="display:inline;fill:#f2f2f2;fill-opacity:1">
-      <path
-         style="color:#000000;fill:#f2f2f2;fill-opacity:1;stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none;paint-order:stroke fill markers"
-         d="m 24.535156,6.6113281 a 0.14380538,0.14380538 0 0 0 -0.105469,0.00195 l -3.589843,1.4414063 a 0.14380538,0.14380538 0 0 0 -0.08594,0.095703 l -0.855469,3.1894536 a 0.14380538,0.14380538 0 0 0 0.205079,0.166015 l 3.71875,-1.9179686 a 0.14380538,0.14380538 0 0 0 0.07422,-0.089844 l 0.726563,-2.7148438 a 0.14380538,0.14380538 0 0 0 -0.08789,-0.171875 z m -0.263672,0.3769531 -0.636718,2.3730469 -3.373047,1.7402349 0.751953,-2.8066411 z"
-         id="path3-1" />
-      <path
-         style="color:#000000;fill:#f2f2f2;fill-opacity:1;stroke-linecap:round;stroke-linejoin:round;-inkscape-stroke:none;paint-order:stroke fill markers"
-         d="M 24.484078,6.7468057 23.756864,9.4608072 20.038285,11.377846 20.8929,8.1882567 Z"
-         id="path4-2" />
-    </g>
-  </g>
+     style="display:inline" />
   <g
      inkscape:groupmode="layer"
      id="layer4"
