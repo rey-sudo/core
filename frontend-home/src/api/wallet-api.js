@@ -95,6 +95,12 @@ const stop = () => {
   Wallet.stopInjectWalletListener();
 };
 
+
+
+///////////////////////////////////////////
+
+
+
 const balanceTx = (unbalancedTx) => {
   return Promise.all([
     THEWALLET.getChangeAddress(),

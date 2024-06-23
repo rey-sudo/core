@@ -3,7 +3,7 @@ import PrimeVue from "primevue/config";
 import { stores } from "./store";
 import { router } from "./router";
 import { createApp } from "vue";
-import { walletAPI } from "@/api/wallet-api";
+
 import "primeicons/primeicons.css";
 import "./style/theme.css";
 import "./style/flags.css";
@@ -227,6 +227,4 @@ app.component("VirtualScroller", VirtualScroller);
 
 router.isReady().then(() => {
   app.mount("#app"); 
-  walletAPI().stop();
-  walletAPI().setup();
 });
