@@ -8,8 +8,8 @@ let THEWALLET = null;
 
 const walletAPI = () => {
   return {
-    setup,
-    stop,
+    startWalletService, 
+    stopWalletService,
     connect,
     reconnect,
   };
@@ -36,7 +36,7 @@ const reconnect = async () => {
   }
 };
 
-const setup = () => {
+const startWalletService = () => {
   Wallet.addEventListener("enabled", (e) => {
     console.log("unused-enabled", e);
   });
@@ -70,7 +70,7 @@ const setup = () => {
   reconnect();
 };
 
-const stop = () => {
+const stopWalletService = () => {
   Wallet.disconnect();
 
   Wallet.removeEventListener("enabled", (e) => {

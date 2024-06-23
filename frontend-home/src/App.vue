@@ -13,9 +13,12 @@ export default {
 
   setup() {
     const { currentSeller } = headerAPI();
+    const { startWalletService, stopWalletService } = walletAPI();
 
     return {
       currentSeller,
+      stopWalletService,
+      startWalletService,
     };
   },
 
@@ -23,10 +26,8 @@ export default {
     const { currentSeller } = headerAPI();
     currentSeller().catch((err) => console.error(err));
 
-    const { stop, setup } = walletAPI();
-    stop();
-    setup();
-  },
+    this.startWalletService();
+  }
 };
 </script>
 
