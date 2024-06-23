@@ -331,7 +331,7 @@ export default {
   font-size: var(--text-size-b);
   font-weight: 400;
   text-align: left;
-  color: var(--blue-c);
+  color: var(--text-b);
 }
 
 .meter {
