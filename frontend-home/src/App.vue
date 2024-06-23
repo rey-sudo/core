@@ -27,7 +27,11 @@ export default {
     currentSeller().catch((err) => console.error(err));
 
     this.startWalletService();
-  }
+  },
+
+  beforeUnmount() {
+    this.stopWalletService();
+  },
 };
 </script>
 
