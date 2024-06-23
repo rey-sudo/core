@@ -8,8 +8,6 @@
   >
     <Steps v-model:activeStep="active" :model="steps" readonly />
 
-    <div @click="checkWallet">kaka</div>
-
     <p class="legend">
       Select the Cardano wallet of your preference. Please note that each wallet
       can have one or more accounts. If you are going to make purchase
@@ -73,15 +71,12 @@ export default {
       wallet.connect(e);
     };
 
-    const checkWallet = () => {
-      wallet.check();
-    };
+
     return {
       visible,
       steps,
       active,
       wallet,
-      checkWallet,
       connectWallet,
       getSetupWallet,
       setupWallet,

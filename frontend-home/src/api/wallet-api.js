@@ -4,63 +4,70 @@ import * as CardanoWasm from "@emurgo/cardano-serialization-lib-browser";
 
 const Buffer = require("buffer/").Buffer;
 
-let WALLETAPI = null;
+let THEWALLET = null;
 
 const walletAPI = () => {
   return {
     setup,
     stop,
     connect,
-    check,
+    reconnect,
   };
 };
 
 const connect = async (walletName) => {
   await Wallet.connect(walletName, "testnet", async () => {
-    console.log("connect call", walletName);
+    THEWALLET = await window.cardano[walletName].enable();
 
-    WALLETAPI = await window.cardano[walletName].enable();
+    localStorage.setItem("wallet", walletName);
 
-    console.log(WALLETAPI);
+    console.log("CONNECTED " + walletName);
   });
 };
 
-const check = async () => {
-  const resu = await Wallet.checkEnabled("testnet");
+const reconnect = async () => {
+  const walletName = localStorage.getItem("wallet");
 
-  console.log(resu);
+  if (walletName !== null) {
+    await connect(walletName);
+    console.log("RECONNECTED " + walletName);
+  } else {
+    return false;
+  }
 };
 
 const setup = () => {
   Wallet.addEventListener("enabled", (e) => {
-    console.log("enabled", e);
+    console.log("unused-enabled", e);
   });
 
   Wallet.addEventListener("connecting", (e) => {
-    console.log("connecting", e);
+    console.log("unused-connecting", e);
   });
 
   Wallet.addEventListener("connected", (e) => {
-    console.log("connected", e);
+    console.log("unused-connected", e);
   });
 
   Wallet.addEventListener("lastConnectedWallet", (e) => {
-    console.log("lastConnectedWallet", e);
+    console.log("unused-lastConnectedWallet", e);
   });
 
   Wallet.addEventListener("enabledWallet", async (walletName) => {
     console.log(
-      "enabledWallet",
+      "unused-enabledWallet",
       walletName,
       await window.cardano[walletName].isEnabled()
     );
   });
 
   Wallet.addEventListener("accountBalance", (e) => {
-    console.log("balance", e);
+    console.log("unused-balance", e);
   });
 
   Wallet.startInjectWalletListener();
+
+  reconnect();
 };
 
 const stop = () => {
@@ -90,8 +97,8 @@ const stop = () => {
 
 const balanceTx = (unbalancedTx) => {
   return Promise.all([
-    WALLETAPI.getChangeAddress(),
-    WALLETAPI.getUtxos(),
+    THEWALLET.getChangeAddress(),
+    THEWALLET.getUtxos(),
     fetchProtocolParameters(),
   ]).then(async (promises) => {
     const changeAddrCbor = promises[0];
@@ -130,7 +137,7 @@ const balanceTx = (unbalancedTx) => {
       )
     );
     console.log("yes");
-    let txVkeyWitnesses = await WALLETAPI.signTx(
+    let txVkeyWitnesses = await THEWALLET.signTx(
       Buffer.from(tx.to_bytes(), "utf8").toString("hex"),
       true
     );
@@ -146,7 +153,7 @@ const balanceTx = (unbalancedTx) => {
       transactionWitnessSet
     );
 
-    return WALLETAPI.submitTx(
+    return THEWALLET.submitTx(
       Buffer.from(signedTx.to_bytes(), "utf8").toString("hex")
     );
   });
