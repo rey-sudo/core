@@ -6,28 +6,35 @@
     blockScroll
     :dismissable="false"
   >
-    <Steps v-model:activeStep="active" :model="steps" readonly />
+    <Steps v-model:activeStep="activeStep" :model="steps" readonly />
+    <div class="stepOne" v-if="activeStep === 0">
+      <p class="legend">
+        Select the Cardano wallet of your preference. Please note that each
+        wallet can have one or more accounts. If you are going to make purchase
+        operations you must use a single account throughout the entire process.
+      </p>
 
-    <p class="legend">
-      Select the Cardano wallet of your preference. Please note that each wallet
-      can have one or more accounts. If you are going to make purchase
-      operations you must use a single account throughout the entire process.
-    </p>
+      <div class="grid-container">
+        <div @click="connectWallet('nami')" class="grid-item">
+          <img src="@/assets/nami.svg" alt="logo" />
+        </div>
+        <div @click="connectWallet('eternl')" class="grid-item">
+          <img src="@/assets/eternl.png" alt="logo" />
+        </div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+      </div>
+    </div>
 
-    <div class="grid-container">
-      <div @click="connectWallet('nami')" class="grid-item">
-        <img src="@/assets/nami.svg" alt="logo" />
+    <div class="stepTwo" v-if="activeStep === 1">
+      <div class="account">
+        SELLER
       </div>
-      <div @click="connectWallet('eternl')" class="grid-item">
-        <img src="@/assets/eternl.png" alt="logo" />
-      </div>
-      <div class="grid-item"></div>
-      <div class="grid-item"></div>
-      <div class="grid-item"></div>
-      <div class="grid-item"></div>
-      <div class="grid-item"></div>
-      <div class="grid-item"></div>
-      <div class="grid-item"></div>
     </div>
   </Sidebar>
 </template>
@@ -41,7 +48,7 @@ export default {
   setup() {
     const { getSetupWallet, setupWallet } = headerAPI();
 
-    const visible = ref(false);
+    const visible = ref(true);
 
     watch(getSetupWallet, (newValue) => {
       if (newValue === true) {
@@ -56,7 +63,7 @@ export default {
     });
     const wallet = walletAPI();
 
-    const active = ref(0);
+    const activeStep = ref(1);
 
     const steps = ref([
       {
@@ -71,11 +78,10 @@ export default {
       wallet.connect(e);
     };
 
-
     return {
       visible,
       steps,
-      active,
+      activeStep,
       wallet,
       connectWallet,
       getSetupWallet,
@@ -125,6 +131,16 @@ export default {
 .grid-item img {
   width: 34px;
   height: 34px;
+}
+
+.stepOne {
+}
+
+.account {
+  border: 1px solid var(--border-b);
+  padding: 1rem;
+  border-radius: 6px;
+  margin-top: 1rem;
 }
 
 @media (max-width: 600px) {
