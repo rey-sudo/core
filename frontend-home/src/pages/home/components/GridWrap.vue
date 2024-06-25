@@ -16,31 +16,21 @@
 
           <div class="card-body">
             <div class="card-body-name">
-              <span> {{ item.name.slice(0, 60) }}...</span>
+              <span> {{ item.name.slice(0, 30) }}...</span>
             </div>
 
             <div class="card-body-price">
               <span> {{ formatPrice(item.price) }}</span>
             </div>
 
-            <div class="card-body-seller">
-              <span>{{ item.discount_label }}</span>
-              <span>
-                <svg
-                  class="badge"
-                  viewBox="0 0 24 24"
-                  width="1rem"
-                  height="1rem"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M16.438 4.313L14.814 1.5 12 3.124 9.187 1.5 7.562 4.313H4.313v3.25L1.5 9.186 3.124 12 1.5 14.813l2.813 1.625v3.248h3.25L9.186 22.5 12 20.876l2.813 1.624 1.625-2.814h3.248v-3.248l2.814-1.624L20.876 12 22.5 9.187l-2.814-1.625V4.313h-3.248zm-.902 4.215l1.414 1.414-6.364 6.364L7.05 12.77l1.414-1.414 2.122 2.122 4.95-4.95z"
-                    fill="#F0B90B"
-                  ></path>
-                </svg>
-              </span>
+            <div class="card-body-rating">
+              <Rating
+                :modelValue="item.rating_count"
+                :stars="5"
+                :readonly="true"
+                :cancel="false"
+              />
+              <span>({{ item.review_count }})</span>
             </div>
           </div>
         </div>
@@ -85,20 +75,7 @@ export default {
 ::v-deep(.p-rating-icon) {
   width: var(--text-size-a);
   height: var(--text-size-a);
-  color: var(--yellow-b);
-}
-
-.card-body-seller {
-  text-align: left;
-  font-size: var(--text-size-a);
-  display: flex;
-  align-items: center;
-  color: var(--text-a);
-  font-weight: 200;
-  margin-top: 1rem;
-  border: 1px solid var(--border-a);
-  padding: 0 0.5rem;
-  display: none;
+  color: var(--blue-c);
 }
 
 .card-body-rating {
@@ -127,25 +104,26 @@ export default {
   font-weight: 600;
   text-align: left;
   font-size: var(--text-size-e);
-  color: var(--blue-c);
+  color: var(--text-a);
   margin-top: 0.5rem;
 }
 
 .grid-item-title {
-  font-size: var(--text-size-g);
+  font-size: var(--text-size-h);
   font-weight: bold;
-  text-align: start;
+  text-align: left;
   color: var(--text-a);
-  padding: 1rem 0;
-  margin: 1rem 0;
+  margin: 2rem 0;
+  font-weight: 700;
+  color: var(--blue-c);
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-rows: minmax(100px, auto);
-  gap: 20px;
-  padding: 0 2rem;
+  gap: 1rem;
+  padding: 0 4rem;
   min-height: 100vh;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
@@ -160,22 +138,18 @@ export default {
 .grid-row {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 0.5rem;
+  gap: 2rem;
 }
 
 .card {
-  width: 300px;
+  width: 100%;
   height: 600px;
   transition: box-shadow 0.25s ease-in-out 0s, transform 0.25s ease 0s;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   cursor: pointer;
-  padding: 1rem;
   margin: auto;
-  line-height: 1.5rem;
-  border: 1px solid var(--border-a);
-  border-radius: 28px;
 }
 
 .card-header {
@@ -184,6 +158,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid var(--border-b);
+  border-radius: 28px;
 }
 
 .card-image {
@@ -200,11 +176,12 @@ export default {
 }
 
 .card-body {
-  flex-basis: 45%;
+  flex-basis: 25%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
+  padding: 1rem;
 }
 
 .card-body-name {

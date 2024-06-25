@@ -9,6 +9,7 @@
         :page="0"
         :responsiveOptions="responsiveOptions"
         :showNavigators="false"
+       
         verticalViewPortHeight="300px"
         :autoplayInterval="5000"
         circular
@@ -81,7 +82,7 @@ export default {
 
 <style lang="css" scoped>
 .image {
-  height: 625px;
+  height: 450px;
   object-fit: cover;
   width: 100%;
   position: relative;
@@ -89,8 +90,8 @@ export default {
 
 .banner {
   width: inherit;
-  height: 625px;
-  min-height: 625px;
+  height: 450px;
+  min-height: 450px;
   z-index: 1;
   position: relative;
   inset: 0px 0px -1px;
@@ -103,16 +104,12 @@ export default {
 .banner-mask {
   width: inherit;
   height: inherit;
-  height: 625px;
+  height: 450px;
   width: 100%;
   z-index: 3;
   position: absolute;
   backdrop-filter: blur(0px);
-  background: linear-gradient(
-    180deg,
-    transparent 90%,
-    rgba(255, 255, 255, 1) 100%
-  );
+
 }
 
 .banner-screen {

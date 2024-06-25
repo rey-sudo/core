@@ -137,7 +137,7 @@
       />
 
       <div class="header-button left" @click="visible = true">
-        <label for=""> <img src="@/assets/location.svg" alt="" /></label>
+        <label for=""> <img src="@/assets/location.svg" alt="" />         </label>
         <div>
           <span>{{ selectedLanguage.code }}</span>
           <span>{{ selectedCountry.name }}</span>
@@ -334,8 +334,8 @@ export default {
   width: 100%;
   box-sizing: border-box;
   background: initial;
-  background: var(--black-a);
   background: var(--blue-b);
+  background: var(--black-a);
   box-shadow: var(--border-shadow);
 }
 
@@ -370,7 +370,7 @@ export default {
   display: flex;
   align-items: center;
   border-radius: 6px;
-  width: 100%;
+  width: 90%;
   color: var(--text-a);
   font-size: var(--text-size-b);
   border: 1px solid var(--border-b);
@@ -612,7 +612,7 @@ i {
 
 @media only screen and (min-width: 1200px) {
   .header .header-center .header-center-search {
-    width: 80%;
+    width: 70%;
   }
 
   .header-left {
