@@ -492,7 +492,7 @@ export default {
 
 .header .header-button span:nth-child(1) {
   font-weight: 400;
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
 }
 
 .header .header-button label {

@@ -171,7 +171,7 @@ export default {
 }
 
 .nav .nav-column .nav-body div {
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
   white-space: nowrap;
   cursor: pointer;
   padding: 0.75rem;
