@@ -1,13 +1,13 @@
 export default () => ({
   allProducts: [
     {
-      title: "Best sellers",
+      title: "Cardano sellers",
       items: [
         {
           id: "P3EWGDGOYGCNCLLT",
           name: "Men College School Bag Laptop Backpack For Men 17.3''Large-capacity Backpack USB Port Bag Business Backpack Oxford Waterproof",
           price_diff: 200,
-          price: 220,
+          price: 2220,
           image:
             "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6537/6537363_sd.jpg",
           payment_type: "10 Slots",
@@ -25,7 +25,7 @@ export default () => ({
           id: "P3EWGDGOYGCNCLLT",
           name: "Thermaltake S100 Tempered Glass Snow Edition Micro-ATX mini-Tower Computer Case with 120mm Rear Fan Pre-Installed CA-1Q9-00S6WN-00, White",
           price_diff: 200,
-          price: 600,
+          price: 4320,
           image:
             "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6541/6541285_sd.jpg",
           payment_type: "10 Slots",
@@ -43,7 +43,7 @@ export default () => ({
           id: "P3EWGDGOYGCNCLLT",
           name: "Broadlink RM4 pro Smart IR/RF Remote Control Hub with Sensor Cable-WiFi IR/RF Blaster for Smart Home Automation, TV, Curtain, Shades Remote, Works with Alexa...",
           price_diff: 330,
-          price: 330,
+          price: 3324,
           image:
             "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6557/6557718_sd.jpg",
           payment_type: "10 Slots",

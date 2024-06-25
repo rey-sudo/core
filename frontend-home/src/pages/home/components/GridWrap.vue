@@ -23,10 +23,6 @@
               <span> {{ formatPrice(item.price) }}</span>
             </div>
 
-            <div class="card-body-collateral">
-              <span> {{ formatPrice(item.collateral) }} Coll.</span>
-            </div>
-
             <div class="card-body-seller">
               <span>{{ item.discount_label }}</span>
               <span>
@@ -131,7 +127,7 @@ export default {
   font-weight: 600;
   text-align: left;
   font-size: var(--text-size-e);
-  color: var(--text-a);
+  color: var(--blue-c);
   margin-top: 0.5rem;
 }
 
@@ -212,7 +208,7 @@ export default {
 }
 
 .card-body-name {
-  color: var(--blue-c);
+  color: var(--text-b);
   font-size: var(--text-size-b);
   text-align: left;
   display: flex;
