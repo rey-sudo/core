@@ -104,7 +104,7 @@ export default {
   font-weight: 600;
   text-align: left;
   font-size: var(--text-size-e);
-  color: var(--blue-c);
+  color: var(--text-a);
   margin-top: 0.5rem;
 }
 
