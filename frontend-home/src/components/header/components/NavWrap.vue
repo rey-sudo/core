@@ -100,13 +100,13 @@ export default {
       (routeName) => (this.currentRoute = routeName),
       { immediate: true }
     )();
-  }
+  },
 };
 </script>
 
 <style lang="css" scoped>
 .nav {
-  padding: 0 5%;
+  padding: 0 8rem;
   z-index: 100;
   display: flex;
   position: fixed;
@@ -114,7 +114,7 @@ export default {
   left: 0;
   width: 100%;
   align-items: center;
-  background: var(--blue-b);
+  background: var(--black-a);
   color: var(--text-w);
   font-weight: 500;
   border-top: 1px solid transparent;
@@ -171,7 +171,7 @@ export default {
 }
 
 .nav .nav-column .nav-body div {
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   white-space: nowrap;
   cursor: pointer;
   padding: 0.75rem;

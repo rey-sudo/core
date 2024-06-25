@@ -137,7 +137,7 @@
       />
 
       <div class="header-button left" @click="visible = true">
-        <label for=""> <img src="@/assets/location.svg" alt="" />         </label>
+        <label for=""> <img src="@/assets/location.svg" alt="" /> </label>
         <div>
           <span>{{ selectedLanguage.code }}</span>
           <span>{{ selectedCountry.name }}</span>
@@ -145,6 +145,8 @@
       </div>
 
       <div class="header-button left">
+        <label for=""> </label>
+
         <div @click="testTx">
           <span>Sell a</span>
           <span>Product</span>
@@ -324,7 +326,7 @@ export default {
 
 <style lang="css" scoped>
 .header {
-  padding: 0.75rem 5%;
+  padding: 0.75rem 8rem;
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -32,9 +32,7 @@
     </div>
 
     <div class="stepTwo" v-if="activeStep === 1">
-      <div class="account">
-        SELLER
-      </div>
+      <div class="account">SELLER</div>
     </div>
   </Sidebar>
 </template>
@@ -48,7 +46,7 @@ export default {
   setup() {
     const { getSetupWallet, setupWallet } = headerAPI();
 
-    const visible = ref(true);
+    const visible = ref(false);  
 
     watch(getSetupWallet, (newValue) => {
       if (newValue === true) {
