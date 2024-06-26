@@ -532,7 +532,7 @@ export default {
 
 .head .head-name {
   font-size: var(--text-size-f);
-  font-weight: 500;
+  font-weight: 600;
   text-align: left;
   width: 90%;
   margin-top: 1rem;
@@ -614,8 +614,6 @@ export default {
 
 .head .head-button.buyButton {
   margin-top: 2rem;
-  background: var(--blue-c);
-  color: var(--text-w);
 }
 
 @media only screen and (max-width: 767px) {
