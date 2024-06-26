@@ -81,7 +81,6 @@
           <span>SKU: P9C3KC93CK</span>
         </div>
 
-        
         <div class="head-rating">
           <Rating
             :modelValue="product.rating_count"
@@ -94,14 +93,11 @@
 
           <span>({{ product.review_count }} Reviews)</span>
         </div>
-        
 
         <div class="head-price">
           <div class="ada-label">₳</div>
           <span>3,024</span>
         </div>
-
-
 
         <div class="head-icons">
           <MeterGroup :value="collateralBar" />
@@ -536,7 +532,7 @@ export default {
 
 .head .head-name {
   font-size: var(--text-size-f);
-  font-weight: 600;
+  font-weight: 500;
   text-align: left;
   width: 90%;
   margin-top: 1rem;
@@ -557,10 +553,10 @@ export default {
   margin-right: 0.5rem;
   font-size: var(--text-size-c);
   align-items: center;
-  margin-top: 1rem;
   display: flex;
   border-bottom: 1px solid var(--border-b);
-  padding: 1rem 0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   width: 90%;
 }
 
