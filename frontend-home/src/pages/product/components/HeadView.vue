@@ -96,7 +96,7 @@
 
         <div class="head-price">
           <div class="ada-label">₳</div>
-          <span> 3024</span>
+          <span>3,024</span>
         </div>
 
         <div class="head-icons">
