@@ -103,7 +103,7 @@
           <MeterGroup :value="collateralBar" />
         </div>
 
-        <div class="head-button withMargin">
+        <div class="head-button buyButton">
           <div @click="buyProduct">Buy now</div>
         </div>
 
@@ -612,8 +612,10 @@ export default {
   color: var(--text-w);
 }
 
-.head .head-button.withMargin {
+.head .head-button.buyButton {
   margin-top: 2rem;
+  background: var(--blue-c);
+  color: var(--text-w);
 }
 
 @media only screen and (max-width: 767px) {
