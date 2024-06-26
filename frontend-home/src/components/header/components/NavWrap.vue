@@ -115,7 +115,6 @@ export default {
   width: 100%;
   align-items: center;
   background: var(--blue-b);
-  background: var(--black-b);
   color: var(--text-w);
   font-weight: 500;
   border-top: 1px solid transparent;
