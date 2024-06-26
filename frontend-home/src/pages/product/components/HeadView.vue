@@ -536,7 +536,7 @@ export default {
 
 .head .head-name {
   font-size: var(--text-size-f);
-  font-weight: 700;
+  font-weight: 600;
   text-align: left;
   width: 90%;
   margin-top: 1rem;
@@ -559,6 +559,9 @@ export default {
   align-items: center;
   margin-top: 1rem;
   display: flex;
+  border-bottom: 1px solid var(--border-b);
+  padding: 1rem 0;
+  width: 90%;
 }
 
 .head .head-rating span {
@@ -576,7 +579,7 @@ export default {
 
 .head .head-price {
   text-align: left;
-  margin-top: 2rem;
+  margin-top: 1rem;
   font-size: var(--text-size-h);
   font-weight: 700;
   display: flex;
