@@ -16,7 +16,7 @@
 
           <div class="card-body">
             <div class="card-body-name">
-              <span> {{ item.name.slice(0, 30) }}...</span>
+              <span> {{ item.name.slice(0, 80) }}...</span>
             </div>
 
             <div class="card-body-price">
@@ -185,13 +185,13 @@ export default {
 }
 
 .card-body-name {
-  color: var(--text-b);
-  font-size: var(--text-size-b);
-  text-align: left;
+  color: var(--text-a);
+  font-size: var(--text-size-c);
+ 
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 500;
+  font-weight: 400;
   text-transform: capitalize;
 }
 
@@ -200,7 +200,8 @@ export default {
 }
 
 .card-body-name span {
-  text-align: inherit;
+  text-align: left;
+  line-height: 24px;
 }
 
 .card-body-name span::first-letter {

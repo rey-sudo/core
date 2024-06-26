@@ -137,7 +137,7 @@
       />
 
       <div class="header-button left" @click="visible = true">
-        <label for=""></label>
+     
         <div>
           <span>{{ selectedLanguage.code }}</span>
           <span>{{ selectedCountry.name }}</span>
@@ -145,7 +145,7 @@
       </div>
 
       <div class="header-button left">
-        <label for=""> </label>
+     
 
         <div @click="testTx">
           <span>Sell a</span>
@@ -174,9 +174,6 @@
 
     <div class="header-right">
       <div class="header-button right">
-        <label v-badge.secondary for="">
-          <img src="@/assets/gift.svg" alt=""
-        /></label>
         <div>
           <span>Be a</span>
           <span>Mediator</span>
@@ -356,7 +353,7 @@ export default {
 }
 
 .header .header-center {
-  flex-basis: 50%;
+  flex-basis: 90%;
   width: auto;
   display: flex;
   align-items: center;
@@ -369,7 +366,7 @@ export default {
   display: flex;
   align-items: center;
   border-radius: 6px;
-  width: 90%;
+  width: 100%;
   color: var(--text-a);
   font-size: var(--text-size-b);
   border: 1px solid var(--border-b);
@@ -450,7 +447,8 @@ export default {
 
 .header-right-count {
   font-weight: 700;
-  font-size: var(--text-size-e);
+  font-size: var(--text-size-d);
+  background: var(--black-b);
 }
 
 .header .header-button {
@@ -464,18 +462,12 @@ export default {
   transition: var(--transition-a);
 }
 
-.header .header-button.left {
-  margin-left: auto;
-}
-
-.header .header-button.right {
-  margin-left: auto;
-}
 
 .header .header-button div {
   display: flex;
   flex-direction: column;
   margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .header .header-button div:hover {
@@ -611,7 +603,7 @@ i {
 
 @media only screen and (min-width: 1200px) {
   .header .header-center .header-center-search {
-    width: 70%;
+    width: 100%;
   }
 
   .header-left {
