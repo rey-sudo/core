@@ -553,7 +553,6 @@ export default {
   font-size: var(--text-size-c);
   align-items: center;
   display: flex;
-  border-bottom: 1px solid var(--border-b);
   padding-top: 1rem;
   padding-bottom: 1rem;
   width: 90%;
