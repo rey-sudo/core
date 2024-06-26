@@ -550,7 +550,6 @@ export default {
 }
 
 .head .head-rating {
-  margin-right: 0.5rem;
   font-size: var(--text-size-c);
   align-items: center;
   display: flex;
