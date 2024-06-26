@@ -110,10 +110,11 @@ export default {
   z-index: 100;
   display: flex;
   position: fixed;
-  top: 74px;
+  top: 66px;
   left: 0;
   width: 100%;
   align-items: center;
+  background: var(--blue-b);
   background: var(--black-b);
   color: var(--text-w);
   font-weight: 500;

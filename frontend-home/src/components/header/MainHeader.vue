@@ -137,7 +137,7 @@
       />
 
       <div class="header-button left" @click="visible = true">
-        <label for=""> <img src="@/assets/location.svg" alt="" /> </label>
+        <label for=""></label>
         <div>
           <span>{{ selectedLanguage.code }}</span>
           <span>{{ selectedCountry.name }}</span>
@@ -186,9 +186,7 @@
       <div class="header-button right">
         <label for=""> <img src="@/assets/cart.svg" alt="" /></label>
 
-        <div class="header-right-count">
-          <span>0</span>
-        </div>
+        <div class="header-right-count">0</div>
       </div>
 
       <div class="header-button right">
@@ -326,7 +324,7 @@ export default {
 
 <style lang="css" scoped>
 .header {
-  padding: 0.75rem 8rem;
+  padding: 0.5rem 8rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -451,9 +449,9 @@ export default {
   justify-content: center;
 }
 
-.header-right-count span {
-  font-weight: 700 !important;
-  font-size: var(--text-size-d) !important;
+.header-right-count {
+  font-weight: 700;
+  font-size: var(--text-size-e);
 }
 
 .header .header-button {
@@ -464,7 +462,7 @@ export default {
   white-space: nowrap;
   cursor: pointer;
   color: var(--text-w);
-  transition: var(--button-transition-a);
+  transition: var(--transition-a);
 }
 
 .header .header-button.left {
