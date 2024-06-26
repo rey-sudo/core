@@ -28,7 +28,7 @@
      inkscape:document-units="px"
      showgrid="false"
      inkscape:zoom="11.526089"
-     inkscape:cx="49.800067"
+     inkscape:cx="52.576377"
      inkscape:cy="17.915878"
      inkscape:window-width="1920"
      inkscape:window-height="1043"
@@ -54,7 +54,7 @@
      style="display:inline">
     <g
        aria-label="pαirfy"
-       transform="matrix(0.87435342,0,0,0.87778272,34.517608,2.5984292)"
+       transform="matrix(0.9112291,0,0,0.91480303,34.497263,2.4949756)"
        id="text2212"
        style="font-size:24px;line-height:1.25;font-family:Manrope;-inkscape-font-specification:Manrope;letter-spacing:-0.25px;opacity:1;fill:#f2f2f2;fill-opacity:1;stroke:#f2f2f2;stroke-width:0.399513;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:7;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers">
       <path
@@ -84,24 +84,16 @@
          id="path103278" />
     </g>
     <circle
-       style="display:inline;opacity:1;fill:#f2f2f2;fill-opacity:1;stroke:#f2f2f2;stroke-width:0.722551;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:7;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       style="display:inline;opacity:1;fill:#f2f2f2;fill-opacity:1;stroke:#f2f2f2;stroke-width:0.753024;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:7;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
        id="path20348-4"
-       cx="62.34013"
-       cy="6.664134"
-       r="1.251457" />
-    <g
-       id="path1"
-       style="display:inline;fill:#ffe600;fill-opacity:1"
-       transform="matrix(-0.3054611,-0.6292052,-0.6292052,0.3054611,42.593395,27.984247)">
-      <path
-         style="color:#000000;fill:#ffe600;fill-opacity:1;-inkscape-stroke:none"
-         d="M 15.40776,15.169855 29.903577,9.8986473 a 0.65890085,0.65890085 0 0 1 0.843394,0.8433937 l -5.271206,14.495817 a 0.65890085,0.65890085 0 0 1 -0.619368,0.434875 v 0 a 0.65890085,0.65890085 0 0 1 -0.612778,-0.415108 l -2.530178,-6.325448 -6.325448,-2.530178 a 0.65890085,0.65890085 0 0 1 0,-1.232144 z m 7.056827,2.635601 v 0 l 0.26356,0.105428 0.105428,0.26356 v 0 l 2.022822,4.994471 4.170844,-11.550534 -11.550532,4.170844 z"
-         id="path3" />
-      <path
-         style="color:#000000;fill:#ffe600;fill-opacity:1;-inkscape-stroke:none"
-         d="m 29.818359,9.6640625 -14.466796,5.2597655 -0.0098,-0.0039 -0.04297,0.01563 c -0.379841,0.144075 -0.585937,0.502431 -0.585937,0.849609 0,0.347179 0.206096,0.707488 0.585937,0.851563 l 6.222656,2.488281 2.490235,6.224609 c 0.137531,0.345329 0.473995,0.572626 0.845703,0.572266 0.381809,-1.62e-4 0.723701,-0.240546 0.853515,-0.599609 l 5.271485,-14.494141 v -0.002 C 31.237646,10.11867 30.525861,9.4088379 29.818359,9.6640625 Z m 0.169922,0.4687505 v 0.002 c 0.342142,-0.123425 0.646862,0.179343 0.523438,0.521484 l -5.271485,14.496094 c -0.05883,0.162717 -0.21174,0.269458 -0.384765,0.269531 -0.168333,1.63e-4 -0.316624,-0.09947 -0.378907,-0.255859 v -0.002 l -2.570312,-6.423828 -6.427734,-2.570312 -0.002,-0.002 c -0.187122,-0.07098 -0.263672,-0.221446 -0.263672,-0.382813 0,-0.157967 0.07917,-0.300337 0.257812,-0.373047 l 0.02344,-0.0078 0.515625,-0.1875 -0.648438,-0.289063 0.04687,-0.0078 0.634766,0.285156 z m -0.544922,1.070312 -12.365234,4.464844 0.486328,0.216797 v 0.02148 l -0.515625,-0.228516 -0.271484,0.09766 5.59375,2.261718 -4.660157,-2.066406 0.02344,-0.0098 4.636719,2.076171 0.164062,0.06641 0.06641,0.164062 2.267579,5.599609 z M 28.611328,12.033203 24.84375,22.46875 23.066406,18.082031 22.919922,17.71875 22.558594,17.574219 h -0.002 l -4.38086,-1.771485 z"
-         id="path4" />
-    </g>
+       cx="63.493195"
+       cy="6.7321506"
+       r="1.3042369" />
+    <path
+       d="M 57.266439,8.460607 59.049076,8.301848 C 58.521998,2.3615061 69.217815,1.4089461 69.744892,7.349287 v 0 C 69.437204,3.9041387 66.395367,1.3604511 62.950145,1.6672791 59.504922,1.9741071 56.960469,5.0153057 57.266439,8.460607 Z"
+       id="path1-5-6"
+       style="display:inline;fill:#ffe600;fill-opacity:1;stroke-width:0.894846"
+       sodipodi:nodetypes="ccccsc" />
   </g>
   <g
      inkscape:groupmode="layer"
