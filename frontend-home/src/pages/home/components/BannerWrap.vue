@@ -82,7 +82,7 @@ export default {
 
 <style lang="css" scoped>
 .image {
-  height: 450px;
+  height: 500px;
   object-fit: cover;
   width: 100%;
   position: relative;
@@ -90,8 +90,8 @@ export default {
 
 .banner {
   width: inherit;
-  height: 450px;
-  min-height: 450px;
+  height: 500px;
+  min-height: 500px;
   z-index: 1;
   position: relative;
   inset: 0px 0px -1px;
@@ -104,7 +104,7 @@ export default {
 .banner-mask {
   width: inherit;
   height: inherit;
-  height: 450px;
+  height: 500px;
   width: 100%;
   z-index: 3;
   position: absolute;

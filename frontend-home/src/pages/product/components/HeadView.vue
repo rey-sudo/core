@@ -81,6 +81,14 @@
           <span>SKU: P9C3KC93CK</span>
         </div>
 
+
+
+        <div class="head-price">
+          <div class="ada-label">₳</div>
+          <span>3,024</span>
+        </div>
+
+        
         <div class="head-rating">
           <Rating
             :modelValue="product.rating_count"
@@ -92,11 +100,6 @@
           <span>{{ product.rating_count }}</span>
 
           <span>({{ product.review_count }} Reviews)</span>
-        </div>
-
-        <div class="head-price">
-          <div class="ada-label">₳</div>
-          <span>3,024</span>
         </div>
 
         <div class="head-icons">
@@ -317,7 +320,7 @@ export default {
 }
 
 ::v-deep(.p-metergroup-meters) {
-  display: none;
+
 }
 
 .bread {
