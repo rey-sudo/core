@@ -107,10 +107,6 @@
           <div @click="buyProduct">Buy now</div>
         </div>
 
-        <div class="head-button">
-          <div @click="buyProduct">Add to cart</div>
-        </div>
-
         <div class="head-seller">
           <div class="head-seller-head">
             <img
@@ -613,6 +609,8 @@ export default {
 
 .head .head-button.buyButton {
   margin-top: 2rem;
+  background: var(--blue-c);
+  color: var(--text-w);
 }
 
 @media only screen and (max-width: 767px) {
