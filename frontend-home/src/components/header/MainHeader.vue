@@ -334,7 +334,7 @@ export default {
   width: 100%;
   box-sizing: border-box;
   background: initial;
-  background: var(--blue-b);
+  background: var(--black-a);
   box-shadow: var(--border-shadow);
 }
 

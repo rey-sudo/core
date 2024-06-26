@@ -90,9 +90,8 @@
 * {
   font-optical-sizing: auto;
   font-style: normal;
-
-  font-family: "IBM Plex Sans", sans-serif;
   font-family: "Open Sans", sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
 }
 
 #app {
