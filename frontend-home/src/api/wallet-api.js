@@ -6,6 +6,12 @@ const Buffer = require("buffer/").Buffer;
 
 let THEWALLET = null;
 
+const walletEnabledEvent = new CustomEvent("walletEnabledEvent", {
+  detail: {
+    payload: "wallet enabled",
+  },
+});
+
 const walletClient = () => {
   return {
     startWalletService,
@@ -58,6 +64,8 @@ const startWalletService = () => {
 
     if (isEnabled) {
       localStorage.setItem("pairfy-enabled-wallet", walletName);
+
+      window.dispatchEvent(walletEnabledEvent);
 
       console.info("ENABLED_WALLET", walletName);
     }
