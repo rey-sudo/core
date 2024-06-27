@@ -373,7 +373,7 @@ export default {
 .head-seller {
   width: 90%;
   margin-top: 2rem;
-  border: 1px solid var(--text-a);
+  border: 1px solid var(--border-b);
   border-radius: 4px;
   overflow: hidden;
 }

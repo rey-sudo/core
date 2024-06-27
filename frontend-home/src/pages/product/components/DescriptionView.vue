@@ -2,6 +2,7 @@
   <Accordion
     :multiple="true"  
     class="accordionStyle"
+    :activeIndex="[0]"
     expandIcon="x"
     collapseIcon="x"
   >

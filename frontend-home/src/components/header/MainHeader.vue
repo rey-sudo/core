@@ -456,13 +456,12 @@ border: none;
   cursor: pointer;
   color: var(--text-w);
   transition: var(--transition-a);
+  margin: 0 auto;
 }
 
 .header .header-button div {
   display: flex;
   flex-direction: column;
-  margin-left: 1rem;
-  margin-right: 1rem;
 }
 
 .header .header-button div:hover {
