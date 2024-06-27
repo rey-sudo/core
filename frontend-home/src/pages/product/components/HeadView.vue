@@ -72,7 +72,9 @@
         </div>
 
         <div class="head-name">
-          Apple 2023 MacBook Pro Laptop M3 Pro chip with 11‑core CPU, 14‑core GPU: 14.2-inch Liquid Retina XDR Display, 18GB Unified Memory, 512GB SSD Storage. Works with iPhone/iPad; Space Black
+          Apple 2023 MacBook Pro Laptop M3 Pro chip with 11‑core CPU, 14‑core
+          GPU: 14.2-inch Liquid Retina XDR Display, 18GB Unified Memory, 512GB
+          SSD Storage. Works with iPhone/iPad; Space Black
         </div>
 
         <div class="head-legend">
@@ -175,13 +177,13 @@ export default {
       },
       {
         label: "Treasury discount",
-        color: "#339CFF",
-        value: 10,
+        color: "#147DFF",
+        value: 15,
         icon: "pi pi-building-columns",
       },
       {
         label: "Protected purchase",
-        color: "#51BAFF",
+        color: "#147DFF",
         value: 100,
         icon: "pi pi-shopping-bag",
       },
@@ -345,23 +347,23 @@ export default {
 }
 
 .meter .level-1 {
-  background: #fff0f0;
+  background: var(--base-b);
 }
 
 .meter .level-2 {
-  background: #fff5e8;
+  background: var(--base-b);
 }
 
 .meter .level-3 {
-  background: #fffcda;
+  background: var(--base-b);
 }
 
 .meter .level-4 {
-  background: #f1fdd7;
+  background: var(--base-b);
 }
 
 .meter .level-5 {
-  background: #edf8ee;
+  background: var(--base-b);
 }
 
 .meter .level-5.actived {
@@ -371,8 +373,8 @@ export default {
 .head-seller {
   width: 90%;
   margin-top: 2rem;
-  border: 1px solid var(--border-b);
-  border-radius: 6px;
+  border: 1px solid var(--text-a);
+  border-radius: 4px;
   overflow: hidden;
 }
 
@@ -380,7 +382,7 @@ export default {
   display: flex;
   padding: 1rem;
   align-items: center;
-  border-bottom: 1px solid var(--border-a);
+  border-bottom: 1px solid var(--border-b);
 }
 
 .head-seller-head img {
@@ -388,7 +390,7 @@ export default {
   height: 3rem;
   outline: 1px solid var(--border-b);
   outline-offset: 2px;
-  border-radius: 6px;
+  border-radius: 4px;
   object-fit: contain;
 }
 
@@ -414,7 +416,7 @@ export default {
 }
 
 .head-icons {
-  width: 50%;
+  width: 90%;
   margin-top: 2rem;
 }
 
@@ -570,7 +572,7 @@ export default {
   text-align: left;
   margin-top: 1rem;
   font-size: var(--text-size-h);
-  font-weight: 700;
+  font-weight: 600;
   display: flex;
   align-items: baseline;
 }
@@ -585,7 +587,7 @@ export default {
 
 .head .head-button {
   background: transparent;
-  border: 1px solid var(--black-a);
+  border: 1px solid var(--text-a);
   width: 90%;
   border-radius: 4px;
   color: var(--text-a);
@@ -604,6 +606,7 @@ export default {
   opacity: 0.9;
   background: var(--blue-c);
   color: var(--text-w);
+  border: 1px solid var(--blue-c);
 }
 
 .head .head-button.buyButton {
