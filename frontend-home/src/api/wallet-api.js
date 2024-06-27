@@ -6,9 +6,9 @@ const Buffer = require("buffer/").Buffer;
 
 let THEWALLET = null;
 
-const walletAPI = () => {
+const walletClient = () => {
   return {
-    startWalletService, 
+    startWalletService,
     stopWalletService,
     connect,
     reconnect,
@@ -95,11 +95,7 @@ const stopWalletService = () => {
   Wallet.stopInjectWalletListener();
 };
 
-
-
 ///////////////////////////////////////////
-
-
 
 const balanceTx = (unbalancedTx) => {
   return Promise.all([
@@ -272,4 +268,4 @@ const fromHexString = (hexString) =>
 
 //const toHexString = (uint8) => Array.from(uint8).map(i2hex).join("");
 
-export { walletAPI, CardanoWasm, balanceTx };
+export { walletClient, CardanoWasm, balanceTx };

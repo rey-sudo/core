@@ -6,4 +6,9 @@ const setupWallet = (state, data) => {
   state.displaySetupWallet = data;
 };
 
-export { setupWallet, currentSeller };
+const connectWallet = (state, data) => {
+  state.walletConnected = data.value;
+  state.walletName = data.name;
+};
+
+export { connectWallet, setupWallet, currentSeller };

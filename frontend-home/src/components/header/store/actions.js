@@ -31,4 +31,9 @@ const loginSeller = async ({ commit }, params) => {
 const setupWallet = async ({ commit }, params) => {
   commit("setupWallet", params);
 };
-export { currentSeller, loginSeller, setupWallet };
+
+const connectWallet = async ({ commit }, params) => {
+  console.log(params);
+  commit("connectWallet", params);
+};
+export { connectWallet, currentSeller, loginSeller, setupWallet };

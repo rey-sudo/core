@@ -1,12 +1,12 @@
 <template>
   <Sidebar
-    v-model:visible="visible"
+    v-model:visible="isVisible"
     header="Setup Wallet"
     position="right"
     blockScroll
     :dismissable="false"
   >
-    <Steps v-model:activeStep="activeStep" :model="steps" readonly />
+    <Steps v-model:activeStep="activeStep" :model="stepsList" readonly />
     <div class="stepOne" v-if="activeStep === 0">
       <p class="legend">
         Select the Cardano wallet of your preference. Please note that each
@@ -15,10 +15,10 @@
       </p>
 
       <div class="grid-container">
-        <div @click="connectWallet('nami')" class="grid-item">
+        <div @click="selectWallet('nami')" class="grid-item">
           <img src="@/assets/nami.svg" alt="logo" />
         </div>
-        <div @click="connectWallet('eternl')" class="grid-item">
+        <div @click="selectWallet('eternl')" class="grid-item">
           <img src="@/assets/eternl.png" alt="logo" />
         </div>
         <div class="grid-item"></div>
@@ -39,31 +39,43 @@
 
 <script>
 import { ref, watch } from "vue";
-import { walletAPI } from "@/api/wallet-api";
+import { walletClient } from "@/api/wallet-api";
 import { headerAPI } from "../composable/header-api";
 
 export default {
   setup() {
     const { getSetupWallet, setupWallet } = headerAPI();
 
-    const visible = ref(false);  
+    const isVisible = ref(false);
+
+    const activeStep = ref(0);
+
+    const check = async () => {
+      const walletName = localStorage.getItem("wallet");
+
+      if (walletName !== null) {
+        activeStep.value = 1;
+      } else {
+        isVisible.value = true;
+      }
+    };
+
+    check();
 
     watch(getSetupWallet, (newValue) => {
       if (newValue === true) {
-        visible.value = true;
+        isVisible.value = true;
       }
     });
 
-    watch(visible, (newValue) => {
+    watch(isVisible, (newValue) => {
       if (newValue === false) {
         setupWallet(false);
       }
     });
-    const wallet = walletAPI();
+    const wallet = walletClient();
 
-    const activeStep = ref(1);
-
-    const steps = ref([
+    const stepsList = ref([
       {
         label: "Connect",
       },
@@ -72,16 +84,16 @@ export default {
       },
     ]);
 
-    const connectWallet = (e) => {
-      wallet.connect(e);
+    const selectWallet = async (e) => {
+      await wallet.connect(e);
     };
 
     return {
-      visible,
-      steps,
+      isVisible,
+      stepsList,
       activeStep,
       wallet,
-      connectWallet,
+      selectWallet,
       getSetupWallet,
       setupWallet,
     };

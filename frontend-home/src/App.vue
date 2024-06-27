@@ -6,14 +6,14 @@
 
 <script>
 import { headerAPI } from "@/components/header/composable/header-api";
-import { walletAPI } from "@/api/wallet-api";
+import { walletClient } from "@/api/wallet-api";
 
 export default {
   name: "App",
 
   setup() {
     const { currentSeller } = headerAPI();
-    const { startWalletService, stopWalletService } = walletAPI();
+    const { startWalletService, stopWalletService } = walletClient();
 
     return {
       currentSeller,
@@ -23,8 +23,7 @@ export default {
   },
 
   mounted() {
-    const { currentSeller } = headerAPI();
-    currentSeller().catch((err) => console.error(err));
+    this.currentSeller().catch((err) => console.error(err));
 
     this.startWalletService();
   },

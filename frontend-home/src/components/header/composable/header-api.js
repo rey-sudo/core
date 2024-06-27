@@ -10,9 +10,13 @@ const headerAPI = () => {
   const setupWallet = async (params) =>
     await store.dispatch("header/setupWallet", params);
 
+  const connectWallet = async (params) =>
+    await store.dispatch("header/connectWallet", params);
+
   return {
     currentSeller,
     setupWallet,
+    connectWallet,
     getCurrentSeller: computed(() => store.getters["header/getCurrentSeller"]),
     getSetupWallet: computed(() => store.getters["header/getSetupWallet"]),
   };
