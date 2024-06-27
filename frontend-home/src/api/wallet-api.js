@@ -19,14 +19,14 @@ const connect = async (walletName) => {
   await Wallet.connect(walletName, "testnet", async () => {
     THEWALLET = await window.cardano[walletName].enable();
 
-    localStorage.setItem("wallet", walletName);
+    localStorage.setItem("pairfy-wallet", walletName);
 
     console.log("CONNECTED " + walletName);
   });
 };
 
 const reconnect = async () => {
-  const walletName = localStorage.getItem("wallet");
+  const walletName = localStorage.getItem("pairfy-wallet");
 
   if (walletName !== null) {
     await connect(walletName);
@@ -54,11 +54,13 @@ const startWalletService = () => {
   });
 
   Wallet.addEventListener("enabledWallet", async (walletName) => {
-    console.log(
-      "unused-enabledWallet",
-      walletName,
-      await window.cardano[walletName].isEnabled()
-    );
+    const isEnabled = await window.cardano[walletName].isEnabled();
+
+    if (isEnabled) {
+      localStorage.setItem("pairfy-enabled-wallet", walletName);
+
+      console.info("ENABLED_WALLET", walletName);
+    }
   });
 
   Wallet.addEventListener("accountBalance", (e) => {

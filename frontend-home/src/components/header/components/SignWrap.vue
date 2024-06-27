@@ -51,7 +51,7 @@ export default {
     const activeStep = ref(0);
 
     const check = async () => {
-      const walletName = localStorage.getItem("wallet");
+      const walletName = localStorage.getItem("pairfy-wallet");
 
       if (walletName !== null) {
         activeStep.value = 1;
