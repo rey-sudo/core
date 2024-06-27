@@ -611,6 +611,9 @@ export default {
 
 .head .head-button.buyButton {
   margin-top: 2rem;
+  background: var(--blue-c);
+  color: var(--text-w);
+  border: 1px solid var(--blue-c);
 }
 
 @media only screen and (max-width: 767px) {
