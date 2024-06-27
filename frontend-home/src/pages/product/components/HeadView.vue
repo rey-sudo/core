@@ -72,8 +72,7 @@
         </div>
 
         <div class="head-name">
-          Apple - MacBook Pro 14" Laptop - M3 Pro chip - 18GB Memory - 14-core
-          GPU - 512GB SSD - Space Black
+          Apple 2023 MacBook Pro Laptop M3 Pro chip with 11‑core CPU, 14‑core GPU: 14.2-inch Liquid Retina XDR Display, 18GB Unified Memory, 512GB SSD Storage. Works with iPhone/iPad; Space Black
         </div>
 
         <div class="head-legend">
@@ -528,10 +527,11 @@ export default {
 
 .head .head-name {
   font-size: var(--text-size-f);
-  font-weight: 600;
+  font-weight: 500;
   text-align: left;
-  width: 90%;
+  width: 100%;
   margin-top: 1rem;
+  line-height: 32px;
 }
 
 .head .head-legend {
@@ -563,8 +563,7 @@ export default {
 
 .head .head-rating span:nth-child(3) {
   font-weight: 400;
-  font-size: var(--text-size-b);
-  color: var(--text-b);
+  font-size: var(--text-size-a);
 }
 
 .head .head-price {
@@ -586,10 +585,10 @@ export default {
 
 .head .head-button {
   background: transparent;
-  border: 1px solid var(--blue-c);
+  border: 1px solid var(--black-a);
   width: 90%;
-  border-radius: 6px;
-  color: var(--blue-c);
+  border-radius: 4px;
+  color: var(--text-a);
   font-weight: 600;
   cursor: pointer;
   display: flex;
@@ -609,8 +608,6 @@ export default {
 
 .head .head-button.buyButton {
   margin-top: 2rem;
-  background: var(--blue-c);
-  color: var(--text-w);
 }
 
 @media only screen and (max-width: 767px) {

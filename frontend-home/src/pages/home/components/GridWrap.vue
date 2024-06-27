@@ -75,7 +75,7 @@ export default {
 ::v-deep(.p-rating-icon) {
   width: var(--text-size-a);
   height: var(--text-size-a);
-  color: var(--blue-c);
+  color: var(--yellow-b);
 }
 
 .card-body-rating {
