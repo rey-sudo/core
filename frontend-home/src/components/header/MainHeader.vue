@@ -137,16 +137,13 @@
       />
 
       <div class="header-button left" @click="visible = true">
-     
         <div>
-          <span>{{ selectedLanguage.code }}</span>
+          <span>Deliver to</span>
           <span>{{ selectedCountry.name }}</span>
         </div>
       </div>
 
       <div class="header-button left">
-     
-
         <div @click="testTx">
           <span>Sell a</span>
           <span>Product</span>
@@ -331,12 +328,12 @@ export default {
   width: 100%;
   box-sizing: border-box;
   background: initial;
-  background: var(--black-a);
+  background: var(--blue-b);
   box-shadow: var(--border-shadow);
 }
 
 .header .header-left {
-  flex-basis: 30%;
+  flex-basis: 20%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -353,7 +350,7 @@ export default {
 }
 
 .header .header-center {
-  flex-basis: 90%;
+  flex-basis: 60%;
   width: auto;
   display: flex;
   align-items: center;
@@ -365,18 +362,18 @@ export default {
   cursor: text;
   display: flex;
   align-items: center;
-  border-radius: 6px;
+  border-radius: 4px;
   width: 100%;
   color: var(--text-a);
   font-size: var(--text-size-b);
-  border: 1px solid var(--border-b);
+  border: 2px solid transparent;
   box-shadow: initial;
   transition: var(--transition-b);
 }
 
 .header .header-center .header-center-search:focus-within {
   background: var(--base-a);
-  border: 1px solid var(--text-a);
+  border: 2px solid var(--text-a);
   box-shadow: initial;
 }
 
@@ -411,7 +408,7 @@ export default {
 }
 
 .header .header-right {
-  flex-basis: 30%;
+  flex-basis: 20%;
   display: flex;
   justify-content: flex-end;
 }
@@ -427,7 +424,7 @@ export default {
   display: flex;
   align-items: center;
   cursor: pointer;
-  border: 1px solid var(--border-b);
+border: none;
 }
 
 .header .header-right button img {
@@ -448,7 +445,6 @@ export default {
 .header-right-count {
   font-weight: 700;
   font-size: var(--text-size-d);
-  background: var(--black-b);
 }
 
 .header .header-button {
@@ -461,7 +457,6 @@ export default {
   color: var(--text-w);
   transition: var(--transition-a);
 }
-
 
 .header .header-button div {
   display: flex;
@@ -483,7 +478,7 @@ export default {
 
 .header .header-button span:nth-child(1) {
   font-weight: 400;
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
 }
 
 .header .header-button label {
@@ -607,7 +602,7 @@ i {
   }
 
   .header-left {
-    flex-basis: 30%;
+    flex-basis: 20%;
   }
 
   .header-center {
@@ -615,7 +610,7 @@ i {
   }
 
   .header-right {
-    flex-basis: 30%;
+    flex-basis: 20%;
   }
 }
 </style>

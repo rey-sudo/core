@@ -110,15 +110,14 @@ export default {
   z-index: 100;
   display: flex;
   position: fixed;
-  top: 66px;
+  top: 64px;
   left: 0;
   width: 100%;
   align-items: center;
-  background: var(--black-b);
-  background: var(--black-b);
+  background: var(--blue-b);
   color: var(--text-w);
   font-weight: 500;
-  border-top: 1px solid transparent;
+  border-top: 1px solid var(--blue-c);
 }
 
 .nav.main {
