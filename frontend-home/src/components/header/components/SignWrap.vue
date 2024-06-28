@@ -52,7 +52,8 @@ export default {
 
     const check = () => {
       const checkStorate = localStorage.getItem("pairfy-wallet");
-      if ( checkStorate !== null) {
+      
+      if (checkStorate !== null) {
         activeStep.value = 1;
       } else {
         isVisible.value = true;
@@ -61,9 +62,9 @@ export default {
 
     check();
 
-    
+
     window.addEventListener("walletEnabledEvent", (event) => {
-      console.log("event", event);
+      console.log("event", event.detail);
       activeStep.value = 1;
     });
 
