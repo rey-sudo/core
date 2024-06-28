@@ -163,7 +163,7 @@ export default {
 .timeline-timer {
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
   line-height: 2rem;
   font-weight: 700;
 }

@@ -42,28 +42,12 @@ const reconnect = async () => {
   }
 };
 
-const startWalletService = () => {
-  Wallet.addEventListener("enabled", (e) => {
-    console.log("unused-enabled", e);
-  });
-
-  Wallet.addEventListener("connecting", (e) => {
-    console.log("unused-connecting", e);
-  });
-
-  Wallet.addEventListener("connected", (e) => {
-    console.log("unused-connected", e);
-  });
-
-  Wallet.addEventListener("lastConnectedWallet", (e) => {
-    console.log("unused-lastConnectedWallet", e);
-  });
-
+const startWalletService = async () => {
   Wallet.addEventListener("enabledWallet", async (walletName) => {
     const isEnabled = await window.cardano[walletName].isEnabled();
 
     if (isEnabled) {
-      localStorage.setItem("pairfy-enabled-wallet", walletName);
+      localStorage.setItem("pairfy-wallet", walletName);
 
       window.dispatchEvent(walletEnabledEvent);
 
@@ -71,13 +55,9 @@ const startWalletService = () => {
     }
   });
 
-  Wallet.addEventListener("accountBalance", (e) => {
-    console.log("unused-balance", e);
-  });
-
   Wallet.startInjectWalletListener();
 
-  reconnect();
+  await reconnect();
 };
 
 const stopWalletService = () => {

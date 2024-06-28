@@ -155,7 +155,7 @@ export default {
   width: 100px;
   height: 250px;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   flex-direction: column;
   align-items: center;
 }

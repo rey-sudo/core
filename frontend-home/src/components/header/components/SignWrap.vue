@@ -50,24 +50,17 @@ export default {
 
     const activeStep = ref(0);
 
-    const check = () => {
-      const checkStorate = localStorage.getItem("pairfy-wallet");
-      
-      if (checkStorate !== null) {
-        activeStep.value = 1;
-      } else {
-        isVisible.value = true;
-      }
-    };
+    const checkStorate = localStorage.getItem("pairfy-wallet");
 
-    check();
+    if (checkStorate !== null) {
+      activeStep.value = 1;
+    } else {
+      isVisible.value = true;
+    }
 
-
-    window.addEventListener("walletEnabledEvent", (event) => {
-      console.log("event", event.detail);
+    window.addEventListener("walletEnabledEvent", () => {
       activeStep.value = 1;
     });
-
 
     watch(getSetupWallet, (newValue) => {
       if (newValue === true) {
