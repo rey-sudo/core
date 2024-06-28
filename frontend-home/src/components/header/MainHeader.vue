@@ -328,7 +328,7 @@ export default {
   width: 100%;
   box-sizing: border-box;
   background: initial;
-  background: var(--blue-b);
+  background: var(--black-a);
   box-shadow: var(--border-shadow);
 }
 
@@ -424,7 +424,7 @@ export default {
   display: flex;
   align-items: center;
   cursor: pointer;
-border: none;
+  border: none;
 }
 
 .header .header-right button img {
