@@ -159,7 +159,7 @@ export default {
   align-items: center;
   justify-content: center;
   border: 1px solid var(--border-b);
-  border-radius: 28px;
+  border-radius: 16px;
 }
 
 .card-image {
