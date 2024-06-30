@@ -4,7 +4,7 @@
     header="Setup Wallet"
     position="right"
     blockScroll
-    :dismissable="false"
+    :dismissable="true"
   >
     <div class="steps">
       <div
@@ -44,7 +44,12 @@
     </div>
 
     <div class="tab-2" v-if="activeStep === 1">
-      <div class="account">SELLER</div>
+      <div class="account">
+        <div class="selector">
+          <div>User</div>
+          <div class="active">Seller</div>
+        </div>
+      </div>
     </div>
   </Sidebar>
 </template>
@@ -58,7 +63,7 @@ export default {
   setup() {
     const { getSetupWallet, setupWallet } = headerAPI();
 
-    const isVisible = ref(false);
+    const isVisible = ref(true);
 
     const activeStep = ref(0);
 
@@ -117,7 +122,7 @@ export default {
 
 <style lang="css" scoped>
 .steps {
-  padding: 1rem 2rem;
+  padding: 1rem 4rem;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -195,10 +200,30 @@ export default {
 }
 
 .account {
+  border-radius: 12px;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--border-b);
+  min-height: 600px;
+}
+
+.selector {
+  display: flex;
+}
+
+.selector div {
   padding: 1rem;
-  border-radius: 6px;
-  margin-top: 1rem;
+  padding: 1rem;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  border-bottom: 2px solid var(--border-b);
+}
+
+.selector div.active {
+  padding: 1rem;
+  border-bottom: 2px solid var(--blue-c);
 }
 
 @media (max-width: 600px) {
