@@ -570,7 +570,7 @@ export default {
 
 .head .head-price {
   text-align: left;
-  margin-top: 1rem;
+  margin-top: initial;
   font-size: var(--text-size-h);
   font-weight: 600;
   display: flex;
