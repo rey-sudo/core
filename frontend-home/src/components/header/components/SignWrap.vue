@@ -12,6 +12,7 @@
         v-for="(item, index) in stepsList"
         :key="item"
         :class="{ active: activeStep === index }"
+        @click="handleStep(index)"
       >
         <i :class="item.icon" />
 
@@ -107,10 +108,15 @@ export default {
       await wallet.connect(e);
     };
 
+    const handleStep = (e) => {
+      activeStep.value = e;
+    };
+
     return {
       isVisible,
       stepsList,
       activeStep,
+      handleStep,
       wallet,
       selectWallet,
       getSetupWallet,
