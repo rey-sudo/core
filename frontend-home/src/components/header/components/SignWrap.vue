@@ -6,9 +6,21 @@
     blockScroll
     :dismissable="false"
   >
-    <Steps v-model:activeStep="activeStep" :model="stepsList" readonly />
+    <div class="steps">
+      <div
+        class="steps-item"
+        v-for="(item, index) in stepsList"
+        :key="item"
+        :class="{ active: activeStep === index }"
+      >
+        <i :class="item.icon" />
+
+        <div class="steps-legend">{{ item.label }}</div>
+      </div>
+    </div>
+
     <div class="stepOne" v-if="activeStep === 0">
-      <p class="legend">
+      <p class="message">
         Select the Cardano wallet of your preference. Please note that each
         wallet can have one or more accounts. If you are going to make purchase
         operations you must use a single account throughout the entire process.
@@ -78,9 +90,11 @@ export default {
     const stepsList = ref([
       {
         label: "Connect",
+        icon: "pi pi-wallet",
       },
       {
         label: "Account",
+        icon: "pi pi-user",
       },
     ]);
 
@@ -102,7 +116,41 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.legend {
+.steps {
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.steps-item {
+  border: 1px solid var(--border-b);
+  border-radius: 6px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.steps-item i {
+  font-size: var(--text-size-d);
+}
+
+.steps-item.active {
+  border: 1px solid var(--blue-c);
+  color: var(--blue-c);
+}
+
+.steps-legend {
+  position: absolute;
+  margin-top: 90px;
+  font-size: var(--text-size-b);
+  font-weight: 500;
+}
+
+.message {
   padding: 1rem;
   border: 1px solid var(--border-b);
   border-radius: 12px;
