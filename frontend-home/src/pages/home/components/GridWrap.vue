@@ -19,9 +19,6 @@
               <span> {{ item.name.slice(0, 80) }}...</span>
             </div>
 
-            <div class="card-body-price">
-              <span> {{ formatPrice(item.price) }}</span>
-            </div>
 
             <div class="card-body-rating">
               <Rating
@@ -32,6 +29,12 @@
               />
               <span>({{ item.review_count }})</span>
             </div>
+
+
+            <div class="card-body-price">
+              <span> {{ formatPrice(item.price) }}</span>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -59,9 +62,9 @@ export default {
     formatPrice(num) {
       const price = num || 0;
 
-      const customCurrencySymbol = "ADA";
+      const customCurrencySymbol = "₳";
 
-      const formattedNumber = `${price.toLocaleString(
+      const formattedNumber = `  ${price.toLocaleString(
         "en-US"
       )} ${customCurrencySymbol}`;
 
