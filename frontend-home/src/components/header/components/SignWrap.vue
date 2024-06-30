@@ -72,14 +72,13 @@ export default {
   setup() {
     const { getSetupWallet, setupWallet } = headerAPI();
 
-    const isVisible = ref(true);
+    const isVisible = ref(false); 
 
     const activeStep = ref(0);
 
-    const enabledWallet = ref(null); 
+    const enabledWallet = ref(null);
 
     const getWalletName = () => localStorage.getItem("pairfy-wallet");
-
 
     if (getWalletName() !== null) {
       activeStep.value = 1;
