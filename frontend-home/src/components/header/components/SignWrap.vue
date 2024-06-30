@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <div class="stepOne" v-if="activeStep === 0">
+    <div class="tab-1" v-if="activeStep === 0">
       <p class="message">
         Select the Cardano wallet of your preference. Please note that each
         wallet can have one or more accounts. If you are going to make purchase
@@ -43,7 +43,7 @@
       </div>
     </div>
 
-    <div class="stepTwo" v-if="activeStep === 1">
+    <div class="tab-2" v-if="activeStep === 1">
       <div class="account">SELLER</div>
     </div>
   </Sidebar>
@@ -191,7 +191,7 @@ export default {
   height: 34px;
 }
 
-.stepOne {
+.tab-1 {
 }
 
 .account {

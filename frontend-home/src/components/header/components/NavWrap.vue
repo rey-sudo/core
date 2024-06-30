@@ -106,7 +106,7 @@ export default {
 
 <style lang="css" scoped>
 .nav {
-  padding: 0 8rem;
+  padding: 0 4rem;
   z-index: 100;
   display: flex;
   position: fixed;

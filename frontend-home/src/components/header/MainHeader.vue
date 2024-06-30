@@ -123,14 +123,14 @@
   <header class="header responsive">
     <div class="header-left">
       <img
-        class="header-left-logo white"
+        class="header-logo white"
         @click="openHome"
         src="@/assets/logo-white.png"
         alt="logo"
       />
 
       <img
-        class="header-left-logo blue"
+        class="header-logo blue"
         @click="openHome"
         src="@/assets/logo-blue.png"
         alt="logo"
@@ -318,7 +318,7 @@ export default {
 
 <style lang="css" scoped>
 .header {
-  padding: 0.5rem 8rem;
+  padding: 0.5rem 4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -339,13 +339,14 @@ export default {
   align-items: center;
 }
 
-.header .header-left .header-left-logo {
+.header .header-left .header-logo {
   cursor: pointer;
   image-rendering: optimizeQuality;
   display: initial;
+  margin-right: 1rem;
 }
 
-.header .header-left .header-left-logo.blue {
+.header .header-left .header-logo.blue {
   display: none;
 }
 
@@ -456,7 +457,14 @@ export default {
   cursor: pointer;
   color: var(--text-w);
   transition: var(--transition-a);
-  margin: 0 auto;
+}
+
+.header .header-button.left {
+  margin-right: auto;
+}
+
+.header .header-button.right {
+  margin-left: auto;
 }
 
 .header .header-button div {
@@ -574,11 +582,11 @@ i {
   .header-left {
     justify-content: space-between;
   }
-  .header-left-logo.white {
+  .header-logo.white {
     display: none;
   }
 
-  .header-left-logo.blue {
+  .header-logo.blue {
     display: initial;
   }
 }
