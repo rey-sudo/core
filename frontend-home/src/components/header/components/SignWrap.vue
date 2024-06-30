@@ -28,11 +28,19 @@
       </p>
 
       <div class="grid-container">
-        <div @click="selectWallet('nami')" class="grid-item">
-          <img src="@/assets/nami.svg" alt="logo" />
+        <div
+          @click="selectWallet('nami')"
+          class="grid-item"
+          :class="{ active: enabledWallet === 'nami' }"
+        >
+          <img src="@/assets/nami.svg" alt="nami" />
         </div>
-        <div @click="selectWallet('eternl')" class="grid-item">
-          <img src="@/assets/eternl.png" alt="logo" />
+        <div
+          @click="selectWallet('eternl')"
+          class="grid-item"
+          :class="{ active: enabledWallet === 'eternl' }"
+        >
+          <img src="@/assets/eternl.png" alt="eternl" />
         </div>
         <div class="grid-item"></div>
         <div class="grid-item"></div>
@@ -68,10 +76,14 @@ export default {
 
     const activeStep = ref(0);
 
-    const checkStorate = localStorage.getItem("pairfy-wallet");
+    const enabledWallet = ref(null); 
 
-    if (checkStorate !== null) {
+    const getWalletName = () => localStorage.getItem("pairfy-wallet");
+
+
+    if (getWalletName() !== null) {
       activeStep.value = 1;
+      enabledWallet.value = getWalletName();
     } else {
       isVisible.value = true;
     }
@@ -110,12 +122,14 @@ export default {
 
     const handleStep = (e) => {
       activeStep.value = e;
+      enabledWallet.value = getWalletName();
     };
 
     return {
       isVisible,
       stepsList,
       activeStep,
+      enabledWallet,
       handleStep,
       wallet,
       selectWallet,
@@ -202,6 +216,10 @@ export default {
   height: 34px;
 }
 
+.grid-item.active {
+  border: 1px solid var(--blue-c);
+}
+
 .tab-1 {
 }
 
@@ -224,7 +242,7 @@ export default {
   text-align: center;
   width: 100%;
   cursor: pointer;
-  border-bottom: 2px solid var(--border-b);
+  border-bottom: 1px solid var(--border-b);
 }
 
 .selector div.active {
