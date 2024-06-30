@@ -343,7 +343,7 @@ export default {
   cursor: pointer;
   image-rendering: optimizeQuality;
   display: initial;
-  margin-right: 1rem;
+  margin-right: auto;
 }
 
 .header .header-left .header-logo.blue {
