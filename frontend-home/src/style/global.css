@@ -52,8 +52,14 @@
   --orange-s: rgba(255, 92, 56, 0.1);
 
   --yellow-a: #ffe600;
-  --yellow-b: #E3AC00;
+  --yellow-b: #f7be2e;
   --yellow-s: rgba(255, 242, 0, 0.1);
+
+  --palette-a: #131921;
+  --palette-b: #f4a6af;
+  --palette-c: #e5be92;
+  --palette-d: #f7be2e;
+  --palette-e: #47d17b;
 
   --green-a: #15c6c1;
   --green-b: rgba(0, 126, 89, 1);
