@@ -114,10 +114,10 @@ export default {
   left: 0;
   width: 100%;
   align-items: center;
-  background: var(--black-a);
+  background: var(--blue-a);
   color: var(--text-w);
   font-weight: 500;
-  border-top: 1px solid transparent;
+  border-top: 1px solid var(--blue-c);
 }
 
 .nav.main {

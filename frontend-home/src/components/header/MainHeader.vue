@@ -328,7 +328,7 @@ export default {
   width: 100%;
   box-sizing: border-box;
   background: initial;
-  background: var(--black-a);
+  background: var(--blue-a);
   box-shadow: var(--border-shadow);
 }
 

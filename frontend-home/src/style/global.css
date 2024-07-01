@@ -23,11 +23,11 @@
   --base-d: #131921;
   --base-e: #232f3e;
 
-  --blue-a: #0069f5;
-  --blue-b: #0040CC; /* 16% */
-  --blue-c: #147DFF;
-  --blue-t: #0457c8;
-  --blue-s: hsla(214, 100%, 48%, 0.1);
+  --blue-a: #0046be;
+  --blue-b: #0046be; /* 16% */
+  --blue-c: #0046be;
+  --blue-t: #0046be;
+  --blue-s: rgba(0, 70, 190, 0.2);
 
   --gradient-a: linear-gradient(
     to right top,
@@ -51,7 +51,7 @@
   --orange-a: #ff5c38;
   --orange-s: rgba(255, 92, 56, 0.1);
 
-  --yellow-a: #ffe600;
+  --yellow-a: #fff200;
   --yellow-b: #f7be2e;
   --yellow-s: rgba(255, 242, 0, 0.1);
 
