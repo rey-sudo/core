@@ -28,7 +28,7 @@
      inkscape:document-units="px"
      showgrid="false"
      inkscape:zoom="14.217421"
-     inkscape:cx="43.432631"
+     inkscape:cx="43.502967"
      inkscape:cy="12.414347"
      inkscape:window-width="1920"
      inkscape:window-height="1043"
@@ -65,42 +65,42 @@
        transform="matrix(1.6350117,0,0,1.6350117,-21.888545,-22.926552)"><tspan
          x="12.943359"
          y="27.203814"
-         id="tspan4"><tspan
+         id="tspan6"><tspan
            style="font-weight:bold;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold'"
-           id="tspan1">pair</tspan><tspan
+           id="tspan2">pair</tspan><tspan
            style="font-weight:bold;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';stroke:#ffffff"
-           id="tspan3">fy</tspan></tspan></text>
+           id="tspan5">fy</tspan></tspan></text>
     <g
        id="g1"
        transform="translate(-2.8081442,-1.4654597)"
-       style="fill:#fff200;fill-opacity:1;stroke:#fff200;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1">
+       style="fill:#ff9a00;fill-opacity:1;stroke:#ff9a00;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1">
       <g
          id="g5"
          transform="rotate(-45,70.327702,4.1389747)"
-         style="fill:#fff200;fill-opacity:1;stroke:#fff200;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers">
+         style="fill:#ff9a00;fill-opacity:1;stroke:#ff9a00;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers">
         <circle
            cx="61.201664"
            cy="10.372748"
            r="1.2016636"
            id="circle1"
-           style="fill:#fff200;fill-opacity:1;stroke:#fff200;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers" />
+           style="fill:#ff9a00;fill-opacity:1;stroke:#ff9a00;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers" />
         <path
            d="m 64.806654,19.986058 a 0.60083181,0.60083181 0 0 1 -0.426591,-0.174242 l -6.4289,-6.434908 A 1.2016636,1.2016636 0 0 1 57.596672,12.529735 V 7.9694208 a 1.2016636,1.2016636 0 0 1 1.201664,-1.2016635 h 4.560313 a 1.2016636,1.2016636 0 0 1 0.847173,0.354491 l 6.434909,6.4289007 a 0.60083181,0.60083181 0 0 1 0,0.853181 l -5.407487,5.407486 a 0.60083181,0.60083181 0 0 1 -0.42659,0.174242 z M 58.798336,7.9694208 v 4.5603142 l 6.008318,6.008318 4.560313,-4.560313 -6.008318,-6.0083192 z"
            id="path1"
-           style="fill:#fff200;fill-opacity:1;stroke:#fff200;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers" />
+           style="fill:#ff9a00;fill-opacity:1;stroke:#ff9a00;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers" />
       </g>
       <g
          id="g3-3"
          transform="rotate(15,8.3740267,81.631538)"
-         style="display:inline;fill:#fff200;fill-opacity:1;stroke:#fff200;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1">
+         style="display:inline;fill:#ff9a00;fill-opacity:1;stroke:#ff9a00;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1">
         <g
            id="g4-6"
            transform="rotate(-90,64.097533,11.204224)"
-           style="fill:#fff200;fill-opacity:1;stroke:#fff200;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1">
+           style="fill:#ff9a00;fill-opacity:1;stroke:#ff9a00;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1">
           <path
              d="m 66.308613,-12.554717 v 0 c 3.548966,0 6.425972,4.162201 6.425973,7.7111672 h 1.285196 c 0,-4.2587602 -3.452408,-7.7111682 -7.711169,-7.7111672 z"
              id="path1-6-7"
-             style="fill:#fff200;fill-opacity:1;stroke:#fff200;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+             style="fill:#ff9a00;fill-opacity:1;stroke:#ff9a00;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
              sodipodi:nodetypes="ccccc" />
         </g>
       </g>
