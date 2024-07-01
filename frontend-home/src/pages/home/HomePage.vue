@@ -45,10 +45,8 @@ export default {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--blue-a);
 }
-
- 
-
 
 @media only screen and (max-width: 767px) {
   .store {

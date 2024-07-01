@@ -1,24 +1,22 @@
 <template>
-  <div>
-    <div class="banner">
-      <div class="banner-mask" />
-      <Carousel
-        :value="products"
-        :numVisible="1"
-        :numScroll="1"
-        :page="0"
-        :responsiveOptions="responsiveOptions"
-        :showNavigators="false"
-        :showIndicators="false"
-        verticalViewPortHeight="300px"
-        :autoplayInterval="5000"
-        circular
-      >
-        <template #item="slotProps">
-          <img class="image" :src="slotProps.data.image" />
-        </template>
-      </Carousel>
-    </div>
+  <div class="banner">
+    <div class="banner-mask" />
+    <Carousel
+      :value="products"
+      :numVisible="1"
+      :numScroll="1"
+      :page="0"
+      :responsiveOptions="responsiveOptions"
+      :showNavigators="false"
+      :showIndicators="true"
+      verticalViewPortHeight="300px"
+      :autoplayInterval="5000"
+      circular
+    >
+      <template #item="slotProps">
+        <img class="image" :src="slotProps.data.image" />
+      </template>
+    </Carousel>
   </div>
 </template>
 
@@ -99,6 +97,7 @@ export default {
   display: flex;
   flex-direction: column;
   margin-top: 41px;
+  padding: 0 8%;
 }
 
 .banner-mask {
