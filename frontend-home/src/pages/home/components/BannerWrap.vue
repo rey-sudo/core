@@ -106,10 +106,11 @@ export default {
   height: 100px;
   width: 100%;
   bottom: 0;
+  left:0;
   z-index: 3;
   position: absolute;
   backdrop-filter: blur(0px);
-  background: linear-gradient(180deg, transparent 10%, var(--blue-a) 100%);
+  background: linear-gradient(180deg, transparent 0%, var(--blue-a) 100%);
 }
 
 .banner-screen {
