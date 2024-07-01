@@ -37,7 +37,7 @@ export default {
       {
         name: "2",
         image:
-          "https://www.asus.com/WebsitesBanner/CO/banners/8felhnrqucxog5m7/8felhnrqucxog5m7-0_0_desktop_0_1X.jpg",
+        "https://www.asus.com/WebsitesBanner/CO/banners/pw8rrokxjygdtfuz/pw8rrokxjygdtfuz-0_0_desktop_0_1X.jpg",
       },
 
       {
@@ -49,7 +49,7 @@ export default {
       {
         name: "4",
         image:
-        "https://www.asus.com/WebsitesBanner/CO/banners/8felhnrqucxog5m7/8felhnrqucxog5m7-0_0_desktop_0_1X.jpg",
+        "https://www.asus.com/WebsitesBanner/CO/banners/rr7kwlphfplxipo6/rr7kwlphfplxipo6-0_0_desktop_0_1X.jpg",
       },
     ]);
     const responsiveOptions = ref([
