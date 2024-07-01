@@ -1,7 +1,7 @@
 export default () => ({
   allProducts: [
     {
-      title: "",
+      title: "Best seller",
       items: [
         {
           id: "P3EWGDGOYGCNCLLT",
@@ -188,7 +188,7 @@ export default () => ({
       ],
     },
     {
-      title: "Explore",
+      title: "Technology",
       items: [
         {
           id: "P3EWGDGOYGCNCLLT",

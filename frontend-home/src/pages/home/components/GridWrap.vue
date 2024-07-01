@@ -19,8 +19,6 @@
               <span> {{ item.name.slice(0, 100) }}...</span>
             </div>
 
-   
-
             <div class="card-body-rating">
               <Rating
                 :modelValue="item.rating_count"
@@ -33,8 +31,6 @@
             <div class="card-body-price">
               <span> {{ formatPrice(item.price) }}</span>
             </div>
-
-            
           </div>
         </div>
       </div>
@@ -116,7 +112,8 @@ export default {
   font-weight: bold;
   text-align: left;
   color: var(--text-a);
-  margin: 2rem 0;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   font-weight: 700;
 }
 
@@ -124,8 +121,7 @@ export default {
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-rows: minmax(100px, auto);
-  gap: 1rem;
-  padding: 0 4rem;
+  padding: 0 10%;
   min-height: 100vh;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
@@ -153,7 +149,7 @@ export default {
   cursor: pointer;
   margin: auto;
   background: var(--base-a);
-    padding: 1rem;
+  padding: 1rem;
 }
 
 .card-header {
@@ -195,7 +191,6 @@ export default {
   font-style: normal;
   text-transform: none;
   text-decoration: none;
-
 }
 
 .card-body-name:hover {
