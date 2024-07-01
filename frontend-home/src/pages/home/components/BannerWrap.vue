@@ -9,7 +9,6 @@
         :page="0"
         :responsiveOptions="responsiveOptions"
         :showNavigators="false"
-       
         verticalViewPortHeight="300px"
         :autoplayInterval="5000"
         circular
@@ -37,7 +36,7 @@ export default {
       {
         name: "2",
         image:
-        "https://www.asus.com/WebsitesBanner/CO/banners/pw8rrokxjygdtfuz/pw8rrokxjygdtfuz-0_0_desktop_0_1X.jpg",
+          "https://www.asus.com/WebsitesBanner/CO/banners/pw8rrokxjygdtfuz/pw8rrokxjygdtfuz-0_0_desktop_0_1X.jpg",
       },
 
       {
@@ -49,7 +48,7 @@ export default {
       {
         name: "4",
         image:
-        "https://www.asus.com/WebsitesBanner/CO/banners/rr7kwlphfplxipo6/rr7kwlphfplxipo6-0_0_desktop_0_1X.jpg",
+          "https://www.asus.com/WebsitesBanner/CO/banners/rr7kwlphfplxipo6/rr7kwlphfplxipo6-0_0_desktop_0_1X.jpg",
       },
     ]);
     const responsiveOptions = ref([
@@ -104,12 +103,13 @@ export default {
 .banner-mask {
   width: inherit;
   height: inherit;
-  height: 400px;
+  height: 100px;
   width: 100%;
+  bottom: 0;
   z-index: 3;
   position: absolute;
   backdrop-filter: blur(0px);
-
+  background: linear-gradient(180deg, transparent 10%, var(--blue-a) 100%);
 }
 
 .banner-screen {

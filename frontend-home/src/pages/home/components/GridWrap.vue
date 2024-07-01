@@ -126,6 +126,8 @@ export default {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
   background: var(--base-b);
+
+  background: linear-gradient(180deg,  var(--blue-a) 0%, var(--base-b) 10%);
 }
 
 .grid-item {

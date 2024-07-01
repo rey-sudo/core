@@ -1,7 +1,7 @@
 export default () => ({
   allProducts: [
     {
-      title: "Best sellers", 
+      title: "", 
       items: [
         {
           id: "P3EWGDGOYGCNCLLT",
