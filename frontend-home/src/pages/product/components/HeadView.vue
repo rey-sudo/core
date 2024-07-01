@@ -604,18 +604,16 @@ export default {
 
 .head .head-button.buyButton {
   margin-top: 2rem;
-  color: var(--text-w);
-  border: 1px solid var(--blue-a);
-  background: var(--blue-a);
+  color: var(--blue-a);
+  border: 1px solid transparent;
+  background: var(--blue-s);
 }
 
 .head .head-button:hover {
-  opacity: 0.9;
   color: var(--text-w);
+  background: var(--blue-a);
   border: 1px solid var(--blue-a);
 }
-
-
 
 @media only screen and (max-width: 767px) {
   .mobile {
