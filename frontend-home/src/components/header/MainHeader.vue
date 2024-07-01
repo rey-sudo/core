@@ -441,12 +441,11 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.header-right-count {
   font-weight: 700;
   font-size: var(--text-size-d);
+  color: var(--yellow-b);
 }
+
 
 .header .header-button {
   font-weight: 500;
