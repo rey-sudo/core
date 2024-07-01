@@ -129,7 +129,7 @@ export default {
   min-height: 100vh;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
-  background: var(--base-a);
+  background: var(--base-b);
 }
 
 .grid-item {
@@ -139,7 +139,7 @@ export default {
 
 .grid-row {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1rem;
 }
 
@@ -152,6 +152,8 @@ export default {
   overflow: hidden;
   cursor: pointer;
   margin: auto;
+  background: var(--base-a);
+    padding: 1rem;
 }
 
 .card-header {
@@ -160,8 +162,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--border-b);
-  border-radius: 28px;
 }
 
 .card-image {
@@ -183,13 +183,11 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 1rem;
 }
 
 .card-body-name {
   color: var(--text-a);
   font-size: var(--text-size-c);
- 
   display: flex;
   align-items: center;
   justify-content: center;

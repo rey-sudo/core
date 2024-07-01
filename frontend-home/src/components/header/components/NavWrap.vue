@@ -118,6 +118,7 @@ export default {
   color: var(--text-w);
   font-weight: 500;
   border-top: 1px solid var(--black-b);
+  box-shadow: var(--shadow-b);
 }
 
 .nav.main {
