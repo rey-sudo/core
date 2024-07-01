@@ -98,6 +98,7 @@
 
 * {
   font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
   font-style: normal;
   font-family: "Open Sans", sans-serif;
   font-family: "IBM Plex Sans", sans-serif;
