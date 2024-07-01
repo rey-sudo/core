@@ -586,8 +586,7 @@ export default {
 }
 
 .head .head-button {
-  background: transparent;
-  border: 1px solid var(--text-a);
+  border: 1px solid var(--blue-a);
   width: 90%;
   border-radius: 4px;
   color: var(--text-a);
@@ -600,17 +599,18 @@ export default {
   text-align: center;
   margin-top: 1rem;
   transition: var(--transition-a);
+  background: var(--blue-a);
 }
 
 .head .head-button.buyButton {
   margin-top: 2rem;
-  color: var(--text-a);
+  color: var(--text-w);
   border: 1px solid var(--blue-a);
+  background: var(--blue-a);
 }
 
 .head .head-button:hover {
   opacity: 0.9;
-  background: var(--blue-a);
   color: var(--text-w);
   border: 1px solid var(--blue-a);
 }

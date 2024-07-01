@@ -28,7 +28,7 @@
      inkscape:document-units="px"
      showgrid="false"
      inkscape:zoom="4.6866963"
-     inkscape:cx="43.314093"
+     inkscape:cx="43.207408"
      inkscape:cy="12.26877"
      inkscape:window-width="1920"
      inkscape:window-height="1043"
@@ -65,15 +65,15 @@
        transform="matrix(1.6350117,0,0,1.6350117,-21.888545,-22.926552)"><tspan
          x="12.943359"
          y="27.203814"
-         id="tspan4"><tspan
+         id="tspan6"><tspan
            style="font-weight:bold;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold'"
-           id="tspan1">pair</tspan><tspan
+           id="tspan2">pair</tspan><tspan
            style="font-weight:bold;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';stroke:#ffffff"
-           id="tspan3">fy</tspan></tspan></text>
+           id="tspan5">fy</tspan></tspan></text>
     <g
        id="g5"
        transform="translate(6.550056,1.6230873)"
-       style="fill:#ffe600;fill-opacity:1">
+       style="fill:#f7be2e;fill-opacity:1">
       <circle
          cx="61.201664"
          cy="10.372748"
@@ -88,11 +88,11 @@
     <g
        id="g3-3"
        transform="rotate(60,49.493482,23.198306)"
-       style="display:inline;fill:#ffe600;fill-opacity:1">
+       style="display:inline;fill:#f7be2e;fill-opacity:1">
       <g
          id="g4-6"
          transform="rotate(-90,64.097533,11.204224)"
-         style="fill:#ffe600;fill-opacity:1">
+         style="fill:#f7be2e;fill-opacity:1">
         <path
            d="m 66.308613,-12.554717 v 0 c 3.548966,0 6.425972,4.162201 6.425973,7.7111672 h 1.285196 c 0,-4.2587602 -3.452408,-7.7111682 -7.711169,-7.7111672 z"
            id="path1-6-7"
