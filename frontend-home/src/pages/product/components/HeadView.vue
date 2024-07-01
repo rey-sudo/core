@@ -602,19 +602,20 @@ export default {
   transition: var(--transition-a);
 }
 
-.head .head-button:hover {
-  opacity: 0.9;
-  background: var(--blue-c);
-  color: var(--text-w);
-  border: 1px solid var(--blue-c);
-}
-
 .head .head-button.buyButton {
   margin-top: 2rem;
-  background: var(--blue-c);
-  color: var(--text-w);
-  border: 1px solid var(--blue-c);
+  color: var(--text-a);
+  border: 1px solid var(--blue-a);
 }
+
+.head .head-button:hover {
+  opacity: 0.9;
+  background: var(--blue-a);
+  color: var(--text-w);
+  border: 1px solid var(--blue-a);
+}
+
+
 
 @media only screen and (max-width: 767px) {
   .mobile {
