@@ -58,6 +58,8 @@
           <div>User</div>
           <div class="active">Seller</div>
         </div>
+
+        <SellerLogin />
       </div>
     </div>
   </Sidebar>
@@ -67,12 +69,16 @@
 import { ref, watch } from "vue";
 import { walletClient } from "@/api/wallet-api";
 import { headerAPI } from "../composable/header-api";
+import SellerLogin from "./SellerLogin.vue";
 
 export default {
+  components: {
+    SellerLogin, 
+  },
   setup() {
     const { getSetupWallet, setupWallet } = headerAPI();
 
-    const isVisible = ref(false); 
+    const isVisible = ref(false);
 
     const activeStep = ref(0);
 
