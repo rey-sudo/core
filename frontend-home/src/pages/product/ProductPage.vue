@@ -41,7 +41,6 @@ export default {
 
     return {
       product,
-
       lockingEndpoint,
     };
   },
@@ -131,9 +130,9 @@ export default {
   mounted() {
     this.scrollTop();
 
-    this.setupLucid();
+   // this.setupLucid();
 
-    this.setupWallet();
+    //this.setupWallet();
   },
 };
 </script>
