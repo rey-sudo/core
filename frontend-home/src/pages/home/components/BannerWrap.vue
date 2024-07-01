@@ -9,6 +9,7 @@
         :page="0"
         :responsiveOptions="responsiveOptions"
         :showNavigators="false"
+        :showIndicators="false"
         verticalViewPortHeight="300px"
         :autoplayInterval="5000"
         circular
