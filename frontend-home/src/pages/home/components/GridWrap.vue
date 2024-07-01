@@ -16,7 +16,7 @@
 
           <div class="card-body">
             <div class="card-body-name">
-              <span> {{ item.name.slice(0, 80) }}...</span>
+              <span> {{ item.name.slice(0, 100) }}...</span>
             </div>
 
    
@@ -140,7 +140,7 @@ export default {
 .grid-row {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .card {
@@ -192,7 +192,10 @@ export default {
   align-items: center;
   justify-content: center;
   font-weight: 400;
-  text-transform: capitalize;
+  font-style: normal;
+  text-transform: none;
+  text-decoration: none;
+
 }
 
 .card-body-name:hover {
