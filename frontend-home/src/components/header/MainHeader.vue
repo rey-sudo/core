@@ -443,7 +443,7 @@ export default {
   justify-content: center;
   font-weight: 700;
   font-size: var(--text-size-d);
-  color: var(--yellow-b);
+  color: var(--text-w);
 }
 
 
@@ -476,7 +476,7 @@ export default {
 }
 
 .header .header-button span {
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
   line-height: 1.25rem;
   text-align: left;
   font-weight: 600;
