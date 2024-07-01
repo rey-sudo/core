@@ -118,7 +118,6 @@ export default {
   color: var(--text-a);
   margin: 2rem 0;
   font-weight: 700;
-  color: var(--blue-c);
 }
 
 .grid {
