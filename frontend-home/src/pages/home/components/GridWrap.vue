@@ -19,6 +19,9 @@
               <span> {{ item.name.slice(0, 80) }}...</span>
             </div>
 
+            <div class="card-body-price">
+              <span> {{ formatPrice(item.price) }}</span>
+            </div>
 
             <div class="card-body-rating">
               <Rating
@@ -31,9 +34,6 @@
             </div>
 
 
-            <div class="card-body-price">
-              <span> {{ formatPrice(item.price) }}</span>
-            </div>
             
           </div>
         </div>
