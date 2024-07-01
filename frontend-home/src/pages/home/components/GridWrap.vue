@@ -108,7 +108,7 @@ export default {
 }
 
 .grid-item-title {
-  font-size: var(--text-size-h);
+  font-size: var(--text-size-g);
   font-weight: bold;
   text-align: left;
   color: var(--text-a);
