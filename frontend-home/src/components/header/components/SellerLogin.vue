@@ -53,6 +53,8 @@
         <span>Country</span>
         <span>{{ getCurrentSeller.country }}</span>
       </div>
+
+
     </div>
   </div>
 </template>
@@ -160,7 +162,6 @@ export default {
   border-radius: 6px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--border-a);
 }
 
 .profile-image {
@@ -196,8 +197,11 @@ export default {
   font-size: var(--text-size-b);
 }
 
-.profile-item span:nth-child(1) {
+.profile-item span {
+  line-height: 1.5rem;
+}
 
+.profile-item span:nth-child(1) {
   font-weight: 500;
 }
 </style>

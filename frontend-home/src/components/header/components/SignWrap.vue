@@ -69,7 +69,7 @@
           </div>
         </div>
 
-        <SellerLogin />
+        <SellerLogin v-if="activeTab === 'seller'" />
       </div>
     </div>
   </Sidebar>
@@ -88,7 +88,7 @@ export default {
   setup() {
     const { getSetupWallet, setupWallet } = headerAPI();
 
-    const isVisible = ref(true);
+    const isVisible = ref(false); 
 
     const activeStep = ref(0);
 
