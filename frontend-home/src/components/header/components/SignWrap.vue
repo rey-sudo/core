@@ -268,7 +268,7 @@ export default {
   text-align: center;
   width: 100%;
   cursor: pointer;
-  font-size: var(--text-size-c);
+  font-size: var(--text-size-b);
   font-weight: 400;
   border-radius: 6px;
   transition: 0.3s ease-in-out;

@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+    <Toast />
     <div v-focustrap class="login-wrap">
       <div class="avatar">
         <div>
@@ -9,7 +10,7 @@
       <div class="field">
         <InputText
           id="email"
-          style=" width: 300px"
+          style="width: 300px"
           v-model="email"
           type="email"
           placeholder="Email"
@@ -19,29 +20,64 @@
       <div class="field">
         <InputText
           id="password"
-          style=" width: 300px"
-          v-model="name"
+          style="width: 300px"
+          v-model="password"
           type="password"
           placeholder="Password"
           autofocus
         />
       </div>
 
-      <Button type="submit" label="Login" class="button" />
+      <Button type="submit" label="Login" class="button" @click="handleLogin" />
     </div>
   </div>
 </template>
 
 <script>
 import { ref } from "vue";
+import { headerAPI } from "@/components/header/composable/header-api";
+import { useToast } from "primevue/usetoast";
 
 export default {
   setup() {
-    const name = ref();
     const email = ref();
-    const accept = ref(false);
+    const password = ref();
 
-    return { name, email, accept };
+    const { loginSeller } = headerAPI();
+
+    const toast = useToast();
+
+    const handleLogin = async () => {
+      const params = {
+        email: email.value,
+        password: password.value,
+      };
+
+      await loginSeller(params)
+        .then(() => {
+          toast.add({
+            severity: "info",
+            summary: "Info",
+            detail: "Message Content",
+            life: 3000,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.add({
+            severity: "error",
+            summary: "Error Message",
+            detail: "Login Error",
+            life: 3000,
+          });
+        });
+    };
+
+    return {
+      handleLogin,
+      email,
+      password,
+    };
   },
 };
 </script>

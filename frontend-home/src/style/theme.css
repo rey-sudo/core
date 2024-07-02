@@ -3048,6 +3048,7 @@
     text-align: center;
     overflow: hidden;
     position: relative;
+ 
   }
   .p-button-label {
     flex: 1 1 auto;
@@ -3099,10 +3100,10 @@
     background: #2196f3;
     border: 1px solid #2196f3;
     padding: 0.5rem 1rem;
-    font-size: 1rem;
+    font-size: var(--text-size-b);
     transition: background-color 0.2s, color 0.2s, border-color 0.2s,
       box-shadow 0.2s;
-    border-radius: 8px;
+    border-radius: 4px;
     outline-color: transparent;
   }
   .p-button:not(:disabled):hover {
