@@ -373,7 +373,7 @@ export default {
 
 .header .header-center .header-center-search:focus-within {
   background: var(--base-a);
-  box-shadow: 0 0 0 2px var(--blue-c), 0 0 0 3px var(--blue-c);
+  box-shadow: 0 0 0 2px var(--yellow-b), 0 0 0 3px var(--yellow-b);
 }
 
 .header .header-center .header-center-search div {
@@ -397,7 +397,7 @@ export default {
   width: 100%;
   font-size: var(--text-size-b);
   color: inherit;
-  padding: 0.75rem 1rem;
+  padding: 0.7rem 1rem;
 }
 
 .header .header-center .header-center-search input::placeholder {
