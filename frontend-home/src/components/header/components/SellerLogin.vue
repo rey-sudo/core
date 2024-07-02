@@ -31,7 +31,24 @@
       <Button type="submit" label="Login" class="button" @click="handleLogin" />
     </div>
 
-    {{ getCurrentSeller }}
+    <div v-if="getCurrentSeller" class="profile">
+      <div class="profile-description">
+        <div class="profile-image">
+          <img
+            src="https://api.dicebear.com/9.x/thumbs/svg?seed=asdasdasdas"
+            alt=""
+          />
+        </div>
+        <div class="profile-name">
+          <span> {{ getCurrentSeller.username }}</span>
+          <span> ID: {{ getCurrentSeller.id }}</span>
+        </div>
+      </div>
+
+      <div class="profile-item">
+        z
+      </div>
+    </div>
   </div>
 </template>
 
@@ -126,4 +143,52 @@ export default {
 .button {
   margin-top: 1rem;
 }
+
+.profile {
+  width: 100%;
+  height: 100%;
+}
+
+.profile-description {
+  padding: 1rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--border-a);
+}
+
+.profile-image {
+  width: 50px;
+  height: 50px;
+  background: green;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--border-b);
+}
+
+.profile-name {
+  margin-left: 1rem;
+  font-size: var(--text-size-c);
+  color: var(--text-a);
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-name span {
+  line-height: 1.5rem;
+}
+
+.profile-name span:nth-child(2) {
+  color: var(--text-b);
+  font-size: var(--text-size-a);
+}
+
+
+
+
+
+
+
+
+
 </style>
