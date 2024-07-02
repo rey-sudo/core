@@ -46,7 +46,12 @@
       </div>
 
       <div class="profile-item">
-        z
+        <span>Email</span>
+        <span>{{ getCurrentSeller.email }}</span>
+      </div>
+      <div class="profile-item">
+        <span>Country</span>
+        <span>{{ getCurrentSeller.country }}</span>
       </div>
     </div>
   </div>
@@ -147,6 +152,7 @@ export default {
 .profile {
   width: 100%;
   height: 100%;
+  display: block;
 }
 
 .profile-description {
@@ -183,12 +189,15 @@ export default {
   font-size: var(--text-size-a);
 }
 
+.profile-item {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  font-size: var(--text-size-b);
+}
 
+.profile-item span:nth-child(1) {
 
-
-
-
-
-
-
+  font-weight: 500;
+}
 </style>
