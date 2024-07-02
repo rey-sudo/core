@@ -8,7 +8,7 @@
       :page="0"
       :responsiveOptions="responsiveOptions"
       :showNavigators="false"
-      :showIndicators="true"
+      :showIndicators="false"
       verticalViewPortHeight="300px"
       :autoplayInterval="5000"
       circular
@@ -105,7 +105,7 @@ export default {
   height: 100px;
   width: 100%;
   bottom: 0;
-  left:0;
+  left: 0;
   z-index: 3;
   position: absolute;
   backdrop-filter: blur(0px);
