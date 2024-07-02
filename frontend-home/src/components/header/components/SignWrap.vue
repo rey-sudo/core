@@ -187,7 +187,7 @@ export default {
 }
 
 .steps-item.active {
-  border: 2px solid var(--blue-c);
+  border: 1px solid var(--blue-c);
   color: var(--blue-c);
 }
 
