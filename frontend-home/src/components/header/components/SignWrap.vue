@@ -73,12 +73,12 @@ import SellerLogin from "./SellerLogin.vue";
 
 export default {
   components: {
-    SellerLogin, 
+    SellerLogin,
   },
   setup() {
     const { getSetupWallet, setupWallet } = headerAPI();
 
-    const isVisible = ref(true); 
+    const isVisible = ref(true);
 
     const activeStep = ref(0);
 
@@ -239,22 +239,26 @@ export default {
 
 .selector {
   display: flex;
+  background: var(--base-b);
+  padding: 0.25rem;
+  overflow: hidden;
+  border-radius: 12px;
 }
 
 .selector div {
-  padding: 1rem;
   padding: 1rem;
   text-align: center;
   width: 100%;
   cursor: pointer;
   font-size: var(--text-size-b);
   font-weight: 600;
-  border-bottom: 1px solid var(--border-b);
+  border-radius: 6px;
 }
 
 .selector div.active {
   padding: 1rem;
-  border-bottom: 2px solid var(--blue-c);
+  background: var(--base-a);
+  box-shadow: var(--shadow-a);
 }
 
 @media (max-width: 600px) {
