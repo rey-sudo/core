@@ -65,14 +65,14 @@
        transform="matrix(1.6350117,0,0,1.6350117,-21.888545,-22.926552)"><tspan
          x="12.943359"
          y="27.203814"
-         id="tspan4"><tspan
+         id="tspan6"><tspan
            style="font-weight:bold;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold'"
-           id="tspan1">pair</tspan><tspan
+           id="tspan2">pair</tspan><tspan
            style="font-weight:bold;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';stroke:#ffffff"
-           id="tspan3">fy</tspan></tspan></text>
+           id="tspan5">fy</tspan></tspan></text>
     <g
        id="g1"
-       transform="rotate(-15,49.609225,22.781375)"
+       transform="translate(-2.3081442,-4.7625006)"
        style="fill:#ff9a00;fill-opacity:1;stroke:#ff9a00;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1">
       <g
          id="g5"
