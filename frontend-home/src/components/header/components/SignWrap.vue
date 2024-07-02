@@ -165,7 +165,7 @@ export default {
 
 <style lang="css" scoped>
 .steps {
-  padding: 1rem 4rem;
+  padding: 1rem 2rem;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -174,8 +174,8 @@ export default {
 .steps-item {
   border: 1px solid var(--border-b);
   border-radius: 6px;
-  width: 50px;
   height: 50px;
+  padding: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -192,8 +192,7 @@ export default {
 }
 
 .steps-legend {
-  position: absolute;
-  margin-top: 90px;
+  margin-left: 1rem;
   font-size: var(--text-size-b);
   font-weight: 500;
 }
@@ -202,7 +201,7 @@ export default {
   padding: 1rem;
   border: 1px solid var(--border-b);
   border-radius: 12px;
-  margin-top: 2rem;
+  margin-top: 1rem;
   background: var(--base-b);
   line-height: 1.75rem;
   font-size: var(--text-size-b);
@@ -248,7 +247,7 @@ export default {
 
 .account {
   border-radius: 12px;
-  margin-top: 2rem;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   border: 1px solid var(--border-b);
