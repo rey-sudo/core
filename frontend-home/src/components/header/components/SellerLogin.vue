@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <Toast />
-    <div v-focustrap class="login-wrap">
+    <div v-if="!getCurrentSeller" v-focustrap class="login-wrap">
       <div class="avatar">
         <div>
           <i class="pi pi-user" />
@@ -30,6 +30,8 @@
 
       <Button type="submit" label="Login" class="button" @click="handleLogin" />
     </div>
+
+    {{ getCurrentSeller }}
   </div>
 </template>
 
@@ -43,7 +45,7 @@ export default {
     const email = ref();
     const password = ref();
 
-    const { loginSeller } = headerAPI();
+    const { loginSeller, getCurrentSeller } = headerAPI();
 
     const toast = useToast();
 
@@ -58,16 +60,15 @@ export default {
           toast.add({
             severity: "info",
             summary: "Info",
-            detail: "Message Content",
+            detail: "Successfully Logged In",
             life: 3000,
           });
         })
         .catch((err) => {
-          console.log(err);
           toast.add({
             severity: "error",
             summary: "Error Message",
-            detail: "Login Error",
+            detail: err.response.errors[0].message,
             life: 3000,
           });
         });
@@ -77,6 +78,7 @@ export default {
       handleLogin,
       email,
       password,
+      getCurrentSeller,
     };
   },
 };

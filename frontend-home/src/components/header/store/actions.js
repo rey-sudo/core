@@ -4,8 +4,6 @@ const currentSeller = async ({ commit }) => {
   try {
     const response = await axiosAPI.get("/api/seller/current-seller");
 
-    console.log(response.data);
-
     commit("currentSeller", response.data.sellerData);
 
     return { ok: true, response: response.data };
@@ -14,11 +12,11 @@ const currentSeller = async ({ commit }) => {
   }
 };
 
-const loginSeller = async (_, params) => {
+const loginSeller = async ({ commit }, params) => {
   try {
     const response = await axiosAPI.post("/api/seller/login-seller", params);
 
-    console.log(response);
+    commit("currentSeller", response.data.data);
 
     return { ok: true, response: response.data };
   } catch (error) {
