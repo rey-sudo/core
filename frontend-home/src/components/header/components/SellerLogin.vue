@@ -1,38 +1,31 @@
 <template>
-  <div class="card flex justify-content-center p-fluid">
-    <div v-focustrap class="w-full" style="max-width: 20rem">
-      <div class="field">
-        <IconField>
-          <InputIcon>
-            <i class="pi pi-user" />
-          </InputIcon>
-          <InputText
-            id="input"
-            v-model="name"
-            type="text"
-            placeholder="Name"
-            autofocus
-          />
-        </IconField>
+  <div class="login">
+    <div v-focustrap class="login-wrap">
+      <div class="avatar">
+        <div>
+          <i class="pi pi-user" />
+        </div>
       </div>
       <div class="field">
-        <IconField>
-          <InputIcon>
-            <i class="pi pi-envelope" />
-          </InputIcon>
-          <InputText
-            id="email"
-            v-model="email"
-            type="email"
-            placeholder="Email"
-          />
-        </IconField>
+        <InputText
+          id="email"
+          v-model="email"
+          type="email"
+          placeholder="Email"
+        />
       </div>
-      <div class="field-checkbox">
-        <Checkbox id="accept" v-model="accept" name="accept" value="Accept" />
-        <label for="accept">I agree to the terms and conditions.</label>
+
+      <div class="field">
+        <InputText
+          id="password"
+          v-model="name"
+          type="password"
+          placeholder="Password"
+          autofocus
+        />
       </div>
-      <Button type="submit" label="Submit" class="mt-2" />
+
+      <Button type="submit" label="Login" class="button" />
     </div>
   </div>
 </template>
@@ -51,4 +44,45 @@ export default {
 };
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+.avatar {
+  display: flex;
+  justify-content: center;
+}
+
+.avatar div {
+  background: var(--base-b);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.avatar div i {
+  font-size: var(--text-size-i);
+}
+
+.login {
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+.field {
+  margin-top: 1rem;
+}
+
+.button {
+  margin-top: 1rem;
+}
+</style>

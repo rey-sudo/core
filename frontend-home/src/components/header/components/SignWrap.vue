@@ -78,7 +78,7 @@ export default {
   setup() {
     const { getSetupWallet, setupWallet } = headerAPI();
 
-    const isVisible = ref(false);
+    const isVisible = ref(true); 
 
     const activeStep = ref(0);
 
