@@ -48,6 +48,7 @@ export default {
 .avatar {
   display: flex;
   justify-content: center;
+  margin-bottom: 1rem; 
 }
 
 .avatar div {
@@ -61,7 +62,7 @@ export default {
 }
 
 .avatar div i {
-  font-size: var(--text-size-i);
+  font-size: var(--text-size-h);
 }
 
 .login {

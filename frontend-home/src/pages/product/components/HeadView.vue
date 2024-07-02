@@ -575,6 +575,7 @@ export default {
   font-weight: 600;
   display: flex;
   align-items: baseline;
+  margin-top: 1rem;
 }
 
 .head .head-price .ada-label {

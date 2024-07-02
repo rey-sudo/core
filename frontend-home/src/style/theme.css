@@ -2015,6 +2015,7 @@
     appearance: none;
     border-radius: 4px;
     outline-color: transparent;
+    font-size: var(--text-size-b);
   }
   .p-inputtext:enabled:hover {
     border-color: #2196f3;

@@ -246,7 +246,7 @@ export default {
 }
 
 .selector div {
-  padding: 1rem;
+  padding: 0.75rem;
   text-align: center;
   width: 100%;
   cursor: pointer;
@@ -256,7 +256,7 @@ export default {
 }
 
 .selector div.active {
-  padding: 1rem;
+  font-weight: 700;
   background: var(--base-a);
   box-shadow: var(--shadow-a);
 }
