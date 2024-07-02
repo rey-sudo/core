@@ -247,6 +247,8 @@ export default {
   text-align: center;
   width: 100%;
   cursor: pointer;
+  font-size: var(--text-size-b);
+  font-weight: 600;
   border-bottom: 1px solid var(--border-b);
 }
 
