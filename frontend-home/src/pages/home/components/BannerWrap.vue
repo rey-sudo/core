@@ -8,7 +8,7 @@
       :page="0"
       :responsiveOptions="responsiveOptions"
       :showNavigators="false"
-      :showIndicators="false"
+      :showIndicators="true"
       verticalViewPortHeight="300px"
       :autoplayInterval="5000"
       circular
@@ -29,7 +29,7 @@ export default {
       {
         name: "1",
         image:
-          "https://www.asus.com/WebsitesBanner/CO/banners/rr7kwlphfplxipo6/rr7kwlphfplxipo6-0_0_desktop_0_1X.jpg",
+          "https://m.media-amazon.com/images/I/71zm8w6m4vL._SX3000_.jpg",
       },
 
       {
