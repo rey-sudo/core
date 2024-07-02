@@ -9,6 +9,7 @@
       <div class="field">
         <InputText
           id="email"
+          style=" width: 300px"
           v-model="email"
           type="email"
           placeholder="Email"
@@ -18,6 +19,7 @@
       <div class="field">
         <InputText
           id="password"
+          style=" width: 300px"
           v-model="name"
           type="password"
           placeholder="Password"
@@ -48,7 +50,7 @@ export default {
 .avatar {
   display: flex;
   justify-content: center;
-  margin-bottom: 1rem; 
+  margin-bottom: 1rem;
 }
 
 .avatar div {

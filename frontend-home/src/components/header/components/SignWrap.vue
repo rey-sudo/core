@@ -55,8 +55,18 @@
     <div class="tab-2" v-if="activeStep === 1">
       <div class="account">
         <div class="selector">
-          <div>User</div>
-          <div class="active">Seller</div>
+          <div
+            @click="selectTab('user')"
+            :class="{ active: activeTab === 'user' }"
+          >
+            User
+          </div>
+          <div
+            @click="selectTab('seller')"
+            :class="{ active: activeTab === 'seller' }"
+          >
+            Seller
+          </div>
         </div>
 
         <SellerLogin />
@@ -130,10 +140,18 @@ export default {
       enabledWallet.value = getWalletName();
     };
 
+    const activeTab = ref("seller");
+
+    const selectTab = (e) => {
+      activeTab.value = e;
+    };
+
     return {
       isVisible,
       stepsList,
+      selectTab,
       activeStep,
+      activeTab,
       enabledWallet,
       handleStep,
       wallet,
@@ -169,7 +187,7 @@ export default {
 }
 
 .steps-item.active {
-  border:2px solid var(--blue-c);
+  border: 2px solid var(--blue-c);
   color: var(--blue-c);
 }
 
@@ -250,13 +268,15 @@ export default {
   text-align: center;
   width: 100%;
   cursor: pointer;
-  font-size: var(--text-size-b);
-  font-weight: 600;
+  font-size: var(--text-size-c);
+  font-weight: 400;
   border-radius: 6px;
+  transition: 0.3s ease-in-out;
 }
 
 .selector div.active {
-  font-weight: 700;
+  font-weight: 500;
+  color: var(--blue-a);
   background: var(--base-a);
   box-shadow: var(--shadow-a);
 }

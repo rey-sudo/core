@@ -35,19 +35,19 @@ export default {
       {
         name: "2",
         image:
-          "https://www.asus.com/WebsitesBanner/CO/banners/pw8rrokxjygdtfuz/pw8rrokxjygdtfuz-0_0_desktop_0_1X.jpg",
+        "https://m.media-amazon.com/images/I/71zm8w6m4vL._SX3000_.jpg",
       },
 
       {
         name: "3",
         image:
-          "https://www.asus.com/WebsitesBanner/CO/banners/pw8rrokxjygdtfuz/pw8rrokxjygdtfuz-0_0_desktop_0_1X.jpg",
+        "https://m.media-amazon.com/images/I/71zm8w6m4vL._SX3000_.jpg",
       },
 
       {
         name: "4",
         image:
-          "https://www.asus.com/WebsitesBanner/CO/banners/rr7kwlphfplxipo6/rr7kwlphfplxipo6-0_0_desktop_0_1X.jpg",
+        "https://m.media-amazon.com/images/I/71zm8w6m4vL._SX3000_.jpg",
       },
     ]);
     const responsiveOptions = ref([
@@ -84,6 +84,8 @@ export default {
   object-fit: cover;
   width: 100%;
   position: relative;
+  object-fit: none;
+  object-position: top;
 }
 
 .banner {
