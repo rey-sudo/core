@@ -1361,21 +1361,9 @@ img {
   justify-content: center;
   padding-left: 56px;
   width: 100%;
-  background: linear-gradient(
-    to right top,
-    #339cff,
-    #1d8cf8,
-    #027cf1,
-    #006ce8,
-    #005bde,
-    #005bde,
-    #005bde,
-    #005bde,
-    #006ce8,
-    #027cf1,
-    #1d8cf8,
-    #339cff
-  );
+  background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yw/r/j5A-vbnR0dd.png');
+  background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .products-wrap {
