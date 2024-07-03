@@ -68,13 +68,8 @@
   --green-b: rgba(0, 126, 89, 1);
   --green-c: #34d399;
 
-  --green-s: rgba(39, 180, 106, 0.1);
 
-  --secondary-a: #131a22;
-  --secondary-b: #2d313c;
-  --secondary-c: #e3f1ff;
-  --secondary-d: #c7e3ff;
-  --secondary-e: #ffffff;
+
 
   --transition-a:  0.2s cubic-bezier(0.2, 0, 0, 1);
   --transition-b:  0.3s ease-in-out;

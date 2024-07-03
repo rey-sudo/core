@@ -473,27 +473,6 @@
               <div class="table-buttons">
                 <Button
                   class="table-button"
-                  icon="pi pi-receipt"
-                  outlined
-                  rounded
-                  v-tooltip.top="'Show slots'"
-                  :disabled="slotProps.data.slots_count < 1"
-                  @click="openSlotListDialog(slotProps.index)"
-                >
-                  <i class="pi pi-folder" />
-                </Button>
-
-                <Button
-                  class="table-button"
-                  icon="pi pi-plus"
-                  outlined
-                  rounded
-                  v-tooltip.top="'Enable slots'"
-                  @click="openCreateSlotDialog(slotProps.index)"
-                />
-
-                <Button
-                  class="table-button"
                   type="button"
                   icon="pi pi-ellipsis-h"
                   outlined
@@ -508,6 +487,27 @@
                   :model="productMenu"
                   :popup="true"
                 />
+
+                <Button
+                  class="table-button"
+                  icon="pi pi-plus"
+                  outlined
+                  rounded
+                  v-tooltip.top="'Enable slots'"
+                  @click="openCreateSlotDialog(slotProps.index)"
+                />
+
+                <Button
+                  class="table-button"
+                  icon="pi pi-receipt"
+                  outlined
+                  rounded
+                  v-tooltip.top="'Show slots'"
+                  :disabled="slotProps.data.slots_count < 1"
+                  @click="openSlotListDialog(slotProps.index)"
+                >
+                  <i class="pi pi-eye" />
+                </Button>
               </div>
             </template>
           </Column>
