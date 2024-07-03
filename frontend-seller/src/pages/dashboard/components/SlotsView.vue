@@ -1369,7 +1369,7 @@ export default {
 .network-analyzer span {
   margin-left: 1rem;
   font-size: var(--text-size-a);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .dialog-title {
