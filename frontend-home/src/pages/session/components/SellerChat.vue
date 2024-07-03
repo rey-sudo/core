@@ -1,12 +1,9 @@
 <template>
   <div class="chat">
     <div class="chat-top">
-      <img
-        src="https://api.dicebear.com/9.x/icons/svg?seed=cheapking700"
-        alt=""
-      />
+      <img :src="getCurrentSeller?.avatar" alt="" />
 
-      <span>CHEAPKING700</span>
+      <span>{{ getCurrentSeller?.username }}</span>
     </div>
     <div class="chat-body"></div>
     <div class="chat-bottom">3</div>
@@ -14,7 +11,17 @@
 </template>
 
 <script>
-export default {};
+import { headerAPI } from "@/components/header/composable/header-api";
+
+export default {
+  setup() {
+    const { getCurrentSeller } = headerAPI();
+
+    return {
+      getCurrentSeller,
+    };
+  },
+};
 </script>
 
 <style lang="css" scoped>

@@ -11,8 +11,8 @@
         </div>
 
         <div class="session-body-right">
-          <MiniChat />
-        </div>
+          <SellerChat />
+        </div> 
       </div>
 
       <div class="session-bottom">z</div>
@@ -23,7 +23,7 @@
 <script>
 import MainHeader from "@/components/header/MainHeader.vue";
 import TimeLine from "@/pages/session/components/TimeLine.vue";
-import MiniChat from "@/pages/session/components/MiniChat.vue";
+import SellerChat from "@/pages/session/components/SellerChat.vue";
 import SellerView from "@/pages/session/components/SellerView.vue";
 import { ref } from "vue";
 import { sessionAPI } from "@/pages/session/api";
@@ -31,7 +31,7 @@ import { sessionAPI } from "@/pages/session/api";
 export default {
   components: {
     MainHeader,
-    MiniChat,
+    SellerChat,
     TimeLine,
     SellerView,
   },

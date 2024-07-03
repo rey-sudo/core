@@ -2,7 +2,7 @@
   <div class="timeline">
     <div class="timeline-title">
       <span>Negotiation Session</span>
-      <span>ID: {{ getSlotData?.id }} </span>
+      <span>{{ getSlotData?.id }} </span>
     </div>
 
     <div class="timeline-subtitle">
