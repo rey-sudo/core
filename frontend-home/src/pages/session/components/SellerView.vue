@@ -45,16 +45,6 @@
         <div class="stepper-title">Order Information</div>
         <div class="stepper-price">
           <div>
-            <label>Total Price </label>
-            <span>{{ getSlotData?.contract_price }} ₳ </span>
-          </div>
-
-          <div>
-            <label>Total Collateral</label>
-            <span>{{ getSlotData?.contract_collateral }} ₳ </span>
-          </div>
-
-          <div>
             <label>Mode</label>
             <span>{{ getSlotData?.mode }}</span>
           </div>
@@ -62,6 +52,16 @@
           <div>
             <label>Units</label>
             <span> {{ getSlotData?.contract_units }}</span>
+          </div>
+
+          <div>
+            <label>Total Price </label>
+            <span>{{ getSlotData?.contract_price }} ₳ </span>
+          </div>
+
+          <div>
+            <label>Total Collateral</label>
+            <span>{{ getSlotData?.contract_collateral }} ₳ </span>
           </div>
         </div>
       </div>
@@ -195,7 +195,7 @@ export default {
   align-items: center;
   text-align: start;
   margin-top: 2rem;
-  max-width: 500px;
+  max-width: 600px;
 }
 
 .stepper-price div {
