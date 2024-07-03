@@ -1270,7 +1270,7 @@
     font-family: var(--font-family);
     font-feature-settings: var(--font-feature-settings, normal);
     font-size: var(--text-size-b);
-    color: var(--text-a);
+    color: var(--text-b);
     background: #ffffff;
     padding: 0.7rem;
     border: 1px solid #ced4da;
@@ -2775,7 +2775,7 @@
     padding: 1rem 1rem;
     color: var(--text-a);
     border-width: 0 0 1px 0;
-    font-weight: 600;
+    font-weight: 500;
     font-size: var(--text-size-b);
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
@@ -2832,12 +2832,12 @@
   .p-datatable .p-datatable-tbody > tr {
     background: #ffffff;
     color: var(--text-a);
-    font-weight: 400;
+    font-weight: 500;
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
   .p-datatable .p-datatable-tbody > tr > td {
     text-align: left;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-a);
     border-width: 0 0 1px 0;
     padding: 1rem;
     font-size: var(--text-size-b);
@@ -4310,8 +4310,8 @@
     background: #ffffff;
     color: var(--text-a);
     padding: 1rem;
-    border-top-right-radius: 6px;
-    border-top-left-radius: 6px;
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
   }
   .p-dialog .p-dialog-header .p-dialog-title {
     font-weight: 700;
@@ -4373,8 +4373,8 @@
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
-    border-bottom-right-radius: 6px;
-    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
   }
   .p-dialog.p-confirm-dialog .p-confirm-dialog-icon {
     font-size: 2rem;

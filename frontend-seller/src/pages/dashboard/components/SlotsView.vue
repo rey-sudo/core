@@ -272,7 +272,7 @@
                 "
                 @click="createTransaction('false', slotProps.data.id)"
               >
-                Active
+                Sign
               </Button>
 
               <Button
@@ -388,7 +388,7 @@
                 :alt="slotProps.data.image_main"
                 width="70"
                 height="70"
-                imageStyle="border-radius: 8px; object-fit: contain; border: 1px solid var(--border-a);"
+                imageStyle="border-radius: 8px; object-fit: contain; border: 1px solid var(--border-b);"
                 preview
               />
             </template>
@@ -401,7 +401,7 @@
                 style="cursor: pointer"
                 @click="copy(slotProps.data.id)"
               >
-                {{ slotProps.data.id.slice(0, 10) }}...
+                {{ slotProps.data.id }}
               </div>
             </template>
           </Column>
@@ -434,6 +434,12 @@
             </template>
           </Column>
 
+          <Column field="stock" header="Stock" sortable style="min-width: 8rem">
+            <template #body="slotProps">
+              {{ slotProps.data.stock }}
+            </template>
+          </Column>
+
           <Column field="price" header="Price" sortable style="min-width: 8rem">
             <template #body="slotProps">
               {{ formatCurrency(slotProps.data.price) }}
@@ -448,12 +454,6 @@
           >
             <template #body="slotProps">
               {{ formatCurrency(slotProps.data.collateral) }}
-            </template>
-          </Column>
-
-          <Column field="stock" header="Stock" sortable style="min-width: 8rem">
-            <template #body="slotProps">
-              {{ slotProps.data.stock }}
             </template>
           </Column>
 
@@ -490,7 +490,7 @@
 
                 <Button
                   class="table-button"
-                  icon="pi pi-plus"
+                  icon="pi pi-pencil"
                   outlined
                   rounded
                   v-tooltip.top="'Enable slots'"
@@ -1441,13 +1441,14 @@ export default {
 }
 
 .total {
-  color: var(--text-w);
+  color: var(--text-a);
   margin-top: 0rem;
   margin-bottom: 0rem;
   border-radius: 8px;
   padding: 0.75rem;
-  font-weight: 500;
-  background: var(--blue-a);
+  font-weight: 400;
+  background: var(--base-b);
+  border: 1px solid var(--border-b);
 }
 
 .total p {
@@ -1549,12 +1550,12 @@ img {
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: 3rem;
+  padding: 2%;
 }
 
 .slots-card {
   width: inherit;
-  border-radius: 6px;
+  border-radius: 12px;
   box-shadow: var(--shadow-a);
   padding: 0 2rem;
   background: var(--base-a);

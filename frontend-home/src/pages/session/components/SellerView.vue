@@ -143,7 +143,7 @@ export default {
   font-size: var(--text-size-e);
   text-align: left;
   max-width: 600px;
-  margin-left: 1rem;
+  margin-left: 2rem;
 }
 
 .stepper-product-title a {
