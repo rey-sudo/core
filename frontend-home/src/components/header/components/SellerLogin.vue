@@ -53,7 +53,6 @@
 
       <div class="profile-buttons">
         <button class="logout-button" @click="logoutSeller">
-          <span>Log Out</span>
           <i class="pi pi-sign-out" />
         </button>
       </div>
@@ -230,11 +229,10 @@ export default {
   border-radius: 4px;
   color: var(--red-a);
   display: flex;
+  justify-content: center;
   align-items: center;
   cursor: pointer;
 }
 
-.logout-button i {
-  margin-left: 0.5rem;
-}
+
 </style>
