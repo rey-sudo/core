@@ -4304,15 +4304,14 @@
     padding: 0px;
     box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.1);
     border: 0 none;
-
   }
   .p-dialog .p-dialog-header {
     border-bottom: 1px solid #dee2e6;
     background: #ffffff;
     color: var(--text-a);
     padding: 1rem;
-    border-top-right-radius: 12px;
-    border-top-left-radius: 12px;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
   }
   .p-dialog .p-dialog-header .p-dialog-title {
     font-weight: 700;
@@ -4374,8 +4373,8 @@
     display: flex;
     justify-content: flex-end;
     gap: 0.5rem;
-    border-bottom-right-radius: 12px;
-    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
   }
   .p-dialog.p-confirm-dialog .p-confirm-dialog-icon {
     font-size: 2rem;

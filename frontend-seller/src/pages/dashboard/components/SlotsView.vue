@@ -1554,11 +1554,11 @@ img {
 
 .slots-card {
   width: inherit;
-  border-radius: 18px;
+  border-radius: 6px;
   box-shadow: var(--shadow-a);
   padding: 0 2rem;
   background: var(--base-a);
-  overflow-y: hide;
+  overflow-y: hidden;
 }
 
 .product-upload {
