@@ -251,7 +251,6 @@ export default {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--border-b);
-  min-height: 600px;
 }
 
 .selector {
