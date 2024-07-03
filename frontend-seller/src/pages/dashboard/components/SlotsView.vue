@@ -485,7 +485,7 @@
 
                 <Button
                   class="table-button"
-                  icon="pi pi-pencil"
+                  icon="pi pi-plus"
                   outlined
                   rounded
                   v-tooltip.top="'Enable slots'"
@@ -1439,11 +1439,12 @@ export default {
   color: var(--text-a);
   margin-top: 0rem;
   margin-bottom: 0rem;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 1rem;
   font-weight: 400;
   background: var(--base-b);
   border: 1px solid var(--border-b);
+  margin-top: 1rem;
 }
 
 .total p {

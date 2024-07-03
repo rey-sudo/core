@@ -58,21 +58,9 @@
      inkscape:groupmode="layer"
      id="layer1"
      style="display:inline">
-    <text
-       xml:space="preserve"
-       id="text1"
-       style="font-size:14.6788px;line-height:0;letter-spacing:-0.611616px;white-space:pre;shape-inside:url(#rect1);display:inline;fill:#f2f2f2;stroke:#f2f2f2;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke markers fill"
-       transform="matrix(1.6350117,0,0,1.6350117,-21.888545,-22.926552)"><tspan
-         x="12.943359"
-         y="27.203814"
-         id="tspan6"><tspan
-           style="font-weight:bold;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold'"
-           id="tspan2">pair</tspan><tspan
-           style="font-weight:bold;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';stroke:#ffffff"
-           id="tspan5">fy</tspan></tspan></text>
     <g
        id="g1"
-       transform="translate(-2.3081442,-4.7625006)"
+       transform="translate(-2.8081442,-1.3634922)"
        style="fill:#ff9a00;fill-opacity:1;stroke:#ff9a00;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1">
       <g
          id="g5"
@@ -105,6 +93,18 @@
         </g>
       </g>
     </g>
+    <text
+       xml:space="preserve"
+       id="text1"
+       style="font-size:14.6788px;line-height:0;letter-spacing:-0.611616px;white-space:pre;shape-inside:url(#rect1);display:inline;fill:#f2f2f2;stroke:#f2f2f2;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke markers fill"
+       transform="matrix(1.6350117,0,0,1.6350117,-21.888545,-22.926552)"><tspan
+         x="12.943359"
+         y="27.203814"
+         id="tspan4"><tspan
+           style="font-weight:bold;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold'"
+           id="tspan1">pair</tspan><tspan
+           style="font-weight:bold;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';stroke:#ffffff"
+           id="tspan3">fy</tspan></tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
