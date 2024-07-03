@@ -209,7 +209,7 @@ export default {
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
   gap: 1rem;
   padding: 1rem;
   margin-top: 1rem;
@@ -219,8 +219,8 @@ export default {
   background: var(--base-b);
   border: 1px solid transparent;
   text-align: center;
-  height: 60px;
-  width: 60px;
+  height: 50px;
+  width: 50px;
   border-radius: 6px;
   cursor: pointer;
   border: 1px solid var(--border-b);
