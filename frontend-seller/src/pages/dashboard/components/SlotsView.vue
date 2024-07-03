@@ -434,11 +434,6 @@
             </template>
           </Column>
 
-          <Column field="stock" header="Stock" sortable style="min-width: 8rem">
-            <template #body="slotProps">
-              {{ slotProps.data.stock }}
-            </template>
-          </Column>
 
           <Column field="price" header="Price" sortable style="min-width: 8rem">
             <template #body="slotProps">
@@ -1445,7 +1440,7 @@ export default {
   margin-top: 0rem;
   margin-bottom: 0rem;
   border-radius: 8px;
-  padding: 0.75rem;
+  padding: 1rem;
   font-weight: 400;
   background: var(--base-b);
   border: 1px solid var(--border-b);

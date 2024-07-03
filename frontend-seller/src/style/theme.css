@@ -2776,7 +2776,7 @@
     color: var(--text-a);
     border-width: 0 0 1px 0;
     font-weight: 500;
-    font-size: var(--text-size-b);
+    font-size: var(--text-size-a);
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
   .p-datatable .p-datatable-tfoot > tr > td {
@@ -2832,7 +2832,7 @@
   .p-datatable .p-datatable-tbody > tr {
     background: #ffffff;
     color: var(--text-a);
-    font-weight: 500;
+    font-weight: 400;
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
   .p-datatable .p-datatable-tbody > tr > td {
