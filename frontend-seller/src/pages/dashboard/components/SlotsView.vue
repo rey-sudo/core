@@ -272,7 +272,7 @@
                 "
                 @click="createTransaction('false', slotProps.data.id)"
               >
-                Sign
+                Active
               </Button>
 
               <Button
@@ -288,7 +288,7 @@
                   )
                 "
               >
-                Sign
+              Active
               </Button>
 
               <Button
@@ -1028,7 +1028,7 @@ export default {
             this.$toast.add({
               severity: "error",
               summary: "Error Message",
-              detail: "Try again later.",
+              detail: "Transaction canceled.",
               life: 5000,
             });
           });
@@ -1549,7 +1549,7 @@ img {
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: 2rem;
+  padding: 3rem;
 }
 
 .slots-card {
