@@ -1,6 +1,6 @@
 <template>
   <Sidebar
-    v-model:visible="isVisible"
+    v-model:visible="displayPanel" 
     header="Setup Wallet"
     position="right"
     blockScroll
@@ -88,7 +88,7 @@ export default {
   setup() {
     const { getSetupWallet, setupWallet } = headerAPI();
 
-    const isVisible = ref(false); 
+    const displayPanel = ref(true); 
 
     const activeStep = ref(0);
 
@@ -100,7 +100,7 @@ export default {
       activeStep.value = 1;
       enabledWallet.value = getWalletName();
     } else {
-      isVisible.value = true;
+      displayPanel.value = true;
     }
 
     window.addEventListener("walletEnabledEvent", () => {
@@ -109,11 +109,11 @@ export default {
 
     watch(getSetupWallet, (newValue) => {
       if (newValue === true) {
-        isVisible.value = true;
+        displayPanel.value = true;
       }
     });
 
-    watch(isVisible, (newValue) => {
+    watch(displayPanel, (newValue) => {
       if (newValue === false) {
         setupWallet(false);
       }
@@ -147,7 +147,7 @@ export default {
     };
 
     return {
-      isVisible,
+      displayPanel,
       stepsList,
       selectTab,
       activeStep,

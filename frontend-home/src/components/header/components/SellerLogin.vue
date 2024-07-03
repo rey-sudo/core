@@ -34,10 +34,7 @@
     <div v-if="getCurrentSeller" class="profile">
       <div class="profile-description">
         <div class="profile-image">
-          <img
-            src="https://api.dicebear.com/9.x/thumbs/svg?seed=asdasdasdas"
-            alt=""
-          />
+          <img :src="getCurrentSeller.avatar" alt="" />
         </div>
         <div class="profile-name">
           <span> {{ getCurrentSeller.username }}</span>
@@ -54,7 +51,12 @@
         <span>{{ getCurrentSeller.country }}</span>
       </div>
 
-
+      <div class="profile-buttons">
+        <button class="logout-button">
+          <span>Logout</span>
+          <i class="pi pi-sign-out" />
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -86,6 +88,7 @@ export default {
             summary: "Info",
             detail: "Successfully Logged In",
             life: 3000,
+            group: "br",
           });
         })
         .catch((err) => {
@@ -130,7 +133,7 @@ export default {
 }
 
 .login {
-  height: 500px;
+  height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -154,14 +157,16 @@ export default {
 .profile {
   width: 100%;
   height: 100%;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
 }
 
 .profile-description {
-  padding: 1rem;
   border-radius: 6px;
   display: flex;
   align-items: center;
+  margin-top: 1rem;
 }
 
 .profile-image {
@@ -193,8 +198,7 @@ export default {
 .profile-item {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
-  font-size: var(--text-size-b);
+  margin-top: 1rem;
 }
 
 .profile-item span {
@@ -203,5 +207,33 @@ export default {
 
 .profile-item span:nth-child(1) {
   font-weight: 500;
+  color: var(--text-a);
+  font-size: var(--text-size-a);
+}
+
+.profile-item span:nth-child(2) {
+  font-weight: 400;
+  font-size: var(--text-size-b);
+}
+
+.profile-buttons {
+  margin-top: auto;
+  justify-content: flex-end;
+  display: flex;
+}
+
+.logout-button {
+  padding: 0.5rem;
+  border: 1px solid var(--red-a);
+  background: transparent;
+  border-radius: 4px;
+  color: var(--red-a);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logout-button i {
+  margin-left: 0.5rem;
 }
 </style>
