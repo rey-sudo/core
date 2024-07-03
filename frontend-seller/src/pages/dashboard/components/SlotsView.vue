@@ -194,7 +194,7 @@
 
     <Dialog
       v-model:visible="slotListDialogVisible"
-      :style="{ width: '90vw' }"
+      :style="{ width: '70vw' }"
       maximizable
       modal
       :draggable="false"
@@ -217,7 +217,7 @@
         scrollHeight="flex"
         tableStyle="min-width: 50rem;"
       >
-        <Column field="created_at" header="Date" sortable>
+        <Column field="created_at" header="Date" sortable style="max-width: 10rem;" >
           <template #body="slotProps">
             {{ formatDate(slotProps.data.created_at) }}
           </template>
