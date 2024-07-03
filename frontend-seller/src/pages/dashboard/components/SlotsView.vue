@@ -233,6 +233,8 @@
           </template>
         </Column>
 
+        <Column field="contract_units" header="Units" sortable></Column>
+
         <Column field="contract_price" header="Price" sortable>
           <template #body="slotProps">
             {{ formatCurrency(slotProps.data.contract_price) }}
@@ -245,47 +247,12 @@
           </template>
         </Column>
 
-        <Column field="contract_units" header="Units" sortable></Column>
-
-        <Column
-          field="contract_state"
-          header="State"
-          style="min-width: 8rem"
-          sortable
-        >
+        <Column :exportable="false" header="Actions">
           <template #body="slotProps">
-            <div class="column-block">
-              <ProgressBar
-                :value="getStateBarValue(slotProps.data.contract_state)"
-                :showValue="false"
-              />
-            </div>
-          </template>
-        </Column>
-
-        <Column field="actived" header="Actived" sortable>
-          <template #body="slotProps">
-            <div class="switch-group">
-              <InputSwitch
-                v-tooltip.top="
-                  'Generate the transaction to send to the network.'
-                "
-                :disabled="slotProps.data.actived === 1 || activeSlotLoader"
-                :modelValue="slotProps.data.actived === 1"
-                @change="
-                  (e) =>
-                    createTransaction(
-                      e.target.ariaChecked,
-                      slotProps.data.id,
-                      null
-                    )
-                "
-              />
-
-              <span
-                v-if="slotProps.data.contract_0_utx || activeSlotLoader"
-                :class="{ disabled: activeSlotLoader }"
-                v-tooltip.top="'⚠ Warning. Click to resend the transaction.'"
+            <div class="table-buttons">
+              <Button
+                class="switch-button table-button actived"
+                v-if="slotProps.data.contract_0_tx"
                 @click="
                   createTransaction(
                     'true',
@@ -294,17 +261,36 @@
                   )
                 "
               >
-                <i v-if="activeSlotLoader" class="pi pi-spin pi-spinner" />
+                Actived
+              </Button>
 
-                <i v-if="!activeSlotLoader" class="pi pi-replay" />
-              </span>
-            </div>
-          </template>
-        </Column>
+              <Button
+                class="switch-button table-button"
+                v-if="
+                  !slotProps.data.contract_0_utx &&
+                  !slotProps.data.contract_0_tx
+                "
+                @click="createTransaction('false', slotProps.data.id)"
+              >
+                Sign
+              </Button>
 
-        <Column :exportable="false" header="Actions">
-          <template #body="slotProps">
-            <div class="table-buttons">
+              <Button
+                class="switch-button table-button"
+                v-if="
+                  slotProps.data.contract_0_utx && !slotProps.data.contract_0_tx
+                "
+                @click="
+                  createTransaction(
+                    'true',
+                    slotProps.data.id,
+                    slotProps.data.contract_0_utx
+                  )
+                "
+              >
+                Sign
+              </Button>
+
               <Button
                 class="table-button"
                 type="button"
@@ -328,7 +314,7 @@
                 v-tooltip.top="'Show the negotiation session.'"
                 outlined
                 rounded
-                @click="openSessionPage(slotProps.data.id)" 
+                @click="openSessionPage(slotProps.data.id)"
               />
             </div>
           </template>
@@ -749,7 +735,7 @@ export default {
     return {
       mediaHostURL: HOST + "/api/media/create-image",
       createSlotLoader: false,
-      activeSlotLoader: false,
+      activedLoader: false,
       createSlotDialogVisible: false,
       createSlotIndex: null,
       deleteProductDialog: false,
@@ -1013,7 +999,7 @@ export default {
       window.open(internalUrl, "_blank");
     },
     async createTransaction(actived, slotId, utx) {
-      this.activeSlotLoader = true;
+      this.activedLoader = true;
 
       if (actived === "false") {
         const addr = await this.getLucid.wallet.address();
@@ -1068,7 +1054,7 @@ export default {
           });
       }
 
-      this.activeSlotLoader = false;
+      this.activedLoader = false;
     },
     getStateBarValue(e) {
       return e * 20;
@@ -1334,6 +1320,24 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.switch-button {
+  background: var(--blue-c);
+  font-size: var(--text-size-b);
+  color: var(--text-w);
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100px;
+  justify-content: center;
+}
+
+.switch-button.actived {
+  background: var(--green-a);
+  border: 1px solid var(--green-a);
+  pointer-events: none;
+}
+
 ::v-deep(.p-progressbar) {
   height: 0.4rem;
 }
