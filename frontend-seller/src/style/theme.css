@@ -1996,7 +1996,7 @@
     padding: 0.6rem 1rem;
     font-size: 1rem;
     transition: 0.1s cubic-bezier(0.08, 0.52, 0.52, 1);
-    border-radius: 8px;
+    border-radius: 6px;
     font-weight: 600;
     outline-color: transparent;
     font-size: var(--text-size-a);
@@ -2108,7 +2108,7 @@
     margin: 0;
   }
   .p-button.p-button-icon-only.p-button-rounded {
-    border-radius: 8px;
+    border-radius: 6px;
     height: 2.357rem;
   }
   .p-button.p-button-sm {

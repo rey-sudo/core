@@ -606,7 +606,6 @@ export default {
 .head .head-button.buyButton {
   margin-top: 2rem;
   color: var(--blue-a);
-  border: 1px solid transparent;
   background: var(--blue-s);
 }
 

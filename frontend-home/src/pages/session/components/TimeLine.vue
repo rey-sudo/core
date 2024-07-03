@@ -179,12 +179,12 @@ export default {
 
 .timeline-title span:nth-child(1) {
   font-size: var(--text-size-f);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .timeline-title span:nth-child(2) {
   font-size: var(--text-size-e);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .timeline-body {

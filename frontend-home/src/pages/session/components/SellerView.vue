@@ -46,12 +46,12 @@
         <div class="stepper-price">
           <div>
             <label>Total Price </label>
-            <span>{{ getSlotData?.contract_price }} ADA</span>
+            <span>{{ getSlotData?.contract_price }} ₳ </span>
           </div>
 
           <div>
             <label>Total Collateral</label>
-            <span>{{ getSlotData?.contract_collateral }} ADA</span>
+            <span>{{ getSlotData?.contract_collateral }} ₳ </span>
           </div>
 
           <div>
@@ -119,7 +119,7 @@ export default {
 .sku,
 .model {
   color: var(--text-b);
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
 }
 .stepper-product {
   display: flex;
@@ -181,9 +181,9 @@ export default {
 }
 
 .stepper-title {
-  font-size: var(--text-size-e);
+  font-size: var(--text-size-f);
   text-align: start;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .stepper {
@@ -195,7 +195,7 @@ export default {
   align-items: center;
   text-align: start;
   margin-top: 2rem;
-  max-width: 600px;
+  max-width: 500px;
 }
 
 .stepper-price div {
