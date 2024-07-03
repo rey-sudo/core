@@ -473,6 +473,27 @@
               <div class="table-buttons">
                 <Button
                   class="table-button"
+                  icon="pi pi-receipt"
+                  outlined
+                  rounded
+                  v-tooltip.top="'Show slots'"
+                  :disabled="slotProps.data.slots_count < 1"
+                  @click="openSlotListDialog(slotProps.index)"
+                >
+                  <i class="pi pi-folder" />
+                </Button>
+
+                <Button
+                  class="table-button"
+                  icon="pi pi-plus"
+                  outlined
+                  rounded
+                  v-tooltip.top="'Enable slots'"
+                  @click="openCreateSlotDialog(slotProps.index)"
+                />
+
+                <Button
+                  class="table-button"
                   type="button"
                   icon="pi pi-ellipsis-h"
                   outlined
@@ -487,24 +508,6 @@
                   :model="productMenu"
                   :popup="true"
                 />
-                <Button
-                  class="table-button"
-                  icon="pi pi-plus"
-                  outlined
-                  rounded
-                  v-tooltip.top="'Enable slots'"
-                  @click="openCreateSlotDialog(slotProps.index)"
-                />
-                <Button
-                  class="table-button"
-                  icon="pi pi-receipt"
-                  outlined
-                  rounded
-                  :disabled="slotProps.data.slots_count < 1"
-                  @click="openSlotListDialog(slotProps.index)"
-                >
-                  <i class="pi pi-folder" />
-                </Button>
               </div>
             </template>
           </Column>
@@ -1322,11 +1325,11 @@ export default {
 <style lang="css" scoped>
 .switch-button {
   background: var(--blue-c);
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
   color: var(--text-w);
   padding: 0.5rem;
   border-radius: 6px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   width: 100px;
   justify-content: center;
@@ -1444,7 +1447,7 @@ export default {
   border-radius: 8px;
   padding: 0.75rem;
   font-weight: 500;
-  background: black;
+  background: var(--blue-a);
 }
 
 .total p {
