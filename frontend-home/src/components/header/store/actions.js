@@ -24,6 +24,18 @@ const loginSeller = async ({ commit }, params) => {
   }
 };
 
+const logoutSeller = async ({ commit }, params) => {
+  try {
+    const response = await axiosAPI.get("/api/seller/logout", params);
+
+    commit("currentSeller", null);
+
+    return { ok: true, response: response.data };
+  } catch (error) {
+    throw { ok: false, response: error.response.data };
+  }
+};
+
 const setupWallet = async ({ commit }, params) => {
   commit("setupWallet", params);
 };
@@ -32,4 +44,4 @@ const connectWallet = async ({ commit }, params) => {
   console.log(params);
   commit("connectWallet", params);
 };
-export { connectWallet, currentSeller, loginSeller, setupWallet };
+export { connectWallet, currentSeller, loginSeller, setupWallet, logoutSeller };

@@ -52,8 +52,8 @@
       </div>
 
       <div class="profile-buttons">
-        <button class="logout-button">
-          <span>Logout</span>
+        <button class="logout-button" @click="logoutSeller">
+          <span>Log Out</span>
           <i class="pi pi-sign-out" />
         </button>
       </div>
@@ -68,10 +68,10 @@ import { useToast } from "primevue/usetoast";
 
 export default {
   setup() {
-    const email = ref();
+    const email = ref(); 
     const password = ref();
 
-    const { loginSeller, getCurrentSeller } = headerAPI();
+    const { loginSeller, getCurrentSeller, logoutSeller } = headerAPI();
 
     const toast = useToast();
 
@@ -104,6 +104,7 @@ export default {
     return {
       handleLogin,
       email,
+      logoutSeller,
       password,
       getCurrentSeller,
     };
@@ -133,7 +134,7 @@ export default {
 }
 
 .login {
-  height: 600px;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
