@@ -124,9 +124,7 @@ export default {
   min-height: 100vh;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
-  background: var(--base-b);
-
-  background: linear-gradient(180deg,  var(--primary-c) 0%, var(--base-b) 10%);
+  background: linear-gradient(180deg,  var(--primary-c) 0%, var(--base-c) 10%);
 }
 
 .grid-item {
