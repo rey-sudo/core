@@ -15,17 +15,19 @@ export default {
     const { currentSeller } = headerAPI();
     const { startWalletService, stopWalletService } = walletClient();
 
+    currentSeller()
+      .then(() => console.info("SELLER_LOGGED"))
+      .catch((err) => console.error(err));
+
+    startWalletService()
+      .then(() => console.info("WALLET_SERVICE"))
+      .catch((err) => console.error(err));
+
     return {
       currentSeller,
       stopWalletService,
       startWalletService,
     };
-  },
-
-  mounted() {
-    this.currentSeller().catch((err) => console.error(err));
-
-    this.startWalletService();
   },
 
   beforeUnmount() {

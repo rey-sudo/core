@@ -160,7 +160,7 @@ export default {
         detail: "Transaction canceled.",
         life: 5000,
       };
-
+/* eslint-disable */
       if (actived === "false") {
         const addr = await this.getLucid.wallet.address();
         const address = await getAddressDetails(addr);
