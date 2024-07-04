@@ -28,7 +28,7 @@
      inkscape:document-units="px"
      showgrid="false"
      inkscape:zoom="14.217421"
-     inkscape:cx="43.432631"
+     inkscape:cx="43.502967"
      inkscape:cy="12.414347"
      inkscape:window-width="1920"
      inkscape:window-height="1043"
@@ -60,7 +60,7 @@
      style="display:inline">
     <g
        id="g1"
-       transform="translate(-2.8081442,-1.3634922)"
+       transform="rotate(-0.0042407,-17759.268,42013.575)"
        style="fill:#ff9a00;fill-opacity:1;stroke:#ff9a00;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1">
       <g
          id="g5"
@@ -100,11 +100,11 @@
        transform="matrix(1.6350117,0,0,1.6350117,-21.888545,-22.926552)"><tspan
          x="12.943359"
          y="27.203814"
-         id="tspan4"><tspan
+         id="tspan6"><tspan
            style="font-weight:bold;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold'"
-           id="tspan1">pair</tspan><tspan
+           id="tspan2">pair</tspan><tspan
            style="font-weight:bold;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';stroke:#ffffff"
-           id="tspan3">fy</tspan></tspan></text>
+           id="tspan5">fy</tspan></tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
