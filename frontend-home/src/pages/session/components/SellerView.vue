@@ -97,7 +97,7 @@
             v-if="!getSlotData?.contract_0_utx && !getSlotData?.contract_0_tx"
             @click="createTransaction('false', getSlotData?.id)"
           >
-            Sign Tx
+            Sign Tx1
           </Button>
 
           <Button
@@ -111,7 +111,7 @@
               )
             "
           >
-            Sign Tx
+            Sign Tx2
           </Button>
         </div>
       </div>
