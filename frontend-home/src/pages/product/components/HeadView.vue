@@ -587,10 +587,10 @@ export default {
 }
 
 .head .head-button {
-  border: 1px solid var(--primary-b);
+  border: 1px solid var(--primary-c);
   width: 90%;
   border-radius: 4px;
-  color: var(--text-a);
+  color: var(--text-w);
   font-weight: 600;
   cursor: pointer;
   display: flex;
@@ -600,16 +600,14 @@ export default {
   text-align: center;
   margin-top: 1rem;
   transition: var(--transition-a);
-  background: var(--primary-b);
+  background: var(--primary-c);
 }
 
 .head .head-button.buyButton {
   margin-top: 2rem;
-  color: var(--text-a);
 }
 
 .head .head-button:hover {
-  color: var(--text-w);
   opacity: 0.9;
 }
 
