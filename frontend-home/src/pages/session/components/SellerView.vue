@@ -121,14 +121,15 @@
 import { sessionAPI } from "@/pages/session/api";
 import { useToast } from "primevue/usetoast";
 import { headerAPI } from "@/components/header/composable/header-api";
-import { balanceTx } from "@/api/wallet-api";
+import { balanceTx, lucidClient } from "@/api/wallet-api";
 import { getAddressDetails } from "lucid-cardano";
+import { walletClient } from "@/api/wallet-api";
 
 export default {
   setup() {
-    const { getLucid, startTx } = headerAPI();
+    const { startTx } = headerAPI();
 
-    const { getSlotData } = sessionAPI();
+    const { getSlotData, startEndpoint } = sessionAPI();
 
     const toast = useToast();
 
@@ -143,8 +144,8 @@ export default {
 
     return {
       getSlotData,
+      startEndpoint,
       showMessage,
-      getLucid,
       startTx,
     };
   },
@@ -169,9 +170,20 @@ export default {
       const a = document.createElement("a");
       const url = URL.createObjectURL(blob);
       a.href = url;
-      a.download = "data.csv";
+
+      const date = new Date();
+      const day = String(date.getDate()).padStart(2, "0");
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const year = date.getFullYear();
+      const hours = date.getHours().toString().padStart(2, "0");
+      const minutes = date.getMinutes().toString().padStart(2, "0");
+
+      const dated = `${month}-${day}-${year}-${hours}-${minutes}`;
+
+      a.download = `transaction-${this.getSlotData?.id}-${dated}.csv`;
 
       document.body.appendChild(a);
+
       a.click();
 
       document.body.removeChild(a);
@@ -180,7 +192,10 @@ export default {
       return txHash;
     },
     async createTransaction(actived, slotId, utx) {
-      console.log(actived, slotId, utx);
+      const { getClient } = walletClient();
+
+      lucidClient.selectWallet(getClient());
+
       this.isLoading = true;
 
       const successMessage = {
@@ -198,10 +213,8 @@ export default {
       };
 
       if (actived === "false") {
-        const addr = await this.getLucid.wallet.address();
+        const addr = await lucidClient.wallet.address();
         const address = await getAddressDetails(addr);
-
-        console.log(address, this.getLucid);
 
         await this.startEndpoint({
           slot_id: slotId,

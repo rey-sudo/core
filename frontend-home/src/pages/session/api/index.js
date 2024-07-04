@@ -7,8 +7,12 @@ const sessionAPI = () => {
   const getSlot = async (params) =>
     await store.dispatch("session/getSlot", params);
 
+  const startEndpoint = async (params) =>
+    await store.dispatch("session/startEndpoint", params);
+
   return {
     getSlot,
+    startEndpoint,
     getSlotData: computed(() => store.getters["session/getSlotData"]),
   };
 };

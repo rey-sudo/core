@@ -2,9 +2,13 @@ import { Wallet } from "@cardano-foundation/cardano-connect-with-wallet-core";
 
 import * as CardanoWasm from "@emurgo/cardano-serialization-lib-browser";
 
+import { Lucid } from "lucid-cardano";
+
 const Buffer = require("buffer/").Buffer;
 
 let THEWALLET = null;
+
+const lucidClient = await Lucid.new();
 
 const walletEnabledEvent = new CustomEvent("walletEnabledEvent", {
   detail: {
@@ -18,7 +22,11 @@ const walletClient = () => {
     stopWalletService,
     connect,
     reconnect,
+    getClient,
   };
+};
+const getClient = () => {
+  return THEWALLET;
 };
 
 const connect = async (walletName) => {
@@ -258,4 +266,4 @@ const fromHexString = (hexString) =>
 
 //const toHexString = (uint8) => Array.from(uint8).map(i2hex).join("");
 
-export { walletClient, CardanoWasm, balanceTx };
+export { walletClient, CardanoWasm, balanceTx, lucidClient };

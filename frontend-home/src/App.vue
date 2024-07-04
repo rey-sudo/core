@@ -7,13 +7,13 @@
 <script>
 import { headerAPI } from "@/components/header/composable/header-api";
 import { walletClient } from "@/api/wallet-api";
-import { Lucid } from "lucid-cardano";
+
 
 export default {
   name: "App",
 
   setup() {
-    const { currentSeller, setupLucid } = headerAPI();
+    const { currentSeller } = headerAPI();
     const { startWalletService, stopWalletService } = walletClient();
 
     currentSeller()
@@ -24,9 +24,6 @@ export default {
       .then(() => console.info("WALLET_SERVICE"))
       .catch((err) => console.error(err));
 
-    setupLucid(Lucid.new())
-      .then(() => console.info("LUCID_SERVICE"))
-      .catch((err) => console.error(err));
 
     return {
       currentSeller,

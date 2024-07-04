@@ -13,7 +13,6 @@ const getSlot = async ({ commit }, params) => {
 };
 
 
-
 const startEndpoint = async (_, params) => {
   try {
     const response = await axiosAPI.post("/api/gate/start-endpoint", params);
