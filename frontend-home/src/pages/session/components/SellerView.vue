@@ -122,9 +122,14 @@
 <script>
 import { sessionAPI } from "@/pages/session/api";
 import { useToast } from "primevue/usetoast";
+import { headerAPI } from "@/components/header/composable/header-api";
+import { balanceTx } from "@/api/wallet-api";
+import { getAddressDetails } from "lucid-cardano";
 
 export default {
   setup() {
+    const { getLucid, startTx } = headerAPI();
+
     const { getSlotData } = sessionAPI();
 
     const toast = useToast();
@@ -141,6 +146,8 @@ export default {
     return {
       getSlotData,
       showMessage,
+      getLucid,
+      startTx
     };
   },
   methods: {
@@ -160,7 +167,7 @@ export default {
         detail: "Transaction canceled.",
         life: 5000,
       };
-/* eslint-disable */
+
       if (actived === "false") {
         const addr = await this.getLucid.wallet.address();
         const address = await getAddressDetails(addr);

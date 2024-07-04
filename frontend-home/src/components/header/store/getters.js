@@ -6,4 +6,8 @@ const getSetupWallet = (state) => {
   return state.displaySetupWallet;
 };
 
-export { getCurrentSeller, getSetupWallet };
+const getLucid = (state) => {
+  return state.lucidClient;
+};
+
+export { getCurrentSeller, getSetupWallet, getLucid };

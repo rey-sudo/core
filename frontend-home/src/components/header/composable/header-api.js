@@ -19,14 +19,19 @@ const headerAPI = () => {
   const logoutSeller = async (params) =>
     await store.dispatch("header/logoutSeller", params);
 
+  const setupLucid = async (data) =>
+    await store.dispatch("header/setupLucid", data);
+
   return {
     currentSeller,
     setupWallet,
     loginSeller,
     logoutSeller,
+    setupLucid,
     connectWallet,
     getCurrentSeller: computed(() => store.getters["header/getCurrentSeller"]),
     getSetupWallet: computed(() => store.getters["header/getSetupWallet"]),
+    getLucid: computed(() => store.getters["header/getLucid"]),
   };
 };
 

@@ -3,4 +3,5 @@ export default () => ({
   displaySetupWallet: false,
   walletConnected: false,
   walletName: null,
+  lucidClient: null,
 });
