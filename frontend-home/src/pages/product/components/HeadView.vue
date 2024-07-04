@@ -610,6 +610,7 @@ export default {
 
 .head .head-button:hover {
   color: var(--text-w);
+  opacity: 0.9;
 }
 
 @media only screen and (max-width: 767px) {
