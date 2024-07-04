@@ -18,8 +18,8 @@
   --black-b: #192f45;
 
   --primary-a: #131921;
-  --primary-b: #ff9a00;
-  --primary-c: #0098fa;
+  --primary-b: #FEBA3E;
+  --primary-c: #0099FF;
 
   --base-a: #ffffff;
   --base-b: #f5f5f7;
@@ -27,10 +27,17 @@
   --base-d: #131921;
   --base-e: #232f3e;
 
-  --blue-a: #0098fa;
-  --blue-b: #0098fa; /* 16% */
-  --blue-c: #0098fa;
-  --blue-t: #0098fa;
+  /* 
+#131921
+#0099FF
+#192F45
+#FEBA3E
+*/
+
+  --blue-a: #0099FF;
+  --blue-b: #0099FF;
+  --blue-c: #0099FF;
+  --blue-t: #0099FF;
   --blue-s: rgba(0, 152, 250, 0.1);
 
   --gradient-a: linear-gradient(
@@ -56,7 +63,7 @@
   --orange-s: rgba(255, 92, 56, 0.1);
 
   --yellow-a: #fff200;
-  --yellow-b: #ff9a00;
+  --yellow-b: #FEBA3E;
   --yellow-s: rgba(255, 242, 0, 0.1);
 
   --palette-a: #131921;
