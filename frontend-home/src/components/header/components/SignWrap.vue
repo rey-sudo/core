@@ -1,6 +1,6 @@
 <template>
   <Sidebar
-    v-model:visible="displayPanel" 
+    v-model:visible="displayPanel"
     header="Setup Wallet"
     position="right"
     blockScroll
@@ -87,7 +87,7 @@ export default {
   setup() {
     const { getSetupWallet, setupWallet } = headerAPI();
 
-    const displayPanel = ref(true); 
+    const displayPanel = ref(false);
 
     const activeStep = ref(0);
 

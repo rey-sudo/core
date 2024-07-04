@@ -22,11 +22,14 @@ const headerAPI = () => {
   const setupLucid = async (data) =>
     await store.dispatch("header/setupLucid", data);
 
+  const startTx = async (data) => await store.dispatch("header/startTx", data);
+
   return {
     currentSeller,
     setupWallet,
     loginSeller,
     logoutSeller,
+    startTx,
     setupLucid,
     connectWallet,
     getCurrentSeller: computed(() => store.getters["header/getCurrentSeller"]),

@@ -79,7 +79,7 @@
       <div class="stepper-body">
         <div class="stepper-buttons">
           <Button
-            class="switch-button table-button actived"
+            class="actived"
             v-if="getSlotData?.contract_0_tx"
             @click="
               createTransaction(
@@ -93,7 +93,6 @@
           </Button>
 
           <Button
-            class="switch-button table-button"
             v-if="!getSlotData?.contract_0_utx && !getSlotData?.contract_0_tx"
             @click="createTransaction('false', getSlotData?.id)"
           >
@@ -101,7 +100,6 @@
           </Button>
 
           <Button
-            class="switch-button table-button"
             v-if="getSlotData?.contract_0_utx && !getSlotData?.contract_0_tx"
             @click="
               createTransaction(
@@ -147,11 +145,42 @@ export default {
       getSlotData,
       showMessage,
       getLucid,
-      startTx
+      startTx,
     };
   },
   methods: {
+    downloadTx(txHash) {
+      const data = [
+        ["SlotId", this.getSlotData?.id],
+        ["Product", this.getSlotData?.product_details.product_name],
+        ["ProductId", this.getSlotData?.product_details.product_id],
+        ["Mode", this.getSlotData?.mode],
+        ["Units", this.getSlotData?.contract_units],
+        ["Price", this.getSlotData?.contract_price],
+        ["Collateral", this.getSlotData?.contract_collateral],
+        ["SlotDate", this.getSlotData?.created_at],
+        ["ContractTx0", txHash],
+      ];
+
+      const csvContent = data.map((row) => row.join(",")).join("\n");
+
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+
+      const a = document.createElement("a");
+      const url = URL.createObjectURL(blob);
+      a.href = url;
+      a.download = "data.csv";
+
+      document.body.appendChild(a);
+      a.click();
+
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      return txHash;
+    },
     async createTransaction(actived, slotId, utx) {
+      console.log(actived, slotId, utx);
       this.isLoading = true;
 
       const successMessage = {
@@ -172,6 +201,8 @@ export default {
         const addr = await this.getLucid.wallet.address();
         const address = await getAddressDetails(addr);
 
+        console.log(address, this.getLucid);
+
         await this.startEndpoint({
           slot_id: slotId,
           seller_pubkeyhash: address.paymentCredential.hash,
@@ -184,7 +215,8 @@ export default {
 
       if (actived === "true") {
         await balanceTx(utx)
-          .then((txHash) => this.startTx({ tx_hash: txHash, slot_id: slotId }))
+          .then((hash) => this.downloadTx(hash))
+          .then((hash) => this.startTx({ tx_hash: hash, slot_id: slotId }))
           .then(() => this.showMessage(successMessage))
           .catch(() => this.showMessage(errorMessage));
       }
@@ -212,6 +244,12 @@ export default {
   cursor: pointer;
 }
 
+.stepper-buttons button.actived {
+  background: var(--green-a);
+  border: 1px solid var(--green-a);
+  pointer-events: none;
+}
+
 .sku,
 .model {
   color: var(--text-b);
@@ -225,8 +263,8 @@ export default {
 }
 
 .stepper-product-image {
-  width: 100px;
-  height: 100px;
+  width: 125px;
+  height: 125px;
   object-fit: contain;
   border-radius: 6px;
   background: var(--base-a);
