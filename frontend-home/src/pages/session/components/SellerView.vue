@@ -1,5 +1,6 @@
 <template>
   <div class="stepper">
+    <Toast />
     <div class="stepper-row">
       <div class="stepper-column">
         <div>1</div>
@@ -77,9 +78,41 @@
       </div>
       <div class="stepper-body">
         <div class="stepper-buttons">
-          <button v-if="getSlotData?.contract_stage === 'inactive'">
+          <Button
+            class="switch-button table-button actived"
+            v-if="getSlotData?.contract_0_tx"
+            @click="
+              createTransaction(
+                'true',
+                getSlotData?.id,
+                getSlotData?.contract_0_utx
+              )
+            "
+          >
+            Actived
+          </Button>
+
+          <Button
+            class="switch-button table-button"
+            v-if="!getSlotData?.contract_0_utx && !getSlotData?.contract_0_tx"
+            @click="createTransaction('false', getSlotData?.id)"
+          >
             Sign Tx
-          </button>
+          </Button>
+
+          <Button
+            class="switch-button table-button"
+            v-if="getSlotData?.contract_0_utx && !getSlotData?.contract_0_tx"
+            @click="
+              createTransaction(
+                'true',
+                getSlotData?.id,
+                getSlotData?.contract_0_utx
+              )
+            "
+          >
+            Sign Tx
+          </Button>
         </div>
       </div>
     </div>
@@ -88,14 +121,69 @@
 
 <script>
 import { sessionAPI } from "@/pages/session/api";
+import { useToast } from "primevue/usetoast";
 
 export default {
   setup() {
     const { getSlotData } = sessionAPI();
 
+    const toast = useToast();
+
+    const showMessage = ({ severity, summary, detail, life }) => {
+      toast.add({
+        severity,
+        summary,
+        detail,
+        life,
+      });
+    };
+
     return {
       getSlotData,
+      showMessage,
     };
+  },
+  methods: {
+    async createTransaction(actived, slotId, utx) {
+      this.isLoading = true;
+
+      const successMessage = {
+        severity: "success",
+        summary: "Successful",
+        detail: "Transaction sent to the network.",
+        life: 5000,
+      };
+
+      const errorMessage = {
+        severity: "error",
+        summary: "Error Message",
+        detail: "Transaction canceled.",
+        life: 5000,
+      };
+
+      if (actived === "false") {
+        const addr = await this.getLucid.wallet.address();
+        const address = await getAddressDetails(addr);
+
+        await this.startEndpoint({
+          slot_id: slotId,
+          seller_pubkeyhash: address.paymentCredential.hash,
+        })
+          .then((res) => balanceTx(res.response.payload.transaction))
+          .then((txHash) => this.startTx({ tx_hash: txHash, slot_id: slotId }))
+          .then(() => this.showMessage(successMessage))
+          .catch(() => this.showMessage(errorMessage));
+      }
+
+      if (actived === "true") {
+        await balanceTx(utx)
+          .then((txHash) => this.startTx({ tx_hash: txHash, slot_id: slotId }))
+          .then(() => this.showMessage(successMessage))
+          .catch(() => this.showMessage(errorMessage));
+      }
+
+      this.isLoading = false;
+    },
   },
 };
 </script>
