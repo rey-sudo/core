@@ -1329,7 +1329,7 @@ export default {
   color: var(--text-w);
   padding: 0.5rem;
   border-radius: 6px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   width: 100px;
   justify-content: center;
