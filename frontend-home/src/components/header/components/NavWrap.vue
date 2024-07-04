@@ -165,14 +165,14 @@ export default {
 }
 
 .nav .nav-column .nav-body div {
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
   white-space: nowrap;
   cursor: pointer;
   padding: 0.75rem;
   font-weight: inherit;
   color: inherit;
   background: transparent;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .nav .nav-column .nav-body div:nth-child(1) {

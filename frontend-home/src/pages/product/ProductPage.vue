@@ -130,7 +130,7 @@ export default {
   mounted() {
     this.scrollTop();
 
-   // this.setupLucid();
+    // this.setupLucid();
 
     //this.setupWallet();
   },
@@ -153,7 +153,7 @@ export default {
 
 .product-body-top {
   min-height: 150vh;
-  margin-top: 75px;
+  margin-top: calc(40px + 2rem);
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;

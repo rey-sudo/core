@@ -98,7 +98,7 @@ export default {
   background-size: contain;
   display: flex;
   flex-direction: column;
-  margin-top: 44px;
+  margin-top: 41px;
   padding: 0 10%;
 }
 
