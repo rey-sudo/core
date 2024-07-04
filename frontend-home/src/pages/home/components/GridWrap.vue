@@ -74,7 +74,6 @@ export default {
 ::v-deep(.p-rating-icon) {
   width: var(--text-size-a);
   height: var(--text-size-a);
-  color: var(--yellow-b);
 }
 
 .card-body-rating {
@@ -86,7 +85,7 @@ export default {
 .card-body-rating span {
   font-size: var(--text-size-a);
   margin-left: 0.5rem;
-  color: var(--blue-a);
+  color: var(--primary-c);
 }
 
 .card-body-collateral {
@@ -127,7 +126,7 @@ export default {
   border-top-right-radius: 0px;
   background: var(--base-b);
 
-  background: linear-gradient(180deg,  var(--blue-a) 0%, var(--base-b) 10%);
+  background: linear-gradient(180deg,  var(--primary-c) 0%, var(--base-b) 10%);
 }
 
 .grid-item {
