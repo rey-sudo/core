@@ -278,7 +278,7 @@
                 "
                 @click="createTransaction('false', slotProps.data.id)"
               >
-                Sign
+                Sign Tx
               </Button>
 
               <Button
@@ -294,7 +294,7 @@
                   )
                 "
               >
-                Sign
+                Sign Tx
               </Button>
 
               <Button
@@ -332,7 +332,7 @@
     </Dialog>
     <Toast />
     <!---//////////////////////////////////////////////////////CONTENT////////////////////////////-->
-    
+
     <div class="slots-wrap">
       <div class="slots-card">
         <DataTable

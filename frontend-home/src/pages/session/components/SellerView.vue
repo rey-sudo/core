@@ -78,7 +78,7 @@
       <div class="stepper-body">
         <div class="stepper-buttons">
           <button v-if="getSlotData?.contract_stage === 'inactive'">
-            Active
+            Sign Tx
           </button>
         </div>
       </div>
@@ -108,6 +108,7 @@ export default {
 .stepper-buttons button {
   border: 1px solid var(--primary-b);
   background: var(--primary-b);
+  font-size: var(--text-size-b);
   padding: 0.5rem 1rem;
   font-weight: 600;
   color: var(--text-w);

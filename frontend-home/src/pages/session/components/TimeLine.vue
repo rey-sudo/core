@@ -45,7 +45,7 @@
       <span>0</span>
     </div>
 
-    <div class="timeline-note">Deploy the script to the blockchain</div>
+    <div class="timeline-note">Press the sign button to deploy the script</div>
   </div>
 </template>
 
