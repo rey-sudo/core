@@ -4314,7 +4314,7 @@
     border-top-left-radius: 12px;
   }
   .p-dialog .p-dialog-header .p-dialog-title {
-    font-weight: 700;
+    font-weight: 600;
     font-size: var(--text-size-e);
   }
   .p-dialog .p-dialog-header .p-dialog-header-icon {

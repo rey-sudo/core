@@ -1578,7 +1578,7 @@ img {
 .field-label {
   line-height: 40px;
   color: var(--text-a);
-  font-weight: 600;
+  font-weight: 500;
   display: flex;
   align-items: center;
 }
@@ -1594,7 +1594,7 @@ img {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--border-a);
-  padding: 0.5rem 0;
+  padding: 1rem 0;
 }
 
 .slots-header-left {
