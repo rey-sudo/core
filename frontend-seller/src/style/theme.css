@@ -1277,7 +1277,7 @@
     transition: background-color 0.2s, color 0.2s, border-color 0.2s,
       box-shadow 0.2s;
     appearance: none;
-    border-radius: 8px;
+    border-radius: 4px;
     outline-color: transparent;
   }
   .p-inputtext:enabled:hover {
@@ -1996,7 +1996,7 @@
     padding: 0.6rem 1rem;
     font-size: 1rem;
     transition: 0.1s cubic-bezier(0.08, 0.52, 0.52, 1);
-    border-radius: 6px;
+    border-radius: 4px;
     font-weight: 600;
     outline-color: transparent;
     font-size: var(--text-size-a);

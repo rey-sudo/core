@@ -84,7 +84,7 @@
 
         <div class="createslot-wrap" v-if="!createSlotLoader">
           <div class="total">
-            <p>Total orders {{ computedSlots }}</p>
+            <p>Total Slots {{ computedSlots }}</p>
             <p>Stock = {{ productList[createSlotIndex].stock }}</p>
             <p>Units = {{ computedUnits }}</p>
             <p>Collateral = {{ computedCollateral }}</p>
@@ -197,6 +197,7 @@
       :style="{ width: '70vw' }"
       maximizable
       modal
+      dismissableMask
       :draggable="false"
       :contentStyle="{ height: '80vw' }"
     >
@@ -217,7 +218,12 @@
         scrollHeight="flex"
         tableStyle="min-width: 50rem;"
       >
-        <Column field="created_at" header="Date" sortable style="max-width: 10rem;" >
+        <Column
+          field="created_at"
+          header="Date"
+          sortable
+          style="max-width: 10rem"
+        >
           <template #body="slotProps">
             {{ formatDate(slotProps.data.created_at) }}
           </template>
@@ -288,7 +294,7 @@
                   )
                 "
               >
-              Active
+                Sign
               </Button>
 
               <Button
@@ -433,7 +439,6 @@
               {{ slotProps.data.category }}
             </template>
           </Column>
-
 
           <Column field="price" header="Price" sortable style="min-width: 8rem">
             <template #body="slotProps">
@@ -1320,7 +1325,7 @@ export default {
 <style lang="css" scoped>
 .switch-button {
   background: var(--blue-c);
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
   color: var(--text-w);
   padding: 0.5rem;
   border-radius: 6px;
@@ -1453,7 +1458,7 @@ export default {
 
 .total p:nth-child(1) {
   font-size: var(--text-size-e);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .product-image-main {
@@ -1537,9 +1542,9 @@ img {
   justify-content: center;
   padding-left: 56px;
   width: 100%;
-  background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yw/r/j5A-vbnR0dd.png');
+  background-image: url("https://static.xx.fbcdn.net/rsrc.php/v3/yw/r/j5A-vbnR0dd.png");
   background-repeat: no-repeat;
-    background-size: cover;
+  background-size: cover;
 }
 
 .slots-wrap {
@@ -1578,9 +1583,10 @@ img {
 .field-label {
   line-height: 40px;
   color: var(--text-a);
-  font-weight: 500;
+  font-weight: 400;
   display: flex;
   align-items: center;
+  font-size: var(--text-size-b);
 }
 
 .field-label i {
