@@ -186,8 +186,8 @@ export default {
 }
 
 .steps-item.active {
-  border: 1px solid var(--blue-c);
-  color: var(--blue-c);
+  border: 1px solid var(--primary-b);
+  color: var(--primary-b);
 }
 
 .steps-legend {
@@ -230,7 +230,7 @@ export default {
 }
 
 .grid-item:hover {
-  border: 1px solid var(--blue-c);
+  border: 1px solid var(--primary-b);
 }
 .grid-item img {
   width: 34px;
@@ -238,7 +238,7 @@ export default {
 }
 
 .grid-item.active {
-  border: 1px solid var(--blue-c);
+  border: 1px solid var(--primary-b);
 }
 
 .tab-1 {
@@ -273,7 +273,7 @@ export default {
 
 .selector div.active {
   font-weight: 500;
-  color: var(--blue-a);
+  color: var(--primary-b);
   background: var(--base-a);
   box-shadow: var(--shadow-a);
 }

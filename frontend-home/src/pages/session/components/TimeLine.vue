@@ -129,7 +129,7 @@ export default {
 }
 
 .transaction button:hover {
-  color: var(--blue-c);
+  color: var(--primary-c);
 }
 
 .transaction span {

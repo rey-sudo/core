@@ -106,8 +106,8 @@ export default {
 }
 
 .stepper-buttons button {
-  border: 1px solid var(--blue-c);
-  background: var(--blue-c);
+  border: 1px solid var(--primary-b);
+  background: var(--primary-b);
   padding: 0.5rem 1rem;
   font-weight: 600;
   color: var(--text-w);
@@ -164,7 +164,7 @@ export default {
   width: 40px;
   height: 40px;
   min-height: 40px;
-  background: var(--blue-c);
+  background: var(--primary-b);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -177,7 +177,7 @@ export default {
 .stepper-column span {
   width: 2px;
   height: 100%;
-  background: var(--blue-c);
+  background: var(--primary-b);
 }
 
 .stepper-title {

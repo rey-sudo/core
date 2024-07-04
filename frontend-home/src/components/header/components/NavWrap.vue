@@ -121,13 +121,6 @@ export default {
   box-shadow: var(--shadow-b);
 }
 
-.nav.main {
-  color: var(--text-w);
-  background: var(--blue-c);
-  font-weight: 600;
-  border-bottom: 1px solid transparent;
-}
-
 .nav.hide {
   display: none;
 }
