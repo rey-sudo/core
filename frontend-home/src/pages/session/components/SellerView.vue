@@ -47,12 +47,12 @@
         <div class="stepper-price">
           <div>
             <label>Total Price </label>
-            <span>{{ getSlotData?.contract_price }} ₳ </span>
+            <span>{{ getSlotData?.contract_price }} ADA </span>
           </div>
 
           <div>
             <label>Total Collateral</label>
-            <span>{{ getSlotData?.contract_collateral }} ₳ </span>
+            <span>{{ getSlotData?.contract_collateral }} ADA </span>
           </div>
 
           <div>
@@ -211,7 +211,7 @@ export default {
 
 .stepper-price div span {
   line-height: 3rem;
-  font-size: var(--text-size-e);
+  font-size: var(--text-size-d);
   color: var(--text-a);
   white-space: nowrap;
   text-transform: capitalize;
