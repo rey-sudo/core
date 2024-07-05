@@ -75,6 +75,8 @@
         <div>3</div>
       </div>
       <div class="stepper-body">
+        <div class="stepper-title">Action</div>
+        <div class="stepper-subtitle">Sign and send the transaction</div>
         <WaitingButton
           v-if="
             getSlotData?.contract_stage === 'inactive' ||
@@ -106,6 +108,12 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.stepper-subtitle {
+  font-size: var(--text-size-b);
+  text-align: left;
+  margin-top: 0.5rem;
+}
+
 .sku,
 .model {
   color: var(--text-b);
@@ -131,7 +139,7 @@ export default {
 }
 
 .stepper-product-title {
-  font-size: var(--text-size-e);
+  font-size: var(--text-size-d);
   text-align: left;
   max-width: 600px;
   margin-left: 2rem;

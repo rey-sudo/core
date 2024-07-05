@@ -1,5 +1,7 @@
 <template>
   <div class="stepper-buttons">
+
+
     <Button
       class="actived"
       v-if="getSlotData?.contract_0_tx"
@@ -158,6 +160,7 @@ export default {
 <style lang="css" scoped>
 .stepper-buttons {
   display: flex;
+  margin-top: 1rem;
 }
 
 .stepper-buttons button {
@@ -177,4 +180,6 @@ export default {
   border: 1px solid var(--green-a);
   pointer-events: none;
 }
+
+
 </style>
