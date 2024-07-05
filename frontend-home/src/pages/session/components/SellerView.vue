@@ -38,7 +38,7 @@
 
     <!--///-->
     <div class="stepper-row">
-      <div class="stepper-column">
+      <div class="stepper-column ">
         <div>2</div>
         <span></span>
       </div>
@@ -68,12 +68,10 @@
       </div>
     </div>
 
-    <!--///-->
-
-    <!--///-->
+    <!--///////////////////////////////////////////////////////////////7-->
 
     <div class="stepper-row">
-      <div class="stepper-column">
+      <div class="stepper-column  ">
         <div>3</div>
       </div>
       <div class="stepper-body">
@@ -271,6 +269,7 @@ export default {
   color: var(--text-b);
   font-size: var(--text-size-b);
 }
+
 .stepper-product {
   display: flex;
   align-items: center;
@@ -310,6 +309,10 @@ export default {
   align-items: center;
 }
 
+.stepper-column.short {
+  height: 200px;
+}
+
 .stepper-column div {
   width: 40px;
   height: 40px;
@@ -331,13 +334,13 @@ export default {
 }
 
 .stepper-title {
-  font-size: var(--text-size-f);
+  font-size: var(--text-size-e);
   text-align: start;
   font-weight: 500;
 }
 
 .stepper {
-  background: var(--base-a);
+  background: var(--base-a); padding: 1rem;
 }
 
 .stepper-price {
@@ -346,6 +349,10 @@ export default {
   text-align: start;
   margin-top: 2rem;
   max-width: 600px;
+  background: var(--base-b);
+  padding: 1rem;
+  border-radius: 16px;
+  border: 1px solid var(--border-b);
 }
 
 .stepper-price div {

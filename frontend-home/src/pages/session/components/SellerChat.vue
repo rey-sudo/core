@@ -6,7 +6,7 @@
       <span>{{ getCurrentSeller?.username }}</span>
     </div>
     <div class="chat-body"></div>
-    <div class="chat-bottom">3</div>
+    <div class="chat-bottom"></div>
   </div>
 </template>
 
