@@ -2,7 +2,7 @@
   <div class="waiting">
     <!--//////////////////////////////////////////////////////////////////////-->
     <template v-if="getSlotData?.contract_0_tx">
-      <div class="subtitle">Sign and send the transaction</div>
+      <div class="subtitle">The transaction has been sent to the network</div>
 
       <Button
         class="actived"
@@ -21,14 +21,14 @@
     <template
       v-if="!getSlotData?.contract_0_utx && !getSlotData?.contract_0_tx"
     >
-      <div class="subtitle">Sign and send the transaction</div>
+      <div class="subtitle">Press to activate the script on the network</div>
       <Button @click="createTransaction('false', getSlotData?.id)">
         Sign Tx1
       </Button>
     </template>
     <!--//////////////////////////////////////////////////////////////////////-->
     <template v-if="getSlotData?.contract_0_utx && !getSlotData?.contract_0_tx">
-      <div class="subtitle">Sign and send the transaction</div>
+      <div class="subtitle">Press to activate the script on the network</div>
       <Button
         @click="
           createTransaction(
@@ -194,8 +194,8 @@ export default {
 }
 
 .waiting button.actived {
-  background: var(--green-a);
-  border: 1px solid var(--green-a);
+  background: var(--primary-c);
+  border: 1px solid var(--primary-c);
   pointer-events: none;
 }
 

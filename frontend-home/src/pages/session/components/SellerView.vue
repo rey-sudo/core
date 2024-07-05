@@ -38,7 +38,7 @@
 
     <!--///-->
     <div class="stepper-row">
-      <div class="stepper-column">
+      <div class="stepper-column short">
         <div>2</div>
         <span></span>
       </div>
@@ -145,7 +145,7 @@ export default {
 }
 
 .stepper-column {
-  width: 100px;
+  width: calc(40px + 2rem);
   height: 250px;
   display: flex;
   justify-content: flex-start;

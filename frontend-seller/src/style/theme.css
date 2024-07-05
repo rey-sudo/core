@@ -4345,7 +4345,7 @@
   .p-dialog .p-dialog-content {
     background: #ffffff;
     color: var(--text-b);
-    padding: 1.75rem 1rem;
+    padding: 1rem;
     font-size: var(--text-size-b);
   }
 

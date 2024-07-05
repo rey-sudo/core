@@ -1259,7 +1259,7 @@ export default {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  height: 60vh;
+ 
 }
 
 .createslot-wrap {
@@ -1274,7 +1274,7 @@ export default {
   padding: 1rem;
   font-weight: 400;
   background: var(--base-b);
-  margin-top: 1rem;
+  border: 1px solid var(--border-b);
 }
 
 .total p {
