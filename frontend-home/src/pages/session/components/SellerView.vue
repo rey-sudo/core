@@ -135,6 +135,7 @@ export default {
   text-align: left;
   max-width: 600px;
   margin-left: 2rem;
+  line-height: 2rem;
 }
 
 .stepper-product-title a {
