@@ -71,7 +71,7 @@
     <!--///////////////////////////////////////////////////////////////7-->
 
     <div class="stepper-row">
-      <div class="stepper-column  ">
+      <div class="stepper-column">
         <div>3</div>
       </div>
       <div class="stepper-body">
@@ -340,7 +340,8 @@ export default {
 }
 
 .stepper {
-  background: var(--base-a); padding: 1rem;
+  background: var(--base-a);
+  padding: 1rem;
 }
 
 .stepper-price {
@@ -349,10 +350,8 @@ export default {
   text-align: start;
   margin-top: 2rem;
   max-width: 600px;
-
   padding: 1rem;
   border-radius: 16px;
-
 }
 
 .stepper-price div {
