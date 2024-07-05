@@ -45,7 +45,7 @@
       <span>0</span>
     </div>
 
-    <div class="timeline-note">Press the sign button to deploy the script</div>
+    <div class="timeline-note">Perform the action before the deadline.</div>
   </div>
 </template>
 
@@ -163,15 +163,20 @@ export default {
 .timeline-timer {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   line-height: 2rem;
   font-weight: 700;
+  font-size: var(--text-size-b);
 }
 
 .timeline-timer span {
-  background: var(--primary-c);
+  background: var(--black-a);
   border-radius: 6px;
-  padding: 0.25rem 0.75rem;
+  width: 30px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 0.25rem;
   color: var(--text-w);
   border: none;
@@ -187,8 +192,6 @@ export default {
   font-weight: 500;
 }
 
-.timeline-body {
-}
 
 .timeline-note {
   padding: 1rem;
