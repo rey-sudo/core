@@ -108,8 +108,6 @@
           <div @click="buyProduct">Buy now</div>
         </div>
 
-
-
         <div class="head-seller">
           <div class="head-seller-head">
             <img
@@ -136,7 +134,7 @@
             </div>
 
             <div class="head-seller-badge">
-              <i class="pi pi-arrow-right-arrow-left" />
+              <i class="pi pi-thumbs-up" />
               <span> Good communication. </span>
               <ul class="meter">
                 <li />
