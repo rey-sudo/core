@@ -1,6 +1,6 @@
 <template>
   <div class="stepper-buttons">
-
+    <div class="stepper-subtitle">Sign and send the transaction</div>
 
     <Button
       class="actived"
@@ -160,7 +160,7 @@ export default {
 <style lang="css" scoped>
 .stepper-buttons {
   display: flex;
-  margin-top: 1rem;
+  flex-direction: column;
 }
 
 .stepper-buttons button {
@@ -168,11 +168,14 @@ export default {
   background: var(--primary-c);
   font-size: var(--text-size-b);
   padding: 0.5rem 1rem;
+  width: 100px;
+  justify-content: center;
   font-weight: 600;
   color: var(--text-w);
   margin-right: 1rem;
   border-radius: 4px;
   cursor: pointer;
+  margin-top: 1rem;
 }
 
 .stepper-buttons button.actived {
@@ -181,5 +184,9 @@ export default {
   pointer-events: none;
 }
 
-
+.stepper-subtitle {
+  font-size: var(--text-size-b);
+  text-align: left;
+  margin-top: 0.5rem;
+}
 </style>

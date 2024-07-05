@@ -43,18 +43,8 @@
         <span></span>
       </div>
       <div class="stepper-body">
-        <div class="stepper-title">Order Information</div>
+        <div class="stepper-title">Information</div>
         <div class="stepper-price">
-          <div>
-            <label>Mode</label>
-            <span>{{ getSlotData?.mode }}</span>
-          </div>
-
-          <div>
-            <label>Units</label>
-            <span> {{ getSlotData?.contract_units }}</span>
-          </div>
-
           <div>
             <label>Total Price </label>
             <span>{{ getSlotData?.contract_price }} ₳ </span>
@@ -63,6 +53,16 @@
           <div>
             <label>Total Collateral</label>
             <span>{{ getSlotData?.contract_collateral }} ₳ </span>
+          </div>
+
+          <div>
+            <label>Mode</label>
+            <span>{{ getSlotData?.mode }}</span>
+          </div>
+
+          <div>
+            <label>Units</label>
+            <span> {{ getSlotData?.contract_units }}</span>
           </div>
         </div>
       </div>
@@ -76,7 +76,6 @@
       </div>
       <div class="stepper-body">
         <div class="stepper-title">Action</div>
-        <div class="stepper-subtitle">Sign and send the transaction</div>
         <WaitingButton
           v-if="
             getSlotData?.contract_stage === 'inactive' ||
@@ -108,12 +107,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.stepper-subtitle {
-  font-size: var(--text-size-b);
-  text-align: left;
-  margin-top: 0.5rem;
-}
-
 .sku,
 .model {
   color: var(--text-b);
@@ -200,8 +193,7 @@ export default {
   align-items: center;
   text-align: start;
   margin-top: 2rem;
-  max-width: 600px;
-  padding: 1rem;
+  max-width: 500px;
   border-radius: 16px;
 }
 
