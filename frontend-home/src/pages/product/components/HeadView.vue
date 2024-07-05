@@ -173,7 +173,7 @@ export default {
         label: "Collateral 500 ADA",
         color: "var(--primary-c)",
         value: 30,
-        icon: "pi pi-crown",
+        icon: "pi pi-money-bill",
       },
       {
         label: "Treasury discount",
@@ -185,7 +185,7 @@ export default {
         label: "Protected purchase",
         color: "var(--primary-c)",
         value: 100,
-        icon: "pi pi-shopping-bag",
+        icon: "pi pi-shopping-cart",
       },
     ]);
 
