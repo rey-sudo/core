@@ -650,7 +650,7 @@ export default {
             icon: "",
           },
           {
-            label: "Delete",
+            label: "Import Tx",
             icon: "",
           },
           {

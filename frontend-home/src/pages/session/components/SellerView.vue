@@ -221,6 +221,7 @@ export default {
           seller_pubkeyhash: address.paymentCredential.hash,
         })
           .then((res) => balanceTx(res.response.payload.transaction))
+          .then((hash) => this.downloadTx(hash))
           .then((txHash) => this.startTx({ tx_hash: txHash, slot_id: slotId }))
           .then(() => this.showMessage(successMessage))
           .catch(() => this.showMessage(errorMessage));
@@ -276,12 +277,12 @@ export default {
 }
 
 .stepper-product-image {
-  width: 125px;
-  height: 125px;
+  width: 100px;
+  height: 100px;
   object-fit: contain;
   border-radius: 6px;
   background: var(--base-a);
-  border: 1px solid var(--border-a);
+  border: 1px solid var(--border-b);
   padding: 0.5rem;
   overflow: hidden;
 }
