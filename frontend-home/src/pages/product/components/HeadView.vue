@@ -108,6 +108,8 @@
           <div @click="buyProduct">Buy now</div>
         </div>
 
+
+
         <div class="head-seller">
           <div class="head-seller-head">
             <img
@@ -416,7 +418,7 @@ export default {
 }
 
 .head-icons {
-  width: 90%;
+  width: 100%;
   margin-top: 2rem;
 }
 

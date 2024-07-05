@@ -1274,7 +1274,6 @@ export default {
   padding: 1rem;
   font-weight: 400;
   background: var(--base-b);
-  border: 1px solid var(--border-b);
   margin-top: 1rem;
 }
 
