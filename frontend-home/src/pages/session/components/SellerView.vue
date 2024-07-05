@@ -192,9 +192,9 @@ export default {
       return txHash;
     },
     async createTransaction(actived, slotId, utx) {
-      const { getClient } = walletClient();
+      const { getWallet } = walletClient();
 
-      lucidClient.selectWallet(getClient());
+      lucidClient.selectWallet(getWallet());
 
       this.isLoading = true;
 
@@ -216,10 +216,12 @@ export default {
         const addr = await lucidClient.wallet.address();
         const address = await getAddressDetails(addr);
 
-        await this.startEndpoint({
+        const params = {
           slot_id: slotId,
           seller_pubkeyhash: address.paymentCredential.hash,
-        })
+        };
+
+        await this.startEndpoint(params)
           .then((res) => balanceTx(res.response.payload.transaction))
           .then((hash) => this.downloadTx(hash))
           .then((txHash) => this.startTx({ tx_hash: txHash, slot_id: slotId }))

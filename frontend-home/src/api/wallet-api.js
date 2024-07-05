@@ -22,10 +22,10 @@ const walletClient = () => {
     stopWalletService,
     connect,
     reconnect,
-    getClient,
+    getWallet,
   };
 };
-const getClient = () => {
+const getWallet = () => {
   return THEWALLET;
 };
 
