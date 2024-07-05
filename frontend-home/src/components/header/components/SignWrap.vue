@@ -233,8 +233,8 @@ export default {
   border: 1px solid var(--primary-c);
 }
 .grid-item img {
-  width: 34px;
-  height: 34px;
+  width: 24px;
+  height: 24px;
 }
 
 .grid-item.active {
