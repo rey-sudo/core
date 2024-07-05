@@ -1,32 +1,47 @@
 <template>
-  <div class="stepper-buttons">
-    <div class="stepper-subtitle">Sign and send the transaction</div>
+  <div class="waiting">
+    <!--//////////////////////////////////////////////////////////////////////-->
+    <template v-if="getSlotData?.contract_0_tx">
+      <div class="subtitle">Sign and send the transaction</div>
 
-    <Button
-      class="actived"
-      v-if="getSlotData?.contract_0_tx"
-      @click="
-        createTransaction('true', getSlotData?.id, getSlotData?.contract_0_utx)
-      "
-    >
-      Actived
-    </Button>
-
-    <Button
+      <Button
+        class="actived"
+        @click="
+          createTransaction(
+            'true',
+            getSlotData?.id,
+            getSlotData?.contract_0_utx
+          )
+        "
+      >
+        Actived
+      </Button>
+    </template>
+    <!--//////////////////////////////////////////////////////////////////////-->
+    <template
       v-if="!getSlotData?.contract_0_utx && !getSlotData?.contract_0_tx"
-      @click="createTransaction('false', getSlotData?.id)"
     >
-      Sign Tx1
-    </Button>
-
-    <Button
-      v-if="getSlotData?.contract_0_utx && !getSlotData?.contract_0_tx"
-      @click="
-        createTransaction('true', getSlotData?.id, getSlotData?.contract_0_utx)
-      "
-    >
-      Sign Tx2
-    </Button>
+      <div class="subtitle">Sign and send the transaction</div>
+      <Button @click="createTransaction('false', getSlotData?.id)">
+        Sign Tx1
+      </Button>
+    </template>
+    <!--//////////////////////////////////////////////////////////////////////-->
+    <template v-if="getSlotData?.contract_0_utx && !getSlotData?.contract_0_tx">
+      <div class="subtitle">Sign and send the transaction</div>
+      <Button
+        @click="
+          createTransaction(
+            'true',
+            getSlotData?.id,
+            getSlotData?.contract_0_utx
+          )
+        "
+      >
+        Sign Tx2
+      </Button>
+    </template>
+    <!--//////////////////////////////////////////////////////////////////////-->
   </div>
 </template>
 
@@ -158,12 +173,12 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.stepper-buttons {
+.waiting {
   display: flex;
   flex-direction: column;
 }
 
-.stepper-buttons button {
+.waiting button {
   border: 1px solid var(--primary-c);
   background: var(--primary-c);
   font-size: var(--text-size-b);
@@ -178,13 +193,13 @@ export default {
   margin-top: 1rem;
 }
 
-.stepper-buttons button.actived {
+.waiting button.actived {
   background: var(--green-a);
   border: 1px solid var(--green-a);
   pointer-events: none;
 }
 
-.stepper-subtitle {
+.subtitle {
   font-size: var(--text-size-b);
   text-align: left;
   margin-top: 0.5rem;
