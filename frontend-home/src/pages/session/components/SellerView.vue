@@ -38,7 +38,7 @@
 
     <!--///-->
     <div class="stepper-row">
-      <div class="stepper-column ">
+      <div class="stepper-column">
         <div>2</div>
         <span></span>
       </div>

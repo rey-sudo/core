@@ -66,7 +66,7 @@ export default {
   width: 100%;
   display: flex;
   align-items: flex-start;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .session-body-left {
