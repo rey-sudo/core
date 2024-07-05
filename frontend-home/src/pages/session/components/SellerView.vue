@@ -254,7 +254,7 @@ export default {
   font-weight: 600;
   color: var(--text-w);
   margin-right: 1rem;
-  border-radius: 6px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
@@ -349,10 +349,10 @@ export default {
   text-align: start;
   margin-top: 2rem;
   max-width: 600px;
-  background: var(--base-b);
+
   padding: 1rem;
   border-radius: 16px;
-  border: 1px solid var(--border-b);
+
 }
 
 .stepper-price div {
