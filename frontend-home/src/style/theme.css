@@ -10610,8 +10610,9 @@
 
   .p-metergroup-label-text {
     font-size: var(--text-size-a);
-    color: var(--text-b);
+    color: var(--text-a);
   }
+  
   .p-metergroup .p-metergroup-meter {
     border: 0 none;
     background: #2196f3;

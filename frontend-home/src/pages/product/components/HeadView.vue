@@ -171,19 +171,19 @@ export default {
     const collateralBar = ref([
       {
         label: "Collateral 500 ADA",
-        color: "var(--primary-c)",
+        color: "var(--primary-a)",
         value: 30,
         icon: "pi pi-money-bill",
       },
       {
         label: "Treasury discount",
-        color: "var(--primary-c)",
+        color: "var(--primary-a)",
         value: 15,
         icon: "pi pi-building-columns",
       },
       {
         label: "Protected purchase",
-        color: "var(--primary-c)",
+        color: "var(--primary-a)",
         value: 100,
         icon: "pi pi-shopping-cart",
       },
@@ -587,7 +587,7 @@ export default {
 }
 
 .head .head-button {
-  border: 1px solid var(--primary-c);
+  border: 1px solid var(--primary-a);
   width: 90%;
   border-radius: 4px;
   color: var(--text-w);
@@ -600,7 +600,7 @@ export default {
   text-align: center;
   margin-top: 1rem;
   transition: var(--transition-a);
-  background: var(--primary-c);
+  background: var(--primary-a);
 }
 
 .head .head-button.buyButton {
