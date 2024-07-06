@@ -45,7 +45,7 @@ export default {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--primary-c);
+  background: var(--primary-a);
 }
 
 @media only screen and (max-width: 767px) {
