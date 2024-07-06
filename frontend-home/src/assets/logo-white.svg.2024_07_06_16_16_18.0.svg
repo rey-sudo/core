@@ -65,37 +65,40 @@
      id="layer1"
      style="display:inline">
     <g
+       id="g5"
+       transform="rotate(-45.004241,70.916098,-6.2000421)"
+       style="fill:#feba3e;fill-opacity:1;stroke:#feba3e;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers">
+      <circle
+         cx="61.201664"
+         cy="10.372748"
+         r="1.2016636"
+         id="circle1"
+         style="fill:#feba3e;fill-opacity:1;stroke:#feba3e;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers" />
+      <path
+         d="m 69.994218,35.451299 a 0.60083181,0.60083181 0 0 1 -0.426591,-0.174242 l -6.4289,-6.434908 A 1.2016636,1.2016636 0 0 1 62.784236,27.994976 V 23.434662 A 1.2016636,1.2016636 0 0 1 63.9859,22.232998 h 4.560313 a 1.2016636,1.2016636 0 0 1 0.847173,0.354491 l 6.434909,6.428901 a 0.60083181,0.60083181 0 0 1 0,0.853181 l -5.407487,5.407486 a 0.60083181,0.60083181 0 0 1 -0.42659,0.174242 z M 63.9859,23.434662 v 4.560314 l 6.008318,6.008318 4.560313,-4.560313 -6.008318,-6.008319 z"
+         id="path1"
+         style="fill:#feba3e;fill-opacity:1;stroke:#feba3e;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers" />
+    </g>
+    <g
        id="g3-3"
-       transform="rotate(33.977342,32.8704,-26.342194)"
+       transform="rotate(-165.00424,35.303771,7.8498005)"
        style="display:inline;fill:#feba3e;fill-opacity:1;stroke:#feba3e;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1">
       <g
          id="g4-6"
          transform="rotate(-90,64.097533,11.204224)"
          style="fill:#feba3e;fill-opacity:1;stroke:#feba3e;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1">
-        <g
+        <path
+           d="m 66.308613,-12.554717 v 0 c 3.548966,0 6.425972,4.162201 6.425973,7.7111672 h 1.285196 c 0,-4.2587602 -3.452408,-7.7111682 -7.711169,-7.7111672 z"
            id="path1-6-7"
-           style="fill:#feba3e;fill-opacity:1">
-          <path
-             style="color:#000000;stroke:none;-inkscape-stroke:none;fill:#feba3e;fill-opacity:1"
-             d="m 66.308613,-12.554717 v 0 c 3.548966,0 6.425972,4.162201 6.425973,7.7111672 h 1.285196 c 0,-4.2587602 -3.452408,-7.7111682 -7.711169,-7.7111672 z"
-             id="path1" />
-          <path
-             style="color:#000000;stroke:none;-inkscape-stroke:none;fill:#feba3e;fill-opacity:1"
-             d="m 66.308594,-12.804688 v 0.5 c 1.676748,0 3.218738,0.988853 4.347656,2.429688 1.128918,1.4408345 1.828125,3.3243236 1.828125,5.03125 v 0.25 h 1.785156 v -0.25 c 0,-4.3938659 -3.567071,-7.960939 -7.960937,-7.960938 z m 3.351562,1.384766 c 2.339164,1.197453 3.961467,3.5394418 4.058594,6.326172 H 72.9375 c -0.06275,-1.7693639 -0.745534,-3.6308603 -1.888672,-5.089844 -0.392695,-0.501196 -0.903434,-0.851946 -1.388672,-1.236328 z"
-             id="path2" />
-        </g>
+           style="fill:#feba3e;fill-opacity:1;stroke:#feba3e;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+           sodipodi:nodetypes="ccccc" />
       </g>
     </g>
     <text
        xml:space="preserve"
        id="text3"
-       style="font-weight:bold;font-size:21.3333px;line-height:0;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';letter-spacing:-1px;white-space:pre;shape-inside:url(#rect3);display:inline;fill:#f2f2f2;fill-opacity:1;stroke:#feba3e;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-       transform="translate(-5.1508928,8.0981203)"><tspan
-         x="11.236328"
-         y="13.25848"
-         id="tspan3">pa<tspan
-   style="fill:#feba3e"
-   id="tspan2">i</tspan>rfy</tspan></text>
+       style="font-weight:bold;font-size:21.3333px;line-height:0;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';letter-spacing:-1px;white-space:pre;shape-inside:url(#rect3);fill:#f2f2f2;fill-opacity:1;stroke:#feba3e;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       transform="translate(-5.1508928,8.0981203)">pairfy</text>
   </g>
   <g
      inkscape:groupmode="layer"
