@@ -112,7 +112,7 @@ export default {
   z-index: 3;
   position: absolute;
   backdrop-filter: blur(0px);
-  background: linear-gradient(180deg, transparent 0%, var(--primary-c) 100%);
+  background: linear-gradient(180deg, transparent 0%, var(--primary-a) 100%);
 }
 
 .banner-screen {

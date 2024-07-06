@@ -85,7 +85,7 @@ export default {
 .card-body-rating span {
   font-size: var(--text-size-a);
   margin-left: 0.5rem;
-  color: var(--primary-c);
+  color: var(--primary-a);
 }
 
 .card-body-collateral {
@@ -124,7 +124,7 @@ export default {
   min-height: 100vh;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
-  background: linear-gradient(180deg,  var(--primary-c) 0%, var(--base-c) 10%);
+  background: linear-gradient(180deg,  var(--primary-a) 0%, var(--base-c) 10%);
 }
 
 .grid-item {

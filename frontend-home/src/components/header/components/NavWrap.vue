@@ -114,7 +114,7 @@ export default {
   left: 0;
   width: 100%;
   align-items: center;
-  background: var(--primary-c);
+  background: var(--primary-a);
   color: var(--text-w);
   font-weight: 500;
   border-top: 1px solid transparent;
