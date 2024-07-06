@@ -68,7 +68,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
     );
 
     if (products.length === 0) {
-      throw new Error("NOT_PRODUCT");
+      throw new BadRequestError("NO_PRODUCT");
     }
 
     const PRODUCT = products[0];
@@ -107,8 +107,6 @@ const createSlotHandler = async (req: Request, res: Response) => {
       scheme.product_discount = 0;
     }
 
-    console.log(scheme);
-
     ///////////////////////////////
 
     const schemeData = `
@@ -128,46 +126,47 @@ const createSlotHandler = async (req: Request, res: Response) => {
       schema_v
      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
-    Array.from({ length: scheme.iterations }).forEach(async (_, i) => {
-      const contractInstance = await API.post(
-        "/api/contract/activate",
-        instanceScheme
-      )
-        .then((res) => {
+    console.log(scheme);
+
+    for (let i = 0; i < scheme.iterations; i++) {
+      try {
+        console.log(i);
+
+        const contractInstance = await API.post(
+          "/api/contract/activate",
+          instanceScheme
+        ).then((res) => {
           assert.ok(res.data.hasOwnProperty("unContractInstanceId"));
           return res.data.unContractInstanceId;
-        })
-        .catch(() => {
-          throw new Error("CID_FAILED");
         });
 
-      const schemeValue = [
-        "S" + getSlotId(),
-        scheme.mode,
-        SELLER.id,
-        contractInstance,
-        params.wallet_id,
-        scheme.iteration_units,
-        scheme.iteration_price,
-        scheme.iteration_collateral,
-        PRODUCT.id,
-        PRODUCT.price,
-        PRODUCT.collateral,
-        scheme.product_discount,
-        0,
-      ];
+        const schemeValue = [
+          "S" + getSlotId(),
+          scheme.mode,
+          SELLER.id,
+          contractInstance,
+          params.wallet_id,
+          scheme.iteration_units,
+          scheme.iteration_price,
+          scheme.iteration_collateral,
+          PRODUCT.id,
+          PRODUCT.price,
+          PRODUCT.collateral,
+          scheme.product_discount,
+          0,
+        ];
 
-      console.log(schemeValue);
-      await connection.execute(schemeData, schemeValue);
-    });
+        await connection.execute(schemeData, schemeValue);
+      } catch (err) {
+        throw new BadRequestError("CID_FAILED");
+      }
+    }
 
     await connection.commit();
 
     res.status(200).send({ success: true });
   } catch (err: any) {
     await connection.rollback();
-
-    throw new BadRequestError(err.message);
   } finally {
     connection.release();
   }

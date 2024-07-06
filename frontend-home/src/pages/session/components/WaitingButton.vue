@@ -23,7 +23,7 @@
     >
       <div class="subtitle">Press to activate the script on the network</div>
       <Button @click="createTransaction('false', getSlotData?.id)">
-        Sign Tx1
+        Sign Tx
       </Button>
     </template>
     <!--//////////////////////////////////////////////////////////////////////-->
