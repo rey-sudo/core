@@ -22,7 +22,7 @@ export default {
         icon: "pi pi-building-columns",
       },
       {
-        label: "Protected purchase 100%",
+        label: "Protected purchase",
         icon: "pi pi-shopping-cart",
       },
     ]);
