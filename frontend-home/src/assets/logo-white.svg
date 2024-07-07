@@ -29,7 +29,7 @@
      showgrid="false"
      inkscape:zoom="14.217421"
      inkscape:cx="43.502967"
-     inkscape:cy="12.414347"
+     inkscape:cy="26.200251"
      inkscape:window-width="1920"
      inkscape:window-height="1043"
      inkscape:window-x="0"
@@ -43,8 +43,8 @@
     <rect
        x="11.236365"
        y="7.2846911"
-       width="55.387751"
-       height="34.870021"
+       width="69.720838"
+       height="10.069939"
        id="rect3" />
     <rect
        x="12.94258"
@@ -66,7 +66,7 @@
      style="display:inline">
     <g
        id="g3-3"
-       transform="rotate(33.977342,33.197105,-26.442007)"
+       transform="rotate(33.977342,32.773875,-25.233899)"
        style="display:inline;fill:#feba3e;fill-opacity:1;stroke:#feba3e;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1">
       <g
          id="g4-6"
@@ -89,13 +89,13 @@
     <text
        xml:space="preserve"
        id="text3"
-       style="font-weight:bold;font-size:21.3333px;line-height:0;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';letter-spacing:-1px;white-space:pre;shape-inside:url(#rect3);display:inline;fill:#f2f2f2;fill-opacity:1;stroke:#feba3e;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       style="font-weight:bold;font-size:22.6667px;line-height:0;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';letter-spacing:-1px;white-space:pre;shape-inside:url(#rect3);shape-padding:0.0952355;display:inline;fill:#f2f2f2;fill-opacity:1;stroke:#feba3e;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
        transform="translate(-5.1508928,7.898494)"><tspan
-         x="11.236328"
-         y="13.25848"
-         id="tspan4">pa<tspan
+         x="11.332031"
+         y="13.727535"
+         id="tspan3">pa<tspan
    style="fill:#fff200"
-   id="tspan1">i</tspan>rfy</tspan></text>
+   id="tspan2">i</tspan>rfy</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
