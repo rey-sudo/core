@@ -145,7 +145,7 @@ export default {
 }
 
 .stepper-column {
-  width: calc(40px + 2rem);
+  width: calc(40px + 4rem);
   height: 250px;
   display: flex;
   justify-content: flex-start;
