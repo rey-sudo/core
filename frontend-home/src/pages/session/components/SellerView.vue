@@ -185,7 +185,6 @@ export default {
 
 .stepper {
   background: var(--base-a);
-  padding: 1rem;
 }
 
 .stepper-price {
