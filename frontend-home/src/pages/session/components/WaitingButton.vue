@@ -23,7 +23,7 @@
     >
       <div class="subtitle">Press to activate the script on the network</div>
       <Button @click="createTransaction('false', getSlotData?.id)">
-        Sign Tx
+        Sign
       </Button>
     </template>
     <!--//////////////////////////////////////////////////////////////////////-->
@@ -179,8 +179,8 @@ export default {
 }
 
 .waiting button {
-  border: 1px solid var(--primary-c);
-  background: var(--primary-c);
+  border: 1px solid var(--primary-a);
+  background: var(--primary-a);
   font-size: var(--text-size-b);
   padding: 0.5rem 1rem;
   width: 100px;
@@ -194,8 +194,8 @@ export default {
 }
 
 .waiting button.actived {
-  background: var(--primary-c);
-  border: 1px solid var(--primary-c);
+  background: var(--primary-a);
+  border: 1px solid var(--primary-a);
   pointer-events: none;
 }
 

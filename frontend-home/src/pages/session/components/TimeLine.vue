@@ -141,7 +141,7 @@ export default {
 }
 
 .timeline {
-  background: var(--base-b);
+  background: var(--base-a);
   border: 1px solid var(--border-b);
   display: flex;
   flex-direction: column;
