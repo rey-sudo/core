@@ -15,20 +15,14 @@ export default {
     const items = ref([
       {
         label: "Collateral 500 ADA",
-        color: "var(--primary-a)",
-        value: 30,
         icon: "pi pi-credit-card",
       },
       {
         label: "Treasury discount 30 ADA",
-        color: "var(--primary-a)",
-        value: 15,
         icon: "pi pi-building-columns",
       },
       {
-        label: "Protected purchase",
-        color: "var(--primary-a)",
-        value: 100,
+        label: "Protected purchase 100%",
         icon: "pi pi-shopping-cart",
       },
     ]);
