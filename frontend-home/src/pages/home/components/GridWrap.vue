@@ -181,8 +181,8 @@ export default {
 }
 
 .card-body-name {
-  color: var(--text-a);
-  font-size: var(--text-size-c);
+  color: var(--text-c);
+  font-size: var(--text-size-b);
   display: flex;
   align-items: center;
   justify-content: center;
