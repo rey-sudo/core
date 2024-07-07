@@ -416,7 +416,7 @@ export default {
 }
 
 .head-icons {
-  width: 100%;
+  width: 50%;
   margin-top: 2rem;
 }
 
