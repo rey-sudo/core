@@ -13,8 +13,10 @@
       :autoplayInterval="5000"
       circular
     >
-      <template #item="slotProps">
-        <img class="image" :src="slotProps.data.image" />
+ 
+      <template #item>
+      
+        <img class="image" src="./header1.png" /> 
       </template>
     </Carousel>
   </div>
@@ -29,7 +31,7 @@ export default {
       {
         name: "1",
         image:
-          "https://m.media-amazon.com/images/I/71zm8w6m4vL._SX3000_.jpg",
+        "https://m.media-amazon.com/images/I/71zm8w6m4vL._SX3000_.jpg",
       },
 
       {
@@ -84,7 +86,6 @@ export default {
   object-fit: cover;
   width: 100%;
   position: relative;
-  object-fit: none;
   object-position: top;
 }
 
