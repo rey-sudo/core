@@ -590,7 +590,7 @@ export default {
   border: 1px solid var(--primary-a);
   width: 90%;
   border-radius: 4px;
-  color: var(--text-a);
+  color: var(--primary-a);
   font-weight: 600;
   cursor: pointer;
   display: flex;
@@ -610,6 +610,8 @@ export default {
 .head .head-button:hover {
   opacity: 0.9;
   border: 1px solid var(--primary-a);
+  background: var(--primary-a);
+  color: var(--text-w);
 }
 
 @media only screen and (max-width: 767px) {

@@ -170,7 +170,7 @@ export default {
 }
 
 .timeline-timer span {
-  background: var(--black-a);
+  background: var(--text-a);
   border-radius: 6px;
   width: 30px;
   height: 40px;
