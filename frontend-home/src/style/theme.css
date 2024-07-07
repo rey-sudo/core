@@ -10610,7 +10610,8 @@
 
   .p-metergroup-label-text {
     font-size: var(--text-size-a);
-    color: var(--text-a);
+    color: var(--text-b);
+    text-transform: capitalize;
   }
   
   .p-metergroup .p-metergroup-meter {
@@ -10629,6 +10630,7 @@
   .p-metergroup .p-metergroup-labels .p-metergroup-label-icon {
     width: 1rem;
     height: 1rem;
+    font-size: var(--text-size-d);
   }
   .p-metergroup .p-metergroup-labels.p-metergroup-labels-vertical {
     gap: 0.5rem;

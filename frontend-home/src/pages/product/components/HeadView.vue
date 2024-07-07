@@ -173,7 +173,7 @@ export default {
         label: "Collateral 500 ADA",
         color: "var(--primary-a)",
         value: 30,
-        icon: "pi pi-money-bill",
+        icon: "pi pi-credit-card",
       },
       {
         label: "Treasury discount",
@@ -590,7 +590,7 @@ export default {
   border: 1px solid var(--primary-a);
   width: 90%;
   border-radius: 4px;
-  color: var(--text-w);
+  color: var(--text-a);
   font-weight: 600;
   cursor: pointer;
   display: flex;
@@ -600,7 +600,7 @@ export default {
   text-align: center;
   margin-top: 1rem;
   transition: var(--transition-a);
-  background: var(--primary-a);
+  background: transparent;
 }
 
 .head .head-button.buyButton {
@@ -609,6 +609,7 @@ export default {
 
 .head .head-button:hover {
   opacity: 0.9;
+  border: 1px solid var(--primary-a);
 }
 
 @media only screen and (max-width: 767px) {
