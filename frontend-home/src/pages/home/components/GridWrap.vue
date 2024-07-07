@@ -79,7 +79,7 @@ export default {
 .card-body-rating {
   display: flex;
   align-items: center;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 
 .card-body-rating span {
@@ -103,7 +103,7 @@ export default {
   text-align: left;
   font-size: var(--text-size-e);
   color: var(--text-a);
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 
 .grid-item-title {

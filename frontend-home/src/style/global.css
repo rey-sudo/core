@@ -18,30 +18,18 @@
   --black-b: #192f45;
 
   --primary-a: #0046be;
-  --primary-b: #FFBD54;
+  --primary-b:  #fff200;
   --primary-c: #0099FF;
+
+  --orange: #FFBD54;
 
   --base-a: #ffffff;
   --base-b: #f5f5f7;
   --base-c: #ebebeb;
 
-
-
-
-  /* 
-#131921
-#0099FF
-#192F45
-#FEBA3E
-*/
-
   --blue-a: #0046be;
   --blue-b: #1A60D8;
   --blue-c: #3379F1;
-
-
-
-
 
   --gradient-a: linear-gradient(
     to right top,
