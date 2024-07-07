@@ -608,7 +608,7 @@ export default {
 }
 
 .head .head-button:hover {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 @media only screen and (max-width: 767px) {
