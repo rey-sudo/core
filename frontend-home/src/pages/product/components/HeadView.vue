@@ -100,9 +100,7 @@
           <span>3,024</span>
         </div>
 
-        <div class="head-icons">
-          <MeterGroup :value="collateralBar" />
-        </div>
+        <InfoIcons />
 
         <div class="head-button buyButton">
           <div @click="buyProduct">Buy now</div>
@@ -154,12 +152,13 @@
 <script>
 import productAPI from "@/pages/product/api";
 import DescriptionView from "./DescriptionView.vue";
-
-import { ref } from "vue";
+import InfoIcons from "./InfoIcons.vue";
+import { ref } from "vue"; 
 
 export default {
   components: {
     DescriptionView,
+    InfoIcons,
   },
   setup() {
     const { lockingEndpoint } = productAPI();
@@ -167,27 +166,6 @@ export default {
     const galleryImage = ref([]);
 
     const galleryImageIndex = ref(0);
-
-    const collateralBar = ref([
-      {
-        label: "Collateral 500 ADA",
-        color: "var(--primary-a)",
-        value: 30,
-        icon: "pi pi-credit-card",
-      },
-      {
-        label: "Treasury discount",
-        color: "var(--primary-a)",
-        value: 15,
-        icon: "pi pi-building-columns",
-      },
-      {
-        label: "Protected purchase",
-        color: "var(--primary-a)",
-        value: 100,
-        icon: "pi pi-shopping-cart",
-      },
-    ]);
 
     const images = ref([
       {
@@ -267,7 +245,6 @@ export default {
       breadItems,
       galleryImage,
       lockingEndpoint,
-      collateralBar,
       responsiveOptions,
       galleryImageIndex,
     };
@@ -413,11 +390,6 @@ export default {
   font-weight: 400;
   font-size: var(--text-size-a);
   color: var(--text-b);
-}
-
-.head-icons {
-  width: 50%;
-  margin-top: 2rem;
 }
 
 .head-seller-badge {
@@ -600,7 +572,7 @@ export default {
   text-align: center;
   margin-top: 1rem;
   transition: var(--transition-a);
-  background: var(--primary-b)
+  background: var(--primary-b);
 }
 
 .head .head-button.buyButton {
