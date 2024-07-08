@@ -503,7 +503,7 @@ export default {
   font-size: var(--text-size-f);
   font-weight: 500;
   text-align: left;
-  width: 100%;
+  width: 90%;
   margin-top: 1rem;
   line-height: 32px;
 }
