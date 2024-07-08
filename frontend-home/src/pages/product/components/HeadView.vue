@@ -505,7 +505,7 @@ export default {
   text-align: left;
   width: 90%;
   margin-top: 1rem;
-  line-height: 32px;
+  line-height: 2.25rem;
 }
 
 .head .head-legend {
