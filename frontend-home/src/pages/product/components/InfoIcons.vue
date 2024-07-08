@@ -23,7 +23,7 @@ export default {
       },
       {
         label: "Protected purchase",
-        icon: "pi pi-shopping-cart",
+        icon: "pi pi-check-circle",
       },
     ]);
 
@@ -52,6 +52,6 @@ export default {
 }
 
 .icons i {
-  color: var(--primary-a);
+  color: var(--text-b);
 }
 </style>
