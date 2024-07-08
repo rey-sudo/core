@@ -52,8 +52,8 @@
                   style="
                     width: 100%;
                     display: block;
-                    min-height: 400px;
-                    max-height: 400px;
+                    min-height: 350px;
+                    max-height: 350px;
                     object-fit: contain;
                   "
                 />
