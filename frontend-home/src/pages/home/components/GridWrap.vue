@@ -182,7 +182,7 @@ export default {
 
 .card-body-name {
   color: var(--text-a);
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-c);
   display: flex;
   align-items: center;
   justify-content: center;

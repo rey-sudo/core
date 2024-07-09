@@ -139,7 +139,7 @@ export default {
 
 <style lang="css" scoped>
 .product-body {
-  padding: 0 10%;
+  padding: 0 11%;
 }
 
 .product {
