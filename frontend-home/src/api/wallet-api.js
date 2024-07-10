@@ -25,7 +25,12 @@ const walletClient = () => {
     getWallet,
   };
 };
-const getWallet = () => {
+
+const getWallet = async () => {
+  if (!connectedWallet) {
+    await reconnect();
+  }
+
   return connectedWallet;
 };
 
@@ -107,7 +112,7 @@ const stopWalletService = () => {
   Wallet.stopInjectWalletListener();
 };
 
-///////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const balanceTx = (unbalancedTx) => {
   return Promise.all([
