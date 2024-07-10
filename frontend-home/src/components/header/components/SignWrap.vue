@@ -117,7 +117,7 @@ export default {
         setupWallet(false);
       }
     });
-    const wallet = walletClient();
+   
 
     const stepsList = ref([
       {
@@ -131,7 +131,7 @@ export default {
     ]);
 
     const selectWallet = async (e) => {
-      await wallet.connect(e);
+      await walletClient().connect(e);
     };
 
     const handleStep = (e) => {
@@ -153,7 +153,6 @@ export default {
       activeTab,
       enabledWallet,
       handleStep,
-      wallet,
       selectWallet,
       getSetupWallet,
       setupWallet,

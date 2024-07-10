@@ -50,6 +50,20 @@ const reconnect = async () => {
   }
 };
 
+const getAddress = async () => {
+  if (!connectedWallet) {
+    await reconnect();
+  }
+  return await connectedWallet.getAddress();
+};
+
+const signMessage = async (message) => {
+  if (!connectedWallet) {
+    await reconnect();
+  }
+  return await connectedWallet.signData(await getAddress(), message);
+};
+
 const startWalletService = async () => {
   Wallet.addEventListener("enabledWallet", async (walletName) => {
     const isEnabled = await window.cardano[walletName].isEnabled();
@@ -266,4 +280,4 @@ const fromHexString = (hexString) =>
 
 //const toHexString = (uint8) => Array.from(uint8).map(i2hex).join("");
 
-export { walletClient, CardanoWasm, balanceTx, lucidClient };
+export { walletClient, CardanoWasm, balanceTx, lucidClient, signMessage, getAddress };
