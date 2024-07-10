@@ -304,7 +304,7 @@ export default {
 }
 
 .head-info {
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
   font-weight: 400;
   text-align: left;
   color: var(--text-b);
@@ -505,7 +505,7 @@ export default {
   text-align: left;
   width: 100%;
   margin-top: 1rem;
-  line-height: 2.25rem;
+  line-height: 2rem;
 }
 
 .head .head-legend {
@@ -513,6 +513,7 @@ export default {
   font-size: var(--text-size-a);
   margin-top: 1rem;
   font-weight: 400;
+  color: var(--text-b);
 }
 
 .head .head-legend span {
@@ -538,6 +539,7 @@ export default {
 .head .head-rating span:nth-child(3) {
   font-weight: 400;
   font-size: var(--text-size-a);
+  color: var(--text-b);
 }
 
 .head .head-price {
