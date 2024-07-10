@@ -6,7 +6,7 @@ import { Lucid } from "lucid-cardano";
 
 const Buffer = require("buffer/").Buffer;
 
-let THEWALLET = null;
+let connectedWallet = null;
 
 const lucidClient = await Lucid.new();
 
@@ -26,12 +26,12 @@ const walletClient = () => {
   };
 };
 const getWallet = () => {
-  return THEWALLET;
+  return connectedWallet;
 };
 
 const connect = async (walletName) => {
   await Wallet.connect(walletName, "testnet", async () => {
-    THEWALLET = await window.cardano[walletName].enable();
+    connectedWallet = await window.cardano[walletName].enable();
 
     localStorage.setItem("pairfy-wallet", walletName);
 
@@ -97,8 +97,8 @@ const stopWalletService = () => {
 
 const balanceTx = (unbalancedTx) => {
   return Promise.all([
-    THEWALLET.getChangeAddress(),
-    THEWALLET.getUtxos(),
+    connectedWallet.getChangeAddress(),
+    connectedWallet.getUtxos(),
     fetchProtocolParameters(),
   ]).then(async (promises) => {
     const changeAddrCbor = promises[0];
@@ -137,7 +137,7 @@ const balanceTx = (unbalancedTx) => {
       )
     );
     console.log("yes");
-    let txVkeyWitnesses = await THEWALLET.signTx(
+    let txVkeyWitnesses = await connectedWallet.signTx(
       Buffer.from(tx.to_bytes(), "utf8").toString("hex"),
       true
     );
@@ -153,7 +153,7 @@ const balanceTx = (unbalancedTx) => {
       transactionWitnessSet
     );
 
-    return THEWALLET.submitTx(
+    return connectedWallet.submitTx(
       Buffer.from(signedTx.to_bytes(), "utf8").toString("hex")
     );
   });
