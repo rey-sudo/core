@@ -50,7 +50,7 @@ const getSlotHandler = async (req: Request, res: Response) => {
     console.log(slots);
 
     if (slots.length === 0) {
-      throw new Error("NOT_SLOT");
+      throw new BadRequestError("NOT_SLOT");
     }
 
     await connection.commit();
@@ -58,8 +58,6 @@ const getSlotHandler = async (req: Request, res: Response) => {
     res.status(200).send({ success: true, payload: slots[0] });
   } catch (err: any) {
     await connection.rollback();
-
-    throw new BadRequestError(err.message);
   } finally {
     connection.release();
   }

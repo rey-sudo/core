@@ -12,7 +12,7 @@ const loginUserHandler = async (req: Request, res: Response) => {
   let params = req.body;
   try {
     if (params.userData) {
-      throw new Error("logged");
+      throw new BadRequestError("logged");
     }
 
     connection = await DB.client.getConnection();
@@ -23,7 +23,8 @@ const loginUserHandler = async (req: Request, res: Response) => {
     );
 
     if (rows.length === 0) {
-      throw new Error("nonexist");
+      throw new BadRequestError("nonexist");
+
     }
 
     const USER = rows[0];
@@ -46,10 +47,7 @@ const loginUserHandler = async (req: Request, res: Response) => {
     res.status(200).send({ success: true, data: userData });
   } catch (err) {
     await connection.rollback();
-
     _.error(err);
-
-    throw new BadRequestError("Invalid credentials or check your wallet");
   } finally {
     connection.release();
   }

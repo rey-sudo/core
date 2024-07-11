@@ -2,9 +2,7 @@ import DB from "../db";
 import { Request, Response } from "express";
 import { requireAuth } from "../utils/required";
 import { sellerMiddleware } from "../utils/seller";
-import { BadRequestError } from "../errors";
 
-////////////////////////////////////////////////////MIDDLEWARES
 
 const startTxMiddlewares: any = [sellerMiddleware, requireAuth];
 
@@ -42,8 +40,6 @@ const startTxHandler = async (req: Request, res: Response) => {
     });
   } catch (err: any) {
     await connection.rollback();
-
-    throw new BadRequestError(err.message);
   } finally {
     connection.release();
   }
