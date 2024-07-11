@@ -5,8 +5,8 @@ use service_user;
 create table if not exists users(
   id varchar(20) not null,
   username varchar(50) not null,
-  wallet varchar(100) not null,
-  signed_tx varchar(100) not null,
+  address varchar(200) not null,
+  pubkeyhash varchar(200) not null,
   country varchar(10) not null,
   terms_accepted boolean not null,
   public_ip varchar(50) not null,
@@ -14,5 +14,5 @@ create table if not exists users(
   schema_t timestamp default current_timestamp,
   schema_v int unsigned not null,
   primary key(id),
-  unique(wallet, username)
+  unique(pubkeyhash)
 ) ENGINE=InnoDB;
