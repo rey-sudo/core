@@ -53,14 +53,6 @@ const main = async () => {
     errorEvents.forEach((e: string) => process.on(e, (err) => catcher(err)));
 
     app.post(
-      "/api/user/create-user",
-
-      route.createUserMiddlewares,
-
-      route.createUserHandler
-    );
-
-    app.post(
       "/api/user/login-user",
 
       route.loginUserMiddlewares,
@@ -76,14 +68,6 @@ const main = async () => {
       route.currentUserHandler
     );
 
-    app.post(
-      "/api/user/delete-user",
-
-      route.createUserMiddlewares,
-
-      route.createUserHandler
-    );
-
     app.get(
       "/api/user/logout",
 
@@ -91,7 +75,7 @@ const main = async () => {
     );
 
     app.get("/api/user/healthcheck", (req, res) => {
-      res.status(200).send('Test OK');
+      res.status(200).send("Test OK");
     });
 
     app.all("*", (_req, _res) => {

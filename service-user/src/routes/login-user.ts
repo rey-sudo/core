@@ -4,45 +4,85 @@ import { createToken } from "../utils/token";
 import { UserToken, userMiddleware } from "../utils/user";
 import { _ } from "../utils/pino";
 import DB from "../db";
+import { getUserId } from "../utils/nano";
+const Cardano = require("@emurgo/cardano-serialization-lib-nodejs");
 
 const loginUserMiddlewares: any = [userMiddleware];
 
 const loginUserHandler = async (req: Request, res: Response) => {
   let connection = null;
   let params = req.body;
+
+  console.log(req.body);
+
   try {
-    if (params.userData) {
-      throw new BadRequestError("logged");
+    const verifySignature = (
+      address: string,
+      message: string,
+      signature: any
+    ) => {
+      const pubKey = Cardano.PublicKey.from_bech32(address);
+      const sig = Cardano.Ed25519Signature.from_bech32(signature);
+      const messageBytes = Buffer.from(message, "utf8");
+      return pubKey.verify(messageBytes, sig);
+    };
+
+    const address = params.address;
+    const message = params.message;
+    const signature = params.signature;
+    const pubkeyhash = "server";
+
+    if (!verifySignature(address, message, signature)) {
+      throw new BadRequestError("AUTH_FAILED");
     }
+
+    ///////////////////////////////////////////////////////
 
     connection = await DB.client.getConnection();
 
-    const [rows] = await connection.execute(
-      "SELECT * FROM users WHERE wallet = ?",
-      [params.wallet]
-    );
+    await connection.beginTransaction();
 
-    if (rows.length === 0) {
-      throw new BadRequestError("nonexist");
+    const userId = getUserId();
 
-    }
+    const schemeData = `
+    INSERT INTO users (
+      id,
+      username,
+      address,
+      pubkeyhash,
+      country,
+      terms_accepted,
+      public_ip,
+      schema_v
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
-    const USER = rows[0];
-
+    const schemeValue = [
+      userId,
+      params.username,
+      address,
+      pubkeyhash,
+      params.country,
+      params.terms_accepted,
+      "192.168.1.1",
+      0,
+    ];
 
     const userData: UserToken = {
-      id: USER.id,
-      role: "USER",
-      wallet: USER.wallet,
-      country: USER.country,
-      username: USER.username,
+      id: userId,
+      role: "user",
+      address,
+      pubkeyhash,
+      country: "ip",
+      username: params.username,
     };
-
-    const token = createToken(userData);
 
     req.session = {
-      jwt: token,
+      jwt: createToken(userData),
     };
+
+    await connection.execute(schemeData, schemeValue);
+
+    await connection.commit();
 
     res.status(200).send({ success: true, data: userData });
   } catch (err) {

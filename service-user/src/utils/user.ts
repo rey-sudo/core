@@ -5,7 +5,8 @@ import jwt from "jsonwebtoken";
 interface UserToken {
   id: string;
   role: string;
-  wallet: string;
+  address: string;
+  pubkeyhash: string;
   country: string;
   username: string;
 }
@@ -29,7 +30,7 @@ const userMiddleware = (req: Request, res: Response, next: NextFunction) => {
       process.env.USER_JWT_KEY!
     ) as UserToken;
 
-    if (sessionData.role !== "USER") {
+    if (sessionData.role !== "user") {
       return next();
     }
 
