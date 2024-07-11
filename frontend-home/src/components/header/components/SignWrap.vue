@@ -67,7 +67,7 @@
             Seller
           </div>
         </div>
-
+        <UserLogin v-if="activeTab === 'user'" />
         <SellerLogin v-if="activeTab === 'seller'" />
       </div>
     </div>
@@ -79,10 +79,12 @@ import { ref, watch } from "vue";
 import { walletClient } from "@/api/wallet-api";
 import { headerAPI } from "../composable/header-api";
 import SellerLogin from "./SellerLogin.vue";
+import UserLogin from "./UserLogin.vue";
 
 export default {
   components: {
     SellerLogin,
+    UserLogin
   },
   setup() {
     const { getSetupWallet, setupWallet } = headerAPI();
@@ -117,7 +119,6 @@ export default {
         setupWallet(false);
       }
     });
-   
 
     const stepsList = ref([
       {
@@ -139,7 +140,7 @@ export default {
       enabledWallet.value = getWalletName();
     };
 
-    const activeTab = ref("seller");
+    const activeTab = ref("user");
 
     const selectTab = (e) => {
       activeTab.value = e;

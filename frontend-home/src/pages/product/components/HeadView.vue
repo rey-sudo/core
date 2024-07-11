@@ -531,7 +531,7 @@ export default {
 
 .head .head-rating span {
   margin-right: 0.5rem;
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-c);
   color: var(--text-a);
   font-weight: 600;
 }
