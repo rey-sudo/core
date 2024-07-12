@@ -70,7 +70,7 @@ const signMessage = async () => {
     await reconnect();
   }
 
-  const message = "PAIRFY_AUTH";
+  const message = "PLEASE SIGN TO AUTHENTICATE IN PAIRFY";
 
   const messageBytes = Buffer.from(message, "utf8").toString("hex");
 
