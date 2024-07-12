@@ -89,7 +89,7 @@ export default {
   setup() {
     const { getSetupWallet, setupWallet } = headerAPI();
 
-    const displayPanel = ref(false);
+    const displayPanel = ref(true);
 
     const activeStep = ref(0);
 
@@ -238,7 +238,7 @@ export default {
 }
 
 .grid-item.active {
-  border: 1px solid var(--primary-c);
+  border: 2px solid var(--primary-c);
 }
 
 .tab-1 {

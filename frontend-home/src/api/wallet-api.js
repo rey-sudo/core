@@ -59,14 +59,22 @@ const getAddress = async () => {
   if (!connectedWallet) {
     await reconnect();
   }
-  return await connectedWallet.getAddress();
+
+  const address = await connectedWallet.getUsedAddresses();
+
+  return address[0];
 };
 
-const signMessage = async (message) => {
+const signMessage = async () => {
   if (!connectedWallet) {
     await reconnect();
   }
-  return await connectedWallet.signData(await getAddress(), message);
+
+  const message = "PAIRFY_AUTH";
+
+  const messageBytes = Buffer.from(message, "utf8").toString("hex");
+
+  return await connectedWallet.signData(await getAddress(), messageBytes);
 };
 
 const startWalletService = async () => {
@@ -122,8 +130,6 @@ const balanceTx = (unbalancedTx) => {
   ]).then(async (promises) => {
     const changeAddrCbor = promises[0];
 
-    console.log(typeof changeAddrCbor);
-
     const changeAddrBech32 = CardanoWasm.Address.from_bytes(
       fromHexString(changeAddrCbor)
     ).to_bech32();
@@ -155,7 +161,7 @@ const balanceTx = (unbalancedTx) => {
         transactionWitnessSet.to_bytes()
       )
     );
-    console.log("yes");
+
     let txVkeyWitnesses = await connectedWallet.signTx(
       Buffer.from(tx.to_bytes(), "utf8").toString("hex"),
       true
@@ -285,4 +291,11 @@ const fromHexString = (hexString) =>
 
 //const toHexString = (uint8) => Array.from(uint8).map(i2hex).join("");
 
-export { walletClient, CardanoWasm, balanceTx, lucidClient, signMessage, getAddress };
+export {
+  walletClient,
+  CardanoWasm,
+  balanceTx,
+  lucidClient,
+  signMessage,
+  getAddress,
+};
