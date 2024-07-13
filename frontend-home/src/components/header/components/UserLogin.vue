@@ -5,15 +5,14 @@
 </template>
 
 <script>
-import {
-  signMessage,
-  getMessage,
-  getAddress,
-  loginUser,
-} from "@/api/wallet-api";
+import { signMessage, getMessage, getAddress } from "@/api/wallet-api";
+
+import headerAPI from "../composable/header-api";
 
 export default {
   setup() {
+    const { loginUser } = headerAPI();
+
     const handleSign = async () => {
       const signature = await signMessage().catch((err) => console.error(err));
 
@@ -27,8 +26,11 @@ export default {
         signature,
       };
 
-      await loginUser(params).then((res) => console.log(res));
+      await loginUser(params)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
     };
+
     return {
       handleSign,
     };

@@ -47,4 +47,4 @@ const headerAPI = () => {
   };
 };
 
-export { headerAPI };
+export default headerAPI;

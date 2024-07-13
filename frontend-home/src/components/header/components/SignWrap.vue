@@ -77,7 +77,7 @@
 <script>
 import { ref, watch } from "vue";
 import { walletClient } from "@/api/wallet-api";
-import { headerAPI } from "../composable/header-api";
+import headerAPI from "../composable/header-api";
 import SellerLogin from "./SellerLogin.vue";
 import UserLogin from "./UserLogin.vue";
 

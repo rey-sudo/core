@@ -48,7 +48,7 @@
 <script>
 import { sessionAPI } from "@/pages/session/api";
 import { useToast } from "primevue/usetoast";
-import { headerAPI } from "@/components/header/composable/header-api";
+import headerAPI from "@/components/header/composable/header-api";
 import { balanceTx, lucidClient } from "@/api/wallet-api";
 import { getAddressDetails } from "lucid-cardano";
 import { walletClient } from "@/api/wallet-api";

@@ -202,7 +202,7 @@
 <script>
 import { CardanoWasm, balanceTx } from "@/api/wallet-api";
 import { ref } from "vue";
-import { headerAPI } from "./composable/header-api";
+import headerAPI from "./composable/header-api";
 import NavWrap from "./components/NavWrap.vue";
 import SignWrap from "./components/SignWrap.vue";
 

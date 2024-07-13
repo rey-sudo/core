@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { headerAPI } from "@/components/header/composable/header-api";
+import  headerAPI  from "@/components/header/composable/header-api";
 
 export default {
   setup() {

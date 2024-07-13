@@ -5,9 +5,8 @@
 </template>
 
 <script>
-import { headerAPI } from "@/components/header/composable/header-api";
+import headerAPI from "@/components/header/composable/header-api";
 import { walletClient } from "@/api/wallet-api";
-
 
 export default {
   name: "App",
@@ -23,7 +22,6 @@ export default {
     startWalletService()
       .then(() => console.info("WALLET_SERVICE"))
       .catch((err) => console.error(err));
-
 
     return {
       currentSeller,

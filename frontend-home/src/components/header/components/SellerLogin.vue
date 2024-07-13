@@ -62,12 +62,12 @@
 
 <script>
 import { ref } from "vue";
-import { headerAPI } from "@/components/header/composable/header-api";
+import headerAPI from "@/components/header/composable/header-api";
 import { useToast } from "primevue/usetoast";
 
 export default {
   setup() {
-    const email = ref(); 
+    const email = ref();
     const password = ref();
 
     const { loginSeller, getCurrentSeller, logoutSeller } = headerAPI();
@@ -233,6 +233,4 @@ export default {
   align-items: center;
   cursor: pointer;
 }
-
-
 </style>
