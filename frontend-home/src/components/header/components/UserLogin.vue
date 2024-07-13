@@ -5,12 +5,29 @@
 </template>
 
 <script>
-import { signMessage } from "@/api/wallet-api";
+import {
+  signMessage,
+  getMessage,
+  getAddress,
+  loginUser,
+} from "@/api/wallet-api";
 
 export default {
   setup() {
     const handleSign = async () => {
-      await signMessage().catch((err) => console.error(err));
+      const signature = await signMessage().catch((err) => console.error(err));
+
+      const message = getMessage();
+
+      const address = await getAddress();
+
+      const params = {
+        address,
+        message,
+        signature,
+      };
+
+      await loginUser(params).then((res) => console.log(res));
     };
     return {
       handleSign,

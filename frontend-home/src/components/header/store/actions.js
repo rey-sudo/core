@@ -12,12 +12,36 @@ const currentSeller = async ({ commit }) => {
   }
 };
 
+const currentUser = async ({ commit }) => {
+  try {
+    const response = await axiosAPI.get("/api/user/current-user");
+
+    commit("currentUser", response.data.userData);
+
+    return { ok: true, response: response.data };
+  } catch (error) {
+    throw { success: false, response: error.response.data };
+  }
+};
+
 const loginSeller = async ({ commit }, params) => {
   try {
     const response = await axiosAPI.post("/api/seller/login-seller", params);
 
     commit("currentSeller", response.data.data);
 
+    return { ok: true, response: response.data };
+  } catch (error) {
+    throw { ok: false, response: error.response.data };
+  }
+};
+
+const loginUser = async ({ commit }, params) => {
+  try {
+    const response = await axiosAPI.post("/api/user/login-user", params);
+
+    commit("currentUser", response.data.data);
+ 
     return { ok: true, response: response.data };
   } catch (error) {
     throw { ok: false, response: error.response.data };
@@ -65,4 +89,4 @@ const setupLucid = async ({ commit }, data) => {
 };
 
 
-export { connectWallet, setupLucid, startTx, currentSeller, loginSeller, setupWallet, logoutSeller };
+export { currentUser, connectWallet, setupLucid, startTx, currentSeller, loginSeller, setupWallet, logoutSeller, loginUser };

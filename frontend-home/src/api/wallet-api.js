@@ -65,16 +65,18 @@ const getAddress = async () => {
   return address[0];
 };
 
+const getMessage = () => {
+  const message = "PLEASE SIGN TO AUTHENTICATE IN PAIRFY";
+
+  return Buffer.from(message, "utf8").toString("hex");
+};
+
 const signMessage = async () => {
   if (!connectedWallet) {
     await reconnect();
   }
 
-  const message = "PLEASE SIGN TO AUTHENTICATE IN PAIRFY";
-
-  const messageBytes = Buffer.from(message, "utf8").toString("hex");
-
-  return await connectedWallet.signData(await getAddress(), messageBytes);
+  return await connectedWallet.signData(await getAddress(), getMessage());
 };
 
 const startWalletService = async () => {
@@ -298,4 +300,5 @@ export {
   lucidClient,
   signMessage,
   getAddress,
+  getMessage
 };

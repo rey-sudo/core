@@ -7,6 +7,9 @@ const headerAPI = () => {
   const currentSeller = async (params) =>
     await store.dispatch("header/currentSeller", params);
 
+  const currentUser = async (params) =>
+    await store.dispatch("header/currentUser", params);
+
   const setupWallet = async (params) =>
     await store.dispatch("header/setupWallet", params);
 
@@ -15,6 +18,9 @@ const headerAPI = () => {
 
   const loginSeller = async (params) =>
     await store.dispatch("header/loginSeller", params);
+
+  const loginUser = async (params) =>
+    await store.dispatch("header/loginUser", params);
 
   const logoutSeller = async (params) =>
     await store.dispatch("header/logoutSeller", params);
@@ -27,12 +33,15 @@ const headerAPI = () => {
   return {
     currentSeller,
     setupWallet,
+    currentUser,
     loginSeller,
     logoutSeller,
+    loginUser,
     startTx,
     setupLucid,
     connectWallet,
     getCurrentSeller: computed(() => store.getters["header/getCurrentSeller"]),
+    getCurrentUser: computed(() => store.getters["header/getCurrentUser"]),
     getSetupWallet: computed(() => store.getters["header/getSetupWallet"]),
     getLucid: computed(() => store.getters["header/getLucid"]),
   };
