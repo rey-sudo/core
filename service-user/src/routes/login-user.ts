@@ -7,6 +7,7 @@ import { getUserId } from "../utils/nano";
 import Cardano from "@emurgo/cardano-serialization-lib-nodejs";
 import DB from "../db";
 const cbor = require("cbor");
+const verifyDataSignature = require("@cardano-foundation/cardano-verify-datasignature");
 
 const loginUserMiddlewares: any = [userMiddleware];
 
@@ -20,6 +21,7 @@ const loginUserHandler = async (req: Request, res: Response) => {
     const address = "na";
     const signature = params.signature;
     const pubkeyhash = "server";
+    const message = "PLEASE SIGN TO AUTHENTICATE IN PAIRFY";
 
     try {
       const verifySignature = (signature: any) => {
@@ -39,15 +41,12 @@ const loginUserHandler = async (req: Request, res: Response) => {
 
         ////////////////////////////////////////////////////
 
-        const message = Buffer.from(
-          "PLEASE SIGN TO AUTHENTICATE IN PAIRFY",
-          "utf8"
-        );
+        const messaged = Buffer.from(message, "utf8");
 
-        return pubKey.verify(message, sig);
+        return pubKey.verify(messaged, sig);
       };
 
-      const result = verifySignature(signature);
+      const result = verifyDataSignature(signature.signature, signature.key, message);
 
       console.log(result);
     } catch (err) {
