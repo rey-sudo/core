@@ -4,6 +4,7 @@ import { createToken } from "../utils/token";
 import { UserToken, userMiddleware } from "../utils/user";
 import { _ } from "../utils/pino";
 import { getUserId } from "../utils/nano";
+import { getPubKeyHash } from "../utils/crypto";
 import Cardano from "@emurgo/cardano-serialization-lib-nodejs";
 import DB from "../db";
 
@@ -19,38 +20,19 @@ const loginUserHandler = async (req: Request, res: Response) => {
 
   try {
     const address = Cardano.Address.from_hex(params.address);
+    const address32: string = address.to_bech32();
+    const pubkeyhash = getPubKeyHash(params.address);
     const signature = params.signature;
-    const pubkeyhash = "server";
     const message = "PLEASE SIGN TO AUTHENTICATE IN PAIRFY";
 
-    try {
-      const getPubKeyHash = (address: any) => {
-        let baseAddr = Cardano.BaseAddress.from_address(address);
+    const verifySignature = verifyDataSignature(
+      signature.signature,
+      signature.key,
+      message,
+      address32
+    );
 
-        if (baseAddr) {
-          const pkh = baseAddr.payment_cred().to_keyhash();
-
-          if (pkh) {
-            return pkh.to_hex();
-          }
-        }
-      };
-
-      console.log(getPubKeyHash(address));
-
-      console.log(address.to_bech32());
-
-      const result = verifyDataSignature(
-        signature.signature,
-        signature.key,
-        message,
-        address.to_bech32()
-      );
-
-      console.log(result);
-    } catch (err) {
-      console.log(err);
-
+    if (!verifySignature) {
       throw new BadRequestError("AUTH_FAILED");
     }
 
@@ -77,7 +59,7 @@ const loginUserHandler = async (req: Request, res: Response) => {
     const schemeValue = [
       userId,
       params.username,
-      address,
+      address32,
       pubkeyhash,
       params.country,
       params.terms_accepted,
@@ -88,7 +70,7 @@ const loginUserHandler = async (req: Request, res: Response) => {
     const userData: UserToken = {
       id: userId,
       role: "user",
-      address: address.to_bech32(),
+      address: address32,
       pubkeyhash,
       country: "ip",
       username: params.username,
@@ -104,7 +86,6 @@ const loginUserHandler = async (req: Request, res: Response) => {
 
     res.status(200).send({ success: true, data: userData });
   } catch (err) {
-    console.log(err);
     await connection.rollback();
     _.error(err);
   } finally {
