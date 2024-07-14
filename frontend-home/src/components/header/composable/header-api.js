@@ -25,6 +25,9 @@ const headerAPI = () => {
   const logoutSeller = async (params) =>
     await store.dispatch("header/logoutSeller", params);
 
+  const logoutUser = async (params) =>
+    await store.dispatch("header/logoutUser", params); 
+
   const setupLucid = async (data) =>
     await store.dispatch("header/setupLucid", data);
 
@@ -34,6 +37,7 @@ const headerAPI = () => {
     currentSeller,
     setupWallet,
     currentUser,
+    logoutUser,
     loginSeller,
     logoutSeller,
     loginUser,
