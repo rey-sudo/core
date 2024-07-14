@@ -3,9 +3,10 @@ import { Request, Response } from "express";
 import { createToken } from "../utils/token";
 import { UserToken, userMiddleware } from "../utils/user";
 import { _ } from "../utils/pino";
-import DB from "../db";
 import { getUserId } from "../utils/nano";
-const Cardano = require("@emurgo/cardano-serialization-lib-nodejs");
+import Cardano from "@emurgo/cardano-serialization-lib-nodejs";
+import DB from "../db";
+const cbor = require("cbor");
 
 const loginUserMiddlewares: any = [userMiddleware];
 
@@ -13,26 +14,53 @@ const loginUserHandler = async (req: Request, res: Response) => {
   let connection = null;
   let params = req.body;
 
-  console.log(req.body);
+  console.log(params);
 
   try {
-    const verifySignature = (
-      address: string,
-      message: string,
-      signature: any
-    ) => {
-      const pubKey = Cardano.PublicKey.from_bech32(address);
-      const sig = Cardano.Ed25519Signature.from_bech32(signature);
-      const messageBytes = Buffer.from(message, "utf8");
-      return pubKey.verify(messageBytes, sig);
-    };
-
     const address = params.address;
     const message = params.message;
     const signature = params.signature;
     const pubkeyhash = "server";
 
-    if (!verifySignature(address, message, signature)) {
+    try {
+      const verifySignature = (message: string, signature: any) => {
+        const cborPubKey = cbor.decodeFirstSync(
+          Buffer.from(signature.key, "hex")
+        );
+
+        const decodedPubKey = cborPubKey.get(-2);
+
+        const pubKey = Cardano.PublicKey.from_bytes(
+          Buffer.from(decodedPubKey, "hex")
+        );
+
+        ////////////////////////////////////////////////////
+
+        const cborSignature = cbor.decodeFirstSync(
+          Buffer.from(signature.signature, "hex")
+        );
+
+        const decodedSignature = cborSignature[3];
+
+        const sig = Cardano.Ed25519Signature.from_bytes(
+          Buffer.from(decodedSignature, "hex")
+        );
+
+        ////////////////////////////////////////////////////
+
+        const messagex = Buffer.from(message, "hex").toString("utf8");
+
+        console.log(messagex);
+
+        return pubKey.verify(Buffer.from(message, "hex"), sig);
+      };
+
+      const result = verifySignature(message, signature);
+
+      console.log(result);
+    } catch (err) {
+      console.log(err);
+
       throw new BadRequestError("AUTH_FAILED");
     }
 
@@ -86,6 +114,7 @@ const loginUserHandler = async (req: Request, res: Response) => {
 
     res.status(200).send({ success: true, data: userData });
   } catch (err) {
+    console.log(err);
     await connection.rollback();
     _.error(err);
   } finally {
