@@ -255,7 +255,7 @@ export default {
 .selector {
   display: flex;
   background: var(--base-b);
-  padding: 3px;
+  padding: 4px;
   overflow: hidden;
   border-radius: 12px;
 }
@@ -268,7 +268,7 @@ export default {
   font-size: var(--text-size-b);
   font-weight: 400;
   border-radius: 6px;
-  transition: 0.3s ease-in-out;
+  transition: 0.1s ease-in-out;
 }
 
 .selector div.active {

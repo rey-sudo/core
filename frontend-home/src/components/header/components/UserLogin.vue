@@ -1,6 +1,9 @@
 <template>
   <div class="user">
-    <div class="button" @click="handleSign">Wallet Login</div>
+    <div class="button" @click="handleSign">
+      <i class="pi pi-wallet" />
+      <span>Login</span>
+    </div>
   </div>
 </template>
 
@@ -45,6 +48,7 @@ export default {
 .button {
   background: var(--primary-a);
   color: var(--text-w);
+  font-size: var(--text-size-b);
   display: flex;
   padding: 0.75rem 1rem;
   width: 100%;
@@ -52,5 +56,9 @@ export default {
   justify-content: center;
   border-radius: 6px;
   cursor: pointer;
+}
+
+.button span {
+  margin-left: 1rem;
 }
 </style>

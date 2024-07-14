@@ -173,7 +173,7 @@ export default {
   width: 50px;
   height: 50px;
   background: green;
-  border-radius: 50%;
+  border-radius: 6px;
   overflow: hidden;
   border: 1px solid var(--border-b);
 }
@@ -198,7 +198,7 @@ export default {
 .profile-item {
   display: flex;
   flex-direction: column;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .profile-item span {
@@ -208,7 +208,7 @@ export default {
 .profile-item span:nth-child(1) {
   font-weight: 500;
   color: var(--text-a);
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
 }
 
 .profile-item span:nth-child(2) {
