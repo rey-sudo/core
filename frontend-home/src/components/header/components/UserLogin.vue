@@ -21,6 +21,7 @@ export default {
       const params = {
         signature,
         address,
+        terms_accepted: true,
       };
 
       await loginUser(params)

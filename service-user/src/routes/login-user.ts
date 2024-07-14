@@ -43,6 +43,8 @@ const loginUserHandler = async (req: Request, res: Response) => {
     await connection.beginTransaction();
 
     const userId = getUserId();
+    const username = "server";
+    const country = "server"
 
     const schemeData = `
     INSERT INTO users (
@@ -68,10 +70,10 @@ const loginUserHandler = async (req: Request, res: Response) => {
 
     const schemeValue = [
       userId,
-      params.username,
+      username,
       address32,
       pubkeyhash,
-      params.country,
+      country,
       params.terms_accepted,
       "192.168.1.1",
       0,
@@ -82,8 +84,8 @@ const loginUserHandler = async (req: Request, res: Response) => {
       role: "user",
       address: address32,
       pubkeyhash,
-      country: "ip",
-      username: params.username,
+      country,
+      username,
     };
 
     req.session = {
