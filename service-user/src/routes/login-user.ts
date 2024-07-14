@@ -23,11 +23,11 @@ const loginUserHandler = async (req: Request, res: Response) => {
 
     try {
       const verifySignature = (signature: any) => {
-        const cborPubKey = cbor.decode(Buffer.from(signature.key, "hex"));
+        const cborPubKey = cbor.decode(signature.key);
 
-        const cborSignature = cbor.decode(
-          Buffer.from(signature.signature, "hex")
-        );
+        const cborSignature = cbor.decode(signature.signature);
+
+        console.log(cborPubKey, cborSignature);
 
         const decodedPubKey = cborPubKey.get(-2);
 
