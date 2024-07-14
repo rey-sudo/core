@@ -29,8 +29,6 @@ const loginUserHandler = async (req: Request, res: Response) => {
           Buffer.from(signature.signature, "hex")
         );
 
-        console.log(cborPubKey, cborSignature);
-
         const decodedPubKey = cborPubKey.get(-2);
 
         const pubKey = Cardano.PublicKey.from_bytes(decodedPubKey);
