@@ -43,7 +43,10 @@ const loginUserHandler = async (req: Request, res: Response) => {
 
         ////////////////////////////////////////////////////
 
-        const message = Buffer.from("PLEASE SIGN TO AUTHENTICATE IN PAIRFY");
+        const message = Buffer.from(
+          "PLEASE SIGN TO AUTHENTICATE IN PAIRFY",
+          "utf8"
+        );
 
         return pubKey.verify(message, sig);
       };
