@@ -8,8 +8,9 @@ export const getPubKeyHash = (address: any): string => {
 
     if (pkh) {
       return pkh.to_hex();
-    }
+    } 
   }
 
   return "N/A";
+
 };

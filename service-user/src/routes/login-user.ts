@@ -21,7 +21,7 @@ const loginUserHandler = async (req: Request, res: Response) => {
   try {
     const address = Cardano.Address.from_hex(params.address);
     const address32: string = address.to_bech32();
-    const pubkeyhash = getPubKeyHash(params.address);
+    const pubkeyhash = getPubKeyHash(address);
     const signature = params.signature;
     const message = "PLEASE SIGN TO AUTHENTICATE IN PAIRFY";
 
@@ -44,7 +44,7 @@ const loginUserHandler = async (req: Request, res: Response) => {
 
     const userId = getUserId();
     const username = "server";
-    const country = "server"
+    const country = "server";
 
     const schemeData = `
     INSERT INTO users (
@@ -87,6 +87,8 @@ const loginUserHandler = async (req: Request, res: Response) => {
       country,
       username,
     };
+
+    console.log(schemeValue);
 
     req.session = {
       jwt: createToken(userData),
