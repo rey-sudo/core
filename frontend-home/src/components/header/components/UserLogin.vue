@@ -14,19 +14,16 @@ export default {
     const { loginUser } = headerAPI();
 
     const handleSign = async () => {
-      const signature = await signMessage().catch((err) => console.error(err));
-
-      const address = await getAddress();
-
-      const params = {
-        signature,
-        address,
-        terms_accepted: true,
-      };
-
-      await loginUser(params)
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+      await signMessage()
+        .then(async (signature) => [signature, await getAddress()])
+        .then(([signature, address]) =>
+          loginUser({
+            signature,
+            address,
+            terms_accepted: true,
+          })
+        )
+        .catch((err) => console.error(err));
     };
 
     return {
