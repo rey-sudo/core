@@ -25,15 +25,13 @@ const loginUserHandler = async (req: Request, res: Response) => {
       const verifySignature = (signature: any) => {
         const cborPubKey = cbor.decode(signature.key);
 
-        const cborSignature = cbor.decode(signature.signature);
-
-        console.log(cborPubKey, cborSignature);
-
         const decodedPubKey = cborPubKey.get(-2);
 
         const pubKey = Cardano.PublicKey.from_bytes(decodedPubKey);
 
         ////////////////////////////////////////////////////
+
+        const cborSignature = cbor.decode(signature.signature);
 
         const decodedSignature = cborSignature[3];
 
