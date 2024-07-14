@@ -513,7 +513,7 @@ export default {
   font-size: var(--text-size-a);
   margin-top: 1rem;
   font-weight: 400;
-  color: var(--text-b);
+  color: var(--text-a);
 }
 
 .head .head-legend span {
@@ -539,7 +539,7 @@ export default {
 .head .head-rating span:nth-child(3) {
   font-weight: 400;
   font-size: var(--text-size-a);
-  color: var(--text-b);
+  color: var(--text-a);
 }
 
 .head .head-price {
