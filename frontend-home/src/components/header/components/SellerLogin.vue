@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <Toast />
-    <div v-if="!getCurrentSeller" v-focustrap class="login-wrap">
+    <div class="login-wrap" v-if="!getCurrentSeller" v-focustrap>
       <div class="avatar">
         <div>
           <i class="pi pi-user" />
@@ -31,7 +31,7 @@
       <Button type="submit" label="Login" class="button" @click="handleLogin" />
     </div>
 
-    <div v-if="getCurrentSeller" class="profile">
+    <div class="profile" v-if="getCurrentSeller">
       <div class="profile-description">
         <div class="profile-image">
           <img :src="getCurrentSeller.avatar" alt="" />

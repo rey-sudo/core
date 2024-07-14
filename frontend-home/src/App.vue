@@ -12,11 +12,15 @@ export default {
   name: "App",
 
   setup() {
-    const { currentSeller } = headerAPI();
+    const { currentSeller, currentUser } = headerAPI();
     const { startWalletService, stopWalletService } = walletClient();
 
     currentSeller()
       .then(() => console.info("SELLER_LOGGED"))
+      .catch((err) => console.error(err));
+
+    currentUser()
+      .then(() => console.info("USER_LOGGED"))
       .catch((err) => console.error(err));
 
     startWalletService()
