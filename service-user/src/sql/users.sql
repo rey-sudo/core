@@ -13,6 +13,6 @@ create table if not exists users(
   created_at timestamp default current_timestamp,
   schema_t timestamp default current_timestamp,
   schema_v int unsigned not null,
-  primary key(id),
+  primary key(pubkeyhash),
   unique(pubkeyhash)
 ) ENGINE=InnoDB;

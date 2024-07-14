@@ -54,7 +54,17 @@ const loginUserHandler = async (req: Request, res: Response) => {
       terms_accepted,
       public_ip,
       schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+     ) 
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+     ON DUPLICATE KEY UPDATE
+      username = VALUES(username),
+      address = VALUES(address),
+      pubkeyhash = VALUES(pubkeyhash),
+      country = VALUES(country),
+      terms_accepted = VALUES(terms_accepted),
+      public_ip = VALUES(public_ip),
+      schema_v = VALUES(schema_v);
+     `;
 
     const schemeValue = [
       userId,
