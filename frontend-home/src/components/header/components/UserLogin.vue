@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { signMessage, getMessage, getAddress } from "@/api/wallet-api";
+import { signMessage } from "@/api/wallet-api";
 
 import headerAPI from "../composable/header-api";
 
@@ -16,13 +16,7 @@ export default {
     const handleSign = async () => {
       const signature = await signMessage().catch((err) => console.error(err));
 
-      const message = getMessage();
-
-      const address = await getAddress();
-
       const params = {
-        address,
-        message,
         signature,
       };
 

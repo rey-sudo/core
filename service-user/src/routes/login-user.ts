@@ -17,22 +17,19 @@ const loginUserHandler = async (req: Request, res: Response) => {
   console.log(params);
 
   try {
-    const address = params.address;
-    const message = params.message;
+    const address = "na";
     const signature = params.signature;
     const pubkeyhash = "server";
 
     try {
-      const verifySignature = (message: string, signature: any) => {
+      const verifySignature = (signature: any) => {
         const cborPubKey = cbor.decodeFirstSync(
           Buffer.from(signature.key, "hex")
         );
 
         const decodedPubKey = cborPubKey.get(-2);
 
-        const pubKey = Cardano.PublicKey.from_bytes(
-          Buffer.from(decodedPubKey, "hex")
-        );
+        const pubKey = Cardano.PublicKey.from_bytes(decodedPubKey);
 
         ////////////////////////////////////////////////////
 
@@ -42,20 +39,16 @@ const loginUserHandler = async (req: Request, res: Response) => {
 
         const decodedSignature = cborSignature[3];
 
-        const sig = Cardano.Ed25519Signature.from_bytes(
-          Buffer.from(decodedSignature, "hex")
-        );
+        const sig = Cardano.Ed25519Signature.from_bytes(decodedSignature);
 
         ////////////////////////////////////////////////////
 
-        const messagex = Buffer.from(message, "hex").toString("utf8");
+        const message = Buffer.from("PLEASE SIGN TO AUTHENTICATE IN PAIRFY");
 
-        console.log(messagex);
-
-        return pubKey.verify(Buffer.from(message, "hex"), sig);
+        return pubKey.verify(message, sig);
       };
 
-      const result = verifySignature(message, signature);
+      const result = verifySignature(signature);
 
       console.log(result);
     } catch (err) {
