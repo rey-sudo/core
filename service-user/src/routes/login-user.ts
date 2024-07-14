@@ -6,7 +6,7 @@ import { _ } from "../utils/pino";
 import { getUserId } from "../utils/nano";
 import Cardano from "@emurgo/cardano-serialization-lib-nodejs";
 import DB from "../db";
-const cbor = require("cbor");
+
 const verifyDataSignature = require("@cardano-foundation/cardano-verify-datasignature");
 
 const loginUserMiddlewares: any = [userMiddleware];

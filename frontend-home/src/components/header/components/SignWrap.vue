@@ -255,7 +255,7 @@ export default {
 .selector {
   display: flex;
   background: var(--base-b);
-  padding: 0.25rem;
+  padding: 3px;
   overflow: hidden;
   border-radius: 12px;
 }
