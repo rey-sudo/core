@@ -8,15 +8,13 @@
       :page="0"
       :responsiveOptions="responsiveOptions"
       :showNavigators="false"
-      :showIndicators="false"
+      :showIndicators="true"
       verticalViewPortHeight="400px"
       :autoplayInterval="5000"
       circular
     >
- 
       <template #item>
-      
-        <img class="image" src="./header1.png" /> 
+        <img class="image" src="./header1.png" />
       </template>
     </Carousel>
   </div>
@@ -31,25 +29,22 @@ export default {
       {
         name: "1",
         image:
-        "https://m.media-amazon.com/images/I/71zm8w6m4vL._SX3000_.jpg",
+          "https://http2.mlstatic.com/D_NQ_811032-MLA77443388376_072024-OO.webp",
       },
 
       {
         name: "2",
-        image:
-        "https://m.media-amazon.com/images/I/71zm8w6m4vL._SX3000_.jpg",
+        image: "https://http2.mlstatic.com/D_NQ_811032-MLA77443388376_072024-OO.webp",
       },
 
       {
         name: "3",
-        image:
-        "https://m.media-amazon.com/images/I/71zm8w6m4vL._SX3000_.jpg",
+        image: "https://http2.mlstatic.com/D_NQ_811032-MLA77443388376_072024-OO.webp",
       },
 
       {
         name: "4",
-        image:
-        "https://m.media-amazon.com/images/I/71zm8w6m4vL._SX3000_.jpg",
+        image: "https://http2.mlstatic.com/D_NQ_811032-MLA77443388376_072024-OO.webp",
       },
     ]);
     const responsiveOptions = ref([
@@ -86,11 +81,12 @@ export default {
   object-fit: cover;
   width: 100%;
   position: relative;
-  object-position: top;
+  object-position: center;
 }
 
 .banner {
   width: inherit;
+  height: 400px;
   min-height: 400px;
   z-index: 1;
   position: relative;
@@ -99,13 +95,12 @@ export default {
   display: flex;
   flex-direction: column;
   margin-top: 41px;
-  padding: 0 10%;
 }
 
 .banner-mask {
   width: inherit;
   height: inherit;
-  height: 100px;
+  height: 50px;
   width: 100%;
   bottom: 0;
   left: 0;

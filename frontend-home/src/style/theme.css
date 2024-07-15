@@ -3984,11 +3984,11 @@
     margin-bottom: 0.5rem;
   }
   .p-carousel .p-carousel-indicators .p-carousel-indicator button {
-    background-color: #e9ecef;
-    width: 1rem;
-    height: 0.25rem;
+    background-color: gray;
+    width: 0.5rem;
+    height: 0.5rem;
     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
-    border-radius: 0;
+    border-radius: 50%;
   }
   .p-carousel .p-carousel-indicators .p-carousel-indicator button:hover {
     background: #dee2e6;
