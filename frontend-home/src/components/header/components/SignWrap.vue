@@ -149,6 +149,14 @@ export default {
 
     const activeTab = ref("user");
 
+    if (getCurrentSeller.value) {
+      activeTab.value = "seller";
+    }
+
+    if (getCurrentUser.value) {
+      activeTab.value = "user";
+    }
+
     watch(getCurrentSeller, (newValue) => {
       if (newValue) {
         activeTab.value = "seller";
