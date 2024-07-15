@@ -3,7 +3,7 @@
     <div class="p-userlogin-wrap" v-if="!getCurrentUser">
       <div class="p-userlogin-wrap-button" @click="handleSign">
         <i class="pi pi-wallet" />
-        <span>Login</span>
+        <span>Wallet Login</span>
       </div>
     </div>
 
@@ -20,12 +20,12 @@
 
       <div class="p-userlogin-profile-item">
         <span>Address</span>
-        <span>{{ getCurrentUser.address }}</span>
+        <span>{{ shortFormat(getCurrentUser.address, 30) }}</span>
       </div>
 
       <div class="p-userlogin-profile-item">
         <span>PKH</span>
-        <span>{{ getCurrentUser.pubkeyhash }}</span>
+        <span>{{ shortFormat(getCurrentUser.pubkeyhash, 30) }}</span>
       </div>
 
       <div class="p-userlogin-profile-buttons">
@@ -39,7 +39,7 @@
 
 <script>
 import { signMessage, getAddress } from "@/api/wallet-api";
-
+import { shortFormat } from "@/utils";
 import headerAPI from "../composable/header-api";
 
 export default {
@@ -63,6 +63,7 @@ export default {
       handleSign,
       getCurrentUser,
       logoutUser,
+      shortFormat,
     };
   },
 };

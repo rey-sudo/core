@@ -54,30 +54,17 @@ import { computed } from "vue";
 import { sessionAPI } from "@/pages/session/api";
 import { useClipboard } from "@vueuse/core";
 import { NETWORK } from "@/api";
+import { shortFormat } from "@/utils";
 
 export default {
   setup() {
     const { getSlotData } = sessionAPI();
 
-    const formatHash = (str, maxLength) => {
-      if (!str) {
-        return "N/A";
-      }
-
-      if (str.length <= maxLength) {
-        return str;
-      }
-
-      const ellipsis = "...";
-      const halfLength = Math.floor((maxLength - ellipsis.length) / 2);
-
-      return str.slice(0, halfLength) + ellipsis + str.slice(-halfLength);
-    };
 
     const eventData = computed(() => [
       {
         status: "Waiting",
-        text: formatHash(getSlotData.value.contract_0_tx, 20),
+        text: shortFormat(getSlotData.value.contract_0_tx, 20),
         data: getSlotData.value.contract_0_tx,
       },
       {
@@ -102,6 +89,7 @@ export default {
       eventData,
       getSlotData,
       copy,
+      shortFormat
     };
   },
 
