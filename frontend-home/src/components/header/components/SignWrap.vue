@@ -295,7 +295,7 @@ export default {
 }
 
 .selector div:hover {
-  color: var(--primary-c);
+  font-weight: 500;
 }
 
 .selector div.active {
