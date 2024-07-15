@@ -85,8 +85,12 @@ export default {
     UserLogin,
   },
   setup() {
-    const { getDisplaySetupWallet, displaySetupWallet, getCurrentSeller, getCurrentUser } =
-      headerAPI();
+    const {
+      getDisplaySetupWallet,
+      displaySetupWallet,
+      getCurrentSeller,
+      getCurrentUser,
+    } = headerAPI();
 
     const displayPanel = ref(false);
 
@@ -154,6 +158,7 @@ export default {
 
     watch(getCurrentUser, (newValue) => {
       if (newValue) {
+        activeTab.value = "user";
         displayPanel.value = false;
       }
     });
