@@ -1,34 +1,34 @@
 <template>
-  <div class="login">
-    <div class="login-wrap" v-if="!getCurrentUser">
-      <div class="button" @click="handleSign">
+  <div class="p-userlogin">
+    <div class="p-userlogin-wrap" v-if="!getCurrentUser">
+      <div class="p-userlogin-wrap-button" @click="handleSign">
         <i class="pi pi-wallet" />
         <span>Login</span>
       </div>
     </div>
 
-    <div class="profile" v-if="getCurrentUser">
-      <div class="profile-item">
+    <div class="p-userlogin-profile" v-if="getCurrentUser">
+      <div class="p-userlogin-profile-item">
         <span>Id</span>
         <span>{{ getCurrentUser.id }}</span>
       </div>
 
-      <div class="profile-item">
+      <div class="p-userlogin-profile-item">
         <span>Country</span>
         <span>{{ getCurrentUser.country }}</span>
       </div>
 
-      <div class="profile-item">
+      <div class="p-userlogin-profile-item">
         <span>Address</span>
         <span>{{ getCurrentUser.address }}</span>
       </div>
 
-      <div class="profile-item">
+      <div class="p-userlogin-profile-item">
         <span>PKH</span>
         <span>{{ getCurrentUser.pubkeyhash }}</span>
       </div>
 
-      <div class="profile-buttons">
+      <div class="p-userlogin-profile-buttons">
         <button class="logout-button" @click="logoutUser">
           <i class="pi pi-sign-out" />
         </button>
@@ -44,7 +44,7 @@ import headerAPI from "../composable/header-api";
 
 export default {
   setup() {
-    const { loginUser, getCurrentUser } = headerAPI();
+    const { loginUser, getCurrentUser, logoutUser } = headerAPI();
 
     const handleSign = async () => {
       await signMessage()
@@ -62,21 +62,30 @@ export default {
     return {
       handleSign,
       getCurrentUser,
+      logoutUser,
     };
   },
 };
 </script>
 
 <style lang="css" scoped>
-.login {
+.p-userlogin {
   height: 400px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1rem;
 }
+.p-userlogin .p-userlogin-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 12px;
+  width: inherit;
+}
 
-.button {
+.p-userlogin .p-userlogin-wrap .p-userlogin-wrap-button {
   background: var(--primary-a);
   color: var(--text-w);
   font-size: var(--text-size-b);
@@ -89,72 +98,39 @@ export default {
   cursor: pointer;
 }
 
-.button span {
+.p-userlogin .p-userlogin-wrap .p-userlogin-wrap-button span {
   margin-left: 1rem;
 }
 
-.profile {
+.p-userlogin .p-userlogin-profile {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.profile-description {
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  margin-top: 1rem;
-}
-
-.profile-image {
-  width: 50px;
-  height: 50px;
-  background: green;
-  border-radius: 6px;
-  overflow: hidden;
-  border: 1px solid var(--border-b);
-}
-
-.profile-name {
-  margin-left: 1rem;
-  font-size: var(--text-size-c);
-  color: var(--text-a);
-  display: flex;
-  flex-direction: column;
-}
-
-.profile-name span {
-  line-height: 1.5rem;
-}
-
-.profile-name span:nth-child(2) {
-  color: var(--text-b);
-  font-size: var(--text-size-a);
-}
-
-.profile-item {
+.p-userlogin .p-userlogin-profile .p-userlogin-profile-item {
   display: flex;
   flex-direction: column;
   margin-top: 1.5rem;
 }
 
-.profile-item span {
+.p-userlogin .p-userlogin-profile .p-userlogin-profile-item span {
   line-height: 1.5rem;
 }
 
-.profile-item span:nth-child(1) {
+.p-userlogin .p-userlogin-profile .p-userlogin-profile-item span:nth-child(1) {
   font-weight: 500;
   color: var(--text-a);
   font-size: var(--text-size-b);
 }
 
-.profile-item span:nth-child(2) {
+.p-userlogin .p-userlogin-profile .p-userlogin-profile-item span:nth-child(2) {
   font-weight: 400;
   font-size: var(--text-size-b);
 }
 
-.profile-buttons {
+.p-userlogin .p-userlogin-profile .p-userlogin-profile-buttons {
   margin-top: auto;
   justify-content: flex-end;
   display: flex;
