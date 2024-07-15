@@ -117,7 +117,6 @@ export default {
   background: var(--primary-a);
   color: var(--text-w);
   font-weight: 500;
-  border-top: 1px solid rgba(255,255,255,0.2);
   box-shadow: var(--shadow-b);
 }
 
