@@ -1,7 +1,5 @@
 <template>
   <div class="head mobile">
-    <!--LEFT-->
-
     <div class="bread">
       <Breadcrumb :home="home" :model="breadItems">
         <template #separator>
@@ -12,56 +10,7 @@
 
     <div class="head-body">
       <div class="head-left">
-        <div class="head-gallery">
-          <div class="head-gallery-boxes">
-            <div
-              v-for="(item, index) in images"
-              :key="item"
-              @click="changeGalleryImage(index)"
-              @mouseover="changeGalleryImage(index)"
-              :class="{ imageSelected: isGalleryImage(index) }"
-            >
-              <img :src="item.thumbnailImageSrc" alt="" />
-            </div>
-
-            <div>
-              <span class="mask">+15</span>
-            </div>
-
-            <div>
-              <span class="mask">
-                <i class="pi pi-play-circle" />
-              </span>
-            </div>
-          </div>
-          <div class="head-gallery-image">
-            <Galleria
-              :value="galleryImage"
-              :responsiveOptions="responsiveOptions"
-              :numVisible="1"
-              :circular="true"
-              :transitionInterval="0"
-              containerStyle="max-width: 60%;   margin-top: 4rem; "
-              :showItemNavigators="false"
-              :showThumbnails="false"
-            >
-              <template #item="slotProps">
-                <img
-                  :src="slotProps.item.itemImageSrc"
-                  :alt="slotProps.item.alt"
-                  style="
-                    width: 100%;
-                    display: block;
-                    min-height: 350px;
-                    max-height: 350px;
-                    object-fit: contain;
-                  "
-                />
-              </template>
-            </Galleria>
-          </div>
-        </div>
-
+        <MediaComp />
         <DescriptionView />
       </div>
 
@@ -153,69 +102,17 @@
 import productAPI from "@/pages/product/api";
 import DescriptionView from "./DescriptionView.vue";
 import InfoIcons from "./InfoIcons.vue";
-import { ref } from "vue"; 
+import MediaComp from "./MediaComp.vue";
+import { ref } from "vue";
 
 export default {
   components: {
     DescriptionView,
     InfoIcons,
+    MediaComp,
   },
   setup() {
     const { lockingEndpoint } = productAPI();
-
-    const galleryImage = ref([]);
-
-    const galleryImageIndex = ref(0);
-
-    const images = ref([
-      {
-        itemImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615_sd.jpg",
-        thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615_sd.jpg",
-        alt: "Description for Image 1",
-        title: "Title 1",
-      },
-      {
-        itemImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615cv11d.jpg",
-        thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615cv11d.jpg",
-        alt: "Description for Image 2",
-        title: "Title 2",
-      },
-      {
-        itemImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615cv12d.jpg",
-        thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615cv12d.jpg",
-        alt: "Description for Image 3",
-        title: "Title 3",
-      },
-      {
-        itemImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615cv13d.jpg",
-        thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615cv13d.jpg",
-        alt: "Description for Image 4",
-        title: "Title 4",
-      },
-    ]);
-
-    const responsiveOptions = ref([
-      {
-        breakpoint: "991px",
-        numVisible: 4,
-      },
-      {
-        breakpoint: "767px",
-        numVisible: 3,
-      },
-      {
-        breakpoint: "575px",
-        numVisible: 1,
-      },
-    ]);
 
     const product = ref({
       rating_count: 4.8,
@@ -238,49 +135,12 @@ export default {
     ]);
 
     return {
-      images,
       product,
       home,
       seller,
       breadItems,
-      galleryImage,
       lockingEndpoint,
-      responsiveOptions,
-      galleryImageIndex,
     };
-  },
-  data() {
-    return {
-      lucid: null,
-      slot_id: "",
-      buyer_pubkeyhash: "",
-      tx1: "84a400800181a300581d70c11355d423aed1273fa29eb0aaae09f63f025890f03fedd6ade0b4f5011a01312d0b028201d8185841d8799f004777616974696e67d87980d87980d87980581c4068ce72a0f73e850f19899a10b82ec534a55a6d860e5c5267dca2b9d87a801a01c9c38b1a01312d0bff02000e81581c4068ce72a0f73e850f19899a10b82ec534a55a6d860e5c5267dca2b9a0f5f6",
-      tx2: "",
-    };
-  },
-
-  created() {
-    this.$watch(
-      () => this.$route.params,
-      (e) => (this.slot_id = e.id),
-      { immediate: true }
-    )();
-  },
-  methods: {
-    isGalleryImage(index) {
-      return this.galleryImageIndex === index;
-    },
-    setupData() {
-      this.galleryImage[0] = this.images[0];
-    },
-    changeGalleryImage(index) {
-      this.galleryImageIndex = index;
-      this.galleryImage[0] = this.images[this.galleryImageIndex];
-    },
-  },
-
-  mounted() {
-    this.setupData();
   },
 };
 </script>
@@ -433,64 +293,6 @@ export default {
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-}
-
-.head .head-gallery {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.head .head-gallery .head-gallery-boxes {
-  display: flex;
-  justify-content: flex-start;
-  position: relative;
-  flex-direction: column;
-  height: 100%;
-}
-
-.mask {
-  background: #55555a;
-  border-radius: 4px;
-  color: var(--text-w);
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  opacity: 0.9;
-}
-
-.head .head-gallery .head-gallery-boxes div {
-  border: 1px solid var(--border-b);
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  padding: 0.25rem;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  width: 70px;
-  height: 70px;
-}
-
-.head .head-gallery .head-gallery-boxes div.imageSelected {
-  outline: 2px solid black;
-}
-
-.head .head-gallery .head-gallery-boxes div img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.head .head-gallery .head-gallery-image {
-  width: 100%;
-  display: flex;
-  justify-content: center;
 }
 
 .head .head-right {
