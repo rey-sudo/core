@@ -198,7 +198,7 @@ export default {
 }
 
 .steps-item i {
-  font-size: var(--text-size-d);
+  font-size: var(--text-size-e);
 }
 
 .steps-item.active {
