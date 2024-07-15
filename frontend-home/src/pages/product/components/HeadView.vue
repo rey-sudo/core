@@ -412,7 +412,6 @@ export default {
 
 .head-body {
   display: flex;
-  padding: 0 1rem;
 }
 
 .arrow::before {
