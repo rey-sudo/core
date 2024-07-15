@@ -8,7 +8,7 @@
       :page="0"
       :responsiveOptions="responsiveOptions"
       :showNavigators="false"
-      :showIndicators="true"
+      :showIndicators="false"
       verticalViewPortHeight="300px"
       :autoplayInterval="5000"
       circular
@@ -91,7 +91,6 @@ export default {
 
 .banner {
   width: inherit;
-  height: 400px;
   min-height: 400px;
   z-index: 1;
   position: relative;
