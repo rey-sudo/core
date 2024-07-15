@@ -3984,7 +3984,7 @@
     margin-bottom: 0.5rem;
   }
   .p-carousel .p-carousel-indicators .p-carousel-indicator button {
-    background-color: gray;
+    background-color: var(--base-a);
     width: 0.5rem;
     height: 0.5rem;
     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
@@ -10613,7 +10613,7 @@
     color: var(--text-b);
     text-transform: capitalize;
   }
-  
+
   .p-metergroup .p-metergroup-meter {
     border: 0 none;
     background: #2196f3;
