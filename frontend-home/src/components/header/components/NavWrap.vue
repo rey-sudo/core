@@ -119,7 +119,6 @@ export default {
   font-weight: 500;
   border-top: 1px solid var(--blue-b);
   box-shadow: var(--shadow-b);
-
 }
 
 .nav.hide {
