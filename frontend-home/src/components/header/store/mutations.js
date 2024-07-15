@@ -6,7 +6,7 @@ const currentUser = (state, data) => {
   state.userData = data;
 };
 
-const setupWallet = (state, data) => {
+const displaySetupWallet = (state, data) => {
   state.displaySetupWallet = data;
 };
 
@@ -18,4 +18,4 @@ const connectWallet = (state, data) => {
 const setupLucid = (state, data) => {
   state.lucidClient = data;
 };
-export { currentUser, connectWallet, setupWallet, currentSeller, setupLucid };
+export { currentUser, connectWallet, displaySetupWallet, currentSeller, setupLucid };

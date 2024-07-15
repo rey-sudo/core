@@ -85,7 +85,7 @@ export default {
     UserLogin,
   },
   setup() {
-    const { getSetupWallet, setupWallet, getCurrentSeller, getCurrentUser } =
+    const { getDisplaySetupWallet, displaySetupWallet, getCurrentSeller, getCurrentUser } =
       headerAPI();
 
     const displayPanel = ref(false);
@@ -111,7 +111,7 @@ export default {
       activeStep.value = 1;
     });
 
-    watch(getSetupWallet, (newValue) => {
+    watch(getDisplaySetupWallet, (newValue) => {
       if (newValue === true) {
         displayPanel.value = true;
       }
@@ -119,7 +119,7 @@ export default {
 
     watch(displayPanel, (newValue) => {
       if (newValue === false) {
-        setupWallet(false);
+        displaySetupWallet(false);
       }
     });
 
@@ -171,8 +171,8 @@ export default {
       enabledWallet,
       handleStep,
       selectWallet,
-      getSetupWallet,
-      setupWallet,
+      getDisplaySetupWallet,
+      displaySetupWallet,
     };
   },
 };

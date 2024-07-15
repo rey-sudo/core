@@ -184,7 +184,7 @@
       </div>
 
       <div class="header-button right">
-        <button @click="setupWallet(true)">
+        <button @click="displaySetupWallet(true)">
           <i class="pi pi-bars" />
           <img src="@/assets/user.svg" alt="" />
         </button>
@@ -214,7 +214,7 @@ export default {
   setup() {
     let currentRoute = ref("");
 
-    const { setupWallet } = headerAPI();
+    const { displaySetupWallet } = headerAPI();
 
     const selectedCountry = ref({ name: "United States", code: "US" });
 
@@ -237,7 +237,7 @@ export default {
       countries,
       selectedLanguage,
       languages,
-      setupWallet,
+      displaySetupWallet,
     };
   },
   data() {

@@ -6,7 +6,7 @@ const getCurrentUser = (state) => {
   return state.userData;
 };
 
-const getSetupWallet = (state) => {
+const getDisplaySetupWallet = (state) => {
   return state.displaySetupWallet;
 };
 
@@ -14,4 +14,4 @@ const getLucid = (state) => {
   return state.lucidClient;
 };
 
-export { getCurrentUser, getCurrentSeller, getSetupWallet, getLucid };
+export { getCurrentUser, getCurrentSeller, getDisplaySetupWallet, getLucid };

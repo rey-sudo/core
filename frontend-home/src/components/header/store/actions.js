@@ -72,8 +72,8 @@ const logoutUser = async ({ commit }, params) => {
   }
 };
 
-const setupWallet = async ({ commit }, params) => {
-  commit("setupWallet", params);
+const displaySetupWallet = async ({ commit }, params) => {
+  commit("displaySetupWallet", params);
 };
 
 const connectWallet = async ({ commit }, params) => {
@@ -107,7 +107,7 @@ export {
   startTx,
   currentSeller,
   loginSeller,
-  setupWallet,
+  displaySetupWallet,
   logoutSeller,
   loginUser,
 };

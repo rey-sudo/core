@@ -10,8 +10,8 @@ const headerAPI = () => {
   const currentUser = async (params) =>
     await store.dispatch("header/currentUser", params);
 
-  const setupWallet = async (params) =>
-    await store.dispatch("header/setupWallet", params);
+  const displaySetupWallet = async (params) =>
+    await store.dispatch("header/displaySetupWallet", params);
 
   const connectWallet = async (params) =>
     await store.dispatch("header/connectWallet", params);
@@ -35,7 +35,7 @@ const headerAPI = () => {
 
   return {
     currentSeller,
-    setupWallet,
+    displaySetupWallet,
     currentUser,
     logoutUser,
     loginSeller,
@@ -46,7 +46,7 @@ const headerAPI = () => {
     connectWallet,
     getCurrentSeller: computed(() => store.getters["header/getCurrentSeller"]),
     getCurrentUser: computed(() => store.getters["header/getCurrentUser"]),
-    getSetupWallet: computed(() => store.getters["header/getSetupWallet"]),
+    getDisplaySetupWallet: computed(() => store.getters["header/getDisplaySetupWallet"]), 
     getLucid: computed(() => store.getters["header/getLucid"]),
   };
 };
