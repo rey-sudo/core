@@ -77,7 +77,7 @@ export default {};
 <style lang="css" scoped>
 .accordionStyle {
   width: 90%;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .keywords {
