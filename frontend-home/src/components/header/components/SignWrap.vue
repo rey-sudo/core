@@ -92,11 +92,20 @@ export default {
       getCurrentUser,
     } = headerAPI();
 
-    const displayPanel = ref(false);
 
-    if (!getCurrentSeller.value && !getCurrentUser.value) {
-      displayPanel.value = true;
-    }
+
+    const stepsList = ref([
+      {
+        label: "Connect",
+        icon: "pi pi-wallet",
+      },
+      {
+        label: "Account",
+        icon: "pi pi-user",
+      },
+    ]);
+
+    const displayPanel = ref(false);
 
     const activeStep = ref(0);
 
@@ -104,16 +113,18 @@ export default {
 
     const getWalletName = () => localStorage.getItem("pairfy-wallet");
 
-    if (getWalletName() !== null) {
+    const walletName = getWalletName();
+
+    if (walletName !== null) {
       activeStep.value = 1;
-      enabledWallet.value = getWalletName();
+      enabledWallet.value = walletName;
     } else {
       displayPanel.value = true;
     }
 
-    window.addEventListener("walletEnabledEvent", () => {
-      activeStep.value = 1;
-    });
+    if (!getCurrentSeller.value && !getCurrentUser.value) {
+      displayPanel.value = true;
+    }
 
     watch(getDisplaySetupWallet, (newValue) => {
       if (newValue === true) {
@@ -127,16 +138,9 @@ export default {
       }
     });
 
-    const stepsList = ref([
-      {
-        label: "Connect",
-        icon: "pi pi-wallet",
-      },
-      {
-        label: "Account",
-        icon: "pi pi-user",
-      },
-    ]);
+    window.addEventListener("walletEnabledEvent", () => {
+      activeStep.value = 1;
+    });
 
     const selectWallet = async (e) => {
       await walletClient().connect(e);
