@@ -88,7 +88,11 @@ export default {
     const { getSetupWallet, setupWallet, getCurrentSeller, getCurrentUser } =
       headerAPI();
 
-    const displayPanel = ref(true);
+    const displayPanel = ref(false);
+
+    if (!getCurrentSeller.value && !getCurrentUser.value) {
+      displayPanel.value = true;
+    }
 
     const activeStep = ref(0);
 
@@ -141,17 +145,16 @@ export default {
 
     const activeTab = ref("user");
 
-    console.log(getCurrentSeller.value);
-
     watch(getCurrentSeller, (newValue) => {
       if (newValue) {
         activeTab.value = "seller";
+        displayPanel.value = false;
       }
     });
 
     watch(getCurrentUser, (newValue) => {
       if (newValue) {
-        activeTab.value = "user";
+        displayPanel.value = false;
       }
     });
 
