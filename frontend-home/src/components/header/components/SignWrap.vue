@@ -15,8 +15,6 @@
         @click="handleStep(index)"
       >
         <i :class="item.icon" />
-
-        <div class="steps-legend">{{ item.label }}</div>
       </div>
     </div>
 
@@ -84,10 +82,11 @@ import UserLogin from "./UserLogin.vue";
 export default {
   components: {
     SellerLogin,
-    UserLogin
+    UserLogin,
   },
   setup() {
-    const { getSetupWallet, setupWallet } = headerAPI();
+    const { getSetupWallet, setupWallet, getCurrentSeller, getCurrentUser } =
+      headerAPI();
 
     const displayPanel = ref(true);
 
@@ -142,6 +141,20 @@ export default {
 
     const activeTab = ref("user");
 
+    console.log(getCurrentSeller.value);
+
+    watch(getCurrentSeller, (newValue) => {
+      if (newValue) {
+        activeTab.value = "seller";
+      }
+    });
+
+    watch(getCurrentUser, (newValue) => {
+      if (newValue) {
+        activeTab.value = "user";
+      }
+    });
+
     const selectTab = (e) => {
       activeTab.value = e;
     };
@@ -164,7 +177,7 @@ export default {
 
 <style lang="css" scoped>
 .steps {
-  padding: 1rem 2rem;
+  padding: 1rem 4rem;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -188,12 +201,6 @@ export default {
 .steps-item.active {
   border: 1px solid var(--primary-c);
   color: var(--primary-c);
-}
-
-.steps-legend {
-  margin-left: 1rem;
-  font-size: var(--text-size-b);
-  font-weight: 500;
 }
 
 .message {
@@ -238,7 +245,7 @@ export default {
 }
 
 .grid-item.active {
-  border: 2px solid var(--primary-c);
+  border: 1px solid var(--primary-c);
 }
 
 .tab-1 {
@@ -269,6 +276,10 @@ export default {
   font-weight: 400;
   border-radius: 6px;
   transition: 0.1s ease-in-out;
+}
+
+.selector div:hover {
+  color: var(--primary-c);
 }
 
 .selector div.active {

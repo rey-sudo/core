@@ -9,7 +9,7 @@
 
     <div class="p-userlogin-profile" v-if="getCurrentUser">
       <div class="p-userlogin-profile-item">
-        <span>Id</span>
+        <span>ID</span>
         <span>{{ getCurrentUser.id }}</span>
       </div>
 
