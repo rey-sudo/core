@@ -14,85 +14,9 @@
         <DescriptionView />
       </div>
 
-      <!--RIGHT-->
       <div class="head-right">
-        <div class="head-info">
-          <span>5 available • 23 sold</span>
-        </div>
-
-        <div class="head-name">
-          Apple 2023 MacBook Pro Laptop M3 Pro chip with 11‑core CPU, 14‑core
-          GPU: 14.2-inch Liquid Retina XDR Display, 18GB Unified Memory, 512GB
-          SSD Storage. Works with iPhone/iPad; Space Black
-        </div>
-
-        <div class="head-legend">
-          <span>Model: PLACCOG7OQVQY2BX </span>
-          <span>SKU: P9C3KC93CK</span>
-        </div>
-
-        <div class="head-rating">
-          <Rating
-            :modelValue="product.rating_count"
-            :stars="5"
-            :readonly="true"
-            :cancel="false"
-            style="margin-right: 0.5rem"
-          />
-          <span>{{ product.rating_count }}</span>
-
-          <span>({{ product.review_count }} Reviews)</span>
-        </div>
-
-        <div class="head-price">
-          <div class="ada-label">₳</div>
-          <span>3,024</span>
-        </div>
-
-        <InfoIcons />
-
-        <div class="head-button buyButton">
-          <div @click="buyProduct">Buy now</div>
-        </div>
-
-        <div class="head-seller">
-          <div class="head-seller-head">
-            <img
-              src="https://http2.mlstatic.com/D_NQ_NP_984015-MLA74975093699_032024-G.jpg"
-              alt=""
-            />
-
-            <div>
-              <span>Samsung</span>
-              <span>1000+ sales completed</span>
-            </div>
-          </div>
-          <div class="head-seller-bottom">
-            <div class="head-seller-badge">
-              <i class="pi pi-clock" />
-              <span> Products delivered on time. </span>
-              <ul class="meter">
-                <li class="level-1" :class="{ actived: false }" />
-                <li class="level-2" :class="{ actived: false }" />
-                <li class="level-3" :class="{ actived: false }" />
-                <li class="level-4" :class="{ actived: false }" />
-                <li class="level-5" :class="{ actived: true }" />
-              </ul>
-            </div>
-
-            <div class="head-seller-badge">
-              <i class="pi pi-thumbs-up" />
-              <span> Good communication. </span>
-              <ul class="meter">
-                <li />
-                <li />
-                <li />
-                <li />
-                <li />
-              </ul>
-            </div>
-          </div>
-        </div>
+        <BuyPanel />
+        <SellerComp />
       </div>
     </div>
   </div>
@@ -101,30 +25,20 @@
 <script>
 import productAPI from "@/pages/product/api";
 import DescriptionView from "./DescriptionView.vue";
-import InfoIcons from "./InfoIcons.vue";
 import MediaComp from "./MediaComp.vue";
+import SellerComp from "./SellerComp.vue";
+import BuyPanel from "./BuyPanel.vue";
 import { ref } from "vue";
 
 export default {
   components: {
     DescriptionView,
-    InfoIcons,
     MediaComp,
+    SellerComp,
+    BuyPanel,
   },
   setup() {
     const { lockingEndpoint } = productAPI();
-
-    const product = ref({
-      rating_count: 4.8,
-      review_count: 558,
-    });
-
-    const seller = ref({
-      name: "Samsung",
-      sales_completed: 1000,
-      delivered_on_time: 5,
-      good_communication: 4,
-    });
 
     const home = ref({ label: "Pairfy" });
 
@@ -135,9 +49,7 @@ export default {
     ]);
 
     return {
-      product,
       home,
-      seller,
       breadItems,
       lockingEndpoint,
     };
@@ -146,14 +58,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-::v-deep(.p-accordion-toggle-icon) {
-  display: none;
-}
-
-::v-deep(.p-metergroup-meters) {
-  display: none;
-}
-
 .bread {
   display: flex;
   justify-content: flex-start;
@@ -161,108 +65,6 @@ export default {
   padding-top: 2rem;
   padding-bottom: 4rem;
   border-top: 1px solid var(--border-b);
-}
-
-.head-info {
-  font-size: var(--text-size-b);
-  font-weight: 400;
-  text-align: left;
-  color: var(--primary-c);
-}
-
-.meter {
-  display: flex;
-  margin-left: auto;
-}
-
-.meter li {
-  width: 1rem;
-  height: 0.5rem;
-  background: var(--base-c);
-  margin-left: 0.25rem;
-  list-style: none;
-}
-
-.meter .level-1 {
-  background: var(--base-b);
-}
-
-.meter .level-2 {
-  background: var(--base-b);
-}
-
-.meter .level-3 {
-  background: var(--base-b);
-}
-
-.meter .level-4 {
-  background: var(--base-b);
-}
-
-.meter .level-5 {
-  background: var(--base-b);
-}
-
-.meter .level-5.actived {
-  background: var(--green-c);
-}
-
-.head-seller {
-  width: 90%;
-  margin-top: 2rem;
-  border: 1px solid var(--border-b);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.head-seller-head {
-  display: flex;
-  padding: 1rem;
-  align-items: center;
-  border-bottom: 1px solid var(--border-b);
-}
-
-.head-seller-head img {
-  width: 3rem;
-  height: 3rem;
-  outline: 1px solid var(--border-b);
-  outline-offset: 2px;
-  border-radius: 4px;
-  object-fit: contain;
-}
-
-.head-seller-head div {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  margin-left: 1rem;
-}
-
-.head-seller-head div span {
-  line-height: 1.5rem;
-}
-
-.head-seller-head div span:nth-child(1) {
-  font-weight: 500;
-}
-
-.head-seller-head div span:nth-child(2) {
-  font-weight: 400;
-  font-size: var(--text-size-a);
-  color: var(--text-b);
-}
-
-.head-seller-badge {
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  color: var(--text-b);
-}
-
-.head-seller-badge span {
-  font-size: var(--text-size-a);
-  margin-left: 1rem;
-  font-weight: 400;
 }
 
 .head {
@@ -299,92 +101,6 @@ export default {
   height: inherit;
   text-align: center;
   width: 30%;
-}
-
-.head .head-name {
-  font-size: var(--text-size-g);
-  font-weight: 500;
-  text-align: left;
-  width: 100%;
-  margin-top: 1rem;
-  line-height: 2.25rem;
-}
-
-.head .head-legend {
-  text-align: left;
-  font-size: var(--text-size-a);
-  margin-top: 1rem;
-  font-weight: 400;
-  color: var(--text-a);
-}
-
-.head .head-legend span {
-  margin-right: 1rem;
-}
-
-.head .head-rating {
-  font-size: var(--text-size-c);
-  align-items: center;
-  display: flex;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  width: 90%;
-}
-
-.head .head-rating span {
-  margin-right: 0.5rem;
-  font-size: var(--text-size-b);
-  color: var(--primary-c);
-  font-weight: 600;
-}
-
-.head .head-rating span:nth-child(3) {
-  font-weight: 400;
-  font-size: var(--text-size-a);
-  color: var(--primary-c);
-}
-
-.head .head-price {
-  text-align: left;
-  margin-top: initial;
-  font-size: var(--text-size-h);
-  font-weight: 600;
-  display: flex;
-  align-items: baseline;
-  margin-top: 1rem;
-}
-
-.head .head-price .ada-label {
-  font-weight: 400;
-  color: var(--text-a);
-  font-size: var(--text-size-g);
-  margin-right: 0.5rem;
-  margin-bottom: 2px;
-}
-
-.head .head-button {
-  border: 1px solid var(--primary-b);
-  width: 90%;
-  border-radius: 4px;
-  color: var(--text-a);
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem;
-  text-align: center;
-  margin-top: 1rem;
-  transition: var(--transition-a);
-  background: var(--primary-b);
-}
-
-.head .head-button.buyButton {
-  margin-top: 2rem;
-}
-
-.head .head-button:hover {
-  opacity: 0.8;
 }
 
 @media only screen and (max-width: 767px) {
