@@ -4,7 +4,7 @@
     modal
     dismissableMask
     header="Buy options"
-    :style="{ width: '80rem' }"
+    :style="{ width: '75vw' }"
     :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
   >
     <DataTable
@@ -12,6 +12,7 @@
       :value="slotList"
       v-model:selection="selectedProducts"
       dataKey="id"
+      style="height: 70vh;"
       :paginator="true"
       :rows="10"
       :filters="filters"
