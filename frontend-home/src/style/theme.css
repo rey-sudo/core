@@ -3096,8 +3096,8 @@
   }
   .p-button {
     color: #ffffff;
-    background: var(--blue-a);
-    border: 1px solid var(--blue-a);
+    background: var(--primary-c);
+    border: 1px solid var(--primary-c);
     padding: 0.5rem 1rem;
     font-size: var(--text-size-b);
     transition: background-color 0.2s, color 0.2s, border-color 0.2s,
