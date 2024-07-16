@@ -1,4 +1,69 @@
 <template>
+  <Dialog
+    v-model:visible="visible"
+    modal
+    dismissableMask
+    header="Buy options"
+    :style="{ width: '80rem' }"
+    :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
+  >
+    <DataTable
+      ref="dt"
+      :value="slotList"
+      v-model:selection="selectedProducts"
+      dataKey="id"
+      :paginator="true"
+      :rows="10"
+      :filters="filters"
+      paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+      :rowsPerPageOptions="[5, 10, 25]"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
+    >
+      <template #header>
+        <div class="toolbar">
+          <InputText
+            v-model="filters['global'].value"
+            placeholder="Search..."
+          />
+        </div>
+      </template>
+
+      <Column
+        field="code"
+        header="Code"
+        sortable
+        style="min-width: 12rem"
+      ></Column>
+      <Column
+        field="name"
+        header="Name"
+        sortable
+        style="min-width: 16rem"
+      ></Column>
+
+      <Column
+        field="category"
+        header="Category"
+        sortable
+        style="min-width: 10rem"
+      ></Column>
+
+      <Column :exportable="false" style="min-width: 8rem">
+        <template #body="slotProps">
+          <Button
+            icon="pi pi-pencil"
+            outlined
+            rounded
+            class="mr-2"
+            @click="editProduct(slotProps.data)"
+          />
+        </template>
+      </Column>
+    </DataTable>
+
+    <template #footer>  </template>
+  </Dialog>
+  <!--//////////////////////////////////////////////////////////////////////////-->
   <div class="head-info">
     <span>5 available</span>
   </div>
@@ -34,13 +99,14 @@
 
   <InfoIcons />
 
-  <div class="head-button buyButton">
-    <div @click="buyProduct">Buy now</div>
+  <div class="head-button buyButton" @click="openSlotDialog">
+    <div>Buy now</div>
   </div>
 </template>
 
 <script>
 import InfoIcons from "./InfoIcons.vue";
+import { FilterMatchMode } from "primevue/api";
 import { ref } from "vue";
 export default {
   components: {
@@ -52,7 +118,64 @@ export default {
       rating_count: 4.8,
       review_count: 558,
     });
-    return { product };
+
+    const visible = ref(false);
+
+    const openSlotDialog = () => {
+      visible.value = true;
+    };
+
+    const filters = ref({
+      global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    });
+
+    const slotList = ref([
+      {
+        id: "1000",
+        code: "f230fh0g3",
+        name: "Bamboo Watch",
+        description: "Product Description",
+        image: "bamboo-watch.jpg",
+        price: 65,
+        category: "Accessories",
+        quantity: 24,
+        inventoryStatus: "INSTOCK",
+        rating: 5,
+      },
+      {
+        id: "1000",
+        code: "f230fh0g3",
+        name: "Bamboo Watch",
+        description: "Product Description",
+        image: "bamboo-watch.jpg",
+        price: 65,
+        category: "Accessories",
+        quantity: 24,
+        inventoryStatus: "INSTOCK",
+        rating: 5,
+      },
+      {
+        id: "1000",
+        code: "f230fh0g3",
+        name: "Bamboo Watch",
+        description: "Product Description",
+        image: "bamboo-watch.jpg",
+        price: 65,
+        category: "Accessories",
+        quantity: 24,
+        inventoryStatus: "INSTOCK",
+        rating: 5,
+      },
+    ]);
+    const selectedProducts = ref();
+    return {
+      product,
+      visible,
+      openSlotDialog,
+      filters,
+      slotList,
+      selectedProducts,
+    };
   },
 };
 </script>
@@ -149,5 +272,10 @@ export default {
 
 .head-button:hover {
   opacity: 0.8;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
 }
 </style>

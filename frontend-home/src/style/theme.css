@@ -4230,8 +4230,9 @@
     border: 1px solid #e9ecef;
     border-width: 0 0 1px 0;
     font-weight: 600;
-    color: #495057;
+    color: var(--text-b);
     background: #f8f9fa;
+    font-size: var(--text-size-b);
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
   .p-datatable .p-datatable-tfoot > tr > td {
@@ -4293,6 +4294,7 @@
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-width: 0 0 1px 0;
     padding: 1rem 1rem;
+    font-size: var(--text-size-b);
   }
   .p-datatable .p-datatable-tbody > tr > td .p-row-toggler,
   .p-datatable .p-datatable-tbody > tr > td .p-row-editor-init,
@@ -4984,7 +4986,8 @@
   .p-paginator .p-paginator-current {
     background-color: transparent;
     border: 0 none;
-    color: #6c757d;
+    color: var(--text-b);
+    font-size: var(--text-size-b);
     min-width: 2.357rem;
     height: 2.357rem;
     margin: 0.143rem;
@@ -5001,9 +5004,10 @@
     border-radius: 3px;
   }
   .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-    background: #2196f3;
-    border-color: #2196f3;
-    color: #ffffff;
+    background: var(--primary-a);
+    border-color: var(--primary-a);
+    color: var(--text-w);
+    border-radius: 50%;
   }
   .p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover {
     background: #e9ecef;
