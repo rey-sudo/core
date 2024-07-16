@@ -36,13 +36,7 @@
           <img
             :src="slotProps.item.itemImageSrc"
             :alt="slotProps.item.alt"
-            style="
-              width: 100%;
-              display: block;
-              min-height: 350px;
-              max-height: 350px;
-              object-fit: contain;
-            "
+            class="p-mediacomp-image"
           />
         </template>
       </Galleria>
@@ -132,7 +126,6 @@ export default {
   mounted() {
     this.setupData();
   },
-  
 };
 </script>
 
@@ -193,5 +186,13 @@ export default {
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.p-mediacomp-image {
+  width: 100%;
+  display: block;
+  min-height: 350px;
+  max-height: 350px;
+  object-fit: contain;
 }
 </style>
