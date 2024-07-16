@@ -1,6 +1,6 @@
 <template>
-  <div class="head-gallery">
-    <div class="head-gallery-boxes">
+  <div class="p-mediacomp">
+    <div class="p-mediacomp-boxes">
       <div
         v-for="(item, index) in images"
         :key="item"
@@ -21,7 +21,7 @@
         </span>
       </div>
     </div>
-    <div class="head-gallery-image">
+    <div class="p-mediacomp-gallery">
       <Galleria
         :value="galleryImage"
         :responsiveOptions="responsiveOptions"
@@ -36,7 +36,7 @@
           <img
             :src="slotProps.item.itemImageSrc"
             :alt="slotProps.item.alt"
-            class="p-mediacomp-image"
+            class="p-mediacomp-gallery-image"
           />
         </template>
       </Galleria>
@@ -130,14 +130,14 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.head .head-gallery {
+.p-mediacomp {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
 }
 
-.head .head-gallery .head-gallery-boxes {
+.p-mediacomp .p-mediacomp-boxes {
   display: flex;
   justify-content: flex-start;
   position: relative;
@@ -158,7 +158,7 @@ export default {
   opacity: 0.9;
 }
 
-.head .head-gallery .head-gallery-boxes div {
+.p-mediacomp .p-mediacomp-boxes div {
   border: 1px solid var(--border-b);
   border-radius: 8px;
   margin-bottom: 1rem;
@@ -172,23 +172,23 @@ export default {
   height: 70px;
 }
 
-.head .head-gallery .head-gallery-boxes div.imageSelected {
+.p-mediacomp .p-mediacomp-boxes div.imageSelected {
   outline: 2px solid black;
 }
 
-.head .head-gallery .head-gallery-boxes div img {
+.p-mediacomp .p-mediacomp-boxes div img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-.head .head-gallery .head-gallery-image {
+.p-mediacomp .p-mediacomp-gallery {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.p-mediacomp-image {
+.p-mediacomp-gallery-image {
   width: 100%;
   display: block;
   min-height: 350px;
