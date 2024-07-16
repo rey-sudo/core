@@ -3117,7 +3117,7 @@
   }
   .p-button.p-button-outlined {
     background-color: transparent;
-    color: #2196f3;
+    color: var(--primary-c);
     border: 1px solid;
   }
   .p-button.p-button-outlined:not(:disabled):hover {
@@ -5004,8 +5004,8 @@
     border-radius: 3px;
   }
   .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-    background: var(--primary-a);
-    border-color: var(--primary-a);
+    background: var(--primary-c);
+    border-color: var(--primary-c);
     color: var(--text-w);
     border-radius: 50%;
   }
