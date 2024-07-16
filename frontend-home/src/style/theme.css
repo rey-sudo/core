@@ -4210,7 +4210,7 @@
   }
   .p-datatable .p-datatable-header {
     background: #f8f9fa;
-    color: #495057;
+    color: var(--text-b);
     border: 1px solid #e9ecef;
     border-width: 0 0 1px 0;
     padding: 1rem 1rem;
@@ -4218,7 +4218,7 @@
   }
   .p-datatable .p-datatable-footer {
     background: #f8f9fa;
-    color: #495057;
+    color: var(--text-b);
     border: 1px solid #e9ecef;
     border-width: 0 0 1px 0;
     padding: 1rem 1rem;
