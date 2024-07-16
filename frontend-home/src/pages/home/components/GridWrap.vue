@@ -181,6 +181,7 @@ export default {
 }
 
 .card-body-name {
+  margin-top: 1rem;
   color: var(--text-a);
   font-size: var(--text-size-c);
   display: flex;
