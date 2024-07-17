@@ -306,6 +306,6 @@ export default {
   border-radius: 6px;
   border: 1px solid var(--primary-b);
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 1rem;
 }
 </style>
