@@ -3,7 +3,8 @@
     v-model:visible="visible"
     modal
     dismissableMask
-    header="Buy options"
+    blockScroll
+    header="Buy Options"
     :draggable="false"
     :style="{ width: '70vw' }"
     :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
