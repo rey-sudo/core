@@ -216,7 +216,7 @@ export default {
   text-align: left;
   width: 100%;
   margin-top: 1rem;
-  line-height: 2.25rem;
+  line-height: 2.5rem;
 }
 
 .head-legend {
