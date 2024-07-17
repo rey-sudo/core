@@ -1,5 +1,4 @@
 import DB from "../db";
-import { BadRequestError } from "../errors";
 import { Request, Response } from "express";
 import { getProductId } from "../utils/nano";
 import { sellerMiddleware } from "../utils/seller";
@@ -71,13 +70,13 @@ const createProductHandler = async (req: Request, res: Response) => {
 
     await connection.commit();
 
-
     res.status(200).send({ success: true });
   } catch (err) {
     await connection.rollback();
 
     _.error(err);
 
+    res.status(400).send({ success: false });
   } finally {
     connection.release();
   }
