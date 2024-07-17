@@ -4,6 +4,8 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
 import cors from "cors";
 import express from "express";
 import http from "http";
+import DB from "./db";
+import listenProducts from "./kafka/products";
 const typeDefs = `#graphql
 
   type Product {
@@ -33,6 +35,14 @@ const resolvers = {
         productPage: () => productPage,
     },
 };
+DB.connect({
+    host: "mysql",
+    port: 3306,
+    user: "marketplace",
+    password: "password",
+    database: "service_query",
+});
+listenProducts();
 const app = express();
 const httpServer = http.createServer(app);
 const server = new ApolloServer({
