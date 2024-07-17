@@ -52,33 +52,33 @@ export default {
     const images = ref([
       {
         itemImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615_sd.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6428/6428324_sd.jpg",
         thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615_sd.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6428/6428324_sd.jpg",
         alt: "Description for Image 1",
         title: "Title 1",
       },
       {
         itemImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615cv11d.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6428/6428324cv11d.jpg",
         thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615cv11d.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6428/6428324cv11d.jpg",
         alt: "Description for Image 2",
         title: "Title 2",
       },
       {
         itemImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615cv12d.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6428/6428324cv12d.jpg",
         thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615cv12d.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6428/6428324cv12d.jpg",
         alt: "Description for Image 3",
         title: "Title 3",
       },
       {
         itemImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615cv13d.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6428/6428324cv14d.jpg",
         thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615cv13d.jpg",
+          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6428/6428324cv14d.jpg",
         alt: "Description for Image 4",
         title: "Title 4",
       },
