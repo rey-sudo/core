@@ -100,7 +100,7 @@ export default {
 .banner-mask {
   width: inherit;
   height: inherit;
-  height: 50px;
+  height: 10px;
   width: 100%;
   bottom: 0;
   left: 0;

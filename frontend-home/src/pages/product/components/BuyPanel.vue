@@ -223,14 +223,12 @@ export default {
 .head-rating span {
   margin-right: 0.5rem;
   font-size: var(--text-size-b);
-  color: var(--primary-c);
   font-weight: 600;
 }
 
 .head-rating span:nth-child(3) {
   font-weight: 400;
   font-size: var(--text-size-a);
-  color: var(--primary-c);
 }
 
 .head-price {
