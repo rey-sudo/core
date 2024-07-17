@@ -5,8 +5,6 @@ import { getProductId } from "../utils/nano";
 import { sellerMiddleware } from "../utils/seller";
 import { requireAuth } from "../utils/required";
 import { _ } from "../utils/pino";
-import { sendEvent } from "./get-events";
-
 
 const createProductMiddlewares: any = [sellerMiddleware, requireAuth];
 
@@ -44,7 +42,7 @@ const createProductHandler = async (req: Request, res: Response) => {
       image_set,
       video_set,
       schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const schemeValue = [
       "P" + getProductId(),
@@ -73,8 +71,6 @@ const createProductHandler = async (req: Request, res: Response) => {
 
     await connection.commit();
 
-    sendEvent(SELLER.id, "product:created");
-    
 
     res.status(200).send({ success: true });
   } catch (err) {
