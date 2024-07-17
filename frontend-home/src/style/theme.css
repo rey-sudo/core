@@ -4998,7 +4998,8 @@
   .p-paginator .p-paginator-pages .p-paginator-page {
     background-color: transparent;
     border: 0 none;
-    color: #6c757d;
+    color: var(--text-b);
+    font-size: var(--text-size-b);
     min-width: 2.357rem;
     height: 2.357rem;
     margin: 0.143rem;
