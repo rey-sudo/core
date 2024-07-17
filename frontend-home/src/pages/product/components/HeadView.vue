@@ -63,7 +63,7 @@ export default {
   justify-content: flex-start;
   width: inherit;
   padding-top: 2rem;
-  padding-bottom: 4rem;
+  padding-bottom: 6rem;
   border-top: 1px solid var(--border-b);
 }
 
