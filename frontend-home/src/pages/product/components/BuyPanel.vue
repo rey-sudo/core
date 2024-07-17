@@ -211,7 +211,7 @@ export default {
 }
 
 .head-name {
-  font-size: var(--text-size-f);
+  font-size: var(--text-size-g);
   font-weight: 500;
   text-align: left;
   width: 100%;

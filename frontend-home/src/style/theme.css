@@ -5000,8 +5000,8 @@
     border: 0 none;
     color: var(--text-b);
     font-size: var(--text-size-b);
-    min-width: 2.357rem;
-    height: 2.357rem;
+    min-width: 2rem;
+    height: 2rem;
     margin: 0.143rem;
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
     border-radius: 3px;
