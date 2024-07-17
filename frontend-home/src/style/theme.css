@@ -4213,7 +4213,7 @@
     color: var(--text-b);
     border: 1px solid #e9ecef;
     border-width: 0 0 1px 0;
-    padding: 1rem 1rem;
+    padding: 0.5rem 1rem;
     font-weight: 600;
   }
   .p-datatable .p-datatable-footer {
