@@ -4245,8 +4245,10 @@
     background: #f8f9fa;
   }
   .p-datatable .p-sortable-column .p-sortable-column-icon {
-    color: #6c757d;
+    color: var(--text-b);
     margin-left: 0.5rem;
+    width: var(--text-size-a);
+    height: var(--text-size-a);
   }
   .p-datatable .p-sortable-column .p-sortable-column-badge {
     border-radius: 50%;
@@ -4933,10 +4935,10 @@
   }
   .p-paginator {
     background: #ffffff;
-    color: #6c757d;
+    color: var(--text-b);
     border: solid #e9ecef;
     border-width: 0;
-    padding: 0.5rem 1rem;
+    padding: 1rem 1rem;
     border-radius: 3px;
   }
   .p-paginator .p-paginator-first,

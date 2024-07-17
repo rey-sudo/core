@@ -87,7 +87,7 @@ export default {
 }
 
 .p-userlogin .p-userlogin-wrap .p-userlogin-wrap-button {
-  background: var(--primary-a);
+  background: var(--primary-c);
   color: var(--text-w);
   font-size: var(--text-size-b);
   display: flex;

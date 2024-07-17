@@ -5,7 +5,7 @@
     dismissableMask
     header="Buy options"
     :draggable="false"
-    :style="{ width: '75vw' }"
+    :style="{ width: '70vw' }"
     :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
   >
     <DataTable
@@ -13,7 +13,7 @@
       :value="slotList"
       v-model:selection="selectedProducts"
       dataKey="id"
-      style="height: 70vh;"
+      style="height: 70vh"
       :paginator="true"
       :rows="10"
       :filters="filters"
@@ -31,39 +31,57 @@
       </template>
 
       <Column
-        field="code"
+        field="id"
         header="Code"
         sortable
         style="min-width: 12rem"
       ></Column>
-      <Column
-        field="name"
-        header="Name"
-        sortable
-        style="min-width: 16rem"
-      ></Column>
 
       <Column
-        field="category"
-        header="Category"
+        field="mode"
+        header="Mode"
         sortable
         style="min-width: 10rem"
       ></Column>
 
-      <Column :exportable="false" style="min-width: 8rem">
+      <Column
+        field="contract_units"
+        header="Units"
+        sortable
+        style="min-width: 10rem"
+      ></Column>
+
+      <Column
+        field="contract_price"
+        header="Price"
+        sortable
+        style="min-width: 10rem"
+      ></Column>
+
+      <Column
+        field="contract_collateral"
+        header="Collateral"
+        sortable
+        style="min-width: 10rem"
+      ></Column>
+
+      <Column
+        field="product_discount"
+        header="Discount"
+        sortable
+        style="min-width: 10rem"
+      ></Column>
+
+      <Column :exportable="false" style="min-width: 10rem">
         <template #body="slotProps">
-          <Button
-            icon="pi pi-pencil"
-            outlined
-            rounded
-            class="mr-2"
-            @click="editProduct(slotProps.data)"
-          />
+          <button class="miniBuyButton" @click="editProduct(slotProps.data)">
+            Buy
+          </button>
         </template>
       </Column>
     </DataTable>
 
-    <template #footer>  </template>
+    <template #footer> </template>
   </Dialog>
   <!--//////////////////////////////////////////////////////////////////////////-->
   <div class="head-info">
@@ -121,7 +139,7 @@ export default {
       review_count: 558,
     });
 
-    const visible = ref(false);
+    const visible = ref(true);
 
     const openSlotDialog = () => {
       visible.value = true;
@@ -133,42 +151,34 @@ export default {
 
     const slotList = ref([
       {
-        id: "1000",
-        code: "f230fh0g3",
-        name: "Bamboo Watch",
-        description: "Product Description",
-        image: "bamboo-watch.jpg",
-        price: 65,
-        category: "Accessories",
-        quantity: 24,
-        inventoryStatus: "INSTOCK",
-        rating: 5,
+        id: "S80843894300",
+        mode: "batch",
+        contract_units: 2,
+        contract_price: 3024,
+        contract_collateral: 20,
+        product_id: "adadada",
+        product_discount: 0,
       },
       {
-        id: "1000",
-        code: "f230fh0g3",
-        name: "Bamboo Watch",
-        description: "Product Description",
-        image: "bamboo-watch.jpg",
-        price: 65,
-        category: "Accessories",
-        quantity: 24,
-        inventoryStatus: "INSTOCK",
-        rating: 5,
+        id: "S80843894300",
+        mode: "batch",
+        contract_units: 2,
+        contract_price: 3024,
+        contract_collateral: 20,
+        product_id: "adadada",
+        product_discount: 0,
       },
       {
-        id: "1000",
-        code: "f230fh0g3",
-        name: "Bamboo Watch",
-        description: "Product Description",
-        image: "bamboo-watch.jpg",
-        price: 65,
-        category: "Accessories",
-        quantity: 24,
-        inventoryStatus: "INSTOCK",
-        rating: 5,
+        id: "S80843894300",
+        mode: "batch",
+        contract_units: 2,
+        contract_price: 3024,
+        contract_collateral: 20,
+        product_id: "adadada",
+        product_discount: 0,
       },
     ]);
+
     const selectedProducts = ref();
     return {
       product,
@@ -277,5 +287,15 @@ export default {
 .toolbar {
   display: flex;
   justify-content: flex-end;
+}
+
+.miniBuyButton {
+  background: var(--primary-b);
+  color: var(--text-a);
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid var(--primary-b);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
 }
 </style>
