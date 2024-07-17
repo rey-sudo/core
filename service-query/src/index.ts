@@ -5,7 +5,7 @@ import cors from "cors";
 import express from "express";
 import http from "http";
 import DB from "./db";
-import listenServiceProducts from "./kafka/products";
+import listenProducts from "./kafka/products";
 
 const typeDefs = `#graphql
 
@@ -48,7 +48,7 @@ DB.connect({
   database: "service_query",
 });
 
-listenServiceProducts();
+listenProducts();
 
 const app = express();
 
