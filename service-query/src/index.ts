@@ -62,7 +62,7 @@ const server = new ApolloServer({
 
 server.start().then(() => {
   app.use(
-    "/",
+    "/api/query",
     cors<cors.CorsRequest>(),
     express.json(),
     expressMiddleware(server, {
