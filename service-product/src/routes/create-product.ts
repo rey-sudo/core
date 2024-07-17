@@ -78,7 +78,6 @@ const createProductHandler = async (req: Request, res: Response) => {
 
     _.error(err);
 
-    throw new BadRequestError("failed");
   } finally {
     connection.release();
   }
