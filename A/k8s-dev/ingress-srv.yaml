@@ -62,7 +62,14 @@ spec:
               service:
                 name: service-media
                 port:
-                  number: 8000        
+                  number: 8000
+          - path: /api/query/?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: service-query
+                port:
+                  number: 4000                          
                   
                              
     - host: dashboard.pairfy.dev
