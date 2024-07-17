@@ -177,6 +177,15 @@ export default {
         product_id: "adadada",
         product_discount: 0,
       },
+      {
+        id: "S80843894300",
+        mode: "batch",
+        contract_units: 2,
+        contract_price: 3024,
+        contract_collateral: 20,
+        product_id: "adadada",
+        product_discount: 0,
+      },
     ]);
 
     const selectedProducts = ref();
