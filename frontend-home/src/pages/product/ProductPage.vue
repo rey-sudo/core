@@ -20,7 +20,7 @@ import MobileHeader from "@/components/header/MobileHeader.vue";
 import HeadView from "@/pages/product/components/HeadView.vue";
 import MobileHeadView from "@/pages/product/components/MobileHeadView.vue";
 
-import { ref } from "vue";
+
 import { Lucid, getAddressDetails } from "lucid-cardano";
 import { balanceTx } from "@/api/wallet-api";
 
@@ -32,17 +32,17 @@ export default {
     MobileHeadView,
   },
   setup() {
-    const { lockingEndpoint } = productAPI();
+    const { getProduct } = productAPI();
 
-    const product = ref({
-      rating_count: 4.8,
-      review_count: 756,
-    });
-
-    return {
-      product,
-      lockingEndpoint,
+    const main = async () => {
+      const params = {
+        id: "PEKV8LM61LZKALYQ",
+      };
+      await getProduct(params).then((res) => console.log(res));
     };
+    main();
+
+    return {};
   },
   data() {
     return {

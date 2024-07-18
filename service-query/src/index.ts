@@ -27,6 +27,20 @@ listenProducts();
 
 const app = express();
 
+const corsOrigin = process.env.CORS_DOMAINS!;
+
+const corsOptions = {
+  origin: corsOrigin?.split(",") || "*",
+  methods: ["GET", "POST"],
+  credentials: true,
+  maxAge: 86400,
+  preflightContinue: false,
+  exposedHeaders: ["Set-Cookie"],
+  optionsSuccessStatus: 204,
+};
+
+
+
 const httpServer = http.createServer(app);
 
 const server = new ApolloServer({
@@ -40,7 +54,7 @@ const main = async () => {
 
   app.use(
     "/api/query",
-    cors<cors.CorsRequest>(),
+    cors<cors.CorsRequest>(corsOptions),
     express.json(),
     expressMiddleware(server, {
       context: async ({ req }) => ({ token: null }),
