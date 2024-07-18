@@ -58,16 +58,18 @@ export default {
       );
     };
 
-    const galleryImages = computed(() =>
-      getProductData.value.image_set.split(",").map((id) => {
+    const galleryImages = computed(() => {
+      const images = getProductData.value.image_set.split(",");
+      images.pop();
+      return images.map((id) => {
         return {
           itemImageSrc: buildURL(id),
           thumbnailImageSrc: buildURL(id),
           alt: "Description for Image 1",
           title: "Title 1",
         };
-      })
-    );
+      });
+    });
 
     const galleryImage = ref([galleryImages.value[0]]);
 
@@ -141,7 +143,7 @@ export default {
 
 .p-mediacomp .p-mediacomp-boxes div {
   border: 1px solid var(--border-b);
-  border-radius: 8px;
+  border-radius: 6px;
   margin-bottom: 1rem;
   padding: 0.25rem;
   overflow: hidden;

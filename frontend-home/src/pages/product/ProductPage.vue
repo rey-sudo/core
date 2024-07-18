@@ -99,7 +99,7 @@ export default {
 
 .page-1 {
   min-height: 150vh;
-  margin-top: calc(40px + 2rem);
+  margin-top: calc(100px + 2rem);
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
