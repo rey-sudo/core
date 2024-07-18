@@ -10,7 +10,9 @@ import { product } from "./resolvers/product";
 import typeDefs from "./types/types";
 
 const resolvers = {
-  ...product.Query,
+  Query: {
+    ...product.Query,
+  },
 };
 
 DB.connect({

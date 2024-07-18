@@ -7,7 +7,7 @@ type Product {
 
 
 type Query {
-  product: [Product]
+  product(id: String): [Product]
 }
 `;
 
