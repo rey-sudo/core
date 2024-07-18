@@ -1,6 +1,8 @@
 <template>
   <div class="products">
-    <!--DIALOG SECTION-->
+    <!--////////////////////////////////////////////////////////////////////////-->
+
+    <!--////////////////////////////////////////////////////////////////////////-->
     <Dialog
       v-model:visible="messageModalVisible"
       modal
@@ -19,7 +21,9 @@
         </div>
       </template>
     </Dialog>
+    <!--////////////////////////////////////////////////////////////////////////-->
 
+    <!--////////////////////////////////////////////////////////////////////////-->
     <Dialog
       v-model:visible="deleteProductDialog"
       :style="{ width: '425px' }"
@@ -43,7 +47,9 @@
         <Button label="Yes" icon="pi pi-check" text @click="deleteProduct" />
       </template>
     </Dialog>
-
+    <!--////////////////////////////////////////////////////////////////////////-->
+                 
+    <!--////////////////////////////////////////////////////////////////////////-->
     <Dialog
       v-model:visible="deleteProductsDialog"
       :style="{ width: '425px' }"
@@ -71,7 +77,9 @@
         />
       </template>
     </Dialog>
-
+    <!--////////////////////////////////////////////////////////////////////////-->
+                 
+    <!--////////////////////////////////////////////////////////////////////////-->
     <Dialog
       v-model:visible="productDialog"
       :style="{ width: '450px' }"
@@ -300,7 +308,7 @@
         </div>
       </div>
 
-      <!--FILEUPLOAD-->
+
       <div class="field">
         <div class="product-upload">
           <label for="fileupload" class="field-label">
@@ -411,14 +419,15 @@
           </small>
         </div>
       </div>
-      <!--FILEUPLOAD-->
 
       <template #footer>
         <Button label="Cancel" text @click="hideDialog" />
         <Button label="Save" text @click="submitForm" />
       </template>
     </Dialog>
-    <!--DIALOG SECTION-->
+    <!--////////////////////////////////////////////////////////////////////////-->
+                 
+    <!--////////////////////////////////////////////////////////////////////////-->
 
     <!---CONTENT-->
     <div class="products-wrap">
@@ -557,8 +566,6 @@
               {{ formatCurrency(slotProps.data.collateral) }}
             </template>
           </Column>
-
-
 
           <Column
             field="rating"
@@ -1347,9 +1354,9 @@ img {
   justify-content: center;
   padding-left: 56px;
   width: 100%;
-  background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yw/r/j5A-vbnR0dd.png');
+  background-image: url("https://static.xx.fbcdn.net/rsrc.php/v3/yw/r/j5A-vbnR0dd.png");
   background-repeat: no-repeat;
-    background-size: cover;
+  background-size: cover;
 }
 
 .products-wrap {
