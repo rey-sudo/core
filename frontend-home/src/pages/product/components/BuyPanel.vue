@@ -204,7 +204,7 @@ export default {
 
 <style lang="css" scoped>
 .head-info {
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
   font-weight: 400;
   text-align: left;
   color: var(--primary-c);
