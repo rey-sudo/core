@@ -141,15 +141,11 @@
       <div class="field">
         <label for="name" class="field-label">
           <span>Name</span>
-          <i
-            class="pi pi-info-circle"
-            v-tooltip.top="'Declarative and descriptive name of the product.'"
-          />
         </label>
 
         <InputText
           id="name"
-          placeholder="Name"
+          placeholder=""
           v-model="productData.name"
           required="true"
           autofocus
@@ -158,6 +154,25 @@
 
         <small class="p-error" v-if="formValidator.value.name">
           {{ formValidationMessage.name }}
+        </small>
+      </div>
+
+      <div class="field">
+        <label class="field-label">
+          <span>Model</span>
+        </label>
+
+        <InputText
+          id="name"
+          placeholder=""
+          v-model="productData.model"
+          required="true"
+          autofocus
+          :class="{ invalid: formValidator.value.model }"
+        />
+
+        <small class="p-error" v-if="formValidator.value.model">
+          {{ formValidationMessage.model }}
         </small>
       </div>
 
@@ -688,6 +703,7 @@ export default {
       id: null,
       seller_id: null,
       name: null,
+      model: null,
       features: "",
       terms_of_sale: "",
       guarantee: "",
@@ -711,6 +727,7 @@ export default {
 
     let formValidator = ref({
       name: false,
+      model: false,
       features: false,
       terms_of_sale: false,
       guarantee: "",
@@ -732,6 +749,7 @@ export default {
         id: null,
         seller_id: null,
         name: null,
+        model: null,
         features: "",
         terms_of_sale: "",
         guarantee: "",
@@ -755,6 +773,7 @@ export default {
 
       formValidator.value = ref({
         name: false,
+        model: false,
         features: false,
         terms_of_sale: false,
         guarantee: false,
@@ -868,6 +887,7 @@ export default {
 
     const formValidationLimits = ref({
       name: 100,
+      model: 100,
       features: 1000,
       terms_of_sale: 1000,
       guarantee: 1000,
@@ -881,6 +901,12 @@ export default {
         "The name is required and max " +
         formValidationLimits.value.name +
         " characters long.",
+
+      model:
+        "The model is required and max " +
+        formValidationLimits.value.model +
+        " characters long.",
+
       features:
         "The features is required and no maximum " +
         formValidationLimits.value.features +
@@ -1015,7 +1041,10 @@ export default {
     async submitForm() {
       this.formValidator.value = {
         name: this.validateName(this.productData.name),
+        model: this.validateModel(this.productData.model),
         features: this.validateFeatures(this.productData.features),
+        terms_of_sale: this.validateTermsOfSale(this.productData.terms_of_sale),
+        guarantee: this.validateGuarantee(this.productData.guarantee),
         category: this.validateCategory(this.productData.category),
         price: this.validatePrice(this.productData.price),
         collateral: this.validateCollateral(this.productData.collateral),
@@ -1032,7 +1061,10 @@ export default {
 
       const params = {
         name: this.productData.name,
+        model: this.productData.model,
         features: this.productData.features,
+        terms_of_sale: this.productData.terms_of_sale,
+        guarantee: this.productData.guarantee,
         category: this.productData.category.code,
         price: this.productData.price,
         collateral: this.productData.collateral,
@@ -1142,28 +1174,25 @@ export default {
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
       };
     },
-    getStatusLabel(status) {
-      switch (status) {
-        case "stock":
-          return "success";
 
-        case "low":
-          return "warning";
-
-        case "out":
-          return "danger";
-
-        default:
-          return null;
-      }
-    },
-
-    validateName(e) {
-      if (!e) {
+    validateName(value) {
+      if (!value) {
         return true;
       }
 
-      if (e.length > this.nameLimit) {
+      if (value.length > this.formValidationLimits.name) {
+        return true;
+      }
+
+      return false;
+    },
+
+    validateModel(value) {
+      if (!value) {
+        return true;
+      }
+
+      if (value.length > this.formValidationLimits.model) {
         return true;
       }
 
@@ -1178,13 +1207,43 @@ export default {
         return true;
       }
 
-      if (e.length > this.featuresLimit) {
+      if (e.length > this.formValidationLimits.features) {
+        return true;
+      }
+
+      return false;
+    },
+    validateTermsOfSale(e) {
+      if (!e) {
+        return true;
+      }
+
+      if (e.length < 1) {
+        return true;
+      }
+
+      if (e.length > this.formValidationLimits.terms_of_sale) {
         return true;
       }
 
       return false;
     },
 
+    validateGuarantee(e) {
+      if (!e) {
+        return true;
+      }
+
+      if (e.length < 1) {
+        return true;
+      }
+
+      if (e.length > this.formValidationLimits.guarantee) {
+        return true;
+      }
+
+      return false;
+    },
     validateCategory(e) {
       return !e ? true : false;
     },
