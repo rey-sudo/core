@@ -228,6 +228,37 @@
         </small>
       </div>
 
+      <div class="field">
+        <label class="field-label">
+          <span>Guarantee</span>
+        </label>
+
+        <Textarea
+          v-model="productData.guarantee"
+          placeholder=""
+          required="true"
+          rows="3"
+          cols="20"
+          autoResize
+          :class="{ invalid: formValidator.value.guarantee }"
+        />
+        <small
+          class="p-counter"
+          :class="{
+            invalid:
+              productData.guarantee.length > formValidationLimits.guarantee,
+          }"
+          v-if="!formValidator.value.guarantee"
+        >
+          {{ productData.guarantee.length }} /
+          {{ formValidationLimits.guarantee }}
+        </small>
+
+        <small class="p-error" v-if="formValidator.value.guarantee"
+          >{{ formValidationMessage.guarantee }}
+        </small>
+      </div>
+
       <div class="formgrid grid">
         <div class="field col">
           <label for="category" class="field-label">
@@ -659,6 +690,7 @@ export default {
       name: null,
       features: "",
       terms_of_sale: "",
+      guarantee: "",
       category: null,
       price: null,
       collateral: null,
@@ -681,6 +713,7 @@ export default {
       name: false,
       features: false,
       terms_of_sale: false,
+      guarantee: "",
       category: false,
       price: false,
       collateral: false,
@@ -701,6 +734,7 @@ export default {
         name: null,
         features: "",
         terms_of_sale: "",
+        guarantee: "",
         category: null,
         price: null,
         collateral: null,
@@ -723,6 +757,7 @@ export default {
         name: false,
         features: false,
         terms_of_sale: false,
+        guarantee: false,
         category: false,
         price: false,
         collateral: false,
@@ -835,6 +870,7 @@ export default {
       name: 100,
       features: 1000,
       terms_of_sale: 1000,
+      guarantee: 1000,
       keywords: 3,
     });
 
@@ -848,6 +884,14 @@ export default {
       features:
         "The features is required and no maximum " +
         formValidationLimits.value.features +
+        " characters.",
+      terms_of_sale:
+        "The terms of sale is required and no maximum " +
+        formValidationLimits.value.terms_of_sale +
+        " characters.",
+      guarantee:
+        "The guarantee is required and no maximum " +
+        formValidationLimits.value.guarantee +
         " characters.",
 
       category: "The category is required.",

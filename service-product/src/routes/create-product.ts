@@ -31,7 +31,6 @@ const createProductHandler = async (req: Request, res: Response) => {
       category,
       price,
       collateral,
-      discount,
       stock,
       keywords,
       country,
@@ -41,7 +40,7 @@ const createProductHandler = async (req: Request, res: Response) => {
       image_set,
       video_set,
       schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const schemeValue = [
       "P" + getProductId(),
@@ -54,7 +53,6 @@ const createProductHandler = async (req: Request, res: Response) => {
       params.category,
       params.price,
       params.collateral,
-      params.discount,
       params.stock,
       params.keywords,
       SELLER.country,
