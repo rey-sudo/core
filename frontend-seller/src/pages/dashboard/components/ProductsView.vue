@@ -886,7 +886,7 @@ export default {
     const toast = useToast();
 
     const formValidationLimits = ref({
-      name: 100,
+      name: 200,
       model: 100,
       features: 1000,
       terms_of_sale: 1000,
