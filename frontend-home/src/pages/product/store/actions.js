@@ -21,7 +21,23 @@ const getProduct = async ({ commit }, params) => {
     query Product($id: String) {
       product(id: $id) {
         id
+        seller_id
         name
+        model
+        features
+        terms_of_sale
+        guarantee
+        category
+        price
+        collateral
+        discount
+        stock
+        keywords
+        media_url
+        media_path
+        image_main
+        image_set
+        video_set
       }
     }
   `;

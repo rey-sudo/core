@@ -1,9 +1,9 @@
 <template>
-  <div class="product">
+  <div class="product" v-if="getProductData">
     <MainHeader />
     <MobileHeader />
-    <div class="product-body">
-      <div class="product-body-top">
+    <div class="product-body" >
+      <div class="product-body-wrap">
         <HeadView />
         <MobileHeadView />
       </div>
@@ -28,7 +28,7 @@ export default {
     MobileHeadView,
   },
   setup() {
-    const { getProduct } = productAPI();
+    const { getProduct, getProductData } = productAPI();
 
     const setupData = (id) => {
       getProduct({ id: id });
@@ -36,6 +36,7 @@ export default {
 
     return {
       setupData,
+      getProductData,
     };
   },
   data() {
@@ -79,7 +80,7 @@ export default {
   align-items: center;
 }
 
-.product-body-top {
+.product-body-wrap {
   min-height: 150vh;
   margin-top: calc(40px + 2rem);
   display: flex;
@@ -92,7 +93,7 @@ export default {
     width: 100%;
   }
 
-  .product-body-top {
+  .product-body-wrap {
     margin-top: 100px;
   }
 }
@@ -103,7 +104,7 @@ export default {
     width: 100%;
   }
 
-  .product-body-top {
+  .product-body-wrap {
     margin-top: 100px;
   }
 }
@@ -114,7 +115,7 @@ export default {
     width: 100%;
   }
 
-  .product-body-top {
+  .product-body-wrap {
     margin-top: 100px;
   }
 }

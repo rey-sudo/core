@@ -94,8 +94,8 @@
   </div>
 
   <div class="head-legend">
-    <span>Model: PLACCOG7OQVQY2BX </span>
-    <span>SKU: P9C3KC93CK</span>
+    <span>Model: {{ getProductData?.model }} </span>
+    <span>SKU: {{ getProductData?.id }}</span>
   </div>
 
   <div class="head-rating">
@@ -125,9 +125,9 @@
 
 <script>
 import InfoIcons from "./InfoIcons.vue";
+import productAPI from "@/pages/product/api/index";
 import { FilterMatchMode } from "primevue/api";
 import { ref } from "vue";
-import productAPI from "@/pages/product/api/index";
 
 export default {
   components: {
@@ -142,7 +142,7 @@ export default {
       review_count: 558,
     });
 
-    const visible = ref(true);
+    const visible = ref(false);
 
     const openSlotDialog = () => {
       visible.value = true;

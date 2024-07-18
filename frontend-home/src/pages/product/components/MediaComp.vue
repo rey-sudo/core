@@ -2,7 +2,7 @@
   <div class="p-mediacomp">
     <div class="p-mediacomp-boxes">
       <div
-        v-for="(item, index) in images"
+        v-for="(item, index) in galleryImages"
         :key="item"
         @click="changeGalleryImage(index)"
         @mouseover="changeGalleryImage(index)"
@@ -45,44 +45,33 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import productAPI from "@/pages/product/api/index";
+import { ref, computed } from "vue";
 
 export default {
   setup() {
-    const images = ref([
-      {
-        itemImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6428/6428324_sd.jpg",
-        thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6428/6428324_sd.jpg",
-        alt: "Description for Image 1",
-        title: "Title 1",
-      },
-      {
-        itemImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6428/6428324cv11d.jpg",
-        thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6428/6428324cv11d.jpg",
-        alt: "Description for Image 2",
-        title: "Title 2",
-      },
-      {
-        itemImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6428/6428324cv12d.jpg",
-        thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6428/6428324cv12d.jpg",
-        alt: "Description for Image 3",
-        title: "Title 3",
-      },
-      {
-        itemImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6428/6428324cv14d.jpg",
-        thumbnailImageSrc:
-          "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6428/6428324cv14d.jpg",
-        alt: "Description for Image 4",
-        title: "Title 4",
-      },
-    ]);
+    const { getProductData } = productAPI();
+
+    const buildURL = (id) => {
+      return (
+        getProductData.value.media_url + getProductData.value.media_path + id
+      );
+    };
+
+    const galleryImages = computed(() =>
+      getProductData.value.image_set.split(",").map((id) => {
+        return {
+          itemImageSrc: buildURL(id),
+          thumbnailImageSrc: buildURL(id),
+          alt: "Description for Image 1",
+          title: "Title 1",
+        };
+      })
+    );
+
+    const galleryImage = ref([galleryImages.value[0]]);
+
+    const galleryImageIndex = ref(0);
 
     const responsiveOptions = ref([
       {
@@ -99,15 +88,12 @@ export default {
       },
     ]);
 
-    const galleryImage = ref([]);
-
-    const galleryImageIndex = ref(0);
-
     return {
-      images,
+      galleryImages,
       responsiveOptions,
       galleryImage,
       galleryImageIndex,
+      getProductData,
     };
   },
 
@@ -115,16 +101,11 @@ export default {
     isGalleryImage(index) {
       return this.galleryImageIndex === index;
     },
-    setupData() {
-      this.galleryImage[0] = this.images[0];
-    },
+
     changeGalleryImage(index) {
       this.galleryImageIndex = index;
-      this.galleryImage[0] = this.images[this.galleryImageIndex];
+      this.galleryImage[0] = this.galleryImages[this.galleryImageIndex];
     },
-  },
-  mounted() {
-    this.setupData();
   },
 };
 </script>
