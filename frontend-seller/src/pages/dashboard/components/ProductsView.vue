@@ -163,7 +163,7 @@
         </label>
         <Textarea
           id="description"
-          v-model="productData.description"
+          v-model="productData.features"
           placeholder=""
           required="true"
           rows="3"
@@ -174,11 +174,11 @@
         <small
           class="p-counter"
           :class="{
-            invalid: productData.description.length > descriptionLimit,
+            invalid: productData.features.length > descriptionLimit,
           }"
           v-if="!formValidator.value.description"
         >
-          {{ productData.description.length }} / {{ descriptionLimit }}
+          {{ productData.features.length }} / {{ descriptionLimit }}
         </small>
 
         <small class="p-error" v-if="formValidator.value.description"
@@ -937,7 +937,7 @@ export default {
     async submitForm() {
       this.formValidator.value = {
         name: this.validateName(this.productData.name),
-        description: this.validateDescription(this.productData.description),
+        description: this.validateDescription(this.productData.features),
         category: this.validateCategory(this.productData.category),
         price: this.validatePrice(this.productData.price),
         collateral: this.validateCollateral(this.productData.collateral),
@@ -954,7 +954,7 @@ export default {
 
       const params = {
         name: this.productData.name,
-        description: this.productData.description,
+        description: this.productData.features,
         category: this.productData.category.code,
         price: this.productData.price,
         collateral: this.productData.collateral,
