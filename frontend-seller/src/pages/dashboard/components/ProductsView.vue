@@ -90,7 +90,7 @@
       class="p-fluid"
     >
       <Carousel
-        v-if="productData.image_base"
+        v-if="productData.media_url"
         :value="getImages(productData)"
         :numVisible="1"
         :numScroll="1"
@@ -114,7 +114,7 @@
         </template>
       </Carousel>
 
-      <div v-if="productData.image_base" class="field">
+      <div v-if="productData.media_url" class="field">
         <label for="mainImage" class="field-label">
           <span>Thumbnail</span>
           <i class="pi pi-info-circle" v-tooltip.top="'First image.'" />
@@ -573,8 +573,8 @@
             <template #body="slotProps">
               <Image
                 :src="
-                  slotProps.data.image_base +
-                  slotProps.data.image_path +
+                  slotProps.data.media_url +
+                  slotProps.data.media_path +
                   slotProps.data.image_main
                 "
                 :alt="slotProps.data.image_main"
@@ -716,8 +716,8 @@ export default {
       theme: null,
       country: null,
       moderated: false,
-      image_base: null,
-      image_path: null,
+      media_url: null,
+      media_path: null,
       image_main: null,
       image_set: [],
       created_at: null,
@@ -762,8 +762,8 @@ export default {
         theme: null,
         country: null,
         moderated: false,
-        image_base: null,
-        image_path: null,
+        media_url: null,
+        media_path: null,
         image_main: null,
         image_set: [],
         created_at: null,
@@ -1118,7 +1118,7 @@ export default {
       return data.map((imageId) => ({
         main: productData.image_main,
         id: imageId,
-        image: productData.image_base + productData.image_path + imageId,
+        image: productData.media_url + productData.media_path + imageId,
       }));
     },
     exportCSV() {
