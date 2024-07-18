@@ -6,38 +6,11 @@ import express from "express";
 import http from "http";
 import DB from "./db";
 import listenProducts from "./kafka/products";
-
-const typeDefs = `#graphql
-
-  type Product {
-    title: String
-    author: String
-  }
-
-  type ProductPage {
-    product: [Product]
-  }
-
-  type Query {
-    productPage: ProductPage
-  }
-`;
-
-const product = [
-  {
-    title: "The Awakening",
-    author: "Kate Chopin",
-  },
-];
-
-const productPage = {
-  product,
-};
+import { product } from "./resolvers/product";
+import typeDefs from "./types/types";
 
 const resolvers = {
-  Query: {
-    productPage: () => productPage,
-  },
+  ...product.Query,
 };
 
 DB.connect({
@@ -60,7 +33,9 @@ const server = new ApolloServer({
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 });
 
-server.start().then(() => {
+const main = async () => {
+  await server.start();
+
   app.use(
     "/api/query",
     cors<cors.CorsRequest>(),
@@ -69,9 +44,7 @@ server.start().then(() => {
       context: async ({ req }) => ({ token: null }),
     })
   );
-});
 
-const main = async () => {
   await new Promise<void>((resolve) =>
     httpServer.listen({ port: 4000 }, resolve)
   );
