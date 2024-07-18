@@ -154,35 +154,35 @@
       </div>
 
       <div class="field">
-        <label for="description" class="field-label">
-          <span>Description</span>
+        <label for="features" class="field-label">
+          <span>Features</span>
           <i
             class="pi pi-info-circle"
-            v-tooltip.top="'Write a clear description about the product.'"
+            v-tooltip.top="'Write a clear features about the product.'"
           />
         </label>
         <Textarea
-          id="description"
+          id="features"
           v-model="productData.features"
           placeholder=""
           required="true"
           rows="3"
           cols="20"
           autoResize
-          :class="{ invalid: formValidator.value.description }"
+          :class="{ invalid: formValidator.value.features }"
         />
         <small
           class="p-counter"
           :class="{
-            invalid: productData.features.length > descriptionLimit,
+            invalid: productData.features.length > featuresLimit,
           }"
-          v-if="!formValidator.value.description"
+          v-if="!formValidator.value.features"
         >
-          {{ productData.features.length }} / {{ descriptionLimit }}
+          {{ productData.features.length }} / {{ featuresLimit }}
         </small>
 
-        <small class="p-error" v-if="formValidator.value.description"
-          >{{ formValidatorText.description }}
+        <small class="p-error" v-if="formValidator.value.features"
+          >{{ formValidatorText.features }}
         </small>
       </div>
 
@@ -510,19 +510,7 @@
               {{ slotProps.data.name.slice(0, 30) }}...
             </template>
           </Column>
-          <Column
-            field="stock_status"
-            header="Stock"
-            sortable
-            style="min-width: 8rem"
-          >
-            <template #body="slotProps">
-              <Tag
-                :value="slotProps.data.stock_status"
-                :severity="getStatusLabel(slotProps.data.stock_status)"
-              />
-            </template>
-          </Column>
+
           <Column
             field="category"
             header="Category"
@@ -629,12 +617,11 @@ export default {
       id: null,
       seller_id: null,
       name: null,
-      description: "",
+      features: "",
       category: null,
       price: null,
       collateral: null,
       stock: null,
-      stock_status: null,
       slots: null,
       keywords: null,
       theme: null,
@@ -651,7 +638,7 @@ export default {
 
     let formValidator = ref({
       name: false,
-      description: false,
+      features: false,
       category: false,
       price: false,
       collateral: false,
@@ -670,12 +657,11 @@ export default {
         id: null,
         seller_id: null,
         name: null,
-        description: "",
+        features: "",
         category: null,
         price: null,
         collateral: null,
         stock: null,
-        stock_status: null,
         slots: null,
         keywords: null,
         theme: null,
@@ -692,7 +678,7 @@ export default {
 
       formValidator.value = ref({
         name: false,
-        description: false,
+        features: false,
         category: false,
         price: false,
         collateral: false,
@@ -803,16 +789,16 @@ export default {
 
     const nameLimit = ref(200);
 
-    const descriptionLimit = ref(1000);
+    const featuresLimit = ref(1000);
 
     const filesUploaded = ref(false);
 
     const formValidatorText = ref({
       name:
         "The name is required and max " + nameLimit.value + " characters long.",
-      description:
-        "The description is required and no maximum " +
-        descriptionLimit.value +
+      features:
+        "The features is required and no maximum " +
+        featuresLimit.value +
         " characters.",
 
       category: "The category is required.",
@@ -828,7 +814,7 @@ export default {
     });
 
     return {
-      descriptionLimit,
+      featuresLimit,
       filesUploaded,
       formValidatorText,
       onRemoveTemplatingFile,
@@ -937,7 +923,7 @@ export default {
     async submitForm() {
       this.formValidator.value = {
         name: this.validateName(this.productData.name),
-        description: this.validateDescription(this.productData.features),
+        features: this.validateFeatures(this.productData.features),
         category: this.validateCategory(this.productData.category),
         price: this.validatePrice(this.productData.price),
         collateral: this.validateCollateral(this.productData.collateral),
@@ -954,7 +940,7 @@ export default {
 
       const params = {
         name: this.productData.name,
-        description: this.productData.features,
+        features: this.productData.features,
         category: this.productData.category.code,
         price: this.productData.price,
         collateral: this.productData.collateral,
@@ -1091,7 +1077,7 @@ export default {
 
       return false;
     },
-    validateDescription(e) {
+    validateFeatures(e) {
       if (!e) {
         return true;
       }
@@ -1100,7 +1086,7 @@ export default {
         return true;
       }
 
-      if (e.length > this.descriptionLimit) {
+      if (e.length > this.featuresLimit) {
         return true;
       }
 
