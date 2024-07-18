@@ -90,9 +90,7 @@
   </div>
 
   <div class="head-name">
-    Apple 2023 MacBook Pro Laptop M3 Pro chip with 11‑core CPU, 14‑core GPU:
-    14.2-inch Liquid Retina XDR Display, 18GB Unified Memory, 512GB SSD Storage.
-    Works with iPhone/iPad; Space Black
+    {{ getProductData?.name }}
   </div>
 
   <div class="head-legend">
@@ -129,12 +127,16 @@
 import InfoIcons from "./InfoIcons.vue";
 import { FilterMatchMode } from "primevue/api";
 import { ref } from "vue";
+import productAPI from "@/pages/product/api/index";
+
 export default {
   components: {
     InfoIcons,
   },
 
   setup() {
+    const { getProductData } = productAPI();
+
     const product = ref({
       rating_count: 4.8,
       review_count: 558,
@@ -197,6 +199,7 @@ export default {
       filters,
       slotList,
       selectedProducts,
+      getProductData,
     };
   },
 };

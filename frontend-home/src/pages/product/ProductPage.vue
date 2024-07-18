@@ -67,6 +67,7 @@ export default {
 <style lang="css" scoped>
 .product-body {
   padding: 0 11%;
+  width: 100%;
 }
 
 .product {
