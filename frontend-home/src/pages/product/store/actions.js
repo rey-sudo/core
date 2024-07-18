@@ -15,7 +15,7 @@ const lockingEndpoint = async (_, params) => {
   }
 };
 
-const getProduct = async (_, params) => {
+const getProduct = async ({ commit }, params) => {
   try {
     const query = `
     query Product($id: String) {
@@ -35,9 +35,9 @@ const getProduct = async (_, params) => {
       variables,
     });
 
-    console.log(response.data);
+    console.log(response.data.data.product[0]);
 
-    //commit("lockingEndpoint", response.data);
+    commit("getProduct", response.data.data.product[0]);
 
     return { success: true, response: response.data };
   } catch (error) {

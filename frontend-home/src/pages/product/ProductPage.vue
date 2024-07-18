@@ -20,10 +20,6 @@ import MobileHeader from "@/components/header/MobileHeader.vue";
 import HeadView from "@/pages/product/components/HeadView.vue";
 import MobileHeadView from "@/pages/product/components/MobileHeadView.vue";
 
-
-import { Lucid, getAddressDetails } from "lucid-cardano";
-import { balanceTx } from "@/api/wallet-api";
-
 export default {
   components: {
     MainHeader,
@@ -34,30 +30,22 @@ export default {
   setup() {
     const { getProduct } = productAPI();
 
-    const main = async () => {
-      const params = {
-        id: "PEKV8LM61LZKALYQ",
-      };
-      await getProduct(params).then((res) => console.log(res));
+    const setupData = (id) => {
+      getProduct({ id: id });
     };
-    main();
 
-    return {};
+    return {
+      setupData,
+    };
   },
   data() {
-    return {
-      lucid: null,
-      slot_id: "",
-      buyer_pubkeyhash: "",
-      tx1: "84a400800181a300581d70c11355d423aed1273fa29eb0aaae09f63f025890f03fedd6ade0b4f5011a01312d0b028201d8185841d8799f004777616974696e67d87980d87980d87980581c4068ce72a0f73e850f19899a10b82ec534a55a6d860e5c5267dca2b9d87a801a01c9c38b1a01312d0bff02000e81581c4068ce72a0f73e850f19899a10b82ec534a55a6d860e5c5267dca2b9a0f5f6",
-      tx2: "",
-    };
+    return {};
   },
 
   created() {
     this.$watch(
       () => this.$route.params,
-      (e) => (this.slot_id = e.id),
+      (params) => this.setupData(params.id),
       { immediate: true }
     )();
   },
@@ -68,71 +56,10 @@ export default {
         behavior: "auto",
       });
     },
-    isGalleryImage(index) {
-      return this.galleryImageIndex === index;
-    },
-    setupData() {
-      this.galleryImage[0] = this.images[0];
-    },
-    changeGalleryImage(index) {
-      this.galleryImageIndex = index;
-      this.galleryImage[0] = this.images[this.galleryImageIndex];
-    },
-    async setupLucid() {
-      this.lucid = await Lucid.new();
-    },
-    async setupWallet() {
-      try {
-        const api = await window.cardano.nami.enable();
-
-        this.lucid.selectWallet(api);
-      } catch (err) {
-        console.error(err);
-      }
-    },
-    async buyProduct() {
-      const addr = await this.lucid.wallet.address();
-      const address = await getAddressDetails(addr);
-
-      this.buyer_pubkeyhash = address.paymentCredential.hash;
-
-      const params = {
-        slot_id: this.slot_id,
-        buyer_pubkeyhash: address.paymentCredential.hash,
-      };
-
-      this.lockingEndpoint(params)
-        .then((res) => balanceTx(res.response.payload.transaction))
-        .then((tx) => console.log(tx))
-        .catch((err) => console.log(err));
-    },
-
-    async buyProduct1(e) {
-      const addr = await this.lucid.wallet.address();
-      const address = await getAddressDetails(addr);
-
-      this.buyer_pubkeyhash = address.paymentCredential.hash;
-
-      if (e === "1") {
-        await balanceTx(this.tx1)
-          .then((tx) => console.log(tx))
-          .catch((err) => console.log(err));
-      }
-
-      if (e === "2") {
-        await balanceTx(this.tx2)
-          .then((tx) => console.log(tx))
-          .catch((err) => console.log(err));
-      }
-    },
   },
 
   mounted() {
     this.scrollTop();
-
-    // this.setupLucid();
-
-    //this.setupWallet();
   },
 };
 </script>
