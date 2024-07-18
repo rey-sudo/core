@@ -5010,7 +5010,7 @@
     background: var(--primary-c);
     border-color: var(--primary-c);
     color: var(--text-w);
-    border-radius: 50%;
+    border-radius: 6px;
   }
   .p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover {
     background: #e9ecef;

@@ -167,7 +167,7 @@ export default {
   font-size: var(--text-size-a);
   white-space: nowrap;
   cursor: pointer;
-  padding: 0.75rem;
+  padding: 0.8rem;
   font-weight: inherit;
   color: inherit;
   background: transparent;
