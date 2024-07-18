@@ -16,8 +16,8 @@
       <p v-for="e in errorModal" :key="e">{{ e }}</p>
 
       <template #footer>
-        <div class="modal-footer">
-          <Button type="button" label="ok" @click="hideModals" />
+        <div>
+          <Button type="button" label="ok" @click="hideErrorModal" />
         </div>
       </template>
     </Dialog>
@@ -929,7 +929,7 @@ export default {
         productData.value.image_set.length +
         " / " +
         minProductImages.value +
-        "images are required.",
+        " images are required.",
     });
 
     return {
@@ -993,39 +993,10 @@ export default {
     this.products = this.getProductsData;
   },
   methods: {
-    handleMessage(type, message) {
-      this.displayErrorModal = true;
-
-      if (type === "response") {
-        this.errorMessageModal = message.response.message;
-      }
-
-      if (type === "error") {
-        this.errorModal = message.response.errors;
-      }
-    },
-    hideModals() {
+    hideErrorModal() {
       this.displayErrorModal = false;
     },
 
-    onFileRemoved(e) {
-      console.log(e.files.length);
-
-      if (e.files.length < this.maxProductImages) {
-        this.disableUpload = false;
-      }
-    },
-    onUpload(e) {
-      const response = JSON.parse(e.xhr.response);
-
-      if (response.success === true) {
-        if (this.productData.image_set.length < this.maxProductImages) {
-          this.productData.image_set.push(...response.payload);
-        } else {
-          this.disableUpload = true;
-        }
-      }
-    },
     formatCurrency(value) {
       if (value) {
         return value + " ADA";
