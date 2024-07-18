@@ -1,15 +1,18 @@
 <template>
-  <div class="product" v-if="getProductData">
+  <div class="product">
     <MainHeader />
     <MobileHeader />
-    <div class="product-body" >
-      <div class="product-body-wrap">
+
+    <div v-if="isLoaded" class="product-body">
+      <div class="page-1">
         <HeadView />
         <MobileHeadView />
       </div>
 
-      <div class="product-body-body"></div>
+      <div class="page-2">x</div>
     </div>
+
+    <div v-if="isFailed">Failed</div>
   </div>
 </template>
 
@@ -19,6 +22,7 @@ import MainHeader from "@/components/header/MainHeader.vue";
 import MobileHeader from "@/components/header/MobileHeader.vue";
 import HeadView from "@/pages/product/components/HeadView.vue";
 import MobileHeadView from "@/pages/product/components/MobileHeadView.vue";
+import { ref } from "vue";
 
 export default {
   components: {
@@ -30,12 +34,25 @@ export default {
   setup() {
     const { getProduct, getProductData } = productAPI();
 
+    const isLoaded = ref(false);
+    const isFailed = ref(false);
+
     const setupData = (id) => {
-      getProduct({ id: id });
+      getProduct({ id: id }).then((res) => {
+        if (res.success === true) {
+          return (isLoaded.value = true);
+        }
+
+        if (res.success === false) {
+          return (isFailed.value = true);
+        }
+      });
     };
 
     return {
       setupData,
+      isLoaded,
+      isFailed,
       getProductData,
     };
   },
@@ -80,7 +97,7 @@ export default {
   align-items: center;
 }
 
-.product-body-wrap {
+.page-1 {
   min-height: 150vh;
   margin-top: calc(40px + 2rem);
   display: flex;
@@ -93,7 +110,7 @@ export default {
     width: 100%;
   }
 
-  .product-body-wrap {
+  .page-1 {
     margin-top: 100px;
   }
 }
@@ -104,7 +121,7 @@ export default {
     width: 100%;
   }
 
-  .product-body-wrap {
+  .page-1 {
     margin-top: 100px;
   }
 }
@@ -115,7 +132,7 @@ export default {
     width: 100%;
   }
 
-  .product-body-wrap {
+  .page-1 {
     margin-top: 100px;
   }
 }

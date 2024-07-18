@@ -144,7 +144,7 @@
       </div>
 
       <div class="header-button left">
-        <div> 
+        <div>
           <span>Sell a</span>
           <span>Product</span>
         </div>
@@ -295,7 +295,6 @@ export default {
       console.log(JSON.stringify(addrMap));
       console.log("contractAddr", JSON.stringify(contractPkh));
     },
-
   },
   mounted() {
     window.addEventListener("scroll", () => {
@@ -315,7 +314,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 1000;
   width: 100%;
