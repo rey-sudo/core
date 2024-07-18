@@ -4,20 +4,20 @@
 
     <!--////////////////////////////////////////////////////////////////////////-->
     <Dialog
-      v-model:visible="messageModalVisible"
+      v-model:visible="displayErrorModal"
       modal
       header="Message"
       :draggable="false"
       :style="{ width: '35rem' }"
       :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
     >
-      <p>{{ messageModal }}</p>
+      <p>{{ errorMessageModal }}</p>
 
       <p v-for="e in errorModal" :key="e">{{ e }}</p>
 
       <template #footer>
         <div class="modal-footer">
-          <Button type="button" label="Ok" @click="hideModals" />
+          <Button type="button" label="ok" @click="hideModals" />
         </div>
       </template>
     </Dialog>
@@ -25,7 +25,7 @@
 
     <!--////////////////////////////////////////////////////////////////////////-->
     <Dialog
-      v-model:visible="deleteProductDialog"
+      v-model:visible="displayDeleteDialog"
       :style="{ width: '425px' }"
       header="Confirm"
       :modal="true"
@@ -42,13 +42,13 @@
           label="No"
           icon="pi pi-times"
           text
-          @click="deleteProductDialog = false"
+          @click="displayDeleteDialog = false"
         />
         <Button label="Yes" icon="pi pi-check" text @click="deleteProduct" />
       </template>
     </Dialog>
     <!--////////////////////////////////////////////////////////////////////////-->
-                 
+
     <!--////////////////////////////////////////////////////////////////////////-->
     <Dialog
       v-model:visible="deleteProductsDialog"
@@ -78,7 +78,7 @@
       </template>
     </Dialog>
     <!--////////////////////////////////////////////////////////////////////////-->
-                 
+
     <!--////////////////////////////////////////////////////////////////////////-->
     <Dialog
       v-model:visible="productDialog"
@@ -157,7 +157,7 @@
         />
 
         <small class="p-error" v-if="formValidator.value.name">
-          {{ formValidatorText.name }}
+          {{ formValidationMessage.name }}
         </small>
       </div>
 
@@ -182,15 +182,49 @@
         <small
           class="p-counter"
           :class="{
-            invalid: productData.features.length > featuresLimit,
+            invalid:
+              productData.features.length > formValidationLimits.features,
           }"
           v-if="!formValidator.value.features"
         >
-          {{ productData.features.length }} / {{ featuresLimit }}
+          {{ productData.features.length }} /
+          {{ formValidationLimits.features }}
         </small>
 
         <small class="p-error" v-if="formValidator.value.features"
-          >{{ formValidatorText.features }}
+          >{{ formValidationMessage.features }}
+        </small>
+      </div>
+
+      <div class="field">
+        <label class="field-label">
+          <span>Terms of Sale</span>
+        </label>
+
+        <Textarea
+          v-model="productData.terms_of_sale"
+          placeholder=""
+          required="true"
+          rows="3"
+          cols="20"
+          autoResize
+          :class="{ invalid: formValidator.value.terms_of_sale }"
+        />
+        <small
+          class="p-counter"
+          :class="{
+            invalid:
+              productData.terms_of_sale.length >
+              formValidationLimits.terms_of_sale,
+          }"
+          v-if="!formValidator.value.terms_of_sale"
+        >
+          {{ productData.terms_of_sale.length }} /
+          {{ formValidationLimits.terms_of_sale }}
+        </small>
+
+        <small class="p-error" v-if="formValidator.value.terms_of_sale"
+          >{{ formValidationMessage.terms_of_sale }}
         </small>
       </div>
 
@@ -215,7 +249,7 @@
             :highlightOnSelect="false"
           />
           <small class="p-error" v-if="formValidator.value.category"
-            >{{ formValidatorText.category }}
+            >{{ formValidationMessage.category }}
           </small>
         </div>
 
@@ -239,7 +273,7 @@
             :class="{ invalid: formValidator.value.price }"
           />
           <small class="p-error" v-if="formValidator.value.price">{{
-            formValidatorText.price
+            formValidationMessage.price
           }}</small>
         </div>
 
@@ -265,7 +299,7 @@
             :class="{ invalid: formValidator.value.collateral }"
           />
           <small class="p-error" v-if="formValidator.value.collateral"
-            >{{ formValidatorText.collateral }}
+            >{{ formValidationMessage.collateral }}
           </small>
         </div>
 
@@ -288,7 +322,7 @@
           />
 
           <small class="p-error" v-if="formValidator.value.stock"
-            >{{ formValidatorText.stock }}
+            >{{ formValidationMessage.stock }}
           </small>
         </div>
         <div class="field col">
@@ -303,11 +337,10 @@
             :class="{ invalid: formValidator.value.keywords }"
           />
           <small class="p-error" v-if="formValidator.value.keywords">
-            {{ formValidatorText.keywords }}
+            {{ formValidationMessage.keywords }}
           </small>
         </div>
       </div>
-
 
       <div class="field">
         <div class="product-upload">
@@ -415,7 +448,7 @@
           </FileUpload>
 
           <small class="invalid" v-if="formValidator.value.images">
-            {{ formValidatorText.images }}
+            {{ formValidationMessage.images }}
           </small>
         </div>
       </div>
@@ -426,7 +459,7 @@
       </template>
     </Dialog>
     <!--////////////////////////////////////////////////////////////////////////-->
-                 
+
     <!--////////////////////////////////////////////////////////////////////////-->
 
     <!---CONTENT-->
@@ -625,6 +658,7 @@ export default {
       seller_id: null,
       name: null,
       features: "",
+      terms_of_sale: "",
       category: null,
       price: null,
       collateral: null,
@@ -646,6 +680,7 @@ export default {
     let formValidator = ref({
       name: false,
       features: false,
+      terms_of_sale: false,
       category: false,
       price: false,
       collateral: false,
@@ -654,8 +689,8 @@ export default {
       images: false,
     });
 
-    let messageModalVisible = ref(false);
-    let messageModal = ref(null);
+    let displayErrorModal = ref(false);
+    let errorMessageModal = ref(null);
     let errorModal = ref(null);
     let disableUpload = ref(false);
 
@@ -665,6 +700,7 @@ export default {
         seller_id: null,
         name: null,
         features: "",
+        terms_of_sale: "",
         category: null,
         price: null,
         collateral: null,
@@ -686,6 +722,7 @@ export default {
       formValidator.value = ref({
         name: false,
         features: false,
+        terms_of_sale: false,
         category: false,
         price: false,
         collateral: false,
@@ -694,8 +731,8 @@ export default {
         images: false,
       });
 
-      messageModalVisible.value = false;
-      messageModal.value = null;
+      displayErrorModal.value = false;
+      errorMessageModal.value = null;
       errorModal.value = null;
       disableUpload.value = false;
     };
@@ -794,25 +831,30 @@ export default {
 
     const toast = useToast();
 
-    const nameLimit = ref(200);
-
-    const featuresLimit = ref(1000);
+    const formValidationLimits = ref({
+      name: 100,
+      features: 1000,
+      terms_of_sale: 1000,
+      keywords: 3,
+    });
 
     const filesUploaded = ref(false);
 
-    const formValidatorText = ref({
+    const formValidationMessage = ref({
       name:
-        "The name is required and max " + nameLimit.value + " characters long.",
+        "The name is required and max " +
+        formValidationLimits.value.name +
+        " characters long.",
       features:
         "The features is required and no maximum " +
-        featuresLimit.value +
+        formValidationLimits.value.features +
         " characters.",
 
       category: "The category is required.",
       price: "The price is required.",
       collateral: "The collateral is required.",
       stock: "The current stock is required.",
-      keywords: "3 keywords are required.",
+      keywords: formValidationLimits.value.keywords + " keywords are required.",
       images:
         productData.value.image_set.length +
         " / " +
@@ -821,9 +863,9 @@ export default {
     });
 
     return {
-      featuresLimit,
       filesUploaded,
-      formValidatorText,
+      formValidationLimits,
+      formValidationMessage,
       onRemoveTemplatingFile,
       onClearTemplatingUpload,
       onSelectedFiles,
@@ -833,8 +875,8 @@ export default {
       productData,
       disableUpload,
       resetForm,
-      messageModalVisible,
-      messageModal,
+      displayErrorModal,
+      errorMessageModal,
       errorModal,
       totalSizePercent,
       formValidator,
@@ -842,7 +884,6 @@ export default {
       createProduct,
       createImages,
       minProductImages,
-      nameLimit,
     };
   },
   data() {
@@ -850,7 +891,7 @@ export default {
       mediaHostURL: HOST + "/api/media/create-image",
       products: null,
       productDialog: false,
-      deleteProductDialog: false,
+      displayDeleteDialog: false,
       deleteProductsDialog: false,
       selectedProducts: null,
       filters: {},
@@ -883,10 +924,10 @@ export default {
   },
   methods: {
     handleMessage(type, message) {
-      this.messageModalVisible = true;
+      this.displayErrorModal = true;
 
       if (type === "response") {
-        this.messageModal = message.response.message;
+        this.errorMessageModal = message.response.message;
       }
 
       if (type === "error") {
@@ -894,7 +935,7 @@ export default {
       }
     },
     hideModals() {
-      this.messageModalVisible = false;
+      this.displayErrorModal = false;
     },
 
     onFileRemoved(e) {
@@ -999,7 +1040,7 @@ export default {
 
     confirmDeleteProduct(productData) {
       this.productData = productData;
-      this.deleteProductDialog = true;
+      this.displayDeleteDialog = true;
     },
 
     deleteProduct() {
@@ -1007,7 +1048,7 @@ export default {
         (val) => val.id !== this.productData.id
       );
 
-      this.deleteProductDialog = false;
+      this.displayDeleteDialog = false;
 
       this.resetForm();
 
