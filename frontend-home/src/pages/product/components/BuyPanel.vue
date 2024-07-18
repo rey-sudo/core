@@ -215,11 +215,11 @@ export default {
 
 .head-name {
   font-size: var(--text-size-g);
-  font-weight: 500;
+  font-weight: 600;
   text-align: left;
   width: 100%;
   margin-top: 1rem;
-  line-height: 2.5rem;
+  line-height: 2.25rem;
 }
 
 .head-legend {
