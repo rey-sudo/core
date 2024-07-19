@@ -164,10 +164,10 @@ export default {
 }
 
 .nav .nav-column .nav-body div {
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   white-space: nowrap;
   cursor: pointer;
-  padding: 0.8rem;
+  padding: 0.75rem;
   font-weight: inherit;
   color: inherit;
   background: transparent;

@@ -465,7 +465,7 @@ export default {
 }
 
 .header .header-button span {
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   line-height: 1.25rem;
   text-align: left;
   font-weight: 600;
