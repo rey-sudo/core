@@ -8,7 +8,7 @@
       :page="0"
       :responsiveOptions="responsiveOptions"
       :showNavigators="false"
-      :showIndicators="true"
+      :showIndicators="false"
       verticalViewPortHeight="400px"
       :autoplayInterval="5000"
       circular
