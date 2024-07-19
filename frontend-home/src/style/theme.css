@@ -2674,8 +2674,8 @@
     filter: drop-shadow(0px 0px 1px transparent);
   }
   .p-rating .p-rating-item .p-rating-icon.p-icon {
-    width: var(--text-size-c);
-    height: var(--text-size-c);
+    width: var(--text-size-b);
+    height: var(--text-size-b);
   }
   .p-rating .p-rating-item .p-rating-icon.p-rating-cancel {
     color: #e74c3c;
