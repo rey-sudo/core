@@ -1,10 +1,10 @@
 
-const commit__getAllProducts = (state, data) => {
-  state.allProducts = data;
+const getTimeline = (state, data) => {
+  state.timeline = data;
 };
 
 
 
 export {
-  commit__getAllProducts
+  getTimeline
 };

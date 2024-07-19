@@ -16,6 +16,7 @@ import MobileGrid from "@/pages/home/components/MobileGrid.vue";
 //import storeAPI from "@/pages/home/composable/home-api";
 import { useRouter } from "vue-router";
 import BannerWrap from "@/pages/home/components/BannerWrap.vue";
+import homeAPI from "@/pages/home/composable/home-api";
 
 export default {
   components: {
@@ -28,6 +29,10 @@ export default {
 
   setup() {
     const router = useRouter();
+
+    const { getTimeline } = homeAPI();
+
+    getTimeline();
 
     return { router };
   },
