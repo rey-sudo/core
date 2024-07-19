@@ -94,7 +94,7 @@ export default {
   background-size: contain;
   display: flex;
   flex-direction: column;
-  margin-top: 41px;
+  margin-top: 106px;
 }
 
 .banner-mask {
