@@ -22,7 +22,7 @@ export default {
         icon: "pi pi-credit-card",
       },
       {
-        label: "Treasury discount " + getProductData.value.collateral + " ADA",
+        label: "Treasury discount " + getProductData.value.discount + " ADA",
         icon: "pi pi-building-columns",
       },
       {

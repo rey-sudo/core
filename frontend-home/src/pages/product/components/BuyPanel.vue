@@ -113,7 +113,7 @@
 
   <div class="head-price">
     <div class="ada-label">₳</div>
-    <span>3,024</span>
+    <span>{{ getProductData.price }}</span>
   </div>
 
   <InfoIcons />
