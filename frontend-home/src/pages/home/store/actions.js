@@ -6,12 +6,7 @@ const getTimeline = async ({ commit }) => {
     query Timeline {
       timeline {
         id
-        seller_id
         name
-        model
-        features
-        terms_of_sale
-        guarantee
         category
         price
         collateral
@@ -30,7 +25,7 @@ const getTimeline = async ({ commit }) => {
 
     console.log(response.data);
 
-    commit("getTimeline", response.data.data.timeline);
+    commit("getTimeline", response.data.data);
 
     return { success: true, response: response.data };
   } catch (error) {

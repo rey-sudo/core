@@ -1,7 +1,7 @@
 <template>
   <div class="grid">
-    <div class="grid-item" v-for="row of getter__allProducts" :key="row">
-      <div class="grid-item-title">{{ row.title }}</div>
+    <div class="grid-item" v-for="row of getTimelineData.timeline" :key="row">
+      <div class="grid-item-category">{{ row.category }}</div>
 
       <div class="grid-row">
         <div
@@ -11,7 +11,7 @@
           @click="handleClick(item.id)"
         >
           <div class="card-header">
-            <img class="card-image" :src="item.image" alt="" />
+            <img class="card-image" :src="buildImage(item)" alt="" />
           </div>
 
           <div class="card-body">
@@ -46,13 +46,17 @@ export default {
   setup() {
     const router = useRouter();
 
-    const { getter__allProducts } = homeAPI();
+    const { getTimelineData } = homeAPI();
 
-    return { router, getter__allProducts };
+    return { router, getTimelineData };
   },
   methods: {
     handleClick(id) {
       this.router.push({ name: "product", params: { id } });
+    },
+
+    buildImage(value) {
+      return value.media_url + value.media_path + value.image_main;
     },
 
     formatPrice(num) {
@@ -106,10 +110,11 @@ export default {
   margin-top: 1rem;
 }
 
-.grid-item-title {
+.grid-item-category {
   font-size: var(--text-size-g);
   font-weight: bold;
   text-align: left;
+  text-transform: capitalize;
   color: var(--text-a);
   margin-top: 2rem;
   margin-bottom: 2rem;
