@@ -58,7 +58,7 @@ const createProductHandler = async (req: Request, res: Response) => {
       SELLER.country,
       "https://pairfy.dev",
       "/api/media/get-image/",
-      params.image_set.split(",")[4],
+      params.image_set.split(",")[params.image_index],
       params.image_set,
       "",
       0,
