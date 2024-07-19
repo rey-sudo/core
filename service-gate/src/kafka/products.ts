@@ -6,7 +6,7 @@ import { stringToTimestamp } from "../utils/other";
 const TOPIC_NAME = "fullfillment.service_product.products";
 const CONSUMER_GROUP = "service-gate-group";
 
-const serviceProductListener = async () => {
+const listenProducts = async () => {
   const consumer = kafka.consumer({ groupId: CONSUMER_GROUP });
 
   await consumer
@@ -57,6 +57,9 @@ const serviceProductListener = async () => {
     .catch((err: any) => _.error(err));
 };
 
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+
 const handleCreate = async (
   data: any,
   consumer: any,
@@ -79,24 +82,27 @@ const handleCreate = async (
       id,
       seller_id,
       name,
-      description,
+      model,
+      features,
+      terms_of_sale,
+      guarantee,
       category,
       price,
       collateral,
+      discount,
       stock,
-      stock_status,
       keywords,
-      theme,
       country,
       moderated,
-      image_base,
-      image_path,
+      media_url,
+      media_path,
       image_main,
       image_set,
+      video_set,
       created_at,
       schema_t,
       schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const schemeValue = Object.values(payload);
 
@@ -121,11 +127,17 @@ const handleCreate = async (
       { topic, partition, offset: message.offset + 1 },
     ]);
   } catch (err) {
-    await connection.rollback().then(() => _.error(err));
+    await connection.rollback();
+    _.error(err);
   } finally {
     connection.release();
   }
 };
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+
 
 const handleUpdate = async (
   data: any,
@@ -149,20 +161,23 @@ const handleUpdate = async (
     SET id = ?,
         seller_id = ?,
         name = ?,
-        description = ?,        
+        model = ?,
+        features = ?,
+        terms_of_sale = ?,
+        guarantee = ?,        
         category = ?,
         price = ?,
         collateral = ?,
+        discount = ?,
         stock = ?,
-        stock_status = ?,
         keywords = ?,
-        theme = ?,
         country = ?,
         moderated = ?,        
-        image_base = ?,
-        image_path = ?,
+        media_url = ?,
+        media_path = ?,
         image_main = ?,
         image_set = ?,
+        video_set = ?,
         created_at = ?,
         schema_t = ?,
         schema_v = ?
@@ -186,11 +201,16 @@ const handleUpdate = async (
       { topic, partition, offset: message.offset + 1 },
     ]);
   } catch (err) {
-    await connection.rollback().then(() => _.error(err));
+    await connection.rollback();
+
+    _.error(err);
   } finally {
     connection.release();
   }
 };
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
 
 const handleDelete = async (
   data: any,
@@ -221,10 +241,11 @@ const handleDelete = async (
       { topic, partition, offset: message.offset + 1 },
     ]);
   } catch (err) {
-    await connection.rollback().then(() => _.error(err));
+    await connection.rollback();
+    _.error(err)
   } finally {
     connection.release();
   }
 };
 
-export default serviceProductListener;
+export default listenProducts;
