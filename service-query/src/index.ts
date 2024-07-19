@@ -8,10 +8,12 @@ import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 import { product } from "./resolvers/product";
+import { timeline } from "./resolvers/timeline";
 
 const resolvers = {
   Query: {
     ...product.Query,
+    ...timeline.Query
   },
 };
 

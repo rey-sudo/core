@@ -24,6 +24,7 @@ type Product {
 
 type Query {
   product(id: String): [Product]
+  timeline: [Product]
 }
 `;
 
