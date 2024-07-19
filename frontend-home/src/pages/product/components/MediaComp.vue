@@ -60,7 +60,7 @@ export default {
 
     const galleryImages = computed(() => {
       const images = getProductData.value.image_set.split(",");
-      images.pop();
+     
       return images.map((id) => {
         return {
           itemImageSrc: buildURL(id),

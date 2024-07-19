@@ -359,7 +359,7 @@
           </label>
           <InputNumber
             id="quantity"
-            placeholder="Stock"
+            placeholder=""
             v-model="productData.stock"
             integeronly
             :min="0"
@@ -442,11 +442,12 @@
               <div v-if="files.length > 0">
                 <div class="upload-list">
                   <div
+                    class="upload-box"
                     v-for="(file, index) of files"
                     :key="file.name + file.type + file.size"
-                    class="upload-box"
                   >
                     <img
+                      :class="{ selected: thumbnailIndex === index }"
                       role="presentation"
                       :alt="file.name"
                       :src="file.objectURL"
@@ -459,11 +460,7 @@
                     <div class="filename">{{ formatSize(file.size) }}</div>
 
                     <div class="upload-control">
-                      <div class="pending-badge">
-                        <span>Pending</span>
-                      </div>
-
-                      <div
+                      <button
                         class="upload-remove"
                         @click="
                           onRemoveTemplatingFile(
@@ -474,7 +471,14 @@
                         "
                       >
                         Delete
-                      </div>
+                      </button>
+
+                      <button
+                        class="select-thumbnail"
+                        @click="selectThumbnail(index)"
+                      >
+                        Thumbnail
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -795,6 +799,7 @@ export default {
     const totalSizePercent = ref(0);
     const files = ref([]);
 
+
     const onRemoveTemplatingFile = (file, removeFileCallback, index) => {
       removeFileCallback(index);
       totalSize.value -= parseInt(formatSize(file.size));
@@ -934,6 +939,7 @@ export default {
 
     return {
       filesUploaded,
+  
       formValidationLimits,
       formValidationMessage,
       onRemoveTemplatingFile,
@@ -964,6 +970,7 @@ export default {
       displayDeleteDialog: false,
       deleteProductsDialog: false,
       selectedProducts: null,
+      thumbnailIndex: 0,
       filters: {},
       categories: [
         { name: "Electronics", code: "electronics" },
@@ -997,6 +1004,9 @@ export default {
     this.products = this.getProductsData;
   },
   methods: {
+    selectThumbnail(index) {
+      this.thumbnailIndex = index;
+    },
     hideErrorModal() {
       this.displayErrorModal = false;
     },
@@ -1046,6 +1056,7 @@ export default {
         stock: this.productData.stock,
         keywords: this.productData.keywords.join(","),
         image_set: this.productData.image_set.join(","),
+        image_index: this.thumbnailIndex,
       };
 
       await this.createProduct(params).then((res) => {
@@ -1303,14 +1314,12 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.pending-badge,
-.completed-badge {
-  background: var(--yellow-b);
+.upload-control button {
   text-align: center;
-  border-radius: 999px;
   font-size: var(--text-size-a);
   padding: 0.25rem;
   width: 100px;
+  margin-right: 1rem;
 }
 
 .completed-badge {
@@ -1338,15 +1347,6 @@ export default {
   margin-top: 0.5rem;
 }
 
-.upload-remove {
-  padding: 0.25rem 1rem;
-  border-radius: 999px;
-  border: 1px solid var(--border-b);
-  margin-left: 0.5rem;
-  font-size: var(--text-size-a);
-  cursor: pointer;
-}
-
 .upload-banner {
   display: flex;
   flex-direction: column;
@@ -1364,12 +1364,16 @@ export default {
 }
 
 .upload-box img {
-  border: 1px solid var(--border-a);
-  border-radius: 8px;
+  border: 1px solid var(--border-b);
+  border-radius: 6px;
   height: 125px;
   object-fit: contain;
   width: 125px;
   padding: 0.5rem;
+}
+
+.upload-box img.selected {
+  border: 1px solid var(--blue-a);
 }
 
 .upload-box .filename {
@@ -1390,9 +1394,9 @@ export default {
 .upload-button {
   cursor: pointer;
   padding: 0.5rem 1rem;
-  border-radius: 8px;
+  border-radius: 6px;
   margin-right: 1rem;
-  border: 1px solid var(--border-a);
+  border: 1px solid var(--border-b);
 }
 
 .product-image-main {
@@ -1476,6 +1480,7 @@ img {
   background-image: url("https://static.xx.fbcdn.net/rsrc.php/v3/yw/r/j5A-vbnR0dd.png");
   background-repeat: no-repeat;
   background-size: cover;
+  background: var(--blue-a);
 }
 
 .products-wrap {
@@ -1487,7 +1492,7 @@ img {
 
 .products-card {
   width: inherit;
-  border-radius: 18px;
+  border-radius: 12px;
   box-shadow: var(--shadow-a);
   padding: 0 2rem;
   background: var(--base-a);
