@@ -90,12 +90,12 @@
   </div>
 
   <div class="head-name">
-    {{ getProductData?.name }}
+    {{ getProductData.name }}
   </div>
 
   <div class="head-legend">
-    <span>Model: {{ getProductData?.model }} </span>
-    <span>SKU: {{ getProductData?.id }}</span>
+    <span>Model: {{ getProductData.model }} </span>
+    <span>SKU: {{ getProductData.id }}</span>
   </div>
 
   <div class="head-rating">
