@@ -8,17 +8,21 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import productAPI from "@/pages/product/api/index";
+
+import { computed } from "vue";
 
 export default {
   setup() {
-    const items = ref([
+    const { getProductData } = productAPI();
+
+    const items = computed(() => [
       {
-        label: "Collateral 500 ADA",
+        label: "Collateral " + getProductData.value.collateral + " ADA",
         icon: "pi pi-credit-card",
       },
       {
-        label: "Treasury discount 30 ADA",
+        label: "Treasury discount " + getProductData.value.collateral + " ADA",
         icon: "pi pi-building-columns",
       },
       {
