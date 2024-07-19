@@ -394,7 +394,7 @@
             <span>Images</span>
             <i
               class="pi pi-info-circle"
-              v-tooltip.top="'The first image is the preview image.'"
+              v-tooltip.top="'The order of upload is respected.'"
             />
           </label>
           <Toast />
@@ -447,7 +447,6 @@
                     :key="file.name + file.type + file.size"
                   >
                     <img
-                      :class="{ selected: thumbnailIndex === index }"
                       role="presentation"
                       :alt="file.name"
                       :src="file.objectURL"
@@ -473,12 +472,7 @@
                         Delete
                       </button>
 
-                      <button
-                        class="select-thumbnail"
-                        @click="selectThumbnail(index)"
-                      >
-                        Thumbnail
-                      </button>
+
                     </div>
                   </div>
                 </div>
@@ -970,7 +964,6 @@ export default {
       displayDeleteDialog: false,
       deleteProductsDialog: false,
       selectedProducts: null,
-      thumbnailIndex: 0,
       filters: {},
       categories: [
         { name: "Electronics", code: "electronics" },
@@ -1004,9 +997,6 @@ export default {
     this.products = this.getProductsData;
   },
   methods: {
-    selectThumbnail(index) {
-      this.thumbnailIndex = index;
-    },
     hideErrorModal() {
       this.displayErrorModal = false;
     },
@@ -1056,7 +1046,6 @@ export default {
         stock: this.productData.stock,
         keywords: this.productData.keywords.join(","),
         image_set: this.productData.image_set.join(","),
-        image_index: this.thumbnailIndex,
       };
 
       await this.createProduct(params).then((res) => {
