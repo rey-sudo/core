@@ -18,16 +18,16 @@
 
           <div class="stepper-product-title">
             <a
-              :href="'/p/' + getSlotData?.product_details.product_id"
+              :href="'/p/' + getSlotData.product_details.product_id"
               target="_blank"
               rel="noopener noreferrer"
             >
-              {{ getSlotData?.product_details.product_name }}</a
+              {{ getSlotData.product_details.product_name }}</a
             >
 
             <span> » </span>
             <span class="sku"
-              >SKU: {{ getSlotData?.product_details.product_id }}</span
+              >SKU: {{ getSlotData.product_details.product_id }}</span
             >
             <span> » </span>
             <span class="model"> Model: 8430288C2C</span>
@@ -47,22 +47,22 @@
         <div class="stepper-price">
           <div>
             <label>Total Price </label>
-            <span>{{ getSlotData?.contract_price }} ADA </span>
+            <span>{{ getSlotData.contract_price }} ADA </span>
           </div>
 
           <div>
             <label>Total Collateral</label>
-            <span>{{ getSlotData?.contract_collateral }} ADA </span>
+            <span>{{ getSlotData.contract_collateral }} ADA </span>
           </div>
 
           <div>
             <label>Mode</label>
-            <span>{{ getSlotData?.mode }}</span>
+            <span>{{ getSlotData.mode }}</span>
           </div>
 
           <div>
             <label>Units</label>
-            <span> {{ getSlotData?.contract_units }}</span>
+            <span> {{ getSlotData.contract_units }}</span>
           </div>
         </div>
       </div>
@@ -78,9 +78,9 @@
         <div class="stepper-title">Action</div>
         <WaitingButton
           v-if="
-            getSlotData?.contract_stage === 'inactive' ||
-            getSlotData?.contract_stage === 'start' ||
-            getSlotData?.contract_stage === 'waiting'
+            getSlotData.contract_stage === 'inactive' ||
+            getSlotData.contract_stage === 'start' ||
+            getSlotData.contract_stage === 'waiting'
           "
         />
       </div>

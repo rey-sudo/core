@@ -2,7 +2,7 @@
   <div class="session">
     <MainHeader />
 
-    <div class="session-wrap">
+    <div class="session-wrap" v-if="isLoaded">
       <TimeLine />
 
       <div class="session-body">
@@ -12,11 +12,12 @@
 
         <div class="session-body-right">
           <SellerChat />
-        </div> 
+        </div>
       </div>
 
       <div class="session-bottom">z</div>
     </div>
+    <div v-if="isFailed">isFailed</div>
   </div>
 </template>
 
@@ -38,21 +39,36 @@ export default {
   setup() {
     let currentRoute = ref("");
 
+    const isLoaded = ref(false);
+
+    const isFailed = ref(false);
+
     const { getSlot } = sessionAPI();
+
+    const setupData = (params) => {
+      getSlot({ id: params.id }).then((res) => {
+        if (res.success === true) {
+          isLoaded.value = true;
+        }
+
+        if (res.success === false) {
+          isFailed.value = true;
+        }
+      });
+    };
 
     return {
       currentRoute,
       getSlot,
+      setupData,
+      isLoaded,
+      isFailed
     };
   },
   created() {
     this.$watch(
-      () => this.$route,
-      (route) => {
-        this.getSlot({ id: route.params.id }).catch((err) =>
-          console.error(err)
-        );
-      },
+      () => this.$route.params,
+      (params) => this.setupData(params),
       { immediate: true }
     )();
   },

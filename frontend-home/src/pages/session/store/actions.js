@@ -6,9 +6,9 @@ const getSlot = async ({ commit }, params) => {
 
     commit("getSlot", response.data.payload);
 
-    return { ok: true, response: response.data };
+    return { success: true, response: response.data };
   } catch (error) {
-    throw { success: false, response: error.response.data };
+    return { success: false, response: error.response.data };
   }
 };
 
