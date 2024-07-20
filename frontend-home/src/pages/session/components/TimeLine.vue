@@ -136,7 +136,6 @@ export default {
   justify-content: center;
   padding: 2rem;
   padding-bottom: 1rem;
-  margin-top: 2rem;
   border-radius: 28px;
 }
 
@@ -158,7 +157,7 @@ export default {
 }
 
 .timeline-timer span {
-  background: var(--text-a);
+  background: var(--primary-c);
   border-radius: 6px;
   width: 30px;
   height: 40px;

@@ -161,7 +161,7 @@ export default {
   width: 40px;
   height: 40px;
   min-height: 40px;
-  background: var(--primary-a);
+  background: var(--primary-c);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -174,7 +174,7 @@ export default {
 .stepper-column span {
   width: 2px;
   height: 100%;
-  background: var(--primary-a);
+  background: var(--primary-c);
 }
 
 .stepper-title {

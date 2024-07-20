@@ -79,6 +79,7 @@ export default {
   flex-direction: column;
   min-height: 100vh;
   padding: 0 10%;
+  margin-top: 100px;
 }
 
 .session-body-right {

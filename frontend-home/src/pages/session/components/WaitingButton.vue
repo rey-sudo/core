@@ -179,8 +179,8 @@ export default {
 }
 
 .waiting button {
-  border: 1px solid var(--primary-a);
-  background: var(--primary-a);
+  border: 1px solid var(--primary-c);
+  background: var(--primary-c);
   font-size: var(--text-size-b);
   padding: 0.5rem 1rem;
   width: 100px;
@@ -194,8 +194,8 @@ export default {
 }
 
 .waiting button.actived {
-  background: var(--primary-a);
-  border: 1px solid var(--primary-a);
+  background: var(--primary-c);
+  border: 1px solid var(--primary-c);
   pointer-events: none;
 }
 
