@@ -12,7 +12,11 @@
         <div class="stepper-product">
           <img
             class="stepper-product-image"
-            src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6534/6534615_sd.jpg"
+            :src="
+              getSlotData.product_details.media_url +
+              getSlotData.product_details.media_path +
+              getSlotData.product_details.image_main
+            "
             alt=""
           />
 
@@ -30,7 +34,9 @@
               >SKU: {{ getSlotData.product_details.product_id }}</span
             >
             <span> » </span>
-            <span class="model"> Model: 8430288C2C</span>
+            <span class="model">
+              Model: {{ getSlotData.product_details.model }}</span
+            >
           </div>
         </div>
       </div>
