@@ -218,7 +218,7 @@ export default {
 }
 
 .stepper-price div span {
-  line-height: 2rem;
+  line-height: 2.5rem;
   font-size: var(--text-size-d);
   color: var(--text-a);
   white-space: nowrap;
