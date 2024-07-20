@@ -1,13 +1,5 @@
 <template>
   <div class="head mobile">
-    <div class="bread">
-      <Breadcrumb :home="home" :model="breadItems">
-        <template #separator>
-          <div class="arrow" />
-        </template>
-      </Breadcrumb>
-    </div>
-
     <div class="head-body">
       <div class="head-left">
         <MediaComp />
@@ -28,7 +20,6 @@ import DescriptionView from "./DescriptionView.vue";
 import MediaComp from "./MediaComp.vue";
 import SellerComp from "./SellerComp.vue";
 import BuyPanel from "./BuyPanel.vue";
-import { ref } from "vue";
 
 export default {
   components: {
@@ -40,17 +31,7 @@ export default {
   setup() {
     const { lockingEndpoint } = productAPI();
 
-    const home = ref({ label: "Pairfy" });
-
-    const breadItems = ref([
-      { label: "Electronics" },
-      { label: "TV & Accessories" },
-      { label: "TVs" },
-    ]);
-
     return {
-      home,
-      breadItems,
       lockingEndpoint,
     };
   },
@@ -58,14 +39,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.bread {
-  display: flex;
-  justify-content: flex-start;
-  width: inherit;
-  padding-top: 2rem;
-  padding-bottom: 4rem;
-  border-top: 1px solid var(--border-b);
-}
+
 
 .head {
   display: flex;
@@ -108,9 +82,6 @@ export default {
     display: none;
   }
 
-  .bread {
-    padding: 1rem;
-  }
 }
 
 /* Tablets and small deskbanners */

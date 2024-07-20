@@ -259,7 +259,7 @@ export default {
   text-align: left;
   margin-top: initial;
   font-size: var(--text-size-h);
-  font-weight: 700;
+  font-weight: 600;
   display: flex;
   align-items: baseline;
   margin-top: 1rem;
