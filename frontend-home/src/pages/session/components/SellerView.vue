@@ -127,10 +127,10 @@ export default {
 }
 
 .stepper-product-image {
-  width: 100px;
-  height: 100px;
+  width: 125px;
+  height: 125px;
   object-fit: contain;
-  border-radius: 6px;
+  border-radius: 12px;
   background: var(--base-a);
   border: 1px solid var(--border-b);
   padding: 0.5rem;
@@ -164,17 +164,16 @@ export default {
 }
 
 .stepper-column div {
-  width: 40px;
-  height: 40px;
-  min-height: 40px;
   background: var(--primary-c);
+  min-height: 2rem;
+  min-width: 2rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--text-w);
   font-weight: 700;
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
 }
 
 .stepper-column span {
@@ -199,12 +198,16 @@ export default {
   text-align: start;
   margin-top: 2rem;
   max-width: 500px;
-  border-radius: 16px;
+  border-radius: 12px;
+  padding: 1rem;
+  border: 1px solid var(--border-b);
 }
 
 .stepper-price div {
   margin-right: auto;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .stepper-price div label {
@@ -215,7 +218,7 @@ export default {
 }
 
 .stepper-price div span {
-  line-height: 3rem;
+  line-height: 2rem;
   font-size: var(--text-size-d);
   color: var(--text-a);
   white-space: nowrap;
