@@ -1,5 +1,6 @@
 import DB from "../db";
 import { Request, Response } from "express";
+import { BadRequestError } from "../errors";
 import { _ } from "../utils/pino";
 
 const buyOptionsMiddlewares: any = [];
@@ -11,6 +12,19 @@ const buyOptionsHandler = async (req: Request, res: Response) => {
 
   try {
     connection = await DB.client.getConnection();
+
+    const [products] = await connection.execute(
+      `
+      SELECT *
+      FROM products
+      WHERE id = ?
+      `,
+      [params.id]
+    );
+
+    if (products.length === 0) {
+      throw new BadRequestError("NO_PRODUCT");
+    }
 
     const [response] = await connection.execute(
       `
