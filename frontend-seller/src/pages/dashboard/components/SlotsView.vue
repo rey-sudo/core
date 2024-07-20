@@ -1,6 +1,8 @@
 <template>
   <div class="slots">
-    <!--DIALOG SECTION-->
+    <!--////////////////////////////////////////////////////////////////////////-->
+
+    <!--////////////////////////////////////////////////////////////////////////-->
     <Dialog
       v-model:visible="messageModalVisible"
       modal
@@ -19,7 +21,9 @@
         </div>
       </template>
     </Dialog>
+    <!--////////////////////////////////////////////////////////////////////////-->
 
+    <!--////////////////////////////////////////////////////////////////////////-->
     <Dialog
       v-model:visible="deleteProductDialog"
       :style="{ width: '425px' }"
@@ -43,7 +47,9 @@
         <Button label="Yes" icon="pi pi-check" text @click="deleteProduct" />
       </template>
     </Dialog>
+    <!--////////////////////////////////////////////////////////////////////////-->
 
+    <!--////////////////////////////////////////////////////////////////////////-->
     <Dialog
       v-model:visible="deleteProductsDialog"
       :style="{ width: '425px' }"
@@ -71,10 +77,12 @@
         />
       </template>
     </Dialog>
+    <!--////////////////////////////////////////////////////////////////////////-->
 
+    <!--////////////////////////////////////////////////////////////////////////-->
     <Dialog
       v-model:visible="createSlotDialogVisible"
-      :style="{ width: '380px' }"
+      :style="{ width: '400px' }"
       header="Availability"
       :modal="true"
       :draggable="false"
@@ -191,7 +199,9 @@
         <Button label="Create" text @click="createSlots" />
       </template>
     </Dialog>
+    <!--////////////////////////////////////////////////////////////////////////-->
 
+    <!--////////////////////////////////////////////////////////////////////////-->
     <Dialog
       v-model:visible="slotListDialogVisible"
       :style="{ width: '70vw' }"
@@ -331,8 +341,9 @@
       </template>
     </Dialog>
     <Toast />
-    <!---//////////////////////////////////////////////////////CONTENT////////////////////////////-->
+    <!--////////////////////////////////////////////////////////////////////////-->
 
+    <!--////////////////////////////////////////////////////////////////////////-->
     <div class="slots-wrap">
       <div class="slots-card">
         <DataTable
@@ -386,9 +397,9 @@
             <template #body="slotProps">
               <Image
                 :src="
-                  slotProps.data.image_base +
-                  slotProps.data.image_path +
-                  slotProps.data.image_main
+                slotProps.data.media_url +
+                slotProps.data.media_path +
+                slotProps.data.image_main
                 "
                 :alt="slotProps.data.image_main"
                 width="70"
