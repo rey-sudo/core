@@ -171,7 +171,7 @@ export default {
 
 .timeline-title span:nth-child(1) {
   font-size: var(--text-size-f);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .timeline-title span:nth-child(2) {

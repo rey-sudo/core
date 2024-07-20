@@ -180,7 +180,7 @@ export default {
 .stepper-title {
   font-size: var(--text-size-e);
   text-align: start;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .stepper {
