@@ -94,7 +94,7 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  padding: 0 10%;
+  padding: 0 12%;
   margin-top: 100px;
 }
 

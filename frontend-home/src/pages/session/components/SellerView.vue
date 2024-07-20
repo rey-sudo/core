@@ -29,11 +29,11 @@
               {{ getSlotData.product_details.product_name }}</a
             >
 
-            <span> » </span>
+            <span> | </span>
             <span class="sku"
               >SKU: {{ getSlotData.product_details.product_id }}</span
             >
-            <span> » </span>
+            <span> | </span>
             <span class="model">
               Model: {{ getSlotData.product_details.model }}</span
             >
@@ -151,7 +151,7 @@ export default {
 }
 
 .stepper-column {
-  width: calc(40px + 4rem);
+  width: 100px;
   height: 250px;
   display: flex;
   justify-content: flex-start;
