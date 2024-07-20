@@ -245,20 +245,21 @@ export default {
 
 .head-rating span {
   margin-right: 0.5rem;
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-c);
   font-weight: 600;
 }
 
 .head-rating span:nth-child(3) {
   font-weight: 400;
   font-size: var(--text-size-a);
+  color: var(--text-a);
 }
 
 .head-price {
   text-align: left;
   margin-top: initial;
   font-size: var(--text-size-h);
-  font-weight: 600;
+  font-weight: 700;
   display: flex;
   align-items: baseline;
   margin-top: 1rem;

@@ -56,6 +56,6 @@ export default {
 }
 
 .icons i {
-  color: var(--primary-a);
+  color: var(--primary-c);
 }
 </style>
