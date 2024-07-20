@@ -157,7 +157,7 @@ export default {
 }
 
 .timeline-timer span {
-  background: var(--primary-c);
+  background: var(--text-a);
   border-radius: 6px;
   width: 30px;
   height: 40px;
