@@ -1162,7 +1162,7 @@ export default {
 <style lang="css" scoped>
 .switch-button {
   background: var(--blue-c);
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   color: var(--text-w);
   padding: 0.5rem;
   border-radius: 6px;
