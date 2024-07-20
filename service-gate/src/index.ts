@@ -117,6 +117,14 @@ const main = async () => {
       route.startTxHandler
     );
 
+    app.get(
+      "/api/gate/buy-options/:id",
+
+      route.buyOptionsMiddlewares,
+
+      route.buyOptionsHandler
+    );
+
     app.all("*", (_req, _res) => {
       throw new NotFoundError();
     });

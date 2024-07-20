@@ -3,4 +3,5 @@ export * from "./start-endpoint";
 export * from "./locking-endpoint";
 export * from "./get-slots";
 export * from "./get-slot";
-export * from "./start-tx"
+export * from "./start-tx";
+export * from "./buy-options";
