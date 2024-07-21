@@ -225,14 +225,14 @@ export default {
   text-align: left;
   margin-top: initial;
   font-size: var(--text-size-h);
-  font-weight: 600;
+  font-weight: 700;
   display: flex;
   align-items: baseline;
   margin-top: 1rem;
 }
 
 .head-price .ada-label {
-  font-weight: 400;
+  font-weight: 500;
   color: var(--text-a);
   font-size: var(--text-size-g);
   margin-right: 0.5rem;
