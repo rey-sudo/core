@@ -7,6 +7,9 @@ const productAPI = () => {
   const lockingEndpoint = async (params) =>
     await store.dispatch("product/lockingEndpoint", params);
 
+  const getOrders = async (params) =>
+    await store.dispatch("product/getOrders", params);
+
   const getProduct = async (params) =>
     await store.dispatch("product/getProduct", params);
 
@@ -16,6 +19,7 @@ const productAPI = () => {
   return {
     lockingEndpoint,
     getProduct,
+    getOrders,
     getProductData: computed(() => store.getters["product/getProductData"]),
     sleep,
   };

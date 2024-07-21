@@ -6,4 +6,8 @@ const getProductData = (state) => {
   return state.productData;
 };
 
-export { getter__allProducts, getProductData };
+const getOrdersData = (state) => {
+  return state.ordersData;
+};
+
+export { getter__allProducts, getProductData, getOrdersData };

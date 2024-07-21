@@ -135,7 +135,7 @@ export default {
   },
 
   setup() {
-    const { getProductData } = productAPI();
+    const { getProductData, getOrdersData } = productAPI();
 
     const product = ref({
       rating_count: 4.8,
@@ -200,6 +200,7 @@ export default {
       slotList,
       selectedProducts,
       getProductData,
+      getOrdersData
     };
   },
 };

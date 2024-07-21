@@ -32,13 +32,13 @@ export default {
     MobileHeadView,
   },
   setup() {
-    const { getProduct, getProductData } = productAPI();
+    const { getProduct, getOrders, getProductData } = productAPI();
 
     const isLoaded = ref(false);
     const isFailed = ref(false);
 
     const setupData = (id) => {
-      getProduct({ id: id }).then((res) => {
+      getProduct({ id }).then((res) => {
         if (res.success === true) {
           return (isLoaded.value = true);
         }
@@ -47,6 +47,8 @@ export default {
           return (isFailed.value = true);
         }
       });
+
+      getOrders({ id });
     };
 
     return {
