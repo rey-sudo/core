@@ -175,8 +175,8 @@
 }
 
 .p-overflow-hidden {
-      overflow: initial !important; 
-     padding-right: initial !important; 
+  overflow: initial !important;
+  padding-right: initial !important;
 }
 
 .p-editor-container .p-editor-toolbar {
@@ -5009,9 +5009,9 @@
     border-radius: 3px;
   }
   .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-    background: var(--primary-c);
+    background: var(--primary-s);
     border-color: var(--primary-c);
-    color: var(--text-w);
+    color: var(--primary-c);
     border-radius: 50%;
   }
   .p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover {
