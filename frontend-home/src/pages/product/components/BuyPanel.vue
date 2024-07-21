@@ -224,7 +224,7 @@ export default {
 
 .head-legend {
   text-align: left;
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   margin-top: 1rem;
   font-weight: 400;
   color: var(--text-a);
