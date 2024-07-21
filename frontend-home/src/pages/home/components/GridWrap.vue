@@ -111,7 +111,7 @@ export default {
 }
 
 .grid-item-category {
-  background: var(--base-b);
+  background: var(--base-a);
   font-size: var(--text-size-g);
   font-weight: bold;
   text-align: left;
