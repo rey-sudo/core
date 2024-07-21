@@ -99,10 +99,12 @@ export default {
 
 .page-1 {
   min-height: 150vh;
-  margin-top: 250px;
+  margin-top: 150px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  border-top: 1px solid var(--border-b);
+  padding-top: 100px;
 }
 
 @media only screen and (max-width: 767px) {
