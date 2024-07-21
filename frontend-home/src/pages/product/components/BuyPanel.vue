@@ -42,7 +42,7 @@
         field="mode"
         header="Mode"
         sortable
-        style="min-width: 10rem"
+        style="min-width: 10rem; text-transform: capitalize"
       ></Column>
 
       <Column
