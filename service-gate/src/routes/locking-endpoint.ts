@@ -36,6 +36,8 @@ const lockingEndpointMiddlewares: any = [];
 const lockingEndpointHandler = async (req: Request, res: Response) => {
   const params = req.body;
 
+  const BUYER = req.userData;
+
   let connection: any = null;
 
   try {
@@ -63,10 +65,9 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
         sCollateralParam: SLOT.contract_collateral * ADA_LOVELACE,
       },
 
-      bWalletParam: params.buyer_pubkeyhash,
+      bWalletParam: BUYER.pubkeyhash,
     };
 
-    
     console.log(lockingEndpoint);
 
     await API.post(
@@ -125,7 +126,9 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
   } catch (err: any) {
     await connection.rollback();
 
-    throw new BadRequestError(err.message);
+    res.status(200).send({
+      success: false,
+    });
   } finally {
     connection.release();
   }
