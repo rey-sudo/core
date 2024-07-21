@@ -21,6 +21,7 @@ const productAPI = () => {
     getProduct,
     getOrders,
     getProductData: computed(() => store.getters["product/getProductData"]),
+    getOrdersData: computed(() => store.getters["product/getOrdersData"]),
     sleep,
   };
 };

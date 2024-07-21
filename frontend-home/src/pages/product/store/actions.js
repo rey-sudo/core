@@ -18,7 +18,7 @@ const getOrders = async ({ commit }, params) => {
   try {
     const response = await axiosApi.get(`/api/gate/buy-options/${params.id}`);
 
-    commit("getOrders", response.data.payload);
+    commit("getOrders", response.data.payload[0]);
 
     return { success: true, response: response.data };
   } catch (error) {

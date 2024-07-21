@@ -29,13 +29,17 @@ const buyOptionsHandler = async (req: Request, res: Response) => {
     const [response] = await connection.execute(
       `
       SELECT
-        id,
-        mode,
-        contract_units,
-        contract_price,
-        contract_collateral,
-        product_discount,
-        COUNT(*) OVER (PARTITION BY product_id, contract_stage) AS slot_count
+        JSON_ARRAYAGG(
+          JSON_OBJECT(
+            'id', id,
+            'mode', mode,
+            'contract_units', contract_units,
+            'contract_price', contract_price,
+            'contract_collateral', contract_collateral,
+            'product_discount', product_discount
+          )
+        ) AS slots,
+        COUNT(*) AS slot_count
       FROM 
         slots
       WHERE

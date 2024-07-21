@@ -4,7 +4,7 @@
     modal
     dismissableMask
     blockScroll
-    header="Buy Options"
+    header="Buy options"
     :draggable="false"
     :style="{ width: '70vw' }"
     :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
@@ -85,8 +85,10 @@
     <template #footer> </template>
   </Dialog>
   <!--//////////////////////////////////////////////////////////////////////////-->
+  <!--//////////////////////////////////////////////////////////////////////////-->
+
   <div class="head-info">
-    <span>5 available</span>
+    <span> {{ getOrdersData?.slot_count }} available</span>
   </div>
 
   <div class="head-name">
@@ -127,7 +129,7 @@
 import InfoIcons from "./InfoIcons.vue";
 import productAPI from "@/pages/product/api/index";
 import { FilterMatchMode } from "primevue/api";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 export default {
   components: {
@@ -152,44 +154,7 @@ export default {
       global: { value: null, matchMode: FilterMatchMode.CONTAINS },
     });
 
-    const slotList = ref([
-      {
-        id: "S80843894300",
-        mode: "batch",
-        contract_units: 2,
-        contract_price: 3024,
-        contract_collateral: 20,
-        product_id: "adadada",
-        product_discount: 0,
-      },
-      {
-        id: "S80843894300",
-        mode: "batch",
-        contract_units: 2,
-        contract_price: 3024,
-        contract_collateral: 20,
-        product_id: "adadada",
-        product_discount: 0,
-      },
-      {
-        id: "S80843894300",
-        mode: "batch",
-        contract_units: 2,
-        contract_price: 3024,
-        contract_collateral: 20,
-        product_id: "adadada",
-        product_discount: 0,
-      },
-      {
-        id: "S80843894300",
-        mode: "batch",
-        contract_units: 2,
-        contract_price: 3024,
-        contract_collateral: 20,
-        product_id: "adadada",
-        product_discount: 0,
-      },
-    ]);
+    const slotList = computed(() => getOrdersData?.value.slots);
 
     const selectedProducts = ref();
     return {
@@ -200,7 +165,7 @@ export default {
       slotList,
       selectedProducts,
       getProductData,
-      getOrdersData
+      getOrdersData,
     };
   },
 };
