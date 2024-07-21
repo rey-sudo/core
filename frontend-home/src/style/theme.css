@@ -175,6 +175,8 @@
 }
 
 .p-overflow-hidden {
+      overflow: initial !important; 
+     padding-right: initial !important; 
 }
 
 .p-editor-container .p-editor-toolbar {
