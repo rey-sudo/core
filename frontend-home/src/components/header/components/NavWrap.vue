@@ -117,7 +117,6 @@ export default {
   background: var(--primary-a);
   color: var(--text-w);
   font-weight: 500;
-  box-shadow: var(--shadow-b);
 }
 
 .nav.hide {

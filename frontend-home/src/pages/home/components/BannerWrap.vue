@@ -95,6 +95,7 @@ export default {
   display: flex;
   flex-direction: column;
   margin-top: 106px;
+  border-top: 1px solid var(--border-a);
 }
 
 .banner-mask {

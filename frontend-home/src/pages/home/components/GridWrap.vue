@@ -111,13 +111,13 @@ export default {
 }
 
 .grid-item-category {
+  background: var(--base-b);
   font-size: var(--text-size-g);
   font-weight: bold;
   text-align: left;
   text-transform: capitalize;
   color: var(--text-a);
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  padding: 2rem;
   font-weight: 700;
 }
 
@@ -141,6 +141,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 0.5rem;
+  background: var(--base-a);
 }
 
 .card {
