@@ -100,7 +100,6 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
     const schemeData = `
       UPDATE slots 
       SET contract_stage = ?,
-          contract_status_1 = ?,
           contract_utx_1 = ?
       WHERE id = ?
       `;
