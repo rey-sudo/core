@@ -21,9 +21,9 @@ interface LockingEndpoint {
 function checkUTX(status: any) {
   assert.ok(status.cicYieldedExportTxs.length !== 0);
 
-  assert.ok(status.cicYieldedExportTxs[0].hasOwnProperty("transaction"));
+  assert.ok(status.cicYieldedExportTxs[1].hasOwnProperty("transaction"));
 
-  assert.ok(status.cicYieldedExportTxs[0].transaction.length !== 0);
+  assert.ok(status.cicYieldedExportTxs[1].transaction.length !== 0);
 
   return status;
 }
@@ -80,7 +80,6 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
       lockingEndpoint
     )
       .then((res) => {
-        console.log(res);
         assert.ok(res.status === 200);
       })
       .catch((err) => {
@@ -88,7 +87,13 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
         throw new Error("CID_FAILED");
       });
 
-    await sleep(2000);
+    await sleep(1000);
+
+    await API.get(`/api/contract/instance/${SLOT.contract_id}/status`)
+      .then((response) => console.log("MID", response))
+      .catch(() => {
+        throw new Error("CID_FAILED");
+      });
 
     ////////////////////////////////////////////////////
 
@@ -114,7 +119,7 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
       BUYER.pubkeyhash,
       "locking",
       contractStatus,
-      contractStatus.cicYieldedExportTxs[0].transaction,
+      contractStatus.cicYieldedExportTxs[1].transaction,
       params.slot_id,
     ];
 
@@ -127,7 +132,7 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
     res.status(200).send({
       success: true,
       payload: {
-        transaction: contractStatus.cicYieldedExportTxs[0].transaction,
+        transaction: contractStatus.cicYieldedExportTxs[1].transaction,
       },
     });
   } catch (err: any) {

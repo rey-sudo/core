@@ -91,7 +91,7 @@
   <!--//////////////////////////////////////////////////////////////////////////-->
 
   <div class="head-info">
-    <span> {{ getOrdersData?.slot_count }} available</span>
+    <span> {{ getOrdersData?.slot_count }} Available</span>
   </div>
 
   <div class="head-name">
