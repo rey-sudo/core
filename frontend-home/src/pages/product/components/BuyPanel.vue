@@ -135,6 +135,7 @@ import { FilterMatchMode } from "primevue/api";
 import { ref, computed } from "vue";
 import { balanceTx } from "@/api/wallet-api";
 import { useToast } from "primevue/usetoast";
+import { useRouter } from "vue-router";
 
 export default {
   components: {
@@ -144,6 +145,8 @@ export default {
   setup() {
     const { getProductData, getOrdersData, lockingEndpoint, lockingTx } =
       productAPI();
+
+    const router = useRouter();
 
     const product = ref({
       rating_count: 4.8,
@@ -196,13 +199,6 @@ export default {
       return txHash;
     };
 
-    const successMessage = {
-      severity: "success",
-      summary: "Successful",
-      detail: "Transaction sent to the network.",
-      life: 5000,
-    };
-
     const errorMessage = {
       severity: "error",
       summary: "Error Message",
@@ -225,12 +221,12 @@ export default {
         .then((res) => balanceTx(res.response.payload.transaction))
         .then((hash) => downloadTx(hash, slotId))
         .then((hash) => lockingTx({ tx_hash: hash, slot_id: slotId }))
-        .then(() => showMessage(successMessage))
+        .then(() => router.push({ name: "session", params: { id: slotId } }))
         .catch(() => showMessage(errorMessage));
     };
 
     const createTransactionX = () => {
-        downloadTx("coco")
+      downloadTx("coco");
     };
 
     return {
