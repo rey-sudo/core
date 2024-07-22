@@ -4,6 +4,7 @@ import assert from "assert";
 import { Request, Response } from "express";
 import { sleep } from "../utils/sleep";
 import { userMiddleware } from "../utils/user";
+import { _ } from "../utils/pino";
 
 const ADA_LOVELACE: number = 1000000;
 
@@ -18,8 +19,6 @@ interface LockingEndpoint {
 }
 
 function checkUTX(status: any) {
-  console.log(status);
-
   assert.ok(status.cicYieldedExportTxs.length !== 0);
 
   assert.ok(status.cicYieldedExportTxs[0].hasOwnProperty("transaction"));
@@ -76,8 +75,6 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
       bWalletParam: BUYER.pubkeyhash,
     };
 
-    console.log(lockingEndpoint);
-
     await API.post(
       `/api/contract/instance/${SLOT.contract_id}/endpoint/Locking`,
       lockingEndpoint
@@ -91,7 +88,7 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
         throw new Error("CID_FAILED");
       });
 
-    await sleep(1000);
+    await sleep(2000);
 
     ////////////////////////////////////////////////////
 
@@ -135,6 +132,8 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
     });
   } catch (err: any) {
     await connection.rollback();
+
+    _.error(err);
 
     res.status(404).send({
       success: false,
