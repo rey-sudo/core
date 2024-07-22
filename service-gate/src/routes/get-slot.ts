@@ -61,17 +61,21 @@ const getSlotHandler = async (req: Request, res: Response) => {
 
     const SLOT = slots[0];
 
-    if (SLOT.seller_id === SELLER.id) {
-      return res.status(200).send({ success: true, payload: slots[0] });
+    console.log(SLOT);
+
+    if (SLOT.seller_id === SELLER?.id) {
+      return res.status(200).send({ success: true, payload: SLOT });
     }
 
-    if (SLOT.buyer_pubkeyhash === BUYER.pubkeyhash) {
-      return res.status(200).send({ success: true, payload: slots[0] });
+    if (SLOT.buyer_pubkeyhash === BUYER?.pubkeyhash) {
+      return res.status(200).send({ success: true, payload: SLOT });
     }
 
     throw new NotAuthorizedError();
   } catch (err: any) {
     await connection.rollback();
+
+    res.status(404).send({ success: false });
   } finally {
     connection.release();
   }
