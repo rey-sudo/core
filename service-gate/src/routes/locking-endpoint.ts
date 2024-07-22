@@ -86,7 +86,7 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
         console.log(err);
       });
 
-    await sleep(1000);
+    await sleep(2000);
 
     await API.get(`/api/contract/instance/${SLOT.contract_id}/status`)
       .then((response) => console.log("MID", response))
@@ -94,6 +94,7 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
         throw new Error("CID_FAILED");
       });
 
+    await sleep(2000);
     ////////////////////////////////////////////////////
 
     const contractStatus = await API.get(

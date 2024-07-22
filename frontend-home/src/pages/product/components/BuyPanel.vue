@@ -164,7 +164,7 @@ export default {
 
     const selectedProducts = ref();
 
-    const downloadTx = (txHash) => {
+    const downloadTx = (txHash, slotId) => {
       const data = [["ContractTx1", txHash]];
 
       const csvContent = data.map((row) => row.join(",")).join("\n");
@@ -184,7 +184,7 @@ export default {
 
       const dated = `${month}-${day}-${year}-${hours}-${minutes}`;
 
-      a.download = `transaction-${this.getSlotData?.id}-${dated}.csv`;
+      a.download = `transaction-${slotId}-${dated}.csv`;
 
       document.body.appendChild(a);
 
@@ -223,10 +223,14 @@ export default {
     const createTransaction = (slotId) => {
       lockingEndpoint({ slot_id: slotId })
         .then((res) => balanceTx(res.response.payload.transaction))
-        .then((hash) => downloadTx(hash))
+        .then((hash) => downloadTx(hash, slotId))
         .then((hash) => lockingTx({ tx_hash: hash, slot_id: slotId }))
         .then(() => showMessage(successMessage))
         .catch(() => showMessage(errorMessage));
+    };
+
+    const createTransactionX = () => {
+        downloadTx("coco")
     };
 
     return {
@@ -236,6 +240,7 @@ export default {
       filters,
       slotList,
       createTransaction,
+      createTransactionX,
       selectedProducts,
       getProductData,
       getOrdersData,
