@@ -4,6 +4,7 @@ import assert from "assert";
 import { Request, Response } from "express";
 import { BadRequestError } from "../errors";
 import { sleep } from "../utils/sleep";
+import { userMiddleware } from "../utils/user";
 
 const ADA_LOVELACE: number = 1000000;
 
@@ -31,7 +32,7 @@ function checkUTX(status: any) {
 
 /////////////////////////////////////////////////////////
 
-const lockingEndpointMiddlewares: any = [];
+const lockingEndpointMiddlewares: any = [userMiddleware];
 
 const lockingEndpointHandler = async (req: Request, res: Response) => {
   const params = req.body;
