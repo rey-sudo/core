@@ -69,8 +69,8 @@ export default {
       },
       {
         status: "Locking",
-        text: "N/A",
-        data: "",
+        text: shortFormat(getSlotData.value.contract_1_tx, 20),
+        data: getSlotData.value.contract_1_tx,
       },
       {
         status: "Delivered",
