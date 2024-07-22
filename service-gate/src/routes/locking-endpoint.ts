@@ -126,7 +126,7 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
   } catch (err: any) {
     await connection.rollback();
 
-    res.status(200).send({
+    res.status(404).send({
       success: false,
     });
   } finally {
