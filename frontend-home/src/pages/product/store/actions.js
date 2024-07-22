@@ -10,10 +10,24 @@ const lockingEndpoint = async (_, params) => {
 
     return { ok: true, response: response.data };
   } catch (error) {
-    throw { ok: false, response: error.response.data };
+    return { ok: false, response: error.response.data };
   }
 };
 
+
+const lockingTx = async (_, params) => {
+  try {
+    const response = await axiosApi.post("/api/gate/locking-tx", params);
+
+    console.log(response.data);
+
+    //commit("lockingEndpoint", response.data);
+
+    return { success: true, response: response.data };
+  } catch (error) {
+    return { success: false, response: error.response.data };
+  }
+};
 const getOrders = async ({ commit }, params) => {
   try {
     const response = await axiosApi.get(`/api/gate/buy-options/${params.id}`);
@@ -72,4 +86,4 @@ const getProduct = async ({ commit }, params) => {
   }
 };
 
-export { lockingEndpoint, getProduct, getOrders };
+export { lockingEndpoint, getProduct, getOrders, lockingTx };
