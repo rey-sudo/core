@@ -93,6 +93,14 @@ const main = async () => {
       route.lockingEndpointHandler
     );
 
+    app.post(
+      "/api/gate/locking-tx",
+
+      route.lockingTxMiddlewares,
+
+      route.lockingTxHandler
+    );
+
     app.get(
       "/api/gate/get-slots",
 

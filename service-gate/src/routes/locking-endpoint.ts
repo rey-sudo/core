@@ -85,6 +85,7 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
       });
 
     await sleep(1000);
+    
     ////////////////////////////////////////////////////
 
     const contractStatus = await API.get(
@@ -99,12 +100,14 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
 
     const schemeData = `
       UPDATE slots 
-      SET contract_stage = ?,
+      SET buyer_pubkeyhash = ?,
+          contract_stage = ?,
           contract_utx_1 = ?
       WHERE id = ?
       `;
 
     const schemeValue = [
+      BUYER.pubkeyhash,
       "locking",
       contractStatus,
       contractStatus.cicYieldedExportTxs[1].transaction,
