@@ -1,15 +1,16 @@
 import DB from "../db";
-import { BadRequestError } from "../errors";
+import { BadRequestError, NotAuthorizedError } from "../errors";
 import { Request, Response } from "express";
 import { sellerMiddleware } from "../utils/seller";
-import { requireAuth } from "../utils/required";
+import { userMiddleware } from "../utils/user";
 
-const getSlotMiddlewares: any = [sellerMiddleware, requireAuth];
+const getSlotMiddlewares: any = [sellerMiddleware, userMiddleware];
 
 const getSlotHandler = async (req: Request, res: Response) => {
   const params = req.params;
 
   const SELLER = req.sellerData;
+  const BUYER = req.userData;
 
   let connection = null;
 
@@ -24,6 +25,7 @@ const getSlotHandler = async (req: Request, res: Response) => {
       slots.status,
       slots.actived,
       slots.seller_id,
+      slots.buyer_pubkeyhash,
       slots.contract_stage,
       slots.contract_units, 
       slots.contract_price,
@@ -51,15 +53,23 @@ const getSlotHandler = async (req: Request, res: Response) => {
       [params.id]
     );
 
-    console.log(slots);
+    await connection.commit();
 
     if (slots.length === 0) {
       throw new BadRequestError("NOT_SLOT");
     }
 
-    await connection.commit();
+    const SLOT = slots[0];
 
-    res.status(200).send({ success: true, payload: slots[0] });
+    if (SLOT.seller_id === SELLER.id) {
+      return res.status(200).send({ success: true, payload: slots[0] });
+    }
+
+    if (SLOT.buyer_pubkeyhash === BUYER.pubkeyhash) {
+      return res.status(200).send({ success: true, payload: slots[0] });
+    }
+
+    throw new NotAuthorizedError();
   } catch (err: any) {
     await connection.rollback();
   } finally {
