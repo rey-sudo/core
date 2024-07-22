@@ -81,7 +81,7 @@ const loginUserHandler = async (req: Request, res: Response) => {
 
     const userData: UserToken = {
       id: userId,
-      role: "user",
+      role: "USER",
       address: address32,
       pubkeyhash,
       country,

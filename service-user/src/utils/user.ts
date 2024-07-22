@@ -30,7 +30,7 @@ const userMiddleware = (req: Request, res: Response, next: NextFunction) => {
       process.env.USER_JWT_KEY!
     ) as UserToken;
 
-    if (sessionData.role !== "user") {
+    if (sessionData.role !== "USER") {
       return next();
     }
 
