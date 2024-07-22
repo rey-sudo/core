@@ -111,7 +111,7 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
       UPDATE slots 
       SET buyer_pubkeyhash = ?,
           contract_stage = ?,
-          contract_utx_1 = ?
+          contract_1_utx = ?
       WHERE id = ?
       `;
 
