@@ -75,7 +75,10 @@
 
       <Column :exportable="false" style="min-width: 10rem">
         <template #body="slotProps">
-          <button class="miniBuyButton" @click="createTransaction(slotProps.data.id)">
+          <button
+            class="miniBuyButton"
+            @click="createTransaction(slotProps.data.id)"
+          >
             Buy
           </button>
         </template>
@@ -130,6 +133,8 @@ import InfoIcons from "./InfoIcons.vue";
 import productAPI from "@/pages/product/api/index";
 import { FilterMatchMode } from "primevue/api";
 import { ref, computed } from "vue";
+import { balanceTx } from "@/api/wallet-api";
+import { useToast } from "primevue/usetoast";
 
 export default {
   components: {
@@ -137,7 +142,8 @@ export default {
   },
 
   setup() {
-    const { getProductData, getOrdersData } = productAPI();
+    const { getProductData, getOrdersData, lockingEndpoint, lockingTx } =
+      productAPI();
 
     const product = ref({
       rating_count: 4.8,
@@ -158,13 +164,78 @@ export default {
 
     const selectedProducts = ref();
 
-    
+    const downloadTx = (txHash) => {
+      const data = [["ContractTx1", txHash]];
+
+      const csvContent = data.map((row) => row.join(",")).join("\n");
+
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+
+      const a = document.createElement("a");
+      const url = URL.createObjectURL(blob);
+      a.href = url;
+
+      const date = new Date();
+      const day = String(date.getDate()).padStart(2, "0");
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const year = date.getFullYear();
+      const hours = date.getHours().toString().padStart(2, "0");
+      const minutes = date.getMinutes().toString().padStart(2, "0");
+
+      const dated = `${month}-${day}-${year}-${hours}-${minutes}`;
+
+      a.download = `transaction-${this.getSlotData?.id}-${dated}.csv`;
+
+      document.body.appendChild(a);
+
+      a.click();
+
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      return txHash;
+    };
+
+    const successMessage = {
+      severity: "success",
+      summary: "Successful",
+      detail: "Transaction sent to the network.",
+      life: 5000,
+    };
+
+    const errorMessage = {
+      severity: "error",
+      summary: "Error Message",
+      detail: "Transaction canceled.",
+      life: 5000,
+    };
+    const toast = useToast();
+
+    const showMessage = ({ severity, summary, detail, life }) => {
+      toast.add({
+        severity,
+        summary,
+        detail,
+        life,
+      });
+    };
+
+    const createTransaction = (slotId) => {
+      lockingEndpoint({ slot_id: slotId })
+        .then((res) => balanceTx(res.response.payload.transaction))
+        .then((hash) => downloadTx(hash))
+        .then((hash) => lockingTx({ tx_hash: hash, slot_id: slotId }))
+        .then(() => showMessage(successMessage))
+        .catch(() => showMessage(errorMessage));
+    };
+
     return {
       product,
       visible,
       openSlotDialog,
       filters,
       slotList,
+      createTransaction,
       selectedProducts,
       getProductData,
       getOrdersData,

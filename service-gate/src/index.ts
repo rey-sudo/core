@@ -29,6 +29,10 @@ const main = async () => {
       throw new Error("SELLER_JWT_KEY error");
     }
 
+    if (!process.env.USER_JWT_KEY) {
+      throw new Error("USER_JWT_KEY error");
+    }
+
     if (!process.env.TOKEN_EXPIRATION) {
       throw new Error("TOKEN_EXPIRATION error");
     }
