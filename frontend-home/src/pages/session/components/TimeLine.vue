@@ -153,12 +153,12 @@ export default {
   align-items: center;
   line-height: 2rem;
   font-weight: 700;
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
 }
 
 .timeline-timer span {
   background: var(--text-a);
-  border-radius: 6px;
+  border-radius: 8px;
   width: 30px;
   height: 40px;
   display: flex;
