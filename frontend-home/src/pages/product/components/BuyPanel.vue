@@ -75,7 +75,7 @@
 
       <Column :exportable="false" style="min-width: 10rem">
         <template #body="slotProps">
-          <button class="miniBuyButton" @click="editProduct(slotProps.data)">
+          <button class="miniBuyButton" @click="createTransaction(slotProps.data.id)">
             Buy
           </button>
         </template>
@@ -157,6 +157,8 @@ export default {
     const slotList = computed(() => getOrdersData?.value.slots);
 
     const selectedProducts = ref();
+
+    
     return {
       product,
       visible,

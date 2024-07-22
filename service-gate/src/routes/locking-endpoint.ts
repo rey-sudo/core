@@ -2,7 +2,6 @@ import DB from "../db";
 import API from "../api";
 import assert from "assert";
 import { Request, Response } from "express";
-import { BadRequestError } from "../errors";
 import { sleep } from "../utils/sleep";
 import { userMiddleware } from "../utils/user";
 
@@ -32,7 +31,7 @@ function checkUTX(status: any) {
 
 /////////////////////////////////////////////////////////
 
-const lockingEndpointMiddlewares: any = [userMiddleware];
+const lockingEndpointMiddlewares: any = [userMiddleware]; //
 
 const lockingEndpointHandler = async (req: Request, res: Response) => {
   const params = req.body;
@@ -57,6 +56,14 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
 
     const SLOT = slots[0];
 
+    if (SLOT.contract_utx_1) {
+      res.status(200).send({
+        success: true,
+        payload: {
+          transaction: SLOT.contract_utx_1,
+        },
+      });
+    }
     ////////////////////////////////////////////////////
 
     const lockingEndpoint: LockingEndpoint = {
@@ -85,7 +92,7 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
       });
 
     await sleep(1000);
-    
+
     ////////////////////////////////////////////////////
 
     const contractStatus = await API.get(
