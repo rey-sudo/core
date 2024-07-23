@@ -1,11 +1,9 @@
-import * as route from "./routes";
 import DB from "./db";
-import serviceGateListener from "./kafka/service-gate-listener";
+import listenSlots from "./kafka/slots";
 import compression from "compression";
 import { app } from "./app";
 import { catcher, check, checkpoint } from "./pod/index";
 import { NotFoundError, errorMiddleware } from "./errors";
-import { eventBus } from "./db/redis";
 
 const main = async () => {
   try {
@@ -37,16 +35,15 @@ const main = async () => {
       throw new Error("EVENT_BUS_URI error");
     }
 
-    /*
     DB.connect({
       host: "mysql",
       port: 3306,
       user: "marketplace",
       password: "password",
-      database: "service_gate",
+      database: "service_session",
     });
 
-   
+    /*
     await eventBus
       .connect({
         url: process.env.EVENT_BUS_URI,
@@ -54,10 +51,10 @@ const main = async () => {
         keepAlive: 100000,
       })
       .then(() => console.log("eventBus connected"))
-      .catch((err: any) => catcher(err));
- */
+      .catch((err: any) => catcher(err));  
+    */
 
-    serviceGateListener();
+    listenSlots();
 
     checkpoint("ready");
 
@@ -71,22 +68,6 @@ const main = async () => {
     ];
 
     errorEvents.forEach((e: string) => process.on(e, (err) => catcher(err)));
-
-    app.post(
-      "/api/gate/create-slot",
-
-      route.createSlotMiddlewares,
-
-      route.createSlotHandler
-    );
-
-    app.get(
-      "/api/gate/get-slots",
-
-      route.getSlotsMiddlewares,
-
-      route.getSlotsHandler
-    );
 
     app.get("/api/session/healthcheck", (req, res) => {
       res.status(200).json({ status: "Test OK" });

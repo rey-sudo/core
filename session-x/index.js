@@ -31,6 +31,7 @@ socketServer.use((socket, next) => {
   if (!token) {
     return next(new Error("Authentication error"));
   }
+  
   jwt.verify(token, secretKey, (err, decoded) => {
     if (err) {
       return next(new Error("Authentication error"));

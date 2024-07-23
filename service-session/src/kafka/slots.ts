@@ -6,18 +6,19 @@ import { stringToTimestamp } from "../utils/other";
 const TOPIC_NAME = "fullfillment.service_gate.slots";
 const CONSUMER_GROUP = "service-session-group";
 
-const serviceGateListenerListener = async () => {
+const listenSlots = async () => {
   const consumer = kafka.consumer({ groupId: CONSUMER_GROUP });
 
   await consumer
     .connect()
-    .then(() =>
-      consumer.subscribe({
+    .then(async () => {
+      await consumer.subscribe({
         topic: TOPIC_NAME,
         fromBeginning: true,
-      })
-    )
-    .then(() => _.info("SERVICE_GATE_LISTENER" + " => " + TOPIC_NAME))
+      });
+
+      _.info("TOPIC " + TOPIC_NAME);
+    })
     .then(() =>
       consumer.run({
         eachMessage: async ({ topic, partition, message }: any) => {
@@ -28,12 +29,27 @@ const serviceGateListenerListener = async () => {
           console.log(payload);
 
           if (payload.op === "c") {
+            await handleCreate(payload, consumer, {
+              topic,
+              partition,
+              message,
+            });
           }
 
           if (payload.op === "u") {
+            await handleUpdate(payload, consumer, {
+              topic,
+              partition,
+              message,
+            });
           }
 
           if (payload.op === "d") {
+            await handleDelete(payload, consumer, {
+              topic,
+              partition,
+              message,
+            });
           }
         },
       })
@@ -41,7 +57,8 @@ const serviceGateListenerListener = async () => {
     .catch((err: any) => _.error(err));
 };
 
-////////////////////////////////////////HANDLERS////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
 
 const handleCreate = async (
   data: any,
@@ -65,24 +82,27 @@ const handleCreate = async (
       id,
       seller_id,
       name,
-      description,
+      model,
+      features,
+      terms_of_sale,
+      guarantee,
       category,
       price,
       collateral,
+      discount,
       stock,
-      stock_status,
       keywords,
-      theme,
       country,
       moderated,
-      image_base,
-      image_path,
+      media_url,
+      media_path,
       image_main,
       image_set,
+      video_set,
       created_at,
       schema_t,
       schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const schemeValue = Object.values(payload);
 
@@ -107,11 +127,17 @@ const handleCreate = async (
       { topic, partition, offset: message.offset + 1 },
     ]);
   } catch (err) {
-    await connection.rollback().then(() => _.error(err));
+    await connection.rollback();
+    _.error(err);
   } finally {
     connection.release();
   }
 };
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
+
 
 const handleUpdate = async (
   data: any,
@@ -135,20 +161,23 @@ const handleUpdate = async (
     SET id = ?,
         seller_id = ?,
         name = ?,
-        description = ?,        
+        model = ?,
+        features = ?,
+        terms_of_sale = ?,
+        guarantee = ?,        
         category = ?,
         price = ?,
         collateral = ?,
+        discount = ?,
         stock = ?,
-        stock_status = ?,
         keywords = ?,
-        theme = ?,
         country = ?,
         moderated = ?,        
-        image_base = ?,
-        image_path = ?,
+        media_url = ?,
+        media_path = ?,
         image_main = ?,
         image_set = ?,
+        video_set = ?,
         created_at = ?,
         schema_t = ?,
         schema_v = ?
@@ -172,11 +201,16 @@ const handleUpdate = async (
       { topic, partition, offset: message.offset + 1 },
     ]);
   } catch (err) {
-    await connection.rollback().then(() => _.error(err));
+    await connection.rollback();
+
+    _.error(err);
   } finally {
     connection.release();
   }
 };
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
 
 const handleDelete = async (
   data: any,
@@ -207,10 +241,11 @@ const handleDelete = async (
       { topic, partition, offset: message.offset + 1 },
     ]);
   } catch (err) {
-    await connection.rollback().then(() => _.error(err));
+    await connection.rollback();
+    _.error(err)
   } finally {
     connection.release();
   }
 };
 
-export default serviceGateListenerListener;
+export default listenSlots;
