@@ -129,7 +129,7 @@ export default {
 
 .timeline {
   background: var(--base-a);
-  border: 1px solid var(--border-b);
+  border: 3px solid var(--border-a);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -156,7 +156,7 @@ export default {
 }
 
 .timeline-timer span {
-  background: var(--base-b);
+  background: var(--primary-c);
   border-radius: 8px;
   width: 30px;
   height: 40px;
@@ -164,8 +164,8 @@ export default {
   justify-content: center;
   align-items: center;
   margin: 0 0.25rem;
-  color: var(--text-a);
-  border: 1px solid var(--border-b);
+  color: var(--text-w);
+  border: 1px solid transparent;
 }
 
 .timeline-timer div{

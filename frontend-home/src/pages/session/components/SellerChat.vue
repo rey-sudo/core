@@ -31,7 +31,7 @@ export default {
   height: 700px;
   border-radius: 16px;
   margin-left: auto;
-  border: 2px solid var(--border-b);
+  border: 3px solid var(--border-a);
   display: flex;
   flex-direction: column;
   overflow: hidden;
