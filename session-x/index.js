@@ -31,7 +31,7 @@ app.get("/create-session/:orderId", (req, res) => {
   res.json({ success: true, message: "session created " + orderId });
 });
 
-socketServer.on("connection", (socket) => {
+const socketConnectionHandler = (socket) => {
   const userId = generateRandomString(4);
 
   console.log(userId + " USER CONNECTED");
@@ -45,19 +45,27 @@ socketServer.on("connection", (socket) => {
 
   sockets[userId].on("message", (payload) => {
     const data = JSON.parse(payload);
-    socketServer.to(payload.room).emit("message", data.content);
+    socketServer.to(data.room).emit("message", data.content);
   });
 
   sockets[userId].on("disconnect", () => {
     console.log("User disconnected");
   });
-});
+};
+
+socketServer.on("connection", socketConnectionHandler);
 
 const PORT = process.env.PORT || 3000;
 
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+////////////
+////////////
+
+////////////
+////////////
 
 function generateRandomString(length) {
   const characters =
