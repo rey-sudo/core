@@ -36,7 +36,7 @@ const buyOptionsHandler = async (req: Request, res: Response) => {
             'contract_units', contract_units,
             'contract_price', contract_price,
             'contract_collateral', contract_collateral,
-            'product_discount', product_discount
+            'contract_discount', contract_discount
           )
         ) AS slots,
         COUNT(*) AS slot_count

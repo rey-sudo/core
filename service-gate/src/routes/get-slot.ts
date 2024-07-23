@@ -40,7 +40,6 @@ const getSlotHandler = async (req: Request, res: Response) => {
           'product_id', products.id,
           'product_name', products.name,
           'model', products.model,
-          'product_price', products.price,
           'media_url', products.media_url,
           'media_path', products.media_path,
           'image_main', products.image_main

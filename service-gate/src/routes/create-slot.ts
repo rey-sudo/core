@@ -119,12 +119,10 @@ const createSlotHandler = async (req: Request, res: Response) => {
       contract_units,
       contract_price,
       contract_collateral,
+      contract_discount,
       product_id,
-      product_price,
-      product_collateral,
-      product_discount,
       schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     console.log(scheme);
 
@@ -149,10 +147,8 @@ const createSlotHandler = async (req: Request, res: Response) => {
           scheme.iteration_units,
           scheme.iteration_price,
           scheme.iteration_collateral,
-          PRODUCT.id,
-          PRODUCT.price,
-          PRODUCT.collateral,
           scheme.product_discount,
+          PRODUCT.id,
           0,
         ];
 

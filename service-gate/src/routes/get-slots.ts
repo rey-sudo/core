@@ -32,9 +32,7 @@ const getSlotsHandler = async (req: Request, res: Response) => {
                 'contract_stage', s.contract_stage,
                 'contract_0_utx', s.contract_0_utx,
                 'contract_0_tx', s.contract_0_tx,
-                'product_price', s.product_price,
-                'product_collateral', s.product_collateral,
-                'product_discount', s.product_discount,
+                'contract_discount', s.contract_discount,
                 'created_at', s.created_at              
             )
         ) AS slots,

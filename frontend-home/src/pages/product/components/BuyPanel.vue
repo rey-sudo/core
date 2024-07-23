@@ -67,7 +67,7 @@
       ></Column>
 
       <Column
-        field="product_discount"
+        field="contract_discount"
         header="Discount"
         sortable
         style="min-width: 10rem"
