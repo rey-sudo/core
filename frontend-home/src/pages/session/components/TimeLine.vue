@@ -38,8 +38,8 @@
     </div>
 
     <div class="timeline-timer">
-      <span>0</span>
-      <span>0</span>
+      <span>1</span>
+      <span>5</span>
       <div>:</div>
       <span>0</span>
       <span>0</span>
@@ -59,7 +59,6 @@ import { shortFormat } from "@/utils";
 export default {
   setup() {
     const { getSlotData } = sessionAPI();
-
 
     const eventData = computed(() => [
       {
@@ -89,7 +88,7 @@ export default {
       eventData,
       getSlotData,
       copy,
-      shortFormat
+      shortFormat,
     };
   },
 
@@ -136,7 +135,7 @@ export default {
   justify-content: center;
   padding: 2rem;
   padding-bottom: 1rem;
-  border-radius: 24px;
+  border-radius: 16px;
 }
 
 .timeline-title,
@@ -157,7 +156,7 @@ export default {
 }
 
 .timeline-timer span {
-  background: var(--text-a);
+  background: var(--base-b);
   border-radius: 8px;
   width: 30px;
   height: 40px;
@@ -165,10 +164,13 @@ export default {
   justify-content: center;
   align-items: center;
   margin: 0 0.25rem;
-  color: var(--text-w);
-  border: none;
+  color: var(--text-a);
+  border: 1px solid var(--border-b);
 }
 
+.timeline-timer div{
+  margin: 0 0.5rem;
+}
 .timeline-title span:nth-child(1) {
   font-size: var(--text-size-f);
   font-weight: 600;
@@ -178,7 +180,6 @@ export default {
   font-size: var(--text-size-d);
   font-weight: 500;
 }
-
 
 .timeline-note {
   padding: 1rem;

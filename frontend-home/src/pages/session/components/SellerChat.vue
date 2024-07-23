@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import  headerAPI  from "@/components/header/composable/header-api";
+import headerAPI from "@/components/header/composable/header-api";
 
 export default {
   setup() {
@@ -26,12 +26,12 @@ export default {
 
 <style lang="css" scoped>
 .chat {
-  background: var(--base-b);
+  background: var(--base-a);
   width: 400px;
   height: 700px;
-  border-radius: 24px;
+  border-radius: 16px;
   margin-left: auto;
-  border: 1px solid var(--border-b);
+  border: 2px solid var(--border-b);
   display: flex;
   flex-direction: column;
   overflow: hidden;
