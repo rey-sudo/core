@@ -5227,8 +5227,8 @@
   .p-timeline .p-timeline-event-marker {
     border: 2px solid var(--primary-c);
     border-radius: 50%;
-    width: 1rem;
-    height: 1rem;
+    width: 1.25rem;
+    height: 1.25rem;
     background-color: #ffffff;
   }
   .p-timeline .p-timeline-event-connector {
