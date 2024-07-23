@@ -13,6 +13,7 @@ app.use(express.static("public"));
 app.use(express.json());
 
 //////////////////////////////////////////////////////////////
+
 const sockets = {};
 
 const roomMessages = {};
@@ -31,20 +32,23 @@ app.get("/create-session/:orderId", (req, res) => {
 });
 
 socketServer.on("connection", (socket) => {
-  sockets["socket1"] = socket;
-  sockets["socket1"].join("1");
+  const userId = generateRandomString(4);
 
-  const socketId = generateRandomString(3);
+  console.log(userId + " USER CONNECTED");
 
-  console.log(socketId + "A user joined");
+  sockets[userId] = socket;
 
-  sockets["socket1"].on("chatMessage", (msg) => {
-    console.log("message: " + msg);
-
-    socketServer.to("1").emit("chatMessage", msg);
+  sockets[userId].on("join", (orderId) => {
+    sockets[userId].join(orderId);
+    console.log("USER JOINED TO ROOM " + orderId);
   });
 
-  sockets["socket1"].on("disconnect", () => {
+  sockets[userId].on("message", (payload) => {
+    const data = JSON.parse(payload);
+    socketServer.to(payload.room).emit("message", data.content);
+  });
+
+  sockets[userId].on("disconnect", () => {
     console.log("User disconnected");
   });
 });

@@ -27,33 +27,43 @@
   <body>
     <ul id="messages"></ul>
     <form id="form" action="">
-      <input id="input" autocomplete="off" /><button>Send</button>
+      <input id="input" autocomplete="off" />
+      <button>Send</button>
     </form>
+    <button id="join">Join</button>
 
     <script src="/socket.io/socket.io.js"></script>
-    
+
     <script>
-      const socket = io('http://localhost:3000');
+      const socket = io("http://localhost:3000");
       const form = document.getElementById("form");
       const input = document.getElementById("input");
       const messages = document.getElementById("messages");
-
-     
 
       form.addEventListener("submit", function (e) {
         console.log("submited");
         e.preventDefault();
         if (input.value) {
-          socket.emit("chatMessage", input.value);
+          const payload = {
+            content: input.value,
+            room: "room1",
+          };
+          socket.emit("message", JSON.stringify(payload));
           input.value = "";
         }
       });
 
-      socket.on("chatMessage", function (msg) {
+      socket.on("message", function (msg) {
         const item = document.createElement("li");
         item.textContent = msg;
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
+      });
+
+      const myButton = document.getElementById("join");
+
+      myButton.addEventListener("click", () => {
+        socket.emit("join", "room1");
       });
     </script>
   </body>
