@@ -147,7 +147,7 @@ export default {
 
 .stepper-product-title a {
   color: var(--text-a);
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .stepper-column {

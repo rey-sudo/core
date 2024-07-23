@@ -225,10 +225,6 @@ export default {
         .catch(() => showMessage(errorMessage));
     };
 
-    const createTransactionX = () => {
-      downloadTx("coco");
-    };
-
     return {
       product,
       visible,
@@ -236,7 +232,6 @@ export default {
       filters,
       slotList,
       createTransaction,
-      createTransactionX,
       selectedProducts,
       getProductData,
       getOrdersData,

@@ -29,7 +29,7 @@ export default {
   background: var(--base-b);
   width: 400px;
   height: 700px;
-  border-radius: 28px;
+  border-radius: 24px;
   margin-left: auto;
   border: 1px solid var(--border-b);
   display: flex;
