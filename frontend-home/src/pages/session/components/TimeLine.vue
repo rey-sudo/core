@@ -129,7 +129,7 @@ export default {
 
 .timeline {
   background: var(--base-a);
-  border: 3px solid var(--border-a);
+  border: 1px solid var(--border-b);
   display: flex;
   flex-direction: column;
   justify-content: center;
