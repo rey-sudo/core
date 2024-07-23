@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const socketServer = new Server(server);
 
 // Middleware
 app.use(express.static("public"));
@@ -13,7 +13,7 @@ app.use(express.static("public"));
 app.use(express.json());
 
 //////////////////////////////////////////////////////////////
-const socketList = {};
+const sockets = {};
 
 const roomMessages = {};
 
@@ -22,34 +22,29 @@ app.get("/", (req, res) => {
 });
 
 //EVENT
-app.get("/create-session/:slotId", (req, res) => {
-  const slotId = req.params["slotId"];
+app.get("/create-session/:orderId", (req, res) => {
+  const orderId = req.params["orderId"];
 
-  io.to(slotId).emit("message", "Hello, Room!");
+  socketServer.to(orderId).emit("message", "Hello, Room!");
 
-  res.json({ success: true, message: "session created " + slotId });
+  res.json({ success: true, message: "session created " + orderId });
 });
 
-//////////////////////////////////////////////////////////////
-
-io.on("connection", (socket) => {
-  socketList["socket1"] = socket;
-  socketList["socket1"].join("1");
+socketServer.on("connection", (socket) => {
+  sockets["socket1"] = socket;
+  sockets["socket1"].join("1");
 
   const socketId = generateRandomString(3);
 
   console.log(socketId + "A user joined");
 
-  //////////////////////////////////////////////////////////////
-
-  socketList["socket1"].on("clientMessage", (msg) => {
+  sockets["socket1"].on("chatMessage", (msg) => {
     console.log("message: " + msg);
-    
-    io.to("1").emit("clientMessage", msg);
+
+    socketServer.to("1").emit("chatMessage", msg);
   });
 
-  //////////////////////////////////////////////////////////////
-  socketList["socket1"].on("disconnect", () => {
+  sockets["socket1"].on("disconnect", () => {
     console.log("User disconnected");
   });
 });
