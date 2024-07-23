@@ -28,6 +28,8 @@ app.get("/create-session/:orderId", (req, res) => {
 
   socketServer.to(orderId).emit("message", "Hello, Room!");
 
+  console.log("ROOM CREATED =>" + orderId);
+
   res.json({ success: true, message: "session created " + orderId });
 });
 
