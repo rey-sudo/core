@@ -6,6 +6,7 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 const socketServer = new Server(server);
+const jwt = require('jsonwebtoken');
 
 // Middleware
 app.use(express.static("public"));
@@ -16,25 +17,31 @@ app.use(express.json());
 
 const sockets = {};
 
-const roomMessages = {};
+const secretKey = "your_secret_key";
 
 app.get("/", (req, res) => {
   res.sendFile(join(__dirname, "index.html"));
 });
 
-//EVENT
-app.get("/create-session/:orderId", (req, res) => {
-  const orderId = req.params["orderId"];
+socketServer.use((socket, next) => {
+  const token = socket.handshake.auth.token;
 
-  socketServer.to(orderId).emit("message", "Hello, Room!");
+  console.log(token);
 
-  console.log("ROOM CREATED =>" + orderId);
-
-  res.json({ success: true, message: "session created " + orderId });
+  if (!token) {
+    return next(new Error("Authentication error"));
+  }
+  jwt.verify(token, secretKey, (err, decoded) => {
+    if (err) {
+      return next(new Error("Authentication error"));
+    }
+    socket.user = decoded;
+    next();
+  });
 });
 
 const socketConnectionHandler = (socket) => {
-  const userId = generateRandomString(4);
+  const userId = generateRandomString(4).toLocaleLowerCase();
 
   console.log(userId + " USER CONNECTED");
 
@@ -47,7 +54,13 @@ const socketConnectionHandler = (socket) => {
 
   sockets[userId].on("message", (payload) => {
     const data = JSON.parse(payload);
-    socketServer.to(data.room).emit("message", data.content);
+
+    const scheme = {
+      user: userId,
+      content: data.content,
+    };
+
+    socketServer.to(data.room).emit("message", JSON.stringify(scheme));
   });
 
   sockets[userId].on("disconnect", () => {
@@ -65,7 +78,17 @@ server.listen(PORT, () => {
 
 ////////////
 ////////////
+/*
+app.get("/create-session/:orderId", (req, res) => {
+  const orderId = req.params["orderId"];
 
+  socketServer.to(orderId).emit("message", "Hello, Room!");
+
+  console.log("ROOM CREATED =>" + orderId);
+
+  res.json({ success: true, message: "session created " + orderId });
+});
+*/
 ////////////
 ////////////
 

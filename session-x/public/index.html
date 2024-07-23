@@ -63,6 +63,10 @@
       const myButton = document.getElementById("join");
 
       myButton.addEventListener("click", () => {
+        const payload = {
+          room: "room1",
+          token: "token",
+        };
         socket.emit("join", "room1");
       });
     </script>
