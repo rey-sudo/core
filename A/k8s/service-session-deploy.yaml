@@ -24,7 +24,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: seller-token-secret
-                  key: SELLER_TOKEN_KEY                       
+                  key: SELLER_TOKEN_KEY   
+            - name: USER_JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: user-token-secret
+                  key: USER_TOKEN_KEY                                           
             - name: POD_TIMEOUT
               value: '120000'   
             - name: EXPRESS_PORT

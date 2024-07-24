@@ -30,7 +30,7 @@ declare global {
 }
 
 const authMiddleware = (socket: Socket, next: (err?: Error) => void) => {
-  const role = socket.handshake.query.token as string;
+  const role = socket.handshake.query.role as string;
   const token = socket.handshake.query.token as string;
 
   if (!token) {

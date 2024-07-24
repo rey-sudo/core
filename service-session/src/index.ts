@@ -37,6 +37,11 @@ const main = async () => {
       throw new Error("SELLER_JWT_KEY error");
     }
 
+
+    if (!process.env.USER_JWT_KEY) {
+      throw new Error("USER_JWT_KEY error");
+    }
+
     if (!process.env.TOKEN_EXPIRATION) {
       throw new Error("TOKEN_EXPIRATION error");
     }
@@ -81,8 +86,7 @@ const main = async () => {
     socketServer.use(authMiddleware);
 
     const socketConnectionHandler = (socket: any) => {
-      
-      console.log(socket.user);
+      console.log(socket.agent);
 
       const userId = generateRandomString(4).toLocaleLowerCase();
 
