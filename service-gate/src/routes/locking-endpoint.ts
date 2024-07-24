@@ -55,14 +55,6 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
 
     const SLOT = slots[0];
 
-    if (SLOT.contract_utx_1) {
-      res.status(200).send({
-        success: true,
-        payload: {
-          transaction: SLOT.contract_utx_1,
-        },
-      });
-    }
     ////////////////////////////////////////////////////
 
     const lockingEndpoint: LockingEndpoint = {
@@ -78,13 +70,9 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
     await API.post(
       `/api/contract/instance/${SLOT.contract_id}/endpoint/Locking`,
       lockingEndpoint
-    )
-      .then((res) => {
-        assert.ok(res.status === 200);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    ).catch((err) => {
+      console.log(err);
+    });
 
     await sleep(2000);
 
@@ -110,14 +98,12 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
     const schemeData = `
       UPDATE slots 
       SET buyer_pubkeyhash = ?,
-          contract_stage = ?,
           contract_1_utx = ?
       WHERE id = ?
       `;
 
     const schemeValue = [
       BUYER.pubkeyhash,
-      "locking",
       contractStatus.cicYieldedExportTxs[0].transaction,
       params.slot_id,
     ];

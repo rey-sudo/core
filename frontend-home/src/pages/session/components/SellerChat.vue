@@ -9,10 +9,8 @@
       <ul id="messages"></ul>
     </div>
     <div class="chat-bottom">
-      <form id="form" action="">
-        <input id="input" autocomplete="off" />
-        <button>Send</button>
-      </form>
+      <input id="input" autocomplete="off" />
+      <button id="send">Send</button>
       <button id="join">Join</button>
     </div>
   </div>
@@ -34,21 +32,8 @@ export default {
     };
   },
   mounted() {
-    const form = document.getElementById("form");
     const input = document.getElementById("input");
     const messages = document.getElementById("messages");
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      if (input.value) {
-        const payload = {
-          content: input.value,
-          room: "room1",
-        };
-        this.socket.emit("message", JSON.stringify(payload));
-        input.value = "";
-      }
-    });
 
     this.socket.on("message", function (msg) {
       const item = document.createElement("li");
@@ -57,10 +42,23 @@ export default {
       window.scrollTo(0, document.body.scrollHeight);
     });
 
-    const myButton = document.getElementById("join");
+    const joinButton = document.getElementById("join");
 
-    myButton.addEventListener("click", () => {
+    joinButton.addEventListener("click", () => {
       this.socket.emit("join", "room1");
+    });
+
+    const sendButton = document.getElementById("send");
+
+    sendButton.addEventListener("click", () => {
+      if (input.value) {
+        const payload = {
+          content: input.value,
+          room: "room1",
+        };
+        this.socket.emit("message", JSON.stringify(payload));
+        input.value = "";
+      }
     });
   },
 };
