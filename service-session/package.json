@@ -38,7 +38,8 @@
     "nanoid": "^3.3.7",
     "pino": "^8.17.2",
     "postgres": "^3.4.3",
-    "redis": "^4.6.14"
+    "redis": "^4.6.14",
+    "socket.io": "^4.7.5"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",

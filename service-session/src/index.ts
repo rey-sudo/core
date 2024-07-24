@@ -1,9 +1,11 @@
 import DB from "./db";
 import listenSlots from "./kafka/slots";
 import compression from "compression";
-import { app } from "./app";
-import { catcher, check, checkpoint } from "./pod/index";
+import express from "express";
+import http from "http";
+import { catcher, checkpoint } from "./pod/index";
 import { NotFoundError, errorMiddleware } from "./errors";
+import { Server } from "socket.io";
 
 const main = async () => {
   try {
@@ -35,28 +37,13 @@ const main = async () => {
       throw new Error("EVENT_BUS_URI error");
     }
 
-    DB.connect({
-      host: "mysql",
-      port: 3306,
-      user: "marketplace",
-      password: "password",
-      database: "service_session",
-    });
+    const app = express();
 
-    /*
-    await eventBus
-      .connect({
-        url: process.env.EVENT_BUS_URI,
-        connectTimeout: 100000,
-        keepAlive: 100000,
-      })
-      .then(() => console.log("eventBus connected"))
-      .catch((err: any) => catcher(err));  
-    */
+    const server = http.createServer(app);
 
-    listenSlots();
+    const socketServer = new Server(server);
 
-    checkpoint("ready");
+    app.use(express.json());
 
     const errorEvents: string[] = [
       "exit",
@@ -69,9 +56,53 @@ const main = async () => {
 
     errorEvents.forEach((e: string) => process.on(e, (err) => catcher(err)));
 
+    DB.connect({
+      host: "mysql",
+      port: 3306,
+      user: "marketplace",
+      password: "password",
+      database: "service_session",
+    });
+
+    listenSlots();
+
+    const sockets: any = {};
+
+    const socketConnectionHandler = (socket: any) => {
+      const userId = generateRandomString(4).toLocaleLowerCase();
+
+      console.log(userId + " USER CONNECTED");
+
+      sockets[userId] = socket;
+
+      sockets[userId].on("join", (orderId: string) => {
+        sockets[userId].join(orderId);
+        console.log("USER JOINED TO ROOM " + orderId);
+      });
+
+      sockets[userId].on("message", (payload: string) => {
+        const data = JSON.parse(payload);
+
+        const scheme = {
+          user: userId,
+          content: data.content,
+        };
+
+        socketServer.to(data.room).emit("message", JSON.stringify(scheme));
+      });
+
+      sockets[userId].on("disconnect", () => {
+        console.log("User disconnected");
+      });
+    };
+
+    socketServer.on("connection", socketConnectionHandler);
+
     app.get("/api/session/healthcheck", (req, res) => {
       res.status(200).json({ status: "Test OK" });
     });
+
+    checkpoint("ready");
 
     app.all("*", (_req, _res) => {
       throw new NotFoundError();
@@ -80,10 +111,26 @@ const main = async () => {
     app.use(errorMiddleware);
 
     app.use(compression());
+
+    const PORT = process.env.PORT || 3000;
+
+    server.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
   } catch (e) {
     catcher(e);
   }
-  check();
 };
 
 main();
+
+function generateRandomString(length: number) {
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
