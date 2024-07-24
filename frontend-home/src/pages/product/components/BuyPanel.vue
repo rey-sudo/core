@@ -280,7 +280,7 @@ export default {
 
 .head-rating span {
   margin-right: 0.5rem;
-  font-size: var(--text-size-c);
+  font-size: var(--text-size-b);
   font-weight: 600;
 }
 
