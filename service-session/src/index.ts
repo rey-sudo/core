@@ -71,7 +71,7 @@ const main = async () => {
     const socketConnectionHandler = (socket: any) => {
       const userId = generateRandomString(4).toLocaleLowerCase();
 
-      console.log(userId + " USER CONNECTED");
+      console.log("USER CONNECTED" + userId);
 
       sockets[userId] = socket;
 
