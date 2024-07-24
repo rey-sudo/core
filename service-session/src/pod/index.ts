@@ -17,7 +17,7 @@ const checkpoint = (point: string) => {
   });
 
   if (isReady(checkpoints)) {
-    const port = process.env.EXPRESS_PORT || "8000";
+    const port = process.env.EXPRESS_PORT || "3000";
 
     const timeout = process.env.EXPRESS_TIMEOUT || "5000";
 

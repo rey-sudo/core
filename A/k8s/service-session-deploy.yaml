@@ -28,7 +28,7 @@ spec:
             - name: POD_TIMEOUT
               value: '120000'   
             - name: EXPRESS_PORT
-              value: "8000"
+              value: "3000"
             - name: EXPRESS_TIMEOUT
               value: "30000"                                                                  
             - name: EVENT_BUS_URI  
@@ -56,5 +56,5 @@ spec:
   ports:
     - name: service-session
       protocol: TCP
-      port: 8000
-      targetPort: 8000
+      port: 3000
+      targetPort: 3000
