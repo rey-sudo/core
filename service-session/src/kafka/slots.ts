@@ -78,36 +78,40 @@ const handleCreate = async (
     await connection.beginTransaction();
 
     const schemeData = `
-    INSERT INTO products (
+    INSERT INTO slots (
       id,
+      mode,
+      status,
+      actived,
       seller_id,
-      name,
-      model,
-      features,
-      terms_of_sale,
-      guarantee,
-      category,
-      price,
-      collateral,
-      discount,
-      stock,
-      keywords,
-      country,
-      moderated,
-      media_url,
-      media_path,
-      image_main,
-      image_set,
-      video_set,
-      created_at,
-      schema_t,
+      seller_pubkeyhash,
+      buyer_id,
+      buyer_pubkeyhash,
+      contract_id,
+      contract_wid, 
+      contract_units, 
+      contract_price,
+      contract_collateral,
+      contract_discount, 
+      contract_stage, 
+      contract_0_utx, 
+      contract_1_utx, 
+      contract_2_utx, 
+      contract_3_utx,
+      contract_0_tx, 
+      contract_1_tx, 
+      contract_2_tx, 
+      contract_3_tx,   
+      product_id,
+      created_at, 
+      schema_t, 
       schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const schemeValue = Object.values(payload);
 
     const [rows] = await connection.execute(
-      "SELECT * FROM products WHERE id = ?",
+      "SELECT * FROM slots WHERE id = ?",
       [payload.id]
     );
 
@@ -134,10 +138,8 @@ const handleCreate = async (
   }
 };
 
-
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
-
 
 const handleUpdate = async (
   data: any,
@@ -157,30 +159,34 @@ const handleUpdate = async (
     await connection.beginTransaction();
 
     const schemeData = `
-    UPDATE products 
+    UPDATE slots
     SET id = ?,
+        mode = ?,
+        status = ?,
+        actived = ?,
         seller_id = ?,
-        name = ?,
-        model = ?,
-        features = ?,
-        terms_of_sale = ?,
-        guarantee = ?,        
-        category = ?,
-        price = ?,
-        collateral = ?,
-        discount = ?,
-        stock = ?,
-        keywords = ?,
-        country = ?,
-        moderated = ?,        
-        media_url = ?,
-        media_path = ?,
-        image_main = ?,
-        image_set = ?,
-        video_set = ?,
-        created_at = ?,
-        schema_t = ?,
-        schema_v = ?
+        seller_pubkeyhash = ?,
+        buyer_id = ?,
+        buyer_pubkeyhash = ?,
+        contract_id = ?,
+        contract_wid = ?, 
+        contract_units = ?, 
+        contract_price = ?,
+        contract_collateral = ?,
+        contract_discount = ?, 
+        contract_stage = ?, 
+        contract_0_utx = ?, 
+        contract_1_utx = ?, 
+        contract_2_utx = ?, 
+        contract_3_utx = ?,
+        contract_0_tx = ?, 
+        contract_1_tx = ?, 
+        contract_2_tx = ?, 
+        contract_3_tx = ?,   
+        product_id = ?,
+        created_at = ?, 
+        schema_t = ?, 
+        schema_v = ? 
     WHERE id = ? AND schema_v = ?`;
 
     const schemeValue = [
@@ -227,7 +233,7 @@ const handleDelete = async (
     await connection.beginTransaction();
 
     const [deleted] = await connection.execute(
-      "DELETE FROM products WHERE id = ? AND schema_v = ?",
+      "DELETE FROM slots WHERE id = ? AND schema_v = ?",
       [payload.id, payload.schema_v]
     );
 
@@ -242,7 +248,7 @@ const handleDelete = async (
     ]);
   } catch (err) {
     await connection.rollback();
-    _.error(err)
+    _.error(err);
   } finally {
     connection.release();
   }
