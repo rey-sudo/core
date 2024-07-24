@@ -24,7 +24,11 @@ export default {
   setup() {
     const { getCurrentSeller } = headerAPI();
 
-    const socket = io("https://pairfy.dev");
+    const socket = io("https://pairfy.dev", {
+      query: {
+        token: "tokenprove",
+      },
+    });
 
     return {
       socket,

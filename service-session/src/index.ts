@@ -6,6 +6,8 @@ import http from "http";
 import { NotFoundError, errorMiddleware } from "./errors";
 import { Server } from "socket.io";
 import { _ } from "./utils/pino";
+import { authMiddleware } from "./utils/seller";
+import cookieSession from "cookie-session";
 
 const catcher = (message?: any, error?: any, bypass?: boolean) => {
   _.error(`EXIT=>${message}-${error}`);
@@ -45,6 +47,8 @@ const main = async () => {
 
     const app = express();
 
+    app.set("trust proxy", 1);
+
     const server = http.createServer(app);
 
     const socketServer = new Server(server);
@@ -74,7 +78,12 @@ const main = async () => {
 
     const sockets: any = {};
 
+    socketServer.use(authMiddleware);
+
     const socketConnectionHandler = (socket: any) => {
+      
+      console.log(socket.user);
+
       const userId = generateRandomString(4).toLocaleLowerCase();
 
       console.log("USER CONNECTED" + userId);
@@ -108,7 +117,6 @@ const main = async () => {
       res.status(200).json({ status: "Test OK" });
     });
 
-
     app.all("*", (_req, _res) => {
       throw new NotFoundError();
     });
@@ -123,7 +131,7 @@ const main = async () => {
       console.log(`Server is running on port ${PORT}`);
     });
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 };
 

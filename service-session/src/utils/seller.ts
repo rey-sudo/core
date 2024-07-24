@@ -1,12 +1,14 @@
-import { Request, Response, NextFunction } from "express";
 import { _ } from "./pino";
 import jwt from "jsonwebtoken";
+import { Socket } from "socket.io";
 
 interface SellerToken {
   id: string;
   role: string;
   email: string;
-  nickname: string;
+  avatar: string;
+  country: string;
+  username: string;
 }
 
 declare global {
@@ -17,27 +19,28 @@ declare global {
   }
 }
 
-const sellerMiddleware = (req: Request, res: Response, next: NextFunction) => {
-  if (!req.session?.jwt) {
-    return next();
+const authMiddleware = (socket: Socket, next: (err?: Error) => void) => {
+  const token = socket.handshake.auth.token;
+
+  console.log(token);
+
+  if (!token) {
+    return next(new Error("Authentication error"));
   }
 
-  try {
-    const sessionData = jwt.verify(
-      req.session.jwt,
-      process.env.SELLER_JWT_KEY!
-    ) as SellerToken;
-
-    if (sessionData.role !== "SELLER") {
-      return next();
+  jwt.verify(token, process.env.SELLER_JWT_KEY!, (err: any, decoded: any) => {
+    if (err) {
+      return next(new Error("Authentication error"));
     }
 
-    req.sellerData = sessionData;
-  } catch (err) {
-    _.error(err);
-  }
+    if (decoded.role !== "SELLER") {
+      return next(new Error("Authentication error"));
+    }
 
-  next();
+    (socket as any).user = decoded as SellerToken;
+
+    next();
+  });
 };
 
-export { sellerMiddleware, SellerToken };
+export { authMiddleware, SellerToken };
