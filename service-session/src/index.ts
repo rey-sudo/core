@@ -6,7 +6,7 @@ import http from "http";
 import { NotFoundError, errorMiddleware } from "./errors";
 import { Server } from "socket.io";
 import { _ } from "./utils/pino";
-import { authMiddleware } from "./utils/seller";
+import { authMiddleware } from "./utils/auth";
 import cookieSession from "cookie-session";
 
 const catcher = (message?: any, error?: any, bypass?: boolean) => {
