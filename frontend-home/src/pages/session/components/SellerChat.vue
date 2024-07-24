@@ -26,7 +26,7 @@ export default {
 
     const socket = io("https://pairfy.dev", {
       query: {
-        token: getCurrentSeller.token,
+        token: getCurrentSeller.value.token,
       },
     });
 

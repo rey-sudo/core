@@ -26,6 +26,7 @@ import MainHeader from "@/components/header/MainHeader.vue";
 import TimeLine from "@/pages/session/components/TimeLine.vue";
 import SellerChat from "@/pages/session/components/SellerChat.vue";
 import SellerView from "@/pages/session/components/SellerView.vue";
+import headerAPI from "@/components/header/composable/header-api";
 import { ref } from "vue";
 import { sessionAPI } from "@/pages/session/api";
 
