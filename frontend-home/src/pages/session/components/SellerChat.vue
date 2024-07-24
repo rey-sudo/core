@@ -1,9 +1,9 @@
 <template>
   <div class="chat">
     <div class="chat-top">
-      <img :src="getCurrentSeller?.avatar" alt="" />
+      <img :src="getCurrentSeller.avatar" alt="" />
 
-      <span>{{ getCurrentSeller?.username }}</span>
+      <span>{{ getCurrentSeller.username }}</span>
     </div>
     <div class="chat-body">
       <ul id="messages"></ul>
@@ -26,7 +26,7 @@ export default {
 
     const socket = io("https://pairfy.dev", {
       query: {
-        token: "tokenprove",
+        token: getCurrentSeller.token,
       },
     });
 

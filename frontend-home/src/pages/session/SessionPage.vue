@@ -11,7 +11,7 @@
         </div>
 
         <div class="session-body-right">
-          <SellerChat />
+          <SellerChat v-if="getCurrentSeller" />
         </div>
       </div>
 
@@ -37,6 +37,8 @@ export default {
     SellerView,
   },
   setup() {
+    const { getCurrentSeller } = headerAPI();
+
     let currentRoute = ref("");
 
     const isLoaded = ref(false);
@@ -59,10 +61,11 @@ export default {
 
     return {
       currentRoute,
+      getCurrentSeller,
       getSlot,
       setupData,
       isLoaded,
-      isFailed
+      isFailed,
     };
   },
   created() {
