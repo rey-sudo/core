@@ -20,7 +20,7 @@ declare global {
 }
 
 const authMiddleware = (socket: Socket, next: (err?: Error) => void) => {
-  const token = socket.handshake.auth.token;
+  const token = socket.handshake.query.token as string;
 
   console.log(token);
 
