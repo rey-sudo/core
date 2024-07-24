@@ -5,21 +5,63 @@
 
       <span>{{ getCurrentSeller?.username }}</span>
     </div>
-    <div class="chat-body"></div>
-    <div class="chat-bottom"></div>
+    <div class="chat-body">
+      <ul id="messages"></ul>
+    </div>
+    <div class="chat-bottom">
+      <form id="form" action="">
+        <input id="input" autocomplete="off" />
+        <button>Send</button>
+      </form>
+      <button id="join">Join</button>
+    </div>
   </div>
 </template>
 
 <script>
 import headerAPI from "@/components/header/composable/header-api";
+import { io } from "socket.io-client";
 
 export default {
   setup() {
     const { getCurrentSeller } = headerAPI();
 
+    const socket = io("https://pairfy.dev");
+
     return {
+      socket,
       getCurrentSeller,
     };
+  },
+  mounted() {
+    const form = document.getElementById("form");
+    const input = document.getElementById("input");
+    const messages = document.getElementById("messages");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (input.value) {
+        const payload = {
+          content: input.value,
+          room: "room1",
+        };
+        this.socket.emit("message", JSON.stringify(payload));
+        input.value = "";
+      }
+    });
+
+    this.socket.on("message", function (msg) {
+      const item = document.createElement("li");
+      item.textContent = msg;
+      messages.appendChild(item);
+      window.scrollTo(0, document.body.scrollHeight);
+    });
+
+    const myButton = document.getElementById("join");
+
+    myButton.addEventListener("click", () => {
+      this.socket.emit("join", "room1");
+    });
   },
 };
 </script>

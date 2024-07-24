@@ -86,3 +86,11 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .                        
+    - image: pairfy/frontend-home
+      context: frontend-home
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .             
