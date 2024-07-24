@@ -186,7 +186,7 @@ const handleUpdate = async (
         product_id = ?,
         created_at = ?, 
         schema_t = ?, 
-        schema_v = ? 
+        schema_v = ?
     WHERE id = ? AND schema_v = ?`;
 
     const schemeValue = [
