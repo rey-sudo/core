@@ -3,9 +3,15 @@ import listenSlots from "./kafka/slots";
 import compression from "compression";
 import express from "express";
 import http from "http";
-import { catcher, checkpoint } from "./pod/index";
 import { NotFoundError, errorMiddleware } from "./errors";
 import { Server } from "socket.io";
+import { _ } from "./utils/pino";
+
+const catcher = (message?: any, error?: any, bypass?: boolean) => {
+  _.error(`EXIT=>${message}-${error}`);
+
+  return bypass || process.exit(1);
+};
 
 const main = async () => {
   try {
@@ -102,7 +108,6 @@ const main = async () => {
       res.status(200).json({ status: "Test OK" });
     });
 
-    checkpoint("ready");
 
     app.all("*", (_req, _res) => {
       throw new NotFoundError();
@@ -117,8 +122,8 @@ const main = async () => {
     server.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
-  } catch (e) {
-    catcher(e);
+  } catch (err) {
+    console.error(err)
   }
 };
 
