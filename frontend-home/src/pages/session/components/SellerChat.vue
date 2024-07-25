@@ -17,7 +17,11 @@
         <div v-if="editor">
           <editor-content :editor="editor" id="editorElement" />
         </div>
-        <button class="chat-wrap-send" @click="sendMessage">
+        <button
+          class="chat-wrap-send"
+          :class="{ active: characterCounter > 0 }"
+          @click="sendMessage"
+        >
           <i class="pi pi-send" />
         </button>
       </div>
@@ -222,12 +226,17 @@ export default {
   align-items: center;
   justify-content: center;
   background: var(--base-a);
+  color: var(--text-b);
   cursor: pointer;
+}
+
+.chat-wrap-send.active {
+  color: var(--primary-c);
 }
 
 .chat-wrap-send i {
   transform: rotate(45deg);
-  color: var(--text-b);
+  color: inherit;
   font-size: var(--text-size-e) !important;
 }
 
