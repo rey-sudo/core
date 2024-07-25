@@ -9,8 +9,8 @@
       <ul id="messages"></ul>
     </div>
     <div class="chat-bottom">
-      <input id="input" autocomplete="off" />
-      <button id="send">Send</button>
+      <input v-model="inputValue" id="input" autocomplete="off" />
+      <button @click="sendMessage" id="send">Send</button>
     </div>
   </div>
 </template>
@@ -20,6 +20,7 @@ import headerAPI from "@/components/header/composable/header-api";
 import { io } from "socket.io-client";
 import { HOST } from "@/api/index";
 import { sessionAPI } from "@/pages/session/api";
+import { ref } from "vue";
 
 export default {
   setup() {
@@ -42,9 +43,21 @@ export default {
 
     connectRoom();
 
+    const inputValue = ref("");
+
+    const sendMessage = () => {
+      const payload = {
+        room: getSlotData.value.id,
+        content: inputValue.value,
+      };
+
+      socket.emit("message", JSON.stringify(payload));
+    };
     return {
       socket,
       connectRoom,
+      sendMessage,
+      inputValue,
       getCurrentUser,
     };
   },
