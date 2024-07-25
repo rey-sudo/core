@@ -85,37 +85,59 @@ const main = async () => {
     socketServer.use(authMiddleware);
 
     const socketConnectionHandler = (socket: any) => {
-      console.log(socket.agent);
+      const AGENT: any = socket.agent;
 
-      const AGENT = socket.agent;
+      console.log("USER CONNECTED" + AGENT.id);
 
-      const userId = generateRandomString(4).toLocaleLowerCase();
+      sockets[AGENT.id] = socket;
 
-      console.log("USER CONNECTED" + userId);
-
-      sockets[userId] = socket;
-
-      sockets[userId].on("join", (payload: string) => {
+      sockets[AGENT.id].on("join", async (payload: string) => {
         const data = JSON.parse(payload);
 
         if (AGENT.role === "SELLER") {
-          sockets[userId].join(data.room);
-          console.log("USER JOINED TO ROOM " + data.room);
+          let connection = null;
+
+          try {
+            connection = await DB.client.getConnection();
+
+            const [slots] = await connection.execute(
+              "SELECT * FROM slots WHERE id = ?",
+              [data.room]
+            );
+
+            if (slots.length === 0) {
+              return;
+            }
+
+            const SLOT = slots[0];
+
+            if (SLOT.seller_id === AGENT.id) {
+              sockets[AGENT.id].join(data.room);
+
+              console.log("USER JOINED TO ROOM " + data.room);
+
+              socketServer.to(data.room).emit("message", "Seller connected");
+            }
+          } catch (err) {
+            await connection.rollback();
+          } finally {
+            connection.release();
+          }
         }
       });
 
-      sockets[userId].on("message", (payload: string) => {
+      sockets[AGENT.id].on("message", (payload: string) => {
         const data = JSON.parse(payload);
 
         const scheme = {
-          user: userId,
+          user: AGENT.id,
           content: data.content,
         };
 
         socketServer.to(data.room).emit("message", JSON.stringify(scheme));
       });
 
-      sockets[userId].on("disconnect", () => {
+      sockets[AGENT.id].on("disconnect", () => {
         console.log("User disconnected");
       });
     };
@@ -145,14 +167,3 @@ const main = async () => {
 };
 
 main();
-
-function generateRandomString(length: number) {
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let result = "";
-  const charactersLength = characters.length;
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
