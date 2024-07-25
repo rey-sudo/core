@@ -84,6 +84,10 @@ export default {
     };
 
     const sendMessage = () => {
+      if (characterCounter.value < 1) {
+        return;
+      }
+
       const payload = {
         room: getSlotData.value.id,
         content: getContent(),
@@ -106,10 +110,21 @@ export default {
     };
   },
   mounted() {
+    const handleEnterKey = () => {
+      this.sendMessage();
+    };
+
     this.editor = new Editor({
       editorProps: {
         attributes: {
           class: "editorClass",
+        },
+        handleKeyDown(view, event) {
+          if (event.key === "Enter") {
+            handleEnterKey();
+            return true;
+          }
+          return false;
         },
       },
       extensions: [
