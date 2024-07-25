@@ -9,6 +9,7 @@ import { authMiddleware } from "./utils/auth";
 import { joinRoomHandler } from "./handlers/join-room";
 import { _ } from "./utils/pino";
 import { messageHandler } from "./handlers/message";
+import { sessionRedis } from "./db/session";
 
 const catcher = (message?: any, error?: any, bypass?: boolean) => {
   _.error(`EXIT=>${message}-${error}`);
@@ -36,7 +37,7 @@ export const socketServer = new Server(server, {
 
 export const sockets: any = {};
 
-const main = () => {
+const main = async () => {
   try {
     if (!process.env.POD_TIMEOUT) {
       throw new Error("POD_TIMEOUT error");
@@ -66,8 +67,8 @@ const main = () => {
       throw new Error("TOKEN_EXPIRATION error");
     }
 
-    if (!process.env.EVENT_BUS_URI) {
-      throw new Error("EVENT_BUS_URI error");
+    if (!process.env.SESSION_REDIS) {
+      throw new Error("SESSION_REDIS error");
     }
 
     app.use(express.json());
@@ -90,6 +91,15 @@ const main = () => {
       password: "password",
       database: "service_session",
     });
+
+    await sessionRedis
+      .connect({
+        url: process.env.SESSION_REDIS,
+        connectTimeout: 100000,
+        keepAlive: 100000,
+      })
+      .then(() => console.log("sessionRedis connected"))
+      .catch((err: any) => catcher(err));
 
     listenSlots();
 

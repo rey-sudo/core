@@ -1,5 +1,6 @@
-import { socketServer, sockets } from "..";
+import { socketServer } from "..";
 import DB from "../db";
+import { sessionRedis } from "../db/session";
 
 export const messageHandler = async (payload: string, AGENT: any) => {
   const data = JSON.parse(payload);
@@ -28,7 +29,21 @@ export const messageHandler = async (payload: string, AGENT: any) => {
           content: data.content,
         };
 
-        socketServer.to(data.room).emit("message", JSON.stringify(scheme));
+        const message = JSON.stringify(scheme);
+
+        sessionRedis.client.rpush(
+          data.room,
+          message,
+          (err: any, reply: any) => {
+            if (err) {
+              console.error("Error saving message:", err);
+            } else {
+              console.log(`Message saved to room ${data.room}: ${message}`);
+            }
+          }
+        );
+
+        socketServer.to(data.room).emit("message", message);
       }
     } catch (err) {
       await connection.rollback();
@@ -56,12 +71,26 @@ export const messageHandler = async (payload: string, AGENT: any) => {
 
       if (SLOT.buyer_pubkeyhash === AGENT.pubkeyhash) {
         const scheme = {
-            user: AGENT.id,
-            role: AGENT.role,
-            content: data.content,
-          };
-  
-          socketServer.to(data.room).emit("message", JSON.stringify(scheme));
+          user: AGENT.id,
+          role: AGENT.role,
+          content: data.content,
+        };
+
+        const message = JSON.stringify(scheme);
+
+        sessionRedis.client.rpush(
+          data.room,
+          message,
+          (err: any, reply: any) => {
+            if (err) {
+              console.error("Error saving message:", err);
+            } else {
+              console.log(`Message saved to room ${data.room}: ${message}`);
+            }
+          }
+        );
+
+        socketServer.to(data.room).emit("message", message);
       }
     } catch (err) {
       await connection.rollback();

@@ -21,10 +21,8 @@ class RedisWrapper {
   }
 }
 
-const eventBus = new RedisWrapper();
+const sessionRedis = new RedisWrapper();
 
-const sendEvent = async (clientId: string, type: string) => {
-  await eventBus.client.publish(clientId, type);
-};
 
-export { RedisWrapper, eventBus, sendEvent };
+
+export { RedisWrapper, sessionRedis };

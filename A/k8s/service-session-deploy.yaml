@@ -19,37 +19,34 @@ spec:
             - name: POD_NAME
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.name                                       
+                  fieldPath: metadata.name
             - name: SELLER_JWT_KEY
               valueFrom:
                 secretKeyRef:
                   name: seller-token-secret
-                  key: SELLER_TOKEN_KEY   
+                  key: SELLER_TOKEN_KEY
             - name: USER_JWT_KEY
               valueFrom:
                 secretKeyRef:
                   name: user-token-secret
-                  key: USER_TOKEN_KEY                                           
+                  key: USER_TOKEN_KEY
             - name: POD_TIMEOUT
-              value: '120000'   
+              value: "120000"
             - name: EXPRESS_PORT
               value: "3000"
             - name: EXPRESS_TIMEOUT
-              value: "30000"                                                                  
-            - name: EVENT_BUS_URI  
-              valueFrom:
-                configMapKeyRef:
-                  name: streaming-config
-                  key: redis                                                                                  
+              value: "30000"
+            - name: SESSION_REDIS
+              value: redis://service-session-redis:6379
             - name: TOKEN_EXPIRATION
               value: "7d"
             - name: CORS_DOMAINS
-              value: "https://pairfy.dev,http://pairfy.dev,http://localhost:8080,http://localhost:8081,https://pairfy.dev,https://dashboard.pairfy.dev"                           
+              value: "https://pairfy.dev,http://pairfy.dev,http://localhost:8080,http://localhost:8081,https://pairfy.dev,https://dashboard.pairfy.dev"
           resources:
             limits:
               memory: "500Mi"
             requests:
-              memory: "256Mi"       
+              memory: "256Mi"
 ---
 apiVersion: v1
 kind: Service
