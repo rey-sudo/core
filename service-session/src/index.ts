@@ -5,10 +5,9 @@ import express from "express";
 import http from "http";
 import { NotFoundError, errorMiddleware } from "./errors";
 import { Server } from "socket.io";
-import { _ } from "./utils/pino";
 import { authMiddleware } from "./utils/auth";
-import cookieSession from "cookie-session";
 import { joinRoomHandler } from "./handlers/join-room";
+import { _ } from "./utils/pino";
 
 const catcher = (message?: any, error?: any, bypass?: boolean) => {
   _.error(`EXIT=>${message}-${error}`);
@@ -22,7 +21,17 @@ app.set("trust proxy", 1);
 
 const server = http.createServer(app);
 
-export const socketServer = new Server(server);
+export const socketServer = new Server(server, {
+  cors: {
+    origin: process.env.CORS_DOMAINS!.split(","),
+    methods: ["GET", "POST"],
+    credentials: true,
+    maxAge: 86400,
+    preflightContinue: false,
+    exposedHeaders: ["Set-Cookie"],
+    optionsSuccessStatus: 204,
+  }
+});
 
 export const sockets: any = {};
 
