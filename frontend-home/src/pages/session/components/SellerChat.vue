@@ -25,7 +25,7 @@ import { sessionAPI } from "@/pages/session/api";
 export default {
   setup() {
     const { getCurrentSeller } = headerAPI();
-    const { getSlot } = sessionAPI();
+    const { getSlotData } = sessionAPI();
 
     const socket = io(HOST, {
       query: {
@@ -36,7 +36,7 @@ export default {
 
     const connectRoom = () => {
       const payload = {
-        room: getSlot.id,
+        room: getSlotData.value.id,
       };
       socket.emit("join", JSON.stringify(payload));
     };

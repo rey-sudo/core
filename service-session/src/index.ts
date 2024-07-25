@@ -87,6 +87,8 @@ const main = async () => {
     const socketConnectionHandler = (socket: any) => {
       console.log(socket.agent);
 
+      const AGENT = socket.agent;
+
       const userId = generateRandomString(4).toLocaleLowerCase();
 
       console.log("USER CONNECTED" + userId);
@@ -96,8 +98,10 @@ const main = async () => {
       sockets[userId].on("join", (payload: string) => {
         const data = JSON.parse(payload);
 
-        sockets[userId].join(data.room);
-        console.log("USER JOINED TO ROOM " + data.room);
+        if (AGENT.role === "SELLER") {
+          sockets[userId].join(data.room);
+          console.log("USER JOINED TO ROOM " + data.room);
+        }
       });
 
       sockets[userId].on("message", (payload: string) => {
