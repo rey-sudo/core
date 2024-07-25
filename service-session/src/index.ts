@@ -8,6 +8,7 @@ import { Server } from "socket.io";
 import { authMiddleware } from "./utils/auth";
 import { joinRoomHandler } from "./handlers/join-room";
 import { _ } from "./utils/pino";
+import { messageHandler } from "./handlers/message";
 
 const catcher = (message?: any, error?: any, bypass?: boolean) => {
   _.error(`EXIT=>${message}-${error}`);
@@ -30,7 +31,7 @@ export const socketServer = new Server(server, {
     preflightContinue: false,
     exposedHeaders: ["Set-Cookie"],
     optionsSuccessStatus: 204,
-  }
+  },
 });
 
 export const sockets: any = {};
@@ -108,16 +109,9 @@ const main = () => {
         joinRoomHandler(payload, AGENT)
       );
 
-      sockets[AGENT.id].on("message", (payload: string) => {
-        const data = JSON.parse(payload);
-
-        const scheme = {
-          user: AGENT.id,
-          content: data.content,
-        };
-
-        socketServer.to(data.room).emit("message", JSON.stringify(scheme));
-      });
+      sockets[AGENT.id].on("message", (payload: string) =>
+        messageHandler(payload, AGENT)
+      );
 
       sockets[AGENT.id].on("disconnect", () => {
         console.log("User disconnected");
