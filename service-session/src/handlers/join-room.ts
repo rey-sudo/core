@@ -29,8 +29,6 @@ export const joinRoomHandler = async (payload: string, AGENT: any) => {
 
         const messages = await sessionRedis.client.lRange(data.room, 0, -1);
 
-        console.log(messages);
-
         socketServer.to(data.room).emit("message", messages);
       }
     } catch (err) {

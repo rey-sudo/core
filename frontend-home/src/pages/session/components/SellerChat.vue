@@ -93,9 +93,11 @@ export default {
         content: getContent(),
       };
 
-      console.log(payload);
-
       socket.emit("message", JSON.stringify(payload));
+
+      if (editor.value) {
+        editor.value.commands.clearContent();
+      }
     };
 
     return {
