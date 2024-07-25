@@ -24,6 +24,7 @@ export const messageHandler = async (payload: string, AGENT: any) => {
       if (SLOT.seller_id === AGENT.id) {
         const scheme = {
           user: AGENT.id,
+          role: AGENT.role,
           content: data.content,
         };
 
@@ -56,6 +57,7 @@ export const messageHandler = async (payload: string, AGENT: any) => {
       if (SLOT.buyer_pubkeyhash === AGENT.pubkeyhash) {
         const scheme = {
             user: AGENT.id,
+            role: AGENT.role,
             content: data.content,
           };
   

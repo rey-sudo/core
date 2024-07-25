@@ -9,7 +9,7 @@
       <ul id="messages"></ul>
     </div>
     <div class="chat-bottom">
-      <input v-model="inputValue" id="input" autocomplete="off" />
+      <div id="editorElement"></div>
       <button @click="sendMessage" id="send">Send</button>
     </div>
   </div>
@@ -17,6 +17,8 @@
 
 <script>
 import headerAPI from "@/components/header/composable/header-api";
+import StarterKit from "@tiptap/starter-kit";
+import { Editor } from "@tiptap/core";
 import { io } from "socket.io-client";
 import { HOST } from "@/api/index";
 import { sessionAPI } from "@/pages/session/api";
@@ -54,8 +56,11 @@ export default {
       socket.emit("message", JSON.stringify(payload));
     };
 
+    const editor = ref(null);
+
     return {
       socket,
+      editor,
       connectRoom,
       inputValue,
       sendMessage,
@@ -63,6 +68,12 @@ export default {
     };
   },
   mounted() {
+    this.editor = new Editor({
+      element: document.getElementById("editorElement"),
+      extensions: [StarterKit],
+      content: "<p>Hello World!</p>",
+    });
+
     const messages = document.getElementById("messages");
 
     this.socket.on("message", function (msg) {
