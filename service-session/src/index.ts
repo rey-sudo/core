@@ -8,6 +8,7 @@ import { Server } from "socket.io";
 import { _ } from "./utils/pino";
 import { authMiddleware } from "./utils/auth";
 import cookieSession from "cookie-session";
+import { joinRoomHandler } from "./handlers/join-room";
 
 const catcher = (message?: any, error?: any, bypass?: boolean) => {
   _.error(`EXIT=>${message}-${error}`);
@@ -15,7 +16,17 @@ const catcher = (message?: any, error?: any, bypass?: boolean) => {
   return bypass || process.exit(1);
 };
 
-const main = async () => {
+const app = express();
+
+app.set("trust proxy", 1);
+
+const server = http.createServer(app);
+
+export const socketServer = new Server(server);
+
+export const sockets: any = {};
+
+const main = () => {
   try {
     if (!process.env.POD_TIMEOUT) {
       throw new Error("POD_TIMEOUT error");
@@ -49,14 +60,6 @@ const main = async () => {
       throw new Error("EVENT_BUS_URI error");
     }
 
-    const app = express();
-
-    app.set("trust proxy", 1);
-
-    const server = http.createServer(app);
-
-    const socketServer = new Server(server);
-
     app.use(express.json());
 
     const errorEvents: string[] = [
@@ -80,10 +83,11 @@ const main = async () => {
 
     listenSlots();
 
-    const sockets: any = {};
-
     socketServer.use(authMiddleware);
 
+    //////////////////////////////////////////////////////////////////////////////////////////
+
+    //////////////////////////////////////////////////////////////////////////////////////////
     const socketConnectionHandler = (socket: any) => {
       const AGENT: any = socket.agent;
 
@@ -91,40 +95,9 @@ const main = async () => {
 
       sockets[AGENT.id] = socket;
 
-      sockets[AGENT.id].on("join", async (payload: string) => {
-        const data = JSON.parse(payload);
-
-        if (AGENT.role === "SELLER") {
-          let connection = null;
-
-          try {
-            connection = await DB.client.getConnection();
-
-            const [slots] = await connection.execute(
-              "SELECT * FROM slots WHERE id = ?",
-              [data.room]
-            );
-
-            if (slots.length === 0) {
-              return;
-            }
-
-            const SLOT = slots[0];
-
-            if (SLOT.seller_id === AGENT.id) {
-              sockets[AGENT.id].join(data.room);
-
-              console.log("USER JOINED TO ROOM " + data.room);
-
-              socketServer.to(data.room).emit("message", "Seller connected");
-            }
-          } catch (err) {
-            await connection.rollback();
-          } finally {
-            connection.release();
-          }
-        }
-      });
+      sockets[AGENT.id].on("joinRoom", (payload: string) =>
+        joinRoomHandler(payload, AGENT)
+      );
 
       sockets[AGENT.id].on("message", (payload: string) => {
         const data = JSON.parse(payload);

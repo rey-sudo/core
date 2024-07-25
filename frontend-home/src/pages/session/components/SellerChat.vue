@@ -38,7 +38,7 @@ export default {
       const payload = {
         room: getSlotData.value.id,
       };
-      socket.emit("join", JSON.stringify(payload));
+      socket.emit("joinRoom", JSON.stringify(payload));
     };
 
     connectRoom();
