@@ -9,7 +9,7 @@
       <ul id="messages"></ul>
 
       <div v-if="editor">
-        {{ lengthCounter }}
+        {{ characterCounter }}
       </div>
     </div>
     <div class="chat-bottom">
@@ -38,7 +38,7 @@ import { Editor, EditorContent } from "@tiptap/vue-3";
 import { io } from "socket.io-client";
 import { HOST } from "@/api/index";
 import { sessionAPI } from "@/pages/session/api";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 export default {
   components: {
@@ -80,6 +80,14 @@ export default {
 
     const editorLimit = ref(200);
 
+    const characterCounter = computed(() => {
+      if (editor.value === null) {
+        return 0;
+      }
+
+      return editor.value.storage.characterCount.characters();
+    });
+
     return {
       socket,
       editor,
@@ -87,17 +95,12 @@ export default {
       inputValue,
       sendMessage,
       getCurrentSeller,
+      characterCounter,
       editorLimit,
     };
   },
-  computed: {
-    lengthCounter() {
-      return this.editor.storage.characterCount.characters();
-    },
-  },
   mounted() {
     this.editor = new Editor({
-
       editorProps: {
         attributes: {
           class: "editorClass",
