@@ -1,6 +1,7 @@
 import { socketServer } from "..";
 import DB from "../db";
 import { sessionRedis } from "../db/session";
+import { _ } from "../utils/pino";
 
 export const messageHandler = async (payload: string, AGENT: any) => {
   const data = JSON.parse(payload);
@@ -31,21 +32,12 @@ export const messageHandler = async (payload: string, AGENT: any) => {
 
         const message = JSON.stringify(scheme);
 
-        sessionRedis.client.rpush(
-          data.room,
-          message,
-          (err: any, reply: any) => {
-            if (err) {
-              console.error("Error saving message:", err);
-            } else {
-              console.log(`Message saved to room ${data.room}: ${message}`);
-            }
-          }
-        );
+        await sessionRedis.client.rPush(data.room, message);
 
         socketServer.to(data.room).emit("message", message);
       }
     } catch (err) {
+      _.error(err);
       await connection.rollback();
     } finally {
       connection.release();
@@ -78,21 +70,12 @@ export const messageHandler = async (payload: string, AGENT: any) => {
 
         const message = JSON.stringify(scheme);
 
-        sessionRedis.client.rpush(
-          data.room,
-          message,
-          (err: any, reply: any) => {
-            if (err) {
-              console.error("Error saving message:", err);
-            } else {
-              console.log(`Message saved to room ${data.room}: ${message}`);
-            }
-          }
-        );
+        await sessionRedis.client.rPush(data.room, message);
 
         socketServer.to(data.room).emit("message", message);
       }
     } catch (err) {
+      _.error(err);
       await connection.rollback();
     } finally {
       connection.release();

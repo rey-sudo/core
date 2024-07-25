@@ -27,18 +27,11 @@ export const joinRoomHandler = async (payload: string, AGENT: any) => {
 
         console.log("USER JOINED TO ROOM " + data.room);
 
-        sessionRedis.client.lrange(
-          data.room,
-          0,
-          -1,
-          (err: any, messages: any) => {
-            if (err) {
-              console.error("Error retrieving messages:", err);
-            } else {
-              socketServer.to(data.room).emit("message", messages);
-            }
-          }
-        );
+        const messages = await sessionRedis.client.lRange(data.room, 0, -1);
+
+        console.log(messages);
+
+        socketServer.to(data.room).emit("message", messages);
       }
     } catch (err) {
       await connection.rollback();
@@ -69,18 +62,9 @@ export const joinRoomHandler = async (payload: string, AGENT: any) => {
 
         console.log("BUYER JOINED TO ROOM " + data.room);
 
-        sessionRedis.client.lrange(
-          data.room,
-          0,
-          -1,
-          (err: any, messages: any) => {
-            if (err) {
-              console.error("Error retrieving messages:", err);
-            } else {
-              socketServer.to(data.room).emit("message", messages);
-            }
-          }
-        );
+        const messages = await sessionRedis.client.lRange(data.room, 0, -1);
+
+        socketServer.to(data.room).emit("message", messages);
       }
     } catch (err) {
       await connection.rollback();
