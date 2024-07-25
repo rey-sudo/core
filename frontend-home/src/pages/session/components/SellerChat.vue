@@ -7,10 +7,6 @@
     </div>
     <div class="chat-body">
       <ul id="messages"></ul>
-
-      <div v-if="editor">
-        {{ characterCounter }}
-      </div>
     </div>
     <div class="chat-bottom">
       <div class="chat-wrap">
@@ -187,7 +183,7 @@ export default {
   pointer-events: none;
 }
 ::v-deep(.editorClass) {
-  width: 330px;
+  width: 350px;
   padding: 0.75rem;
   border-radius: 6px;
   background: var(--base-b);
@@ -247,7 +243,7 @@ export default {
 
 .chat {
   background: var(--base-a);
-  width: 400px;
+  width: 425px;
   height: 700px;
   border-radius: 16px;
   margin-left: auto;
