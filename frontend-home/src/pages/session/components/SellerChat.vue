@@ -11,7 +11,6 @@
     <div class="chat-bottom">
       <input id="input" autocomplete="off" />
       <button id="send">Send</button>
-      <button id="join">Join</button>
     </div>
   </div>
 </template>
@@ -58,12 +57,6 @@ export default {
       item.textContent = msg;
       messages.appendChild(item);
       window.scrollTo(0, document.body.scrollHeight);
-    });
-
-    const joinButton = document.getElementById("join");
-
-    joinButton.addEventListener("click", () => {
-      this.socket.emit("join", "room1");
     });
 
     const sendButton = document.getElementById("send");
