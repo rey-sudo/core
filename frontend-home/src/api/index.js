@@ -8,4 +8,6 @@ const baseURL = {
 
 const NETWORK = "preview";
 
-export { env, baseURL, NETWORK };
+const HOST = baseURL[env];
+
+export { env, baseURL, NETWORK, HOST };

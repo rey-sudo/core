@@ -19,12 +19,13 @@
 <script>
 import headerAPI from "@/components/header/composable/header-api";
 import { io } from "socket.io-client";
+import { HOST } from "@/api/index";
 
 export default {
   setup() {
     const { getCurrentSeller } = headerAPI();
 
-    const socket = io("https://pairfy.dev", {
+    const socket = io(HOST, {
       query: {
         role: "SELLER",
         token: getCurrentSeller.value.token,
