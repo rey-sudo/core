@@ -1308,10 +1308,20 @@
   resolved "https://registry.npmjs.org/@tiptap/extension-paragraph/-/extension-paragraph-2.5.6.tgz"
   integrity sha512-ZPoerYEZLHlOCsfEfagX38ahXwegZaAB/ZUlcff9ehp5v8uO4L64mWyQRoTDF74A9cGnKxE3enokz8tOA47fkA==
 
+"@tiptap/extension-placeholder@^2.5.6":
+  version "2.5.6"
+  resolved "https://registry.npmjs.org/@tiptap/extension-placeholder/-/extension-placeholder-2.5.6.tgz"
+  integrity sha512-ULmR146/l1zGTkzyda/9Y7yDSz3Pr6hE+ccBDiJ0OMgf7ukL+iwAuZJz3R1EbDz6x2FfrspVnt2/ieCYDKe7Hw==
+
 "@tiptap/extension-strike@^2.5.6":
   version "2.5.6"
   resolved "https://registry.npmjs.org/@tiptap/extension-strike/-/extension-strike-2.5.6.tgz"
   integrity sha512-dh3E/6ex1VSfpdautCyody+J4FuLmOZVcJbOMAEUNRBRMMKQmJZIXgBJrKOJuqnWoWWL00LlvbHnNUDzWYAQoA==
+
+"@tiptap/extension-text-align@^2.5.6":
+  version "2.5.6"
+  resolved "https://registry.npmjs.org/@tiptap/extension-text-align/-/extension-text-align-2.5.6.tgz"
+  integrity sha512-GJ5OJt1NEO9G6I++b3yU6Vs0wYa/AiKWtB32w4CktVo1LqIRJIvDOACVwFl33CjP9mDhkoZrjdkPA3FJkMhSCA==
 
 "@tiptap/extension-text@^2.5.6":
   version "2.5.6"
