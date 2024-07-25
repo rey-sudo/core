@@ -65,17 +65,6 @@ export default {
 
     connectRoom();
 
-    const inputValue = ref("");
-
-    const sendMessage = () => {
-      const payload = {
-        room: getSlotData.value.id,
-        content: inputValue.value,
-      };
-
-      socket.emit("message", JSON.stringify(payload));
-    };
-
     const editor = ref(null);
 
     const editorLimit = ref(200);
@@ -88,15 +77,32 @@ export default {
       return editor.value.storage.characterCount.characters();
     });
 
+    const getContent = () => {
+      if (editor.value) {
+        return editor.value.getJSON();
+      }
+    };
+
+    const sendMessage = () => {
+      const payload = {
+        room: getSlotData.value.id,
+        content: getContent(),
+      };
+
+      console.log(payload);
+
+      socket.emit("message", JSON.stringify(payload));
+    };
+
     return {
       socket,
       editor,
       connectRoom,
-      inputValue,
       sendMessage,
       getCurrentSeller,
       characterCounter,
       editorLimit,
+      getContent,
     };
   },
   mounted() {
