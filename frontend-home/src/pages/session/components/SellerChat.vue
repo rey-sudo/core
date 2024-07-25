@@ -134,9 +134,9 @@ export default {
 }
 ::v-deep(.editorClass) {
   width: 330px;
-  padding: 0.5rem;
-  border: 1px solid var(--border-b);
+  padding: 0.75rem;
   border-radius: 6px;
+  background: var(--base-b);
   font-weight: 600;
   text-align: left;
   font-size: var(--text-size-b);
@@ -145,10 +145,23 @@ export default {
   overflow-x: hidden;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  border: 1px solid var(--border-b);
+  transition-duration: 250ms;
+  transition-property: all;
+  transition-timing-function: ease-in-out;
 }
 
 ::v-deep(.editorClass::-webkit-scrollbar) {
   display: none;
+}
+
+::v-deep(.editorClass:hover) {
+  border: 1px solid var(--primary-c);
+}
+
+::v-deep(.ProseMirror-focused) {
+  border: 1px solid var(--primary-c);
+  outline: initial;
 }
 
 .chat-wrap-send {
