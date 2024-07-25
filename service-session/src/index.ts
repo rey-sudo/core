@@ -37,7 +37,6 @@ const main = async () => {
       throw new Error("SELLER_JWT_KEY error");
     }
 
-
     if (!process.env.USER_JWT_KEY) {
       throw new Error("USER_JWT_KEY error");
     }
@@ -94,9 +93,11 @@ const main = async () => {
 
       sockets[userId] = socket;
 
-      sockets[userId].on("join", (orderId: string) => {
-        sockets[userId].join(orderId);
-        console.log("USER JOINED TO ROOM " + orderId);
+      sockets[userId].on("join", (payload: string) => {
+        const data = JSON.parse(payload);
+
+        sockets[userId].join(data.room);
+        console.log("USER JOINED TO ROOM " + data.room);
       });
 
       sockets[userId].on("message", (payload: string) => {

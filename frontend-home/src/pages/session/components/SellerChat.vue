@@ -20,10 +20,12 @@
 import headerAPI from "@/components/header/composable/header-api";
 import { io } from "socket.io-client";
 import { HOST } from "@/api/index";
+import { sessionAPI } from "@/pages/session/api";
 
 export default {
   setup() {
     const { getCurrentSeller } = headerAPI();
+    const { getSlot } = sessionAPI();
 
     const socket = io(HOST, {
       query: {
@@ -32,8 +34,18 @@ export default {
       },
     });
 
+    const connectRoom = () => {
+      const payload = {
+        room: getSlot.id,
+      };
+      socket.emit("join", JSON.stringify(payload));
+    };
+
+    connectRoom();
+
     return {
       socket,
+      connectRoom,
       getCurrentSeller,
     };
   },
