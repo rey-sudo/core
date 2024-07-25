@@ -183,7 +183,7 @@ export default {
   pointer-events: none;
 }
 ::v-deep(.editorClass) {
-  width: 350px;
+  width: 355px;
   padding: 0.75rem;
   border-radius: 6px;
   background: var(--base-b);
