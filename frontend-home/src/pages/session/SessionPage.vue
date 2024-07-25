@@ -41,7 +41,7 @@ export default {
     SellerView,
   },
   setup() {
-    const { getCurrentSeller } = headerAPI();
+    const { getCurrentSeller, getCurrentUser } = headerAPI();
 
     let currentRoute = ref("");
 
@@ -66,6 +66,7 @@ export default {
     return {
       currentRoute,
       getCurrentSeller,
+      getCurrentUser,
       getSlot,
       setupData,
       isLoaded,
