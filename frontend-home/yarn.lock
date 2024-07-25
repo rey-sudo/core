@@ -1181,6 +1181,11 @@
   resolved "https://registry.npmjs.org/@polka/url/-/url-1.0.0-next.23.tgz"
   integrity sha512-C16M+IYz0rgRhWZdCmK+h58JMv8vijAA61gmz2rspCSwKwzBebpdcsiUmwrtJRdphuY30i6BSLEOP8ppbNLyLg==
 
+"@popperjs/core@^2.9.0":
+  version "2.11.8"
+  resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.11.8.tgz"
+  integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
+
 "@remirror/core-constants@^2.0.2":
   version "2.0.2"
   resolved "https://registry.npmjs.org/@remirror/core-constants/-/core-constants-2.0.2.tgz"
@@ -1238,10 +1243,22 @@
   resolved "https://registry.npmjs.org/@tiptap/extension-bold/-/extension-bold-2.5.6.tgz"
   integrity sha512-LevDq/SCCO0xQKIjcFGYedokmKSaBjPS3yrNS/MZepzbDCzY7JQb+DIywRDq2XRymdp/Gs7GT5ItSvWlDIBj+w==
 
+"@tiptap/extension-bubble-menu@^2.5.6":
+  version "2.5.6"
+  resolved "https://registry.npmjs.org/@tiptap/extension-bubble-menu/-/extension-bubble-menu-2.5.6.tgz"
+  integrity sha512-jFfMyaVkA7gSqS8CZyzdAUhMw5lMhBCoNOZE9oOIttWoE2wssSsGnprmIzTOR+g65kF8yxxzAdNOYjfv/xQ1pw==
+  dependencies:
+    tippy.js "^6.3.7"
+
 "@tiptap/extension-bullet-list@^2.5.6":
   version "2.5.6"
   resolved "https://registry.npmjs.org/@tiptap/extension-bullet-list/-/extension-bullet-list-2.5.6.tgz"
   integrity sha512-D5YRc5jeT38T7TaJQvsBwGzQRpXY+Evr5Ql8US67sORAc29DNR9afdsYfyn/L1WMwLgP8AzYjkAPB5wb8EKdZg==
+
+"@tiptap/extension-character-count@^2.5.6":
+  version "2.5.6"
+  resolved "https://registry.npmjs.org/@tiptap/extension-character-count/-/extension-character-count-2.5.6.tgz"
+  integrity sha512-3k2q/6BVc906dpN1jU5tofgtSdXXJCMyvDkr9YSkzNE7YMEnW0tx70zeNYzorynK7Sq0efPlh8i6mRJ1xKByTA==
 
 "@tiptap/extension-code-block@^2.5.6":
   version "2.5.6"
@@ -1262,6 +1279,13 @@
   version "2.5.6"
   resolved "https://registry.npmjs.org/@tiptap/extension-dropcursor/-/extension-dropcursor-2.5.6.tgz"
   integrity sha512-XEW5RQQvqzYCtP7FZbSvF2xq1OvT9X5FXi+/9q22gCetuc8fmr/Mh6vmgAe9q+yo+nb8Tjwnykzdi7lo+YCKRw==
+
+"@tiptap/extension-floating-menu@^2.5.6":
+  version "2.5.6"
+  resolved "https://registry.npmjs.org/@tiptap/extension-floating-menu/-/extension-floating-menu-2.5.6.tgz"
+  integrity sha512-UORk6CDtECqLoaOVx0oTwidrjdHEWaPaY/pYGnCC4Kptv6zEqIsZXidFcYBM1wTt44AESgUXDTnZF8U7M/YtEA==
+  dependencies:
+    tippy.js "^6.3.7"
 
 "@tiptap/extension-gapcursor@^2.5.6":
   version "2.5.6"
@@ -1376,6 +1400,14 @@
     "@tiptap/extension-paragraph" "^2.5.6"
     "@tiptap/extension-strike" "^2.5.6"
     "@tiptap/extension-text" "^2.5.6"
+
+"@tiptap/vue-3@^2.5.6":
+  version "2.5.6"
+  resolved "https://registry.npmjs.org/@tiptap/vue-3/-/vue-3-2.5.6.tgz"
+  integrity sha512-K3hbvNbEX0VRLubXe9zdP8Lf7VJ0Twe4bATssk2hwwsy8pLbAUbsvs+rF0bhItpHcEjIRQbuN8aMtbXRjLKRdA==
+  dependencies:
+    "@tiptap/extension-bubble-menu" "^2.5.6"
+    "@tiptap/extension-floating-menu" "^2.5.6"
 
 "@trysound/sax@0.2.0":
   version "0.2.0"
@@ -6531,6 +6563,13 @@ thunky@^1.0.2:
   version "1.1.0"
   resolved "https://registry.npmjs.org/thunky/-/thunky-1.1.0.tgz"
   integrity sha512-eHY7nBftgThBqOyHGVN+l8gF0BucP09fMo0oO/Lb0w1OF80dJv+lDVpXG60WMQvkcxAkNybKsrEIE3ZtKGmPrA==
+
+tippy.js@^6.3.7:
+  version "6.3.7"
+  resolved "https://registry.npmjs.org/tippy.js/-/tippy.js-6.3.7.tgz"
+  integrity sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ==
+  dependencies:
+    "@popperjs/core" "^2.9.0"
 
 to-fast-properties@^2.0.0:
   version "2.0.0"

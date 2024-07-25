@@ -7,10 +7,16 @@
     </div>
     <div class="chat-body">
       <ul id="messages"></ul>
+
+      <div v-if="editor">
+        {{ lengthCounter }}
+      </div>
     </div>
     <div class="chat-bottom">
       <div class="chat-wrap">
-        <div id="editorElement"></div>
+        <div v-if="editor">
+          <editor-content :editor="editor" id="editorElement" />
+        </div>
         <button class="chat-wrap-send" @click="sendMessage">
           <i class="pi pi-send" />
         </button>
@@ -23,14 +29,22 @@
 import headerAPI from "@/components/header/composable/header-api";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
+import Text from "@tiptap/extension-text";
 import TextAlign from "@tiptap/extension-text-align";
-import { Editor } from "@tiptap/core";
+import CharacterCount from "@tiptap/extension-character-count";
+import Document from "@tiptap/extension-document";
+import Paragraph from "@tiptap/extension-paragraph";
+import { Editor, EditorContent } from "@tiptap/vue-3";
 import { io } from "socket.io-client";
 import { HOST } from "@/api/index";
 import { sessionAPI } from "@/pages/session/api";
 import { ref } from "vue";
 
 export default {
+  components: {
+    EditorContent,
+  },
+
   setup() {
     const { getCurrentSeller } = headerAPI();
     const { getSlotData } = sessionAPI();
@@ -64,6 +78,8 @@ export default {
 
     const editor = ref(null);
 
+    const editorLimit = ref(200);
+
     return {
       socket,
       editor,
@@ -71,17 +87,25 @@ export default {
       inputValue,
       sendMessage,
       getCurrentSeller,
+      editorLimit,
     };
+  },
+  computed: {
+    lengthCounter() {
+      return this.editor.storage.characterCount.characters();
+    },
   },
   mounted() {
     this.editor = new Editor({
-      element: document.getElementById("editorElement"),
+
       editorProps: {
         attributes: {
           class: "editorClass",
         },
       },
       extensions: [
+        Document,
+        Paragraph,
         StarterKit,
         Text,
         TextAlign.configure({
@@ -92,6 +116,9 @@ export default {
           placeholder: "write a message…",
           emptyEditorClass: "is-editor-empty",
           emptyNodeClass: "my-custom-is-empty-class",
+        }),
+        CharacterCount.configure({
+          limit: this.editorLimit,
         }),
       ],
       editable: true,
