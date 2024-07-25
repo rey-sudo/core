@@ -91,7 +91,7 @@ const main = () => {
     const socketConnectionHandler = (socket: any) => {
       const AGENT: any = socket.agent;
 
-      console.log("USER CONNECTED" + AGENT.id);
+      console.log("AGENT CONNECTED" + AGENT.id);
 
       sockets[AGENT.id] = socket;
 

@@ -12,6 +12,7 @@
 
         <div class="session-body-right">
           <SellerChat v-if="getCurrentSeller" />
+          <BuyerChat v-if="getCurrentUser" />
         </div>
       </div>
 
@@ -25,6 +26,7 @@
 import MainHeader from "@/components/header/MainHeader.vue";
 import TimeLine from "@/pages/session/components/TimeLine.vue";
 import SellerChat from "@/pages/session/components/SellerChat.vue";
+import BuyerChat from "@/pages/session/components/BuyerChat.vue";
 import SellerView from "@/pages/session/components/SellerView.vue";
 import headerAPI from "@/components/header/composable/header-api";
 import { ref } from "vue";
@@ -34,6 +36,7 @@ export default {
   components: {
     MainHeader,
     SellerChat,
+    BuyerChat,
     TimeLine,
     SellerView,
   },

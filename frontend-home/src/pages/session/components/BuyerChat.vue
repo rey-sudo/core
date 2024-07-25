@@ -1,9 +1,9 @@
 <template>
   <div class="chat">
     <div class="chat-top">
-      <img :src="getCurrentSeller.avatar" alt="" />
+      <img :src="getCurrentUser?.avatar" alt="" />
 
-      <span>{{ getCurrentSeller.username }}</span>
+      <span>{{ getCurrentUser.pubkeyhash }}</span>
     </div>
     <div class="chat-body">
       <ul id="messages"></ul>
@@ -23,13 +23,13 @@ import { sessionAPI } from "@/pages/session/api";
 
 export default {
   setup() {
-    const { getCurrentSeller } = headerAPI();
+    const { getCurrentUser } = headerAPI();
     const { getSlotData } = sessionAPI();
 
     const socket = io(HOST, {
       query: {
-        role: "SELLER",
-        token: getCurrentSeller.value.token,
+        role: "USER",
+        token: getCurrentUser.value.token,
       },
     });
 
@@ -45,7 +45,7 @@ export default {
     return {
       socket,
       connectRoom,
-      getCurrentSeller,
+      getCurrentUser,
     };
   },
   mounted() {

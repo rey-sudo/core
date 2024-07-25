@@ -34,7 +34,12 @@ const userMiddleware = (req: Request, res: Response, next: NextFunction) => {
       return next();
     }
 
-    req.userData = sessionData;
+    const scheme =  {
+      ...sessionData,
+      token: req.session.jwt
+    }
+
+    req.userData = scheme;
   } catch (err) {
     _.error(err);
   }
