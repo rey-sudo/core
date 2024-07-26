@@ -134,7 +134,8 @@ export default {
           class: "editorClass",
         },
         handleKeyDown(view, event) {
-          if (event.key === "Enter") {
+          if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault();
             handleEnterKey();
             return true;
           }
@@ -163,8 +164,6 @@ export default {
       content: "",
     });
 
-    const messages = document.getElementById("messages");
-
     const setMessages = (msg) => {
       this.messageHistory = msg.map((e) => JSON.parse(e));
     };
@@ -174,9 +173,7 @@ export default {
     });
 
     this.socket.on("message", function (msg) {
-      const item = document.createElement("li");
-      item.textContent = msg;
-      messages.appendChild(item);
+      console.log(msg);
     });
   },
   beforeUnmount() {
@@ -289,17 +286,17 @@ export default {
 }
 
 .chat-body::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
   border-radius: 10px;
 }
 
 .chat-body::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
   border-radius: 10px;
 }
 
 .chat-body::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
 
 .chat-bottom {

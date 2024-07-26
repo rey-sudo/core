@@ -87,6 +87,7 @@ export default {
   margin-top: 1rem;
   border: 1px solid;
   justify-content: flex-start;
+  text-align: start;
 }
 
 .bubble-wrap.sender {
