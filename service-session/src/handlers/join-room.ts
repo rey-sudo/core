@@ -29,7 +29,7 @@ export const joinRoomHandler = async (payload: string, AGENT: any) => {
 
         const messages = await sessionRedis.client.lRange(data.room, 0, -1);
 
-        socketServer.to(data.room).emit("message", messages);
+        socketServer.to(data.room).emit(AGENT.id, messages);
       }
     } catch (err) {
       await connection.rollback();
@@ -62,7 +62,7 @@ export const joinRoomHandler = async (payload: string, AGENT: any) => {
 
         const messages = await sessionRedis.client.lRange(data.room, 0, -1);
 
-        socketServer.to(data.room).emit("message", messages);
+        socketServer.to(data.room).emit(AGENT.id, messages);
       }
     } catch (err) {
       await connection.rollback();

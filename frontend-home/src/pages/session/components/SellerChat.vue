@@ -153,6 +153,12 @@ export default {
 
     const messages = document.getElementById("messages");
 
+    this.socket.on(this.getCurrentSeller.id, function (msg) {
+      const item = document.createElement("li");
+      item.textContent = msg;
+      messages.appendChild(item);
+    });
+
     this.socket.on("message", function (msg) {
       const item = document.createElement("li");
       item.textContent = msg;
