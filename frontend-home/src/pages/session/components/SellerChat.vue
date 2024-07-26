@@ -6,11 +6,14 @@
       <span>{{ getCurrentSeller.username }}</span>
     </div>
     <div class="chat-body">
-      <ul id="messages">
-        <div v-for="item in messageHistory" :key="item">
-          <BubbleMsg :content="item.content" :role="item.role" :id="item.id" />
-        </div> 
-      </ul>
+      <BubbleMsg
+        v-for="item in messageHistory"
+        :key="item"
+        :content="item.content"
+        :role="item.role"
+        :sender="item.role === 'SELLER'"
+        :id="item.id"
+      />
     </div>
     <div class="chat-bottom">
       <div class="chat-wrap">
@@ -201,6 +204,7 @@ export default {
   height: 0;
   pointer-events: none;
 }
+
 ::v-deep(.editorClass) {
   width: 355px;
   padding: 0.75rem;
@@ -277,6 +281,25 @@ export default {
   background: var(--base-a);
   overflow-y: scroll;
   overflow-x: hidden;
+  padding: 1rem;
+}
+
+.chat-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.chat-body::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 10px;
+}
+
+.chat-body::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 10px;
+}
+
+.chat-body::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }
 
 .chat-bottom {
