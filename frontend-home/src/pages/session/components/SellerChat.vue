@@ -7,9 +7,9 @@
     </div>
     <div class="chat-body">
       <ul id="messages">
-        {{
-          messageHistory
-        }}
+        <div v-for="item in messageHistory" :key="item">
+          <BubbleMsg :content="item.content" :role="item.role" :id="item.id" />
+        </div> 
       </ul>
     </div>
     <div class="chat-bottom">
@@ -38,6 +38,7 @@ import TextAlign from "@tiptap/extension-text-align";
 import CharacterCount from "@tiptap/extension-character-count";
 import Document from "@tiptap/extension-document";
 import Paragraph from "@tiptap/extension-paragraph";
+import BubbleMsg from "./BubbleMsg.vue";
 import { Editor, EditorContent } from "@tiptap/vue-3";
 import { io } from "socket.io-client";
 import { HOST } from "@/api/index";
@@ -47,6 +48,7 @@ import { ref, computed } from "vue";
 export default {
   components: {
     EditorContent,
+    BubbleMsg,
   },
 
   setup() {
