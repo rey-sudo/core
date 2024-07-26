@@ -76,7 +76,7 @@ export default {
 
     const editor = ref(null);
 
-    const editorLimit = ref(200);
+    const editorLimit = ref(500);
 
     const characterCounter = computed(() => {
       if (editor.value === null) {
@@ -207,7 +207,7 @@ export default {
   padding: 0.75rem;
   border-radius: 6px;
   background: var(--base-b);
-  font-weight: 600;
+  font-weight: 500;
   text-align: left;
   font-size: var(--text-size-b);
   max-height: 100px;
