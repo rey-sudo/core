@@ -73,7 +73,6 @@ export default {
   padding: 12px;
   white-space: pre-wrap;
   word-break: break-word;
-  font-size: 14px;
   font-size: var(--text-size-b);
 }
 
@@ -85,7 +84,6 @@ export default {
 .bubble-wrap {
   display: flex;
   margin-top: 1rem;
-  border: 1px solid;
   justify-content: flex-start;
   text-align: start;
 }
