@@ -6,7 +6,11 @@
       <span>{{ getCurrentSeller.username }}</span>
     </div>
     <div class="chat-body">
-      <ul id="messages"></ul>
+      <ul id="messages">
+        {{
+          messageHistory
+        }}
+      </ul>
     </div>
     <div class="chat-bottom">
       <div class="chat-wrap">
@@ -100,6 +104,8 @@ export default {
       }
     };
 
+    let messageHistory = ref([]);
+
     return {
       socket,
       editor,
@@ -109,6 +115,7 @@ export default {
       characterCounter,
       editorLimit,
       getContent,
+      messageHistory,
     };
   },
   mounted() {
@@ -153,10 +160,12 @@ export default {
 
     const messages = document.getElementById("messages");
 
-    this.socket.on(this.getCurrentSeller.id, function (msg) {
-      const item = document.createElement("li");
-      item.textContent = msg;
-      messages.appendChild(item);
+    const setMessages = (msg) => {
+      this.messageHistory = msg.map((e) => JSON.parse(e));
+    };
+
+    this.socket.on(this.getCurrentSeller.id, (msg) => {
+      setMessages(msg);
     });
 
     this.socket.on("message", function (msg) {
