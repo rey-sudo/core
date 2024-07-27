@@ -111,6 +111,11 @@ export default {
 
     let messageHistory = ref([]);
 
+    const scrollBottom = () => {
+      const div = document.getElementById("scroll");
+      div.scrollTop = div.scrollHeight;
+    };
+
     return {
       socket,
       editor,
@@ -121,6 +126,7 @@ export default {
       editorLimit,
       getContent,
       messageHistory,
+      scrollBottom,
     };
   },
   mounted() {
