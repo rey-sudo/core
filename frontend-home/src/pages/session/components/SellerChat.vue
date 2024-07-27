@@ -5,14 +5,15 @@
 
       <span>{{ getCurrentSeller.username }}</span>
     </div>
-    <div class="chat-body">
+    <div class="chat-body" id="scroll">
       <BubbleMsg
-        v-for="item in messageHistory"
+        v-for="(item, index) in messageHistory"
         :key="item"
         :content="item.content"
-        :role="item.role"
+        :last="messageHistory.length - 1 === index"
         :sender="item.role === 'SELLER'"
         :id="item.id"
+        @onLast="scrollBottom"
       />
     </div>
     <div class="chat-bottom">
@@ -112,8 +113,13 @@ export default {
     let messageHistory = ref([]);
 
     const scrollBottom = () => {
+      console.log("YES");
       const div = document.getElementById("scroll");
-      div.scrollTop = div.scrollHeight;
+      if (div) {
+        setTimeout(() => {
+          div.scrollTop = div.scrollHeight;
+        }, 100);
+      }
     };
 
     return {
@@ -288,17 +294,17 @@ export default {
 }
 
 .chat-body::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 .chat-body::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
+  background: var(--base-b);
+  border-radius: 8px;
 }
 
 .chat-body::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
+  background: #b7bdc6;
+  border-radius: 8px;
 }
 
 .chat-body::-webkit-scrollbar-thumb:hover {

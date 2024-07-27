@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { onBeforeUnmount } from "vue";
+import { onBeforeUnmount, onMounted } from "vue";
 import { EditorContent, useEditor } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 
@@ -13,13 +13,14 @@ export default {
   components: {
     EditorContent,
   },
+  emits: ["onLast"],
   props: {
     content: {
       type: Object,
       required: true,
     },
-    role: {
-      type: String,
+    last: {
+      type: Boolean,
       required: true,
     },
     id: {
@@ -31,7 +32,7 @@ export default {
       required: true,
     },
   },
-  setup(props) {
+  setup(props, { emit }) {
     const bubbleClass = `bubbleClass ${props.sender ? "sender" : ""}`;
 
     const editor = useEditor({
@@ -43,6 +44,12 @@ export default {
           class: bubbleClass,
         },
       },
+    });
+
+    onMounted(() => {
+      if (props.last) {
+        emit("onLast");
+      }
     });
 
     onBeforeUnmount(() => {
