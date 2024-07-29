@@ -1,6 +1,18 @@
 <template>
   <div class="bubble-wrap" :class="{ sender: sender }">
-    <editor-content :editor="editor" />
+    <editor-content
+      :editor="editor"
+      v-tooltip.left="{
+        value: formatDate(date),
+        pt: {
+          text: {
+            style: {
+              fontSize: 'var(--text-size-a)',
+            },
+          },
+        },
+      }"
+    />
   </div>
 </template>
 
@@ -23,7 +35,7 @@ export default {
       type: Boolean,
       required: true,
     },
-    id: {
+    date: {
       type: String,
       required: true,
     },
@@ -46,6 +58,26 @@ export default {
       },
     });
 
+    const formatDate = (inputDate) => {
+      let date = new Date(inputDate);
+
+      let day = date.getDate();
+      let month = date.toLocaleString("en-US", { month: "long" });
+      let year = date.getFullYear();
+
+
+      let hours = date.getHours();
+      let minutes = date.getMinutes();
+      let period = hours >= 12 ? "pm" : "am";
+      hours = hours % 12;
+      hours = hours ? hours : 12; 
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+
+      let formattedDate = `${day} ${month} ${year}, ${hours}:${minutes} ${period}`;
+
+      return formattedDate;
+    };
+
     onMounted(() => {
       if (props.last) {
         emit("onLast");
@@ -60,6 +92,7 @@ export default {
 
     return {
       editor,
+      formatDate,
     };
   },
 };

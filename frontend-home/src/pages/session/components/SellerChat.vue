@@ -12,7 +12,7 @@
         :content="item.content"
         :last="messageHistory.length - 1 === index"
         :sender="item.role === 'SELLER'"
-        :id="item.id"
+        :date="item.date"
         @onLast="scrollBottom"
       />
     </div>
