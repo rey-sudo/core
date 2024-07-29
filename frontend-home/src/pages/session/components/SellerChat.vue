@@ -5,7 +5,11 @@
 
       <span>{{ shortFormat(getSlotData.buyer_pubkeyhash, 5, "USER") }}</span>
 
-      <button @click="toggleMenu"  aria-haspopup="true" aria-controls="overlay_menu">
+      <button
+        @click="toggleMenu"
+        aria-haspopup="true"
+        aria-controls="overlay_menu"
+      >
         <i class="pi pi-ellipsis-v" />
       </button>
 
@@ -213,8 +217,12 @@ export default {
       setMessages(msg);
     });
 
+    const setMessage = (msg) => {
+      this.messageHistory.push(JSON.parse(msg));
+    };
+
     this.socket.on("message", function (msg) {
-      console.log(msg);
+      setMessage(msg);
     });
   },
   beforeUnmount() {
