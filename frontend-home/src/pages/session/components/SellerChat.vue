@@ -3,7 +3,9 @@
     <div class="chat-top">
       <img :src="getCurrentSeller.avatar" alt="" />
 
-      <span>{{ getCurrentSeller.username }}</span>
+      <span>{{
+        shortFormat(getSlotData.buyer_pubkeyhash, 5) || "BUYER"
+      }}</span>
     </div>
     <div class="chat-body" id="scroll">
       <BubbleMsg
@@ -48,6 +50,7 @@ import { io } from "socket.io-client";
 import { HOST } from "@/api/index";
 import { sessionAPI } from "@/pages/session/api";
 import { ref, computed } from "vue";
+import { shortFormat } from "@/utils";
 
 export default {
   components: {
@@ -113,7 +116,6 @@ export default {
     let messageHistory = ref([]);
 
     const scrollBottom = () => {
-      console.log("YES");
       const div = document.getElementById("scroll");
       if (div) {
         setTimeout(() => {
@@ -126,6 +128,7 @@ export default {
       socket,
       editor,
       connectRoom,
+      getSlotData,
       sendMessage,
       getCurrentSeller,
       characterCounter,
@@ -133,6 +136,7 @@ export default {
       getContent,
       messageHistory,
       scrollBottom,
+      shortFormat
     };
   },
   mounted() {
