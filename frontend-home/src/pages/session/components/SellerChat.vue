@@ -1,6 +1,6 @@
 <template>
-  <div class="chat">
-    <div class="chat-top">
+  <div class="p-chat">
+    <div class="p-chat-top">
       <img src="@/assets/empty-user.png" alt="" />
 
       <span>{{ shortFormat(getSlotData.buyer_pubkeyhash, 5, "Buyer") }}</span>
@@ -15,7 +15,7 @@
 
       <Menu ref="menu" id="overlay_menu" :model="menuItems" :popup="true" />
     </div>
-    <div class="chat-body" id="scroll">
+    <div class="p-chat-body" id="scroll">
       <BubbleMsg
         v-for="(item, index) in messageHistory"
         :key="item"
@@ -26,13 +26,13 @@
         @onLast="scrollBottom"
       />
     </div>
-    <div class="chat-bottom">
-      <div class="chat-wrap">
+    <div class="p-chat-bottom">
+      <div class="p-chat-editor">
         <div v-if="editor">
           <editor-content :editor="editor" id="editorElement" />
         </div>
         <button
-          class="chat-wrap-send"
+          class="p-chat-editor-send"
           :class="{ active: characterCounter > 0 }"
           @click="sendMessage"
         >
@@ -283,34 +283,7 @@ export default {
   outline: initial;
 }
 
-.chat-wrap-send {
-  border: none;
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--base-a);
-  color: var(--text-b);
-  cursor: pointer;
-}
-
-.chat-wrap-send.active {
-  color: var(--primary-c);
-}
-
-.chat-wrap-send i {
-  transform: rotate(45deg);
-  color: inherit;
-  font-size: var(--text-size-e) !important;
-}
-
-.chat-wrap {
-  display: flex;
-  align-items: center;
-}
-
-.chat {
+.p-chat {
   background: var(--base-a);
   width: 425px;
   height: 700px;
@@ -322,38 +295,7 @@ export default {
   overflow: hidden;
 }
 
-.chat-body {
-  height: 100%;
-  background: var(--base-a);
-  overflow-y: scroll;
-  overflow-x: hidden;
-  padding: 1rem;
-}
-
-.chat-body::-webkit-scrollbar {
-  width: 8px;
-}
-
-.chat-body::-webkit-scrollbar-track {
-  background: var(--base-b);
-  border-radius: 8px;
-}
-
-.chat-body::-webkit-scrollbar-thumb {
-  background: #b7bdc6;
-  border-radius: 8px;
-}
-
-.chat-body::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-.chat-bottom {
-  padding: 1rem;
-  border-top: 1px solid var(--border-a);
-}
-
-.chat-top {
+.p-chat .p-chat-top {
   height: 100px;
   padding: 1rem;
   display: flex;
@@ -361,14 +303,14 @@ export default {
   border-bottom: 1px solid var(--border-a);
 }
 
-.chat-top button {
+.p-chat .p-chat-top button {
   margin-left: auto;
   background: transparent;
   border: none;
   cursor: pointer;
 }
 
-.chat-top img {
+.p-chat .p-chat-top img {
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -376,8 +318,66 @@ export default {
   background: var(--base-a);
 }
 
-.chat-top span {
+.p-chat .p-chat-top span {
   margin-left: 1rem;
   font-weight: 500;
+}
+
+.p-chat .p-chat-body {
+  height: 100%;
+  background: var(--base-a);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 1rem;
+}
+
+.p-chat-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.p-chat-body::-webkit-scrollbar-track {
+  background: var(--base-b);
+  border-radius: 8px;
+}
+
+.p-chat-body::-webkit-scrollbar-thumb {
+  background: #b7bdc6;
+  border-radius: 8px;
+}
+
+.p-chat-body::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.p-chat .p-chat-bottom {
+  padding: 1rem;
+  border-top: 1px solid var(--border-a);
+}
+
+.p-chat .p-chat-editor {
+  display: flex;
+  align-items: center;
+}
+
+.p-chat .p-chat-editor-send {
+  border: none;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--base-a);
+  color: var(--text-b);
+  cursor: pointer;
+}
+
+.p-chat .p-chat-editor-send.active {
+  color: var(--primary-c);
+}
+
+.p-chat .p-chat-editor-send i {
+  transform: rotate(45deg);
+  color: inherit;
+  font-size: var(--text-size-e) !important;
 }
 </style>
