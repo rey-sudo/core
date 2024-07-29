@@ -29,11 +29,11 @@
      showgrid="false"
      inkscape:zoom="14.217421"
      inkscape:cx="43.502967"
-     inkscape:cy="26.200251"
+     inkscape:cy="14.946452"
      inkscape:window-width="1920"
-     inkscape:window-height="1011"
-     inkscape:window-x="1920"
-     inkscape:window-y="32"
+     inkscape:window-height="1043"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
      inkscape:pageshadow="2"
@@ -64,38 +64,17 @@
      inkscape:groupmode="layer"
      id="layer1"
      style="display:inline">
-    <g
-       id="g3-3"
-       transform="rotate(33.977342,32.773875,-25.233899)"
-       style="display:inline;fill:#ffe000;fill-opacity:1;stroke:#feba3e;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1">
-      <g
-         id="g4-6"
-         transform="rotate(-90,64.097533,11.204224)"
-         style="fill:#ffe000;fill-opacity:1;stroke:#feba3e;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1">
-        <g
-           id="path1-6-7"
-           style="fill:#ffe000;fill-opacity:1">
-          <path
-             style="color:#000000;fill:#ffe000;fill-opacity:1;stroke:none;-inkscape-stroke:none"
-             d="m 66.308613,-12.554717 v 0 c 3.548966,0 6.425972,4.162201 6.425973,7.7111672 h 1.285196 c 0,-4.2587602 -3.452408,-7.7111682 -7.711169,-7.7111672 z"
-             id="path1" />
-          <path
-             style="color:#000000;fill:#ffe000;fill-opacity:1;stroke:none;-inkscape-stroke:none"
-             d="m 66.308594,-12.804688 v 0.5 c 1.676748,0 3.218738,0.988853 4.347656,2.429688 1.128918,1.4408345 1.828125,3.3243236 1.828125,5.03125 v 0.25 h 1.785156 v -0.25 c 0,-4.3938659 -3.567071,-7.960939 -7.960937,-7.960938 z m 3.351562,1.384766 c 2.339164,1.197453 3.961467,3.5394418 4.058594,6.326172 H 72.9375 c -0.06275,-1.7693639 -0.745534,-3.6308603 -1.888672,-5.089844 -0.392695,-0.501196 -0.903434,-0.851946 -1.388672,-1.236328 z"
-             id="path2" />
-        </g>
-      </g>
-    </g>
     <text
        xml:space="preserve"
-       id="text3"
-       style="font-weight:bold;font-size:22.6667px;line-height:0;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';letter-spacing:-1px;white-space:pre;shape-inside:url(#rect3);shape-padding:0.0952355;display:inline;fill:#f2f2f2;fill-opacity:1;stroke:#feba3e;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
-       transform="translate(-5.1508928,7.898494)"><tspan
-         x="11.332031"
-         y="13.727535"
-         id="tspan4">pa<tspan
-   style="fill:#ffe000"
-   id="tspan1">i</tspan>rfy</tspan></text>
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.3333px;line-height:0;font-family:Manrope;-inkscape-font-specification:Manrope;letter-spacing:-1px;fill:#ffe000;stroke:#ff9a00;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke fill markers"
+       x="-0.24345796"
+       y="20.279991"
+       id="text2"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         x="-0.24345796"
+         y="20.279991"
+         style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-size:21.3333px;font-family:Manrope;-inkscape-font-specification:'Manrope Ultra-Bold';fill:#ececec;fill-opacity:1;stroke:none">pαirbe</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
