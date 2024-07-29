@@ -21,7 +21,7 @@
         :key="item"
         :content="item.content"
         :last="messageHistory.length - 1 === index"
-        :sender="item.role === 'SELLER'"
+        :sender="item.role === 'USER'"
         :date="item.date"
         @onLast="scrollBottom"
       />
