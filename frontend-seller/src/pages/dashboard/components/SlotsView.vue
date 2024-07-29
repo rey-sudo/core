@@ -363,7 +363,7 @@
           <template #header>
             <div class="slots-header">
               <div class="slots-header-left">
-                <span>Enable slots</span>
+                <span>Create orders</span>
                 <span
                   >Choose the product and the quantity available for sale.</span
                 >
@@ -503,7 +503,7 @@
                   icon="pi pi-plus"
                   outlined
                   rounded
-                  v-tooltip.top="'Enable slots'"
+                  v-tooltip.top="'Create orders'"
                   @click="openCreateSlotDialog(slotProps.index)"
                 />
 
