@@ -3,7 +3,7 @@
     <div class="p-chat-top">
       <img src="@/assets/empty-user.png" alt="" />
 
-      <span>{{ shortFormat(getSlotData.buyer_pubkeyhash, 5, "Buyer") }}</span>
+      <span>{{ shortFormat(getSlotData.buyer_pubkeyhash, 20, "Buyer") }}</span>
 
       <button
         @click="toggleMenu"
