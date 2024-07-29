@@ -28,6 +28,7 @@ export const messageHandler = async (payload: string, AGENT: any) => {
           id: AGENT.id,
           role: AGENT.role,
           content: data.content,
+          date: new Date()
         };
 
         const message = JSON.stringify(scheme);
@@ -66,6 +67,7 @@ export const messageHandler = async (payload: string, AGENT: any) => {
           id: AGENT.id,
           role: AGENT.role,
           content: data.content,
+          date: new Date()
         };
 
         const message = JSON.stringify(scheme);
