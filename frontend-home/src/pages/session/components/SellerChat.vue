@@ -1,11 +1,15 @@
 <template>
   <div class="chat">
     <div class="chat-top">
-      <img :src="getCurrentSeller.avatar" alt="" />
+      <img src="@/assets/empty-user.png" alt="" />
 
-      <span>{{
-        shortFormat(getSlotData.buyer_pubkeyhash, 5) || "BUYER"
-      }}</span>
+      <span>{{ shortFormat(getSlotData.buyer_pubkeyhash, 5, "USER") }}</span>
+
+      <button @click="toggleMenu"  aria-haspopup="true" aria-controls="overlay_menu">
+        <i class="pi pi-ellipsis-v" />
+      </button>
+
+      <Menu ref="menu" id="overlay_menu" :model="menuItems" :popup="true" />
     </div>
     <div class="chat-body" id="scroll">
       <BubbleMsg
@@ -124,19 +128,40 @@ export default {
       }
     };
 
+    const menu = ref();
+
+    const menuItems = ref([
+      {
+        label: "Options",
+        items: [
+          {
+            label: "Report",
+            icon: "pi pi-receipt",
+          },
+        ],
+      },
+    ]);
+
+    const toggleMenu = (event) => {
+      menu.value.toggle(event);
+    };
+
     return {
       socket,
       editor,
+      menu,
       connectRoom,
       getSlotData,
+      menuItems,
       sendMessage,
       getCurrentSeller,
       characterCounter,
       editorLimit,
       getContent,
+      toggleMenu,
       messageHistory,
       scrollBottom,
-      shortFormat
+      shortFormat,
     };
   },
   mounted() {
@@ -326,6 +351,13 @@ export default {
   display: flex;
   align-items: center;
   border-bottom: 1px solid var(--border-a);
+}
+
+.chat-top button {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .chat-top img {

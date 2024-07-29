@@ -1,6 +1,6 @@
-export const shortFormat = (str, maxLength) => {
+export const shortFormat = (str, maxLength, message) => {
   if (!str) {
-    return "N/A";
+    return message || "N/A";
   }
 
   if (str.length <= maxLength) {

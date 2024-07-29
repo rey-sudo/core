@@ -51,7 +51,7 @@ export default {
 
 .icons span {
   margin-left: 0.5rem;
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   color: var(--text-b);
 }
 
