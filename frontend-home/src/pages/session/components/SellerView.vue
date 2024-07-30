@@ -89,6 +89,8 @@
             getSlotData.contract_stage === 'waiting'
           "
         />
+
+        <DeliveredButton v-if="getSlotData.contract_stage === 'locking'" />
       </div>
     </div>
   </div>
@@ -97,10 +99,12 @@
 <script>
 import { sessionAPI } from "@/pages/session/api";
 import WaitingButton from "./WaitingButton.vue";
+import DeliveredButton from "./DeliveredButton.vue";
 
 export default {
   components: {
     WaitingButton,
+    DeliveredButton,
   },
   setup() {
     const { getSlotData } = sessionAPI();
