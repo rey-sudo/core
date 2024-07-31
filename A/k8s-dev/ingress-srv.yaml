@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: ingress-service
   annotations:
-    kubernetes.io/ingress.class: "nginx" 
+    kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
@@ -27,7 +27,7 @@ spec:
               service:
                 name: frontend-home
                 port:
-                  number: 8000                                        
+                  number: 8000
           - path: /api/seller/?(.*)
             pathType: ImplementationSpecific
             backend:
@@ -41,21 +41,21 @@ spec:
               service:
                 name: service-user
                 port:
-                  number: 8000                  
+                  number: 8000
           - path: /api/product/?(.*)
             pathType: ImplementationSpecific
             backend:
               service:
                 name: service-product
                 port:
-                  number: 8000                 
+                  number: 8000
           - path: /api/gate/?(.*)
             pathType: ImplementationSpecific
             backend:
               service:
                 name: service-gate
                 port:
-                  number: 8000                    
+                  number: 8000
           - path: /api/media/?(.*)
             pathType: ImplementationSpecific
             backend:
@@ -69,15 +69,21 @@ spec:
               service:
                 name: service-query
                 port:
-                  number: 4000                          
+                  number: 4000
           - path: /socket.io/?(.*)
             pathType: ImplementationSpecific
             backend:
               service:
                 name: service-session
                 port:
-                  number: 3000                  
-                             
+                  number: 3000
+          - path: /api/location/?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: service-location
+                port:
+                  number: 8000
     - host: dashboard.pairfy.dev
       http:
         paths:
@@ -87,4 +93,4 @@ spec:
               service:
                 name: frontend-seller
                 port:
-                  number: 8000                   
+                  number: 8000

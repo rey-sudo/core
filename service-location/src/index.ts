@@ -1,11 +1,9 @@
+import compression from "compression";
 import * as route from "./routes";
-import DB from "./db";
 import { app } from "./app";
 import { catcher, check, checkpoint } from "./pod/index";
 import { NotFoundError, errorMiddleware } from "./errors";
-import serviceProductListener from "./kafka/products";
-import compression from "compression";
-import { eventBus } from "./db/redis";
+
 
 const main = async () => {
   try {
@@ -25,41 +23,6 @@ const main = async () => {
       throw new Error("CORS_DOMAINS error");
     }
 
-    if (!process.env.SELLER_JWT_KEY) {
-      throw new Error("SELLER_JWT_KEY error");
-    }
-
-    if (!process.env.USER_JWT_KEY) {
-      throw new Error("USER_JWT_KEY error");
-    }
-
-    if (!process.env.TOKEN_EXPIRATION) {
-      throw new Error("TOKEN_EXPIRATION error");
-    }
-
-    if (!process.env.EVENT_BUS_URI) {
-      throw new Error("EVENT_BUS_URI error");
-    }
-
-    DB.connect({
-      host: "mysql",
-      port: 3306,
-      user: "marketplace",
-      password: "password",
-      database: "service_gate",
-    });
-
-    await eventBus
-      .connect({
-        url: process.env.EVENT_BUS_URI,
-        connectTimeout: 100000,
-        keepAlive: 100000,
-      })
-      .then(() => console.log("eventBus connected"))
-      .catch((err: any) => catcher(err));
-
-    serviceProductListener();
-
     checkpoint("ready");
 
     const errorEvents: string[] = [
@@ -74,68 +37,16 @@ const main = async () => {
     errorEvents.forEach((e: string) => process.on(e, (err) => catcher(err)));
 
     app.post(
-      "/api/gate/create-slot",
+      "/api/location/get-location",
 
-      route.createSlotMiddlewares,
+      [],
 
-      route.createSlotHandler
+      route.getLocation
     );
 
-    app.post(
-      "/api/gate/start-endpoint",
-
-      route.startEndpointMiddlewares,
-
-      route.startEndpointHandler
-    );
-
-    app.post(
-      "/api/gate/locking-endpoint",
-
-      route.lockingEndpointMiddlewares,
-
-      route.lockingEndpointHandler
-    );
-
-    app.post(
-      "/api/gate/locking-tx",
-
-      route.lockingTxMiddlewares,
-
-      route.lockingTxHandler
-    );
-
-    app.get(
-      "/api/gate/get-slots",
-
-      route.getSlotsMiddlewares,
-
-      route.getSlotsHandler
-    );
-
-    app.get(
-      "/api/gate/get-slot/:id",
-
-      route.getSlotMiddlewares,
-
-      route.getSlotHandler
-    );
-
-    app.post(
-      "/api/gate/start-tx",
-
-      route.startTxMiddlewares,
-
-      route.startTxHandler
-    );
-
-    app.get(
-      "/api/gate/buy-options/:id",
-
-      route.buyOptionsMiddlewares,
-
-      route.buyOptionsHandler
-    );
+    app.get("/api/session/healthcheck", (req, res) => {
+      res.status(200).json({ status: "Test OK" });
+    });
 
     app.all("*", (_req, _res) => {
       throw new NotFoundError();
