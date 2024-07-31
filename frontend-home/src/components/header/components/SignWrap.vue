@@ -206,6 +206,7 @@ export default {
 .steps-item {
   border: 1px solid var(--border-b);
   border-radius: 6px;
+  width: 50px;
   height: 50px;
   padding: 1rem;
   display: flex;
@@ -215,11 +216,11 @@ export default {
 }
 
 .steps-item i {
-  font-size: var(--text-size-e);
+  font-size: var(--text-size-d);
 }
 
 .steps-item.active {
-  border: 1px solid var(--primary-c);
+  border: 2px solid var(--primary-c);
   color: var(--primary-c);
 }
 

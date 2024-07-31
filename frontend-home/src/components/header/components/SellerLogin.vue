@@ -172,7 +172,7 @@ export default {
   width: 50px;
   height: 50px;
   background: green;
-  border-radius: 6px;
+  border-radius: 50%;
   overflow: hidden;
   border: 1px solid var(--border-b);
 }
