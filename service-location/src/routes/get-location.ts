@@ -6,7 +6,7 @@ const getLocation = async (req: Request, res: Response) => {
     console.log(req.publicAddress, req.ip);
 
     const response = await axios.get(
-      `http://ip-api.com/json/181.132.16.192`
+      `http://ip-api.com/json/${req.publicAddress}`
     );
 
     console.log(response.data);
