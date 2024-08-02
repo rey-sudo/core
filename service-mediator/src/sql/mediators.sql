@@ -1,6 +1,6 @@
-CREATE DATABASE service_seller;
+CREATE DATABASE service_mediator;
 
-use service_seller;
+use service_mediator;
 
 create table if not exists mediators(
   id varchar(20) not null,

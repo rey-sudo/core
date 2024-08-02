@@ -84,6 +84,13 @@ spec:
                 name: service-location
                 port:
                   number: 8000
+          - path: /api/mediator/?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: service-mediator
+                port:
+                  number: 8000                  
     - host: dashboard.pairfy.dev
       http:
         paths:
