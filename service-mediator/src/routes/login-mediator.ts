@@ -2,24 +2,24 @@ import { BadRequestError } from "../errors";
 import { comparePassword } from "../utils/password";
 import { Request, Response } from "express";
 import { createToken } from "../utils/token";
-import { SellerToken, sellerMiddleware } from "../utils/seller";
+import { MediatorToken, mediatorMiddleware } from "../utils/mediator";
 import { _ } from "../utils/pino";
 import DB from "../db";
 
-const loginSellerMiddlewares: any = [sellerMiddleware];
+const loginMediatorMiddlewares: any = [mediatorMiddleware];
 
-const loginSellerHandler = async (req: Request, res: Response) => {
+const loginMediatorHandler = async (req: Request, res: Response) => {
   let connection = null;
   let params = req.body;
   try {
-    if (params.sellerData) {
+    if (params.mediatorData) {
       throw new Error("logged");
     }
 
     connection = await DB.client.getConnection();
 
     const [rows] = await connection.execute(
-      "SELECT * FROM sellers WHERE email = ?",
+      "SELECT * FROM mediators WHERE email = ?",
       [params.email]
     );
 
@@ -27,35 +27,34 @@ const loginSellerHandler = async (req: Request, res: Response) => {
       throw new Error("nonexist");
     }
 
-    const SELLER = rows[0];
+    const MEDIATOR = rows[0];
 
     const passwordsMatch = await comparePassword(
-      SELLER.password_hash,
+      MEDIATOR.password_hash,
       params.password
     );
 
     if (!passwordsMatch) throw new BadRequestError("failed");
 
-    if (SELLER.verified !== 1) {
+    if (MEDIATOR.verified !== 1) {
       throw new Error("unverified");
     }
 
-    const sellerData: SellerToken = {
-      id: SELLER.id,
-      role: "SELLER",
-      email: SELLER.email,
-      avatar: SELLER.avatar_base + SELLER.avatar_path,
-      country: SELLER.country,
-      username: SELLER.username,
+    const mediatorData: MediatorToken = {
+      id: MEDIATOR.id,
+      role: "MEDIATOR",
+      email: MEDIATOR.email,
+      country: MEDIATOR.country,
+      username: MEDIATOR.username,
     };
 
-    const token = createToken(sellerData);
+    const token = createToken(mediatorData);
 
     req.session = {
       jwt: token,
     };
 
-    res.status(200).send({ success: true, data: sellerData });
+    res.status(200).send({ success: true, data: mediatorData });
   } catch (err) {
     await connection.rollback();
 
@@ -67,4 +66,4 @@ const loginSellerHandler = async (req: Request, res: Response) => {
   }
 };
 
-export { loginSellerMiddlewares, loginSellerHandler };
+export { loginMediatorMiddlewares, loginMediatorHandler };

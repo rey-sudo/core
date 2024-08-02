@@ -2,11 +2,10 @@ import { Request, Response, NextFunction } from "express";
 import { _ } from "./pino";
 import jwt from "jsonwebtoken";
 
-interface SellerToken {
+interface MediatorToken {
   id: string;
   role: string;
   email: string;
-  avatar: string;
   country: string;
   username: string;
 }
@@ -14,12 +13,12 @@ interface SellerToken {
 declare global {
   namespace Express {
     interface Request {
-      sellerData: SellerToken;
+      mediatorData: MediatorToken;
     }
   }
 }
 
-const sellerMiddleware = (req: Request, res: Response, next: NextFunction) => {
+const mediatorMiddleware = (req: Request, res: Response, next: NextFunction) => {
   if (!req.session?.jwt) {
     return next();
   }
@@ -27,10 +26,10 @@ const sellerMiddleware = (req: Request, res: Response, next: NextFunction) => {
   try {
     const sessionData = jwt.verify(
       req.session.jwt,
-      process.env.SELLER_JWT_KEY!
-    ) as SellerToken;
+      process.env.MEDIATOR_JWT_KEY!
+    ) as MediatorToken;
 
-    if (sessionData.role !== "SELLER") {
+    if (sessionData.role !== "MEDIATOR") {
       return next();
     }
 
@@ -39,7 +38,7 @@ const sellerMiddleware = (req: Request, res: Response, next: NextFunction) => {
       token: req.session.jwt
     }
 
-    req.sellerData = scheme;
+    req.mediatorData = scheme;
   } catch (err) {
     _.error(err);
   }
@@ -47,4 +46,4 @@ const sellerMiddleware = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
-export { sellerMiddleware, SellerToken };
+export { mediatorMiddleware, MediatorToken };

@@ -1,4 +1,4 @@
-export * from "./current-seller";
-export * from "./create-seller";
-export * from "./login-seller";
+export * from "./current-mediator";
+export * from "./create-mediator";
+export * from "./login-mediator";
 export * from "./logout";

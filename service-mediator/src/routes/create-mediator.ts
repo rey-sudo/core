@@ -13,26 +13,15 @@ const createSellerHandler = async (req: Request, res: Response) => {
 
   const params = req.body;
   
-  console.log("1");
-
   try {
     connection = await DB.client.getConnection();
 
     await connection.beginTransaction();
 
-    console.log("2");
-
-    const token = createToken({
-      role: "create-seller",
-      entity: "seller",
-      email: params.email,
-      username: params.username,
-    });
-
     const password = await hashPassword(params.password);
 
     const schemeData = `
-    INSERT INTO sellers (
+    INSERT INTO mediators (
       id,
       username,
       email,
