@@ -1,5 +1,5 @@
 import { customAlphabet } from "nanoid";
 
-const getSellerId = customAlphabet("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", 20);
+const getMediatorId = customAlphabet("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", 16);
 
-export { getSellerId};
+export { getMediatorId};

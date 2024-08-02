@@ -13,7 +13,7 @@ const loginMediatorHandler = async (req: Request, res: Response) => {
   let params = req.body;
   try {
     if (params.mediatorData) {
-      throw new Error("logged");
+      throw new Error("LOGGED");
     }
 
     connection = await DB.client.getConnection();
@@ -24,7 +24,7 @@ const loginMediatorHandler = async (req: Request, res: Response) => {
     );
 
     if (rows.length === 0) {
-      throw new Error("nonexist");
+      throw new Error("NO_EXIST");
     }
 
     const MEDIATOR = rows[0];

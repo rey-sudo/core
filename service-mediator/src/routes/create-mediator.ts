@@ -1,14 +1,13 @@
 import { hashPassword } from "../utils/password";
 import { BadRequestError } from "../errors";
 import { Request, Response } from "express";
-import { getSellerId } from "../utils/nano";
-import { createToken } from "../utils/token";
+import { getMediatorId } from "../utils/nano";
 import { _ } from "../utils/pino";
 import DB from "../db";
 
-const createSellerMiddlewares: any = [];
+const createMediatorMiddlewares: any = [];
 
-const createSellerHandler = async (req: Request, res: Response) => {
+const createMediatorHandler = async (req: Request, res: Response) => {
   let connection = null;
 
   const params = req.body;
@@ -28,25 +27,19 @@ const createSellerHandler = async (req: Request, res: Response) => {
       password_hash,
       verified,
       country,
-      trade_terms,
       terms_accepted,
-      avatar_base,
-      avatar_path,
       public_ip,
       schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const schemeValue = [
-      getSellerId(),
+      getMediatorId(),
       params.username,
       params.email,
       password,
       false,
       params.country,
-      "Terms and conditions: Provide correct data for effective shipping.",
       params.terms_accepted,
-      "https://example.com",
-      "/avatar.jpg",
       "192.168.1.1",
       0,
     ];
@@ -67,4 +60,4 @@ const createSellerHandler = async (req: Request, res: Response) => {
   }
 };
 
-export { createSellerMiddlewares, createSellerHandler };
+export { createMediatorMiddlewares, createMediatorHandler };
