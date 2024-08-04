@@ -40,7 +40,7 @@ const publicKeyHash = lucid.utils.getAddressDetails(
  
 const datum = Data.to(new Constr(0, [publicKeyHash]));
  
-const txHash = await lock(10000000n, { into: validator, owner: datum });
+const txHash = await lock(2000000n, { into: validator, owner: datum });
  
 await lucid.awaitTx(txHash);
  
