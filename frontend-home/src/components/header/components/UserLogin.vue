@@ -25,7 +25,14 @@
 
       <div class="p-userlogin-profile-item">
         <span>PKH</span>
+        <span style="word-break: break-word">
+          {{ getCurrentUser.pubkeyhash }}
+        </span>
         <span>{{ shortFormat(getCurrentUser.pubkeyhash, 30) }}</span>
+      </div>
+
+      <div class="p-userlogin-profile-item">
+        <button @click="createTransaction">TX</button>
       </div>
 
       <div class="p-userlogin-profile-buttons">
@@ -40,7 +47,9 @@
 <script>
 import { signMessage, getAddress } from "@/api/wallet-api";
 import { shortFormat } from "@/utils";
+import { balanceTx, lucidClient } from "@/api/wallet-api";
 import headerAPI from "../composable/header-api";
+import { walletClient } from "@/api/wallet-api";
 
 export default {
   setup() {
@@ -59,9 +68,22 @@ export default {
         .catch((err) => console.error(err));
     };
 
+    const createTransaction = async () => {
+      const tx0 =
+        "84a300818258208217ed7c898b40f1a10a98afeda20a8c0670438f31512c4adc34c51572529574010182a300581d70c1fe430f19ac248a8a7ea47db106002c4327e542c3fdc60ad6481103011a00989680028201d8185822d8799f581c424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2bff82581d60405f9ca0d2c74b034bc206bbcd263d32bee842e785561771fc9a9b991b000000025293725c021a00028ee9a0f5f6";
+
+      const { getWallet } = walletClient();
+
+      lucidClient.selectWallet(getWallet());
+
+      const result = await balanceTx(tx0);
+
+      console.log(result);
+    };
     return {
       handleSign,
       getCurrentUser,
+      createTransaction,
       logoutUser,
       shortFormat,
     };

@@ -37,9 +37,13 @@ const publicKeyHash = lucid.utils.getAddressDetails(
   await lucid.wallet.address()
 ).paymentCredential?.hash;
 
-const datum = Data.to(new Constr(0, [publicKeyHash]));
+console.log(publicKeyHash);
 
-const unbalancedTx = await deploy(2000000n, {
+const datum = Data.to(
+  new Constr(0, ["424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b"])
+);
+
+const unbalancedTx = await deploy(10000000n, {
   validator: validator,
   datum: datum,
 });
