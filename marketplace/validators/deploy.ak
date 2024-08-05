@@ -33,8 +33,8 @@ validator(token_name: ByteArray, utxo_ref: OutputReference) {
 }
 
 type MachineStateDatum {
-  state: Int
-  seller: Hash<Blake2b_224, VerificationKey>,
+  state: Int,
+  seller: Hash<Blake2b_224, VerificationKey>
 }
 
 type MachineStateInput {
@@ -52,7 +52,7 @@ validator {
   ) -> Bool {
 
   match (datum, redeemer) {
-//////////////////////////
+//////////////////////////////////////////////////////////////
     ( MachineStateDatum { state, seller }, Waiting ) -> {
 
             let newState = 0
@@ -68,7 +68,7 @@ validator {
 
 
         }
-//////////////////////
+//////////////////////////////////////////////////////////////
         _ -> false
     }
    
