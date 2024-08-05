@@ -1,46 +1,30 @@
-use aiken/hash.{Blake2b_224, Hash}
+use aiken/dict
 use aiken/list
-use aiken/string
-use aiken/transaction.{
-  OutputReference, ScriptContext, Spend, Transaction, TransactionId,
-}
-use aiken/transaction/credential.{VerificationKey}
-
-type Datum {
-  owner: Hash<Blake2b_224, VerificationKey>,
-}
+use aiken/transaction.{Mint, OutputReference, ScriptContext, Transaction}
+use aiken/transaction/value
 
 type Redeemer {
-  msg: ByteArray,
+  Mint
+  Burn
 }
 
-validator {
-  fn hello_world(
-    datum: Datum,
-    redeemer: Redeemer,
-    context: ScriptContext,
-  ) -> Bool {
-    trace string.from_bytearray(redeemer.msg)
-    let must_say_hello = redeemer.msg == "Hello, World!"
-    let must_be_signed =
-      list.has(context.transaction.extra_signatories, datum.owner)
-    must_say_hello? && must_be_signed?
-  }
-}
-
-test hello_world_example() {
-  let datum =
-    Datum { owner: #"00000000000000000000000000000000000000000000000000000000" }
-  let redeemer = Redeemer { msg: "Hello, World!" }
-  let placeholder_utxo =
-    OutputReference { transaction_id: TransactionId(""), output_index: 0 }
-  let context =
-    ScriptContext {
-      purpose: Spend(placeholder_utxo),
-      transaction: transaction.placeholder()
-        |> fn(transaction) {
-            Transaction { ..transaction, extra_signatories: [datum.owner] }
-          },
+validator(token_name: ByteArray, utxo_ref: OutputReference) {
+  fn deploy(redeemer: Redeemer, ctx: ScriptContext) -> Bool {
+    let ScriptContext { transaction, purpose } = ctx
+    expect Mint(policy_id) = purpose
+    let Transaction { inputs, mint, .. } = transaction
+    expect [Pair(asset_name, amount)] =
+      mint
+        |> value.from_minted_value
+        |> value.tokens(policy_id)
+        |> dict.to_pairs()
+    when redeemer is {
+      Mint -> {
+        expect Some(_input) =
+          list.find(inputs, fn(input) { input.output_reference == utxo_ref })
+        amount == 1 && asset_name == token_name
+      }
+      Burn -> amount == -1 && asset_name == token_name
     }
-  hello_world(datum, redeemer, context)
+  }
 }
