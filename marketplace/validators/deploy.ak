@@ -38,7 +38,7 @@ type MachineStateDatum {
 
 type MachineStateInput {
   Waiting
-  Locking
+  Locking { buyer: ByteArray }
   Delivered
   Received
 }
@@ -49,10 +49,6 @@ validator {
     redeemer: MachineStateInput,
     context: ScriptContext,
   ) -> Bool {
-    trace string.from_bytearray(redeemer.msg)
-    let must_say_hello = redeemer.msg == "Hello, World!"
-    let must_be_signed =
-      list.has(context.transaction.extra_signatories, datum.seller)
-    must_say_hello? && must_be_signed?
+    todowhenredee
   }
 }
