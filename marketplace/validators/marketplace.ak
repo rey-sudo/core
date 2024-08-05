@@ -55,8 +55,7 @@ validator {
       (MachineStateDatum { state, seller }, Waiting) -> {
         let _newState = state
 
-        let must_be_state = True
-
+        let must_be_state = state == 0
         let must_be_signed =
           list.has(context.transaction.extra_signatories, seller)
 
