@@ -49,6 +49,11 @@ validator {
     redeemer: MachineStateInput,
     context: ScriptContext,
   ) -> Bool {
-    todowhenredee
+    when redeemer is {
+      Waiting -> {
+        let must_be_signed =
+          list.has(context.transaction.extra_signatories, datum.seller)
+      }
+    }
   }
 }
