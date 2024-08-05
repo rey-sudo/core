@@ -33,6 +33,7 @@ validator(token_name: ByteArray, utxo_ref: OutputReference) {
 }
 
 type MachineStateDatum {
+  state: Int
   seller: Hash<Blake2b_224, VerificationKey>,
 }
 
@@ -49,11 +50,28 @@ validator {
     redeemer: MachineStateInput,
     context: ScriptContext,
   ) -> Bool {
-    when redeemer is {
-      Waiting -> {
-        let must_be_signed =
-          list.has(context.transaction.extra_signatories, datum.seller)
-      }
+
+  match (datum, redeemer) {
+//////////////////////////
+    ( MachineStateDatum { state, seller }, Waiting ) -> {
+
+            let newState = 0
+
+            let must_be_state = match ctx.tx.outputs {
+                [TxOut { datum: Some(MachineStateDatum { state: newState }) }, ..] -> true
+                _ -> false
+            }
+
+            let must_be_signed = list.has(context.transaction.extra_signatories, seller)
+
+            must_be_state? && must_be_signed?
+
+
+        }
+//////////////////////
+        _ -> false
     }
+   
+
   }
 }
