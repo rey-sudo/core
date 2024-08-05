@@ -1,18 +1,18 @@
 import {
+  applyParamsToScript,
   Blockfrost,
   C,
   Constr,
   Data,
   fromHex,
+  fromText,
   Lucid,
   MintingPolicy,
   SpendingValidator,
   toHex,
   TxHash,
-  utf8ToHex,
-} from "https://deno.land/x/lucid@0.8.3/mod.ts";
+} from "https://deno.land/x/lucid@0.10.7/mod.ts";
 import * as cbor from "https://deno.land/x/cbor@v1.4.1/index.js";
-import blueprint from "~/plutus.json" assert { type: "json" };
 
 const lucid = await Lucid.new(
   new Blockfrost(
@@ -22,9 +22,7 @@ const lucid = await Lucid.new(
   "Preview",
 );
 
-lucid.selectWalletFromPrivateKey(await Deno.readTextFile("./me.sk"));
-
-const validator = await readValidators();
+const blueprint = JSON.parse(await Deno.readTextFile("plutus.json"));
 
 export type Validators = {
   threadToken: MintingPolicy;
@@ -60,39 +58,75 @@ export function readValidators(): Validators {
   };
 }
 
-//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
 
-const publicKeyHash = lucid.utils.getAddressDetails(
-  await lucid.wallet.address(),
-).paymentCredential?.hash;
+lucid.selectWalletFromPrivateKey(await Deno.readTextFile("./me.sk"));
 
-const datum = Data.to(new Constr(0, [publicKeyHash]));
+const validators = await readValidators();
 
-const txHash = await deploy(1000000n, { validator: validator, datum: datum });
+const validatorWithParams = (tokenName: string, outRef: Data) => {
+  const threadToken = applyParamsToScript(validators.threadToken.script, [
+    fromText(tokenName),
+    outRef,
+  ]);
 
-await lucid.awaitTx(txHash);
+  const threadTokenPolicyId = lucid.utils.validatorToScriptHash({
+    type: "PlutusV2",
+    script: threadToken,
+  });
 
-console.log(`1 tADA locked into the contract at:
-    Tx ID: ${txHash}
-    Datum: ${datum}
-`);
+  const machineStateAddress = lucid.utils.validatorToAddress({
+    type: "PlutusV2",
+    script: validators.machineState.script,
+  });
 
-// --- Supporting functions
+  return {
+    threadToken: {
+      type: "PlutusV2",
+      script: threadToken,
+    },
+    threadTokenPolicyId,
 
-async function deploy(
-  lovelace: bigint,
-  { validator, datum }: { validator: SpendingValidator; datum: string },
-): Promise<TxHash> {
-  const contractAddress = lucid.utils.validatorToAddress(validator);
+    machineStateAddress,
+  };
+};
 
-  console.log(contractAddress);
+//////////////////////////////////////////////////////////////
+const utxos = await lucid?.wallet.getUtxos()!;
 
-  const tx = await lucid
-    .newTx()
-    .payToContract(contractAddress, { inline: datum }, { lovelace })
-    .complete();
+const utxo = utxos[0];
 
-  const signedTx = await tx.sign().complete();
+const outRef = new Constr(0, [
+  new Constr(0, [utxo.txHash]),
+  BigInt(utxo.outputIndex),
+]);
 
-  return signedTx.submit();
-}
+const tokenName = "threadtoken";
+
+const validatorParametrized = validatorWithParams(tokenName, outRef);
+
+const mintRedeemer = Data.to(new Constr(0, []));
+
+const policyId = validatorParametrized.threadTokenPolicyId;
+
+const assetName = `${policyId}${fromText(tokenName)}`;
+
+const tx = await lucid
+  .newTx()
+  .collectFrom([utxo])
+  .attachMintingPolicy(validatorParametrized.threadToken as SpendingValidator)
+  .mintAssets(
+    { [assetName]: BigInt(1) },
+    mintRedeemer,
+  )
+  .payToAddress(validatorParametrized.machineStateAddress, {
+    [assetName]: BigInt(1),
+  })
+  .complete();
+
+
+const signedTx = await tx.sign().complete();
+
+const txHash = await signedTx.submit();
+
+console.log(txHash);
