@@ -4,13 +4,13 @@ use aiken/transaction.{OutputReference, ScriptContext, Transaction} as tx
 use aiken/transaction/value
 
 // Define the minting redeemer
-type Redeemer {
+type ThreadTokenInput {
   Mint
   Burn
 }
 
 validator(token_name: ByteArray, utxo_ref: OutputReference) {
-  fn threadtoken(redeemer: Redeemer, ctx: ScriptContext) -> Bool {
+  fn threadtoken(redeemer: ThreadTokenInput, ctx: ScriptContext) -> Bool {
     let ScriptContext { transaction, purpose } = ctx
     expect tx.Mint(policy_id) = purpose
     let Transaction { inputs, mint, .. } = transaction
@@ -29,5 +29,27 @@ validator(token_name: ByteArray, utxo_ref: OutputReference) {
 
       Burn -> amount == -1 && asset_name == token_name
     }
+  }
+}
+
+type MachineStateDatum {
+  seller: Hash<Blake2b_224, VerificationKey>,
+}
+
+type Redeemer {
+  msg: ByteArray,
+}
+
+validator {
+  fn machinestate(
+    datum: MachineStateDatum,
+    redeemer: Redeemer,
+    context: ScriptContext,
+  ) -> Bool {
+    trace string.from_bytearray(redeemer.msg)
+    let must_say_hello = redeemer.msg == "Hello, World!"
+    let must_be_signed =
+      list.has(context.transaction.extra_signatories, datum.seller)
+    must_say_hello? && must_be_signed?
   }
 }
