@@ -1,29 +1,32 @@
 use aiken/dict
 use aiken/list
-use aiken/transaction.{Mint, OutputReference, ScriptContext, Transaction}
+use aiken/transaction.{OutputReference, ScriptContext, Transaction} as tx
 use aiken/transaction/value
 
+// Define the minting redeemer
 type Redeemer {
   Mint
   Burn
 }
 
 validator(token_name: ByteArray, utxo_ref: OutputReference) {
-  fn deploy(redeemer: Redeemer, ctx: ScriptContext) -> Bool {
+  fn threadtoken(redeemer: Redeemer, ctx: ScriptContext) -> Bool {
     let ScriptContext { transaction, purpose } = ctx
-    expect Mint(policy_id) = purpose
+    expect tx.Mint(policy_id) = purpose
     let Transaction { inputs, mint, .. } = transaction
-    expect [Pair(asset_name, amount)] =
+    expect [(asset_name, amount)] =
       mint
         |> value.from_minted_value
         |> value.tokens(policy_id)
-        |> dict.to_pairs()
+        |> dict.to_list()
+
     when redeemer is {
       Mint -> {
         expect Some(_input) =
           list.find(inputs, fn(input) { input.output_reference == utxo_ref })
         amount == 1 && asset_name == token_name
       }
+
       Burn -> amount == -1 && asset_name == token_name
     }
   }
