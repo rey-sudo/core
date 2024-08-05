@@ -114,19 +114,11 @@ const assetName = `${policyId}${fromText(tokenName)}`;
 console.log("policyId:" + policyId);
 console.log("policyId:" + assetName);
 
-const Datum = Data.Object({
-  state: Data.Integer(),
-  seller: Data.Bytes(),
-});
-
-type Datum = Data.Static<typeof Datum>;
-
-const datum = Data.to<Datum>(
-  {
-    state: BigInt(0),
-    seller: "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b",
-  },
-  Datum,
+const datum = Data.to(
+  new Constr(0, [
+    Data.to(BigInt(0)),
+    "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b",
+  ]),
 );
 
 const tx = await lucid
