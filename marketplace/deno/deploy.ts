@@ -116,7 +116,7 @@ console.log("policyId:" + assetName);
 
 const datum = Data.to(
   new Constr(0, [
-    Data.to(BigInt(0)),
+    BigInt(0),
     "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b",
   ]),
 );
