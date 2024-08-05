@@ -3,7 +3,7 @@ use aiken/list
 use aiken/transaction.{OutputReference, ScriptContext, Transaction} as tx
 use aiken/transaction/value
 
-// Define the minting redeemer
+
 type ThreadTokenInput {
   Mint
   Burn
