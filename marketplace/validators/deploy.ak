@@ -1,8 +1,7 @@
 use aiken/dict
 use aiken/hash.{Blake2b_224, Hash}
 use aiken/list
-use aiken/transaction.{
-  OutputReference, ScriptContext, Transaction} as tx
+use aiken/transaction.{OutputReference, ScriptContext, Transaction} as tx
 use aiken/transaction/credential.{VerificationKey}
 use aiken/transaction/value
 
@@ -53,7 +52,6 @@ validator {
     context: ScriptContext,
   ) -> Bool {
     when (datum, redeemer) is {
-      ////////////////////////////////////////////////////////
       (MachineStateDatum { state, seller }, Waiting) -> {
         let _newState = state
 
@@ -65,14 +63,11 @@ validator {
         must_be_state? && must_be_signed?
       }
 
-      (MachineStateDatum { state, ..}, Locking { buyer }) -> True
+      (MachineStateDatum { state, .. }, Locking { buyer }) -> True
 
-      (MachineStateDatum { state, ..}, Delivered) -> True
+      (MachineStateDatum { state, .. }, Delivered) -> True
 
-      (MachineStateDatum { state, ..}, Received) -> True
-
-      ////////////////////////////////////////////////////////
-
+      (MachineStateDatum { state, .. }, Received) -> True
     }
   }
 }
