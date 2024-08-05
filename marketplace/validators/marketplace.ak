@@ -53,8 +53,6 @@ validator {
   ) -> Bool {
     when (datum, redeemer) is {
       (MachineStateDatum { state, seller }, Waiting) -> {
-        let _newState = state
-
         let must_be_state = state == 0
         let must_be_signed =
           list.has(context.transaction.extra_signatories, seller)
