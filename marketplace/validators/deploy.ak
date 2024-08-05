@@ -5,7 +5,7 @@ use aiken/dict
 use aiken/hash.{Blake2b_224, Hash}
 use aiken/list
 use aiken/transaction.{Output,
-  OutputReference, ScriptContext, Transaction, Datum} as tx
+  OutputReference, ScriptContext, Transaction} as tx
 use aiken/transaction/credential.{VerificationKey}
 use aiken/transaction/value
 
@@ -61,7 +61,7 @@ validator {
 
         let must_be_state =
           when context.transaction.outputs is {
-            [Output{datum: Some(MachineStateDatum { state: newState })..}, ..] ->
+            [Output{datum: Some(MachineStateDatum { state: newState ..})..}, ..] ->
               true
             _ -> false
           }
