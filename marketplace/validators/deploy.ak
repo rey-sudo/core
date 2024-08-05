@@ -52,8 +52,8 @@ validator {
   ) -> Bool {
 
   match (datum, redeemer) {
-//////////////////////////////////////////////////////////////
-    ( MachineStateDatum { state, seller }, Waiting ) -> {
+
+    (MachineStateDatum { state, seller }, Waiting) -> {
 
             let newState = 0
 
