@@ -36,14 +36,17 @@ type MachineStateDatum {
   seller: Hash<Blake2b_224, VerificationKey>,
 }
 
-type Redeemer {
-  msg: ByteArray,
+type MachineStateInput {
+  Waiting
+  Locking
+  Delivered
+  Received
 }
 
 validator {
   fn machinestate(
     datum: MachineStateDatum,
-    redeemer: Redeemer,
+    redeemer: MachineStateInput,
     context: ScriptContext,
   ) -> Bool {
     trace string.from_bytearray(redeemer.msg)
