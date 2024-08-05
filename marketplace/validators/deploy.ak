@@ -1,8 +1,13 @@
-use aiken/dict
-use aiken/list
-use aiken/transaction.{OutputReference, ScriptContext, Transaction} as tx
-use aiken/transaction/value
+///////////////////////////////////////
+///////////////////////////////////////
 
+use aiken/dict
+use aiken/hash.{Blake2b_224, Hash}
+use aiken/list
+use aiken/transaction.{Output,
+  OutputReference, ScriptContext, Transaction, Datum} as tx
+use aiken/transaction/credential.{VerificationKey}
+use aiken/transaction/value
 
 type ThreadTokenInput {
   Mint
@@ -14,11 +19,11 @@ validator(token_name: ByteArray, utxo_ref: OutputReference) {
     let ScriptContext { transaction, purpose } = ctx
     expect tx.Mint(policy_id) = purpose
     let Transaction { inputs, mint, .. } = transaction
-    expect [(asset_name, amount)] =
+    expect [Pair(asset_name, amount)] =
       mint
         |> value.from_minted_value
         |> value.tokens(policy_id)
-        |> dict.to_list()
+        |> dict.to_pairs()
 
     when redeemer is {
       Mint -> {
@@ -34,7 +39,7 @@ validator(token_name: ByteArray, utxo_ref: OutputReference) {
 
 type MachineStateDatum {
   state: Int,
-  seller: Hash<Blake2b_224, VerificationKey>
+  seller: Hash<Blake2b_224, VerificationKey>,
 }
 
 type MachineStateInput {
@@ -50,27 +55,24 @@ validator {
     redeemer: MachineStateInput,
     context: ScriptContext,
   ) -> Bool {
+    when (datum, redeemer) is {
+      (MachineStateDatum { state, seller }, Waiting) -> {
+        let newState = 0
 
-  match (datum, redeemer) {
+        let must_be_state =
+          when context.transaction.outputs is {
+            [Output{datum: Some(MachineStateDatum { state: newState })..}, ..] ->
+              true
+            _ -> false
+          }
 
-    (MachineStateDatum { state, seller }, Waiting) -> {
+        let must_be_signed =
+          list.has(context.transaction.extra_signatories, seller)
 
-            let newState = 0
+        must_be_state? && must_be_signed?
+      }
 
-            let must_be_state = match ctx.tx.outputs {
-                [TxOut { datum: Some(MachineStateDatum { state: newState }) }, ..] -> true
-                _ -> false
-            }
-
-            let must_be_signed = list.has(context.transaction.extra_signatories, seller)
-
-            must_be_state? && must_be_signed?
-
-        }
-//////////////////////////////////////////////////////////////
-        _ -> false
+      _ -> false
     }
-   
-
   }
 }
