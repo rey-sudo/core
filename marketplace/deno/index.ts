@@ -33,36 +33,35 @@ async function readValidator(): Promise<SpendingValidator> {
   };
 }
 
-
 const publicKeyHash = lucid.utils.getAddressDetails(
   await lucid.wallet.address()
 ).paymentCredential?.hash;
- 
+
 const datum = Data.to(new Constr(0, [publicKeyHash]));
- 
-const txHash = await lock(2000000n, { into: validator, owner: datum });
- 
-await lucid.awaitTx(txHash);
- 
+
+const unbalancedTx = await deploy(2000000n, {
+  validator: validator,
+  datum: datum,
+});
+
 console.log(`1 tADA locked into the contract at:
-    Tx ID: ${txHash}
+    uTx: ${unbalancedTx}
     Datum: ${datum}
 `);
- 
+
 // --- Supporting functions
- 
-async function lock(
+
+async function deploy(
   lovelace: bigint,
-  { into, owner }: { into: SpendingValidator; owner: string }
+  { validator, datum }: { validator: SpendingValidator; datum: string }
 ): Promise<TxHash> {
-  const contractAddress = lucid.utils.validatorToAddress(into);
- 
+  const contractAddress = lucid.utils.validatorToAddress(validator);
+  console.log(contractAddress);
+
   const tx = await lucid
     .newTx()
-    .payToContract(contractAddress, { inline: owner }, { lovelace })
+    .payToContract(contractAddress, { inline: datum }, { lovelace })
     .complete();
- 
-  const signedTx = await tx.sign().complete();
- 
-  return signedTx.submit();
+
+  return tx.toString();
 }
