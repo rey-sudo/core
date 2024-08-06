@@ -27,6 +27,10 @@ const main = async () => {
       throw new Error("USER_JWT_KEY error");
     }
 
+    if (!process.env.ADMIN_JWT_KEY) {
+      throw new Error("ADMIN_JWT_KEY error");
+    }
+
     if (!process.env.TOKEN_EXPIRATION) {
       throw new Error("TOKEN_EXPIRATION error");
     }
@@ -58,6 +62,14 @@ const main = async () => {
       route.loginUserMiddlewares,
 
       route.loginUserHandler
+    );
+
+    app.post(
+      "/api/user/delete-user",
+
+      route.deleteUserMiddlewares,
+
+      route.deleteUserHandler
     );
 
     app.get(
