@@ -66,7 +66,7 @@ validator {
 
         trace string.from_int(lovelace_spending) 
 
-        let must_be_collateral = lovelace_spending >= 1000000
+        let must_be_collateral = lovelace_spending >= 10000000
 
         must_be_state? && must_be_signed? && must_be_collateral?
       }
