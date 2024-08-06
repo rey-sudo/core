@@ -104,19 +104,30 @@ const redeemer = Data.to(new Constr(0, []));
 
 const datum = Data.to(
   new Constr(0, [
-    BigInt(0),
+    BigInt(1),
     "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b",
   ]),
 );
 
-const tx = await lucid
-  .newTx()
-  .collectFrom([utxo], redeemer)
-  .payToContract(validatorParametrized.machineStateAddress, { inline: datum }, {
-    lovelace: 10000000n,
-    [assetName]: BigInt(1),
-  })
-  .attachSpendingValidator(validators.machineState as SpendingValidator)
-  .complete();
+try {
+  const tx = await lucid
+    .newTx()
+    .collectFrom([utxo], redeemer)
+    .addSignerKey("424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b")
+    .payToContract(
+      validatorParametrized.machineStateAddress,
+      { inline: datum },
+      {
+        lovelace: BigInt(10000000),
+      },
+    )
+    .payToAddress(validatorParametrized.machineStateAddress, {
+      [assetName]: BigInt(1),
+    })
+    .attachSpendingValidator(validators.machineState as SpendingValidator)
+    .complete();
 
-console.log(await tx.toString());
+  console.log(await tx.toString());
+} catch (err) {
+  console.log(err);
+}
