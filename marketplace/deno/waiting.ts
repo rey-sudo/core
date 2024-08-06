@@ -77,17 +77,17 @@ const validatorWithParams = () => {
 //////////////////////////////////////////////////////////////
 lucid.selectWalletFromPrivateKey(await Deno.readTextFile("./me.sk"));
 
-const policyId = "3681dd85bf4383dcf86b661fa991d7db6013cc7ad2477d094d799a73";
+const policyId = "98c346b491ddeea02185a5ecc3349009e179a9042947c049a2c90938";
 
 const utxo: UTxO = {
-  txHash: "18d2881f528359a953b2149db71f48d2b9b554c53e00039f459a712b475934d2",
+  txHash: "d51227e035e83f6be1bfa250d7eca3de58696b6a8ed33a9dc6088974d5419020",
   outputIndex: 0,
   assets: {
     lovelace: 1236970n,
-    "3681dd85bf4383dcf86b661fa991d7db6013cc7ad2477d094d799a73746872656164746f6b656e":
+    "98c346b491ddeea02185a5ecc3349009e179a9042947c049a2c90938746872656164746f6b656e":
       1n,
   },
-  address: "addr_test1wr3x8r2g50dn55y28fvxr4na0h0g7d6y42mzlh8krqnuttqakfhve",
+  address: "addr_test1wp4ep7h3mw4fvse8v8lmafzjpettgfm972r783mzlcemzrg5avvkf",
   datumHash: "1cc953c6981e5e524f90f459f28847ab24455c9ee3ae7c8916d4889ceb2d8a11",
   datum:
     "d8799f00581c424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2bff",
