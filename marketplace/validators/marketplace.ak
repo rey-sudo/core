@@ -61,7 +61,7 @@ validator {
             context.transaction.inputs,
             0,
             fn(n, total) { n.output.value.lovelace + total },
-          ) >= 10
+          ) >= 1000000
         trace must_be_collateral 
 
         must_be_state? && must_be_signed? && must_be_collateral?
