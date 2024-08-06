@@ -1,6 +1,7 @@
 use aiken/dict
 use aiken/hash.{Blake2b_224, Hash}
 use aiken/list
+use aiken/string
 use aiken/transaction.{OutputReference, ScriptContext, Transaction} as tx
 use aiken/transaction/credential.{VerificationKey}
 use aiken/transaction/value
@@ -56,13 +57,16 @@ validator {
         let must_be_state = state == 0
         let must_be_signed =
           list.has(context.transaction.extra_signatories, seller)
-        let must_be_collateral =
+        let lovelace_spending =
           list.foldl(
             context.transaction.inputs,
             0,
-            fn(n, total) { n.output.value.lovelace + total },
-          ) >= 1000000
-        trace must_be_collateral 
+            fn(n, total) { value.lovelace_of(n.output.value) + total },
+          ) 
+
+        trace string.from_int(lovelace_spending) 
+
+        let must_be_collateral = lovelace_spending >= 1000000
 
         must_be_state? && must_be_signed? && must_be_collateral?
       }
