@@ -56,8 +56,14 @@ validator {
         let must_be_state = state == 0
         let must_be_signed =
           list.has(context.transaction.extra_signatories, seller)
-
-        must_be_state? && must_be_signed?
+        let must_be_collateral =
+          list.foldl(
+            context.transaction.inputs,
+            0,
+            fn(n, total) { n.output.value.lovelace + total },
+          )
+    
+        must_be_state? && must_be_signed? && must_be_collateral?
       }
 
       (MachineStateDatum { state, .. }, Locking { buyer }) -> True
