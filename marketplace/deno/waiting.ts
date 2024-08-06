@@ -11,6 +11,7 @@ import {
   SpendingValidator,
   toHex,
   TxHash,
+  UTxO,
 } from "https://deno.land/x/lucid@0.10.7/mod.ts";
 import * as cbor from "https://deno.land/x/cbor@v1.4.1/index.js";
 
@@ -62,47 +63,60 @@ export function readValidators(): Validators {
 
 const validators = await readValidators();
 
-const validatorWithParams = (tokenName: string, outRef: Data) => {
-  const threadToken = applyParamsToScript(validators.threadToken.script, [
-    fromText(tokenName),
-    outRef,
-  ]);
-
-  const threadTokenPolicyId = lucid.utils.validatorToScriptHash({
-    type: "PlutusV2",
-    script: threadToken,
-  });
-
+const validatorWithParams = () => {
   const machineStateAddress = lucid.utils.validatorToAddress({
     type: "PlutusV2",
     script: validators.machineState.script,
   });
 
   return {
-    threadToken: {
-      type: "PlutusV2",
-      script: threadToken,
-    },
-    threadTokenPolicyId,
-
     machineStateAddress,
   };
 };
 
 //////////////////////////////////////////////////////////////
+lucid.selectWalletFromPrivateKey(await Deno.readTextFile("./me.sk"));
 
-const mph = "3681dd85bf4383dcf86b661fa991d7db6013cc7ad2477d094d799a73";
+const policyId = "3681dd85bf4383dcf86b661fa991d7db6013cc7ad2477d094d799a73";
 
-async function getUtxosByPolicyId(lucid: any, policyId: string) {
-  const assets = await lucid.fetchAssetsByPolicy(policyId);
-  const utxos = await Promise.all(
-    assets.map(async (asset: any) => {
-      return await lucid.utxosByUnit(asset.unit);
-    }),
-  );
-  return utxos.flat();
-}
+const utxo: UTxO = {
+  txHash: "18d2881f528359a953b2149db71f48d2b9b554c53e00039f459a712b475934d2",
+  outputIndex: 0,
+  assets: {
+    lovelace: 1236970n,
+    "3681dd85bf4383dcf86b661fa991d7db6013cc7ad2477d094d799a73746872656164746f6b656e":
+      1n,
+  },
+  address: "addr_test1wr3x8r2g50dn55y28fvxr4na0h0g7d6y42mzlh8krqnuttqakfhve",
+  datumHash: "1cc953c6981e5e524f90f459f28847ab24455c9ee3ae7c8916d4889ceb2d8a11",
+  datum:
+    "d8799f00581c424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2bff",
+  scriptRef: null,
+};
 
-const utxos = await getUtxosByPolicyId(lucid, mph);
+const tokenName = "threadtoken";
 
-console.log(utxos);
+const validatorParametrized = validatorWithParams();
+
+const assetName = `${policyId}${fromText(tokenName)}`;
+
+const redeemer = Data.to(new Constr(0, []));
+
+const datum = Data.to(
+  new Constr(0, [
+    BigInt(0),
+    "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b",
+  ]),
+);
+
+const tx = await lucid
+  .newTx()
+  .collectFrom([utxo], redeemer)
+  .payToContract(validatorParametrized.machineStateAddress, { inline: datum }, {
+    lovelace: 10000000n,
+    [assetName]: BigInt(1),
+  })
+  .attachSpendingValidator(validators.machineState as SpendingValidator)
+  .complete();
+
+console.log(await tx.toString());
