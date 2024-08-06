@@ -100,7 +100,6 @@ const validatorParametrized = validatorWithParams();
 
 const assetName = `${policyId}${fromText(tokenName)}`;
 
-
 const redeemer = Data.to(new Constr(0, []));
 
 const datum = Data.to(
