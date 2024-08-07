@@ -186,11 +186,21 @@ const balanceTx = (unbalancedTx) => {
       Buffer.from(external, "hex")
     );
 
-    console.log("external", externalWitnesses.to_json());
+    console.log("local", localWitnesses.vkeys().to_json());
 
-    transactionWitnessSet.set_vkeys(localWitnesses.vkeys());
+    console.log("external", externalWitnesses.vkeys().to_json());
 
-    transactionWitnessSet.set_vkeys(externalWitnesses.vkeys());
+    console.log("get", externalWitnesses.vkeys().get(0));
+
+    const puta = CardanoWasm.Vkeywitnesses.new();
+
+    puta.add(localWitnesses.vkeys().get(0));
+
+    puta.add(externalWitnesses.vkeys().get(0));
+
+    console.log("puta", puta.to_json());
+
+    transactionWitnessSet.set_vkeys(puta);
 
     const signedTx = CardanoWasm.Transaction.new(
       tx.body(),
