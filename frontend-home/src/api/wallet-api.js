@@ -197,8 +197,8 @@ const buildTx = async (
   utxos,
   outputs,
   protocolParameters,
-  auxiliaryData,
-  inputs
+  auxiliaryData
+
 ) => {
   const txBuilderConfig = CardanoWasm.TransactionBuilderConfigBuilder.new()
     .coins_per_utxo_byte(
@@ -229,6 +229,30 @@ const buildTx = async (
 
   utxos.forEach((utxo) => utxosCore.add(utxo));
 
+  const scheme = {
+    input: {
+      transaction_id:
+        "919818c757b8242ffc60ed2ca4bdf4d2c0dea87203075143b1565978197dac3b",
+      index: 0,
+    },
+    output: {
+      address:
+        "addr_test1wp4ep7h3mw4fvse8v8lmafzjpettgfm972r783mzlcemzrg5avvkf",
+      amount: {
+        coin: "10000000",
+        multiasset: {
+          "54a29c2626156de3af97cdead84264aaf0805857cc5c026af077fc3b746872656164746f6b656e":
+            "1",
+        },
+      },
+    },
+    plutus_data:
+      "d8799f00581c424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2bff",
+    script_ref: null,
+  };
+
+  CardanoWasm.TransactionUnspentOutput.from_json(scheme);
+
   console.log(utxosCore.to_json());
 
   console.log("1");
@@ -238,9 +262,7 @@ const buildTx = async (
     CardanoWasm.CoinSelectionStrategyCIP2.LargestFirstMultiAsset
   );
 
-  for (let i = 0; i < inputs.len(); i++) {
-    txBuilder.add_reference_input(inputs.get(i));
-  }
+  txBuilder.add_input();
 
   console.log("2");
 
