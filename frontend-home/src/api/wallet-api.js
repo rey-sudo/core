@@ -231,7 +231,10 @@ const buildTx = async (
 
   console.log("1");
 
-  txBuilder.add_inputs_from(utxosCore, 3);
+  txBuilder.add_inputs_from(
+    utxosCore,
+    CardanoWasm.CoinSelectionStrategyCIP2.LargestFirstMultiAsset
+  );
 
   console.log("2");
 
