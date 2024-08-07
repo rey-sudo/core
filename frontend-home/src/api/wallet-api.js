@@ -146,9 +146,7 @@ const balanceTx = (unbalancedTx) => {
 
     const utx = CardanoWasm.Transaction.from_bytes(fromHexString(unbalancedTx));
 
-    console.log(utx.body().to_json());
-
-    const txBody = await buildTx(
+    await buildTx(
       { paymentAddr: changeAddrBech32 },
       utxos,
       utx.body().outputs(),
@@ -156,8 +154,6 @@ const balanceTx = (unbalancedTx) => {
       null,
       utx.body().inputs()
     );
-
-    console.log("NEWBODY", txBody.to_json());
 
     /////////////
 
@@ -170,25 +166,40 @@ const balanceTx = (unbalancedTx) => {
       )
     );
 
-    let txVkeyWitnesses = await connectedWallet.signTx(
+    ////////////////////////////////////////////////////////
+
+    let localWitnesses = await connectedWallet.signTx(
       Buffer.from(tx.to_bytes(), "utf8").toString("hex"),
       true
     );
 
-    txVkeyWitnesses = CardanoWasm.TransactionWitnessSet.from_bytes(
-      Buffer.from(txVkeyWitnesses, "hex")
+    const external =
+      "a10081825820a1762bfee703366b36b0c15a3ab14357cbc74a447b035609aa65e479470d0bf25840973f867b73c206118f93c14d86e91ad9ed03817be6cfe746c9d4d8c5f7f9b66795d3e35fee3ec91a1fa9ec476a8588bb2172d2d83a5224c4fc003f56d0cda402";
+
+    ////////////////////////////////////////////////////////
+
+    localWitnesses = CardanoWasm.TransactionWitnessSet.from_bytes(
+      Buffer.from(localWitnesses, "hex")
     );
 
-    transactionWitnessSet.set_vkeys(txVkeyWitnesses.vkeys());
+    const externalWitnesses = CardanoWasm.TransactionWitnessSet.from_bytes(
+      Buffer.from(external, "hex")
+    );
+
+    console.log("external", externalWitnesses.to_json());
+
+    transactionWitnessSet.set_vkeys(localWitnesses.vkeys());
+
+    transactionWitnessSet.set_vkeys(externalWitnesses.vkeys());
 
     const signedTx = CardanoWasm.Transaction.new(
       tx.body(),
       transactionWitnessSet
     );
 
-    return connectedWallet.submitTx(
-      Buffer.from(signedTx.to_bytes(), "utf8").toString("hex")
-    );
+    console.log(signedTx.witness_set().to_json());
+
+    return connectedWallet.submitTx(signedTx);
   });
 };
 
@@ -253,8 +264,6 @@ const buildTx = async (
   } catch (err) {
     console.error(err);
   }
-
-  console.log(utxosCore.to_json());
 
   txBuilder.add_inputs_from(
     utxosCore,

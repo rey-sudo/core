@@ -147,9 +147,13 @@ try {
       },
     });
 
-  await tx.sign();
+  const txCbor = tx.toString();
 
-  console.log(await tx.toString());
+  console.log(txCbor);
+
+  const partial = await tx.partialSign();
+
+  console.log(partial);
 } catch (err) {
   console.log(err);
 }

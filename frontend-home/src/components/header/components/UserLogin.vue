@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { signMessage, getAddress } from "@/api/wallet-api";
+import { signMessage, getAddress, balanceTx } from "@/api/wallet-api";
 import { shortFormat } from "@/utils";
 import { lucidClient } from "@/api/wallet-api";
 import headerAPI from "../composable/header-api";
@@ -76,13 +76,13 @@ export default {
 
       lucidClient.selectWallet(getWallet());
 
-      const tx = await lucidClient.fromTx(tx0);
+      try {
+        const result = await balanceTx(tx0);
 
-      const signed = await tx.sign();
-
-      const result = await signed.submit();
-
-      console.log(result);
+        console.log(result);
+      } catch (err) {
+        console.error(err);
+      }
     };
     return {
       handleSign,
