@@ -164,7 +164,7 @@ const balanceTx = (unbalancedTx) => {
     const transactionWitnessSet = CardanoWasm.TransactionWitnessSet.new();
 
     const tx = CardanoWasm.Transaction.new(
-      txBody,
+      utx.body(),
       CardanoWasm.TransactionWitnessSet.from_bytes(
         transactionWitnessSet.to_bytes()
       )
