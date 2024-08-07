@@ -131,6 +131,7 @@ const tx = await lucid
   )
   .payToContract(validatorParametrized.machineStateAddress, { inline: datum }, {
     [assetName]: BigInt(1),
+    lovelace: BigInt(10000000),
   })
   .complete();
 

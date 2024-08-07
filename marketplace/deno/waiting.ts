@@ -77,14 +77,14 @@ const validatorWithParams = () => {
 //////////////////////////////////////////////////////////////
 lucid.selectWalletFromPrivateKey(await Deno.readTextFile("./me.sk"));
 
-const policyId = "98c346b491ddeea02185a5ecc3349009e179a9042947c049a2c90938";
+const policyId = "54a29c2626156de3af97cdead84264aaf0805857cc5c026af077fc3b";
 
 const utxo: UTxO = {
-  txHash: "d51227e035e83f6be1bfa250d7eca3de58696b6a8ed33a9dc6088974d5419020",
+  txHash: "919818c757b8242ffc60ed2ca4bdf4d2c0dea87203075143b1565978197dac3b",
   outputIndex: 0,
   assets: {
-    lovelace: 1236970n,
-    "98c346b491ddeea02185a5ecc3349009e179a9042947c049a2c90938746872656164746f6b656e":
+    lovelace: 10000000n,
+    "54a29c2626156de3af97cdead84264aaf0805857cc5c026af077fc3b746872656164746f6b656e":
       1n,
   },
   address: "addr_test1wp4ep7h3mw4fvse8v8lmafzjpettgfm972r783mzlcemzrg5avvkf",
