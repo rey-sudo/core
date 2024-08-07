@@ -120,12 +120,15 @@ const localChange = await lucid.wallet.address();
 
 const productCollateral = 23000000n;
 
-const externalADA = 9606467635n;
+const fee = 1000000n;
+
+const externalADA = 9606467635n - fee;
 try {
   const tx = await lucid
     .newTx()
     .collectFrom([utxo, utxis[0]], redeemer)
     .addSignerKey("424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b")
+    .addSigner(await lucid.wallet.address())
     .payToContract(
       validatorParametrized.machineStateAddress,
       { inline: datum },
@@ -143,6 +146,8 @@ try {
         address: localChange,
       },
     });
+
+  await tx.sign();
 
   console.log(await tx.toString());
 } catch (err) {
