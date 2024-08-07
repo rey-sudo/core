@@ -157,7 +157,7 @@ const balanceTx = (unbalancedTx) => {
       utx.body().inputs()
     );
 
-    console.log(txBody.to_json());
+    console.log("NEWBODY", txBody.to_json());
 
     /////////////
 
