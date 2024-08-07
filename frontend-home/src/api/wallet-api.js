@@ -186,12 +186,6 @@ const balanceTx = (unbalancedTx) => {
       Buffer.from(external, "hex")
     );
 
-    console.log("local", localWitnesses.vkeys().to_json());
-
-    console.log("external", externalWitnesses.vkeys().to_json());
-
-    console.log("get", externalWitnesses.vkeys().get(0));
-
     const mixedVkeys = CardanoWasm.Vkeywitnesses.new();
 
     mixedVkeys.add(localWitnesses.vkeys().get(0));
