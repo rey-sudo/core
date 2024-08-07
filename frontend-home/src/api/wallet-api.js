@@ -200,8 +200,6 @@ const balanceTx = (unbalancedTx) => {
 
     finishWitnessSet.set_vkeys(mixedVkeys);
 
-    console.log("OLD SET", finishWitnessSet.to_json());
-
     const signedTx = CardanoWasm.Transaction.new(tx.body(), finishWitnessSet);
 
     console.log(signedTx.to_json());

@@ -11,6 +11,7 @@ import {
   SpendingValidator,
   toHex,
   TxHash,
+  Unit,
   UTxO,
 } from "https://deno.land/x/lucid@0.10.7/mod.ts";
 import * as cbor from "https://deno.land/x/cbor@v1.4.1/index.js";
@@ -98,7 +99,7 @@ const tokenName = "threadtoken";
 
 const validatorParametrized = validatorWithParams();
 
-const assetName = `${policyId}${fromText(tokenName)}`;
+const assetName: Unit = policyId + fromText(tokenName);
 
 const redeemer = Data.to(new Constr(0, []));
 
@@ -145,6 +146,7 @@ try {
       change: {
         address: localChange,
       },
+      coinSelection: true,
     });
 
   const txCbor = tx.toString();
