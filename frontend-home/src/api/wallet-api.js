@@ -2,7 +2,7 @@ import { Wallet } from "@cardano-foundation/cardano-connect-with-wallet-core";
 
 import * as CardanoWasm from "@emurgo/cardano-serialization-lib-browser";
 
-import { Lucid } from "lucid-cardano";
+import { Lucid, utxoToCore } from "lucid-cardano";
 
 const Buffer = require("buffer/").Buffer;
 
@@ -198,7 +198,6 @@ const buildTx = async (
   outputs,
   protocolParameters,
   auxiliaryData
-
 ) => {
   const txBuilderConfig = CardanoWasm.TransactionBuilderConfigBuilder.new()
     .coins_per_utxo_byte(
@@ -229,42 +228,38 @@ const buildTx = async (
 
   utxos.forEach((utxo) => utxosCore.add(utxo));
 
-  const scheme = {
-    input: {
-      transaction_id:
-        "919818c757b8242ffc60ed2ca4bdf4d2c0dea87203075143b1565978197dac3b",
-      index: 0,
+  const utxoi = {
+    txHash: "919818c757b8242ffc60ed2ca4bdf4d2c0dea87203075143b1565978197dac3b",
+    outputIndex: 0,
+    assets: {
+      lovelace: 10000000n,
+      "54a29c2626156de3af97cdead84264aaf0805857cc5c026af077fc3b746872656164746f6b656e":
+        1n,
     },
-    output: {
-      address:
-        "addr_test1wp4ep7h3mw4fvse8v8lmafzjpettgfm972r783mzlcemzrg5avvkf",
-      amount: {
-        coin: "10000000",
-        multiasset: {
-          "54a29c2626156de3af97cdead84264aaf0805857cc5c026af077fc3b746872656164746f6b656e":
-            "1",
-        },
-      },
-    },
-    plutus_data:
+    address: "addr_test1wp4ep7h3mw4fvse8v8lmafzjpettgfm972r783mzlcemzrg5avvkf",
+    datumHash:
+      "1cc953c6981e5e524f90f459f28847ab24455c9ee3ae7c8916d4889ceb2d8a11",
+    datum:
       "d8799f00581c424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2bff",
-    script_ref: null,
+    scriptRef: null,
   };
 
-  CardanoWasm.TransactionUnspentOutput.from_json(scheme);
+  try {
+    utxosCore.add(
+      CardanoWasm.TransactionUnspentOutput.from_hex(
+        Buffer.from(utxoToCore(utxoi).to_bytes()).toString("hex")
+      )
+    );
+  } catch (err) {
+    console.error(err);
+  }
 
   console.log(utxosCore.to_json());
-
-  console.log("1");
 
   txBuilder.add_inputs_from(
     utxosCore,
     CardanoWasm.CoinSelectionStrategyCIP2.LargestFirstMultiAsset
   );
-
-  txBuilder.add_input();
-
-  console.log("2");
 
   txBuilder.add_change_if_needed(
     CardanoWasm.Address.from_bech32(account.paymentAddr)

@@ -23,6 +23,7 @@
     "@vueuse/core": "^10.9.0",
     "axios": "^1.5.1",
     "buffer": "^6.0.3",
+    "cbor": "^9.0.2",
     "core-js": "^3.8.3",
     "lucid-cardano": "^0.10.7",
     "primeicons": "^7.0.0",
