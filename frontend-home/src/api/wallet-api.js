@@ -192,22 +192,20 @@ const balanceTx = (unbalancedTx) => {
 
     console.log("get", externalWitnesses.vkeys().get(0));
 
-    const puta = CardanoWasm.Vkeywitnesses.new();
+    const mixedVkeys = CardanoWasm.Vkeywitnesses.new();
 
-    puta.add(localWitnesses.vkeys().get(0));
+    mixedVkeys.add(localWitnesses.vkeys().get(0));
 
-    puta.add(externalWitnesses.vkeys().get(0));
+    mixedVkeys.add(externalWitnesses.vkeys().get(0));
 
-    console.log("puta", puta.to_json());
-
-    transactionWitnessSet.set_vkeys(puta);
+    transactionWitnessSet.set_vkeys(mixedVkeys);
 
     const signedTx = CardanoWasm.Transaction.new(
       tx.body(),
       transactionWitnessSet
     );
 
-    console.log(signedTx.witness_set().to_json());
+    console.log(signedTx.to_json());
 
     return connectedWallet.submitTx(signedTx);
   });
