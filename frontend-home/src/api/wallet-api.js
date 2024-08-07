@@ -153,7 +153,8 @@ const balanceTx = (unbalancedTx) => {
       utxos,
       utx.body().outputs(),
       pp,
-      null
+      null,
+      utx.body().inputs()
     );
 
     console.log(txBody.to_json());
@@ -196,7 +197,8 @@ const buildTx = async (
   utxos,
   outputs,
   protocolParameters,
-  auxiliaryData
+  auxiliaryData,
+  inputs
 ) => {
   const txBuilderConfig = CardanoWasm.TransactionBuilderConfigBuilder.new()
     .coins_per_utxo_byte(
@@ -229,6 +231,10 @@ const buildTx = async (
 
   console.log(utxosCore.to_json());
 
+  for (let i = 0; i < inputs.len(); i++) {
+    txBuilder.add_reference_input(inputs.get(i));
+  }
+  
   console.log("1");
 
   txBuilder.add_inputs_from(
