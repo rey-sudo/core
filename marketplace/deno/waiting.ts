@@ -116,7 +116,7 @@ try {
     .addSignerKey("424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b")
     .payToAddress(validatorParametrized.machineStateAddress, {
       [assetName]: BigInt(1),
-      lovelace: BigInt(9000000),
+      lovelace: BigInt(9000000)
     })
     .payToContract(
       validatorParametrized.machineStateAddress,

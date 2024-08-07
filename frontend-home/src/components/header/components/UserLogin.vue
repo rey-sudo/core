@@ -76,13 +76,9 @@ export default {
 
       lucidClient.selectWallet(getWallet());
 
-      try {
-        const result = await balanceTx(tx0);
+      const result = await balanceTx(tx0);
 
-        console.log(result);
-      } catch (err) {
-        console.error(err);
-      }
+      console.log(result);
     };
     return {
       handleSign,

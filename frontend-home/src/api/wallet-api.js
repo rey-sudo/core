@@ -146,6 +146,8 @@ const balanceTx = (unbalancedTx) => {
 
     const utx = CardanoWasm.Transaction.from_bytes(fromHexString(unbalancedTx));
 
+    console.log(utx.body().to_json());
+
     const txBody = await buildTx(
       { paymentAddr: changeAddrBech32 },
       utxos,
@@ -153,6 +155,8 @@ const balanceTx = (unbalancedTx) => {
       pp,
       null
     );
+
+    console.log(txBody.to_json());
 
     /////////////
 
@@ -186,19 +190,6 @@ const balanceTx = (unbalancedTx) => {
     );
   });
 };
-
-const WEIGHTS = Uint32Array.from([
-  200, // weight ideal > 100 inputs
-  1000, // weight ideal < 100 inputs
-  1500, // weight assets if plutus
-  800, // weight assets if not plutus
-  800, // weight distance if not plutus
-  5000, // weight utxos
-]);
-
-/**const TX = {
-  invalid_hereafter: 3600 * 6, //6h from current slot
-};*/
 
 const buildTx = async (
   account,
@@ -236,11 +227,13 @@ const buildTx = async (
 
   utxos.forEach((utxo) => utxosCore.add(utxo));
 
-  txBuilder.add_inputs_from(
-    utxosCore,
-    CardanoWasm.Address.from_bech32(account.paymentAddr),
-    WEIGHTS
-  );
+  console.log(utxosCore.to_json());
+
+  console.log("1");
+
+  txBuilder.add_inputs_from(utxosCore, 3);
+
+  console.log("2");
 
   txBuilder.add_change_if_needed(
     CardanoWasm.Address.from_bech32(account.paymentAddr)
