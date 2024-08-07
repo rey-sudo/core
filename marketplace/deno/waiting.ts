@@ -114,6 +114,10 @@ try {
     .newTx()
     .collectFrom([utxo], redeemer)
     .addSignerKey("424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b")
+    .payToAddress(validatorParametrized.machineStateAddress, {
+      [assetName]: BigInt(1),
+      lovelace: BigInt(9000000),
+    })
     .payToContract(
       validatorParametrized.machineStateAddress,
       { inline: datum },
@@ -121,9 +125,6 @@ try {
         lovelace: BigInt(10000000),
       },
     )
-    .payToAddress(validatorParametrized.machineStateAddress, {
-      [assetName]: BigInt(1),
-    })
     .attachSpendingValidator(validators.machineState as SpendingValidator)
     .complete();
 

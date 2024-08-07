@@ -138,8 +138,6 @@ const balanceTx = (unbalancedTx) => {
 
     const utxosCbor = promises[1];
 
-    console.log(utxosCbor);
-
     const utxos = utxosCbor.map((cbor) =>
       CardanoWasm.TransactionUnspentOutput.from_bytes(fromHexString(cbor))
     );
@@ -148,30 +146,20 @@ const balanceTx = (unbalancedTx) => {
 
     const utx = CardanoWasm.Transaction.from_bytes(fromHexString(unbalancedTx));
 
-    console.log(utx.body().to_json());
-
-     await buildTx(
+    const txBody = await buildTx(
       { paymentAddr: changeAddrBech32 },
       utxos,
       utx.body().outputs(),
       pp,
-      null,
-      utx.body().inputs()
+      null
     );
 
-   
+    /////////////
 
-
-
-    console.log("NEW_BODY", utx.body().to_json());
-
-    ////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////
-    
     const transactionWitnessSet = CardanoWasm.TransactionWitnessSet.new();
 
     const tx = CardanoWasm.Transaction.new(
-      utx.body(),
+      txBody,
       CardanoWasm.TransactionWitnessSet.from_bytes(
         transactionWitnessSet.to_bytes()
       )
@@ -217,8 +205,7 @@ const buildTx = async (
   utxos,
   outputs,
   protocolParameters,
-  auxiliaryData,
-  inputs
+  auxiliaryData
 ) => {
   const txBuilderConfig = CardanoWasm.TransactionBuilderConfigBuilder.new()
     .coins_per_utxo_byte(
@@ -243,27 +230,17 @@ const buildTx = async (
 
   txBuilder.add_output(outputs.get(0));
 
-  for (let i = 0; i < outputs.len(); i++) {
-    txBuilder.add_output(outputs.get(i));
-  }
-
   if (auxiliaryData) txBuilder.set_auxiliary_data(auxiliaryData);
 
   const utxosCore = CardanoWasm.TransactionUnspentOutputs.new();
 
   utxos.forEach((utxo) => utxosCore.add(utxo));
 
-  console.log(utxosCore.to_json());
-
   txBuilder.add_inputs_from(
     utxosCore,
     CardanoWasm.Address.from_bech32(account.paymentAddr),
     WEIGHTS
   );
-
-  for (let i = 0; i < inputs.len(); i++) {
-    txBuilder.add_reference_input(inputs.get(i));
-  }
 
   txBuilder.add_change_if_needed(
     CardanoWasm.Address.from_bech32(account.paymentAddr)
