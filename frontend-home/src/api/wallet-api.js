@@ -146,6 +146,8 @@ const balanceTx = (unbalancedTx) => {
 
     const utx = CardanoWasm.Transaction.from_bytes(fromHexString(unbalancedTx));
 
+    console.log(utx.to_json());
+
     await buildTx(
       { paymentAddr: changeAddrBech32 },
       utxos,
@@ -194,10 +196,13 @@ const balanceTx = (unbalancedTx) => {
 
     transactionWitnessSet.set_vkeys(mixedVkeys);
 
-    const signedTx = CardanoWasm.Transaction.new(
-      tx.body(),
-      transactionWitnessSet
-    );
+    const finishWitnessSet = utx.witness_set();
+
+    finishWitnessSet.set_vkeys(mixedVkeys);
+
+    console.log("OLD SET", finishWitnessSet.to_json());
+
+    const signedTx = CardanoWasm.Transaction.new(tx.body(), finishWitnessSet);
 
     console.log(signedTx.to_json());
 
