@@ -109,14 +109,26 @@ const datum = Data.to(
   ]),
 );
 
+const externalAddress =
+  "addr_test1qppygdhzm0t7nnlclmds3dy0wc3du870dpy48juu0xxuu2aefdfvc4e0785y7vfhwlmsn3rn26mzvv9md0mhnkpjlc4s0jshh4";
+
+const utxis = await lucid.utxosAt(
+  externalAddress,
+);
+
+const localChange = await lucid.wallet.address();
+
+const productPrice = 23000000n;
+
+const externalADA = 9606467635n;
 try {
   const tx = await lucid
     .newTx()
-    .collectFrom([utxo], redeemer)
+    .collectFrom([utxo, utxis[0]], redeemer)
     .addSignerKey("424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b")
     .payToAddress(validatorParametrized.machineStateAddress, {
       [assetName]: BigInt(1),
-      lovelace: BigInt(9000000)
+      lovelace: BigInt(9000000),
     })
     .payToContract(
       validatorParametrized.machineStateAddress,
@@ -125,8 +137,15 @@ try {
         lovelace: BigInt(10000000),
       },
     )
+    .payToAddress(externalAddress, {
+      lovelace: BigInt(externalADA - productPrice),
+    })
     .attachSpendingValidator(validators.machineState as SpendingValidator)
-    .complete();
+    .complete({
+      change: {
+        address: localChange,
+      },
+    });
 
   console.log(await tx.toString());
 } catch (err) {
