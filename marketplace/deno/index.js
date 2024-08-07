@@ -23,7 +23,7 @@ const blaze = await Blaze.from(provider, wallet);
 
 const tx = await blaze
   .newTransaction()
-  .payLovelace(targetWallet, 10n * 1_000_000n)
+  .payLovelace(targetWallet, 13n * 1_000_000n)
   .addRequiredSigner("424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b")
   .complete();
 
