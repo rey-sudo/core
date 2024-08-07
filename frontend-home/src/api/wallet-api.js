@@ -231,16 +231,16 @@ const buildTx = async (
 
   console.log(utxosCore.to_json());
 
-  for (let i = 0; i < inputs.len(); i++) {
-    txBuilder.add_reference_input(inputs.get(i));
-  }
-  
   console.log("1");
 
   txBuilder.add_inputs_from(
     utxosCore,
     CardanoWasm.CoinSelectionStrategyCIP2.LargestFirstMultiAsset
   );
+
+  for (let i = 0; i < inputs.len(); i++) {
+    txBuilder.add_reference_input(inputs.get(i));
+  }
 
   console.log("2");
 
