@@ -129,33 +129,18 @@ const balanceTx = (unbalancedTx) => {
     connectedWallet.getChangeAddress(),
     connectedWallet.getUtxos(),
     fetchProtocolParameters(),
-  ]).then(async (promises) => {
-    const changeAddrCbor = promises[0];
+  ]).then(async () => {
 
-    const changeAddrBech32 = CardanoWasm.Address.from_bytes(
-      fromHexString(changeAddrCbor)
-    ).to_bech32();
-
-    const utxosCbor = promises[1];
-
-    const utxos = utxosCbor.map((cbor) =>
-      CardanoWasm.TransactionUnspentOutput.from_bytes(fromHexString(cbor))
-    );
-
-    const pp = promises[2];
 
     const utx = CardanoWasm.Transaction.from_bytes(fromHexString(unbalancedTx));
 
-    await buildTx(
-      { paymentAddr: changeAddrBech32 },
-      utxos,
-      utx.body().outputs(),
-      pp
-    );
+
 
     /////////////
 
     const tx = CardanoWasm.Transaction.new(utx.body(), utx.witness_set());
+
+    console.log("BODY", tx.to_json());
 
     let txVkeyWitnesses = await connectedWallet.signTx(
       Buffer.from(tx.to_bytes(), "utf8").toString("hex"),
@@ -183,67 +168,6 @@ const balanceTx = (unbalancedTx) => {
   });
 };
 
-const WEIGHTS = Uint32Array.from([
-  200, // weight ideal > 100 inputs
-  1000, // weight ideal < 100 inputs
-  1500, // weight assets if plutus
-  800, // weight assets if not plutus
-  800, // weight distance if not plutus
-  5000, // weight utxos
-]);
-
-/**const TX = {
-  invalid_hereafter: 3600 * 6, //6h from current slot
-};*/
-
-const buildTx = async (
-  account,
-  utxos,
-  outputs,
-  protocolParameters,
-  auxiliaryData = null
-) => {
-  const txBuilderConfig = CardanoWasm.TransactionBuilderConfigBuilder.new()
-    .coins_per_utxo_byte(
-      CardanoWasm.BigNum.from_str(protocolParameters.coinsPerUtxoWord)
-    )
-    .fee_algo(
-      CardanoWasm.LinearFee.new(
-        CardanoWasm.BigNum.from_str(protocolParameters.linearFee.minFeeA),
-        CardanoWasm.BigNum.from_str(protocolParameters.linearFee.minFeeB)
-      )
-    )
-    .key_deposit(CardanoWasm.BigNum.from_str(protocolParameters.keyDeposit))
-    .pool_deposit(CardanoWasm.BigNum.from_str(protocolParameters.poolDeposit))
-    .max_tx_size(protocolParameters.maxTxSize)
-    .max_value_size(protocolParameters.maxValSize)
-    .build();
-  //.collateral_percentage(protocolParameters.collateralPercentage)
-  //.max_collateral_inputs(protocolParameters.maxCollateralInputs)
-  //.ex_unit_prices(CardanoWasm.ExUnitPrices)
-
-  const txBuilder = CardanoWasm.TransactionBuilder.new(txBuilderConfig);
-
-  txBuilder.add_output(outputs.get(0));
-
-  if (auxiliaryData) txBuilder.set_auxiliary_data(auxiliaryData);
-
-  const utxosCore = CardanoWasm.TransactionUnspentOutputs.new();
-
-  utxos.forEach((utxo) => utxosCore.add(utxo));
-
-  txBuilder.add_inputs_from(
-    utxosCore,
-    CardanoWasm.Address.from_bech32(account.paymentAddr),
-    WEIGHTS
-  );
-
-  txBuilder.add_change_if_needed(
-    CardanoWasm.Address.from_bech32(account.paymentAddr)
-  );
-
-  return txBuilder.build();
-};
 
 const fetchProtocolParameters = () => {
   return fetch("https://cardano-preview.blockfrost.io/api/v0/blocks/latest", {
