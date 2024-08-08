@@ -24,6 +24,7 @@ const lucid = await Lucid.new(
   "Preview",
 );
 
+
 const blueprint = JSON.parse(await Deno.readTextFile("plutus.json"));
 
 export type Validators = {
@@ -76,7 +77,6 @@ const validatorWithParams = () => {
 };
 
 //////////////////////////////////////////////////////////////
-lucid.selectWalletFromPrivateKey(await Deno.readTextFile("./me.sk"));
 
 const policyId = "54a29c2626156de3af97cdead84264aaf0805857cc5c026af077fc3b";
 
@@ -113,23 +113,22 @@ const datum = Data.to(
 const externalAddress =
   "addr_test1qppygdhzm0t7nnlclmds3dy0wc3du870dpy48juu0xxuu2aefdfvc4e0785y7vfhwlmsn3rn26mzvv9md0mhnkpjlc4s0jshh4";
 
-const utxis = await lucid.utxosAt(
+const externalAddressUtxos = await lucid.utxosAt(
   externalAddress,
 );
 
-const localChange = await lucid.wallet.address();
+lucid.selectWalletFrom({
+  address: externalAddress,
+  utxos: externalAddressUtxos,
+});
 
 const productCollateral = 23000000n;
 
-const fee = 1000000n;
-
-const externalADA = 9606467635n - fee;
 try {
   const tx = await lucid
     .newTx()
-    .collectFrom([utxo, utxis[0]], redeemer)
+    .collectFrom([utxo, externalAddressUtxos[0]], redeemer)
     .addSignerKey("424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b")
-    .addSigner(await lucid.wallet.address())
     .payToContract(
       validatorParametrized.machineStateAddress,
       { inline: datum },
@@ -138,13 +137,10 @@ try {
         lovelace: BigInt(productCollateral),
       },
     )
-    .payToAddress(externalAddress, {
-      lovelace: BigInt(externalADA - productCollateral),
-    })
     .attachSpendingValidator(validators.machineState as SpendingValidator)
     .complete({
       change: {
-        address: localChange,
+        address: externalAddress,
       },
       coinSelection: true,
     });
@@ -153,9 +149,6 @@ try {
 
   console.log(txCbor);
 
-  const partial = await tx.partialSign();
-
-  console.log(partial);
 } catch (err) {
   console.log(err);
 }
