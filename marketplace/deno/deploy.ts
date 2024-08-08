@@ -16,10 +16,10 @@ import * as cbor from "https://deno.land/x/cbor@v1.4.1/index.js";
 
 const lucid = await Lucid.new(
   new Blockfrost(
-    "https://cardano-preview.blockfrost.io/api/v0",
-    "previewgTjbjYtdKdOcNmhtu6H9snNl3DhnaxQf",
+    "https://cardano-preprod.blockfrost.io/api/v0",
+    "preprodex26NYImZOT84XAA67qhyHyA7TT6PCGI",
   ),
-  "Preview",
+  "Preprod",
 );
 
 const blueprint = JSON.parse(await Deno.readTextFile("plutus.json"));
@@ -60,7 +60,7 @@ export function readValidators(): Validators {
 
 //////////////////////////////////////////////////////////////
 
-lucid.selectWalletFromPrivateKey(await Deno.readTextFile("./me.sk"));
+lucid.selectWalletFromPrivateKey(await Deno.readTextFile("./preprod.sk"));
 
 const validators = await readValidators();
 
@@ -131,7 +131,7 @@ const tx = await lucid
   )
   .payToContract(validatorParametrized.machineStateAddress, { inline: datum }, {
     [assetName]: BigInt(1),
-    lovelace: BigInt(10000000),
+    lovelace: BigInt(20000000),
   })
   .complete();
 

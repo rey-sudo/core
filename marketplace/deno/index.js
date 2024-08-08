@@ -20,8 +20,8 @@ let contractAddress = Core.addressFromBech32(
 );
 
 const provider = new Blockfrost({
-  network: "cardano-preview",
-  projectId: "previewgTjbjYtdKdOcNmhtu6H9snNl3DhnaxQf",
+  network: "cardano-preprod",
+  projectId: "preprodex26NYImZOT84XAA67qhyHyA7TT6PCGI",
 });
 
 const wallet = new ColdWallet(externalWallet, 2, provider);
@@ -31,7 +31,7 @@ const blaze = await Blaze.from(provider, wallet);
 ///////////////////////////////////
 
 const threadTokenUnit =
-  "54a29c2626156de3af97cdead84264aaf0805857cc5c026af077fc3b746872656164746f6b656e";
+  "e47c725c66c8a898833d9664ea0b26182f1270b1e65f3225a2de26c1746872656164746f6b656e";
 
 const assetId = Core.AssetId(threadTokenUnit);
 
@@ -90,4 +90,4 @@ const cbor = tx.toCbor();
 
 console.log(cbor);
 
-//"previewgTjbjYtdKdOcNmhtu6H9snNl3DhnaxQf"
+
