@@ -24,12 +24,12 @@ const lucid = await Lucid.new(
 
 const blueprint = JSON.parse(await Deno.readTextFile("plutus.json"));
 
-export type Validators = {
+type Validators = {
   threadToken: MintingPolicy;
-  machineState: SpendingValidator;
+  stateMachine: SpendingValidator;
 };
 
-export function readValidators(): Validators {
+function readValidators(): Validators {
   const threadToken = blueprint.validators.find(
     (v: any) => v.title === "marketplace.threadtoken",
   );
@@ -38,18 +38,18 @@ export function readValidators(): Validators {
     throw new Error("threadToken validator not found");
   }
 
-  const machineState = blueprint.validators.find((v: any) =>
+  const stateMachine = blueprint.validators.find((v: any) =>
     v.title === "marketplace.machinestate"
   );
 
-  if (!machineState) {
-    throw new Error("machineState validator not found");
+  if (!stateMachine) {
+    throw new Error("stateMachine validator not found");
   }
 
   return {
-    machineState: {
+    stateMachine: {
       type: "PlutusV2",
-      script: machineState.compiledCode,
+      script: stateMachine.compiledCode,
     },
     threadToken: {
       type: "PlutusV2",
@@ -58,7 +58,8 @@ export function readValidators(): Validators {
   };
 }
 
-//////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
 
 lucid.selectWalletFromPrivateKey(await Deno.readTextFile("./preprod.sk"));
 
@@ -77,7 +78,7 @@ const validatorWithParams = (tokenName: string, outRef: Data) => {
 
   const machineStateAddress = lucid.utils.validatorToAddress({
     type: "PlutusV2",
-    script: validators.machineState.script,
+    script: validators.stateMachine.script,
   });
 
   return {
@@ -91,7 +92,9 @@ const validatorWithParams = (tokenName: string, outRef: Data) => {
   };
 };
 
-//////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
 const utxos = await lucid?.wallet.getUtxos()!;
 
 const utxo = utxos[0];
@@ -121,6 +124,8 @@ const datum = Data.to(
   ]),
 );
 
+const minLovelaceUtxo = 2n * 1_000_000n;
+
 const tx = await lucid
   .newTx()
   .collectFrom([utxo])
@@ -131,7 +136,7 @@ const tx = await lucid
   )
   .payToContract(validatorParametrized.machineStateAddress, { inline: datum }, {
     [assetName]: BigInt(1),
-    lovelace: BigInt(10000000),
+    lovelace: BigInt(minLovelaceUtxo),
   })
   .complete();
 
