@@ -30,9 +30,9 @@ const blaze = await Blaze.from(provider, wallet);
 
 ///////////////////////////////////
 
-const btnUnit =
+const threadTokenUnit =
   "54a29c2626156de3af97cdead84264aaf0805857cc5c026af077fc3b746872656164746f6b656e";
-const assetId = Core.AssetId(btnUnit);
+const assetId = Core.AssetId(threadTokenUnit);
 
 const assetName = Buffer.from(
   Core.AssetId.getAssetName(assetId),
@@ -53,7 +53,7 @@ for (const utxo of utxos) {
   const amountADA = utxo.output().amount().coin();
   console.log(`Amount of ADA: ${amountADA / 1000000n}`);
 
-  const amountBTN = utxo.output().amount().multiasset().get(btnUnit);
+  const amountBTN = utxo.output().amount().multiasset().get(threadTokenUnit);
   console.log(`Amount of ${assetName}: ${amountBTN}`);
 }
 
@@ -71,7 +71,7 @@ const stateMachineScript = Core.Script.newPlutusV2Script(
   )
 );
 
-const valuex = makeValue([[[assetName, 1n]]]);
+const valuex = makeValue([[assetName, 1n]]);
 
 const tx = await blaze
   .newTransaction()
