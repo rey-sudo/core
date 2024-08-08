@@ -76,7 +76,7 @@ const minUtxoValue = 10n * 1_000_000n;
 
 const threadTokenAsset = makeValue(minUtxoValue, ...[[threadTokenUnit, 1n]]);
 
-const minFee = 2n * 1_000_000n;
+const minFee = 3n * 1_000_000n;
 
 const tx = await blaze
   .newTransaction()
