@@ -146,7 +146,7 @@ const balanceTx = (unbalancedTx) => {
 
     const utx = CardanoWasm.Transaction.from_bytes(fromHexString(unbalancedTx));
 
-    const txBody = await buildTx(
+    await buildTx(
       { paymentAddr: changeAddrBech32 },
       utxos,
       utx.body().outputs(),
@@ -155,14 +155,7 @@ const balanceTx = (unbalancedTx) => {
 
     /////////////
 
-    const transactionWitnessSet = CardanoWasm.TransactionWitnessSet.new();
-
-    const tx = CardanoWasm.Transaction.new(
-      txBody,
-      CardanoWasm.TransactionWitnessSet.from_bytes(
-        transactionWitnessSet.to_bytes()
-      )
-    );
+    const tx = CardanoWasm.Transaction.new(utx.body(), utx.witness_set());
 
     let txVkeyWitnesses = await connectedWallet.signTx(
       Buffer.from(tx.to_bytes(), "utf8").toString("hex"),
@@ -173,12 +166,16 @@ const balanceTx = (unbalancedTx) => {
       Buffer.from(txVkeyWitnesses, "hex")
     );
 
-    transactionWitnessSet.set_vkeys(txVkeyWitnesses.vkeys());
+    const newTransactionWitnessSet = utx.witness_set();
+
+    newTransactionWitnessSet.set_vkeys(txVkeyWitnesses.vkeys());
 
     const signedTx = CardanoWasm.Transaction.new(
       tx.body(),
-      transactionWitnessSet
+      newTransactionWitnessSet
     );
+
+    console.log("NEWBODY", signedTx.to_json());
 
     return connectedWallet.submitTx(
       Buffer.from(signedTx.to_bytes(), "utf8").toString("hex")
@@ -300,5 +297,5 @@ export {
   lucidClient,
   signMessage,
   getAddress,
-  getMessage
+  getMessage,
 };
