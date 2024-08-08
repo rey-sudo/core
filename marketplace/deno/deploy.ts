@@ -111,8 +111,8 @@ const policyId = validatorParametrized.threadTokenPolicyId;
 
 const assetName = `${policyId}${fromText(tokenName)}`;
 
-console.log("policyId:" + policyId);
-console.log("policyId:" + assetName);
+console.log("policyId: " + policyId);
+console.log("policyId: " + assetName);
 
 const datum = Data.to(
   new Constr(0, [
@@ -131,7 +131,7 @@ const tx = await lucid
   )
   .payToContract(validatorParametrized.machineStateAddress, { inline: datum }, {
     [assetName]: BigInt(1),
-    lovelace: BigInt(20000000),
+    lovelace: BigInt(10000000),
   })
   .complete();
 
