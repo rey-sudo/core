@@ -2724,6 +2724,11 @@
   "workspace": {
     "dependencies": [
       "jsr:@std/assert@1"
-    ]
+    ],
+    "packageJson": {
+      "dependencies": [
+        "npm:@blaze-cardano/sdk@^0.1.4"
+      ]
+    }
   }
 }
