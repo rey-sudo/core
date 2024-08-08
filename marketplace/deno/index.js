@@ -1,4 +1,11 @@
-import { ColdWallet, Core, Blaze, Blockfrost } from "@blaze-cardano/sdk";
+import {
+  ColdWallet,
+  Core,
+  Data,
+  Blaze,
+  makeValue,
+  Blockfrost,
+} from "@blaze-cardano/sdk";
 
 let externalWallet = Core.addressFromBech32(
   "addr_test1qppygdhzm0t7nnlclmds3dy0wc3du870dpy48juu0xxuu2aefdfvc4e0785y7vfhwlmsn3rn26mzvv9md0mhnkpjlc4s0jshh4"
@@ -32,26 +39,34 @@ const assetName = Buffer.from(
   "hex"
 ).toString();
 
-const utxos = await provider.getUnspentOutputsWithAsset(contractAddress, assetId);
+const utxos = await provider.getUnspentOutputsWithAsset(
+  contractAddress,
+  assetId
+);
 
 console.log(`UTxOs with ${assetName} Asset (FT):${utxos}`);
 
 for (const utxo of utxos) {
-    const utxoRef = `${utxo.input().transactionId()}#${utxo.input().index()}`;
-    console.log(utxoRef);
-  
-    const amountADA = utxo.output().amount().coin();
-    console.log(`Amount of ADA: ${amountADA / 1000000n}`);
-  
-    const amountBTN = utxo.output().amount().multiasset().get(btnUnit);
-    console.log(`Amount of ${assetName}: ${amountBTN}`);
-  }
-  
-  
+  const utxoRef = `${utxo.input().transactionId()}#${utxo.input().index()}`;
+  console.log(utxoRef);
+
+  const amountADA = utxo.output().amount().coin();
+  console.log(`Amount of ADA: ${amountADA / 1000000n}`);
+
+  const amountBTN = utxo.output().amount().multiasset().get(btnUnit);
+  console.log(`Amount of ${assetName}: ${amountBTN}`);
+}
+
 //////////////////////////////////
+
+const stateMachineRedeemer = Core.PlutusData.newConstrPlutusData(
+  new Core.ConstrPlutusData(0n, new Core.PlutusList())
+);
 
 const tx = await blaze
   .newTransaction()
+  .addInput(utxos[0], stateMachineRedeemer)
+  .payAssets(targetWallet, makeValue(0n, ...[assetName, 1n]))
   .payLovelace(targetWallet, 13n * 1_000_000n)
   .addRequiredSigner("424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b")
   .setChangeAddress(externalWallet)
@@ -60,11 +75,5 @@ const tx = await blaze
 const cbor = tx.toCbor();
 
 console.log(cbor);
-
-
-
-
-
-
 
 //"previewgTjbjYtdKdOcNmhtu6H9snNl3DhnaxQf"
