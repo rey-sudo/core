@@ -81,7 +81,7 @@ const tx = await blaze
   .addInput(utxos[0], stateMachineRedeemer)
   .payAssets(targetWallet, threadTokenAsset)
   .provideScript(stateMachineScript)
-  .payLovelace(targetWallet, 13n * 1_000_000n)
+  .payLovelace(targetWallet, 20n * 1_000_000n)
   .addRequiredSigner("424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b")
   .setChangeAddress(externalWallet)
   .complete();
