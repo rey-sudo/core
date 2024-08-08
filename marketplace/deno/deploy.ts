@@ -3,7 +3,6 @@ import {
   Blockfrost,
   C,
   Constr,
-  Unit,
   Data,
   fromHex,
   fromText,
@@ -12,6 +11,7 @@ import {
   SpendingValidator,
   toHex,
   TxHash,
+  Unit,
 } from "https://deno.land/x/lucid@0.10.7/mod.ts";
 import * as cbor from "https://deno.land/x/cbor@v1.4.1/index.js";
 
@@ -23,6 +23,11 @@ const lucid = await Lucid.new(
   "Preprod",
 );
 
+lucid.selectWalletFromPrivateKey(await Deno.readTextFile("./preprod.sk"));
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
 const blueprint = JSON.parse(await Deno.readTextFile("plutus.json"));
 
 type Validators = {
@@ -30,7 +35,7 @@ type Validators = {
   stateMachine: SpendingValidator;
 };
 
-function readValidators(): Validators {
+const readValidators = (): Validators => {
   const threadToken = blueprint.validators.find(
     (v: any) => v.title === "marketplace.threadtoken",
   );
@@ -57,12 +62,10 @@ function readValidators(): Validators {
       script: threadToken.compiledCode,
     },
   };
-}
+};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
-
-lucid.selectWalletFromPrivateKey(await Deno.readTextFile("./preprod.sk"));
 
 const validators = await readValidators();
 
@@ -132,10 +135,14 @@ const tx = await lucid
     { [assetName]: BigInt(1) },
     mintRedeemer,
   )
-  .payToContract(parameterizedValidators.stateMachineAddress, { inline: datum }, {
-    [assetName]: BigInt(1),
-    lovelace: BigInt(minLovelaceUtxo),
-  })
+  .payToContract(
+    parameterizedValidators.stateMachineAddress,
+    { inline: datum },
+    {
+      [assetName]: BigInt(1),
+      lovelace: BigInt(minLovelaceUtxo),
+    },
+  )
   .complete();
 
 const signedTx = await tx.sign().complete();
@@ -146,4 +153,4 @@ console.log(txHash);
 
 console.log("policyId: " + policyId);
 
-console.log("policyId: " + assetName);
+console.log("assetName: " + assetName);
