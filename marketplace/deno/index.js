@@ -39,6 +39,8 @@ const assetName = Buffer.from(
   "hex"
 ).toString();
 
+
+
 const utxos = await provider.getUnspentOutputsWithAsset(
   contractAddress,
   assetId
