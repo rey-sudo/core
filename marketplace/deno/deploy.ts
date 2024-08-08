@@ -65,7 +65,7 @@ lucid.selectWalletFromPrivateKey(await Deno.readTextFile("./preprod.sk"));
 
 const validators = await readValidators();
 
-const validatorWithParams = (tokenName: string, outRef: Data) => {
+const validatorsWithParams = (tokenName: string, outRef: Data) => {
   const threadToken = applyParamsToScript(validators.threadToken.script, [
     fromText(tokenName),
     outRef,
@@ -106,11 +106,11 @@ const outRef = new Constr(0, [
 
 const tokenName = "threadtoken";
 
-const validatorParametrized = validatorWithParams(tokenName, outRef);
+const parametrizedValidators = validatorsWithParams(tokenName, outRef);
 
 const mintRedeemer = Data.to(new Constr(0, []));
 
-const policyId = validatorParametrized.threadTokenPolicyId;
+const policyId = parametrizedValidators.threadTokenPolicyId;
 
 const assetName = `${policyId}${fromText(tokenName)}`;
 
@@ -129,12 +129,12 @@ const minLovelaceUtxo = 2n * 1_000_000n;
 const tx = await lucid
   .newTx()
   .collectFrom([utxo])
-  .attachMintingPolicy(validatorParametrized.threadToken as SpendingValidator)
+  .attachMintingPolicy(parametrizedValidators.threadToken as SpendingValidator)
   .mintAssets(
     { [assetName]: BigInt(1) },
     mintRedeemer,
   )
-  .payToContract(validatorParametrized.machineStateAddress, { inline: datum }, {
+  .payToContract(parametrizedValidators.machineStateAddress, { inline: datum }, {
     [assetName]: BigInt(1),
     lovelace: BigInt(minLovelaceUtxo),
   })
