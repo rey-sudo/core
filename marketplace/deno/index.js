@@ -72,13 +72,13 @@ const stateMachineScript = Core.Script.newPlutusV2Script(
   )
 );
 
-const valuex = makeValue([[assetName, 1n]]);
+const valuex = makeValue([[threadTokenUnit, 1n]]);
 
 const tx = await blaze
   .newTransaction()
   .addInput(utxos[0], stateMachineRedeemer)
-  .provideScript(stateMachineScript)
   .payAssets(targetWallet, valuex)
+  .provideScript(stateMachineScript)
   .payLovelace(targetWallet, 13n * 1_000_000n)
   .addRequiredSigner("424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b")
   .setChangeAddress(externalWallet)
