@@ -66,7 +66,6 @@ const stateMachineRedeemer = Core.PlutusData.newConstrPlutusData(
 const tx = await blaze
   .newTransaction()
   .addInput(utxos[0], stateMachineRedeemer)
-  .payAssets(targetWallet, makeValue(0n, ...[assetName, 1n]))
   .payLovelace(targetWallet, 13n * 1_000_000n)
   .addRequiredSigner("424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b")
   .setChangeAddress(externalWallet)
