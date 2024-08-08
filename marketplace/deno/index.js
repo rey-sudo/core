@@ -76,6 +76,8 @@ const minUtxoValue = 10n * 1_000_000n;
 
 const threadTokenAsset = makeValue(minUtxoValue, ...[[threadTokenUnit, 1n]]);
 
+const minFee = 2n * 1_000_000n;
+
 const tx = await blaze
   .newTransaction()
   .addInput(utxos[0], stateMachineRedeemer)
@@ -84,10 +86,9 @@ const tx = await blaze
   .payLovelace(targetWallet, 20n * 1_000_000n)
   .addRequiredSigner("424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b")
   .setChangeAddress(externalWallet)
+  .setMinimumFee(minFee)
   .complete();
 
 const cbor = tx.toCbor();
 
 console.log(cbor);
-
-
