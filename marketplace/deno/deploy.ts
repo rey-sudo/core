@@ -77,7 +77,7 @@ const validatorsWithParams = (tokenName: string, outRef: Data) => {
     script: threadToken,
   });
 
-  const machineStateAddress = lucid.utils.validatorToAddress({
+  const stateMachineAddress = lucid.utils.validatorToAddress({
     type: "PlutusV2",
     script: validators.stateMachine.script,
   });
@@ -89,16 +89,16 @@ const validatorsWithParams = (tokenName: string, outRef: Data) => {
     },
     threadTokenPolicyId,
 
-    machineStateAddress,
+    stateMachineAddress,
   };
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-const utxos = await lucid?.wallet.getUtxos()!;
+const localWalletUtxos = await lucid?.wallet.getUtxos()!;
 
-const utxo = utxos[0];
+const utxo = localWalletUtxos[0];
 
 const outRef = new Constr(0, [
   new Constr(0, [utxo.txHash]),
@@ -114,10 +114,6 @@ const mintRedeemer = Data.to(new Constr(0, []));
 const policyId = parameterizedValidators.threadTokenPolicyId;
 
 const assetName: Unit = policyId + fromText(tokenName);
-
-console.log("policyId: " + policyId);
-
-console.log("policyId: " + assetName);
 
 const datum = Data.to(
   new Constr(0, [
@@ -136,7 +132,7 @@ const tx = await lucid
     { [assetName]: BigInt(1) },
     mintRedeemer,
   )
-  .payToContract(parameterizedValidators.machineStateAddress, { inline: datum }, {
+  .payToContract(parameterizedValidators.stateMachineAddress, { inline: datum }, {
     [assetName]: BigInt(1),
     lovelace: BigInt(minLovelaceUtxo),
   })
@@ -147,3 +143,7 @@ const signedTx = await tx.sign().complete();
 const txHash = await signedTx.submit();
 
 console.log(txHash);
+
+console.log("policyId: " + policyId);
+
+console.log("policyId: " + assetName);
