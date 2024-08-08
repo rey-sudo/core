@@ -74,16 +74,30 @@ const stateMachineScript = Core.Script.newPlutusV2Script(
 
 const minUtxoValue = 10n * 1_000_000n;
 
-const threadTokenAsset = makeValue(minUtxoValue, ...[[threadTokenUnit, 1n]]);
+const productPrice = 25n * 1_000_000n;
+
+const threadTokenAsset = makeValue(productPrice, ...[[threadTokenUnit, 1n]]);
 
 const minFee = 3n * 1_000_000n;
+
+
+const data = {
+  state: 1n,
+  seller: "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b",
+};
+
+const Datum = Data.Object({
+  state: Data.Integer(),
+  seller: Data.Bytes(),
+});
+
+const waitingDatum = Data.to(data, Datum);
 
 const tx = await blaze
   .newTransaction()
   .addInput(utxos[0], stateMachineRedeemer)
-  .payAssets(targetWallet, threadTokenAsset)
+  .lockAssets(contractAddress, threadTokenAsset, waitingDatum)
   .provideScript(stateMachineScript)
-  .payLovelace(targetWallet, 20n * 1_000_000n)
   .addRequiredSigner("424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b")
   .setChangeAddress(externalWallet)
   .setMinimumFee(minFee)
