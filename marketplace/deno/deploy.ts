@@ -3,6 +3,7 @@ import {
   Blockfrost,
   C,
   Constr,
+  Unit,
   Data,
   fromHex,
   fromText,
@@ -112,9 +113,10 @@ const mintRedeemer = Data.to(new Constr(0, []));
 
 const policyId = parameterizedValidators.threadTokenPolicyId;
 
-const assetName = `${policyId}${fromText(tokenName)}`;
+const assetName: Unit = policyId + fromText(tokenName);
 
 console.log("policyId: " + policyId);
+
 console.log("policyId: " + assetName);
 
 const datum = Data.to(
