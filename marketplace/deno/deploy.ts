@@ -106,11 +106,11 @@ const outRef = new Constr(0, [
 
 const tokenName = "threadtoken";
 
-const parametrizedValidators = validatorsWithParams(tokenName, outRef);
+const parameterizedValidators = validatorsWithParams(tokenName, outRef);
 
 const mintRedeemer = Data.to(new Constr(0, []));
 
-const policyId = parametrizedValidators.threadTokenPolicyId;
+const policyId = parameterizedValidators.threadTokenPolicyId;
 
 const assetName = `${policyId}${fromText(tokenName)}`;
 
@@ -129,12 +129,12 @@ const minLovelaceUtxo = 2n * 1_000_000n;
 const tx = await lucid
   .newTx()
   .collectFrom([utxo])
-  .attachMintingPolicy(parametrizedValidators.threadToken as SpendingValidator)
+  .attachMintingPolicy(parameterizedValidators.threadToken as SpendingValidator)
   .mintAssets(
     { [assetName]: BigInt(1) },
     mintRedeemer,
   )
-  .payToContract(parametrizedValidators.machineStateAddress, { inline: datum }, {
+  .payToContract(parameterizedValidators.machineStateAddress, { inline: datum }, {
     [assetName]: BigInt(1),
     lovelace: BigInt(minLovelaceUtxo),
   })
