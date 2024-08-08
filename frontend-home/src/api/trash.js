@@ -2,7 +2,7 @@ import { Wallet } from "@cardano-foundation/cardano-connect-with-wallet-core";
 
 import * as CardanoWasm from "@emurgo/cardano-serialization-lib-browser";
 
-import { Lucid } from "lucid-cardano";
+import { Lucid, utxoToCore } from "lucid-cardano";
 
 const Buffer = require("buffer/").Buffer;
 
@@ -146,11 +146,15 @@ const balanceTx = (unbalancedTx) => {
 
     const utx = CardanoWasm.Transaction.from_bytes(fromHexString(unbalancedTx));
 
-    const txBody = await buildTx(
+    console.log(utx.to_json());
+
+    await buildTx(
       { paymentAddr: changeAddrBech32 },
       utxos,
       utx.body().outputs(),
-      pp
+      pp,
+      null,
+      utx.body().inputs()
     );
 
     /////////////
@@ -158,53 +162,58 @@ const balanceTx = (unbalancedTx) => {
     const transactionWitnessSet = CardanoWasm.TransactionWitnessSet.new();
 
     const tx = CardanoWasm.Transaction.new(
-      txBody,
+      utx.body(),
       CardanoWasm.TransactionWitnessSet.from_bytes(
         transactionWitnessSet.to_bytes()
       )
     );
 
-    let txVkeyWitnesses = await connectedWallet.signTx(
+    ////////////////////////////////////////////////////////
+
+    let localWitnesses = await connectedWallet.signTx(
       Buffer.from(tx.to_bytes(), "utf8").toString("hex"),
       true
     );
 
-    txVkeyWitnesses = CardanoWasm.TransactionWitnessSet.from_bytes(
-      Buffer.from(txVkeyWitnesses, "hex")
+    const external =
+      "a10081825820a1762bfee703366b36b0c15a3ab14357cbc74a447b035609aa65e479470d0bf25840973f867b73c206118f93c14d86e91ad9ed03817be6cfe746c9d4d8c5f7f9b66795d3e35fee3ec91a1fa9ec476a8588bb2172d2d83a5224c4fc003f56d0cda402";
+
+    ////////////////////////////////////////////////////////
+
+    localWitnesses = CardanoWasm.TransactionWitnessSet.from_bytes(
+      Buffer.from(localWitnesses, "hex")
     );
 
-    transactionWitnessSet.set_vkeys(txVkeyWitnesses.vkeys());
-
-    const signedTx = CardanoWasm.Transaction.new(
-      tx.body(),
-      transactionWitnessSet
+    const externalWitnesses = CardanoWasm.TransactionWitnessSet.from_bytes(
+      Buffer.from(external, "hex")
     );
 
-    return connectedWallet.submitTx(
-      Buffer.from(signedTx.to_bytes(), "utf8").toString("hex")
-    );
+    const mixedVkeys = CardanoWasm.Vkeywitnesses.new();
+
+    mixedVkeys.add(localWitnesses.vkeys().get(0));
+
+    mixedVkeys.add(externalWitnesses.vkeys().get(0));
+
+    transactionWitnessSet.set_vkeys(mixedVkeys);
+
+    const finishWitnessSet = utx.witness_set();
+
+    finishWitnessSet.set_vkeys(mixedVkeys);
+
+    const signedTx = CardanoWasm.Transaction.new(tx.body(), finishWitnessSet);
+
+    console.log(signedTx.to_json());
+
+    return connectedWallet.submitTx(signedTx);
   });
 };
-
-const WEIGHTS = Uint32Array.from([
-  200, // weight ideal > 100 inputs
-  1000, // weight ideal < 100 inputs
-  1500, // weight assets if plutus
-  800, // weight assets if not plutus
-  800, // weight distance if not plutus
-  5000, // weight utxos
-]);
-
-/**const TX = {
-  invalid_hereafter: 3600 * 6, //6h from current slot
-};*/
 
 const buildTx = async (
   account,
   utxos,
   outputs,
   protocolParameters,
-  auxiliaryData = null
+  auxiliaryData
 ) => {
   const txBuilderConfig = CardanoWasm.TransactionBuilderConfigBuilder.new()
     .coins_per_utxo_byte(
@@ -235,10 +244,35 @@ const buildTx = async (
 
   utxos.forEach((utxo) => utxosCore.add(utxo));
 
+  const utxoi = {
+    txHash: "919818c757b8242ffc60ed2ca4bdf4d2c0dea87203075143b1565978197dac3b",
+    outputIndex: 0,
+    assets: {
+      lovelace: 10000000n,
+      "54a29c2626156de3af97cdead84264aaf0805857cc5c026af077fc3b746872656164746f6b656e":
+        1n,
+    },
+    address: "addr_test1wp4ep7h3mw4fvse8v8lmafzjpettgfm972r783mzlcemzrg5avvkf",
+    datumHash:
+      "1cc953c6981e5e524f90f459f28847ab24455c9ee3ae7c8916d4889ceb2d8a11",
+    datum:
+      "d8799f00581c424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2bff",
+    scriptRef: null,
+  };
+
+  try {
+    utxosCore.add(
+      CardanoWasm.TransactionUnspentOutput.from_hex(
+        Buffer.from(utxoToCore(utxoi).to_bytes()).toString("hex")
+      )
+    );
+  } catch (err) {
+    console.error(err);
+  }
+
   txBuilder.add_inputs_from(
     utxosCore,
-    CardanoWasm.Address.from_bech32(account.paymentAddr),
-    WEIGHTS
+    CardanoWasm.CoinSelectionStrategyCIP2.LargestFirstMultiAsset
   );
 
   txBuilder.add_change_if_needed(
@@ -300,5 +334,5 @@ export {
   lucidClient,
   signMessage,
   getAddress,
-  getMessage
+  getMessage,
 };

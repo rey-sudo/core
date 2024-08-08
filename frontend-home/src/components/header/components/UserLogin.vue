@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { signMessage, getAddress } from "@/api/wallet-api";
+import { signMessage, getAddress, balanceTx } from "@/api/wallet-api";
 import { shortFormat } from "@/utils";
 import { lucidClient } from "@/api/wallet-api";
 import headerAPI from "../composable/header-api";
@@ -76,12 +76,8 @@ export default {
 
       lucidClient.selectWallet(getWallet());
 
-      const wallet = await getWallet();
-
-      const signedTx = await wallet.signTx(tx0);
-
       try {
-        const txHash = await wallet.submitTx(signedTx);
+        const txHash = await balanceTx(tx0);
 
         console.log(`Transaction submitted with hash: ${txHash}`);
       } catch (err) {
