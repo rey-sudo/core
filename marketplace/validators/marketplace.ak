@@ -34,12 +34,12 @@ validator(token_name: ByteArray, utxo_ref: OutputReference) {
   }
 }
 
-type MachineStateDatum {
+type StateMachineDatum {
   state: Int,
   seller: Hash<Blake2b_224, VerificationKey>,
 }
 
-type MachineStateInput {
+type StateMachineInput {
   Waiting
   Locking { buyer: ByteArray }
   Delivered
@@ -48,14 +48,14 @@ type MachineStateInput {
 
 validator(threadtoken: ByteArray) {
   fn statemachine(
-    datum: MachineStateDatum,
-    redeemer: MachineStateInput,
+    datum: StateMachineDatum,
+    redeemer: StateMachineInput,
     context: ScriptContext,
   ) -> Bool {
     when context.purpose is {
       Spend(_) ->
         when (datum, redeemer) is {
-          (MachineStateDatum { state, seller }, Waiting) -> {
+          (StateMachineDatum { state, seller }, Waiting) -> {
             let must_be_state = state == 0
             let must_be_signed =
               list.has(context.transaction.extra_signatories, seller)
@@ -72,11 +72,11 @@ validator(threadtoken: ByteArray) {
             must_be_state? && must_be_signed?
           }
 
-          (MachineStateDatum { state, .. }, Locking { buyer }) -> True
+          (StateMachineDatum { state, .. }, Locking { buyer }) -> True
 
-          (MachineStateDatum { state, .. }, Delivered) -> True
+          (StateMachineDatum { state, .. }, Delivered) -> True
 
-          (MachineStateDatum { state, .. }, Received) -> True
+          (StateMachineDatum { state, .. }, Received) -> True
         }
       _ -> False
     }
