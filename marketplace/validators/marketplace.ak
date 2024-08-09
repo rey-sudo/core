@@ -1,25 +1,21 @@
+//////////////////TEST////////////////////////////
+///////////////////////////////////////////////
+
 use aiken/dict
+use aiken/fuzz
 use aiken/hash.{Blake2b_224, Hash}
+use aiken/interval
 use aiken/list
+use aiken/pairs
 use aiken/string
 use aiken/transaction.{OutputReference, ScriptContext, Spend, Transaction} as tx
-use aiken/transaction/credential.{VerificationKey, Address, ScriptCredential}
+use aiken/transaction.{Input, NoDatum, Output, TransactionId}
+use aiken/transaction/credential.{Address, ScriptCredential, VerificationKey}
 use aiken/transaction/value
 
-//////////////////TEST////////////////////////////
-/// 
-
-use aiken/fuzz
-use aiken/interval
-use aiken/pairs
-use aiken/transaction.{
-  Input, NoDatum, Output, 
-  TransactionId,
-}
-
 /// 
 /// 
-///////////////////////////////////////////////
+/// 
 type ThreadTokenInput {
   Mint
   Burn
@@ -97,10 +93,6 @@ validator(threadtoken: ByteArray) {
   }
 }
 
-
-
-
-
 test spend_validator() {
   let own_ref =
     OutputReference {
@@ -110,8 +102,7 @@ test spend_validator() {
       output_index: 0,
     }
   let script_purpose = Spend(own_ref)
-  let state_token_symbol =
-    #"99999999999999999999999999999999999999999999999999999999"
+  let threadtoken = #"99999999999999999999999999999999999999999999999999999999"
   let token_name = #"02"
   let own_val_hash = #"88888888888888888888888888888888888888888888888888888888"
   let input_utxo =
@@ -124,7 +115,7 @@ test spend_validator() {
         },
         value: value.add(
           value.from_lovelace(2_000_000),
-          state_token_symbol,
+          threadtoken,
           token_name,
           1,
         ),
@@ -140,7 +131,7 @@ test spend_validator() {
       },
       value: value.add(
         value.from_lovelace(2_000_000),
-        state_token_symbol,
+        threadtoken,
         token_name,
         1,
       ),
@@ -150,11 +141,12 @@ test spend_validator() {
 
   let redeemer = Waiting
 
-  let datum = StateMachineDatum {
-    state: 0,
-    seller: #"00000000000000000000000000000000000000000000000000000000"
-  }
-  let tx = 
+  let datum =
+    StateMachineDatum {
+      state: 0,
+      seller: #"00000000000000000000000000000000000000000000000000000000",
+    }
+  let tx =
     Transaction {
       inputs: [input_utxo],
       reference_inputs: [],
@@ -172,5 +164,5 @@ test spend_validator() {
       },
     }
   let ctx = ScriptContext { purpose: script_purpose, transaction: tx }
-  statemachine(state_token_symbol, datum, redeemer, ctx)
+  statemachine(threadtoken, datum, redeemer, ctx)
 }
