@@ -125,7 +125,7 @@ const datum = Data.to(
   ]),
 );
 
-const minLovelaceUtxo = 2n * 1_000_000n;
+const minUtxoLovelace = 2n * 1_000_000n;
 
 const tx = await lucid
   .newTx()
@@ -140,7 +140,7 @@ const tx = await lucid
     { inline: datum },
     {
       [stateMachineUnit]: BigInt(1),
-      lovelace: BigInt(minLovelaceUtxo),
+      lovelace: BigInt(minUtxoLovelace),
     },
   )
   .complete();
