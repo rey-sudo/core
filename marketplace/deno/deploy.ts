@@ -137,7 +137,7 @@ const minUtxoLovelace = 2n * 1_000_000n;
 const tx = await lucid
   .newTx()
   .collectFrom([utxo])
-  .attachMintingPolicy(parameterizedValidators.threadToken as SpendingValidator)
+  .attachMintingPolicy(parameterizedValidators.threadToken as MintingPolicy)
   .mintAssets(
     { [stateMachineUnit]: BigInt(1) },
     mintRedeemer,
