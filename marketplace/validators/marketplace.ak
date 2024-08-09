@@ -46,7 +46,7 @@ type MachineStateInput {
   Received
 }
 
-validator {
+validator(policy_id: ByteArray) {
   fn machinestate(
     datum: MachineStateDatum,
     redeemer: MachineStateInput,
