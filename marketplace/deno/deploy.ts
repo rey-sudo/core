@@ -80,9 +80,13 @@ const validatorsWithParams = (tokenName: string, outRef: Data) => {
     script: threadToken,
   });
 
+  const stateMachine = applyParamsToScript(validators.stateMachine.script, [
+    threadTokenPolicyId,
+  ]);
+
   const stateMachineAddress = lucid.utils.validatorToAddress({
     type: "PlutusV2",
-    script: validators.stateMachine.script,
+    script: stateMachine,
   });
 
   return {
@@ -90,8 +94,11 @@ const validatorsWithParams = (tokenName: string, outRef: Data) => {
       type: "PlutusV2",
       script: threadToken,
     },
+    stateMachine: {
+      type: "PlutusV2",
+      script: stateMachine,
+    },
     threadTokenPolicyId,
-
     stateMachineAddress,
   };
 };
