@@ -88,7 +88,7 @@ validator(threadtoken: ByteArray) {
 
             let must_be_collateral = speding_lovelace >= collateral
 
-            must_be_state? && must_be_signed? && must_be_collateral? && must_be_policy
+            must_be_state? && must_be_signed? && must_be_collateral? && must_be_policy?
           }
 
           (StateMachineDatum { state, .. }, Locking { buyer }) -> True
