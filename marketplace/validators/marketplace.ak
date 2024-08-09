@@ -2,7 +2,7 @@ use aiken/dict
 use aiken/hash.{Blake2b_224, Hash}
 use aiken/list
 use aiken/string
-use aiken/transaction.{OutputReference, ScriptContext, Transaction} as tx
+use aiken/transaction.{OutputReference, ScriptContext, Spend, Transaction} as tx
 use aiken/transaction/credential.{VerificationKey}
 use aiken/transaction/value
 
@@ -52,31 +52,33 @@ validator(threadtoken: ByteArray) {
     redeemer: MachineStateInput,
     context: ScriptContext,
   ) -> Bool {
-    when (datum, redeemer) is {
-      (MachineStateDatum { state, seller }, Waiting) -> {
-        let must_be_state = state == 0
-        let must_be_signed =
-          list.has(context.transaction.extra_signatories, seller)
+    when context.purpose is {
+      Spend(_) ->
+        when (datum, redeemer) is {
+          (MachineStateDatum { state, seller }, Waiting) -> {
+            let must_be_state = state == 0
+            let must_be_signed =
+              list.has(context.transaction.extra_signatories, seller)
 
+            let lovelace_spending =
+              list.foldl(
+                context.transaction.inputs,
+                0,
+                fn(n, total) { value.lovelace_of(n.output.value) + total },
+              )
 
-        let lovelace_spending =
-          list.foldl(
-            context.transaction.inputs,
-            0,
-            fn(n, total) { value.lovelace_of(n.output.value) + total },
-          ) 
+            trace string.from_int(lovelace_spending)
 
-        trace string.from_int(lovelace_spending) 
+            must_be_state? && must_be_signed?
+          }
 
+          (MachineStateDatum { state, .. }, Locking { buyer }) -> True
 
-        must_be_state? && must_be_signed?
-      }
+          (MachineStateDatum { state, .. }, Delivered) -> True
 
-      (MachineStateDatum { state, .. }, Locking { buyer }) -> True
-
-      (MachineStateDatum { state, .. }, Delivered) -> True
-
-      (MachineStateDatum { state, .. }, Received) -> True
+          (MachineStateDatum { state, .. }, Received) -> True
+        }
+      _ -> False
     }
   }
 }
