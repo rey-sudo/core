@@ -90,7 +90,11 @@ validator(threadtoken: ByteArray) {
 
             trace string.from_int(speding_lovelace)
 
-            must_be_state? && must_be_signed?
+            let collateral = 25000000
+
+            let must_be_collateral = speding_lovelace >= collateral
+
+            must_be_state? && must_be_signed? && must_be_collateral
           }
 
           (StateMachineDatum { state, .. }, Locking { buyer }) -> True
@@ -141,7 +145,7 @@ test spend_validator() {
         stake_credential: None,
       },
       value: value.add(
-        value.from_lovelace(2_000_000),
+        value.from_lovelace(25_000_000),
         threadtoken,
         token_name,
         1,
