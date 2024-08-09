@@ -27,7 +27,7 @@ const blaze = await Blaze.from(provider, wallet);
 ///////////////////////////////////
 
 const threadTokenUnit =
-  "eae54750459b753aa3502c0afed7d62b8e7b3e9a070c8a0024aec934746872656164746f6b656e";
+  "6b646f82ba2c66ed48b62a39e2b8b1930f56641af7c41104ffc14a48746872656164746f6b656e";
 
 const assetId = Core.AssetId(threadTokenUnit);
 
