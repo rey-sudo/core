@@ -46,8 +46,8 @@ type MachineStateInput {
   Received
 }
 
-validator(policy_id: ByteArray) {
-  fn machinestate(
+validator(threadtoken: ByteArray) {
+  fn state_machine(
     datum: MachineStateDatum,
     redeemer: MachineStateInput,
     context: ScriptContext,

@@ -12,7 +12,7 @@
   },
   "validators": [
     {
-      "title": "marketplace.machinestate",
+      "title": "marketplace.state_machine",
       "datum": {
         "title": "datum",
         "schema": {
@@ -27,7 +27,7 @@
       },
       "parameters": [
         {
-          "title": "policy_id",
+          "title": "threadtoken",
           "schema": {
             "$ref": "#/definitions/ByteArray"
           }
