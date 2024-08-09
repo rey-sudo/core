@@ -70,21 +70,15 @@ validator(threadtoken: ByteArray) {
             let must_be_signed =
               list.has(context.transaction.extra_signatories, seller)
 
-            let lovelace_spending =
-              list.foldl(
-                context.transaction.inputs,
-                0,
-                fn(n, total) { value.lovelace_of(n.output.value) + total },
-              )
-            
-            trace string.from_int(lovelace_spending)
-
             expect Some(sm_input) = 
                 list.find(context.transaction.inputs, fn(input) { input.output_reference == utxo_ref })
 
             
             expect Some(to_machine_output) = 
               list.find(context.transaction.outputs, fn(output) { output.address == sm_input.output.address })
+
+
+            let must_be_policy = list.has(value.policies(to_machine_output.value), threadtoken)
 
             let speding_lovelace = value.lovelace_of(to_machine_output.value)
 
@@ -94,7 +88,7 @@ validator(threadtoken: ByteArray) {
 
             let must_be_collateral = speding_lovelace >= collateral
 
-            must_be_state? && must_be_signed? && must_be_collateral
+            must_be_state? && must_be_signed? && must_be_collateral? && must_be_policy
           }
 
           (StateMachineDatum { state, .. }, Locking { buyer }) -> True
