@@ -47,7 +47,7 @@ type MachineStateInput {
 }
 
 validator(threadtoken: ByteArray) {
-  fn state_machine(
+  fn statemachine(
     datum: MachineStateDatum,
     redeemer: MachineStateInput,
     context: ScriptContext,

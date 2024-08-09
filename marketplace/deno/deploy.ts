@@ -45,7 +45,7 @@ const readValidators = (): Validators => {
   }
 
   const stateMachine = blueprint.validators.find((v: any) =>
-    v.title === "marketplace.state_machine"
+    v.title === "marketplace.statemachine"
   );
 
   if (!stateMachine) {
