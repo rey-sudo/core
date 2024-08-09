@@ -63,7 +63,7 @@ validator(threadtoken: ByteArray) {
     context: ScriptContext,
   ) -> Bool {
     when context.purpose is {
-      Spend(_) ->
+      Spend(utxo_ref) ->
         when (datum, redeemer) is {
           (StateMachineDatum { state, seller }, Waiting) -> {
             let must_be_state = state == 0
@@ -76,8 +76,17 @@ validator(threadtoken: ByteArray) {
                 0,
                 fn(n, total) { value.lovelace_of(n.output.value) + total },
               )
-
+            
             trace string.from_int(lovelace_spending)
+
+            expect Some(sm_input) = 
+                list.find(context.transaction.inputs, fn(input) { input.output_reference == utxo_ref })
+
+            
+            expect Some(to_machine_output) = 
+              list.find(context.transaction.outputs, fn(output) { output.address == sm_input.output.address })
+
+          
 
             must_be_state? && must_be_signed?
           }
