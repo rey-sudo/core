@@ -116,7 +116,7 @@ const mintRedeemer = Data.to(new Constr(0, []));
 
 const policyId = parameterizedValidators.threadTokenPolicyId;
 
-const assetName: Unit = policyId + fromText(tokenName);
+const stateMachineUnit: Unit = policyId + fromText(tokenName);
 
 const datum = Data.to(
   new Constr(0, [
@@ -132,14 +132,14 @@ const tx = await lucid
   .collectFrom([utxo])
   .attachMintingPolicy(parameterizedValidators.threadToken as SpendingValidator)
   .mintAssets(
-    { [assetName]: BigInt(1) },
+    { [stateMachineUnit]: BigInt(1) },
     mintRedeemer,
   )
   .payToContract(
     parameterizedValidators.stateMachineAddress,
     { inline: datum },
     {
-      [assetName]: BigInt(1),
+      [stateMachineUnit]: BigInt(1),
       lovelace: BigInt(minLovelaceUtxo),
     },
   )
@@ -153,4 +153,4 @@ console.log(txHash);
 
 console.log("policyId: " + policyId);
 
-console.log("assetName: " + assetName);
+console.log("stateMachineUnit: " + stateMachineUnit);
