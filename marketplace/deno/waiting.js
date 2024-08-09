@@ -7,22 +7,18 @@ import {
   Blockfrost,
 } from "@blaze-cardano/sdk";
 
-let externalWallet = Core.addressFromBech32(
-  "addr_test1qppygdhzm0t7nnlclmds3dy0wc3du870dpy48juu0xxuu2aefdfvc4e0785y7vfhwlmsn3rn26mzvv9md0mhnkpjlc4s0jshh4"
-);
-
-const targetWallet = Core.addressFromBech32(
-  "addr_test1qp539v654clv34y7k6zwrtxzczwvzz0dudmgfy5rt3qvjf2hrg74pzy4umh8udkhshpqmwdzluk6zvr5tcrj8h74re2q2yavu8"
-);
-
-let contractAddress = Core.addressFromBech32(
-  "addr_test1wp4ep7h3mw4fvse8v8lmafzjpettgfm972r783mzlcemzrg5avvkf"
-);
-
 const provider = new Blockfrost({
   network: "cardano-preprod",
   projectId: "preprodex26NYImZOT84XAA67qhyHyA7TT6PCGI",
 });
+
+const externalWallet = Core.addressFromBech32(
+  "addr_test1qppygdhzm0t7nnlclmds3dy0wc3du870dpy48juu0xxuu2aefdfvc4e0785y7vfhwlmsn3rn26mzvv9md0mhnkpjlc4s0jshh4"
+);
+
+const stateMachineAddress = Core.addressFromBech32(
+  "addr_test1wp4ep7h3mw4fvse8v8lmafzjpettgfm972r783mzlcemzrg5avvkf"
+);
 
 const wallet = new ColdWallet(externalWallet, 2, provider);
 
@@ -40,14 +36,20 @@ const assetName = Buffer.from(
   "hex"
 ).toString();
 
-const utxos = await provider.getUnspentOutputsWithAsset(
-  contractAddress,
+const threadTokenUtxos = await provider.getUnspentOutputsWithAsset(
+  stateMachineAddress,
   assetId
 );
 
-console.log(`UTxOs with ${assetName} Asset (FT):${utxos}`);
+if (threadTokenUtxos.length < 1) {
+  throw new Error("ZERO_THREADTOKEN_UTXOS");
+}
 
-for (const utxo of utxos) {
+if (threadTokenUtxos.length > 1) {
+  throw new Error("THREADTOKEN_QUANTITY");
+}
+
+for (const utxo of threadTokenUtxos) {
   const utxoRef = `${utxo.input().transactionId()}#${utxo.input().index()}`;
   console.log(utxoRef);
 
@@ -80,7 +82,6 @@ const threadTokenAsset = makeValue(productPrice, ...[[threadTokenUnit, 1n]]);
 
 const minFee = 3n * 1_000_000n;
 
-
 const data = {
   state: 1n,
   seller: "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b",
@@ -95,8 +96,8 @@ const waitingDatum = Data.to(data, Datum);
 
 const tx = await blaze
   .newTransaction()
-  .addInput(utxos[0], stateMachineRedeemer)
-  .lockAssets(contractAddress, threadTokenAsset, waitingDatum)
+  .addInput(threadTokenUtxos[0], stateMachineRedeemer)
+  .lockAssets(stateMachineAddress, threadTokenAsset, waitingDatum)
   .provideScript(stateMachineScript)
   .addRequiredSigner("424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b")
   .setChangeAddress(externalWallet)
