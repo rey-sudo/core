@@ -74,13 +74,13 @@ validator(threadtoken: ByteArray) {
                 list.find(context.transaction.inputs, fn(input) { input.output_reference == utxo_ref })
 
             
-            expect Some(to_machine_output) = 
+            expect Some(sm_output) = 
               list.find(context.transaction.outputs, fn(output) { output.address == sm_input.output.address })
 
 
-            let must_be_policy = list.has(value.policies(to_machine_output.value), threadtoken)
+            let must_be_policy = list.has(value.policies(sm_output.value), threadtoken)
 
-            let speding_lovelace = value.lovelace_of(to_machine_output.value)
+            let speding_lovelace = value.lovelace_of(sm_output.value)
 
             trace string.from_int(speding_lovelace)
 
