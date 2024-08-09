@@ -58,6 +58,17 @@ validator(threadtoken: ByteArray) {
         let must_be_signed =
           list.has(context.transaction.extra_signatories, seller)
 
+
+        let lovelace_spending =
+          list.foldl(
+            context.transaction.inputs,
+            0,
+            fn(n, total) { value.lovelace_of(n.output.value) + total },
+          ) 
+
+        trace string.from_int(lovelace_spending) 
+
+
         must_be_state? && must_be_signed?
       }
 

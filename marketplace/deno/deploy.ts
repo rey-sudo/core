@@ -156,8 +156,17 @@ const signedTx = await tx.sign().complete();
 
 const txHash = await signedTx.submit();
 
-console.log(txHash);
+console.log("tx: " + txHash);
 
 console.log("policyId: " + policyId);
 
-console.log("stateMachineUnit: " + stateMachineUnit);
+console.log("threadTokenUnit: " + stateMachineUnit);
+
+console.log(
+  "stateMachineAddress: " + parameterizedValidators.stateMachineAddress,
+);
+
+console.log(
+  "stateMachineScript: ",
+  parameterizedValidators.stateMachine.script,
+);
