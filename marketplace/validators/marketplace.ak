@@ -47,6 +47,7 @@ validator(token_name: ByteArray, utxo_ref: OutputReference) {
 type StateMachineDatum {
   state: Int,
   seller: Hash<Blake2b_224, VerificationKey>,
+  collateral: Int
 }
 
 type StateMachineInput {
@@ -65,7 +66,7 @@ validator(threadtoken: ByteArray) {
     when context.purpose is {
       Spend(utxo_ref) ->
         when (datum, redeemer) is {
-          (StateMachineDatum { state, seller }, Waiting) -> {
+          (StateMachineDatum { state, seller, collateral }, Waiting) -> {
             let must_be_state = state == 0
             let must_be_signed =
               list.has(context.transaction.extra_signatories, seller)
@@ -83,8 +84,6 @@ validator(threadtoken: ByteArray) {
             let speding_lovelace = value.lovelace_of(sm_output.value)
 
             trace string.from_int(speding_lovelace)
-
-            let collateral = 25000000
 
             let must_be_collateral = speding_lovelace >= collateral
 
@@ -154,6 +153,7 @@ test spend_validator() {
     StateMachineDatum {
       state: 0,
       seller: #"00000000000000000000000000000000000000000000000000000000",
+      collateral: 25000000
     }
   let tx =
     Transaction {
