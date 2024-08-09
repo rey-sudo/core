@@ -86,7 +86,9 @@ validator(threadtoken: ByteArray) {
             expect Some(to_machine_output) = 
               list.find(context.transaction.outputs, fn(output) { output.address == sm_input.output.address })
 
-          
+            let speding_lovelace = value.lovelace_of(to_machine_output.value)
+
+            trace string.from_int(speding_lovelace)
 
             must_be_state? && must_be_signed?
           }
