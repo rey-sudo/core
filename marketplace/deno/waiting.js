@@ -80,7 +80,7 @@ const stateMachineScript = cborToScript(
 
 const minUtxoValue = 10n * 1_000_000n;
 
-const productPrice = 11n * 1_000_000n;
+const productPrice = 25n * 1_000_000n;
 
 const productCollateral = 25n * 1_000_000n;
 
