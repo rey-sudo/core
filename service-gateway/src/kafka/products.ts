@@ -4,7 +4,7 @@ import { _ } from "../utils/pino";
 import { stringToTimestamp } from "../utils/other";
 
 const TOPIC_NAME = "fullfillment.service_product.products";
-const CONSUMER_GROUP = "service-gate-group";
+const CONSUMER_GROUP = "service-gateway-group";
 
 const listenProducts = async () => {
   const consumer = kafka.consumer({ groupId: CONSUMER_GROUP });

@@ -1,7 +1,7 @@
 const { Kafka } = require("kafkajs");
 
 const kafka = new Kafka({
-  clientId: "service-gate",
+  clientId: "service-gateway",
   ssl: false,
   enforceRequestTimeout: false,
   brokers: [
