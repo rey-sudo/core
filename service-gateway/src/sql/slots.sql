@@ -1,6 +1,6 @@
-CREATE DATABASE service_gate;
+CREATE DATABASE service_gateway;
 
-use service_gate;
+use service_gateway;
 
 create table if not exists slots(
   id varchar(20) not null,
