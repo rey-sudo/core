@@ -125,10 +125,13 @@ const policyId = parameterizedValidators.threadTokenPolicyId;
 
 const stateMachineUnit: Unit = policyId + fromText(tokenName);
 
+const productCollateral = 25n * 1_000_000n;
+
 const datum = Data.to(
   new Constr(0, [
     BigInt(0),
     "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b",
+    productCollateral,
   ]),
 );
 

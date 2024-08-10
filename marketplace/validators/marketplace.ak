@@ -57,7 +57,7 @@ type StateMachineInput {
   Received
 }
 
-validator(threadtoken: ByteArray) {
+validator(threadtoken: value.PolicyId) {
   fn statemachine(
     datum: StateMachineDatum,
     redeemer: StateMachineInput,
