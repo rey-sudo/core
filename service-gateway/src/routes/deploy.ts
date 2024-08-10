@@ -20,8 +20,6 @@ const BLOCKFROST_KEY = "preprodex26NYImZOT84XAA67qhyHyA7TT6PCGI";
 
 const BLOCKFROST_ENV = "Preprod";
 
-const ADA_LOVELACE: number = 1000000;
-
 ////////////////////////////////////////////////////
 
 const deployMiddlewares: any = [sellerMiddleware, requireAuth];
@@ -42,7 +40,7 @@ const deployHandler = async (req: Request, res: Response) => {
 
     const [orders] = await connection.execute(
       "SELECT * FROM orders WHERE id = ? AND seller_id = ?",
-      [params.slot_id, SELLER.id],
+      [params.order_id, SELLER.id],
     );
 
     if (orders.length === 0) {
@@ -73,6 +71,7 @@ const deployHandler = async (req: Request, res: Response) => {
     console.log(await lucid.wallet.address());
 
     /////////////////
+    
     const localWalletUtxos = await lucid.wallet.getUtxos();
 
     if (localWalletUtxos.length < 1) {
@@ -99,7 +98,7 @@ const deployHandler = async (req: Request, res: Response) => {
     const stateMachineDatum = Data.to(
       new Constr(0, [
         BigInt(0),
-        "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b",
+        params.seller_pubkeyhash,
         productCollateral,
       ]),
     );
@@ -134,9 +133,9 @@ const deployHandler = async (req: Request, res: Response) => {
 
     const signedTx = await tx.sign().complete();
 
-    const txHash = await signedTx.submit();
+    const transaction = await signedTx.submit();
 
-    console.log("tx: " + txHash);
+    console.log("tx: " + transaction);
 
     console.log("threadTokenPolicyId: " + threadTokenPolicyId);
 
@@ -172,8 +171,8 @@ const deployHandler = async (req: Request, res: Response) => {
       parameterizedValidators.stateMachineAddress,
       0,
       threadTokenPolicyId,
-      txHash,
-      params.slot_id,
+      transaction,
+      params.order_id,
       SELLER.id,
     ];
 
