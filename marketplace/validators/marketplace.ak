@@ -111,7 +111,7 @@ validator(threadtoken: ByteArray) {
   }
 }
 
-test spend_validator() {
+test waiting() {
   let own_ref =
     OutputReference {
       transaction_id: TransactionId {
