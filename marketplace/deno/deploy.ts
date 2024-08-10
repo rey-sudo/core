@@ -23,12 +23,12 @@ const lucid = await Lucid.new(
   "Preprod",
 );
 
-
-const LOCAL_SEED = "bulk ahead math cloud retreat manual antenna ahead autumn bird element stumble fiction tell magic cross arm payment breeze suggest pig version expand divert"
+const LOCAL_SEED =
+  "bulk ahead math cloud retreat manual antenna ahead autumn bird element stumble fiction tell magic cross arm payment breeze suggest pig version expand divert";
 
 lucid.selectWalletFromSeed(LOCAL_SEED);
 
-console.log(lucid.wallet.address());
+console.log(await lucid.wallet.address());
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
