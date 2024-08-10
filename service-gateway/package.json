@@ -34,6 +34,7 @@
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
     "kafkajs": "^2.2.4",
+    "lucid-cardano": "^0.10.7",
     "mysql2": "^3.7.0",
     "nanoid": "^3.3.7",
     "pino": "^8.17.2",
