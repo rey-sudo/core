@@ -23,8 +23,13 @@ const lucid = await Lucid.new(
   "Preprod",
 );
 
-lucid.selectWalletFromPrivateKey(await Deno.readTextFile("./preprod.sk"));
+const phrase = lucid.utils.generateSeedPhrase();
 
+console.log(phrase);
+
+lucid.selectWalletFromSeed(phrase);
+
+console.log(lucid.wallet.address());
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -108,6 +113,10 @@ const validatorsWithParams = (tokenName: string, outRef: Data) => {
 
 const localWalletUtxos = await lucid?.wallet.getUtxos()!;
 
+if (localWalletUtxos.length < 1) {
+  throw new Error("FEE_WALLET_NO_UTXOS");
+}
+
 const utxo = localWalletUtxos[0];
 
 const outRef = new Constr(0, [
@@ -119,15 +128,13 @@ const tokenName = "threadtoken";
 
 const parameterizedValidators = validatorsWithParams(tokenName, outRef);
 
-const mintRedeemer = Data.to(new Constr(0, []));
-
 const policyId = parameterizedValidators.threadTokenPolicyId;
 
 const stateMachineUnit: Unit = policyId + fromText(tokenName);
 
 const productCollateral = 25n * 1_000_000n;
 
-const datum = Data.to(
+const stateMachineDatum = Data.to(
   new Constr(0, [
     BigInt(0),
     "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b",
@@ -137,23 +144,31 @@ const datum = Data.to(
 
 const minUtxoLovelace = 2n * 1_000_000n;
 
+const threadTokenInput = Data.to(new Constr(0, []));
+
+const localWallet = await lucid.wallet.address();
+
 const tx = await lucid
   .newTx()
   .collectFrom([utxo])
   .attachMintingPolicy(parameterizedValidators.threadToken as MintingPolicy)
   .mintAssets(
     { [stateMachineUnit]: BigInt(1) },
-    mintRedeemer,
+    threadTokenInput,
   )
   .payToContract(
     parameterizedValidators.stateMachineAddress,
-    { inline: datum },
+    { inline: stateMachineDatum },
     {
       [stateMachineUnit]: BigInt(1),
       lovelace: BigInt(minUtxoLovelace),
     },
   )
-  .complete();
+  .complete({
+    change: {
+      address: localWallet,
+    },
+  });
 
 const signedTx = await tx.sign().complete();
 
