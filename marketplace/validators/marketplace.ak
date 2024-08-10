@@ -8,8 +8,8 @@ use aiken/interval
 use aiken/list
 use aiken/pairs
 use aiken/string
-use aiken/transaction.{OutputReference, ScriptContext, Spend, Transaction} as tx
-use aiken/transaction.{Input, NoDatum, Output, TransactionId}
+use aiken/transaction.{OutputReference, ScriptContext, Spend, Transaction, InlineDatum } as tx
+use aiken/transaction.{Input, NoDatum, Output, Datum, TransactionId}
 use aiken/transaction/credential.{Address, ScriptCredential, VerificationKey}
 use aiken/transaction/value
 
@@ -87,7 +87,17 @@ validator(threadtoken: ByteArray) {
 
             let must_be_collateral = speding_lovelace >= collateral
 
-            must_be_state? && must_be_signed? && must_be_collateral? && must_be_policy?
+            let new_data: Data = StateMachineDatum {
+              state : 1,
+              seller : seller,
+              collateral : collateral
+            }
+
+            let new_datum = InlineDatum(new_data)
+
+            let must_be_datum = new_datum == sm_output.datum
+
+            must_be_state? && must_be_signed? && must_be_collateral? && must_be_policy? && must_be_datum?
           }
 
           (StateMachineDatum { state, .. }, Locking { buyer }) -> True
@@ -131,6 +141,12 @@ test spend_validator() {
         reference_script: None,
       },
     }
+  let new_data: Data = StateMachineDatum {
+      state : 1,
+      seller : #"00000000000000000000000000000000000000000000000000000000",
+      collateral : 25000000
+  }  
+  let new_datum = InlineDatum(new_data)
   let output =
     Output {
       address: Address {
@@ -143,7 +159,7 @@ test spend_validator() {
         token_name,
         1,
       ),
-      datum: NoDatum,
+      datum: new_datum,
       reference_script: None,
     }
 
