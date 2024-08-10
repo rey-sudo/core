@@ -30,8 +30,8 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .               
-    - image: pairfy/service-gate
-      context: service-gate
+    - image: pairfy/service-gateway
+      context: service-gateway
       docker:
         dockerfile: Dockerfile
       sync:

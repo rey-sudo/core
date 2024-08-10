@@ -1,5 +1,5 @@
 {
-  "name": "service-gate",
+  "name": "service-gateway",
   "version": "1.0.0",
   "description": "CRUD service for negotiations.",
   "main": "index.js",

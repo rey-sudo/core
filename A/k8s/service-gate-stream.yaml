@@ -1,14 +1,14 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaConnector
 metadata:
-  name: service-gate-stream
+  name: service-gateway-stream
   labels:
     strimzi.io/cluster: debezium-connect-cluster
 spec:
   class: io.debezium.connector.mysql.MySqlConnector
   tasksMax: 1
   config:
-    name: service-gate-stream
+    name: service-gateway-stream
     connector.class: io.debezium.connector.mysql.MySqlConnector
     database.hostname: "mysql"
     database.port: 3306
