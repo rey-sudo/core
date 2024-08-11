@@ -24,6 +24,10 @@
       "./src/__test/setup.ts"
     ]
   },
+  "exports": {
+    ".": "./index.js",
+    "./*": "./*"
+  },
   "dependencies": {
     "ajv": "^8.12.0",
     "axios": "^1.6.7",
