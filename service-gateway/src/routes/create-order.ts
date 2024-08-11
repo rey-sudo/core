@@ -20,12 +20,12 @@ interface CreateScheme {
 
 ///////////////////////////////////////////////MIDDLEWARES
 
-const createSlotMiddlewares: any = [sellerMiddleware, requireAuth];
+const createOrderMiddlewares: any = [sellerMiddleware, requireAuth];
 
 ///////////////////////////////////////////////
 
 /**HANDLER: create product orders*/
-const createSlotHandler = async (req: Request, res: Response) => {
+const createOrderHandler = async (req: Request, res: Response) => {
   let connection: any = null;
 
   const params = req.body;
@@ -134,4 +134,4 @@ const createSlotHandler = async (req: Request, res: Response) => {
   }
 };
 
-export { createSlotHandler, createSlotMiddlewares };
+export { createOrderHandler, createOrderMiddlewares };

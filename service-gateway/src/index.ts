@@ -74,23 +74,23 @@ const main = async () => {
     errorEvents.forEach((e: string) => process.on(e, (err) => catcher(err)));
 
     app.post(
-      "/api/gate/create-slot",
+      "/api/gateway/create-slot",
 
-      route.createSlotMiddlewares,
+      route.createOrderMiddlewares,
 
-      route.createSlotHandler
+      route.createOrderHandler
     );
 
     app.post(
-      "/api/gate/start-endpoint",
+      "/api/gateway/deploy",
 
-      route.startEndpointMiddlewares,
+      route.deployMiddlewares,
 
-      route.startEndpointHandler
+      route.deployHandler
     );
 
     app.post(
-      "/api/gate/locking-endpoint",
+      "/api/gateway/locking-endpoint",
 
       route.lockingEndpointMiddlewares,
 
@@ -98,7 +98,7 @@ const main = async () => {
     );
 
     app.post(
-      "/api/gate/locking-tx",
+      "/api/gateway/locking-tx",
 
       route.lockingTxMiddlewares,
 
@@ -106,7 +106,7 @@ const main = async () => {
     );
 
     app.get(
-      "/api/gate/get-slots",
+      "/api/gateway/get-slots",
 
       route.getSlotsMiddlewares,
 
@@ -114,7 +114,7 @@ const main = async () => {
     );
 
     app.get(
-      "/api/gate/get-slot/:id",
+      "/api/gateway/get-slot/:id",
 
       route.getSlotMiddlewares,
 
@@ -122,7 +122,7 @@ const main = async () => {
     );
 
     app.post(
-      "/api/gate/start-tx",
+      "/api/gateway/waiting-tx",
 
       route.startTxMiddlewares,
 
@@ -130,7 +130,7 @@ const main = async () => {
     );
 
     app.get(
-      "/api/gate/buy-options/:id",
+      "/api/gateway/buy-options/:id",
 
       route.buyOptionsMiddlewares,
 

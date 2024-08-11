@@ -3,14 +3,8 @@
     <!--////////////////////////////////////////////////////////////////////////-->
 
     <!--////////////////////////////////////////////////////////////////////////-->
-    <Dialog
-      v-model:visible="messageModalVisible"
-      modal
-      header="Message"
-      :draggable="false"
-      :style="{ width: '35rem' }"
-      :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
-    >
+    <Dialog v-model:visible="messageModalVisible" modal header="Message" :draggable="false" :style="{ width: '35rem' }"
+      :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
       <p>{{ messageModal }}</p>
 
       <p v-for="e in errorModal" :key="e">{{ e }}</p>
@@ -24,69 +18,34 @@
     <!--////////////////////////////////////////////////////////////////////////-->
 
     <!--////////////////////////////////////////////////////////////////////////-->
-    <Dialog
-      v-model:visible="deleteProductDialog"
-      :style="{ width: '425px' }"
-      header="Confirm"
-      :modal="true"
-    >
+    <Dialog v-model:visible="deleteProductDialog" :style="{ width: '425px' }" header="Confirm" :modal="true">
       <div class="confirmation-content">
         <i class="pi pi-exclamation-triangle" style="font-size: 2rem" />
-        <span v-if="product"
-          >Are you sure you want to delete <b>{{ product.name }}</b
-          >?</span
-        >
+        <span v-if="product">Are you sure you want to delete <b>{{ product.name }}</b>?</span>
       </div>
       <template #footer>
-        <Button
-          label="No"
-          icon="pi pi-times"
-          text
-          @click="deleteProductDialog = false"
-        />
+        <Button label="No" icon="pi pi-times" text @click="deleteProductDialog = false" />
         <Button label="Yes" icon="pi pi-check" text @click="deleteProduct" />
       </template>
     </Dialog>
     <!--////////////////////////////////////////////////////////////////////////-->
 
     <!--////////////////////////////////////////////////////////////////////////-->
-    <Dialog
-      v-model:visible="deleteProductsDialog"
-      :style="{ width: '425px' }"
-      header="Confirm"
-      :modal="true"
-    >
+    <Dialog v-model:visible="deleteProductsDialog" :style="{ width: '425px' }" header="Confirm" :modal="true">
       <div class="confirmation-content">
         <i class="pi pi-exclamation-triangle" style="font-size: 2rem" />
-        <span v-if="product"
-          >Are you sure you want to delete the selected slots?</span
-        >
+        <span v-if="product">Are you sure you want to delete the selected slots?</span>
       </div>
       <template #footer>
-        <Button
-          label="No"
-          icon="pi pi-times"
-          text
-          @click="deleteProductsDialog = false"
-        />
-        <Button
-          label="Yes"
-          icon="pi pi-check"
-          text
-          @click="deleteSelectedProducts"
-        />
+        <Button label="No" icon="pi pi-times" text @click="deleteProductsDialog = false" />
+        <Button label="Yes" icon="pi pi-check" text @click="deleteSelectedProducts" />
       </template>
     </Dialog>
     <!--////////////////////////////////////////////////////////////////////////-->
 
     <!--////////////////////////////////////////////////////////////////////////-->
-    <Dialog
-      v-model:visible="createSlotDialogVisible"
-      :style="{ width: '400px' }"
-      header="Availability"
-      :modal="true"
-      :draggable="false"
-    >
+    <Dialog v-model:visible="createSlotDialogVisible" :style="{ width: '400px' }" header="Availability" :modal="true"
+      :draggable="false">
       <div class="createslot">
         <LoadingBars v-if="createSlotLoader" />
 
@@ -103,38 +62,19 @@
           <div class="field">
             <label for="batchMode" class="field-label">
               <span>Batch</span>
-              <i
-                class="pi pi-info-circle"
-                v-tooltip.top="
-                  'Batch mode allows to add discounts for multiple units.'
-                "
-              />
+              <i class="pi pi-info-circle" v-tooltip.top="'Batch mode allows to add discounts for multiple units.'
+                " />
             </label>
-            <InputSwitch
-              id="batchMode"
-              v-model="slotForm.batchMode"
-              @change="() => resetSlotForm()"
-            />
+            <InputSwitch id="batchMode" v-model="slotForm.batchMode" @change="() => resetSlotForm()" />
           </div>
 
           <div class="field">
             <label for="units" class="field-label">
               <span>Units</span>
-              <i
-                class="pi pi-info-circle"
-                v-tooltip.top="'Number of units available for sale.'"
-              />
+              <i class="pi pi-info-circle" v-tooltip.top="'Number of units available for sale.'" />
             </label>
-            <InputNumber
-              id="units"
-              v-model="slotForm.productUnits"
-              showButtons
-              placeholder=""
-              integeronly
-              locale="en-US"
-              :min="0"
-              :class="{ invalid: slotFormErrors.productUnits }"
-            />
+            <InputNumber id="units" v-model="slotForm.productUnits" showButtons placeholder="" integeronly
+              locale="en-US" :min="0" :class="{ invalid: slotFormErrors.productUnits }" />
             <small class="p-error" v-if="slotFormErrors.productUnits">
               The unit is required and greater than 0.
             </small>
@@ -143,24 +83,12 @@
           <div class="field">
             <label for="batch" class="field-label">
               <span>Batch</span>
-              <i
-                class="pi pi-info-circle"
-                v-tooltip.top="
-                  'Each batch contains the chosen number of units.'
-                "
-              />
+              <i class="pi pi-info-circle" v-tooltip.top="'Each batch contains the chosen number of units.'
+                " />
             </label>
-            <InputNumber
-              id="batch"
-              v-model="slotForm.batchNumber"
-              showButtons
-              placeholder=""
-              :disabled="!slotForm.batchMode"
-              integeronly
-              locale="en-US"
-              :min="0"
-              :class="{ invalid: slotFormErrors.batchNumber }"
-            />
+            <InputNumber id="batch" v-model="slotForm.batchNumber" showButtons placeholder=""
+              :disabled="!slotForm.batchMode" integeronly locale="en-US" :min="0"
+              :class="{ invalid: slotFormErrors.batchNumber }" />
             <small class="p-error" v-if="slotFormErrors.batchNumber">
               The batch must be greater than 0.
             </small>
@@ -169,27 +97,13 @@
           <div class="field">
             <label for="unitDiscount" class="field-label">
               <span>Discount</span>
-              <i
-                class="pi pi-info-circle"
-                v-tooltip.top="'Discount per unit in batch mode.'"
-              />
+              <i class="pi pi-info-circle" v-tooltip.top="'Discount per unit in batch mode.'" />
             </label>
-            <InputNumber
-              id="unitDiscount"
-              v-model="slotForm.productDiscount"
-              showButtons
-              placeholder="Select A Percentage"
-              :disabled="!slotForm.batchMode"
-              integeronly
-              suffix=" % OFF"
-              locale="en-US"
-              :min="0"
-              :max="100"
-              :class="{ invalid: slotFormErrors.productDiscount }"
-            />
+            <InputNumber id="unitDiscount" v-model="slotForm.productDiscount" showButtons
+              placeholder="Select A Percentage" :disabled="!slotForm.batchMode" integeronly suffix=" % OFF"
+              locale="en-US" :min="0" :max="100" :class="{ invalid: slotFormErrors.productDiscount }" />
             <small class="p-error" v-if="slotFormErrors.productDiscount">
-              The discount must be greater than 0.</small
-            >
+              The discount must be greater than 0.</small>
           </div>
         </div>
       </div>
@@ -202,15 +116,8 @@
     <!--////////////////////////////////////////////////////////////////////////-->
 
     <!--////////////////////////////////////////////////////////////////////////-->
-    <Dialog
-      v-model:visible="slotListDialogVisible"
-      :style="{ width: '70vw' }"
-      maximizable
-      modal
-      dismissableMask
-      :draggable="false"
-      :contentStyle="{ height: '80vw' }"
-    >
+    <Dialog v-model:visible="slotListDialogVisible" :style="{ width: '70vw' }" maximizable modal dismissableMask
+      :draggable="false" :contentStyle="{ height: '80vw' }">
       <template #header>
         <div class="dialog-header">
           <span class="dialog-title">Product slots</span>
@@ -221,19 +128,9 @@
         </div>
       </template>
 
-      <DataTable
-        :value="productList[slotListDialogIndex].slots"
-        stripedRows
-        scrollable
-        scrollHeight="flex"
-        tableStyle="min-width: 50rem;"
-      >
-        <Column
-          field="created_at"
-          header="Date"
-          sortable
-          style="max-width: 10rem"
-        >
+      <DataTable :value="productList[slotListDialogIndex].slots" stripedRows scrollable scrollHeight="flex"
+        tableStyle="min-width: 50rem;">
+        <Column field="created_at" header="Date" sortable style="max-width: 10rem">
           <template #body="slotProps">
             {{ formatDate(slotProps.data.created_at) }}
           </template>
@@ -266,72 +163,22 @@
         <Column :exportable="false" header="Actions">
           <template #body="slotProps">
             <div class="table-buttons">
-              <Button
-                class="switch-button table-button actived"
-                v-if="slotProps.data.contract_0_tx"
-                @click="
-                  createTransaction(
-                    'true',
-                    slotProps.data.id,
-                    slotProps.data.contract_0_utx
-                  )
-                "
-              >
+              <Button class="switch-button table-button actived" v-if="slotProps.data.contract_0_tx">
                 Actived
               </Button>
 
-              <Button
-                class="switch-button table-button"
-                v-if="
-                  !slotProps.data.contract_0_utx &&
-                  !slotProps.data.contract_0_tx
-                "
-                @click="createTransaction('false', slotProps.data.id)"
-              >
-                Sign Tx
+              <Button class="switch-button table-button" v-if="
+                !slotProps.data.contract_0_tx
+              " @click="deployTransaction(slotProps.data.id)">
+                Deploy
               </Button>
 
-              <Button
-                class="switch-button table-button"
-                v-if="
-                  slotProps.data.contract_0_utx && !slotProps.data.contract_0_tx
-                "
-                @click="
-                  createTransaction(
-                    'true',
-                    slotProps.data.id,
-                    slotProps.data.contract_0_utx
-                  )
-                "
-              >
-                Sign Tx
-              </Button>
+              <Button class="table-button" type="button" icon="pi pi-ellipsis-h" outlined rounded aria-haspopup="true"
+                aria-controls="slot_menu" @click="openSlotMenu" />
+              <Menu ref="slotMenuRef" id="slot_menu" :model="slotMenu" :popup="true" />
 
-              <Button
-                class="table-button"
-                type="button"
-                icon="pi pi-ellipsis-h"
-                outlined
-                rounded
-                aria-haspopup="true"
-                aria-controls="slot_menu"
-                @click="openSlotMenu"
-              />
-              <Menu
-                ref="slotMenuRef"
-                id="slot_menu"
-                :model="slotMenu"
-                :popup="true"
-              />
-
-              <Button
-                class="table-button"
-                icon="pi pi-arrow-up-right"
-                v-tooltip.top="'Show the negotiation session.'"
-                outlined
-                rounded
-                @click="openSessionPage(slotProps.data.id)"
-              />
+              <Button class="table-button" icon="pi pi-arrow-up-right" v-tooltip.top="'Show the negotiation session.'"
+                outlined rounded @click="openSessionPage(slotProps.data.id)" />
             </div>
           </template>
         </Column>
@@ -346,47 +193,29 @@
     <!--////////////////////////////////////////////////////////////////////////-->
     <div class="slots-wrap">
       <div class="slots-card">
-        <DataTable
-          ref="productListTable"
-          resizableColumns
-          :value="productList"
-          v-model:expandedRows="selectedProducts"
-          dataKey="id"
-          :paginator="true"
-          :rows="10"
-          :filters="filters"
+        <DataTable ref="productListTable" resizableColumns :value="productList" v-model:expandedRows="selectedProducts"
+          dataKey="id" :paginator="true" :rows="10" :filters="filters"
           paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-          :rowsPerPageOptions="[5, 10, 25]"
-          currentPageReportTemplate="{first} to {last} of {totalRecords} items"
-        >
+          :rowsPerPageOptions="[5, 10, 25]" currentPageReportTemplate="{first} to {last} of {totalRecords} items">
           <template #expansion> x </template>
           <template #header>
             <div class="slots-header">
               <div class="slots-header-left">
                 <span>Create orders</span>
-                <span
-                  >Choose the product and the quantity available for sale.</span
-                >
+                <span>Choose the product and the quantity available for sale.</span>
               </div>
 
               <div class="slots-header-right">
                 <div class="slots-header-right-search">
                   <i class="pi pi-search" />
-                  <InputText
-                    v-model="filters['global'].value"
-                    placeholder="Search"
-                  />
+                  <InputText v-model="filters['global'].value" placeholder="Search" />
                 </div>
               </div>
             </div>
 
             <Toolbar>
               <template #end>
-                <Button
-                  label="Export"
-                  icon="pi pi-upload"
-                  @click="exportCSV($event)"
-                />
+                <Button label="Export" icon="pi pi-upload" @click="exportCSV($event)" />
               </template>
             </Toolbar>
           </template>
@@ -395,56 +224,31 @@
 
           <Column header="Image" style="max-width: 8rem">
             <template #body="slotProps">
-              <Image
-                :src="
-                slotProps.data.media_url +
+              <Image :src="slotProps.data.media_url +
                 slotProps.data.media_path +
                 slotProps.data.image_main
-                "
-                :alt="slotProps.data.image_main"
-                width="70"
-                height="70"
-                imageStyle="border-radius: 8px; object-fit: contain; border: 1px solid var(--border-b);"
-                preview
-              />
+                " :alt="slotProps.data.image_main" width="70" height="70"
+                imageStyle="border-radius: 8px; object-fit: contain; border: 1px solid var(--border-b);" preview />
             </template>
           </Column>
 
           <Column field="id" header="Code" sortable>
             <template #body="slotProps">
-              <div
-                v-tooltip.top="'Copy'"
-                style="cursor: pointer"
-                @click="copy(slotProps.data.id)"
-              >
+              <div v-tooltip.top="'Copy'" style="cursor: pointer" @click="copy(slotProps.data.id)">
                 {{ slotProps.data.id }}
               </div>
             </template>
           </Column>
 
-          <Column
-            field="name"
-            header="Name"
-            sortable
-            style="max-width: 16rem; white-space: break-spaces"
-          >
+          <Column field="name" header="Name" sortable style="max-width: 16rem; white-space: break-spaces">
             <template #body="slotProps">
-              <div
-                v-tooltip.top="'Copy'"
-                style="cursor: pointer"
-                @click="copy(slotProps.data.name)"
-              >
+              <div v-tooltip.top="'Copy'" style="cursor: pointer" @click="copy(slotProps.data.name)">
                 {{ slotProps.data.name.slice(0, 30) }}...
               </div>
             </template>
           </Column>
 
-          <Column
-            field="category"
-            header="Category"
-            sortable
-            style="min-width: 8rem; text-transform: capitalize"
-          >
+          <Column field="category" header="Category" sortable style="min-width: 8rem; text-transform: capitalize">
             <template #body="slotProps">
               {{ slotProps.data.category }}
             </template>
@@ -456,23 +260,13 @@
             </template>
           </Column>
 
-          <Column
-            field="collateral"
-            header="Collateral"
-            sortable
-            style="min-width: 8rem"
-          >
+          <Column field="collateral" header="Collateral" sortable style="min-width: 8rem">
             <template #body="slotProps">
               {{ formatCurrency(slotProps.data.collateral) }}
             </template>
           </Column>
 
-          <Column
-            field="slots_count"
-            header="Slots"
-            sortable
-            style="min-width: 8rem"
-          >
+          <Column field="slots_count" header="Slots" sortable style="min-width: 8rem">
             <template #body="slotProps">
               {{ slotProps.data.slots_count }}
             </template>
@@ -481,41 +275,15 @@
           <Column :exportable="false" style="min-width: 8rem" header="Actions">
             <template #body="slotProps">
               <div class="table-buttons">
-                <Button
-                  class="table-button"
-                  type="button"
-                  icon="pi pi-ellipsis-h"
-                  outlined
-                  rounded
-                  aria-haspopup="true"
-                  aria-controls="product_menu"
-                  @click="openProductMenu"
-                />
-                <Menu
-                  ref="productMenuRef"
-                  id="product_menu"
-                  :model="productMenu"
-                  :popup="true"
-                />
+                <Button class="table-button" type="button" icon="pi pi-ellipsis-h" outlined rounded aria-haspopup="true"
+                  aria-controls="product_menu" @click="openProductMenu" />
+                <Menu ref="productMenuRef" id="product_menu" :model="productMenu" :popup="true" />
 
-                <Button
-                  class="table-button"
-                  icon="pi pi-plus"
-                  outlined
-                  rounded
-                  v-tooltip.top="'Create orders'"
-                  @click="openCreateSlotDialog(slotProps.index)"
-                />
+                <Button class="table-button" icon="pi pi-plus" outlined rounded v-tooltip.top="'Create orders'"
+                  @click="openCreateSlotDialog(slotProps.index)" />
 
-                <Button
-                  class="table-button"
-                  icon="pi pi-receipt"
-                  outlined
-                  rounded
-                  v-tooltip.top="'Show slots'"
-                  :disabled="slotProps.data.slots_count < 1"
-                  @click="openSlotListDialog(slotProps.index)"
-                >
+                <Button class="table-button" icon="pi pi-receipt" outlined rounded v-tooltip.top="'Show slots'"
+                  :disabled="slotProps.data.slots_count < 1" @click="openSlotListDialog(slotProps.index)">
                   <i class="pi pi-folder" />
                 </Button>
               </div>
@@ -530,7 +298,6 @@
 <script>
 import dashboardAPI from "@/pages/dashboard/api/index";
 import LoadingBars from "@/components/LoadingBars.vue";
-import { balanceTx } from "@/api/wallet-api";
 import { getAddressDetails } from "lucid-cardano";
 import { FilterMatchMode } from "primevue/api";
 import { HOST } from "@/api/index";
@@ -548,7 +315,7 @@ export default {
       createProduct,
       createSlot,
       getLucid,
-      startEndpoint,
+      deploy,
     } = dashboardAPI();
 
     const productList = ref(getSlotsData.value);
@@ -718,7 +485,7 @@ export default {
       createSlot,
       resetSlotForm,
       productList,
-      startEndpoint,
+      deploy,
       getLucid,
       openProductMenu,
       product,
@@ -838,62 +605,34 @@ export default {
       const internalUrl = "http://localhost:8080/session/" + slotId;
       window.open(internalUrl, "_blank");
     },
-    async createTransaction(actived, slotId, utx) {
+    async deployTransaction(slotId) {
       this.activedLoader = true;
 
-      if (actived === "false") {
-        const addr = await this.getLucid.wallet.address();
-        const address = await getAddressDetails(addr);
+      const addr = await this.getLucid.wallet.address();
+      const address = await getAddressDetails(addr);
 
-        await this.startEndpoint({
-          slot_id: slotId,
-          seller_pubkeyhash: address.paymentCredential.hash,
-        })
-          .then((res) => balanceTx(res.response.payload.transaction))
-          .then((txHash) => this.startTx({ tx_hash: txHash, slot_id: slotId }))
-          .then(() => {
-            this.$toast.add({
-              severity: "success",
-              summary: "Successful",
-              detail: "Transaction sent to the network.",
-              life: 5000,
-            });
+      await this.deploy({
+        order_id: slotId,
+        seller_pubkeyhash: address.paymentCredential.hash,
+      })
+        .then(() =>
+          this.$toast.add({
+            severity: "success",
+            summary: "Successful",
+            detail: "Transaction sent to the network.",
+            life: 5000,
           })
-          .catch((err) => {
-            console.error(err);
+        )
+        .catch((err) => {
+          console.error(err);
 
-            this.$toast.add({
-              severity: "error",
-              summary: "Error Message",
-              detail: "Transaction canceled.",
-              life: 5000,
-            });
+          this.$toast.add({
+            severity: "error",
+            summary: "Error Message",
+            detail: "Transaction canceled.",
+            life: 5000,
           });
-      }
-
-      if (actived === "true") {
-        await balanceTx(utx)
-          .then((txHash) => this.startTx({ tx_hash: txHash, slot_id: slotId }))
-          .then(() => {
-            this.$toast.add({
-              severity: "success",
-              summary: "Successful",
-              detail: "Transaction sent to the network.",
-              life: 5000,
-            });
-          })
-          .catch((err) => {
-            console.error(err);
-
-            this.$toast.add({
-              severity: "error",
-              summary: "Error Message",
-              detail: "Transaction canceled.",
-              life: 5000,
-            });
-          });
-      }
-
+        });
       this.activedLoader = false;
     },
     getStateBarValue(e) {
@@ -983,7 +722,6 @@ export default {
         product_units: this.slotForm.productUnits,
         batch_number: this.slotForm.batchNumber,
         product_discount: this.slotForm.productDiscount,
-        wallet_id: "c08b3754a3fc2c4cb063e12295e903d14edc899d",
         product_id: this.productList[this.createSlotIndex].id,
       };
 
@@ -1270,7 +1008,7 @@ export default {
   justify-content: center;
   flex-direction: column;
   align-items: center;
- 
+
 }
 
 .createslot-wrap {
@@ -1519,6 +1257,5 @@ img {
   }
 }
 
-@media only screen and (min-width: 1200px) {
-}
+@media only screen and (min-width: 1200px) {}
 </style>
