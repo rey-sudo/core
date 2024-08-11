@@ -1,9 +1,7 @@
 import DB from "../db";
-import API from "../api";
-import assert from "assert";
 import { BadRequestError } from "../errors";
 import { Request, Response } from "express";
-import { getSlotId } from "../utils/nano";
+import { getOrderId } from "../utils/nano";
 import { sellerMiddleware } from "../utils/seller";
 import { requireAuth } from "../utils/required";
 import { getContractCollateral, getContractPrice } from "../utils/other";
@@ -20,13 +18,6 @@ interface CreateScheme {
   product_discount: number;
 }
 
-interface InstanceScheme {
-  caID: string;
-  caWallet: {
-    getWalletId: string;
-  };
-}
-
 ///////////////////////////////////////////////MIDDLEWARES
 
 const createSlotMiddlewares: any = [sellerMiddleware, requireAuth];
@@ -40,13 +31,6 @@ const createSlotHandler = async (req: Request, res: Response) => {
   const params = req.body;
 
   const SELLER = req.sellerData;
-
-  const instanceScheme: InstanceScheme = {
-    caID: "SlaveContract",
-    caWallet: {
-      getWalletId: params.wallet_id,
-    },
-  };
 
   let scheme: CreateScheme = {
     mode: "",
@@ -64,7 +48,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
 
     const [products] = await connection.execute(
       "SELECT * FROM products WHERE id = ? AND seller_id = ?",
-      [params.product_id, SELLER.id]
+      [params.product_id, SELLER.id],
     );
 
     if (products.length === 0) {
@@ -83,12 +67,12 @@ const createSlotHandler = async (req: Request, res: Response) => {
         "batch",
         PRODUCT.price,
         params.product_discount,
-        params.product_units
+        params.product_units,
       );
       scheme.iteration_collateral = getContractCollateral(
         "batch",
         PRODUCT.collateral,
-        params.product_units
+        params.product_units,
       );
       scheme.product_discount = params.product_discount;
     }
@@ -101,7 +85,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
         "unit",
         PRODUCT.price,
         params.product_discount,
-        params.product_units
+        params.product_units,
       );
       scheme.iteration_collateral = PRODUCT.collateral;
       scheme.product_discount = 0;
@@ -110,7 +94,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
     ///////////////////////////////
 
     const schemeData = `
-    INSERT INTO slots (
+    INSERT INTO orders (
       id,
       mode,
       seller_id,
@@ -128,22 +112,10 @@ const createSlotHandler = async (req: Request, res: Response) => {
 
     for (let i = 0; i < scheme.iterations; i++) {
       try {
-        console.log(i);
-
-        const contractInstance = await API.post(
-          "/api/contract/activate",
-          instanceScheme
-        ).then((res) => {
-          assert.ok(res.data.hasOwnProperty("unContractInstanceId"));
-          return res.data.unContractInstanceId;
-        });
-
         const schemeValue = [
-          "S" + getSlotId(),
+          getOrderId(),
           scheme.mode,
           SELLER.id,
-          contractInstance,
-          params.wallet_id,
           scheme.iteration_units,
           scheme.iteration_price,
           scheme.iteration_collateral,
@@ -154,7 +126,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
 
         await connection.execute(schemeData, schemeValue);
       } catch (err) {
-        throw new BadRequestError("CID_FAILED");
+        throw new BadRequestError("FAILED");
       }
     }
 
@@ -163,9 +135,10 @@ const createSlotHandler = async (req: Request, res: Response) => {
     res.status(200).send({ success: true });
   } catch (err: any) {
     await connection.rollback();
+    res.status(404).send({ success: false });
   } finally {
     connection.release();
   }
 };
 
-export { createSlotMiddlewares, createSlotHandler };
+export { createSlotHandler, createSlotMiddlewares };

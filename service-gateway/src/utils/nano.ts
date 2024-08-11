@@ -1,5 +1,5 @@
 import { customAlphabet } from "nanoid";
 
-const getSlotId = customAlphabet("0123456789ABCDEF", 15);
+const getOrderId = customAlphabet("0123456789", 20);
 
-export { getSlotId };
+export { getOrderId };
