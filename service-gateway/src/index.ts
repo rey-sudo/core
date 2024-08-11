@@ -6,6 +6,7 @@ import cookieSession from "cookie-session";
 import pkg from 'body-parser';
 const { json, urlencoded } = pkg;
 import { Request, Response, NextFunction } from "express";
+import { message } from "./other";
 
 const app = express();
 
@@ -56,5 +57,5 @@ app.use(json({ limit: 5000000 }));
 
 app.use(cookieSession(sessionOptions));
 
-const message: string = "Hello, TypeScript with Node.js!";
+
 console.log(message);
