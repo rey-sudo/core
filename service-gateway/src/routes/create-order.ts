@@ -24,7 +24,7 @@ const createSlotMiddlewares: any = [sellerMiddleware, requireAuth];
 
 ///////////////////////////////////////////////
 
-/**HANDLER: create product slots*/
+/**HANDLER: create product orders*/
 const createSlotHandler = async (req: Request, res: Response) => {
   let connection: any = null;
 
@@ -98,15 +98,13 @@ const createSlotHandler = async (req: Request, res: Response) => {
       id,
       mode,
       seller_id,
-      contract_id,
-      contract_wid,
       contract_units,
       contract_price,
       contract_collateral,
-      contract_discount,
       product_id,
+      product_discount,
       schema_v
-     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     console.log(scheme);
 
@@ -119,8 +117,8 @@ const createSlotHandler = async (req: Request, res: Response) => {
           scheme.iteration_units,
           scheme.iteration_price,
           scheme.iteration_collateral,
-          scheme.product_discount,
           PRODUCT.id,
+          scheme.product_discount,
           0,
         ];
 
