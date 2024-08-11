@@ -2,6 +2,7 @@
   "name": "service-gateway",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,5 +14,9 @@
     "@types/node": "^22.2.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@blaze-cardano/sdk": "^0.1.5",
+    "lucid-cardano": "^0.10.7"
   }
 }
