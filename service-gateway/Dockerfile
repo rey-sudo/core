@@ -1,23 +1,20 @@
-FROM node:alpine
+# Use an official Node.js runtime as a parent image
+FROM node:18-alpine
 
-WORKDIR /app
+# Set the working directory in the container
+WORKDIR /usr/src/app
 
-COPY package.json .
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
 
-RUN npm config set fetch-timeout 30000
+# Install dependencies
+RUN npm install
 
-RUN npm config set fetch-retry-maxtimeout 30000
-
-RUN npm config set fetch-retry-mintimeout 30000
-
-RUN npm install --verbose
-
+# Copy the rest of the application code, including the src directory
 COPY . .
 
-RUN rm -rf /app/src/blockchain/test
+# Compile TypeScript to JavaScript
+RUN npx tsc
 
-RUN npm run build 
-
-RUN npm install --omit=dev
-
-CMD ["npm", "start"]
+# Command to run the app
+CMD ["node", "dist/index.js"]
