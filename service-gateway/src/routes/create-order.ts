@@ -81,12 +81,7 @@ const createSlotHandler = async (req: Request, res: Response) => {
       scheme.mode = "unit";
       scheme.iterations = params.product_units;
       scheme.iteration_units = 1;
-      scheme.iteration_price = getContractPrice(
-        "unit",
-        PRODUCT.price,
-        params.product_discount,
-        params.product_units,
-      );
+      scheme.iteration_price = PRODUCT.price;
       scheme.iteration_collateral = PRODUCT.collateral;
       scheme.product_discount = 0;
     }
