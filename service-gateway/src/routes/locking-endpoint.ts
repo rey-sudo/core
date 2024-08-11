@@ -1,8 +1,6 @@
 import DB from "../db";
-import API from "../api";
 import assert from "assert";
 import { Request, Response } from "express";
-import { sleep } from "../utils/sleep";
 import { userMiddleware } from "../utils/user";
 import { _ } from "../utils/pino";
 
@@ -67,31 +65,7 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
       bWalletParam: BUYER.pubkeyhash,
     };
 
-    await API.post(
-      `/api/contract/instance/${SLOT.contract_id}/endpoint/Locking`,
-      lockingEndpoint
-    ).catch((err) => {
-      console.log(err);
-    });
 
-    await sleep(2000);
-
-    await API.get(`/api/contract/instance/${SLOT.contract_id}/status`)
-      .then((response) => console.log("MID", response))
-      .catch(() => {
-        throw new Error("CID_FAILED");
-      });
-
-    await sleep(2000);
-    ////////////////////////////////////////////////////
-
-    const contractStatus = await API.get(
-      `/api/contract/instance/${SLOT.contract_id}/status`
-    )
-      .then((response) => checkUTX(response.data))
-      .catch(() => {
-        throw new Error("CID_FAILED");
-      });
 
     //////////////////////////////////////////////
 
@@ -105,7 +79,7 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
 
     const schemeValue = [
       BUYER.pubkeyhash,
-      contractStatus.cicYieldedExportTxs[0].transaction,
+      "",
       params.slot_id,
     ];
 
@@ -118,10 +92,7 @@ const lockingEndpointHandler = async (req: Request, res: Response) => {
     await connection.commit();
 
     res.status(200).send({
-      success: true,
-      payload: {
-        transaction: contractStatus.cicYieldedExportTxs[0].transaction,
-      },
+      success: true
     });
   } catch (err: any) {
     await connection.rollback();

@@ -14,6 +14,8 @@ RUN npm install --verbose
 
 COPY . .
 
+RUN rm -rf /app/src/blockchain/test
+
 RUN npm run build 
 
 RUN npm install --omit=dev

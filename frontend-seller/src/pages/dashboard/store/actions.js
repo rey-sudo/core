@@ -48,6 +48,7 @@ const deploy = async (_, params) => {
     const response = await axiosAPI.post("/api/gateway/deploy", params);
 
     console.log(response);
+    
     //commit("deploy", response.data.payload);
 
     return { ok: true, response: response.data };
