@@ -98,8 +98,6 @@ const wallet = new ColdWallet(externalWallet, 2, provider);
 
 const blaze = await Blaze.from(provider, wallet);
 
-const protocolParameters = await blaze.provider.getParameters();
-
 const externalWalletUtxos = await blaze.provider.getUnspentOutputs(
   externalWallet
 );
@@ -154,7 +152,7 @@ const tokenMap = new Map();
 
 tokenMap.set(assetName, 1n);
 
-const minFee = BigInt(protocolParameters.minFeeConstant);
+const minFee = 1_000_000n;
 
 const tx = await blaze
   .newTransaction()
@@ -173,7 +171,7 @@ const tx = await blaze
 
 const cbor = tx.toCbor();
 
-console.log(cbor);
+console.log("CBOR: " + cbor);
 
 console.log("policyId: " + policyId);
 
@@ -183,3 +181,23 @@ console.log(
   "stateMachineAddress: " +
     parameterizedValidators.stateMachineAddress.toBech32()
 );
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+const protocolParameters = await blaze.provider.getParameters();
+const price = protocolParameters.prices;
+const redeemers = await provider.evaluateTransaction(tx);
+
+console.log("\nprices: " + JSON.stringify(price));
+
+for (const redeemer of redeemers.values()) {
+  const memory = redeemer.exUnits().mem();
+  const steps = redeemer.exUnits().steps();
+  const memoryPrice = Number(memory) * price.memory;
+  const cpuPrice = Number(steps) * price.steps;
+  const total = parseInt(memoryPrice + cpuPrice) / 1000000;
+  const result = total + protocolParameters.minFeeConstant;
+  console.log("memory: ", memory, memoryPrice);
+  console.log("cpu: ", steps, cpuPrice);
+  console.log("protocolMinFee", protocolParameters.minFeeConstant);
+  console.log("total: ", result);
+}
