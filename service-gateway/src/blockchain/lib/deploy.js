@@ -143,8 +143,6 @@ const Datum = Data.Object({
 
 const stateMachineDatum = Data.to(data, Datum);
 
-const minUtxoLovelace = 2n * 1_000_000n;
-
 const threadTokenInput = Core.PlutusData.newConstrPlutusData(
   new Core.ConstrPlutusData(0n, new Core.PlutusList())
 );
@@ -158,7 +156,7 @@ const tokenMap = new Map();
 
 tokenMap.set(assetName, 1n);
 
-const minFee = 3n * 1_000_000n;
+const minFee = BigInt(minFeeConstant);
 
 const tx = await blaze
   .newTransaction()
