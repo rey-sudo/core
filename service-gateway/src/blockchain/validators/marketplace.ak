@@ -42,12 +42,12 @@ validator(token_name: ByteArray, utxo_ref: OutputReference) {
 type StateMachineDatum {
   state: Int,
   seller: Hash<Blake2b_224, VerificationKey>,
-  collateral: Int
+  collateral: Int,
+  price: Int
 }
 
 type StateMachineInput {
-  Waiting
-  Locking { buyer: ByteArray }
+  Locking
   Delivered
   Received
 }
@@ -61,7 +61,7 @@ validator(threadtoken: value.PolicyId) {
     when context.purpose is {
       Spend(utxo_ref) ->
         when (datum, redeemer) is {
-          (StateMachineDatum { state, seller, collateral }, Waiting) -> {
+          (StateMachineDatum { state, seller, collateral, price }, Locking) -> {
             let must_be_state = state == 0
             let must_be_signed =
               list.has(context.transaction.extra_signatories, seller)
@@ -85,7 +85,8 @@ validator(threadtoken: value.PolicyId) {
             let new_data: Data = StateMachineDatum {
               state : 1,
               seller : seller,
-              collateral : collateral
+              collateral : collateral,
+              price: price
             }
 
             let new_datum = InlineDatum(new_data)
@@ -94,8 +95,6 @@ validator(threadtoken: value.PolicyId) {
 
             must_be_state? && must_be_signed? && must_be_collateral? && must_be_policy? && must_be_datum?
           }
-
-          (StateMachineDatum { state, .. }, Locking { buyer }) -> True
 
           (StateMachineDatum { state, .. }, Delivered) -> True
 
@@ -139,7 +138,8 @@ test waiting() {
   let new_data: Data = StateMachineDatum {
       state : 1,
       seller : #"00000000000000000000000000000000000000000000000000000000",
-      collateral : 25000000
+      collateral : 25000000,
+      price: 50000000
   }  
   let new_datum = InlineDatum(new_data)
   let output =
@@ -158,13 +158,14 @@ test waiting() {
       reference_script: None,
     }
 
-  let redeemer = Waiting
+  let redeemer = Locking
 
   let datum =
     StateMachineDatum {
       state: 0,
       seller: #"00000000000000000000000000000000000000000000000000000000",
-      collateral: 25000000
+      collateral: 25000000,
+      price: 50000000
     }
   let tx =
     Transaction {
