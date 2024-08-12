@@ -18,7 +18,7 @@ const externalWallet = Core.addressFromBech32(
 );
 
 const stateMachineAddress = Core.addressFromBech32(
-  "addr_test1wqu29yd0r3pzdh6pas9rgnhxn9dcyt6rkm3xyqs4cz8kylc0u2lpe"
+  "addr_test1wrhksdrwgrwtt85d0hw84w4mza7jmptteafd3sxupce0ats53a9wu"
 );
 
 const wallet = new ColdWallet(externalWallet, 2, provider);
@@ -28,7 +28,7 @@ const blaze = await Blaze.from(provider, wallet);
 ///////////////////////////////////
 
 const threadTokenUnit =
-  "d9ec13627b55c95a3ceb513f17dd3288d1ee62e17fa2f098ee52ed07746872656164746f6b656e";
+  "a5a44a5990b43851644aa92e820c939dccb9cd27d0451b20501c2f7d746872656164746f6b656e";
 
 const assetId = Core.AssetId(threadTokenUnit);
 
