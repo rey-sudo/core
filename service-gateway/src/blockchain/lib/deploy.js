@@ -17,17 +17,6 @@ const provider = new Blockfrost({
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-const externalWallet = Core.addressFromBech32(
-  "addr_test1qppygdhzm0t7nnlclmds3dy0wc3du870dpy48juu0xxuu2aefdfvc4e0785y7vfhwlmsn3rn26mzvv9md0mhnkpjlc4s0jshh4"
-);
-
-const wallet = new ColdWallet(externalWallet, 2, provider);
-
-const blaze = await Blaze.from(provider, wallet);
-
-///////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////
-
 const validatorsWithParams = (tokenName, outRef) => {
   const threadTokenScript = cborToScript(
     applyParamsToScript(
@@ -101,6 +90,18 @@ const validatorsWithParams = (tokenName, outRef) => {
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
+const externalWallet = Core.addressFromBech32(
+  "addr_test1qppygdhzm0t7nnlclmds3dy0wc3du870dpy48juu0xxuu2aefdfvc4e0785y7vfhwlmsn3rn26mzvv9md0mhnkpjlc4s0jshh4"
+);
+
+const wallet = new ColdWallet(externalWallet, 2, provider);
+
+const blaze = await Blaze.from(provider, wallet);
+
+const protocolParameters = await blaze.provider.getParameters();
+
+console.log(protocolParameters);
+
 const externalWalletUtxos = await blaze.provider.getUnspentOutputs(
   externalWallet
 );
@@ -158,7 +159,6 @@ const tokenMap = new Map();
 tokenMap.set(assetName, 1n);
 
 const minFee = 3n * 1_000_000n;
-
 
 const tx = await blaze
   .newTransaction()
