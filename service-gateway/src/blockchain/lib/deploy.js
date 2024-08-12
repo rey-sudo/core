@@ -14,6 +14,9 @@ const provider = new Blockfrost({
   projectId: "preprodex26NYImZOT84XAA67qhyHyA7TT6PCGI",
 });
 
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
 const externalWallet = Core.addressFromBech32(
   "addr_test1qppygdhzm0t7nnlclmds3dy0wc3du870dpy48juu0xxuu2aefdfvc4e0785y7vfhwlmsn3rn26mzvv9md0mhnkpjlc4s0jshh4"
 );
