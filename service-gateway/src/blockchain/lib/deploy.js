@@ -1,54 +1,51 @@
 import {
-  applyParamsToScript,
-  Blockfrost,
-  C,
-  Constr,
+  ColdWallet,
+  Core,
   Data,
-  fromHex,
-  fromText,
-  Lucid,
-  MintingPolicy,
-  SpendingValidator,
-  toHex,
-  TxHash,
-  Unit,
-} from "https://deno.land/x/lucid@0.10.7/mod.ts";
-import * as cbor from "https://deno.land/x/cbor@v1.4.1/index.js";
+  Blaze,
+  makeValue,
+  Blockfrost,
+  MintingPolicy
+} from "@blaze-cardano/sdk";
 
-const lucid = await Lucid.new(
-  new Blockfrost(
-    "https://cardano-preprod.blockfrost.io/api/v0",
-    "preprodex26NYImZOT84XAA67qhyHyA7TT6PCGI",
-  ),
-  "Preprod",
+const provider = new Blockfrost({
+  network: "cardano-preprod",
+  projectId: "preprodex26NYImZOT84XAA67qhyHyA7TT6PCGI",
+});
+
+const externalWallet = Core.addressFromBech32(
+  "addr_test1qppygdhzm0t7nnlclmds3dy0wc3du870dpy48juu0xxuu2aefdfvc4e0785y7vfhwlmsn3rn26mzvv9md0mhnkpjlc4s0jshh4"
 );
 
-const LOCAL_SEED =
-  "bulk ahead math cloud retreat manual antenna ahead autumn bird element stumble fiction tell magic cross arm payment breeze suggest pig version expand divert";
+const wallet = new ColdWallet(externalWallet, 2, provider);
 
-lucid.selectWalletFromSeed(LOCAL_SEED);
+const blaze = await Blaze.from(provider, wallet);
 
-console.log(await lucid.wallet.address());
+
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
+async function readBlueprint() {
+  try {
+    const data = await fs.readFile('plutus.json', 'utf8');
+    console.log(data);
+  } catch (err) {
+    console.error(err);
+  }
+}
 
-const blueprint = JSON.parse(await Deno.readTextFile("plutus.json"));
+const blueprint = readBlueprint();
 
-type Validators = {
-  threadToken: MintingPolicy;
-  stateMachine: SpendingValidator;
-};
 
-const readValidators = (): Validators => {
+const readValidators = () => {
   const threadToken = blueprint.validators.find(
-    (v: any) => v.title === "marketplace.threadtoken",
+    (v) => v.title === "marketplace.threadtoken",
   );
 
   if (!threadToken) {
     throw new Error("threadToken validator not found");
   }
 
-  const stateMachine = blueprint.validators.find((v: any) =>
+  const stateMachine = blueprint.validators.find((v) =>
     v.title === "marketplace.statemachine"
   );
 
@@ -73,7 +70,7 @@ const readValidators = (): Validators => {
 
 const validators = await readValidators();
 
-const validatorsWithParams = (tokenName: string, outRef: Data) => {
+const validatorsWithParams = (tokenName, outRef) => {
   const threadToken = applyParamsToScript(validators.threadToken.script, [
     fromText(tokenName),
     outRef,
