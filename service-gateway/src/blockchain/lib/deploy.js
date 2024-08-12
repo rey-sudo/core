@@ -145,17 +145,17 @@ const threadTokenInput = Core.PlutusData.newConstrPlutusData(
   new Core.ConstrPlutusData(0n, new Core.PlutusList())
 );
 
-console.log("111111111111111111111");
-
 const threadTokenAsset = makeValue(
   productCollateral,
   ...[[threadTokenUnit, 1n]]
 );
-console.log("2222222222222222222222");
 
 const tokenMap = new Map();
 
 tokenMap.set(assetName, 1n);
+
+const minFee = 3n * 1_000_000n;
+
 
 const tx = await blaze
   .newTransaction()
@@ -169,6 +169,7 @@ const tx = await blaze
   )
   .addRequiredSigner("424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b")
   .setChangeAddress(externalWallet)
+  .setMinimumFee(minFee)
   .complete();
 
 const cbor = tx.toCbor();
