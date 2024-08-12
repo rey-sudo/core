@@ -1,6 +1,3 @@
-//////////////////TEST////////////////////////////
-///////////////////////////////////////////////
-
 use aiken/dict
 use aiken/fuzz
 use aiken/hash.{Blake2b_224, Hash}
@@ -13,9 +10,7 @@ use aiken/transaction.{Input, NoDatum, Output, Datum, TransactionId}
 use aiken/transaction/credential.{Address, ScriptCredential, VerificationKey}
 use aiken/transaction/value
 
-/// 
-/// 
-/// 
+
 type ThreadTokenInput {
   Mint
   Burn
