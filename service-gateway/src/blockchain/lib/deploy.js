@@ -100,8 +100,6 @@ const blaze = await Blaze.from(provider, wallet);
 
 const protocolParameters = await blaze.provider.getParameters();
 
-console.log(protocolParameters);
-
 const externalWalletUtxos = await blaze.provider.getUnspentOutputs(
   externalWallet
 );
@@ -156,7 +154,7 @@ const tokenMap = new Map();
 
 tokenMap.set(assetName, 1n);
 
-const minFee = BigInt(minFeeConstant);
+const minFee = BigInt(protocolParameters.minFeeConstant);
 
 const tx = await blaze
   .newTransaction()
