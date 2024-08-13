@@ -80,7 +80,7 @@ validator(threadtoken: value.PolicyId) {
 
             trace string.from_int(speding_lovelace)
 
-            let must_be_collateral = speding_lovelace >= collateral
+            let must_be_price = speding_lovelace >= price
 
             let new_data: Data = StateMachineDatum {
               state : 1,
@@ -93,7 +93,7 @@ validator(threadtoken: value.PolicyId) {
 
             let must_be_datum = new_datum == sm_output.datum
 
-            must_be_state? && must_be_signed? && must_be_collateral? && must_be_policy? && must_be_datum?
+            must_be_state? && must_be_signed? && must_be_price? && must_be_policy? && must_be_datum?
           }
 
           (StateMachineDatum { state, .. }, Delivered) -> True
@@ -149,7 +149,7 @@ test waiting() {
         stake_credential: None,
       },
       value: value.add(
-        value.from_lovelace(25_000_000),
+        value.from_lovelace(50_000_000),
         threadtoken,
         token_name,
         1,
