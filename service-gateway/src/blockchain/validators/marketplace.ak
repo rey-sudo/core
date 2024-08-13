@@ -44,7 +44,7 @@ type StateMachineDatum {
   seller: Hash<Blake2b_224, VerificationKey>,
   collateral: Int,
   price: Int,
-  buyer: Hash<Blake2b_224, VerificationKey>,
+  buyer: Option<Hash<Blake2b_224, VerificationKey>>,
 }
 
 type StateMachineInput {
@@ -64,6 +64,7 @@ validator(threadtoken: value.PolicyId) {
         when (datum, redeemer) is {
           (StateMachineDatum { state, seller, collateral, price, .. }, Locking { buyer }) -> {
             let must_be_state = state == 0
+            let must_be_empty = datum.buyer == None
             let must_be_signed =
               list.has(context.transaction.extra_signatories, buyer)
 
@@ -88,7 +89,7 @@ validator(threadtoken: value.PolicyId) {
               seller : seller,
               collateral : collateral,
               price: price,
-              buyer: buyer
+              buyer: Some(buyer)
             }
 
             let new_datum = InlineDatum(new_data)
@@ -143,7 +144,7 @@ test waiting() {
       seller : #"00000000000000000000000000000000000000000000000000000000",
       collateral : 25000000,
       price: 50000000,
-      buyer: new_buyer
+      buyer: Some(new_buyer)
   }  
   let new_datum = InlineDatum(new_data)
   let output =
@@ -169,7 +170,7 @@ test waiting() {
       seller: #"00000000000000000000000000000000000000000000000000000000",
       collateral: 25000000,
       price: 50000000,
-      buyer: fake_buyer
+      buyer: None
     }
   let tx =
     Transaction {
