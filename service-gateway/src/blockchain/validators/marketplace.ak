@@ -48,7 +48,7 @@ type StateMachineDatum {
 }
 
 type StateMachineInput {
-  Locking { buyer: Hash<Blake2b_224, VerificationKey> }
+  Locking { buyer_param: Hash<Blake2b_224, VerificationKey> }
   Delivered
   Received
 }
@@ -62,11 +62,11 @@ validator(threadtoken: value.PolicyId) {
     when context.purpose is {
       Spend(utxo_ref) ->
         when (datum, redeemer) is {
-          (StateMachineDatum { state, seller, collateral, price, .. }, Locking { buyer }) -> {
+          (StateMachineDatum { state, seller, collateral, price, buyer }, Locking { buyer_param }) -> {
             let must_be_state = state == 0
-            let must_be_empty = datum.buyer == None
+            let must_be_empty = buyer == None
             let must_be_signed =
-              list.has(context.transaction.extra_signatories, buyer)
+              list.has(context.transaction.extra_signatories, buyer_param)
 
             expect Some(sm_input) = 
                 list.find(context.transaction.inputs, fn(input) { input.output_reference == utxo_ref })
@@ -89,7 +89,7 @@ validator(threadtoken: value.PolicyId) {
               seller : seller,
               collateral : collateral,
               price: price,
-              buyer: Some(buyer)
+              buyer: Some(buyer_param)
             }
 
             let new_datum = InlineDatum(new_data)
@@ -162,7 +162,7 @@ test waiting() {
       datum: new_datum,
       reference_script: None,
     }
-  let redeemer = Locking {  buyer: new_buyer  }
+  let redeemer = Locking {  buyer_param: new_buyer  }
   let fake_buyer = #"55555555555555555555555555555555555555555555555555555555"
   let current_datum =
     StateMachineDatum {
