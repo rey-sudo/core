@@ -43,11 +43,12 @@ type StateMachineDatum {
   state: Int,
   seller: Hash<Blake2b_224, VerificationKey>,
   collateral: Int,
-  price: Int
+  price: Int,
+  buyer: Hash<Blake2b_224, VerificationKey>,
 }
 
 type StateMachineInput {
-  Locking
+  Locking { buyer: Hash<Blake2b_224, VerificationKey> }
   Delivered
   Received
 }
@@ -61,10 +62,10 @@ validator(threadtoken: value.PolicyId) {
     when context.purpose is {
       Spend(utxo_ref) ->
         when (datum, redeemer) is {
-          (StateMachineDatum { state, seller, collateral, price }, Locking) -> {
+          (StateMachineDatum { state, seller, collateral, price, .. }, Locking { buyer }) -> {
             let must_be_state = state == 0
             let must_be_signed =
-              list.has(context.transaction.extra_signatories, seller)
+              list.has(context.transaction.extra_signatories, buyer)
 
             expect Some(sm_input) = 
                 list.find(context.transaction.inputs, fn(input) { input.output_reference == utxo_ref })
@@ -86,7 +87,8 @@ validator(threadtoken: value.PolicyId) {
               state : 1,
               seller : seller,
               collateral : collateral,
-              price: price
+              price: price,
+              buyer: buyer
             }
 
             let new_datum = InlineDatum(new_data)
@@ -117,6 +119,7 @@ test waiting() {
   let threadtoken = #"99999999999999999999999999999999999999999999999999999999"
   let token_name = #"02"
   let own_val_hash = #"88888888888888888888888888888888888888888888888888888888"
+  let new_buyer = #"77777777777777777777777777777777777777777777777777777777"
   let input_utxo =
     Input {
       output_reference: own_ref,
@@ -139,7 +142,8 @@ test waiting() {
       state : 1,
       seller : #"00000000000000000000000000000000000000000000000000000000",
       collateral : 25000000,
-      price: 50000000
+      price: 50000000,
+      buyer: new_buyer
   }  
   let new_datum = InlineDatum(new_data)
   let output =
@@ -157,15 +161,15 @@ test waiting() {
       datum: new_datum,
       reference_script: None,
     }
-
-  let redeemer = Locking
-
-  let datum =
+  let redeemer = Locking {  buyer: new_buyer  }
+  let fake_buyer = #"55555555555555555555555555555555555555555555555555555555"
+  let current_datum =
     StateMachineDatum {
       state: 0,
       seller: #"00000000000000000000000000000000000000000000000000000000",
       collateral: 25000000,
-      price: 50000000
+      price: 50000000,
+      buyer: fake_buyer
     }
   let tx =
     Transaction {
@@ -177,7 +181,7 @@ test waiting() {
       certificates: [],
       withdrawals: [],
       validity_range: interval.everything(),
-      extra_signatories: [datum.seller],
+      extra_signatories: [new_buyer],
       redeemers: [],
       datums: dict.new(),
       id: TransactionId {
@@ -185,5 +189,5 @@ test waiting() {
       },
     }
   let ctx = ScriptContext { purpose: script_purpose, transaction: tx }
-  statemachine(threadtoken, datum, redeemer, ctx)
+  statemachine(threadtoken, current_datum, redeemer, ctx)
 }
