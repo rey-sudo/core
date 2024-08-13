@@ -91,7 +91,7 @@ const productPrice = 50n * 1_000_000n;
 
 const productCollateral = 25n * 1_000_000n;
 
-const threadTokenAsset = makeValue(productPrice, ...[[threadTokenUnit, 1n]]);
+const threadTokenAsset = makeValue(productPrice + productCollateral, ...[[threadTokenUnit, 1n]]);
 
 const minFee = 3n * 1_000_000n;
 
