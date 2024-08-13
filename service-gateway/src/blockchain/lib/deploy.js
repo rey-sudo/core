@@ -131,7 +131,7 @@ const data = {
   seller: "d0f4b0252c3c54d0ec21fe600c51489db9d5c534f14afc3227aa7af9",
   collateral: productCollateral,
   price: productPrice,
-  buyer: "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b"
+  buyer: "00000000000000000000000000000000000000000000000000000000"
 };
 
 const Datum = Data.Object({
