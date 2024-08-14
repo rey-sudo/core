@@ -155,7 +155,6 @@ const deployHandler = async (req: Request, res: Response) => {
     const schemeData = `
       UPDATE orders 
       SET status = ?,
-          deployed = ?,
           seller_pubkeyhash = ?,
           contract_address = ?,
           contract_state = ?,
@@ -164,10 +163,9 @@ const deployHandler = async (req: Request, res: Response) => {
       `;
 
     const schemeValue = [
-      "deployed",
-      true,
-      params.seller_pubkeyhash,
-      parameterizedValidators.stateMachineAddress,
+      "deploying",
+      params.pubkeyhash,
+      parameterizedValidators.stateMachineAddress.toBech32(),
       0,
       policyId,
       params.order_id,
