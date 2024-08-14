@@ -5,7 +5,7 @@ import PrimeVue from 'primevue/config';
 import { stores } from "./store";
 import { router } from "./router";
 import { createApp } from 'vue';
-import  { walletAPI }  from '@/api/wallet-api';
+
 
 import AutoComplete from 'primevue/autocomplete';
 import Accordion from 'primevue/accordion';
@@ -221,7 +221,5 @@ app.component('VirtualScroller', VirtualScroller);
 
 router.isReady().then(() => {
     app.mount("#app");
-    walletAPI().stop() 
-    walletAPI().setup() 
 });
 

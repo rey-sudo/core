@@ -301,7 +301,7 @@ import { FilterMatchMode } from "primevue/api";
 import { HOST } from "@/api/index";
 import { ref } from "vue";
 import { useClipboard } from "@vueuse/core";
-import { lucidClient,  walletClient} from "@/api/wallet-api";
+import { lucidClient, walletClient } from "@/api/wallet-api";
 
 export default {
   components: {
@@ -313,7 +313,6 @@ export default {
       deployTx,
       createProduct,
       createOrder,
-      getLucid,
       deploy,
     } = dashboardAPI();
 
@@ -485,7 +484,6 @@ export default {
       resetSlotForm,
       productList,
       deploy,
-      getLucid,
       openProductMenu,
       product,
       productMenu,
@@ -609,9 +607,11 @@ export default {
 
       const { getWallet } = walletClient();
 
-      lucidClient.selectWallet(getWallet());
+      console.log(await getWallet());
 
-      const addr = await this.getLucid.wallet.address();
+      lucidClient.selectWallet(await getWallet());
+
+      const addr = await lucidClient.wallet.address();
       const address = await getAddressDetails(addr);
 
       await this.deploy({

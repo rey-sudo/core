@@ -7,9 +7,6 @@
 <script>
 import entryAPI from "@/pages/entry/api";
 import { walletClient } from "@/api/wallet-api"
-import {
-    eventMachine
-} from "@/api/event";
 
 export default {
     name: "App",
@@ -32,7 +29,6 @@ export default {
     },
     mounted() {
         this.getUser()
-            .then(() => eventMachine.setup())
             .catch((err) => {
                 console.error(err);
             });
