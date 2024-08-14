@@ -10,33 +10,20 @@
         <div class="stepper-title">Product</div>
 
         <div class="stepper-product">
-          <img
-            class="stepper-product-image"
-            :src="
-              getOrderData.product_details.media_url +
-              getOrderData.product_details.media_path +
-              getOrderData.product_details.image_main
-            "
-            alt=""
-          />
+          <img class="stepper-product-image" :src="getOrderData.product_details.media_url +
+            getOrderData.product_details.media_path +
+            getOrderData.product_details.image_main
+            " alt="" />
 
           <div class="stepper-product-title">
-            <a
-              :href="'/p/' + getOrderData.product_details.product_id"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {{ getOrderData.product_details.product_name }}</a
-            >
+            <a :href="'/p/' + getOrderData.product_details.product_id" target="_blank" rel="noopener noreferrer">
+              {{ getOrderData.product_details.product_name }}</a>
 
             <span> | </span>
-            <span class="sku"
-              >SKU: {{ getOrderData.product_details.product_id }}</span
-            >
+            <span class="sku">SKU: {{ getOrderData.product_details.product_id }}</span>
             <span> | </span>
             <span class="model">
-              Model: {{ getOrderData.product_details.model }}</span
-            >
+              Model: {{ getOrderData.product_details.model }}</span>
           </div>
         </div>
       </div>
@@ -53,12 +40,12 @@
         <div class="stepper-price">
           <div>
             <label>Total Price </label>
-            <span>{{ getOrderData.contract_price }} ADA </span>
+            <span>{{ formatLovelace(getOrderData.contract_price) }}</span>
           </div>
 
           <div>
             <label>Total Collateral</label>
-            <span>{{ getOrderData.contract_collateral }} ADA </span>
+            <span>{{ formatLovelace(getOrderData.contract_collateral) }}</span>
           </div>
 
           <div>
@@ -82,13 +69,11 @@
       </div>
       <div class="stepper-body">
         <div class="stepper-title">Action</div>
-        <WaitingButton
-          v-if="
-            getOrderData.contract_stage === 'inactive' ||
-            getOrderData.contract_stage === 'start' ||
-            getOrderData.contract_stage === 'waiting'
-          "
-        />
+        <WaitingButton v-if="
+          getOrderData.contract_stage === 'inactive' ||
+          getOrderData.contract_stage === 'start' ||
+          getOrderData.contract_stage === 'waiting'
+        " />
 
         <DeliveredButton v-if="getOrderData.contract_stage === 'locking'" />
       </div>
@@ -109,8 +94,15 @@ export default {
   setup() {
     const { getOrderData } = sessionAPI();
 
+    const formatLovelace = (value) => {
+      if (value) {
+        const newValue = value / 1000000;
+        return newValue + " ADA"
+      }
+    }
     return {
       getOrderData,
+      formatLovelace
     };
   },
 };
