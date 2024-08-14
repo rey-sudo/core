@@ -609,10 +609,11 @@ export default {
       const addr = await this.getLucid.wallet.address();
       const address = await getAddressDetails(addr);
 
-      console.log(address);
+      console.log(address.address.bech32);
 
       await this.deploy({
         order_id: slotId,
+        address: address.address.bech32,
         pubkeyhash: address.paymentCredential.hash,
       })
         .then(() =>

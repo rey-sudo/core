@@ -42,7 +42,7 @@
 import ProductsView from "./components/ProductsView.vue";
 import entryAPI from "@/pages/entry/api";
 import dashboardAPI from "@/pages/dashboard/api";
-import SlotsView from "./components/SlotsView.vue";
+import SlotsView from "./components/OrdersView.vue";
 import { Lucid, getAddressDetails } from "lucid-cardano";
 
 export default {
