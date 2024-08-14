@@ -4,21 +4,14 @@ import { requireAuth } from "../utils/required";
 import { sellerMiddleware } from "../utils/seller";
 import { BadRequestError } from "../errors";
 import {
-  Blockfrost,
-  Constr,
+  Blaze,
+  ColdWallet,
+  Core,
   Data,
-  fromText,
-  Lucid,
-  MintingPolicy,
-  Unit,
-} from "lucid-cardano";
-import { validatorsWithParams } from "../blockchain";
-
-const BLOCKFROST_URL = "https://cardano-preprod.blockfrost.io/api/v0";
-
-const BLOCKFROST_KEY = "preprodex26NYImZOT84XAA67qhyHyA7TT6PCGI";
-
-const BLOCKFROST_ENV = "Preprod";
+  makeValue,
+  Static,
+} from "@blaze-cardano/sdk";
+import { provider, validatorsWithParams } from "../blockchain";
 
 ////////////////////////////////////////////////////
 
@@ -53,104 +46,111 @@ const deployHandler = async (req: Request, res: Response) => {
       throw new Error("IS_DEPLOYED");
     }
 
-    /////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
 
-    const lucid = await Lucid.new(
-      new Blockfrost(
-        BLOCKFROST_URL,
-        BLOCKFROST_KEY,
-      ),
-      BLOCKFROST_ENV,
+    const externalWallet = Core.addressFromBech32(
+      params.address,
     );
 
-    const LOCAL_SEED =
-      "bulk ahead math cloud retreat manual antenna ahead autumn bird element stumble fiction tell magic cross arm payment breeze suggest pig version expand divert";
+    const wallet = new ColdWallet(
+      externalWallet,
+      Core.NetworkId.Testnet,
+      provider,
+    );
 
-    lucid.selectWalletFromSeed(LOCAL_SEED);
+    const blaze = await Blaze.from(provider, wallet);
 
-    console.log(await lucid.wallet.address());
+    const externalWalletUtxos = await blaze.provider.getUnspentOutputs(
+      externalWallet,
+    );
 
-    /////////////////
-    
-    const localWalletUtxos = await lucid.wallet.getUtxos();
-
-    if (localWalletUtxos.length < 1) {
-      throw new BadRequestError("FEE_WALLET_NO_UTXOS");
+    if (externalWalletUtxos.length < 1) {
+      throw new BadRequestError("WALLET_NO_UTXOS");
     }
 
-    const utxo = localWalletUtxos[0];
+    const utxo = externalWalletUtxos[0];
 
-    const outRef = new Constr(0, [
-      new Constr(0, [utxo.txHash]),
-      BigInt(utxo.outputIndex),
-    ]);
+    const outRef = {
+      transactionId: { hash: utxo.input().transactionId() },
+      outputIndex: utxo.input().index(),
+    };
 
     const tokenName = "threadtoken";
 
-    const parameterizedValidators = validatorsWithParams(tokenName, outRef);
+    const assetName = Buffer.from(tokenName, "utf8").toString("hex");
 
-    const threadTokenPolicyId = parameterizedValidators.threadTokenPolicyId;
+    const parameterizedValidators = validatorsWithParams(assetName, outRef);
 
-    const stateMachineUnit: Unit = threadTokenPolicyId + fromText(tokenName);
+    const policyId = Core.PolicyId(parameterizedValidators.threadTokenPolicyId);
 
-    const productCollateral = BigInt(ORDER.contract_collateral);
+    const threadTokenUnit = policyId + assetName;
 
-    const stateMachineDatum = Data.to(
-      new Constr(0, [
-        BigInt(0),
-        params.seller_pubkeyhash,
-        productCollateral,
-      ]),
+    const Datum = Data.Object({
+      state: Data.Integer(),
+      seller: Data.Bytes(),
+      collateral: Data.Integer(),
+      price: Data.Integer(),
+      buyer: Data.Nullable(Data.Bytes()),
+    });
+
+    type Datum = Static<typeof Datum>;
+
+    const data: Datum = {
+      state: 0n,
+      seller: params.pubkeyhash,
+      collateral: BigInt(ORDER.contract_collateral),
+      price: BigInt(ORDER.contract_price),
+      buyer: null,
+    };
+
+    const stateMachineDatum = Data.to(data, Datum);
+
+    const threadTokenInput = Core.PlutusData.newConstrPlutusData(
+      new Core.ConstrPlutusData(0n, new Core.PlutusList()),
     );
 
-    const minUtxoLovelace = 2n * 1_000_000n;
+    const threadTokenAsset = makeValue(
+      BigInt(ORDER.contract_collateral),
+      [threadTokenUnit, 1n],
+    );
 
-    const threadTokenInput = Data.to(new Constr(0, []));
+    const tokenMap = new Map();
 
-    const localWallet = await lucid.wallet.address();
+    tokenMap.set(assetName, 1n);
 
-    const tx = await lucid
-      .newTx()
-      .collectFrom([utxo])
-      .attachMintingPolicy(parameterizedValidators.threadToken as MintingPolicy)
-      .mintAssets(
-        { [stateMachineUnit]: BigInt(1) },
-        threadTokenInput,
-      )
-      .payToContract(
+    const minFee = 1_000_000n;
+
+    const tx = await blaze
+      .newTransaction()
+      .addInput(utxo)
+      .addMint(policyId, tokenMap, threadTokenInput)
+      .provideScript(parameterizedValidators.threadTokenScript)
+      .lockAssets(
         parameterizedValidators.stateMachineAddress,
-        { inline: stateMachineDatum },
-        {
-          [stateMachineUnit]: BigInt(1),
-          lovelace: BigInt(minUtxoLovelace),
-        },
+        threadTokenAsset,
+        stateMachineDatum,
       )
-      .complete({
-        change: {
-          address: localWallet,
-        },
-      });
+      .addRequiredSigner(
+        params.pubkeyhash,
+      )
+      .setChangeAddress(externalWallet)
+      .setMinimumFee(minFee)
+      .complete();
 
-    const signedTx = await tx.sign().complete();
+    const cbor = tx.toCbor();
 
-    const transaction = await signedTx.submit();
+    console.log("CBOR: " + cbor);
 
-    console.log("tx: " + transaction);
+    console.log("policyId: " + policyId);
 
-    console.log("threadTokenPolicyId: " + threadTokenPolicyId);
-
-    console.log("threadTokenUnit: " + stateMachineUnit);
-
-    console.log(
-      "stateMachineAddress: " + parameterizedValidators.stateMachineAddress,
-    );
+    console.log("threadTokenUnit: " + threadTokenUnit);
 
     console.log(
-      "stateMachineScript: ",
-      parameterizedValidators.stateMachine.script,
+      "stateMachineAddress: " +
+        parameterizedValidators.stateMachineAddress.toBech32(),
     );
 
-    //////////////////////////////////////////////////////7
+    /////////////////////////////////////////////////////////////////
 
     const schemeData = `
       UPDATE orders 
@@ -159,8 +159,7 @@ const deployHandler = async (req: Request, res: Response) => {
           seller_pubkeyhash = ?,
           contract_address = ?,
           contract_state = ?,
-          contract_threadtoken = ?,
-          contract_0_tx = ?
+          contract_threadtoken = ?
       WHERE id = ? AND seller_id = ?
       `;
 
@@ -170,8 +169,7 @@ const deployHandler = async (req: Request, res: Response) => {
       params.seller_pubkeyhash,
       parameterizedValidators.stateMachineAddress,
       0,
-      threadTokenPolicyId,
-      transaction,
+      policyId,
       params.order_id,
       SELLER.id,
     ];
