@@ -129,8 +129,8 @@
       <DataTable :value="productList[slotListDialogIndex].orders" stripedRows scrollable scrollHeight="flex"
         tableStyle="min-width: 50rem;">
         <Column field="created_at" header="Date" sortable style="max-width: 10rem">
-          <template #body="slotProps">
-            {{ formatDate(slotProps.data.created_at) }}
+          <template #body="orderProps">
+            {{ formatDate(orderProps.data.created_at) }}
           </template>
         </Column>
 
@@ -139,35 +139,35 @@
         <Column field="contract_state" header="State" sortable></Column>
 
         <Column field="mode" header="Mode" sortable>
-          <template #body="slotProps">
-            <span>{{ slotProps.data.mode }}</span>
+          <template #body="orderProps">
+            <span>{{ orderProps.data.mode }}</span>
           </template>
         </Column>
 
         <Column field="contract_units" header="Units" sortable></Column>
 
         <Column field="contract_price" header="Price" sortable>
-          <template #body="slotProps">
-            {{ formatCurrency(slotProps.data.contract_price) }}
+          <template #body="orderProps">
+            {{ formatLovelace(orderProps.data.contract_price) }}
           </template>
         </Column>
 
         <Column field="contract_collateral" header="Collateral" sortable>
-          <template #body="slotProps">
-            {{ formatCurrency(slotProps.data.contract_collateral) }}
+          <template #body="orderProps">
+            {{ formatLovelace(orderProps.data.contract_collateral) }}
           </template>
         </Column>
 
         <Column :exportable="false" header="Actions">
-          <template #body="slotProps">
+          <template #body="orderProps">
             <div class="table-buttons">
-              <Button class="switch-button table-button actived" v-if="slotProps.data.contract_0_tx">
+              <Button class="switch-button table-button actived" v-if="orderProps.data.contract_0_tx">
                 Actived
               </Button>
 
               <Button class="switch-button table-button" v-if="
-                !slotProps.data.contract_0_tx
-              " @click="deployTransaction(slotProps.data.id)">
+                !orderProps.data.contract_0_tx
+              " @click="deployTransaction(orderProps.data.id)">
                 Deploy
               </Button>
 
@@ -176,7 +176,7 @@
               <Menu ref="slotMenuRef" id="slot_menu" :model="slotMenu" :popup="true" />
 
               <Button class="table-button" icon="pi pi-arrow-up-right" v-tooltip.top="'Show the negotiation session.'"
-                outlined rounded @click="openSessionPage(slotProps.data.id)" />
+                outlined rounded @click="openSessionPage(orderProps.data.id)" />
             </div>
           </template>
         </Column>
@@ -221,67 +221,67 @@
           <Column style="width: 3rem" :exportable="false" />
 
           <Column header="Image" style="max-width: 8rem">
-            <template #body="slotProps">
-              <Image :src="slotProps.data.media_url +
-                slotProps.data.media_path +
-                slotProps.data.image_main
-                " :alt="slotProps.data.image_main" width="70" height="70"
+            <template #body="orderProps">
+              <Image :src="orderProps.data.media_url +
+                orderProps.data.media_path +
+                orderProps.data.image_main
+                " :alt="orderProps.data.image_main" width="70" height="70"
                 imageStyle="border-radius: 8px; object-fit: contain; border: 1px solid var(--border-b);" preview />
             </template>
           </Column>
 
           <Column field="id" header="Code" sortable>
-            <template #body="slotProps">
-              <div v-tooltip.top="'Copy'" style="cursor: pointer" @click="copy(slotProps.data.id)">
-                {{ slotProps.data.id }}
+            <template #body="orderProps">
+              <div v-tooltip.top="'Copy'" style="cursor: pointer" @click="copy(orderProps.data.id)">
+                {{ orderProps.data.id }}
               </div>
             </template>
           </Column>
 
           <Column field="name" header="Name" sortable style="max-width: 16rem; white-space: break-spaces">
-            <template #body="slotProps">
-              <div v-tooltip.top="'Copy'" style="cursor: pointer" @click="copy(slotProps.data.name)">
-                {{ slotProps.data.name.slice(0, 30) }}...
+            <template #body="orderProps">
+              <div v-tooltip.top="'Copy'" style="cursor: pointer" @click="copy(orderProps.data.name)">
+                {{ orderProps.data.name.slice(0, 30) }}...
               </div>
             </template>
           </Column>
 
           <Column field="category" header="Category" sortable style="min-width: 8rem; text-transform: capitalize">
-            <template #body="slotProps">
-              {{ slotProps.data.category }}
+            <template #body="orderProps">
+              {{ orderProps.data.category }}
             </template>
           </Column>
 
           <Column field="price" header="Price" sortable style="min-width: 8rem">
-            <template #body="slotProps">
-              {{ formatCurrency(slotProps.data.price) }}
+            <template #body="orderProps">
+              {{ formatCurrency(orderProps.data.price) }}
             </template>
           </Column>
 
           <Column field="collateral" header="Collateral" sortable style="min-width: 8rem">
-            <template #body="slotProps">
-              {{ formatCurrency(slotProps.data.collateral) }}
+            <template #body="orderProps">
+              {{ formatCurrency(orderProps.data.collateral) }}
             </template>
           </Column>
 
-          <Column field="slots_count" header="Slots" sortable style="min-width: 8rem">
-            <template #body="slotProps">
-              {{ slotProps.data.slots_count }}
+          <Column field="order_count" header="Orders" sortable style="min-width: 8rem">
+            <template #body="orderProps">
+              {{ orderProps.data.order_count }}
             </template>
           </Column>
 
           <Column :exportable="false" style="min-width: 8rem" header="Actions">
-            <template #body="slotProps">
+            <template #body="orderProps">
               <div class="table-buttons">
                 <Button class="table-button" type="button" icon="pi pi-ellipsis-h" outlined rounded aria-haspopup="true"
                   aria-controls="product_menu" @click="openProductMenu" />
                 <Menu ref="productMenuRef" id="product_menu" :model="productMenu" :popup="true" />
 
                 <Button class="table-button" icon="pi pi-plus" outlined rounded v-tooltip.top="'Create orders'"
-                  @click="openCreateSlotDialog(slotProps.index)" />
+                  @click="openCreateSlotDialog(orderProps.index)" />
 
                 <Button class="table-button" icon="pi pi-receipt" outlined rounded v-tooltip.top="'Show slots'"
-                  :disabled="slotProps.data.slots_count < 1" @click="openSlotListDialog(slotProps.index)">
+                  :disabled="orderProps.data.order_count < 1" @click="openSlotListDialog(orderProps.index)">
                   <i class="pi pi-folder" />
                 </Button>
               </div>
@@ -340,7 +340,7 @@ export default {
       schema_t: null,
       schema_v: null,
       slots: [],
-      slots_count: null,
+      order_count: null,
     });
 
     let invalidProductName = ref(false);
@@ -380,7 +380,7 @@ export default {
         schema_t: null,
         schema_v: null,
         slots: [],
-        slots_count: null,
+        order_count: null,
       };
 
       invalidProductName.value = false;
@@ -639,7 +639,7 @@ export default {
       return e * 20;
     },
     openSlotListDialog(productIndex) {
-      if (this.productList[productIndex].slots_count < 1) {
+      if (this.productList[productIndex].order_count < 1) {
         return;
       }
 
@@ -687,6 +687,12 @@ export default {
       }
     },
     formatCurrency(value) {
+      if (value) {
+        return value + " ADA";
+      }
+    },
+
+    formatLovelace(value) {
       if (value) {
         const newValue = value / 1000000;
         return newValue + " ADA";
