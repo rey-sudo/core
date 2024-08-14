@@ -3,7 +3,7 @@
     <div class="p-chat-top">
       <img src="@/assets/empty-user.png" alt="" />
 
-      <span>{{ shortFormat(getSlotData.buyer_pubkeyhash, 20, "Buyer") }}</span>
+      <span>{{ shortFormat(getOrderData.buyer_pubkeyhash, 20, "Buyer") }}</span>
 
       <button
         @click="toggleMenu"
@@ -68,7 +68,7 @@ export default {
 
   setup() {
     const { getCurrentSeller } = headerAPI();
-    const { getSlotData } = sessionAPI();
+    const { getOrderData } = sessionAPI();
 
     const socket = io(HOST, {
       query: {
@@ -79,7 +79,7 @@ export default {
 
     const connectRoom = () => {
       const payload = {
-        room: getSlotData.value.id,
+        room: getOrderData.value.id,
       };
       socket.emit("joinRoom", JSON.stringify(payload));
     };
@@ -110,7 +110,7 @@ export default {
       }
 
       const payload = {
-        room: getSlotData.value.id,
+        room: getOrderData.value.id,
         content: getContent(),
       };
 
@@ -155,7 +155,7 @@ export default {
       editor,
       menu,
       connectRoom,
-      getSlotData,
+      getOrderData,
       menuItems,
       sendMessage,
       getCurrentSeller,

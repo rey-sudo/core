@@ -2,17 +2,17 @@
   <div class="timeline">
     <div class="timeline-title">
       <span>Negotiation Session</span>
-      <span>{{ getSlotData?.id }} </span>
+      <span>{{ getOrderData?.id }} </span>
     </div>
 
     <div class="timeline-subtitle">
       <span>Space for bilateral negotiation </span>
-      <span> {{ getSlotData?.created_at }}</span>
+      <span> {{ getOrderData?.created_at }}</span>
     </div>
 
     <div class="timeline-body">
       <Timeline
-        v-if="getSlotData"
+        v-if="getOrderData"
         :value="eventData"
         layout="horizontal"
         align="top"
@@ -58,18 +58,18 @@ import { shortFormat } from "@/utils";
 
 export default {
   setup() {
-    const { getSlotData } = sessionAPI();
+    const { getOrderData } = sessionAPI();
 
     const eventData = computed(() => [
       {
         status: "Waiting",
-        text: shortFormat(getSlotData.value.contract_0_tx, 20),
-        data: getSlotData.value.contract_0_tx,
+        text: shortFormat(getOrderData.value.contract_0_tx, 20),
+        data: getOrderData.value.contract_0_tx,
       },
       {
         status: "Locking",
-        text: shortFormat(getSlotData.value.contract_1_tx, 20),
-        data: getSlotData.value.contract_1_tx,
+        text: shortFormat(getOrderData.value.contract_1_tx, 20),
+        data: getOrderData.value.contract_1_tx,
       },
       {
         status: "Delivered",
@@ -86,7 +86,7 @@ export default {
     const { copy } = useClipboard();
     return {
       eventData,
-      getSlotData,
+      getOrderData,
       copy,
       shortFormat,
     };

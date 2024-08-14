@@ -13,29 +13,29 @@
           <img
             class="stepper-product-image"
             :src="
-              getSlotData.product_details.media_url +
-              getSlotData.product_details.media_path +
-              getSlotData.product_details.image_main
+              getOrderData.product_details.media_url +
+              getOrderData.product_details.media_path +
+              getOrderData.product_details.image_main
             "
             alt=""
           />
 
           <div class="stepper-product-title">
             <a
-              :href="'/p/' + getSlotData.product_details.product_id"
+              :href="'/p/' + getOrderData.product_details.product_id"
               target="_blank"
               rel="noopener noreferrer"
             >
-              {{ getSlotData.product_details.product_name }}</a
+              {{ getOrderData.product_details.product_name }}</a
             >
 
             <span> | </span>
             <span class="sku"
-              >SKU: {{ getSlotData.product_details.product_id }}</span
+              >SKU: {{ getOrderData.product_details.product_id }}</span
             >
             <span> | </span>
             <span class="model">
-              Model: {{ getSlotData.product_details.model }}</span
+              Model: {{ getOrderData.product_details.model }}</span
             >
           </div>
         </div>
@@ -53,22 +53,22 @@
         <div class="stepper-price">
           <div>
             <label>Total Price </label>
-            <span>{{ getSlotData.contract_price }} ADA </span>
+            <span>{{ getOrderData.contract_price }} ADA </span>
           </div>
 
           <div>
             <label>Total Collateral</label>
-            <span>{{ getSlotData.contract_collateral }} ADA </span>
+            <span>{{ getOrderData.contract_collateral }} ADA </span>
           </div>
 
           <div>
             <label>Mode</label>
-            <span>{{ getSlotData.mode }}</span>
+            <span>{{ getOrderData.mode }}</span>
           </div>
 
           <div>
             <label>Units</label>
-            <span> {{ getSlotData.contract_units }}</span>
+            <span> {{ getOrderData.contract_units }}</span>
           </div>
         </div>
       </div>
@@ -84,13 +84,13 @@
         <div class="stepper-title">Action</div>
         <WaitingButton
           v-if="
-            getSlotData.contract_stage === 'inactive' ||
-            getSlotData.contract_stage === 'start' ||
-            getSlotData.contract_stage === 'waiting'
+            getOrderData.contract_stage === 'inactive' ||
+            getOrderData.contract_stage === 'start' ||
+            getOrderData.contract_stage === 'waiting'
           "
         />
 
-        <DeliveredButton v-if="getSlotData.contract_stage === 'locking'" />
+        <DeliveredButton v-if="getOrderData.contract_stage === 'locking'" />
       </div>
     </div>
   </div>
@@ -107,10 +107,10 @@ export default {
     DeliveredButton,
   },
   setup() {
-    const { getSlotData } = sessionAPI();
+    const { getOrderData } = sessionAPI();
 
     return {
-      getSlotData,
+      getOrderData,
     };
   },
 };
