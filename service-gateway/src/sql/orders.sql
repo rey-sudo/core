@@ -11,7 +11,7 @@ create table if not exists orders(
   buyer_id varchar(20) default null,
   buyer_pubkeyhash varchar(100) default null,
   contract_address varchar(100) default null,
-  contract_state int unsigned not null,
+  contract_state int unsigned default 0,
   contract_threadtoken varchar(100) default null,
   contract_unit varchar(100) default null,
   contract_units int unsigned not null,

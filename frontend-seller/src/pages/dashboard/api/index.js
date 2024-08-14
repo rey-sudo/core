@@ -10,14 +10,14 @@ const dashboardAPI = () => {
   const createProduct = async (params) =>
     await store.dispatch("dashboard/createProduct", params);
 
-  const startTx = async (params) =>
-    await store.dispatch("dashboard/startTx", params);
+  const deployTx = async (params) =>
+    await store.dispatch("dashboard/deployTx", params);
 
   const createImages = async (params) =>
     await store.dispatch("dashboard/createImages", params);
 
-  const createSlot = async (params) =>
-    await store.dispatch("dashboard/createSlot", params);
+  const createOrder = async (params) =>
+    await store.dispatch("dashboard/createOrder", params);
 
   const deploy = async (params) =>
     await store.dispatch("dashboard/deploy", params);
@@ -42,11 +42,11 @@ const dashboardAPI = () => {
     createProduct,
     deploy,
     getProducts,
-    createSlot,
+    createOrder,
     setupLucid,
     createImages,
     getSlots,
-    startTx,
+    deployTx,
     sleep,
   };
 };

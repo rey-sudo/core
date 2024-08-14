@@ -119,6 +119,7 @@ const createOrderHandler = async (req: Request, res: Response) => {
 
         await connection.execute(schemeData, schemeValue);
       } catch (err) {
+        console.error(err);
         throw new BadRequestError("FAILED");
       }
     }
@@ -127,7 +128,10 @@ const createOrderHandler = async (req: Request, res: Response) => {
 
     res.status(200).send({ success: true });
   } catch (err: any) {
+    _.error(err);
+
     await connection.rollback();
+
     res.status(404).send({ success: false });
   } finally {
     connection.release();

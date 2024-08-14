@@ -74,7 +74,7 @@ const main = async () => {
     errorEvents.forEach((e: string) => process.on(e, (err) => catcher(err)));
 
     app.post(
-      "/api/gateway/create-slot",
+      "/api/gateway/create-order",
 
       route.createOrderMiddlewares,
 

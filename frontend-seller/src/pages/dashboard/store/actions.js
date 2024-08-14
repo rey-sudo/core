@@ -13,9 +13,9 @@ const createProduct = async (_, params) => {
   }
 };
 
-const startTx = async (_, params) => {
+const deployTx = async (_, params) => {
   try {
-    const response = await axiosAPI.post("/api/gateway/start-tx", params);
+    const response = await axiosAPI.post("/api/gateway/deploy-tx", params);
 
     console.log(response);
 
@@ -61,11 +61,11 @@ const setupLucid = async ({ commit }, data) => {
   commit("setupLucid", data);
 };
 
-const createSlot = async (_, params) => {
+const createOrder = async (_, params) => {
   try {
-    const response = await axiosAPI.post("/api/gateway/create-slot", params);
+    const response = await axiosAPI.post("/api/gateway/create-order", params);
 
-    //commit("createSlot", response.data.payload);
+    //commit("createOrder", response.data.payload);
 
     return { ok: true, response: response.data };
   } catch (error) {
@@ -102,8 +102,8 @@ export {
   setupLucid,
   createProduct,
   createImages,
-  startTx,
+  deployTx,
   getProducts,
-  createSlot,
+  createOrder,
   getSlots,
 };

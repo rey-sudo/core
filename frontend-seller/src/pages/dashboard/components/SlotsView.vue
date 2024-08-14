@@ -44,19 +44,18 @@
     <!--////////////////////////////////////////////////////////////////////////-->
 
     <!--////////////////////////////////////////////////////////////////////////-->
-    <Dialog v-model:visible="createSlotDialogVisible" :style="{ width: '400px' }" header="Availability" :modal="true"
+    <Dialog v-model:visible="createOrderDialog" :style="{ width: '400px' }" header="Create orders" :modal="true"
       :draggable="false">
       <div class="createslot">
-        <LoadingBars v-if="createSlotLoader" />
+        <LoadingBars v-if="createOrderLoader" />
 
-        <div class="createslot-wrap" v-if="!createSlotLoader">
+        <div class="createslot-wrap" v-if="!createOrderLoader">
           <div class="total">
-            <p>Total Slots {{ computedSlots }}</p>
-            <p>Stock = {{ productList[createSlotIndex].stock }}</p>
+            <p>Total orders {{ computedTotalOrders }}</p>
+            <p>Stock = {{ productList[createOrderIndex].stock }}</p>
             <p>Units = {{ computedUnits }}</p>
             <p>Collateral = {{ computedCollateral }}</p>
             <p>Price = {{ computedPrice }}</p>
-            <p>Fee = 1 ADA</p>
           </div>
 
           <div class="field">
@@ -65,7 +64,7 @@
               <i class="pi pi-info-circle" v-tooltip.top="'Batch mode allows to add discounts for multiple units.'
                 " />
             </label>
-            <InputSwitch id="batchMode" v-model="slotForm.batchMode" @change="() => resetSlotForm()" />
+            <InputSwitch id="batchMode" v-model="orderForm.batchMode" @change="() => resetSlotForm()" />
           </div>
 
           <div class="field">
@@ -73,9 +72,9 @@
               <span>Units</span>
               <i class="pi pi-info-circle" v-tooltip.top="'Number of units available for sale.'" />
             </label>
-            <InputNumber id="units" v-model="slotForm.productUnits" showButtons placeholder="" integeronly
-              locale="en-US" :min="0" :class="{ invalid: slotFormErrors.productUnits }" />
-            <small class="p-error" v-if="slotFormErrors.productUnits">
+            <InputNumber id="units" v-model="orderForm.productUnits" showButtons placeholder="" integeronly
+              locale="en-US" :min="0" :class="{ invalid: orderFormErrors.productUnits }" />
+            <small class="p-error" v-if="orderFormErrors.productUnits">
               The unit is required and greater than 0.
             </small>
           </div>
@@ -86,10 +85,10 @@
               <i class="pi pi-info-circle" v-tooltip.top="'Each batch contains the chosen number of units.'
                 " />
             </label>
-            <InputNumber id="batch" v-model="slotForm.batchNumber" showButtons placeholder=""
-              :disabled="!slotForm.batchMode" integeronly locale="en-US" :min="0"
-              :class="{ invalid: slotFormErrors.batchNumber }" />
-            <small class="p-error" v-if="slotFormErrors.batchNumber">
+            <InputNumber id="batch" v-model="orderForm.batchNumber" showButtons placeholder=""
+              :disabled="!orderForm.batchMode" integeronly locale="en-US" :min="0"
+              :class="{ invalid: orderFormErrors.batchNumber }" />
+            <small class="p-error" v-if="orderFormErrors.batchNumber">
               The batch must be greater than 0.
             </small>
           </div>
@@ -99,10 +98,10 @@
               <span>Discount</span>
               <i class="pi pi-info-circle" v-tooltip.top="'Discount per unit in batch mode.'" />
             </label>
-            <InputNumber id="unitDiscount" v-model="slotForm.productDiscount" showButtons
-              placeholder="Select A Percentage" :disabled="!slotForm.batchMode" integeronly suffix=" % OFF"
-              locale="en-US" :min="0" :max="100" :class="{ invalid: slotFormErrors.productDiscount }" />
-            <small class="p-error" v-if="slotFormErrors.productDiscount">
+            <InputNumber id="unitDiscount" v-model="orderForm.productDiscount" showButtons
+              placeholder="Select A Percentage" :disabled="!orderForm.batchMode" integeronly suffix=" % OFF"
+              locale="en-US" :min="0" :max="100" :class="{ invalid: orderFormErrors.productDiscount }" />
+            <small class="p-error" v-if="orderFormErrors.productDiscount">
               The discount must be greater than 0.</small>
           </div>
         </div>
@@ -110,7 +109,7 @@
 
       <template #footer>
         <Button label="Cancel" text @click="closeProductDialog" />
-        <Button label="Create" text @click="createSlots" />
+        <Button label="Create" text @click="createOrders" />
       </template>
     </Dialog>
     <!--////////////////////////////////////////////////////////////////////////-->
@@ -128,7 +127,7 @@
         </div>
       </template>
 
-      <DataTable :value="productList[slotListDialogIndex].slots" stripedRows scrollable scrollHeight="flex"
+      <DataTable :value="productList[slotListDialogIndex].orders" stripedRows scrollable scrollHeight="flex"
         tableStyle="min-width: 50rem;">
         <Column field="created_at" header="Date" sortable style="max-width: 10rem">
           <template #body="slotProps">
@@ -138,7 +137,7 @@
 
         <Column field="status" header="Status" sortable></Column>
 
-        <Column field="contract_stage" header="Stage" sortable></Column>
+        <Column field="contract_state" header="State" sortable></Column>
 
         <Column field="mode" header="Mode" sortable>
           <template #body="slotProps">
@@ -311,9 +310,9 @@ export default {
   setup() {
     const {
       getSlotsData,
-      startTx,
+      deployTx,
       createProduct,
-      createSlot,
+      createOrder,
       getLucid,
       deploy,
     } = dashboardAPI();
@@ -449,7 +448,7 @@ export default {
       slotMenuRef.value.toggle(event);
     };
 
-    const slotForm = ref({
+    const orderForm = ref({
       batchMode: false,
       productUnits: 1,
       batchNumber: 0,
@@ -457,15 +456,15 @@ export default {
     });
 
     const resetSlotForm = () => {
-      slotForm.value = {
-        batchMode: slotForm.value.batchMode,
+      orderForm.value = {
+        batchMode: orderForm.value.batchMode,
         productUnits: 1,
         batchNumber: 0,
         productDiscount: undefined,
       };
     };
 
-    const slotFormErrors = ref({
+    const orderFormErrors = ref({
       batchMode: false,
       productUnits: false,
       batchNumber: false,
@@ -479,10 +478,10 @@ export default {
       copy,
       copied,
       isSupported,
-      startTx,
-      slotFormErrors,
-      slotForm,
-      createSlot,
+      deployTx,
+      orderFormErrors,
+      orderForm,
+      createOrder,
       resetSlotForm,
       productList,
       deploy,
@@ -514,10 +513,10 @@ export default {
   data() {
     return {
       mediaHostURL: HOST + "/api/media/create-image",
-      createSlotLoader: false,
+      createOrderLoader: false,
       activedLoader: false,
-      createSlotDialogVisible: false,
-      createSlotIndex: null,
+      createOrderDialog: false,
+      createOrderIndex: null,
       deleteProductDialog: false,
       deleteProductsDialog: false,
       descriptionLengthLimit: 1000,
@@ -536,43 +535,43 @@ export default {
   },
   computed: {
     computedMode() {
-      return this.slotForm.batchMode ? "batch" : "unit";
+      return this.orderForm.batchMode ? "batch" : "unit";
     },
-    computedSlots() {
-      if (!this.slotForm.batchMode) {
-        return this.slotForm.productUnits;
+    computedTotalOrders() {
+      if (!this.orderForm.batchMode) {
+        return this.orderForm.productUnits;
       }
 
-      if (this.slotForm.batchMode) {
-        return this.slotForm.batchNumber;
+      if (this.orderForm.batchMode) {
+        return this.orderForm.batchNumber;
       }
 
       return 0;
     },
 
     computedUnits() {
-      if (!this.slotForm.batchMode) {
-        return this.slotForm.productUnits;
+      if (!this.orderForm.batchMode) {
+        return this.orderForm.productUnits;
       }
 
-      if (this.slotForm.batchMode) {
-        return this.slotForm.productUnits * this.slotForm.batchNumber;
+      if (this.orderForm.batchMode) {
+        return this.orderForm.productUnits * this.orderForm.batchNumber;
       }
 
       return 0;
     },
 
     computedCollateral() {
-      if (!this.slotForm.batchMode) {
+      if (!this.orderForm.batchMode) {
         let total =
-          this.productList[this.createSlotIndex].collateral *
-          this.slotForm.productUnits;
+          this.productList[this.createOrderIndex].collateral *
+          this.orderForm.productUnits;
         return `${total} ADA`;
       }
 
-      if (this.slotForm.batchMode) {
-        let units = this.slotForm.productUnits * this.slotForm.batchNumber;
-        let total = this.productList[this.createSlotIndex].collateral * units;
+      if (this.orderForm.batchMode) {
+        let units = this.orderForm.productUnits * this.orderForm.batchNumber;
+        let total = this.productList[this.createOrderIndex].collateral * units;
         return `${total} ADA`;
       }
 
@@ -580,15 +579,15 @@ export default {
     },
 
     computedPrice() {
-      if (!this.slotForm.batchMode) {
-        let total = this.productList[this.createSlotIndex].price;
+      if (!this.orderForm.batchMode) {
+        let total = this.productList[this.createOrderIndex].price;
         return `${total} ADA`;
       }
 
-      if (this.slotForm.batchMode) {
-        let originalPrice = this.productList[this.createSlotIndex].price;
+      if (this.orderForm.batchMode) {
+        let originalPrice = this.productList[this.createOrderIndex].price;
 
-        let discountPercentage = this.slotForm.productDiscount;
+        let discountPercentage = this.orderForm.productDiscount;
 
         let discountAmount = (originalPrice * discountPercentage) / 100;
 
@@ -611,9 +610,11 @@ export default {
       const addr = await this.getLucid.wallet.address();
       const address = await getAddressDetails(addr);
 
+      console.log(address);
+
       await this.deploy({
         order_id: slotId,
-        seller_pubkeyhash: address.paymentCredential.hash,
+        pubkeyhash: address.paymentCredential.hash,
       })
         .then(() =>
           this.$toast.add({
@@ -693,46 +694,46 @@ export default {
     },
     openProductDialog() {
       this.resetForm();
-      this.createSlotDialogVisible = true;
+      this.createOrderDialog = true;
     },
     closeProductDialog() {
-      this.createSlotDialogVisible = false;
+      this.createOrderDialog = false;
     },
-    async createSlots() {
-      this.slotFormErrors.productUnits = this.unitNumber(
-        this.slotForm.productUnits
+    async createOrders() {
+      this.orderFormErrors.productUnits = this.unitNumber(
+        this.orderForm.productUnits
       );
 
-      this.slotFormErrors.batchNumber = this.batchNumber(
-        this.slotForm.batchMode,
-        this.slotForm.batchNumber
+      this.orderFormErrors.batchNumber = this.batchNumber(
+        this.orderForm.batchMode,
+        this.orderForm.batchNumber
       );
 
-      this.slotFormErrors.productDiscount = this.productDiscount(
-        this.slotForm.batchMode,
-        this.slotForm.productDiscount
+      this.orderFormErrors.productDiscount = this.productDiscount(
+        this.orderForm.batchMode,
+        this.orderForm.productDiscount
       );
 
-      if (Object.values(this.slotFormErrors).includes(true)) {
+      if (Object.values(this.orderFormErrors).includes(true)) {
         return;
       }
 
       const params = {
-        batch_mode: this.slotForm.batchMode,
-        product_units: this.slotForm.productUnits,
-        batch_number: this.slotForm.batchNumber,
-        product_discount: this.slotForm.productDiscount,
-        product_id: this.productList[this.createSlotIndex].id,
+        batch_mode: this.orderForm.batchMode,
+        product_units: this.orderForm.productUnits,
+        batch_number: this.orderForm.batchNumber,
+        product_discount: this.orderForm.productDiscount,
+        product_id: this.productList[this.createOrderIndex].id,
       };
 
       console.log(params);
 
-      this.createSlotLoader = true;
+      this.createOrderLoader = true;
 
-      await this.createSlot(params)
+      await this.createOrder(params)
         .then((res) => {
           if (res.response.success === true) {
-            this.createSlotDialogVisible = false;
+            this.createOrderDialog = false;
 
             this.$toast.add({
               severity: "success",
@@ -759,8 +760,9 @@ export default {
             detail: "Please try again later.",
             life: 3000,
           });
-        })
-        .finally(() => (this.createSlotLoader = false));
+        });
+
+      this.createOrderLoader = false
     },
     unitNumber(value) {
       if (!value) {
@@ -811,8 +813,8 @@ export default {
     },
 
     openCreateSlotDialog(productIndex) {
-      this.createSlotIndex = productIndex;
-      this.createSlotDialogVisible = true;
+      this.createOrderIndex = productIndex;
+      this.createOrderDialog = true;
     },
 
     confirmDeleteProduct(productData) {
@@ -877,22 +879,7 @@ export default {
           matchMode: FilterMatchMode.CONTAINS,
         },
       };
-    },
-    getStatusLabel(status) {
-      switch (status) {
-        case "stock":
-          return "success";
-
-        case "low":
-          return "warning";
-
-        case "out":
-          return "danger";
-
-        default:
-          return null;
-      }
-    },
+    }
   },
 };
 </script>
@@ -1032,7 +1019,7 @@ export default {
 
 .total p:nth-child(1) {
   font-size: var(--text-size-e);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .product-image-main {
