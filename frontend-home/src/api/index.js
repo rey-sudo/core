@@ -6,7 +6,7 @@ const baseURL = {
   prod: "https://pairfy.io",
 };
 
-const NETWORK = "preview";
+const NETWORK = "preprod";
 
 const HOST = baseURL[env];
 
