@@ -124,95 +124,38 @@ const stopWalletService = () => {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const balanceTx = (unbalancedTx) => {
-  return Promise.all([
-    connectedWallet.getChangeAddress(),
-    connectedWallet.getUtxos(),
-    fetchProtocolParameters(),
-  ]).then(async () => {
+const balanceTx = async (unbalancedTx) => {
+  const utx = CardanoWasm.Transaction.from_hex(unbalancedTx);
 
+  const tx = CardanoWasm.Transaction.new(utx.body(), utx.witness_set());
 
-    const utx = CardanoWasm.Transaction.from_bytes(fromHexString(unbalancedTx));
+  let txVkeyWitnesses = await connectedWallet.signTx(
+    Buffer.from(tx.to_bytes(), "utf8").toString("hex"),
+    true
+  );
 
+  txVkeyWitnesses = CardanoWasm.TransactionWitnessSet.from_bytes(
+    Buffer.from(txVkeyWitnesses, "hex")
+  );
 
+  const newTransactionWitnessSet = utx.witness_set();
 
-    /////////////
+  newTransactionWitnessSet.set_vkeys(txVkeyWitnesses.vkeys());
 
-    const tx = CardanoWasm.Transaction.new(utx.body(), utx.witness_set());
+  const signedTx = CardanoWasm.Transaction.new(
+    tx.body(),
+    newTransactionWitnessSet
+  );
 
-    console.log("BODY", tx.to_json());
+  console.log("NEWBODY", signedTx.to_json());
 
-    let txVkeyWitnesses = await connectedWallet.signTx(
-      Buffer.from(tx.to_bytes(), "utf8").toString("hex"),
-      true
-    );
-
-    txVkeyWitnesses = CardanoWasm.TransactionWitnessSet.from_bytes(
-      Buffer.from(txVkeyWitnesses, "hex")
-    );
-
-    const newTransactionWitnessSet = utx.witness_set();
-
-    newTransactionWitnessSet.set_vkeys(txVkeyWitnesses.vkeys());
-
-    const signedTx = CardanoWasm.Transaction.new(
-      tx.body(),
-      newTransactionWitnessSet
-    );
-
-    console.log("NEWBODY", signedTx.to_json());
-
-    return connectedWallet.submitTx(
-      Buffer.from(signedTx.to_bytes(), "utf8").toString("hex")
-    );
-  });
+  return connectedWallet.submitTx(
+    Buffer.from(signedTx.to_bytes(), "utf8").toString("hex")
+  );
 };
 
 
-const fetchProtocolParameters = () => {
-  return fetch("https://cardano-preview.blockfrost.io/api/v0/blocks/latest", {
-    headers: {
-      project_id: "previewXgODba40jVJAs1QgKTBOAuwhvNFHHMVo",
-    },
-  })
-    .then((res) => res.json())
-    .then((latestBlock) => {
-      return fetch(
-        `https://cardano-preview.blockfrost.io/api/v0/epochs/${latestBlock.epoch}/parameters`,
-        {
-          headers: {
-            project_id: "previewXgODba40jVJAs1QgKTBOAuwhvNFHHMVo",
-          },
-        }
-      )
-        .then((res) => res.json())
-        .then((p) => {
-          return {
-            linearFee: {
-              minFeeA: p.min_fee_a.toString(),
-              minFeeB: p.min_fee_b.toString(),
-            },
-            minUtxo: "1000000", //p.min_utxo, minUTxOValue protocol paramter has been removed since Alonzo HF. Calulation of minADA works differently now, but 1 minADA still sufficient for now
-            poolDeposit: p.pool_deposit,
-            keyDeposit: p.key_deposit,
-            coinsPerUtxoWord: "34482",
-            maxValSize: 5000,
-            priceMem: 5.77e-2,
-            priceStep: 7.21e-5,
-            maxTxSize: parseInt(p.max_tx_size),
-            slot: parseInt(latestBlock.slot),
-          };
-        });
-    });
-};
 
-const fromHexString = (hexString) =>
-  new Uint8Array(hexString.match(/.{1,2}/g).map((byte) => parseInt(byte, 16)));
-
-// padd with leading 0 if <16
-//const i2hex = (i) => ("0" + i.toString(16)).slice(-2);
-
-//const toHexString = (uint8) => Array.from(uint8).map(i2hex).join("");
 
 export {
   walletClient,

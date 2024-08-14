@@ -301,6 +301,7 @@ import { FilterMatchMode } from "primevue/api";
 import { HOST } from "@/api/index";
 import { ref } from "vue";
 import { useClipboard } from "@vueuse/core";
+import { lucidClient,  walletClient} from "@/api/wallet-api";
 
 export default {
   components: {
@@ -606,10 +607,12 @@ export default {
     async deployTransaction(slotId) {
       this.activedLoader = true;
 
+      const { getWallet } = walletClient();
+
+      lucidClient.selectWallet(getWallet());
+
       const addr = await this.getLucid.wallet.address();
       const address = await getAddressDetails(addr);
-
-      console.log(address.address.bech32);
 
       await this.deploy({
         order_id: slotId,

@@ -1,11 +1,12 @@
 <template>
-<main>
-    <router-view />
-</main>
+    <main>
+        <router-view />
+    </main>
 </template>
 
 <script>
 import entryAPI from "@/pages/entry/api";
+import { walletClient } from "@/api/wallet-api"
 import {
     eventMachine
 } from "@/api/event";
@@ -16,6 +17,14 @@ export default {
         const {
             getUser
         } = entryAPI();
+
+        const { startWalletService } = walletClient();
+
+        startWalletService()
+            .then(() => console.info("WALLET_SERVICE"))
+            .catch((err) => console.error(err));
+
+
 
         return {
             getUser,
