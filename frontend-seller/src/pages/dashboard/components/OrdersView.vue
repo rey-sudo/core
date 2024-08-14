@@ -301,7 +301,7 @@ import { FilterMatchMode } from "primevue/api";
 import { HOST } from "@/api/index";
 import { ref } from "vue";
 import { useClipboard } from "@vueuse/core";
-import { lucidClient, walletClient } from "@/api/wallet-api";
+import { lucidClient, walletClient, balanceTx } from "@/api/wallet-api";
 
 export default {
   components: {
@@ -618,7 +618,8 @@ export default {
         order_id: slotId,
         address: address.address.bech32,
         pubkeyhash: address.paymentCredential.hash,
-      })
+      }).then((res) => balanceTx(res.response.payload.transaction))
+        .then((hash) => this.deployTx({ tx_hash: hash, order_id: slotId }))
         .then(() =>
           this.$toast.add({
             severity: "success",
