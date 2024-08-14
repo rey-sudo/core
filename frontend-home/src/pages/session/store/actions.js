@@ -1,10 +1,10 @@
 import axiosAPI from "@/api/axios-api";
 
-const getSlot = async ({ commit }, params) => {
+const getOrder = async ({ commit }, params) => {
   try {
-    const response = await axiosAPI.get(`/api/gate/get-slot/${params.id}`);
+    const response = await axiosAPI.get(`/api/gateway/get-order/${params.id}`);
 
-    commit("getSlot", response.data.payload);
+    commit("getOrder", response.data.payload);
 
     return { success: true, response: response.data };
   } catch (error) {
@@ -15,7 +15,7 @@ const getSlot = async ({ commit }, params) => {
 
 const startEndpoint = async (_, params) => {
   try {
-    const response = await axiosAPI.post("/api/gate/start-endpoint", params);
+    const response = await axiosAPI.post("/api/gateway/start-endpoint", params);
 
     console.log(response);
     //commit("startEndpoint", response.data.payload);
@@ -26,4 +26,4 @@ const startEndpoint = async (_, params) => {
   }
 };
 
-export { getSlot, startEndpoint};
+export { getOrder, startEndpoint};

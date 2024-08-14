@@ -1,10 +1,10 @@
 
-const getSlot = (state, data) => {
-  state.slotData = data;
+const getOrder = (state, data) => {
+  state.orderData = data;
 };
 
 
 
 export {
-  getSlot
+  getOrder
 };

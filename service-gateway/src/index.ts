@@ -106,19 +106,19 @@ const main = async () => {
     );
 
     app.get(
-      "/api/gateway/get-slots",
+      "/api/gateway/get-orders",
+
+      route.getOrdersMiddlewares,
+
+      route.getOrdersHandler
+    );
+
+    app.get(
+      "/api/gateway/get-order/:id",
 
       route.getOrderMiddlewares,
 
       route.getOrderHandler
-    );
-
-    app.get(
-      "/api/gateway/get-slot/:id",
-
-      route.getSlotMiddlewares,
-
-      route.getSlotHandler
     );
 
     app.post(

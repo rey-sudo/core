@@ -85,11 +85,11 @@ const getProducts = async ({ commit }, params) => {
   }
 };
 
-const getSlots = async ({ commit }, params) => {
+const getOrders = async ({ commit }, params) => {
   try {
-    const response = await axiosAPI.get("/api/gateway/get-slots", params);
+    const response = await axiosAPI.get("/api/gateway/get-orders", params);
 
-    commit("getSlots", response.data.payload);
+    commit("getOrders", response.data.payload);
 
     return { ok: true, response: response.data };
   } catch (error) {
@@ -105,5 +105,5 @@ export {
   deployTx,
   getProducts,
   createOrder,
-  getSlots,
+  getOrders,
 };

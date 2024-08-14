@@ -7,6 +7,7 @@ import { requireAuth } from "../utils/required";
 import { getContractCollateral, getContractPrice } from "../utils/other";
 import { _ } from "../utils/pino";
 
+const ADA_LOVELACE = 1000000;
 ///////////////////////////////////////////////TYPES
 
 interface CreateScheme {
@@ -81,8 +82,8 @@ const createOrderHandler = async (req: Request, res: Response) => {
       scheme.mode = "unit";
       scheme.iterations = params.product_units;
       scheme.iteration_units = 1;
-      scheme.iteration_price = PRODUCT.price;
-      scheme.iteration_collateral = PRODUCT.collateral;
+      scheme.iteration_price = ADA_LOVELACE * PRODUCT.price;
+      scheme.iteration_collateral = ADA_LOVELACE * PRODUCT.collateral;
       scheme.product_discount = 0;
     }
 

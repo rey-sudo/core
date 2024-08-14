@@ -7,13 +7,13 @@ const getProducts = (state, data) => {
   state.productsData.push(...data);
 };
 
-const getSlots = (state, data) => {
-  state.slotsData.length = 0;
-  state.slotsData.push(...data);
+const getOrders = (state, data) => {
+  state.ordersData.length = 0;
+  state.ordersData.push(...data);
 };
 
 const setupLucid = (state, data) => {
   state.lucidClient = data;
 };
 
-export { setupLucid, createProduct, getProducts, getSlots };
+export { setupLucid, createProduct, getProducts, getOrders };

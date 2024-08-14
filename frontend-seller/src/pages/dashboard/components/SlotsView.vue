@@ -52,10 +52,9 @@
         <div class="createslot-wrap" v-if="!createOrderLoader">
           <div class="total">
             <p>Total orders {{ computedTotalOrders }}</p>
-            <p>Stock = {{ productList[createOrderIndex].stock }}</p>
             <p>Units = {{ computedUnits }}</p>
             <p>Collateral = {{ computedCollateral }}</p>
-            <p>Price = {{ computedPrice }}</p>
+            <p>Product Price = {{ computedPrice }}</p>
           </div>
 
           <div class="field">
@@ -119,7 +118,7 @@
       :draggable="false" :contentStyle="{ height: '80vw' }">
       <template #header>
         <div class="dialog-header">
-          <span class="dialog-title">Product slots</span>
+          <span class="dialog-title">Product orders</span>
           <div class="network-analyzer">
             <div class="loader" />
             <span>Scanning network</span>
@@ -309,7 +308,7 @@ export default {
   },
   setup() {
     const {
-      getSlotsData,
+      getOrdersData,
       deployTx,
       createProduct,
       createOrder,
@@ -317,7 +316,7 @@ export default {
       deploy,
     } = dashboardAPI();
 
-    const productList = ref(getSlotsData.value);
+    const productList = ref(getOrdersData.value);
 
     let product = ref({
       id: null,
@@ -498,7 +497,7 @@ export default {
       messageModalVisible,
       messageModal,
       errorModal,
-      getSlotsData,
+      getOrdersData,
       createProduct,
       invalidProductName,
       invalidProductDescription,
@@ -689,7 +688,8 @@ export default {
     },
     formatCurrency(value) {
       if (value) {
-        return value + " ADA";
+        const newValue = value / 1000000;
+        return newValue + " ADA";
       }
     },
     openProductDialog() {
@@ -1018,8 +1018,8 @@ export default {
 }
 
 .total p:nth-child(1) {
-  font-size: var(--text-size-e);
-  font-weight: 600;
+  font-size: var(--text-size-d);
+  font-weight: 500;
 }
 
 .product-image-main {

@@ -1,12 +1,13 @@
 function stringToTimestamp(date: string) {
   return date.replace("T", " ").replace("Z", "");
 }
+const ADA_LOVELACE = 1000000;
 
 function getContractPrice(
   mode: string,
   productPrice: number,
   productDiscount: number,
-  productUnits: number
+  productUnits: number,
 ): number {
   if (mode === "unit") {
     return productPrice;
@@ -19,7 +20,7 @@ function getContractPrice(
 
     let totalPrice = discountPrice * productUnits;
 
-    return Math.floor(totalPrice);
+    return ADA_LOVELACE * totalPrice;
   }
 
   return 0;
@@ -28,19 +29,19 @@ function getContractPrice(
 function getContractCollateral(
   mode: string,
   productCollateral: number,
-  productUnits: number
+  productUnits: number,
 ): number {
   if (mode === "unit") {
-    return productCollateral
+    return productCollateral;
   }
 
   if (mode === "batch") {
     let totalCollateral = productCollateral * productUnits;
 
-    return Math.floor(totalCollateral);
+    return  ADA_LOVELACE * totalCollateral;
   }
 
   return 0;
 }
 
-export { stringToTimestamp, getContractPrice, getContractCollateral };
+export { getContractCollateral, getContractPrice, stringToTimestamp };

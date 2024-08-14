@@ -4,16 +4,16 @@ import { computed } from "vue";
 const sessionAPI = () => {
   const store = useStore();
 
-  const getSlot = async (params) =>
-    await store.dispatch("session/getSlot", params);
+  const getOrder = async (params) =>
+    await store.dispatch("session/getOrder", params);
 
   const startEndpoint = async (params) =>
     await store.dispatch("session/startEndpoint", params);
 
   return {
-    getSlot,
+    getOrder,
     startEndpoint,
-    getSlotData: computed(() => store.getters["session/getSlotData"]),
+    getOrderData: computed(() => store.getters["session/getOrderData"]),
   };
 };
 

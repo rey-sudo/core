@@ -3,9 +3,9 @@ import { Request, Response } from "express";
 import { sellerMiddleware } from "../utils/seller";
 import { requireAuth } from "../utils/required";
 
-const getOrderMiddlewares: any = [sellerMiddleware, requireAuth];
+const getOrdersMiddlewares: any = [sellerMiddleware, requireAuth];
 
-const getOrderHandler = async (req: Request, res: Response) => {
+const getOrdersHandler = async (req: Request, res: Response) => {
   const params = req.body;
 
   const SELLER = req.sellerData;
@@ -59,4 +59,4 @@ const getOrderHandler = async (req: Request, res: Response) => {
   }
 };
 
-export { getOrderHandler, getOrderMiddlewares };
+export { getOrdersHandler, getOrdersMiddlewares };

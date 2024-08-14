@@ -25,8 +25,8 @@ const dashboardAPI = () => {
   const getProducts = async (params) =>
     await store.dispatch("dashboard/getProducts", params);
 
-  const getSlots = async (params) =>
-    await store.dispatch("dashboard/getSlots", params);
+  const getOrders = async (params) =>
+    await store.dispatch("dashboard/getOrders", params);
 
   const setupLucid = async (data) =>
     await store.dispatch("dashboard/setupLucid", data);
@@ -36,7 +36,7 @@ const dashboardAPI = () => {
 
   return {
     getProductsData: computed(() => store.getters["dashboard/getProductsData"]),
-    getSlotsData: computed(() => store.getters["dashboard/getSlotsData"]),
+    getOrdersData: computed(() => store.getters["dashboard/getOrdersData"]),
     getLucid: computed(() => store.getters["dashboard/getLucid"]),
     fetchProductData,
     createProduct,
@@ -45,7 +45,7 @@ const dashboardAPI = () => {
     createOrder,
     setupLucid,
     createImages,
-    getSlots,
+    getOrders,
     deployTx,
     sleep,
   };

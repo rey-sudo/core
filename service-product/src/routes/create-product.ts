@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { getProductId } from "../utils/nano";
 import { sellerMiddleware } from "../utils/seller";
 import { requireAuth } from "../utils/required";
+import { BadRequestError } from "../errors";
 import { _ } from "../utils/pino";
 
 const createProductMiddlewares: any = [sellerMiddleware, requireAuth];
@@ -15,6 +16,10 @@ const createProductHandler = async (req: Request, res: Response) => {
   let connection = null;
 
   try {
+    if (params.collateral > params.price) {
+      throw new BadRequestError("MAX_COLLATERAL");
+    }
+
     connection = await DB.client.getConnection();
 
     await connection.beginTransaction();
@@ -80,4 +85,4 @@ const createProductHandler = async (req: Request, res: Response) => {
   }
 };
 
-export { createProductMiddlewares, createProductHandler };
+export { createProductHandler, createProductMiddlewares };

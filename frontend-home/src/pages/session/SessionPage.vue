@@ -49,10 +49,10 @@ export default {
 
     const isFailed = ref(false);
 
-    const { getSlot } = sessionAPI();
+    const { getOrder } = sessionAPI();
 
     const setupData = (params) => {
-      getSlot({ id: params.id }).then((res) => {
+      getOrder({ id: params.id }).then((res) => {
         if (res.success === true) {
           isLoaded.value = true;
         }
@@ -67,7 +67,7 @@ export default {
       currentRoute,
       getCurrentSeller,
       getCurrentUser,
-      getSlot,
+      getOrder,
       setupData,
       isLoaded,
       isFailed,

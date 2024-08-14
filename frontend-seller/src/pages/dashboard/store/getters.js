@@ -3,12 +3,12 @@ const getProductsData = (state) => {
   return state.productsData;
 };
 
-const getSlotsData = (state) => {
-  return state.slotsData;
+const getOrdersData = (state) => {
+  return state.ordersData;
 };
 
 const getLucid = (state) => {
   return state.lucidClient;
 };
 
-export { getProductsData, getSlotsData, getLucid };
+export { getProductsData, getOrdersData, getLucid };

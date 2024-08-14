@@ -53,7 +53,7 @@ export default {
 
   setup() {
     const { getUserData } = entryAPI();
-    const { getProducts, getSlots, setupLucid, getLucid } = dashboardAPI();
+    const { getProducts, getOrders, setupLucid, getLucid } = dashboardAPI();
 
     const update = {
       lucid: async () => setupLucid(await Lucid.new()),
@@ -63,7 +63,7 @@ export default {
           .catch((err) => console.log(err)),
 
       slots: () =>
-        getSlots()
+        getOrders()
           .then(() => console.info("slots:updated"))
           .catch((err) => console.log(err)),
     };

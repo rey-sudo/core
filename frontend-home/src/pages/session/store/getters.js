@@ -1,5 +1,5 @@
-const getSlotData = (state) => {
-  return state.slotData;
+const getOrderData = (state) => {
+  return state.orderData;
 };
 
-export { getSlotData };
+export { getOrderData };
