@@ -163,7 +163,7 @@ const deployHandler = async (req: Request, res: Response) => {
       `;
 
     const schemeValue = [
-      "deploying",
+      "deploy",
       params.pubkeyhash,
       parameterizedValidators.stateMachineAddress.toBech32(),
       0,
