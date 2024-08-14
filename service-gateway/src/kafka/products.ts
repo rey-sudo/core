@@ -22,34 +22,38 @@ const listenProducts = async () => {
     .then(() =>
       consumer.run({
         eachMessage: async ({ topic, partition, message }: any) => {
-          if (!message.value) return;
+          try {
+            if (!message.value) return;
 
-          const payload = JSON.parse(message.value.toString()).payload;
+            const payload = JSON.parse(message.value.toString()).payload;
 
-          console.log(payload);
+            console.log(payload);
 
-          if (payload.op === "c") {
-            await handleCreate(payload, consumer, {
-              topic,
-              partition,
-              message,
-            });
-          }
+            if (payload.op === "c") {
+              await handleCreate(payload, consumer, {
+                topic,
+                partition,
+                message,
+              });
+            }
 
-          if (payload.op === "u") {
-            await handleUpdate(payload, consumer, {
-              topic,
-              partition,
-              message,
-            });
-          }
+            if (payload.op === "u") {
+              await handleUpdate(payload, consumer, {
+                topic,
+                partition,
+                message,
+              });
+            }
 
-          if (payload.op === "d") {
-            await handleDelete(payload, consumer, {
-              topic,
-              partition,
-              message,
-            });
+            if (payload.op === "d") {
+              await handleDelete(payload, consumer, {
+                topic,
+                partition,
+                message,
+              });
+            }
+          } catch (err) {
+            console.error(err);
           }
         },
       })
@@ -63,7 +67,7 @@ const listenProducts = async () => {
 const handleCreate = async (
   data: any,
   consumer: any,
-  { topic, partition, message }: any
+  { topic, partition, message }: any,
 ) => {
   const payload = data.after;
 
@@ -108,7 +112,7 @@ const handleCreate = async (
 
     const [rows] = await connection.execute(
       "SELECT * FROM products WHERE id = ?",
-      [payload.id]
+      [payload.id],
     );
 
     if (rows.length !== 0) {
@@ -124,25 +128,32 @@ const handleCreate = async (
     await connection.commit();
 
     await consumer.commitOffsets([
-      { topic, partition, offset: message.offset + 1 },
+      {
+        topic,
+        partition,
+        offset: (parseInt(message.offset, 10) + 1).toString(),
+      },
     ]);
   } catch (err) {
-    await connection.rollback();
     _.error(err);
+
+    if (connection) {
+      await connection.rollback();
+    }
   } finally {
-    connection.release();
+    if (connection) {
+      connection.release();
+    }
   }
 };
 
-
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
-
 
 const handleUpdate = async (
   data: any,
   consumer: any,
-  { topic, partition, message }: any
+  { topic, partition, message }: any,
 ) => {
   const payload = data.after;
 
@@ -198,14 +209,22 @@ const handleUpdate = async (
     await connection.commit();
 
     await consumer.commitOffsets([
-      { topic, partition, offset: message.offset + 1 },
+      {
+        topic,
+        partition,
+        offset: (parseInt(message.offset, 10) + 1).toString(),
+      },
     ]);
   } catch (err) {
-    await connection.rollback();
-
     _.error(err);
+
+    if (connection) {
+      await connection.rollback();
+    }
   } finally {
-    connection.release();
+    if (connection) {
+      connection.release();
+    }
   }
 };
 
@@ -215,7 +234,7 @@ const handleUpdate = async (
 const handleDelete = async (
   data: any,
   consumer: any,
-  { topic, partition, message }: any
+  { topic, partition, message }: any,
 ) => {
   const payload = data.before;
 
@@ -226,9 +245,20 @@ const handleDelete = async (
 
     await connection.beginTransaction();
 
+    const [products] = await connection.execute(
+      "SELECT id FROM products WHERE id = ? AND schema_v = ?",
+      [payload.id, payload.schema_v],
+    );
+
+    if (products.length === 0) {
+      return await consumer.commitOffsets([
+        { topic, partition, offset: message.offset + 1 },
+      ]);
+    }
+
     const [deleted] = await connection.execute(
       "DELETE FROM products WHERE id = ? AND schema_v = ?",
-      [payload.id, payload.schema_v]
+      [payload.id, payload.schema_v],
     );
 
     if (deleted.affectedRows === 0) {
@@ -238,13 +268,22 @@ const handleDelete = async (
     await connection.commit();
 
     await consumer.commitOffsets([
-      { topic, partition, offset: message.offset + 1 },
+      {
+        topic,
+        partition,
+        offset: (parseInt(message.offset, 10) + 1).toString(),
+      },
     ]);
   } catch (err) {
-    await connection.rollback();
-    _.error(err)
+    _.error(err);
+
+    if (connection) {
+      await connection.rollback();
+    }
   } finally {
-    connection.release();
+    if (connection) {
+      connection.release();
+    }
   }
 };
 

@@ -3,7 +3,7 @@ import DB from "./db";
 import { app } from "./app";
 import { catcher, check, checkpoint } from "./pod/index";
 import { NotFoundError, errorMiddleware } from "./errors";
-import serviceProductListener from "./kafka/products";
+import listenProducts from "./kafka/products";
 import compression from "compression";
 import { eventBus } from "./db/redis";
 
@@ -46,7 +46,7 @@ const main = async () => {
       port: 3306,
       user: "marketplace",
       password: "password",
-      database: "service_gate",
+      database: "service_gateway",
     });
 
     await eventBus
@@ -58,7 +58,7 @@ const main = async () => {
       .then(() => console.log("eventBus connected"))
       .catch((err: any) => catcher(err));
 
-    serviceProductListener();
+    listenProducts();
 
     checkpoint("ready");
 
@@ -108,9 +108,9 @@ const main = async () => {
     app.get(
       "/api/gateway/get-slots",
 
-      route.getSlotsMiddlewares,
+      route.getOrderMiddlewares,
 
-      route.getSlotsHandler
+      route.getOrderHandler
     );
 
     app.get(
