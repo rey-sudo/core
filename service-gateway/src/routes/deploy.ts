@@ -137,9 +137,9 @@ const deployHandler = async (req: Request, res: Response) => {
       .setMinimumFee(minFee)
       .complete();
 
-    const cbor = tx.toCbor();
+    const transaction = tx.toCbor();
 
-    console.log("CBOR: " + cbor);
+    console.log("CBOR: " + transaction);
 
     console.log("policyId: " + policyId);
 
@@ -158,7 +158,9 @@ const deployHandler = async (req: Request, res: Response) => {
           seller_pubkeyhash = ?,
           contract_address = ?,
           contract_state = ?,
-          contract_threadtoken = ?
+          contract_threadtoken = ?,
+          contract_unit = ?,
+          contract_0_utx = ?
       WHERE id = ? AND seller_id = ?
       `;
 
@@ -168,6 +170,8 @@ const deployHandler = async (req: Request, res: Response) => {
       parameterizedValidators.stateMachineAddress.toBech32(),
       0,
       policyId,
+      threadTokenUnit,
+      transaction,
       params.order_id,
       SELLER.id,
     ];
