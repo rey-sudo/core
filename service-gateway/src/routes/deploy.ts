@@ -43,9 +43,19 @@ const deployHandler = async (req: Request, res: Response) => {
     const ORDER = orders[0];
 
     if (ORDER.deployed) {
-      throw new Error("IS_DEPLOYED");
+      throw new BadRequestError("DEPLOYED");
     }
 
+    /*
+    if (ORDER.contract_0_utx) {
+      return res.status(200).send({
+        success: true,
+        payload: {
+          transaction: ORDER.contract_0_utx,
+        },
+      });
+    }
+*/
     /////////////////////////////////////////////////////////////////
 
     const externalWallet = Core.addressFromBech32(
@@ -154,8 +164,7 @@ const deployHandler = async (req: Request, res: Response) => {
 
     const schemeData = `
       UPDATE orders 
-      SET status = ?,
-          seller_pubkeyhash = ?,
+      SET seller_pubkeyhash = ?,
           contract_address = ?,
           contract_state = ?,
           contract_threadtoken = ?,
@@ -165,7 +174,6 @@ const deployHandler = async (req: Request, res: Response) => {
       `;
 
     const schemeValue = [
-      "deploy",
       params.pubkeyhash,
       parameterizedValidators.stateMachineAddress.toBech32(),
       0,
@@ -182,6 +190,9 @@ const deployHandler = async (req: Request, res: Response) => {
 
     res.status(200).send({
       success: true,
+      payload: {
+        transaction,
+      },
     });
   } catch (err: any) {
     await connection.rollback();

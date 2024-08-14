@@ -31,5 +31,5 @@ create table if not exists orders(
   schema_t timestamp default current_timestamp,
   schema_v int unsigned not null,
   primary key(id),
-  unique (contract_id)
+  unique (id)
 ) ENGINE = InnoDB;

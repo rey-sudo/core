@@ -122,11 +122,11 @@ const main = async () => {
     );
 
     app.post(
-      "/api/gateway/waiting-tx",
+      "/api/gateway/deploy-tx",
 
-      route.startTxMiddlewares,
+      route.deployTxMiddlewares,
 
-      route.startTxHandler
+      route.deployTxHandler
     );
 
     app.get(

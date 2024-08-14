@@ -4,11 +4,11 @@ import { requireAuth } from "../utils/required";
 import { sellerMiddleware } from "../utils/seller";
 
 
-const startTxMiddlewares: any = [sellerMiddleware, requireAuth];
+const deployTxMiddlewares: any = [sellerMiddleware, requireAuth];
 
 ////////////////////////////////////////////////////
 
-const startTxHandler = async (req: Request, res: Response) => {
+const deployTxHandler = async (req: Request, res: Response) => {
   let connection: any = null;
 
   const params = req.body;
@@ -23,13 +23,13 @@ const startTxHandler = async (req: Request, res: Response) => {
     //////////////////////////////////////////////
 
     const schemeData = `
-      UPDATE slots 
-      SET contract_stage = ?,
+      UPDATE orders 
+      SET status = ?,
           contract_0_tx = ?
       WHERE id = ? AND seller_id = ?
       `;
 
-    const schemeValue = ["waiting", params.tx_hash, params.slot_id, SELLER.id];
+    const schemeValue = ["waiting", params.tx_hash, params.order_id, SELLER.id];
 
     await connection.execute(schemeData, schemeValue);
 
@@ -40,9 +40,12 @@ const startTxHandler = async (req: Request, res: Response) => {
     });
   } catch (err: any) {
     await connection.rollback();
+    res.status(404).send({
+      success: false,
+    });
   } finally {
     connection.release();
   }
 };
 
-export { startTxMiddlewares, startTxHandler };
+export { deployTxMiddlewares, deployTxHandler };
