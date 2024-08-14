@@ -3,10 +3,10 @@ import kafka from "./client";
 import { _ } from "../utils/pino";
 import { stringToTimestamp } from "../utils/other";
 
-const TOPIC_NAME = "fullfillment.service_gate.slots";
+const TOPIC_NAME = "fullfillment.service_gateway.orders";
 const CONSUMER_GROUP = "service-session-group";
 
-const listenSlots = async () => {
+const listenOrders = async () => {
   const consumer = kafka.consumer({ groupId: CONSUMER_GROUP });
 
   await consumer
@@ -78,22 +78,21 @@ const handleCreate = async (
     await connection.beginTransaction();
 
     const schemeData = `
-    INSERT INTO slots (
+    INSERT INTO orders (
       id,
       mode,
       status,
-      actived,
       seller_id,
       seller_pubkeyhash,
       buyer_id,
       buyer_pubkeyhash,
-      contract_id,
-      contract_wid, 
+      contract_address,
+      contract_state,
+      contract_threadtoken, 
+      contract_unit,
       contract_units, 
       contract_price,
       contract_collateral,
-      contract_discount, 
-      contract_stage, 
       contract_0_utx, 
       contract_1_utx, 
       contract_2_utx, 
@@ -103,6 +102,7 @@ const handleCreate = async (
       contract_2_tx, 
       contract_3_tx,   
       product_id,
+      product_discount,
       created_at, 
       schema_t, 
       schema_v
@@ -111,7 +111,7 @@ const handleCreate = async (
     const schemeValue = Object.values(payload);
 
     const [rows] = await connection.execute(
-      "SELECT * FROM slots WHERE id = ?",
+      "SELECT * FROM orders WHERE id = ?",
       [payload.id]
     );
 
@@ -128,7 +128,11 @@ const handleCreate = async (
     await connection.commit();
 
     await consumer.commitOffsets([
-      { topic, partition, offset: message.offset + 1 },
+      {
+        topic,
+        partition,
+        offset: (parseInt(message.offset, 10) + 1).toString(),
+      },
     ]);
   } catch (err) {
     await connection.rollback();
@@ -159,22 +163,21 @@ const handleUpdate = async (
     await connection.beginTransaction();
 
     const schemeData = `
-    UPDATE slots
+    UPDATE orders
     SET id = ?,
         mode = ?,
         status = ?,
-        actived = ?,
         seller_id = ?,
         seller_pubkeyhash = ?,
         buyer_id = ?,
         buyer_pubkeyhash = ?,
-        contract_id = ?,
-        contract_wid = ?, 
+        contract_address = ?,
+        contract_state = ?,
+        contract_threadtoken = ?, 
+        contract_unit = ?,
         contract_units = ?, 
         contract_price = ?,
         contract_collateral = ?,
-        contract_discount = ?, 
-        contract_stage = ?, 
         contract_0_utx = ?, 
         contract_1_utx = ?, 
         contract_2_utx = ?, 
@@ -184,6 +187,7 @@ const handleUpdate = async (
         contract_2_tx = ?, 
         contract_3_tx = ?,   
         product_id = ?,
+        product_discount = ?,
         created_at = ?, 
         schema_t = ?, 
         schema_v = ?
@@ -204,7 +208,11 @@ const handleUpdate = async (
     await connection.commit();
 
     await consumer.commitOffsets([
-      { topic, partition, offset: message.offset + 1 },
+      {
+        topic,
+        partition,
+        offset: (parseInt(message.offset, 10) + 1).toString(),
+      },
     ]);
   } catch (err) {
     await connection.rollback();
@@ -232,8 +240,20 @@ const handleDelete = async (
 
     await connection.beginTransaction();
 
+    const [orders] = await connection.execute(
+      "SELECT id FROM orders WHERE id = ? AND schema_v = ?",
+      [payload.id, payload.schema_v],
+    );
+
+    if (orders.length === 0) {
+      return await consumer.commitOffsets([
+        { topic, partition, offset: message.offset + 1 },
+      ]);
+    }
+
+
     const [deleted] = await connection.execute(
-      "DELETE FROM slots WHERE id = ? AND schema_v = ?",
+      "DELETE FROM orders WHERE id = ? AND schema_v = ?",
       [payload.id, payload.schema_v]
     );
 
@@ -244,7 +264,11 @@ const handleDelete = async (
     await connection.commit();
 
     await consumer.commitOffsets([
-      { topic, partition, offset: message.offset + 1 },
+      {
+        topic,
+        partition,
+        offset: (parseInt(message.offset, 10) + 1).toString(),
+      },
     ]);
   } catch (err) {
     await connection.rollback();
@@ -254,4 +278,4 @@ const handleDelete = async (
   }
 };
 
-export default listenSlots;
+export default listenOrders;
