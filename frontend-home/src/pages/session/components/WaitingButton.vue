@@ -3,7 +3,7 @@
     <!--//////////////////////////////////////////////////////////////////////-->
 
     <template v-if="getOrderData.contract_0_tx">
-      <div class="subtitle">The transaction has been sent to the network</div>
+      <div class="subtitle">The transaction has been sent to the network.</div>
 
       <Button class="actived">
         Actived
@@ -11,7 +11,7 @@
     </template>
     <!--//////////////////////////////////////////////////////////////////////-->
     <template v-if="!getOrderData.contract_0_tx">
-      <div class="subtitle">Press to activate the script on the network</div>
+      <div class="subtitle">Press to activate the script on the network.</div>
 
       <Button @click="createTransaction(getOrderData.id)">
         Sign
@@ -121,13 +121,13 @@ export default {
 }
 
 .waiting button.actived {
-  background: var(--green-a);
-  border: 1px solid var(--green-a);
+  background: var(--primary-c);
+  border: 1px solid var(--primary-c);
   pointer-events: none;
 }
 
 .subtitle {
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-c);
   text-align: left;
   margin-top: 0.5rem;
 }

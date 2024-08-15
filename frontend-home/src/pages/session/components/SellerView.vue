@@ -1,21 +1,21 @@
 <template>
-  <div class="stepper">
+  <div class="summary">
     <Toast />
-    <div class="stepper-row">
-      <div class="stepper-column">
+    <div class="summary-row">
+      <div class="summary-column">
         <div>1</div>
         <span></span>
       </div>
-      <div class="stepper-body">
-        <div class="stepper-title">Product</div>
+      <div class="summary-body">
+        <div class="summary-title">Product</div>
 
-        <div class="stepper-product">
-          <img class="stepper-product-image" :src="getOrderData.product_details.media_url +
+        <div class="summary-product">
+          <img class="summary-product-image" :src="getOrderData.product_details.media_url +
             getOrderData.product_details.media_path +
             getOrderData.product_details.image_main
             " alt="" />
 
-          <div class="stepper-product-title">
+          <div class="summary-product-title">
             <a :href="'/p/' + getOrderData.product_details.product_id" target="_blank" rel="noopener noreferrer">
               {{ getOrderData.product_details.product_name }}</a>
 
@@ -30,14 +30,14 @@
     </div>
 
     <!--///-->
-    <div class="stepper-row">
-      <div class="stepper-column short">
+    <div class="summary-row">
+      <div class="summary-column short">
         <div>2</div>
         <span></span>
       </div>
-      <div class="stepper-body">
-        <div class="stepper-title">Information</div>
-        <div class="stepper-price">
+      <div class="summary-body">
+        <div class="summary-title">Information</div>
+        <div class="summary-price">
           <div>
             <label>Total Price </label>
             <span>{{ formatLovelace(getOrderData.contract_price) }}</span>
@@ -63,12 +63,12 @@
 
     <!--///////////////////////////////////////////////////////////////7-->
 
-    <div class="stepper-row">
-      <div class="stepper-column">
+    <div class="summary-row">
+      <div class="summary-column">
         <div>3</div>
       </div>
-      <div class="stepper-body">
-        <div class="stepper-title">Action</div>
+      <div class="summary-body">
+        <div class="summary-title">Action</div>
         <WaitingButton v-if="
           getOrderData.status === 'created' ||
           getOrderData.status === 'waiting'
@@ -114,14 +114,14 @@ export default {
   font-size: var(--text-size-b);
 }
 
-.stepper-product {
+.summary-product {
   display: flex;
   align-items: center;
   width: 100%;
   margin-top: 2rem;
 }
 
-.stepper-product-image {
+.summary-product-image {
   width: 125px;
   height: 125px;
   object-fit: contain;
@@ -132,20 +132,20 @@ export default {
   overflow: hidden;
 }
 
-.stepper-product-title {
-  font-size: var(--text-size-d);
+.summary-product-title {
+  font-size: var(--text-size-e);
   text-align: left;
   max-width: 600px;
   margin-left: 2rem;
   line-height: 2rem;
 }
 
-.stepper-product-title a {
+.summary-product-title a {
   color: var(--text-a);
   font-weight: 400;
 }
 
-.stepper-column {
+.summary-column {
   width: 75px;
   height: 275px;
   display: flex;
@@ -154,11 +154,11 @@ export default {
   align-items: center;
 }
 
-.stepper-column.short {
+.summary-column.short {
   height: 200px;
 }
 
-.stepper-column div {
+.summary-column div {
   background: var(--primary-c);
   min-height: 2rem;
   min-width: 2rem;
@@ -171,19 +171,19 @@ export default {
   font-size: var(--text-size-a);
 }
 
-.stepper-column span {
+.summary-column span {
   width: 2px;
   height: 100%;
   background: var(--primary-c);
 }
 
-.stepper-title {
+.summary-title {
   font-size: var(--text-size-e);
   text-align: start;
   font-weight: 600;
 }
 
-.stepper {
+.summary {
   background: var(--base-a);
   padding: 2rem 1rem;
   border-radius: 16px;
@@ -191,7 +191,7 @@ export default {
   height: 700px;
 }
 
-.stepper-price {
+.summary-price {
   display: flex;
   align-items: center;
   text-align: start;
@@ -202,34 +202,34 @@ export default {
   border: 1px solid var(--border-b);
 }
 
-.stepper-price div {
+.summary-price div {
   margin-right: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.stepper-price div label {
+.summary-price div label {
   display: flex;
   align-items: baseline;
   font-size: var(--text-size-b);
   color: var(--text-b);
 }
 
-.stepper-price div span {
+.summary-price div span {
   line-height: 2.5rem;
-  font-size: var(--text-size-d);
+  font-size: var(--text-size-e);
   color: var(--text-a);
   white-space: nowrap;
   text-transform: capitalize;
 }
 
-.stepper-row {
+.summary-row {
   display: flex;
   width: 100%;
 }
 
-.stepper-body {
+.summary-body {
   padding: 0.25rem;
   width: 100%;
 }
