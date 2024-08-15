@@ -38,7 +38,7 @@
 
       <Column :exportable="false" style="min-width: 10rem">
         <template #body="orderProps">
-          <button class="miniBuyButton" @click="createTransaction(orderProps.data.id)"> 
+          <button class="miniBuyButton" @click="createTransaction(orderProps.data.id)">
             Buy
           </button>
         </template>
@@ -88,9 +88,10 @@ import InfoIcons from "./InfoIcons.vue";
 import productAPI from "@/pages/product/api/index";
 import { FilterMatchMode } from "primevue/api";
 import { ref, computed } from "vue";
-import { balanceTx } from "@/api/wallet-api";
 import { useToast } from "primevue/usetoast";
 import { useRouter } from "vue-router";
+import { balanceTx, lucidClient, walletClient } from "@/api/wallet-api";
+
 
 export default {
   components: {
@@ -98,7 +99,7 @@ export default {
   },
 
   setup() {
-    const { getProductData, getOrdersData, lockingEndpoint, lockingTx } =
+    const { getProductData, getOrdersData, locking, lockingTx } =
       productAPI();
 
     const router = useRouter();
@@ -122,7 +123,7 @@ export default {
 
     const selectedProducts = ref();
 
-    const downloadTx = (txHash, slotId) => {
+    const downloadTx = (txHash, orderId) => {
       const data = [["ContractTx1", txHash]];
 
       const csvContent = data.map((row) => row.join(",")).join("\n");
@@ -142,7 +143,7 @@ export default {
 
       const dated = `${month}-${day}-${year}-${hours}-${minutes}`;
 
-      a.download = `transaction-${slotId}-${dated}.csv`;
+      a.download = `transaction-${orderId}-${dated}.csv`;
 
       document.body.appendChild(a);
 
@@ -171,12 +172,15 @@ export default {
       });
     };
 
-    const createTransaction = (slotId) => {
-      lockingEndpoint({ slot_id: slotId })
+    const createTransaction = async (orderId) => {
+      const { getWallet } = walletClient();
+
+      lucidClient.selectWallet(getWallet());
+
+      await locking({ order_id: orderId })
         .then((res) => balanceTx(res.response.payload.transaction))
-        .then((hash) => downloadTx(hash, slotId))
-        .then((hash) => lockingTx({ tx_hash: hash, slot_id: slotId }))
-        .then(() => router.push({ name: "session", params: { id: slotId } }))
+        .then((hash) => lockingTx({ tx_hash: hash, order_id: orderId }))
+        .then(() => router.push({ name: "session", params: { id: orderId } }))
         .catch(() => showMessage(errorMessage));
     };
 
@@ -190,6 +194,7 @@ export default {
 
     return {
       product,
+      downloadTx, 
       tableVisible,
       openSlotDialog,
       formatDiscount,

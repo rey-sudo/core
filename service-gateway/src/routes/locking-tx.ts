@@ -2,7 +2,6 @@ import DB from "../db";
 import { Request, Response } from "express";
 import { userMiddleware } from "../utils/user";
 
-
 const lockingTxMiddlewares: any = [userMiddleware];
 
 ////////////////////////////////////////////////////
@@ -22,13 +21,19 @@ const lockingTxHandler = async (req: Request, res: Response) => {
     //////////////////////////////////////////////
 
     const schemeData = `
-      UPDATE slots 
-      SET contract_stage = ?,
+      UPDATE orders 
+      SET status = ?,
+          buyer_pubkeyhash = ?,
           contract_1_tx = ?
-      WHERE id = ? AND buyer_pubkeyhash = ?
+      WHERE id = ?
       `;
 
-    const schemeValue = ["locking", params.tx_hash, params.slot_id, BUYER.pubkeyhash];
+    const schemeValue = [
+      "locking",
+      BUYER.pubkeyhash,
+      params.tx_hash,
+      params.order_id
+    ];
 
     await connection.execute(schemeData, schemeValue);
 
@@ -48,4 +53,4 @@ const lockingTxHandler = async (req: Request, res: Response) => {
   }
 };
 
-export { lockingTxMiddlewares, lockingTxHandler };
+export { lockingTxHandler, lockingTxMiddlewares };

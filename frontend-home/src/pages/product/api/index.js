@@ -4,8 +4,8 @@ import { computed } from "vue";
 const productAPI = () => {
   const store = useStore();
 
-  const lockingEndpoint = async (params) =>
-    await store.dispatch("product/lockingEndpoint", params);
+  const locking = async (params) =>
+    await store.dispatch("product/locking", params);
 
   const lockingTx = async (params) =>
     await store.dispatch("product/lockingTx", params);
@@ -20,7 +20,7 @@ const productAPI = () => {
     new Promise((resolve) => setTimeout(() => resolve(false), timeInMs));
 
   return {
-    lockingEndpoint,
+    locking,
     getProduct,
     getOrders,
     lockingTx,
