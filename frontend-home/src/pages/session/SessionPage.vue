@@ -95,7 +95,6 @@ export default {
 
 .session-body-left {
   width: 60%;
-  background: var(--base-a);
 }
 
 .session-wrap {
@@ -104,6 +103,7 @@ export default {
   min-height: 100vh;
   padding: 0 11%;
   margin-top: 100px;
+  background: var(--base-b);
 }
 
 .session-body-right {

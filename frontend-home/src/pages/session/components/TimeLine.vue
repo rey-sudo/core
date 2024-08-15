@@ -129,13 +129,13 @@ export default {
 
 .timeline {
   background: var(--base-a);
-  border: 1px solid var(--border-b);
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 2rem;
   padding-bottom: 1rem;
   border-radius: 16px;
+  border: 3px solid var(--border-a);
 }
 
 .timeline-title,
@@ -156,7 +156,7 @@ export default {
 }
 
 .timeline-timer span {
-  background: var(--text-a);
+  background: var(--primary-c);
   border-radius: 8px;
   width: 30px;
   height: 40px;

@@ -126,7 +126,7 @@ export default {
   width: 125px;
   height: 125px;
   object-fit: contain;
-  border-radius: 12px;
+  border-radius: 16px;
   background: var(--base-a);
   border: 1px solid var(--border-b);
   padding: 0.5rem;
@@ -147,7 +147,7 @@ export default {
 }
 
 .stepper-column {
-  width: 100px;
+  width: 75px;
   height: 250px;
   display: flex;
   justify-content: flex-start;
@@ -186,6 +186,10 @@ export default {
 
 .stepper {
   background: var(--base-a);
+  padding: 2rem 1rem;
+  border-radius: 16px;
+  border: 3px solid var(--border-a);
+  height: 700px;
 }
 
 .stepper-price {

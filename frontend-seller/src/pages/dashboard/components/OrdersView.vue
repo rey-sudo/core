@@ -136,13 +136,13 @@
 
         <Column field="status" header="Status" sortable></Column>
 
-        <Column field="contract_state" header="State" sortable></Column>
-
         <Column field="mode" header="Mode" sortable>
           <template #body="orderProps">
             <span>{{ orderProps.data.mode }}</span>
           </template>
         </Column>
+
+        <Column field="contract_state" header="State" sortable></Column>
 
         <Column field="contract_units" header="Units" sortable></Column>
 
