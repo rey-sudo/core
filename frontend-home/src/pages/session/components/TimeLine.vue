@@ -11,22 +11,19 @@
     </div>
 
     <div class="timeline-body">
-      <Timeline
-        v-if="getOrderData"
-        :value="timelineData"
-        layout="horizontal"
-        align="top"
-      >
+      <Timeline :value="timelineData" layout="horizontal" align="top">
         <template #opposite="orderProps">
           <div class="transaction">
+            <span class="checker" v-if="orderProps.item.text !== 'N/A'">
+              <i class="pi pi-sort-down-fill" />
+            </span>
+
+
             <span @click="openCardanoScan(orderProps.item.data)">{{
               orderProps.item.text
             }}</span>
 
-            <button
-              v-if="orderProps.item.data"
-              @click="copy(orderProps.item.data)"
-            >
+            <button class="copier" v-if="orderProps.item.data" @click="copy(orderProps.item.data)">
               <i class="pi pi-copy" />
             </button>
           </div>
@@ -107,15 +104,20 @@ export default {
   align-items: center;
 }
 
-.transaction button {
-  margin-left: 0.25rem;
+.copier {
+  margin-left: 0.5rem;
   border-radius: 6px;
   border: none;
   cursor: pointer;
   background: initial;
 }
 
-.transaction button:hover {
+.copier i {
+  font-size: 12px;
+  color: var(--text-b);
+}
+
+.copier i:hover {
   color: var(--primary-c);
 }
 
@@ -136,7 +138,7 @@ export default {
   padding: 2rem;
   padding-bottom: 1rem;
   border-radius: 16px;
- border: 1px solid var(--border-b);
+  border: 1px solid var(--border-b);
 }
 
 .timeline-title,
@@ -169,9 +171,10 @@ export default {
   border: 1px solid transparent;
 }
 
-.timeline-timer div{
+.timeline-timer div {
   margin: 0 0.5rem;
 }
+
 .timeline-title span:nth-child(1) {
   font-size: var(--text-size-f);
   font-weight: 600;
@@ -185,5 +188,13 @@ export default {
 .timeline-note {
   padding: 1rem;
   font-size: var(--text-size-b);
+}
+
+.checker {
+  margin-right: 1rem;
+}
+
+.checker i {
+  color: var(--green-a);
 }
 </style>

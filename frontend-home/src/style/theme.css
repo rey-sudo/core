@@ -5225,7 +5225,7 @@
     flex-direction: column-reverse;
   }
   .p-timeline .p-timeline-event-marker {
-    border: 2px solid var(--primary-c);
+    border: 2px solid var(--border-b);
     border-radius: 50%;
     width: 1rem;
     height: 1rem;
