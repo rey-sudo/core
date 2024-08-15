@@ -74,7 +74,7 @@
           getOrderData.status === 'waiting'
         " />
 
-        <DeliveredButton v-if="getOrderData.contract_stage === 'locking'" />
+        <DeliveredButton v-if="getOrderData.status === 'locking'" />
       </div>
     </div>
   </div>
