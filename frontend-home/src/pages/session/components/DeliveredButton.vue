@@ -15,7 +15,7 @@ export default {
   setup() {
     const { startTx } = headerAPI();
 
-    const { getSlotData, startEndpoint } = sessionAPI();
+    const { getOrderData, startEndpoint } = sessionAPI();
 
     const toast = useToast();
 
@@ -29,7 +29,7 @@ export default {
     };
 
     return {
-      getSlotData,
+      getOrderData,
       startEndpoint,
       showMessage,
       startTx,
@@ -37,47 +37,7 @@ export default {
   },
 
   methods: {
-    downloadTx(txHash) {
-      const data = [
-        ["SlotId", this.getSlotData?.id],
-        ["Product", this.getSlotData?.product_details.product_name],
-        ["ProductId", this.getSlotData?.product_details.product_id],
-        ["Mode", this.getSlotData?.mode],
-        ["Units", this.getSlotData?.contract_units],
-        ["Price", this.getSlotData?.contract_price],
-        ["Collateral", this.getSlotData?.contract_collateral],
-        ["SlotDate", this.getSlotData?.created_at],
-        ["ContractTx0", txHash],
-      ];
-
-      const csvContent = data.map((row) => row.join(",")).join("\n");
-
-      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-
-      const a = document.createElement("a");
-      const url = URL.createObjectURL(blob);
-      a.href = url;
-
-      const date = new Date();
-      const day = String(date.getDate()).padStart(2, "0");
-      const month = String(date.getMonth() + 1).padStart(2, "0");
-      const year = date.getFullYear();
-      const hours = date.getHours().toString().padStart(2, "0");
-      const minutes = date.getMinutes().toString().padStart(2, "0");
-
-      const dated = `${month}-${day}-${year}-${hours}-${minutes}`;
-
-      a.download = `transaction-${this.getSlotData?.id}-${dated}.csv`;
-
-      document.body.appendChild(a);
-
-      a.click();
-
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-
-      return txHash;
-    }
+    
   },
 };
 </script>
