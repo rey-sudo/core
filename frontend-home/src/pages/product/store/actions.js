@@ -2,7 +2,7 @@ import axiosApi from "@/api/axios-api";
 
 const lockingEndpoint = async (_, params) => {
   try {
-    const response = await axiosApi.post("/api/gate/locking-endpoint", params);
+    const response = await axiosApi.post("/api/gateway/locking-endpoint", params);
 
     console.log(response.data);
 
@@ -17,7 +17,7 @@ const lockingEndpoint = async (_, params) => {
 
 const lockingTx = async (_, params) => {
   try {
-    const response = await axiosApi.post("/api/gate/locking-tx", params);
+    const response = await axiosApi.post("/api/gateway/locking-tx", params);
 
     console.log(response.data);
 
@@ -30,7 +30,7 @@ const lockingTx = async (_, params) => {
 };
 const getOrders = async ({ commit }, params) => {
   try {
-    const response = await axiosApi.get(`/api/gate/buy-options/${params.id}`);
+    const response = await axiosApi.get(`/api/gateway/buy-options/${params.id}`);
 
     commit("getOrders", response.data.payload[0]);
 

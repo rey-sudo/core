@@ -1,84 +1,44 @@
 <template>
-  <Dialog
-    v-model:visible="visible"
-    modal
-    dismissableMask
-    blockScroll
-    header="Buy options"
-    :draggable="false"
-    :style="{ width: '70vw' }"
-    :breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
-  >
-    <DataTable
-      ref="dt"
-      :value="slotList"
-      v-model:selection="selectedProducts"
-      dataKey="id"
-      style="height: 70vh"
-      :paginator="true"
-      :rows="10"
-      :filters="filters"
+  <Dialog v-model:visible="visible" modal dismissableMask blockScroll header="Buy options" :draggable="false"
+    :style="{ width: '70vw' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
+    <DataTable ref="dt" :value="orderList" v-model:selection="selectedProducts" dataKey="id" style="height: 70vh"
+      :paginator="true" :rows="10" :filters="filters"
       paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
       :rowsPerPageOptions="[5, 10, 25]"
-      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
-    >
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products">
       <template #header>
         <div class="toolbar">
-          <InputText
-            v-model="filters['global'].value"
-            placeholder="Search..."
-          />
+          <InputText v-model="filters['global'].value" placeholder="Search..." />
         </div>
       </template>
 
-      <Column
-        field="id"
-        header="Code"
-        sortable
-        style="min-width: 12rem"
-      ></Column>
+      <Column field="id" header="Code" sortable style="min-width: 12rem"></Column>
 
-      <Column
-        field="mode"
-        header="Mode"
-        sortable
-        style="min-width: 10rem; text-transform: capitalize"
-      ></Column>
+      <Column field="mode" header="Mode" sortable style="min-width: 10rem; text-transform: capitalize"></Column>
 
-      <Column
-        field="contract_units"
-        header="Units"
-        sortable
-        style="min-width: 10rem"
-      ></Column>
+      <Column field="contract_units" header="Units" sortable style="min-width: 10rem"></Column>
 
-      <Column
-        field="contract_price"
-        header="Price"
-        sortable
-        style="min-width: 10rem"
-      ></Column>
+      <Column field="contract_price" header="Price" sortable style="min-width: 10rem">
+        <template #body="orderProps">
+          {{ formatLovelace(orderProps.data.contract_price) }}
+        </template>
+      </Column>
 
-      <Column
-        field="contract_collateral"
-        header="Collateral"
-        sortable
-        style="min-width: 10rem"
-      ></Column>
+      <Column field="contract_collateral" header="Collateral" sortable style="min-width: 10rem">
+        <template #body="orderProps">
+          {{ formatLovelace(orderProps.data.contract_collateral) }}
+        </template>
+      </Column>
 
-      <Column
-        field="contract_discount"
-        header="Discount"
-        sortable
-        style="min-width: 10rem"
-      ></Column>
+      <Column field="contract_discount" header="Discount" sortable style="min-width: 10rem">
+        <template #body="orderProps">
+          {{ formatDiscount(orderProps.data.product_discount) }}
+        </template>
+      </Column>
 
       <Column :exportable="false" style="min-width: 10rem">
         <template #body="slotProps">
-          <button
-            class="miniBuyButton"
-            @click="createTransaction(slotProps.data.id)"
-          >
+          <button class="miniBuyButton" @click="createTransaction(slotProps.data.id)">
             Buy
           </button>
         </template>
@@ -91,7 +51,7 @@
   <!--//////////////////////////////////////////////////////////////////////////-->
 
   <div class="head-info">
-    <span> {{ getOrdersData?.slot_count }} Available</span>
+    <span> {{ getOrdersData?.order_count }} Available</span>
   </div>
 
   <div class="head-name">
@@ -104,13 +64,8 @@
   </div>
 
   <div class="head-rating">
-    <Rating
-      :modelValue="product.rating_count"
-      :stars="5"
-      :readonly="true"
-      :cancel="false"
-      style="margin-right: 0.5rem"
-    />
+    <Rating :modelValue="product.rating_count" :stars="5" :readonly="true" :cancel="false"
+      style="margin-right: 0.5rem" />
     <span>{{ product.rating_count }}</span>
 
     <span>({{ product.review_count }} Reviews)</span>
@@ -163,7 +118,7 @@ export default {
       global: { value: null, matchMode: FilterMatchMode.CONTAINS },
     });
 
-    const slotList = computed(() => getOrdersData?.value.slots);
+    const orderList = computed(() => getOrdersData?.value.orders);
 
     const selectedProducts = ref();
 
@@ -225,12 +180,22 @@ export default {
         .catch(() => showMessage(errorMessage));
     };
 
+    const formatDiscount = (value) => {
+      return `${value} %`
+    }
+
+    const formatLovelace = (value) => {
+      return `${value / 1000000} ADA`
+    }
+
     return {
       product,
       visible,
       openSlotDialog,
+      formatDiscount,
+      formatLovelace,
       filters,
-      slotList,
+      orderList,
       createTransaction,
       selectedProducts,
       getProductData,
@@ -280,7 +245,7 @@ export default {
 
 .head-rating span {
   margin-right: 0.5rem;
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-c);
   font-weight: 600;
 }
 

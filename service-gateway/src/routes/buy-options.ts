@@ -36,16 +36,16 @@ const buyOptionsHandler = async (req: Request, res: Response) => {
             'contract_units', contract_units,
             'contract_price', contract_price,
             'contract_collateral', contract_collateral,
-            'contract_discount', contract_discount
+            'product_discount', product_discount
           )
-        ) AS slots,
-        COUNT(*) AS slot_count
+        ) AS orders,
+        COUNT(*) AS order_count
       FROM 
-        slots
+        orders
       WHERE
         product_id = ?
       AND
-        contract_stage = ?    
+        status = ?    
       `,
       [params.id, "waiting"]
     );
