@@ -5,37 +5,23 @@
 
       <span>{{ shortFormat(getOrderData.buyer_pubkeyhash, 20, "Buyer") }}</span>
 
-      <button
-        @click="toggleMenu"
-        aria-haspopup="true"
-        aria-controls="overlay_menu"
-      >
+      <button @click="toggleMenu" aria-haspopup="true" aria-controls="overlay_menu">
         <i class="pi pi-ellipsis-v" />
       </button>
 
       <Menu ref="menu" id="overlay_menu" :model="menuItems" :popup="true" />
     </div>
     <div class="p-chat-body" id="scroll">
-      <BubbleMsg
-        v-for="(item, index) in messageHistory"
-        :key="item"
-        :content="item.content"
-        :last="messageHistory.length - 1 === index"
-        :sender="item.role === 'SELLER'"
-        :date="item.date"
-        @onLast="scrollBottom"
-      />
+      <BubbleMsg v-for="(item, index) in messageHistory" :key="item" :content="item.content"
+        :last="messageHistory.length - 1 === index" :sender="item.role === 'SELLER'" :date="item.date"
+        @onLast="scrollBottom" />
     </div>
     <div class="p-chat-bottom">
       <div class="p-chat-editor">
         <div v-if="editor">
           <editor-content :editor="editor" id="editorElement" />
         </div>
-        <button
-          class="p-chat-editor-send"
-          :class="{ active: characterCounter > 0 }"
-          @click="sendMessage"
-        >
+        <button class="p-chat-editor-send" :class="{ active: characterCounter > 0 }" @click="sendMessage">
           <i class="pi pi-send" />
         </button>
       </div>
@@ -226,7 +212,9 @@ export default {
     });
   },
   beforeUnmount() {
-    this.editor.destroy();
+    if (this.editor) {
+      this.editor.destroy();
+    }
   },
 };
 </script>

@@ -252,7 +252,7 @@ export default {
 .head-rating span:nth-child(3) {
   font-weight: 400;
   font-size: var(--text-size-a);
-  color: var(--text-a);
+  color: var(--text-b);
 }
 
 .head-price {
