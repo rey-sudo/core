@@ -94,7 +94,7 @@ export default {
 }
 
 .session-body-left {
-  width: 60%;
+  width: 70%;
 }
 
 .session-wrap {
@@ -107,7 +107,7 @@ export default {
 }
 
 .session-body-right {
-  width: 40%;
+  width: 30%;
 }
 
 .session-bottom {
