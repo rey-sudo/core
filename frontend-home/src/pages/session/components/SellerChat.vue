@@ -3,7 +3,7 @@
     <div class="p-chat-top">
       <img src="@/assets/empty-user.png" alt="" />
 
-      <span>{{ shortFormat(getOrderData.buyer_pubkeyhash, 20, "Buyer") }}</span>
+      <span>BUYER</span>
 
       <button @click="toggleMenu" aria-haspopup="true" aria-controls="overlay_menu">
         <i class="pi pi-ellipsis-v" />

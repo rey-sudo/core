@@ -3,7 +3,7 @@
     <div class="p-chat-top">
       <img src="@/assets/empty-user.png" alt="" />
 
-      <span>{{ getOrderData.seller_id }}</span>
+      <span>SELLER</span>
 
       <button
         @click="toggleMenu"
