@@ -5,7 +5,7 @@ import { catcher, check, checkpoint } from "./pod/index";
 import { NotFoundError, errorMiddleware } from "./errors";
 import listenProducts from "./kafka/products";
 import compression from "compression";
-import { eventBus } from "./db/redis";
+import { redisDB } from "./db/redis";
 
 const main = async () => {
   try {
@@ -37,8 +37,8 @@ const main = async () => {
       throw new Error("TOKEN_EXPIRATION error");
     }
 
-    if (!process.env.EVENT_BUS_URI) {
-      throw new Error("EVENT_BUS_URI error");
+    if (!process.env.REDIS_URI) {
+      throw new Error("REDIS_URI error");
     }
 
     DB.connect({
@@ -49,13 +49,13 @@ const main = async () => {
       database: "service_gateway",
     });
 
-    await eventBus
+    await redisDB
       .connect({
-        url: process.env.EVENT_BUS_URI,
+        url: process.env.REDIS_URI,
         connectTimeout: 100000,
         keepAlive: 100000,
       })
-      .then(() => console.log("eventBus connected"))
+      .then(() => console.log("redisDB connected"))
       .catch((err: any) => catcher(err));
 
     listenProducts();
