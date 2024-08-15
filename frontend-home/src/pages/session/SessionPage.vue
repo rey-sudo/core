@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <div class="session-bottom">z</div>
+      <div class="session-bottom"></div>
     </div>
     <div v-if="isFailed">isFailed</div>
   </div>
