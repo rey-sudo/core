@@ -16,7 +16,7 @@
       <div class="subtitle">Press to activate the script on the network.</div>
 
       <Button @click="createTransaction(getOrderData.id)">
-        Sign
+      <span>Deploy</span>
       </Button>
     </template>
     <!--//////////////////////////////////////////////////////////////////////-->

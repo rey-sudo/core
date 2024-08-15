@@ -69,6 +69,7 @@
       </div>
       <div class="summary-body">
         <div class="summary-title">Action</div>
+        <LockingButton v-if="getOrderData.status === 'locking'" />
         <ReceivedButton v-if="getOrderData.status === 'delivered'" />
       </div>
     </div>
@@ -77,12 +78,13 @@
 
 <script>
 import { sessionAPI } from "@/pages/session/api";
-
+import LockingButton from "./LockingButton.vue";
 import ReceivedButton from "./ReceivedButton.vue";
 
 export default {
   components: {
     ReceivedButton,
+    LockingButton
   },
   setup() {
     const { getOrderData } = sessionAPI();

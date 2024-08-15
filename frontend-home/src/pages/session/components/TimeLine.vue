@@ -123,7 +123,6 @@ export default {
 }
 
 .transaction span {
-  cursor: pointer;
   font-size: var(--text-size-c);
 }
 
