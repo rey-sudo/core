@@ -116,7 +116,6 @@ export default {
 
 .copier i {
   font-size: 12px;
-  color: var(--text-b);
 }
 
 .copier i:hover {

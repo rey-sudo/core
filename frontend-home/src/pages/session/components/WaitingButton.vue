@@ -6,7 +6,9 @@
       <div class="subtitle">The transaction has been sent to the network.</div>
 
       <Button class="actived">
-        Actived
+        <span> Actived</span>
+
+        <span style="margin-left: 0.5rem;"> <i class="pi pi-check" style="font-size: 12px;" /></span>
       </Button>
     </template>
     <!--//////////////////////////////////////////////////////////////////////-->
@@ -124,6 +126,7 @@ export default {
   background: var(--primary-c);
   border: 1px solid var(--primary-c);
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .subtitle {
