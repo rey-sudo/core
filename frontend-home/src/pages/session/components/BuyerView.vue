@@ -104,7 +104,6 @@ export default {
 <style lang="css" scoped>
 .sku,
 .model {
-  color: var(--text-b);
   font-size: var(--text-size-b);
 }
 
