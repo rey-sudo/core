@@ -273,7 +273,7 @@ export default {
   height: 700px;
   border-radius: 16px;
   margin-left: auto;
-  border: 3px solid var(--border-a);
+  border: 1px solid var(--border-b);
   display: flex;
   flex-direction: column;
   overflow: hidden;

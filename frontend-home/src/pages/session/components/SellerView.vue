@@ -148,7 +148,7 @@ export default {
 
 .stepper-column {
   width: 75px;
-  height: 250px;
+  height: 275px;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
@@ -188,7 +188,7 @@ export default {
   background: var(--base-a);
   padding: 2rem 1rem;
   border-radius: 16px;
-  border: 3px solid var(--border-a);
+  border: 1px solid var(--border-b);
   height: 700px;
 }
 
