@@ -22,12 +22,12 @@ export default {
         icon: "pi pi-credit-card",
       },
       {
-        label: "Treasury discount " + getProductData.value.discount + " ADA",
+        label: "Product discount " + getProductData.value.discount + " ADA",
         icon: "pi pi-building-columns",
       },
       {
         label: "Protected purchase",
-        icon: "pi pi-check-circle",
+        icon: "pi pi-shopping-cart",
       },
     ]);
 
