@@ -1,5 +1,5 @@
 <template>
-  <Dialog v-model:visible="visible" modal dismissableMask blockScroll header="Buy options" :draggable="false"
+  <Dialog v-model:visible="visible" modal dismissableMask blockScroll header="Buy Options" :draggable="false"
     :style="{ width: '70vw' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
     <DataTable ref="dt" :value="orderList" v-model:selection="selectedProducts" dataKey="id" style="height: 70vh"
       :paginator="true" :rows="10" :filters="filters"
@@ -207,7 +207,7 @@ export default {
 
 <style lang="css" scoped>
 .head-info {
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   font-weight: 400;
   text-align: left;
   color: var(--primary-c);

@@ -4290,7 +4290,7 @@
   }
   .p-datatable .p-datatable-tbody > tr {
     background: #ffffff;
-    color: #495057;
+    color: var(--text-b);
     transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
   .p-datatable .p-datatable-tbody > tr > td {
