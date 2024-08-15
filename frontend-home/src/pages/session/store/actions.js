@@ -13,12 +13,11 @@ const getOrder = async ({ commit }, params) => {
 };
 
 
-const startEndpoint = async (_, params) => {
+const deploy = async (_, params) => {
   try {
-    const response = await axiosAPI.post("/api/gateway/start-endpoint", params);
+    const response = await axiosAPI.post("/api/gateway/deploy", params);
 
     console.log(response);
-    //commit("startEndpoint", response.data.payload);
 
     return { ok: true, response: response.data };
   } catch (error) {
@@ -26,4 +25,17 @@ const startEndpoint = async (_, params) => {
   }
 };
 
-export { getOrder, startEndpoint};
+const deployTx = async (_, params) => {
+  try {
+    const response = await axiosAPI.post("/api/gateway/deploy-tx", params);
+
+    console.log(response);
+
+
+    return { ok: true, response: response.data };
+  } catch (error) {
+    throw { ok: false, response: error.response.data };
+  }
+};
+
+export { getOrder, deploy, deployTx};

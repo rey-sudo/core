@@ -2,37 +2,37 @@
   <div class="timeline">
     <div class="timeline-title">
       <span>Negotiation Session</span>
-      <span>{{ getOrderData?.id }} </span>
+      <span>{{ getOrderData.id }} </span>
     </div>
 
     <div class="timeline-subtitle">
       <span>Space for bilateral negotiation </span>
-      <span> {{ getOrderData?.created_at }}</span>
+      <span> {{ getOrderData.created_at }}</span>
     </div>
 
     <div class="timeline-body">
       <Timeline
         v-if="getOrderData"
-        :value="eventData"
+        :value="timelineData"
         layout="horizontal"
         align="top"
       >
-        <template #opposite="slotProps">
+        <template #opposite="orderProps">
           <div class="transaction">
-            <span @click="openCardanoScan(slotProps.item.data)">{{
-              slotProps.item.text
+            <span @click="openCardanoScan(orderProps.item.data)">{{
+              orderProps.item.text
             }}</span>
 
             <button
-              v-if="slotProps.item.data"
-              @click="copy(slotProps.item.data)"
+              v-if="orderProps.item.data"
+              @click="copy(orderProps.item.data)"
             >
               <i class="pi pi-copy" />
             </button>
           </div>
         </template>
-        <template #content="slotProps">
-          {{ slotProps.item.status }}
+        <template #content="orderProps">
+          {{ orderProps.item.status }}
         </template>
       </Timeline>
     </div>
@@ -60,7 +60,7 @@ export default {
   setup() {
     const { getOrderData } = sessionAPI();
 
-    const eventData = computed(() => [
+    const timelineData = computed(() => [
       {
         status: "Waiting",
         text: shortFormat(getOrderData.value.contract_0_tx, 20),
@@ -85,7 +85,7 @@ export default {
 
     const { copy } = useClipboard();
     return {
-      eventData,
+      timelineData,
       getOrderData,
       copy,
       shortFormat,

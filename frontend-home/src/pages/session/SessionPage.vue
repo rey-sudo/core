@@ -7,7 +7,7 @@
 
       <div class="session-body">
         <div class="session-body-left">
-          <SellerView />
+          <SellerView v-if="getCurrentSeller"/>
         </div>
 
         <div class="session-body-right">

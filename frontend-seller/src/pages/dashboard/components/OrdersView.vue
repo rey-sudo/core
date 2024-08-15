@@ -607,8 +607,6 @@ export default {
 
       const { getWallet } = walletClient();
 
-      console.log(await getWallet());
-
       lucidClient.selectWallet(await getWallet());
 
       const addr = await lucidClient.wallet.address();
@@ -638,6 +636,7 @@ export default {
             life: 5000,
           });
         });
+        
       this.activedLoader = false;
     },
     getStateBarValue(e) {

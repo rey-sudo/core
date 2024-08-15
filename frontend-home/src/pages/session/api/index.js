@@ -7,12 +7,16 @@ const sessionAPI = () => {
   const getOrder = async (params) =>
     await store.dispatch("session/getOrder", params);
 
-  const startEndpoint = async (params) =>
-    await store.dispatch("session/startEndpoint", params);
+  const deploy = async (params) =>
+    await store.dispatch("session/deploy", params);
+
+  const deployTx = async (params) =>
+    await store.dispatch("session/deployTx", params);
 
   return {
     getOrder,
-    startEndpoint,
+    deploy,
+    deployTx,
     getOrderData: computed(() => store.getters["session/getOrderData"]),
   };
 };

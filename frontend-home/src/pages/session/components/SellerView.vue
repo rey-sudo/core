@@ -70,9 +70,8 @@
       <div class="stepper-body">
         <div class="stepper-title">Action</div>
         <WaitingButton v-if="
-          getOrderData.contract_stage === 'inactive' ||
-          getOrderData.contract_stage === 'start' ||
-          getOrderData.contract_stage === 'waiting'
+          getOrderData.status === 'created' ||
+          getOrderData.status === 'waiting'
         " />
 
         <DeliveredButton v-if="getOrderData.contract_stage === 'locking'" />

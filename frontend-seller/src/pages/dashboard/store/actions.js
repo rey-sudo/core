@@ -19,7 +19,6 @@ const deployTx = async (_, params) => {
 
     console.log(response);
 
-    //commit("createProduct", response.data.payload);
 
     return { ok: true, response: response.data };
   } catch (error) {
