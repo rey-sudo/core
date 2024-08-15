@@ -116,7 +116,7 @@ export default {
   text-align: left;
   text-transform: capitalize;
   color: var(--text-w);
-  padding: 2rem;
+  padding: 2rem 0;
   font-weight: 700;
 }
 
