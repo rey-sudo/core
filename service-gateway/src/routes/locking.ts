@@ -1,16 +1,11 @@
 import DB from "../db";
-import {
-  Blaze,
-  ColdWallet,
-  Core,
-  Data,
-  makeValue,
-} from "@blaze-cardano/sdk";
+import { Blaze, ColdWallet, Core, Data, makeValue } from "@blaze-cardano/sdk";
 import { Request, Response } from "express";
 import { userMiddleware } from "../utils/user";
 import { provider } from "../blockchain";
 import { BadRequestError } from "../errors";
 import { MarketplaceStatemachine } from "../blockchain/plutus";
+import { redisDB } from "../db/redis";
 import { _ } from "../utils/pino";
 
 const lockingMiddlewares: any = [userMiddleware];
@@ -35,6 +30,14 @@ const lockingHandler = async (req: Request, res: Response) => {
     }
 
     const ORDER = orders[0];
+
+    const isLocked = await redisDB.client.get(ORDER.id);
+
+    console.log(isLocked);
+
+    if (isLocked === "locked") {
+      throw new BadRequestError("LOCKED");
+    }
 
     const externalWallet = Core.addressFromBech32(
       BUYER.address,
@@ -129,6 +132,11 @@ const lockingHandler = async (req: Request, res: Response) => {
     const transaction = tx.toCbor();
 
     console.log(transaction);
+
+    await redisDB.client.set(ORDER.id, "locked", {
+      EX: 20,
+      NX: true,
+    });
 
     //////////////////////////////////////////////
 
