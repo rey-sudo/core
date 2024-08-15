@@ -90,11 +90,11 @@ const main = async () => {
     );
 
     app.post(
-      "/api/gateway/locking-endpoint",
+      "/api/gateway/locking",
 
-      route.lockingEndpointMiddlewares,
+      route.lockingMiddlewares,
 
-      route.lockingEndpointHandler
+      route.lockingHandler
     );
 
     app.post(
