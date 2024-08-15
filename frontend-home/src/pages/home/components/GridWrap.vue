@@ -115,7 +115,7 @@ export default {
   font-weight: bold;
   text-align: left;
   text-transform: capitalize;
-  color: var(--text-a);
+  color: var(--text-w);
   padding: 2rem;
   font-weight: 700;
 }
@@ -129,6 +129,7 @@ export default {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
   background: linear-gradient(180deg, var(--primary-a) 0%, var(--base-c) 30%);
+  background: initial;
 }
 
 .grid-item {

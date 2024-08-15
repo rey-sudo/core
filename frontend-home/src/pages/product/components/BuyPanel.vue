@@ -207,7 +207,7 @@ export default {
 
 <style lang="css" scoped>
 .head-info {
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-a);
   font-weight: 400;
   text-align: left;
   color: var(--primary-c);
@@ -251,7 +251,7 @@ export default {
 
 .head-rating span:nth-child(3) {
   font-weight: 400;
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   color: var(--text-b);
 }
 
