@@ -136,7 +136,7 @@ export default {
   padding: 2rem;
   padding-bottom: 1rem;
   border-radius: 16px;
-  box-shadow: var(--shadow-b);
+ border: 1px solid var(--border-b);
 }
 
 .timeline-title,
