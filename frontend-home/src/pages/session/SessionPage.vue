@@ -8,6 +8,7 @@
       <div class="session-body">
         <div class="session-body-left">
           <SellerView v-if="getCurrentSeller"/>
+          <BuyerView v-if="getCurrentUser"/>
         </div>
 
         <div class="session-body-right">
@@ -28,6 +29,7 @@ import TimeLine from "@/pages/session/components/TimeLine.vue";
 import SellerChat from "@/pages/session/components/SellerChat.vue";
 import BuyerChat from "@/pages/session/components/BuyerChat.vue";
 import SellerView from "@/pages/session/components/SellerView.vue";
+import BuyerView from "@/pages/session/components/BuyerView.vue";
 import headerAPI from "@/components/header/composable/header-api";
 import { ref } from "vue";
 import { sessionAPI } from "@/pages/session/api";
@@ -39,6 +41,7 @@ export default {
     BuyerChat,
     TimeLine,
     SellerView,
+    BuyerView
   },
   setup() {
     const { getCurrentSeller, getCurrentUser } = headerAPI();
