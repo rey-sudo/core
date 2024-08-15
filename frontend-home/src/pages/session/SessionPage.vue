@@ -84,8 +84,8 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.session {
-}
+.session {}
+
 .session-body {
   width: 100%;
   display: flex;
@@ -101,8 +101,8 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  padding: 0 11%;
-  margin-top: 100px;
+  padding: 2rem 11%;
+  margin-top: 64px;
   background: var(--base-b);
 }
 

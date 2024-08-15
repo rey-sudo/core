@@ -5247,6 +5247,7 @@
     white-space: nowrap;
     text-align: left;
     font-weight: 400;
+    font-size: var(--text-size-d);
   }
   .p-timeline.p-timeline-horizontal .p-timeline-event-connector {
     height: 1px;
