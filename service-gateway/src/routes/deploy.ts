@@ -1,8 +1,4 @@
 import DB from "../db";
-import { Request, Response } from "express";
-import { requireAuth } from "../utils/required";
-import { sellerMiddleware } from "../utils/seller";
-import { BadRequestError } from "../errors";
 import {
   Blaze,
   ColdWallet,
@@ -11,6 +7,10 @@ import {
   makeValue,
   Static,
 } from "@blaze-cardano/sdk";
+import { Request, Response } from "express";
+import { requireAuth } from "../utils/required";
+import { sellerMiddleware } from "../utils/seller";
+import { BadRequestError } from "../errors";
 import { provider, validatorsWithParams } from "../blockchain";
 
 ////////////////////////////////////////////////////
@@ -42,20 +42,6 @@ const deployHandler = async (req: Request, res: Response) => {
 
     const ORDER = orders[0];
 
-    if (ORDER.deployed) {
-      throw new BadRequestError("DEPLOYED");
-    }
-
-    /*
-    if (ORDER.contract_0_utx) {
-      return res.status(200).send({
-        success: true,
-        payload: {
-          transaction: ORDER.contract_0_utx,
-        },
-      });
-    }
-*/
     /////////////////////////////////////////////////////////////////
 
     const externalWallet = Core.addressFromBech32(
@@ -166,20 +152,16 @@ const deployHandler = async (req: Request, res: Response) => {
       UPDATE orders 
       SET seller_pubkeyhash = ?,
           contract_address = ?,
-          contract_state = ?,
           contract_threadtoken = ?,
-          contract_unit = ?,
-          contract_0_utx = ?
+          contract_unit = ?
       WHERE id = ? AND seller_id = ?
       `;
 
     const schemeValue = [
       params.pubkeyhash,
       parameterizedValidators.stateMachineAddress.toBech32(),
-      0,
       policyId,
       threadTokenUnit,
-      transaction,
       params.order_id,
       SELLER.id,
     ];
