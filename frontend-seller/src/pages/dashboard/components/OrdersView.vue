@@ -158,7 +158,7 @@
           </template>
         </Column>
 
-        <Column :exportable="false" header="Actions">
+        <Column field="contract_0_tx" :exportable="false" header="Actions" sortable>
           <template #body="orderProps">
             <div class="table-buttons">
               <Button class="switch-button table-button actived" v-if="orderProps.data.contract_0_tx">

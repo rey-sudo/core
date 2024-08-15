@@ -63,7 +63,7 @@ export default {
   width: 90%;
   margin-top: 2rem;
   border: 1px solid var(--border-b);
-  border-radius: 4px;
+  border-radius: 6px;
   overflow: hidden;
 }
 
@@ -79,7 +79,7 @@ export default {
   height: 3rem;
   outline: 1px solid var(--border-b);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 6px;
   object-fit: contain;
 }
 
