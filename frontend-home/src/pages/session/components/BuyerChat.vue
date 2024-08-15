@@ -225,9 +225,7 @@ export default {
       setMessage(msg);
     });
   },
-  beforeUnmount() {
-    this.editor.destroy();
-  },
+
 };
 </script>
 

@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { onBeforeUnmount, onMounted } from "vue";
+import { onMounted } from "vue";
 import { EditorContent, useEditor } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 
@@ -84,11 +84,6 @@ export default {
       }
     });
 
-    onBeforeUnmount(() => {
-      if (editor) {
-        editor.destroy();
-      }
-    });
 
     return {
       editor,

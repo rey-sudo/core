@@ -211,11 +211,7 @@ export default {
       setMessage(msg);
     });
   },
-  beforeUnmount() {
-    if (this.editor) {
-      this.editor.destroy();
-    }
-  },
+
 };
 </script>
 
