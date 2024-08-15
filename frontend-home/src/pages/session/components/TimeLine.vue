@@ -21,7 +21,7 @@
 
             <span @click="openCardanoScan(orderProps.item.data)">{{
               orderProps.item.text
-            }}</span>
+              }}</span>
 
             <button class="copier" v-if="orderProps.item.data" @click="copy(orderProps.item.data)">
               <i class="pi pi-copy" />
@@ -29,7 +29,9 @@
           </div>
         </template>
         <template #content="orderProps">
-          {{ orderProps.item.status }}
+          <span>{{ orderProps.item.status }}</span>
+          <span class="minicon" v-if="orderProps.item.status === 'Delivered'"><i class="pi pi-truck" /></span>
+          <span class="minicon" v-if="orderProps.item.status === 'Received'"><i class="pi pi-box" /></span>
         </template>
       </Timeline>
     </div>
@@ -196,5 +198,13 @@ export default {
 
 .checker i {
   color: var(--green-a);
+}
+
+.minicon {
+  margin-left: 0.5rem;
+}
+
+.minicon i {
+  font-size: 12px;
 }
 </style>
