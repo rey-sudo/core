@@ -6,7 +6,7 @@
       <div class="subtitle">The transaction has been sent to the network.</div>
 
       <Button class="actived">
-        <span> Actived</span>
+        <span>Actived</span>
 
         <span style="margin-left: 0.5rem;"> <i class="pi pi-check" style="font-size: 12px;" /></span>
       </Button>
@@ -16,7 +16,7 @@
       <div class="subtitle">Press to activate the script on the network.</div>
 
       <Button @click="createTransaction(getOrderData.id)">
-      <span>Deploy</span>
+        <span>Deploy</span>
       </Button>
     </template>
     <!--//////////////////////////////////////////////////////////////////////-->

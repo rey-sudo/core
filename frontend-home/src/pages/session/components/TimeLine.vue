@@ -19,7 +19,7 @@
             </span>
 
 
-            <span @click="openCardanoScan(orderProps.item.data)">{{
+            <span style="cursor: default;" @click="openCardanoScan(orderProps.item.data)">{{
               orderProps.item.text
               }}</span>
 
