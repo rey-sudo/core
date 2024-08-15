@@ -38,8 +38,8 @@
     </div>
 
     <div class="timeline-timer">
-      <span>1</span>
-      <span>5</span>
+      <span>2</span>
+      <span>3</span>
       <div>:</div>
       <span>0</span>
       <span>0</span>
