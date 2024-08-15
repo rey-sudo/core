@@ -1,5 +1,5 @@
 <template>
-  <Dialog v-model:visible="visible" modal dismissableMask blockScroll header="Buy Options" :draggable="false"
+  <Dialog v-model:visible="tableVisible" modal dismissableMask blockScroll header="Buy Options" :draggable="false"
     :style="{ width: '70vw' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
     <DataTable ref="dt" :value="orderList" v-model:selection="selectedProducts" dataKey="id" style="height: 70vh"
       :paginator="true" :rows="10" :filters="filters"
@@ -37,8 +37,8 @@
       </Column>
 
       <Column :exportable="false" style="min-width: 10rem">
-        <template #body="slotProps">
-          <button class="miniBuyButton" @click="createTransaction(slotProps.data.id)">
+        <template #body="orderProps">
+          <button class="miniBuyButton" @click="createTransaction(orderProps.data.id)"> 
             Buy
           </button>
         </template>
@@ -108,10 +108,10 @@ export default {
       review_count: 558,
     });
 
-    const visible = ref(false);
+    const tableVisible = ref(false);
 
     const openSlotDialog = () => {
-      visible.value = true;
+      tableVisible.value = true;
     };
 
     const filters = ref({
@@ -190,7 +190,7 @@ export default {
 
     return {
       product,
-      visible,
+      tableVisible,
       openSlotDialog,
       formatDiscount,
       formatLovelace,
@@ -274,10 +274,10 @@ export default {
 }
 
 .head-button {
-  border: 1px solid var(--primary-b);
+  border: 1px solid var(--primary-c);
   width: 90%;
-  border-radius: 4px;
-  color: var(--text-a);
+  border-radius: 6px;
+  color: var(--text-w);
   font-weight: 600;
   cursor: pointer;
   display: flex;
@@ -287,7 +287,7 @@ export default {
   text-align: center;
   margin-top: 1rem;
   transition: var(--transition-a);
-  background: var(--primary-b);
+  background: var(--primary-c);
 }
 
 .head-button.buyButton {

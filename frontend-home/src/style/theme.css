@@ -5009,7 +5009,7 @@
     border-radius: 3px;
   }
   .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-    background: var(--primary-s);
+    background: var(--base-b);
     border-color: var(--primary-c);
     color: var(--primary-c);
     border-radius: 50%;
