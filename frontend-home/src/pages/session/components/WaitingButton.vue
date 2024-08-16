@@ -8,7 +8,6 @@
       <Button class="actived">
         <span>Actived</span>
 
-        <span style="margin-left: 0.5rem;"> <i class="pi pi-check" style="font-size: 12px;" /></span>
       </Button>
     </template>
     <!--//////////////////////////////////////////////////////////////////////-->

@@ -203,6 +203,6 @@ export default {
 }
 
 .minicon i {
-  font-size: 12px;
+  font-size: 14px;
 }
 </style>

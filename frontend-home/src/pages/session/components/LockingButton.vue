@@ -4,9 +4,8 @@
 
     <Button class="actived">
       <span>
-        Paid
+        PAID
       </span>
-      <span style="margin-left: 0.5rem;"> <i class="pi pi-check" style="font-size: 12px;" /></span>
     </Button>
   </div>
 </template>
