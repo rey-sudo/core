@@ -61,7 +61,7 @@ export default {
 <style lang="css" scoped>
 .seller {
   margin-top: 2rem;
-  border: 2px solid var(--border-a);
+  border: 3px solid var(--border-a);
   border-radius: 16px;
   overflow: hidden;
 }
