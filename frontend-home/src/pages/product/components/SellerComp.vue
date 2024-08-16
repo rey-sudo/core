@@ -1,6 +1,6 @@
 <template>
-  <div class="head-seller">
-    <div class="head-seller-head">
+  <div class="seller">
+    <div class="seller-head">
       <img
         src="https://http2.mlstatic.com/D_NQ_NP_984015-MLA74975093699_032024-G.jpg"
         alt=""
@@ -11,8 +11,8 @@
         <span>1000+ sales completed</span>
       </div>
     </div>
-    <div class="head-seller-bottom">
-      <div class="head-seller-badge">
+    <div class="seller-bottom">
+      <div class="seller-badge">
         <i class="pi pi-clock" />
         <span> Products delivered on time. </span>
         <ul class="meter">
@@ -24,7 +24,7 @@
         </ul>
       </div>
 
-      <div class="head-seller-badge">
+      <div class="seller-badge">
         <i class="pi pi-thumbs-up" />
         <span> Good communication. </span>
         <ul class="meter">
@@ -59,22 +59,21 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.head-seller {
-  width: 90%;
+.seller {
   margin-top: 2rem;
-  border: 1px solid var(--border-b);
-  border-radius: 6px;
+  border: 2px solid var(--border-a);
+  border-radius: 16px;
   overflow: hidden;
 }
 
-.head-seller-head {
+.seller-head {
   display: flex;
   padding: 1rem;
   align-items: center;
-  border-bottom: 1px solid var(--border-b);
+  border-bottom: 1px solid var(--border-a);
 }
 
-.head-seller-head img {
+.seller-head img {
   width: 3rem;
   height: 3rem;
   outline: 1px solid var(--border-b);
@@ -83,35 +82,35 @@ export default {
   object-fit: contain;
 }
 
-.head-seller-head div {
+.seller-head div {
   display: flex;
   flex-direction: column;
   text-align: left;
   margin-left: 1rem;
 }
 
-.head-seller-head div span {
+.seller-head div span {
   line-height: 1.5rem;
 }
 
-.head-seller-head div span:nth-child(1) {
+.seller-head div span:nth-child(1) {
   font-weight: 500;
 }
 
-.head-seller-head div span:nth-child(2) {
+.seller-head div span:nth-child(2) {
   font-weight: 400;
   font-size: var(--text-size-a);
   color: var(--text-b);
 }
 
-.head-seller-badge {
+.seller-badge {
   display: flex;
   align-items: center;
   padding: 1rem;
   color: var(--text-b);
 }
 
-.head-seller-badge span {
+.seller-badge span {
   font-size: var(--text-size-a);
   margin-left: 1rem;
   font-weight: 400;

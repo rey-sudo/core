@@ -49,37 +49,38 @@
   </Dialog>
   <!--//////////////////////////////////////////////////////////////////////////-->
   <!--//////////////////////////////////////////////////////////////////////////-->
+  <div class="panel">
+    <div class="panel-info">
+      <span> {{ getOrdersData?.order_count }} Available</span>
+    </div>
 
-  <div class="head-info">
-    <span> {{ getOrdersData?.order_count }} Available</span>
-  </div>
+    <div class="panel-name">
+      {{ getProductData.name }}
+    </div>
 
-  <div class="head-name">
-    {{ getProductData.name }}
-  </div>
+    <div class="panel-legend">
+      <span>Model: {{ getProductData.model }} </span>
+      <span>SKU: {{ getProductData.id }}</span>
+    </div>
 
-  <div class="head-legend">
-    <span>Model: {{ getProductData.model }} </span>
-    <span>SKU: {{ getProductData.id }}</span>
-  </div>
+    <div class="panel-rating">
+      <Rating :modelValue="product.rating_count" :stars="5" :readonly="true" :cancel="false"
+        style="margin-right: 0.5rem" />
+      <span>{{ product.rating_count }}</span>
 
-  <div class="head-rating">
-    <Rating :modelValue="product.rating_count" :stars="5" :readonly="true" :cancel="false"
-      style="margin-right: 0.5rem" />
-    <span>{{ product.rating_count }}</span>
+      <span>({{ product.review_count }} Reviews)</span>
+    </div>
 
-    <span>({{ product.review_count }} Reviews)</span>
-  </div>
+    <div class="panel-price">
+      <div class="ada-label">₳</div>
+      <span>{{ getProductData.price }}</span>
+    </div>
 
-  <div class="head-price">
-    <div class="ada-label">₳</div>
-    <span>{{ getProductData.price }}</span>
-  </div>
+    <InfoIcons />
 
-  <InfoIcons />
-
-  <div class="head-button buyButton" @click="openSlotDialog">
-    <div>Buy now</div>
+    <div class="panel-button buyButton" @click="openSlotDialog">
+      <div>Buy now</div>
+    </div>
   </div>
 </template>
 
@@ -194,7 +195,7 @@ export default {
 
     return {
       product,
-      downloadTx, 
+      downloadTx,
       tableVisible,
       openSlotDialog,
       formatDiscount,
@@ -211,14 +212,20 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.head-info {
+.panel {
+  border: 2px solid var(--border-a);
+  border-radius: 16px;
+  padding: 1rem;
+}
+
+.panel-info {
   font-size: var(--text-size-a);
   font-weight: 400;
   text-align: left;
   color: var(--primary-c);
 }
 
-.head-name {
+.panel-name {
   font-size: var(--text-size-g);
   font-weight: 600;
   text-align: left;
@@ -227,7 +234,7 @@ export default {
   line-height: 2.25rem;
 }
 
-.head-legend {
+.panel-legend {
   text-align: left;
   font-size: var(--text-size-b);
   margin-top: 1rem;
@@ -235,32 +242,32 @@ export default {
   color: var(--text-a);
 }
 
-.head-legend span {
+.panel-legend span {
   margin-right: 1rem;
 }
 
-.head-rating {
+.panel-rating {
   font-size: var(--text-size-c);
   align-items: center;
   display: flex;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  width: 90%;
+
 }
 
-.head-rating span {
+.panel-rating span {
   margin-right: 0.5rem;
   font-size: var(--text-size-c);
   font-weight: 600;
 }
 
-.head-rating span:nth-child(3) {
+.panel-rating span:nth-child(3) {
   font-weight: 400;
   font-size: var(--text-size-b);
   color: var(--text-b);
 }
 
-.head-price {
+.panel-price {
   text-align: left;
   margin-top: initial;
   font-size: var(--text-size-h);
@@ -270,7 +277,7 @@ export default {
   margin-top: 1rem;
 }
 
-.head-price .ada-label {
+.panel-price .ada-label {
   font-weight: 500;
   color: var(--text-a);
   font-size: var(--text-size-g);
@@ -278,28 +285,27 @@ export default {
   margin-bottom: 2px;
 }
 
-.head-button {
-  border: 1px solid var(--primary-c);
-  width: 90%;
-  border-radius: 6px;
-  color: var(--text-w);
+.panel-button {
+  border: 1px solid var(--primary-b);
+  border-radius: 999px;
+  color: var(--text-a);
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem;
+  padding: 0.5rem;
   text-align: center;
   margin-top: 1rem;
   transition: var(--transition-a);
-  background: var(--primary-c);
+  background: var(--primary-b);
 }
 
-.head-button.buyButton {
+.panel-button.buyButton {
   margin-top: 2rem;
 }
 
-.head-button:hover {
+.panel-button:hover {
   opacity: 0.8;
 }
 

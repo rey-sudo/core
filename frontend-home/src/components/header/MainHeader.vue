@@ -1,34 +1,17 @@
 <template>
-  <Dialog
-    v-model:visible="visible"
-    modal
-    :draggable="false"
-    :baseZIndex="10"
-    dismissableMask
-    closeOnEscape
-    header="Country"
-    :style="{ width: '23rem' }"
-  >
+  <Dialog v-model:visible="visible" modal :draggable="false" :baseZIndex="10" dismissableMask closeOnEscape
+    header="Country" :style="{ width: '23rem' }">
     <div class="country">
       <div class="country-title">
         Choose a country to search and deliver products.
       </div>
 
-      <Dropdown
-        v-model="selectedCountry"
-        :options="countries"
-        filter
-        optionLabel="name"
-        placeholder="Country"
-        class="country-dropdown"
-      >
+      <Dropdown v-model="selectedCountry" :options="countries" filter optionLabel="name" placeholder="Country"
+        class="country-dropdown">
         <template #value="slotProps">
           <div v-if="slotProps.value" class="country-dropdown-item">
-            <img
-              :alt="slotProps.value.label"
-              src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
-              :class="`mr-2 flag flag-${slotProps.value.code.toLowerCase()}`"
-            />
+            <img :alt="slotProps.value.label" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
+              :class="`mr-2 flag flag-${slotProps.value.code.toLowerCase()}`" />
             <div>{{ slotProps.value.name }}</div>
           </div>
           <span v-else>
@@ -37,24 +20,16 @@
         </template>
         <template #option="slotProps">
           <div class="country-dropdown-item">
-            <img
-              :alt="slotProps.option.label"
+            <img :alt="slotProps.option.label"
               src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
-              :class="`mr-2 flag flag-${slotProps.option.code.toLowerCase()}`"
-            />
+              :class="`mr-2 flag flag-${slotProps.option.code.toLowerCase()}`" />
             <div>{{ slotProps.option.name }}</div>
           </div>
         </template>
       </Dropdown>
 
-      <Dropdown
-        v-model="selectedLanguage"
-        :options="languages"
-        filter
-        optionLabel="name"
-        placeholder="Country"
-        class="country-dropdown"
-      >
+      <Dropdown v-model="selectedLanguage" :options="languages" filter optionLabel="name" placeholder="Country"
+        class="country-dropdown">
         <template #value="slotProps">
           <div v-if="slotProps.value" class="country-dropdown-item">
             <div>{{ slotProps.value.name }}</div>
@@ -72,19 +47,8 @@
     </div>
 
     <template #footer>
-      <Button
-        label="Cancel"
-        text
-        severity="secondary"
-        @click="visible = false"
-        autofocus
-      />
-      <Button
-        label="Save"
-        severity="secondary"
-        @click="visible = false"
-        autofocus
-      />
+      <Button label="Cancel" text severity="secondary" @click="visible = false" autofocus />
+      <Button label="Save" severity="secondary" @click="visible = false" autofocus />
     </template>
   </Dialog>
 
@@ -92,19 +56,9 @@
 
   <header class="header responsive">
     <div class="header-left">
-      <img
-        class="header-logo white"
-        @click="openHome"
-        src="@/assets/logo-white.png"
-        alt="logo"
-      />
+      <img class="header-logo white" @click="openHome" src="@/assets/logo-white.png" alt="logo" />
 
-      <img
-        class="header-logo blue"
-        @click="openHome"
-        src="@/assets/logo-blue.png"
-        alt="logo"
-      />
+      <img class="header-logo blue" @click="openHome" src="@/assets/logo-blue.png" alt="logo" />
 
       <div class="header-button left" @click="visible = true">
         <div>
@@ -125,11 +79,7 @@
 
     <div class="header-center">
       <div class="header-center-search">
-        <input
-          type="text"
-          maxlength="200"
-          placeholder="What do you need to find today?"
-        />
+        <input type="text" maxlength="200" placeholder="What do you need to find today?" />
 
         <div>
           <i class="pi pi-search" />
@@ -246,7 +196,7 @@ export default {
   width: 100%;
   box-sizing: border-box;
   background: var(--primary-a);
-  box-shadow: var(--border-shadow);
+  box-shadow: var(--shadow-b);
 }
 
 .header .header-left {
@@ -419,7 +369,7 @@ i {
   line-height: 0;
 }
 
-.country{
+.country {
   display: flex;
   flex-direction: column;
   padding: 1rem 1.5rem;
@@ -456,6 +406,7 @@ i {
     padding-left: 1rem;
     padding-right: 1rem;
   }
+
   .responsive {
     display: none;
   }
@@ -463,6 +414,7 @@ i {
   .header-left {
     justify-content: space-between;
   }
+
   .header-logo.white {
     display: none;
   }
