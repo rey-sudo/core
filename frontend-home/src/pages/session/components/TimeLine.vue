@@ -30,7 +30,7 @@
         </template>
         <template #content="orderProps">
           <span>{{ orderProps.item.status }}</span>
-          <span class="minicon" v-if="orderProps.item.status === 'Delivered'"><i class="pi pi-truck" /></span>
+          <span class="minicon" v-if="orderProps.item.status === 'Shipping'"><i class="pi pi-truck" /></span>
           <span class="minicon" v-if="orderProps.item.status === 'Received'"><i class="pi pi-box" /></span>
         </template>
       </Timeline>
@@ -71,7 +71,7 @@ export default {
         data: getOrderData.value.contract_1_tx,
       },
       {
-        status: "Delivered",
+        status: "Shipping",
         text: "N/A",
         data: "",
       },
