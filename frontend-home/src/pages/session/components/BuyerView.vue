@@ -29,9 +29,9 @@
       </div>
     </div>
 
-    <!--///-->
+
     <div class="summary-row">
-      <div class="summary-column short">
+      <div class="summary-column">
         <div>2</div>
         <span></span>
       </div>
@@ -142,16 +142,13 @@ export default {
 
 .summary-column {
   width: 75px;
-  height: 275px;
+  height: 225px;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
   align-items: center;
 }
 
-.summary-column.short {
-  height: 200px;
-}
 
 .summary-column div {
   background: var(--primary-c);

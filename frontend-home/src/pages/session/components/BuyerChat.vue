@@ -3,7 +3,7 @@
     <div class="p-chat-top">
       <img src="@/assets/empty-user.png" alt="" />
 
-      <span>SELLER</span>
+      <span>Seller</span>
 
       <button
         @click="toggleMenu"

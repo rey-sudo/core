@@ -88,36 +88,6 @@
     </template>
   </Dialog>
 
-  <Dialog
-    v-model:visible="walletVisible"
-    modal
-    :draggable="false"
-    :baseZIndex="10"
-    dismissableMask
-    closeOnEscape
-    header="Sign In"
-    :style="{ width: '23rem' }"
-  >
-    <div class="wallet">
-      <div class="wallet-title">Choose a Cardano wallet.</div>
-
-      <div class="wallet-grid">
-        <div class="wallet-icon">
-          <img src="@/assets/nami.svg" alt="logo" />
-        </div>
-      </div>
-    </div>
-
-    <template #footer>
-      <Button
-        label="Done"
-        severity="secondary"
-        @click="walletVisible = false"
-        autofocus
-      />
-    </template>
-  </Dialog>
-
   <!---HEADER-->
 
   <header class="header responsive">
@@ -200,7 +170,6 @@
 </template>
 
 <script>
-import { CardanoWasm } from "@/api/wallet-api";
 import { ref } from "vue";
 import headerAPI from "./composable/header-api";
 import NavWrap from "./components/NavWrap.vue";
@@ -242,9 +211,7 @@ export default {
   },
   data() {
     return {
-      isScrolled: false,
-      visible: false,
-      walletVisible: false,
+      visible: false
     };
   },
   created() {
@@ -255,9 +222,6 @@ export default {
     )();
   },
   methods: {
-    openWalletDialog() {
-      this.walletVisible = true;
-    },
 
     openHome() {
       if (this.currentRoute === "home") {
@@ -265,46 +229,8 @@ export default {
       }
 
       this.$router.push({ name: "home" });
-    },
-
-    async getPubKeyHash() {
-      const usedAddr = await window.cardano.getUsedAddresses();
-
-      const addrMap = usedAddr.map((hexAddr) => {
-        let byteAddr = CardanoWasm.Address.from_hex(hexAddr);
-        // eslint-disable-next-line
-        let pkh = CardanoWasm.BaseAddress.from_address(byteAddr)
-          .payment_cred()
-          .to_keyhash()
-          .to_hex();
-
-        return {
-          address: byteAddr.to_bech32(),
-        };
-      });
-
-      const contractAddr = "-";
-
-      const contractAdd = CardanoWasm.Address.from_bech32(contractAddr);
-
-      const contractPkh = CardanoWasm.BaseAddress.from_address(contractAdd)
-        .payment_cred()
-        .to_keyhash()
-        .to_hex();
-
-      console.log(JSON.stringify(addrMap));
-      console.log("contractAddr", JSON.stringify(contractPkh));
-    },
-  },
-  mounted() {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 0) {
-        this.isScrolled = true;
-      } else {
-        this.isScrolled = false;
-      }
-    });
-  },
+    }
+  }
 };
 </script>
 
@@ -319,7 +245,6 @@ export default {
   z-index: 1000;
   width: 100%;
   box-sizing: border-box;
-  background: initial;
   background: var(--primary-a);
   box-shadow: var(--border-shadow);
 }
@@ -494,8 +419,7 @@ i {
   line-height: 0;
 }
 
-.country,
-.wallet {
+.country{
   display: flex;
   flex-direction: column;
   padding: 1rem 1.5rem;
@@ -520,44 +444,13 @@ i {
   margin-right: 1rem;
 }
 
-.wallet-title {
-  font-size: var(--text-size-a);
-}
 
-.wallet-icon {
-  cursor: pointer;
-  border: 1px solid var(--border-a);
-  border-radius: 8px;
-}
-.wallet-icon img {
-  width: 2rem;
-  height: 2rem;
-}
 
-.wallet-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(3rem, 1fr));
-  gap: 20px;
-  margin-top: 1rem;
-}
 
-.wallet-icon {
-  background: var(--base-a);
-  border: 1px solid var(--border-b);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 3rem;
-  height: 3rem;
-}
 
 /* Mobile devices (portrait and landscape) */
 
 @media only screen and (max-width: 767px) {
-  .wallet-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
 
   header {
     padding-left: 1rem;
