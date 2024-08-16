@@ -213,7 +213,7 @@ export default {
 
 <style lang="css" scoped>
 .panel {
-  border: 2px solid var(--border-b);
+  border: 2px solid var(--border-a);
   border-radius: 8px;
   padding: 1rem;
 }
