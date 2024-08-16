@@ -108,7 +108,7 @@ validator(threadtoken: value.PolicyId) {
   }
 }
 
-test waiting() {
+test deploy() {
   let own_ref =
     OutputReference {
       transaction_id: TransactionId {
