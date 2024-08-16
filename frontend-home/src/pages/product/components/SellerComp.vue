@@ -75,7 +75,7 @@ export default {
   height: 3rem;
   outline: 1px solid var(--border-b);
   outline-offset: 2px;
-  border-radius: 6px;
+  border-radius: 8px;
   object-fit: contain;
 }
 
