@@ -64,7 +64,7 @@ export default {
 
 .head .head-left {
   text-align: center;
-  width: 73%;
+  width: 72%;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -74,7 +74,7 @@ export default {
 .head .head-right {
   height: inherit;
   text-align: center;
-  width: 27%;
+  width: 28%;
 }
 
 @media only screen and (max-width: 767px) {
