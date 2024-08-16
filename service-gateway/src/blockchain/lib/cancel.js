@@ -14,7 +14,7 @@ const provider = new Blockfrost({
 });
 
 const externalWallet = Core.addressFromBech32(
-  "addr_test1qppygdhzm0t7nnlclmds3dy0wc3du870dpy48juu0xxuu2aefdfvc4e0785y7vfhwlmsn3rn26mzvv9md0mhnkpjlc4s0jshh4"
+  "addr_test1qrg0fvp99s79f58vy8lxqrz3fzwmn4w9xnc54lpjy74847v04wk5sd4fhk5jur50npqse22mjn4we4r4l7uxfpdggrcsf7cf5y"
 );
 
 const stateMachineAddress = Core.addressFromBech32(
@@ -72,13 +72,9 @@ const stateMachineInput = Data.Enum([
   Data.Literal("Received"),
 ]);
 
-const lockingInput = {
-  Locking: {
-    buyer_param: "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b",
-  },
-};
+const cancelInput = "Cancel";
 
-const stateMachineRedeemer = Data.to(lockingInput, stateMachineInput);
+const stateMachineRedeemer = Data.to(cancelInput, stateMachineInput);
 
 const stateMachineScript = cborToScript(
   applyParamsToScript(
@@ -93,19 +89,16 @@ const productPrice = 50n * 1_000_000n;
 
 const productCollateral = 25n * 1_000_000n;
 
-const threadTokenAsset = makeValue(
-  productPrice + productCollateral,
-  ...[[threadTokenUnit, 1n]]
-);
+const threadTokenAsset = makeValue(0n, ...[[threadTokenUnit, 1n]]);
 
 const minFee = 1n * 1_000_000n;
 
 const data = {
-  state: 1n,
+  state: -1n,
   seller: "d0f4b0252c3c54d0ec21fe600c51489db9d5c534f14afc3227aa7af9",
   collateral: productCollateral,
   price: productPrice,
-  buyer: "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b",
+  buyer: null,
 };
 
 const Datum = Data.Object({
@@ -113,26 +106,22 @@ const Datum = Data.Object({
   seller: Data.Bytes(),
   collateral: Data.Integer(),
   price: Data.Integer(),
-  buyer: Data.Nullable(Data.Bytes()),
+  buyer: Data.Nullable(),
 });
 
-const lockingDatum = Data.to(data, Datum);
+const cancelDatum = Data.to(data, Datum);
 
-try {
-  const tx = await blaze
-    .newTransaction()
-    .addInput(threadTokenUtxos[0], stateMachineRedeemer)
-    .lockAssets(stateMachineAddress, threadTokenAsset, lockingDatum)
-    .provideScript(stateMachineScript)
-    .addRequiredSigner(
-      "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b"
-    )
-    .setChangeAddress(externalWallet)
-    .setMinimumFee(minFee)
-    .complete();
+const tx = await blaze
+  .newTransaction()
+  .addInput(threadTokenUtxos[0], stateMachineRedeemer)
+  .lockAssets(stateMachineAddress, threadTokenAsset, cancelDatum)
+  .payLovelace(externalWallet, productCollateral)
+  .provideScript(stateMachineScript)
+  .addRequiredSigner("d0f4b0252c3c54d0ec21fe600c51489db9d5c534f14afc3227aa7af9")
+  .setChangeAddress(externalWallet)
+  .setMinimumFee(minFee)
+  .complete();
 
-  const cbor = tx.toCbor();
-  console.log(cbor);
-} catch (err) {
-  console.error(err);
-}
+const cbor = tx.toCbor();
+
+console.log(cbor);

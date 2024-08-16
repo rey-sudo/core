@@ -48,8 +48,9 @@ type StateMachineDatum {
 }
 
 type StateMachineInput {
+  Cancel
   Locking { buyer_param: Hash<Blake2b_224, VerificationKey> }
-  Delivered
+  Shipping
   Received
 }
 
@@ -62,9 +63,40 @@ validator(threadtoken: value.PolicyId) {
     when context.purpose is {
       Spend(utxo_ref) ->
         when (datum, redeemer) is {
+          (StateMachineDatum { state, seller, collateral, price, buyer }, Cancel) -> {
+            let must_be_state = state == 0  
+
+            let must_be_signed =
+              list.has(context.transaction.extra_signatories, seller)
+
+            expect Some(sm_input) = 
+              list.find(context.transaction.inputs, fn(input) { input.output_reference == utxo_ref })            
+
+            expect Some(sm_output) = 
+              list.find(context.transaction.outputs, fn(output) { output.address == sm_input.output.address })
+            
+            let must_be_policy = list.has(value.policies(sm_output.value), threadtoken)
+
+            let new_data: Data = StateMachineDatum {
+              state : -1,
+              seller : seller,
+              collateral : collateral,
+              price: price,
+              buyer: None
+            }
+
+            let new_datum = InlineDatum(new_data)
+
+            let must_be_datum = new_datum == sm_output.datum
+
+            must_be_state? && must_be_signed? && must_be_policy? && must_be_datum?
+          }
+
           (StateMachineDatum { state, seller, collateral, price, buyer }, Locking { buyer_param }) -> {
             let must_be_state = state == 0
+
             let must_be_empty = buyer == None
+
             let must_be_signed =
               list.has(context.transaction.extra_signatories, buyer_param)
 
@@ -99,7 +131,7 @@ validator(threadtoken: value.PolicyId) {
             must_be_state? && must_be_signed? && must_be_price? && must_be_policy? && must_be_datum?
           }
 
-          (StateMachineDatum { state, .. }, Delivered) -> True
+          (StateMachineDatum { state, .. }, Shipping) -> True
 
           (StateMachineDatum { state, .. }, Received) -> True
         }
@@ -183,6 +215,91 @@ test deploy() {
       withdrawals: [],
       validity_range: interval.everything(),
       extra_signatories: [new_buyer],
+      redeemers: [],
+      datums: dict.new(),
+      id: TransactionId {
+        hash: #"0000000000000000000000000000000000000000000000000000000000000000",
+      },
+    }
+  let ctx = ScriptContext { purpose: script_purpose, transaction: tx }
+  statemachine(threadtoken, current_datum, redeemer, ctx)
+}
+
+
+test cancel() {
+  let own_ref =
+    OutputReference {
+      transaction_id: TransactionId {
+        hash: #"ee220ba9258ef159bb44f0d3522b840a80475eac2df7176f2c513d59a2ead71f",
+      },
+      output_index: 0,
+    }
+  let threadtoken = #"99999999999999999999999999999999999999999999999999999999"
+  let token_name = #"02"
+  let own_val_hash = #"88888888888888888888888888888888888888888888888888888888"
+  let input_utxo =
+    Input {
+      output_reference: own_ref,
+      output: Output {
+        address: Address {
+          payment_credential: ScriptCredential(own_val_hash),
+          stake_credential: None,
+        },
+        value: value.add(
+          value.from_lovelace(25_000_000),
+          threadtoken,
+          token_name,
+          1,
+        ),
+        datum: NoDatum,
+        reference_script: None,
+      },
+    }
+  let new_data: Data = StateMachineDatum {
+      state : -1,
+      seller : #"00000000000000000000000000000000000000000000000000000000",
+      collateral : 25000000,
+      price: 50000000,
+      buyer: None
+  }  
+  let new_datum = InlineDatum(new_data)
+  let output =
+    Output {
+      address: Address {
+        payment_credential: ScriptCredential(own_val_hash),
+        stake_credential: None,
+      },
+      value: value.add(
+        value.from_lovelace(0_000_000),
+        threadtoken,
+        token_name,
+        1,
+      ),
+      datum: new_datum,
+      reference_script: None,
+    }
+  let script_purpose = Spend(own_ref)
+  let redeemer = Cancel
+  let current_datum =
+    StateMachineDatum {
+      state: 0,
+      seller: #"00000000000000000000000000000000000000000000000000000000",
+      collateral: 25000000,
+      price: 50000000,
+      buyer: None
+    }
+
+  let tx =
+    Transaction {
+      inputs: [input_utxo],
+      reference_inputs: [],
+      outputs: [output],
+      fee: value.zero(),
+      mint: value.zero() |> value.to_minted_value(),
+      certificates: [],
+      withdrawals: [],
+      validity_range: interval.everything(),
+      extra_signatories: [current_datum.seller],
       redeemers: [],
       datums: dict.new(),
       id: TransactionId {
