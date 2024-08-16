@@ -21,9 +21,10 @@
 
             <span style="cursor: default;" @click="openCardanoScan(orderProps.item.data)">{{
               orderProps.item.text
-              }}</span>
+            }}</span>
 
-            <button class="copier" v-if="orderProps.item.data" @click="copy(orderProps.item.data)">
+            <button class="copier" v-if="orderProps.item.data" @click="copy(orderProps.item.data)"
+              v-tooltip.top="'Copy'">
               <i class="pi pi-copy" />
             </button>
           </div>
