@@ -286,9 +286,9 @@ export default {
 }
 
 .panel-button {
-  border: 1px solid var(--primary-b);
+  border: 1px solid var(--primary-c);
   border-radius: 999px;
-  color: var(--text-a);
+  color: var(--text-w);
   font-weight: 600;
   cursor: pointer;
   display: flex;
@@ -298,7 +298,7 @@ export default {
   text-align: center;
   margin-top: 1rem;
   transition: var(--transition-a);
-  background: var(--primary-b);
+  background: var(--primary-c);
 }
 
 .panel-button.buyButton {

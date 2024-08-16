@@ -14,7 +14,7 @@
     <div class="seller-bottom">
       <div class="seller-badge">
         <i class="pi pi-clock" />
-        <span> Products delivered on time. </span>
+        <span> Time management. </span>
         <ul class="meter">
           <li class="level-1" :class="{ actived: false }" />
           <li class="level-2" :class="{ actived: false }" />
@@ -111,7 +111,7 @@ export default {
 }
 
 .seller-badge span {
-  font-size: var(--text-size-a);
+  font-size: var(--text-size-b);
   margin-left: 1rem;
   font-weight: 400;
 }
