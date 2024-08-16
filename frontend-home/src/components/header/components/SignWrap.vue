@@ -14,7 +14,7 @@
         :class="{ active: activeStep === index }"
         @click="handleStep(index)"
       >
-        <i :class="item.icon" />
+        {{ item.label }}
       </div>
     </div>
 
@@ -96,7 +96,7 @@ export default {
 
     const stepsList = ref([
       {
-        label: "Connect",
+        label: "Wallet",
         icon: "pi pi-wallet",
       },
       {
@@ -197,22 +197,19 @@ export default {
 
 <style lang="css" scoped>
 .steps {
-  padding: 1rem 4rem;
+  padding: 1rem;
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
 }
 
 .steps-item {
-  border: 1px solid var(--border-b);
-  border-radius: 6px;
-  width: 50px;
-  height: 50px;
-  padding: 1rem;
+  padding: 0.5rem;
+  margin-right: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  border-bottom: 2px solid var(--border-b);
 }
 
 .steps-item i {
@@ -220,7 +217,7 @@ export default {
 }
 
 .steps-item.active {
-  border: 2px solid var(--primary-c);
+  border-bottom: 2px solid var(--primary-c);
   color: var(--primary-c);
 }
 

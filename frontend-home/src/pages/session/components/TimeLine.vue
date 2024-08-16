@@ -195,7 +195,7 @@ export default {
 }
 
 .checker i {
-  color: var(--green-a);
+  color: var(--primary-c);
 }
 
 .minicon {
