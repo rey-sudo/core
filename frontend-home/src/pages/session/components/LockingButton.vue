@@ -1,6 +1,6 @@
 <template>
   <div class="locking">
-    <div class="subtitle">Provide shipping information to the seller</div>
+    <div class="subtitle">Provide shipping information to the seller.</div>
 
     <Button class="actived">
       <span>
