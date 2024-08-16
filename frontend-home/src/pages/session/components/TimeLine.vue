@@ -31,6 +31,8 @@
         </template>
         <template #content="orderProps">
           <span>{{ orderProps.item.status }}</span>
+          <span class="minicon" v-if="orderProps.item.status === 'Waiting'"><i class="pi pi-clock" /></span>
+          <span class="minicon" v-if="orderProps.item.status === 'Locking'"><i class="pi pi-credit-card" /></span>
           <span class="minicon" v-if="orderProps.item.status === 'Shipping'"><i class="pi pi-truck" /></span>
           <span class="minicon" v-if="orderProps.item.status === 'Received'"><i class="pi pi-box" /></span>
         </template>
@@ -39,13 +41,13 @@
 
     <div class="timeline-timer">
       <span>2</span>
-      <span>3</span>
+      <span>4</span>
       <div>:</div>
       <span>0</span>
       <span>0</span>
     </div>
 
-    <div class="timeline-note">Perform the action before the deadline.</div>
+    <div class="timeline-note">Shipping valid range</div>
   </div>
 </template>
 
@@ -188,7 +190,7 @@ export default {
 
 .timeline-note {
   padding: 1rem;
-  font-size: var(--text-size-b);
+  font-size: var(--text-size-c);
 }
 
 .checker {
@@ -196,7 +198,7 @@ export default {
 }
 
 .checker i {
-  color: var(--primary-c);
+  color: var(--green-a);
 }
 
 .minicon {
@@ -204,6 +206,6 @@ export default {
 }
 
 .minicon i {
-  font-size: 14px;
+  font-size: 13px;
 }
 </style>
