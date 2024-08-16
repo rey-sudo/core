@@ -289,7 +289,7 @@ export default {
   border: 1px solid var(--primary-c);
   border-radius: 999px;
   color: var(--text-w);
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
