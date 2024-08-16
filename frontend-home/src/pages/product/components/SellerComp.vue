@@ -1,10 +1,7 @@
 <template>
   <div class="seller">
     <div class="seller-head">
-      <img
-        src="https://http2.mlstatic.com/D_NQ_NP_984015-MLA74975093699_032024-G.jpg"
-        alt=""
-      />
+      <img src="https://http2.mlstatic.com/D_NQ_NP_984015-MLA74975093699_032024-G.jpg" alt="" />
 
       <div>
         <span>Samsung</span>
@@ -61,8 +58,8 @@ export default {
 <style lang="css" scoped>
 .seller {
   margin-top: 2rem;
-  border: 3px solid var(--border-a);
-  border-radius: 16px;
+  border: 1px solid var(--border-b);
+  border-radius: 8px;
   overflow: hidden;
 }
 

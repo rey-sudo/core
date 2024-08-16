@@ -213,8 +213,8 @@ export default {
 
 <style lang="css" scoped>
 .panel {
-  border: 3px solid var(--border-a);
-  border-radius: 16px;
+  border: 4px solid var(--border-a);
+  border-radius: 8px;
   padding: 1rem;
 }
 
@@ -289,7 +289,7 @@ export default {
   border: 1px solid var(--primary-b);
   border-radius: 999px;
   color: var(--text-a);
-  font-weight: 400;
+  font-weight: 500;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -299,6 +299,7 @@ export default {
   margin-top: 1rem;
   transition: var(--transition-a);
   background: var(--primary-b);
+  font-size: var(--text-size-b);
 }
 
 .panel-button.buyButton {
