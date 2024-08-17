@@ -1,6 +1,7 @@
 export * from "./create-order";
 export * from "./deploy";
 export * from "./cancel";
+export * from "./cancel-tx";
 export * from "./locking";
 export * from "./get-orders";
 export * from "./get-order";

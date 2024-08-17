@@ -114,7 +114,7 @@
     <!--////////////////////////////////////////////////////////////////////////-->
 
     <!--////////////////////////////////////////////////////////////////////////-->
-    <Dialog v-model:visible="slotListDialogVisible" :style="{ width: '70vw' }" maximizable modal dismissableMask
+    <Dialog v-model:visible="slotListDialogVisible" :style="{ width: '75vw' }" maximizable modal dismissableMask
       :draggable="false" :contentStyle="{ height: '80vw' }">
       <template #header>
         <div class="dialog-header">
@@ -133,6 +133,7 @@
             {{ formatDate(orderProps.data.created_at) }}
           </template>
         </Column>
+        <Column field="id" header="Code" sortable></Column>
 
         <Column field="status" header="Status" sortable></Column>
 
@@ -142,7 +143,6 @@
           </template>
         </Column>
 
-        <Column field="contract_state" header="State" sortable></Column>
 
         <Column field="contract_units" header="Units" sortable></Column>
 
@@ -161,7 +161,11 @@
         <Column field="contract_0_tx" :exportable="false" header="Actions" sortable>
           <template #body="orderProps">
             <div class="table-buttons">
-              <Button class="switch-button table-button actived" v-if="orderProps.data.contract_0_tx">
+              <Button class="switch-button table-button canceled" v-if="orderProps.data.status === 'canceled'">
+                Canceled
+              </Button>
+
+              <Button class="switch-button table-button actived" v-if="orderProps.data.status === 'waiting'">
                 Actived
               </Button>
 
@@ -283,7 +287,7 @@
                   @click="openCreateSlotDialog(orderProps.index)" />
 
                 <Button class="table-button" icon="pi pi-receipt" outlined rounded v-tooltip.top="'Show orders'"
-                  :disabled="orderProps.data.order_count < 1" @click="openSlotListDialog(orderProps.index)">
+                  :disabled="orderProps.data.order_count < 1" @click="openOrderListDialog(orderProps.index)">
                   <i class="pi pi-folder" />
                 </Button>
               </div>
@@ -317,6 +321,7 @@ export default {
       createOrder,
       deploy,
       cancel,
+      cancelTx
     } = dashboardAPI();
 
     const productList = ref(getOrdersData.value);
@@ -459,6 +464,7 @@ export default {
       copy,
       copied,
       cancel,
+      cancelTx,
       isSupported,
       orderMenuId,
       deployTx,
@@ -593,10 +599,6 @@ export default {
     },
   },
   methods: {
-    openSessionPage(orderId) {
-      const internalUrl = "http://localhost:8080/session/" + orderId;
-      window.open(internalUrl, "_blank");
-    },
     async deployTransaction(orderId) {
       const { getWallet } = walletClient();
 
@@ -673,7 +675,11 @@ export default {
     getStateBarValue(e) {
       return e * 20;
     },
-    openSlotListDialog(productIndex) {
+    openSessionPage(orderId) {
+      const internalUrl = "http://localhost:8080/session/" + orderId;
+      window.open(internalUrl, "_blank");
+    },
+    openOrderListDialog(productIndex) {
       if (this.productList[productIndex].order_count < 1) {
         return;
       }
@@ -931,7 +937,7 @@ export default {
   font-size: var(--text-size-b);
   color: var(--text-w);
   padding: 0.5rem;
-  border-radius: 6px;
+  border-radius: 4px;
   font-weight: 600;
   cursor: pointer;
   width: 100px;
@@ -943,6 +949,13 @@ export default {
   border: 1px solid var(--green-a);
   pointer-events: none;
 }
+
+.switch-button.canceled {
+  background: var(--red-a);
+  border: 1px solid var(--red-a);
+  pointer-events: none;
+}
+
 
 ::v-deep(.p-progressbar) {
   height: 0.4rem;

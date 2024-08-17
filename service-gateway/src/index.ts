@@ -90,6 +90,14 @@ const main = async () => {
     );
 
     app.post(
+      "/api/gateway/cancel-tx",
+
+      route.cancelTxMiddlewares,
+
+      route.cancelTxHandler
+    );
+
+    app.post(
       "/api/gateway/deploy",
 
       route.deployMiddlewares,

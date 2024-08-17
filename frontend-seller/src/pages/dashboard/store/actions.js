@@ -27,6 +27,20 @@ const cancel = async (_, params) => {
 };
 
 
+const cancelTx = async (_, params) => {
+  try {
+    const response = await axiosAPI.post("/api/gateway/cancel-tx", params);
+
+    console.log(response);
+
+
+    return { ok: true, response: response.data };
+  } catch (error) {
+    throw { ok: false, response: error.response.data };
+  }
+};
+
+
 const deployTx = async (_, params) => {
   try {
     const response = await axiosAPI.post("/api/gateway/deploy-tx", params);
@@ -115,6 +129,7 @@ export {
   setupLucid,
   createProduct,
   cancel,
+  cancelTx,
   createImages,
   deployTx,
   getProducts,

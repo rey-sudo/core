@@ -13,6 +13,9 @@ const dashboardAPI = () => {
   const cancel = async (params) =>
     await store.dispatch("dashboard/cancel", params);
 
+  const cancelTx = async (params) =>
+    await store.dispatch("dashboard/cancelTx", params);
+
   const deployTx = async (params) =>
     await store.dispatch("dashboard/deployTx", params);
 
@@ -45,6 +48,7 @@ const dashboardAPI = () => {
     createProduct,
     deploy,
     cancel,
+    cancelTx,
     getProducts,
     createOrder,
     setupLucid,

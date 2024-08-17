@@ -30,7 +30,6 @@ const getOrderHandler = async (req: Request, res: Response) => {
       orders.contract_units, 
       orders.contract_price,
       orders.contract_collateral,
-      orders.contract_0_utx,
       orders.contract_0_tx,
       orders.contract_1_tx,
       orders.contract_2_tx,
