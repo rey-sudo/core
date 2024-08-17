@@ -58,11 +58,11 @@ const cancelHandler = async (req: Request, res: Response) => {
     );
 
     if (threadTokenUtxos.length < 1) {
-      throw new BadRequestError("NO_THREADTOKEN_UTXO");
+      throw new Error("NO_TT_UTXO");
     }
 
     if (threadTokenUtxos.length > 1) {
-      throw new BadRequestError("THREADTOKEN_QUANTITY");
+      throw new Error("TT_QUANTITY");
     }
 
     const stateMachineInput = Data.Enum([
@@ -120,10 +120,6 @@ const cancelHandler = async (req: Request, res: Response) => {
 
     const transaction = tx.toCbor();
 
-    console.log(transaction);
-
-    //////////////////////////////////////////////
-
     await connection.commit();
 
     res.status(200).send({
@@ -133,13 +129,13 @@ const cancelHandler = async (req: Request, res: Response) => {
       },
     });
   } catch (err: any) {
+    console.log(err.message);
+    
     await connection.rollback();
 
     _.error(err);
 
-    res.status(404).send({
-      success: false,
-    });
+    throw new BadRequestError(err.message);
   } finally {
     connection.release();
   }

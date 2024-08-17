@@ -1,5 +1,5 @@
 <template>
-  <div class="slots">
+  <div class="orders">
     <!--////////////////////////////////////////////////////////////////////////-->
 
     <!--////////////////////////////////////////////////////////////////////////-->
@@ -34,7 +34,7 @@
     <Dialog v-model:visible="deleteProductsDialog" :style="{ width: '425px' }" header="Confirm" :modal="true">
       <div class="confirmation-content">
         <i class="pi pi-exclamation-triangle" style="font-size: 2rem" />
-        <span v-if="product">Are you sure you want to delete the selected slots?</span>
+        <span v-if="product">Are you sure you want to delete the selected orders?</span>
       </div>
       <template #footer>
         <Button label="No" icon="pi pi-times" text @click="deleteProductsDialog = false" />
@@ -172,8 +172,10 @@
               </Button>
 
               <Button class="table-button" type="button" icon="pi pi-ellipsis-h" outlined rounded aria-haspopup="true"
-                aria-controls="slot_menu" @click="openSlotMenu" />
-              <Menu ref="slotMenuRef" id="slot_menu" :model="slotMenu" :popup="true" />
+                aria-controls="order_menu" @click="openSlotMenu" />
+
+              <Menu ref="orderMenuRef" id="order_menu" :model="orderMenu" :popup="true"
+                @focus="orderMenuId = orderProps.data.id" />
 
               <Button class="table-button" icon="pi pi-arrow-up-right" v-tooltip.top="'Show the negotiation session.'"
                 outlined rounded @click="openSessionPage(orderProps.data.id)" />
@@ -189,22 +191,22 @@
     <!--////////////////////////////////////////////////////////////////////////-->
 
     <!--////////////////////////////////////////////////////////////////////////-->
-    <div class="slots-wrap">
-      <div class="slots-card">
+    <div class="orders-wrap">
+      <div class="orders-card">
         <DataTable ref="productListTable" resizableColumns :value="productList" v-model:expandedRows="selectedProducts"
           dataKey="id" :paginator="true" :rows="10" :filters="filters"
           paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
           :rowsPerPageOptions="[5, 10, 25]" currentPageReportTemplate="{first} to {last} of {totalRecords} items">
           <template #expansion> x </template>
           <template #header>
-            <div class="slots-header">
-              <div class="slots-header-left">
+            <div class="orders-header">
+              <div class="orders-header-left">
                 <span>Create orders</span>
                 <span>Choose the product and the quantity available for sale.</span>
               </div>
 
-              <div class="slots-header-right">
-                <div class="slots-header-right-search">
+              <div class="orders-header-right">
+                <div class="orders-header-right-search">
                   <i class="pi pi-search" />
                   <InputText v-model="filters['global'].value" placeholder="Search" />
                 </div>
@@ -280,7 +282,7 @@
                 <Button class="table-button" icon="pi pi-plus" outlined rounded v-tooltip.top="'Create orders'"
                   @click="openCreateSlotDialog(orderProps.index)" />
 
-                <Button class="table-button" icon="pi pi-receipt" outlined rounded v-tooltip.top="'Show slots'"
+                <Button class="table-button" icon="pi pi-receipt" outlined rounded v-tooltip.top="'Show orders'"
                   :disabled="orderProps.data.order_count < 1" @click="openSlotListDialog(orderProps.index)">
                   <i class="pi pi-folder" />
                 </Button>
@@ -314,6 +316,7 @@ export default {
       createProduct,
       createOrder,
       deploy,
+      cancel,
     } = dashboardAPI();
 
     const productList = ref(getOrdersData.value);
@@ -339,7 +342,7 @@ export default {
       created_at: null,
       schema_t: null,
       schema_v: null,
-      slots: [],
+      orders: [],
       order_count: null,
     });
 
@@ -379,7 +382,7 @@ export default {
         created_at: null,
         schema_t: null,
         schema_v: null,
-        slots: [],
+        orders: [],
         order_count: null,
       };
 
@@ -415,36 +418,15 @@ export default {
       },
     ]);
 
-    const slotMenuRef = ref();
+    const orderMenuRef = ref();
 
-    const slotMenu = ref([
-      {
-        label: "Options",
-        items: [
-          {
-            label: "Transactions",
-            icon: "",
-          },
-          {
-            label: "Import Tx",
-            icon: "",
-          },
-          {
-            label: "Appeal",
-            icon: "",
-          },
-          {
-            label: "Sign",
-            icon: "",
-          },
-        ],
-      },
-    ]);
+    const orderMenuId = ref();
+
     const openProductMenu = (event) => {
       productMenuRef.value.toggle(event);
     };
     const openSlotMenu = (event) => {
-      slotMenuRef.value.toggle(event);
+      orderMenuRef.value.toggle(event);
     };
 
     const orderForm = ref({
@@ -476,7 +458,9 @@ export default {
       text,
       copy,
       copied,
+      cancel,
       isSupported,
+      orderMenuId,
       deployTx,
       orderFormErrors,
       orderForm,
@@ -489,9 +473,8 @@ export default {
       productMenu,
       productMenuRef,
       disableUpload,
-      slotMenuRef,
+      orderMenuRef,
       openSlotMenu,
-      slotMenu,
       resetForm,
       messageModalVisible,
       messageModal,
@@ -512,7 +495,6 @@ export default {
     return {
       mediaHostURL: HOST + "/api/media/create-image",
       createOrderLoader: false,
-      activedLoader: false,
       createOrderDialog: false,
       createOrderIndex: null,
       deleteProductDialog: false,
@@ -522,7 +504,20 @@ export default {
       minProductImages: 5,
       slotListDialogVisible: false,
       slotListDialogIndex: null,
-
+      orderMenu: [
+        {
+          label: "Options",
+          items: [
+            {
+              label: "Cancel",
+              icon: "",
+              command: async () => {
+                await this.cancelTransaction(this.orderMenuId)
+              }
+            }
+          ],
+        },
+      ],
       maxProductImages: 5,
       selectedProducts: null,
       filters: {},
@@ -598,13 +593,11 @@ export default {
     },
   },
   methods: {
-    openSessionPage(slotId) {
-      const internalUrl = "http://localhost:8080/session/" + slotId;
+    openSessionPage(orderId) {
+      const internalUrl = "http://localhost:8080/session/" + orderId;
       window.open(internalUrl, "_blank");
     },
-    async deployTransaction(slotId) {
-      this.activedLoader = true;
-
+    async deployTransaction(orderId) {
       const { getWallet } = walletClient();
 
       lucidClient.selectWallet(await getWallet());
@@ -613,11 +606,11 @@ export default {
       const address = await getAddressDetails(addr);
 
       await this.deploy({
-        order_id: slotId,
+        order_id: orderId,
         address: address.address.bech32,
         pubkeyhash: address.paymentCredential.hash,
       }).then((res) => balanceTx(res.response.payload.transaction))
-        .then((hash) => this.deployTx({ tx_hash: hash, order_id: slotId }))
+        .then((hash) => this.deployTx({ tx_hash: hash, order_id: orderId }))
         .then(() =>
           this.$toast.add({
             severity: "success",
@@ -636,8 +629,46 @@ export default {
             life: 5000,
           });
         });
-        
-      this.activedLoader = false;
+    },
+
+    async cancelTransaction(orderId) {
+      const { getWallet } = walletClient();
+
+      lucidClient.selectWallet(await getWallet());
+
+      const addr = await lucidClient.wallet.address();
+      const address = await getAddressDetails(addr);
+
+      await this.cancel({
+        order_id: orderId,
+        address: address.address.bech32,
+      }).then((res) => balanceTx(res.response.payload.transaction))
+        .then((hash) => this.cancelTx({ tx_hash: hash, order_id: orderId }))
+        .then(() =>
+          this.$toast.add({
+            severity: "success",
+            summary: "Successful",
+            detail: "Transaction sent to the network.",
+            life: 5000,
+          })
+        )
+        .catch((err) => {
+          if (err.response?.errors) {
+            return this.$toast.add({
+              severity: "error",
+              summary: "Error Message",
+              detail: err.response.errors[0].message,
+              life: 5000,
+            })
+          }
+
+          this.$toast.add({
+            severity: "error",
+            summary: "Error Message",
+            detail: "Transaction Failed",
+            life: 5000,
+          })
+        });
     },
     getStateBarValue(e) {
       return e * 20;
@@ -1108,7 +1139,7 @@ img {
   border-radius: 8px;
 }
 
-.slots {
+.orders {
   display: flex;
   justify-content: center;
   padding-left: 56px;
@@ -1118,14 +1149,14 @@ img {
   background-size: cover;
 }
 
-.slots-wrap {
+.orders-wrap {
   display: flex;
   justify-content: center;
   width: 100%;
   padding: 2%;
 }
 
-.slots-card {
+.orders-card {
   width: inherit;
   border-radius: 12px;
   box-shadow: var(--shadow-a);
@@ -1166,7 +1197,7 @@ img {
   margin-top: 3px;
 }
 
-.slots-header {
+.orders-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1174,7 +1205,7 @@ img {
   padding: 1rem 0;
 }
 
-.slots-header-left {
+.orders-header-left {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -1182,24 +1213,24 @@ img {
   text-align: left;
 }
 
-.slots-header-left span:nth-child(1) {
+.orders-header-left span:nth-child(1) {
   font-weight: 700;
   font-size: var(--text-size-f);
 }
 
-.slots-header-left span:nth-child(2) {
+.orders-header-left span:nth-child(2) {
   font-weight: 400;
   line-height: 2rem;
   font-size: var(--text-size-c);
 }
 
-.slots-header-right-search {
+.orders-header-right-search {
   display: flex;
   align-items: center;
   position: relative;
 }
 
-.slots-header-right-search i {
+.orders-header-right-search i {
   right: 0;
   position: absolute;
   margin-right: 1rem;
@@ -1210,46 +1241,46 @@ img {
 }
 
 @media only screen and (max-width: 767px) {
-  .slots-header {
+  .orders-header {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .slots-card {
+  .orders-card {
     padding: 0 1rem;
   }
 
-  .slots-wrap {
+  .orders-wrap {
     padding: 1rem;
   }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  .slots-header {
+  .orders-header {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .slots-card {
+  .orders-card {
     padding: 0 1rem;
   }
 
-  .slots-wrap {
+  .orders-wrap {
     padding: 1rem;
   }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .slots-header {
+  .orders-header {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .slots-card {
+  .orders-card {
     padding: 0 1rem;
   }
 
-  .slots-wrap {
+  .orders-wrap {
     padding: 1rem;
   }
 }

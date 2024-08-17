@@ -3,9 +3,9 @@ import DB from "./db";
 import { app } from "./app";
 import { catcher, check, checkpoint } from "./pod/index";
 import { NotFoundError, errorMiddleware } from "./errors";
+import { redisDB } from "./db/redis";
 import listenProducts from "./kafka/products";
 import compression from "compression";
-import { redisDB } from "./db/redis";
 
 const main = async () => {
   try {
@@ -79,6 +79,14 @@ const main = async () => {
       route.createOrderMiddlewares,
 
       route.createOrderHandler
+    );
+
+    app.post(
+      "/api/gateway/cancel",
+
+      route.cancelMiddlewares,
+
+      route.cancelHandler
     );
 
     app.post(
