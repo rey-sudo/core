@@ -75,8 +75,9 @@ const lockingHandler = async (req: Request, res: Response) => {
     }
 
     const stateMachineInput = Data.Enum([
+      Data.Literal("Cancel"),
       Data.Object({ Locking: Data.Object({ buyer_param: Data.Bytes() }) }),
-      Data.Literal("Delivered"),
+      Data.Literal("Shipping"),
       Data.Literal("Received"),
     ]);
 
@@ -134,7 +135,7 @@ const lockingHandler = async (req: Request, res: Response) => {
     console.log(transaction);
 
     await redisDB.client.set(ORDER.id, "locked", {
-      EX: 20,
+      EX: 10,
       NX: true,
     });
 
