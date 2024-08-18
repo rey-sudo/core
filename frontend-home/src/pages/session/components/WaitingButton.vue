@@ -1,17 +1,26 @@
 <template>
   <div class="waiting">
-    <!--//////////////////////////////////////////////////////////////////////-->
 
-    <template v-if="getOrderData.contract_0_tx">
+    <template v-if="getOrderData.status === 'canceled'">
+      <Button class="canceled">
+        <span>Canceled</span>
+      </Button>
+    </template>
+
+    <template v-if="getOrderData.status === 'waiting'">
       <div class="subtitle">The transaction has been sent to the network.</div>
 
       <Button class="actived">
         <span>Actived</span>
 
       </Button>
+
+      <Button class="cancel" @click="cancelTransaction(getOrderData.id)">
+        <span>Cancel</span>
+      </Button>
     </template>
     <!--//////////////////////////////////////////////////////////////////////-->
-    <template v-if="!getOrderData.contract_0_tx">
+    <template v-if="getOrderData.status === 'created'">
       <div class="subtitle">Press to activate the script on the network.</div>
 
       <Button @click="createTransaction(getOrderData.id)">
@@ -34,7 +43,7 @@ export default {
   setup() {
     const { startTx } = headerAPI();
 
-    const { getOrderData, deploy, deployTx } = sessionAPI();
+    const { getOrderData, deploy, deployTx, cancel, cancelTx } = sessionAPI();
 
     const toast = useToast();
 
@@ -52,31 +61,19 @@ export default {
       deploy,
       showMessage,
       startTx,
-      deployTx
+      deployTx,
+      cancel,
+      cancelTx
     };
   },
 
   methods: {
     async createTransaction(slotId) {
-      this.isLoading = true;
 
       const { getWallet } = walletClient();
 
       lucidClient.selectWallet(await getWallet());
 
-      const successMessage = {
-        severity: "success",
-        summary: "Successful",
-        detail: "Transaction sent to the network.",
-        life: 5000,
-      };
-
-      const errorMessage = {
-        severity: "error",
-        summary: "Error Message",
-        detail: "Transaction canceled.",
-        life: 5000,
-      };
 
       const addr = await lucidClient.wallet.address();
       const address = await getAddressDetails(addr);
@@ -88,13 +85,71 @@ export default {
       }).then((res) => balanceTx(res.response.payload.transaction))
         .then((hash) => this.deployTx({ tx_hash: hash, order_id: slotId }))
         .then(() =>
-          this.$toast.add(successMessage)
+          this.$toast.add({
+            severity: "success",
+            summary: "Successful",
+            detail: "Transaction sent to the network.",
+            life: 5000,
+          })
         )
-        .catch(() =>
-          this.$toast.add(errorMessage)
-        );
+        .catch((err) => {
+          if (err.response?.errors) {
+            return this.$toast.add({
+              severity: "error",
+              summary: "Error Message",
+              detail: err.response.errors[0].message,
+              life: 5000,
+            })
+          }
 
-      this.isLoading = false;
+          this.$toast.add({
+            severity: "error",
+            summary: "Error Message",
+            detail: "Transaction Failed",
+            life: 5000,
+          })
+        });
+    },
+
+
+    async cancelTransaction(orderId) {
+      const { getWallet } = walletClient();
+
+      lucidClient.selectWallet(await getWallet());
+
+      const addr = await lucidClient.wallet.address();
+      const address = await getAddressDetails(addr);
+
+      await this.cancel({
+        order_id: orderId,
+        address: address.address.bech32,
+      }).then((res) => balanceTx(res.response.payload.transaction))
+        .then((hash) => this.cancelTx({ tx_hash: hash, order_id: orderId }))
+        .then(() =>
+          this.$toast.add({
+            severity: "success",
+            summary: "Successful",
+            detail: "Transaction sent to the network.",
+            life: 5000,
+          })
+        )
+        .catch((err) => {
+          if (err.response?.errors) {
+            return this.$toast.add({
+              severity: "error",
+              summary: "Error Message",
+              detail: err.response.errors[0].message,
+              life: 5000,
+            })
+          }
+
+          this.$toast.add({
+            severity: "error",
+            summary: "Error Message",
+            detail: "Transaction Failed",
+            life: 5000,
+          })
+        });
     },
   },
 };
@@ -127,6 +182,20 @@ export default {
   pointer-events: none;
   cursor: not-allowed;
 }
+
+.waiting button.cancel {
+  background: var(--red-a);
+  border: 1px solid var(--red-a);
+}
+
+
+.waiting button.canceled {
+  background: var(--red-a);
+  border: 1px solid var(--red-a);
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 
 .subtitle {
   font-size: var(--text-size-c);

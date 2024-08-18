@@ -13,10 +13,18 @@ const sessionAPI = () => {
   const deployTx = async (params) =>
     await store.dispatch("session/deployTx", params);
 
+  const cancel = async (params) =>
+    await store.dispatch("session/cancel", params);
+
+  const cancelTx = async (params) =>
+    await store.dispatch("session/cancelTx", params);
+
   return {
     getOrder,
     deploy,
     deployTx,
+    cancel,
+    cancelTx,
     getOrderData: computed(() => store.getters["session/getOrderData"]),
   };
 };

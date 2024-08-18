@@ -12,7 +12,6 @@ const getOrder = async ({ commit }, params) => {
   }
 };
 
-
 const deploy = async (_, params) => {
   try {
     const response = await axiosAPI.post("/api/gateway/deploy", params);
@@ -31,6 +30,17 @@ const deployTx = async (_, params) => {
 
     console.log(response);
 
+    return { ok: true, response: response.data };
+  } catch (error) {
+    throw { ok: false, response: error.response.data };
+  }
+};
+
+const cancel = async (_, params) => {
+  try {
+    const response = await axiosAPI.post("/api/gateway/cancel", params);
+
+    console.log(response);
 
     return { ok: true, response: response.data };
   } catch (error) {
@@ -38,4 +48,16 @@ const deployTx = async (_, params) => {
   }
 };
 
-export { getOrder, deploy, deployTx};
+const cancelTx = async (_, params) => {
+  try {
+    const response = await axiosAPI.post("/api/gateway/cancel-tx", params);
+
+    console.log(response);
+
+    return { ok: true, response: response.data };
+  } catch (error) {
+    throw { ok: false, response: error.response.data };
+  }
+};
+
+export { getOrder, deploy, deployTx, cancel, cancelTx };

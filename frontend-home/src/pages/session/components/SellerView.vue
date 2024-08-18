@@ -71,7 +71,8 @@
         <div class="summary-title">Action</div>
         <WaitingButton v-if="
           getOrderData.status === 'created' ||
-          getOrderData.status === 'waiting'
+          getOrderData.status === 'waiting' ||
+          getOrderData.status === 'canceled'
         " />
 
         <ShippedButton v-if="getOrderData.status === 'locking'" />

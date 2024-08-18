@@ -595,14 +595,21 @@ export default {
           })
         )
         .catch((err) => {
-          console.error(err);
+          if (err.response?.errors) {
+            return this.$toast.add({
+              severity: "error",
+              summary: "Error Message",
+              detail: err.response.errors[0].message,
+              life: 5000,
+            })
+          }
 
           this.$toast.add({
             severity: "error",
             summary: "Error Message",
-            detail: "Transaction canceled.",
+            detail: "Transaction Failed",
             life: 5000,
-          });
+          })
         });
     },
 
