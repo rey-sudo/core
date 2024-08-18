@@ -6316,7 +6316,7 @@
     color: #495057;
   }
   .p-toast .p-toast-message.p-toast-message-error {
-    background: #e53935;
+    background: var(--red-a);
     border: 0 none;
     border-width: 0 0 0 4px;
     color: #ffffff;
