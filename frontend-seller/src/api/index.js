@@ -1,5 +1,5 @@
 const env = "dev";
-const network = "preprod";
+const NETWORK = "preprod";
 const baseURL = {
   local: "https://localhost:443",
   dev: "https://pairfy.dev",
@@ -8,4 +8,4 @@ const baseURL = {
 
 const HOST = baseURL[env];
 
-export { env, baseURL, HOST, network};
+export { env, baseURL, HOST, NETWORK };

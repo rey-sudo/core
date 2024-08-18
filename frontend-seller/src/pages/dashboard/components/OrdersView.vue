@@ -45,7 +45,7 @@
 
     <!--////////////////////////////////////////////////////////////////////////-->
     <Dialog v-model:visible="createOrderDialog" :style="{ width: '400px' }" header="Create orders" :modal="true"
-      :draggable="false">
+      dismissableMask :draggable="false">
       <div class="createslot">
         <LoadingBars v-if="createOrderLoader" />
 
@@ -114,7 +114,7 @@
     <!--////////////////////////////////////////////////////////////////////////-->
 
     <!--////////////////////////////////////////////////////////////////////////-->
-    <Dialog v-model:visible="slotListDialogVisible" :style="{ width: '75vw' }" maximizable modal dismissableMask
+    <Dialog v-model:visible="orderListDialogVisible" :style="{ width: '75vw' }" maximizable modal dismissableMask
       :draggable="false" :contentStyle="{ height: '80vw' }">
       <template #header>
         <div class="dialog-header">
@@ -126,7 +126,7 @@
         </div>
       </template>
 
-      <DataTable :value="productList[slotListDialogIndex].orders" stripedRows scrollable scrollHeight="flex"
+      <DataTable :value="productList[orderListDialogIndex].orders" stripedRows scrollable scrollHeight="flex"
         tableStyle="min-width: 50rem;">
         <Column field="created_at" header="Date" sortable style="max-width: 10rem">
           <template #body="orderProps">
@@ -161,6 +161,7 @@
         <Column field="contract_0_tx" :exportable="false" header="Actions" sortable>
           <template #body="orderProps">
             <div class="table-buttons">
+
               <Button class="switch-button table-button canceled" v-if="orderProps.data.status === 'canceled'">
                 Canceled
               </Button>
@@ -169,17 +170,14 @@
                 Actived
               </Button>
 
-              <Button class="switch-button table-button" v-if="
-                !orderProps.data.contract_0_tx
-              " @click="deployTransaction(orderProps.data.id)">
+              <Button class="switch-button table-button" v-if="!orderProps.data.contract_0_tx"
+                @click="deployTransaction(orderProps.data.id)">
                 Deploy
               </Button>
 
-              <Button class="table-button" type="button" icon="pi pi-ellipsis-h" outlined rounded aria-haspopup="true"
-                aria-controls="order_menu" @click="openSlotMenu" />
-
-              <Menu ref="orderMenuRef" id="order_menu" :model="orderMenu" :popup="true"
-                @focus="orderMenuId = orderProps.data.id" />
+              <Button class="table-button" icon="pi pi-times" v-tooltip.top="'Cancel'"
+                :disabled="orderProps.data.status !== 'waiting'" outlined rounded
+                @click="cancelTransaction(orderProps.data.id)" />
 
               <Button class="table-button" icon="pi pi-arrow-up-right" v-tooltip.top="'Show the negotiation session.'"
                 outlined rounded @click="openSessionPage(orderProps.data.id)" />
@@ -188,7 +186,7 @@
         </Column>
       </DataTable>
       <template #footer>
-        <Button label="Done" @click="slotListDialogVisible = false" />
+        <Button label="Done" @click="orderListDialogVisible = false" />
       </template>
     </Dialog>
     <Toast />
@@ -279,9 +277,6 @@
           <Column :exportable="false" style="min-width: 8rem" header="Actions">
             <template #body="orderProps">
               <div class="table-buttons">
-                <Button class="table-button" type="button" icon="pi pi-ellipsis-h" outlined rounded aria-haspopup="true"
-                  aria-controls="product_menu" @click="openProductMenu" />
-                <Menu ref="productMenuRef" id="product_menu" :model="productMenu" :popup="true" />
 
                 <Button class="table-button" icon="pi pi-plus" outlined rounded v-tooltip.top="'Create orders'"
                   @click="openCreateSlotDialog(orderProps.index)" />
@@ -308,6 +303,7 @@ import { HOST } from "@/api/index";
 import { ref } from "vue";
 import { useClipboard } from "@vueuse/core";
 import { lucidClient, walletClient, balanceTx } from "@/api/wallet-api";
+import { NETWORK } from "@/api/index";
 
 export default {
   components: {
@@ -405,34 +401,9 @@ export default {
       errorModal.value = null;
       disableUpload.value = false;
     };
-    const productMenuRef = ref();
 
-    const productMenu = ref([
-      {
-        label: "Options",
-        items: [
-          {
-            label: "Refresh",
-            icon: "",
-          },
-          {
-            label: "Export",
-            icon: "",
-          },
-        ],
-      },
-    ]);
 
-    const orderMenuRef = ref();
 
-    const orderMenuId = ref();
-
-    const openProductMenu = (event) => {
-      productMenuRef.value.toggle(event);
-    };
-    const openSlotMenu = (event) => {
-      orderMenuRef.value.toggle(event);
-    };
 
     const orderForm = ref({
       batchMode: false,
@@ -466,7 +437,6 @@ export default {
       cancel,
       cancelTx,
       isSupported,
-      orderMenuId,
       deployTx,
       orderFormErrors,
       orderForm,
@@ -474,13 +444,8 @@ export default {
       resetSlotForm,
       productList,
       deploy,
-      openProductMenu,
       product,
-      productMenu,
-      productMenuRef,
       disableUpload,
-      orderMenuRef,
-      openSlotMenu,
       resetForm,
       messageModalVisible,
       messageModal,
@@ -508,8 +473,8 @@ export default {
       descriptionLengthLimit: 1000,
       nameLengthLimit: 200,
       minProductImages: 5,
-      slotListDialogVisible: false,
-      slotListDialogIndex: null,
+      orderListDialogVisible: false,
+      orderListDialogIndex: null,
       orderMenu: [
         {
           label: "Options",
@@ -517,8 +482,13 @@ export default {
             {
               label: "Cancel",
               icon: "",
-              command: async () => {
-                await this.cancelTransaction(this.orderMenuId)
+            },
+            {
+              label: "TxId",
+              icon: "",
+              command: () => {
+                const internalUrl = `https://${NETWORK}.cardanoscan.io/transaction/${this.orderMenuData.contract_0_tx}`;
+                window.open(internalUrl, "_blank");
               }
             }
           ],
@@ -599,6 +569,9 @@ export default {
     },
   },
   methods: {
+    consoleitor(e) {
+      console.log(e)
+    },
     async deployTransaction(orderId) {
       const { getWallet } = walletClient();
 
@@ -684,8 +657,8 @@ export default {
         return;
       }
 
-      this.slotListDialogIndex = productIndex;
-      this.slotListDialogVisible = true;
+      this.orderListDialogIndex = productIndex;
+      this.orderListDialogVisible = true;
     },
     onBeforeUpload() {
       if (this.product.image_set.length < this.maxProductImages) {
