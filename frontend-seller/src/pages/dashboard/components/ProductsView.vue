@@ -1466,10 +1466,9 @@ img {
   justify-content: center;
   padding-left: 56px;
   width: 100%;
-  background-image: url("https://static.xx.fbcdn.net/rsrc.php/v3/yw/r/j5A-vbnR0dd.png");
+  background-image: url("@/assets/gradient.png");
   background-repeat: no-repeat;
   background-size: cover;
-  background: var(--blue-a);
 }
 
 .products-wrap {
