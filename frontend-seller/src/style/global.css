@@ -27,8 +27,8 @@
   --blue-t: #0098FA;
   --blue-s: rgba(0, 152, 250, 0.1);
 
-  --red-a: #ff385c;
-  --red-s: rgba(255, 56, 92, 0.1);
+  --red-a: #f16083;
+  --red-s: #f160823d;
 
   --orange-a: #ff5c38;
   --orange-s: rgba(255, 92, 56, 0.1);
@@ -37,9 +37,9 @@
   --yellow-b: #f0b90b;
   --yellow-s: rgba(255, 242, 0, 0.1);
 
-  --green-a: #34d399;
-  --green-b: #34d399;
-  --green-c: #34d399;
+  --green-a: #4bc0c0;
+  --green-b: #4bc0c0;
+  --green-c: #4bc0c0;
 
 
   --transition-a:  0.2s cubic-bezier(0.2, 0, 0, 1);
