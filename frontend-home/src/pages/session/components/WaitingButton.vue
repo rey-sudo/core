@@ -2,10 +2,10 @@
   <div class="waiting">
 
     <template v-if="getOrderData.status === 'canceled'">
-      <div class="subtitle">The script has been cancelled</div>
+      <div class="subtitle">The script has been cancelled.</div>
 
 
-      <Button class="canceled">
+      <Button class="cancel disabled">
         <span>Canceled</span>
       </Button>
     </template>
@@ -13,7 +13,7 @@
     <template v-if="getOrderData.status === 'waiting'">
       <div class="subtitle">The transaction has been sent to the network.</div>
 
-      <Button class="actived">
+      <Button class="actived disabled">
         <span>Actived</span>
 
       </Button>
@@ -182,8 +182,6 @@ export default {
 .waiting button.actived {
   background: var(--green-a);
   border: 1px solid var(--green-a);
-  pointer-events: none;
-  cursor: not-allowed;
 }
 
 .waiting button.cancel {
@@ -192,13 +190,10 @@ export default {
 }
 
 
-.waiting button.canceled {
-  background: var(--red-a);
-  border: 1px solid var(--red-a);
+.disabled {
   pointer-events: none;
   cursor: not-allowed;
 }
-
 
 .subtitle {
   font-size: var(--text-size-c);
