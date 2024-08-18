@@ -12,6 +12,7 @@ import { requireAuth } from "../utils/required";
 import { sellerMiddleware } from "../utils/seller";
 import { BadRequestError } from "../errors";
 import { provider, validatorsWithParams } from "../blockchain";
+import { _ } from "../utils/pino";
 
 ////////////////////////////////////////////////////
 
@@ -61,7 +62,7 @@ const deployHandler = async (req: Request, res: Response) => {
     );
 
     if (externalWalletUtxos.length < 1) {
-      throw new BadRequestError("WALLET_NO_UTXOS");
+      throw new Error("NO_UTXOS");
     }
 
     const utxo = externalWalletUtxos[0];
@@ -135,17 +136,6 @@ const deployHandler = async (req: Request, res: Response) => {
 
     const transaction = tx.toCbor();
 
-    console.log("CBOR: " + transaction);
-
-    console.log("policyId: " + policyId);
-
-    console.log("threadTokenUnit: " + threadTokenUnit);
-
-    console.log(
-      "stateMachineAddress: " +
-        parameterizedValidators.stateMachineAddress.toBech32(),
-    );
-
     /////////////////////////////////////////////////////////////////
 
     const schemeData = `
@@ -179,9 +169,9 @@ const deployHandler = async (req: Request, res: Response) => {
   } catch (err: any) {
     await connection.rollback();
 
-    res.status(404).send({
-      success: false,
-    });
+    _.error(err);
+
+    throw new BadRequestError(err.message);
   } finally {
     connection.release();
   }
