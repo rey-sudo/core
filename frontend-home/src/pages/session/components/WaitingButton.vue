@@ -2,6 +2,9 @@
   <div class="waiting">
 
     <template v-if="getOrderData.status === 'canceled'">
+      <div class="subtitle">The script has been cancelled</div>
+
+
       <Button class="canceled">
         <span>Canceled</span>
       </Button>
@@ -177,8 +180,8 @@ export default {
 }
 
 .waiting button.actived {
-  background: var(--primary-c);
-  border: 1px solid var(--primary-c);
+  background: var(--green-a);
+  border: 1px solid var(--green-a);
   pointer-events: none;
   cursor: not-allowed;
 }
