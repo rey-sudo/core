@@ -170,7 +170,7 @@
                 Actived
               </Button>
 
-              <Button class="switch-button table-button" v-if="!orderProps.data.contract_0_tx"
+              <Button class="switch-button table-button" v-if="orderProps.data.status === 'created'"
                 @click="deployTransaction(orderProps.data.id)">
                 Deploy
               </Button>
