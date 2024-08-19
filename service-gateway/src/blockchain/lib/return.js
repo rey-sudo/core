@@ -59,8 +59,8 @@ for (const utxo of threadTokenUtxos) {
   const amountADA = utxo.output().amount().coin();
   console.log(`Amount of ADA: ${amountADA / 1000000n}`);
 
-  const amountBTN = utxo.output().amount().multiasset().get(threadTokenUnit);
-  console.log(`Amount of ${assetName}: ${amountBTN}`);
+  const amountToken = utxo.output().amount().multiasset().get(threadTokenUnit);
+  console.log(`Amount of ${assetName}: ${amountToken}`);
 }
 
 //////////////////////////////////
@@ -78,20 +78,9 @@ const stateMachineInput = Data.Enum([
   Data.Literal("Received"),
 ]);
 
-const shippingRange = 2 * 60 * 60 * 1000;
+const returnInput = "Return";
 
-const lockUntil = Date.now() + 1800000;
-
-const rangeParam = BigInt(lockUntil);
-
-const lockingInput = {
-  Locking: {
-    buyer_param: "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b",
-    range_param: rangeParam,
-  },
-};
-
-const stateMachineRedeemer = Data.to(lockingInput, stateMachineInput);
+const stateMachineRedeemer = Data.to(returnInput, stateMachineInput);
 
 const stateMachineScript = cborToScript(
   applyParamsToScript(
@@ -107,19 +96,19 @@ const productPrice = 50n * 1_000_000n;
 const productCollateral = 25n * 1_000_000n;
 
 const threadTokenAsset = makeValue(
-  productPrice + productCollateral,
+  productCollateral,
   ...[[threadTokenUnit, 1n]]
 );
 
 const minFee = 1n * 1_000_000n;
 
 const data = {
-  state: 1n,
+  state: 0n,
   seller: "d0f4b0252c3c54d0ec21fe600c51489db9d5c534f14afc3227aa7af9",
   collateral: productCollateral,
   price: productPrice,
-  buyer: "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b",
-  range: rangeParam,
+  buyer: null,
+  range: null,
 };
 
 const Datum = Data.Object({
@@ -127,34 +116,40 @@ const Datum = Data.Object({
   seller: Data.Bytes(),
   collateral: Data.Integer(),
   price: Data.Integer(),
-  buyer: Data.Nullable(Data.Bytes()),
-  range: Data.Nullable(Data.Integer()),
+  buyer: Data.Nullable(),
+  range: Data.Nullable(),
 });
 
-const lockingDatum = Data.to(data, Datum);
+const returnDatum = Data.to(data, Datum);
+
+const laterTime = Date.now() + 1 * 60 * 60 * 1000;
 
 try {
   const tx = await blaze
     .newTransaction()
     .addInput(threadTokenUtxos[0], stateMachineRedeemer)
-    .lockAssets(stateMachineAddress, threadTokenAsset, lockingDatum)
+    .lockAssets(stateMachineAddress, threadTokenAsset, returnDatum)
+    .payLovelace(externalWallet, productPrice)
     .provideScript(stateMachineScript)
     .addRequiredSigner(
       "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b"
     )
+    .setValidFrom(toSlot(Core.SLOT_CONFIG_NETWORK.Preprod, Date.now()))
+    .setValidUntil(toSlot(Core.SLOT_CONFIG_NETWORK.Preprod, laterTime))
     .setChangeAddress(externalWallet)
     .setMinimumFee(minFee)
     .complete();
 
   const cbor = tx.toCbor();
-  console.log("Tx: ", cbor);
+  console.log(cbor);
 } catch (err) {
   console.error(err);
 }
 
-console.log("LockUntil: ", lockUntil);
-
-console.log("Range param: ", rangeParam);
+/*
+    .setValidFrom(Core.Slot(currentTime))
+    .setValidUntil(Core.Slot(laterTime))
+*/
 
 function toUnixTime(config, slot) {
   const { zeroSlot, slotLength, zeroTime } = config;

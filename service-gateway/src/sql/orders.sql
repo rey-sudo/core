@@ -17,6 +17,7 @@ create table if not exists orders(
   contract_units int unsigned not null,
   contract_price int unsigned not null,
   contract_collateral int unsigned not null,
+  contract_range int unsigned default null,
   contract_0_tx varchar(100) default null,
   contract_1_tx varchar(100) default null,
   contract_2_tx varchar(100) default null,
