@@ -36,8 +36,6 @@ const lockingHandler = async (req: Request, res: Response) => {
 
     const isLocked = await redisDB.client.get(ORDER.id);
 
-    console.log(isLocked);
-
     if (isLocked === "locked") {
       throw new Error("LOCKED");
     }
@@ -96,7 +94,7 @@ const lockingHandler = async (req: Request, res: Response) => {
       Data.Literal("Received"),
     ]);
     ////
-    const SHIPPING_RANGE = "1";
+    const SHIPPING_RANGE = "32";
 
     const LOCKING_TX_RANGE = "900000";
     ////
