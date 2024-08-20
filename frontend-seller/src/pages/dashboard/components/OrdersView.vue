@@ -166,7 +166,8 @@
                 Canceled
               </Button>
 
-              <Button class="switch-button table-button actived" v-if="orderProps.data.status === 'waiting'">
+              <Button class="switch-button table-button actived"
+                v-if="orderProps.data.status === 'waiting' || orderProps.data.contract_0_tx">
                 Actived
               </Button>
 
