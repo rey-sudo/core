@@ -766,7 +766,7 @@ export default {
             this.$toast.add({
               severity: "success",
               summary: "Successful",
-              detail: "Check the slot folder.",
+              detail: "Check the orders folder.",
               life: 5000,
             });
           }
