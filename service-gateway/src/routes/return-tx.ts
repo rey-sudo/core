@@ -11,8 +11,6 @@ const returnTxHandler = async (req: Request, res: Response) => {
 
   const params = req.body;
 
-  const BUYER = req.userData;
-
   try {
     connection = await DB.client.getConnection();
 
@@ -29,8 +27,8 @@ const returnTxHandler = async (req: Request, res: Response) => {
       `;
 
     const schemeValue = [
-      "returned",
-      BUYER.pubkeyhash,
+      "waiting",
+      null,
       params.tx_hash,
       params.order_id
     ];
@@ -46,7 +44,7 @@ const returnTxHandler = async (req: Request, res: Response) => {
     await connection.rollback();
 
     res.status(404).send({
-      success: true,
+      success: false,
     });
   } finally {
     connection.release();

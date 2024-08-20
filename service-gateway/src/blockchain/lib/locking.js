@@ -80,7 +80,9 @@ const stateMachineInput = Data.Enum([
 
 const shippingRange = 1 * 60 * 60 * 1000;
 
-const lockUntil = Date.now() + shippingRange;
+const txValidationTime = 900000;
+
+const lockUntil = Date.now() + shippingRange + txValidationTime;
 
 const rangeParam = BigInt(lockUntil);
 
@@ -133,6 +135,8 @@ const Datum = Data.Object({
 
 const lockingDatum = Data.to(data, Datum);
 
+const txValidUntil = Date.now() + txValidationTime;
+
 try {
   const tx = await blaze
     .newTransaction()
@@ -142,6 +146,8 @@ try {
     .addRequiredSigner(
       "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b"
     )
+    .setValidFrom(unixToSlot(Core.SLOT_CONFIG_NETWORK.Preprod, Date.now()))
+    .setValidUntil(unixToSlot(Core.SLOT_CONFIG_NETWORK.Preprod, txValidUntil))
     .setChangeAddress(externalWallet)
     .setMinimumFee(minFee)
     .complete();
@@ -164,11 +170,11 @@ function toUnixTime(config, slot) {
   return zeroTime + msAfterZeroSlot;
 }
 
-function toSlot(config, unixTime) {
+function unixToSlot(config, unixTime) {
   const { zeroSlot, slotLength, zeroTime } = config;
   const timePassed = unixTime - zeroTime;
   const slotsPassed = Math.floor(timePassed / slotLength);
   return Core.Slot(zeroSlot + slotsPassed);
 }
 
-const mySlot = toSlot(Core.SLOT_CONFIG_NETWORK.Preprod, Date.now());
+const mySlot = unixToSlot(Core.SLOT_CONFIG_NETWORK.Preprod, Date.now());

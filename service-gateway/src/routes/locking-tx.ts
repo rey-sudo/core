@@ -46,7 +46,7 @@ const lockingTxHandler = async (req: Request, res: Response) => {
     await connection.rollback();
 
     res.status(404).send({
-      success: true,
+      success: false,
     });
   } finally {
     connection.release();
