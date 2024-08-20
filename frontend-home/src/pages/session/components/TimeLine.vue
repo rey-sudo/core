@@ -21,7 +21,7 @@
 
             <span style="cursor: default;" @click="openCardanoScan(orderProps.item.data)">{{
               orderProps.item.text
-            }}</span>
+              }}</span>
 
             <button class="copier" v-if="orderProps.item.data" @click="copy(orderProps.item.data)"
               v-tooltip.top="'Copy'">
@@ -39,15 +39,11 @@
       </Timeline>
     </div>
 
-    <div class="timeline-timer">
-      <span>2</span>
-      <span>4</span>
-      <div>:</div>
-      <span>0</span>
-      <span>0</span>
-    </div>
 
-    <div class="timeline-note">Shipping valid range</div>
+    <CountDown />
+
+
+    <div class="timeline-note">Range to send the packet</div>
   </div>
 </template>
 
@@ -57,8 +53,12 @@ import { sessionAPI } from "@/pages/session/api";
 import { useClipboard } from "@vueuse/core";
 import { NETWORK } from "@/api";
 import { shortFormat } from "@/utils";
+import CountDown from "./CountDown.vue"
 
 export default {
+  components: {
+    CountDown
+  },
   setup() {
     const { getOrderData } = sessionAPI();
 
@@ -150,32 +150,6 @@ export default {
   justify-content: space-between;
   align-items: center;
   line-height: 2rem;
-}
-
-.timeline-timer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  line-height: 2rem;
-  font-weight: 700;
-  font-size: var(--text-size-a);
-}
-
-.timeline-timer span {
-  background: var(--text-a);
-  border-radius: 6px;
-  width: 30px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 0.25rem;
-  color: var(--text-w);
-  border: 1px solid transparent;
-}
-
-.timeline-timer div {
-  margin: 0 0.5rem;
 }
 
 .timeline-title span:nth-child(1) {

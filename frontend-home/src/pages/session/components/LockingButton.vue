@@ -4,7 +4,7 @@
 
     <Button class="actived">
       <span>
-        PAID
+        Paid
       </span>
     </Button>
   </div>
@@ -39,8 +39,8 @@ export default {
 }
 
 .locking button.actived {
-  background: var(--primary-c);
-  border: 1px solid var(--primary-c);
+  background: var(--green-a);
+  border: 1px solid var(--green-a);
   pointer-events: none;
   display: flex;
   align-items: center

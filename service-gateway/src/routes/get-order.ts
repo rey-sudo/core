@@ -30,6 +30,7 @@ const getOrderHandler = async (req: Request, res: Response) => {
       orders.contract_units, 
       orders.contract_price,
       orders.contract_collateral,
+      orders.contract_range,
       orders.contract_0_tx,
       orders.contract_1_tx,
       orders.contract_2_tx,
@@ -54,7 +55,7 @@ const getOrderHandler = async (req: Request, res: Response) => {
     await connection.commit();
 
     if (orders.length === 0) {
-      throw new BadRequestError("NOT_ORDER");
+      throw new BadRequestError("NO_ORDER");
     }
 
     const ORDER = orders[0];
@@ -71,9 +72,10 @@ const getOrderHandler = async (req: Request, res: Response) => {
 
     throw new NotAuthorizedError();
   } catch (err: any) {
-    _.error(err);
-    
+  
     await connection.rollback();
+
+    _.error(err);
 
     res.status(404).send({ success: false });
   } finally {
