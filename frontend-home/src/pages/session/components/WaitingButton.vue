@@ -26,7 +26,7 @@
     <template v-if="getOrderData.status === 'created'">
       <div class="subtitle">Press to activate the script on the network.</div>
 
-      <Button @click="createTransaction(getOrderData.id)">
+      <Button @click="deployTransaction(getOrderData.id)">
         <span>Deploy</span>
       </Button>
     </template>
@@ -37,10 +37,9 @@
 <script>
 import { sessionAPI } from "@/pages/session/api";
 import { useToast } from "primevue/usetoast";
-import headerAPI from "@/components/header/composable/header-api";
-import { balanceTx, lucidClient } from "@/api/wallet-api";
 import { getAddressDetails } from "lucid-cardano";
-import { walletClient } from "@/api/wallet-api";
+import { walletClient, balanceTx, lucidClient } from "@/api/wallet-api";
+import headerAPI from "@/components/header/composable/header-api";
 
 export default {
   setup() {
@@ -71,7 +70,7 @@ export default {
   },
 
   methods: {
-    async createTransaction(slotId) {
+    async deployTransaction(slotId) {
 
       const { getWallet } = walletClient();
 

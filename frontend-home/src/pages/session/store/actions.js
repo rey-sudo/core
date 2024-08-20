@@ -36,6 +36,30 @@ const deployTx = async (_, params) => {
   }
 };
 
+const return_ = async (_, params) => {
+  try {
+    const response = await axiosAPI.post("/api/gateway/return", params);
+
+    console.log(response);
+
+    return { ok: true, response: response.data };
+  } catch (error) {
+    throw { ok: false, response: error.response.data };
+  }
+};
+
+const returnTx = async (_, params) => {
+  try {
+    const response = await axiosAPI.post("/api/gateway/return-tx", params);
+
+    console.log(response);
+
+    return { ok: true, response: response.data };
+  } catch (error) {
+    throw { ok: false, response: error.response.data };
+  }
+};
+
 const cancel = async (_, params) => {
   try {
     const response = await axiosAPI.post("/api/gateway/cancel", params);
@@ -60,4 +84,8 @@ const cancelTx = async (_, params) => {
   }
 };
 
-export { getOrder, deploy, deployTx, cancel, cancelTx };
+const returnable = async ({ commit }, params) => {
+  commit("returnable", params);
+};
+
+export { getOrder, deploy, deployTx, cancel, cancelTx, returnTx, return_, returnable };

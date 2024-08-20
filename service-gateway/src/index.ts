@@ -2,7 +2,7 @@ import * as route from "./routes";
 import DB from "./db";
 import { app } from "./app";
 import { catcher, check, checkpoint } from "./pod/index";
-import { NotFoundError, errorMiddleware } from "./errors";
+import { errorMiddleware, NotFoundError } from "./errors";
 import { redisDB } from "./db/redis";
 import listenProducts from "./kafka/products";
 import compression from "compression";
@@ -75,82 +75,74 @@ const main = async () => {
 
     app.post(
       "/api/gateway/create-order",
-
       route.createOrderMiddlewares,
-
-      route.createOrderHandler
+      route.createOrderHandler,
     );
 
     app.post(
       "/api/gateway/cancel",
-
       route.cancelMiddlewares,
-
-      route.cancelHandler
+      route.cancelHandler,
     );
 
     app.post(
       "/api/gateway/cancel-tx",
-
       route.cancelTxMiddlewares,
-
-      route.cancelTxHandler
+      route.cancelTxHandler,
     );
 
     app.post(
       "/api/gateway/deploy",
-
       route.deployMiddlewares,
-
-      route.deployHandler
-    );
-
-    app.post(
-      "/api/gateway/locking",
-
-      route.lockingMiddlewares,
-
-      route.lockingHandler
-    );
-
-    app.post(
-      "/api/gateway/locking-tx",
-
-      route.lockingTxMiddlewares,
-
-      route.lockingTxHandler
-    );
-
-    app.get(
-      "/api/gateway/get-orders",
-
-      route.getOrdersMiddlewares,
-
-      route.getOrdersHandler
-    );
-
-    app.get(
-      "/api/gateway/get-order/:id",
-
-      route.getOrderMiddlewares,
-
-      route.getOrderHandler
+      route.deployHandler,
     );
 
     app.post(
       "/api/gateway/deploy-tx",
-
       route.deployTxMiddlewares,
+      route.deployTxHandler,
+    );
 
-      route.deployTxHandler
+    app.post(
+      "/api/gateway/locking",
+      route.lockingMiddlewares,
+      route.lockingHandler,
+    );
+
+    app.post(
+      "/api/gateway/locking-tx",
+      route.lockingTxMiddlewares,
+      route.lockingTxHandler,
+    );
+
+    app.post(
+      "/api/gateway/return",
+      route.returnMiddlewares,
+      route.returnHandler,
+    );
+
+    app.post(
+      "/api/gateway/return-tx",
+      route.returnTxMiddlewares,
+      route.returnTxHandler,
+    );
+
+    app.get(
+      "/api/gateway/get-orders",
+      route.getOrdersMiddlewares,
+      route.getOrdersHandler,
+    );
+
+    app.get(
+      "/api/gateway/get-order/:id",
+      route.getOrderMiddlewares,
+      route.getOrderHandler,
     );
 
     app.get(
       "/api/gateway/buy-options/:id",
-
       route.buyOptionsMiddlewares,
-
-      route.buyOptionsHandler
+      route.buyOptionsHandler,
     );
 
     app.all("*", (_req, _res) => {

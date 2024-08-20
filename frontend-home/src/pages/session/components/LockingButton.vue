@@ -8,7 +8,7 @@
       </span>
     </Button>
 
-    <Button class="cancel">
+    <Button class="cancel" v-if="getReturnable" @click="returnTransaction">
       <span>
         Return
       </span>
@@ -17,9 +17,53 @@
 </template>
 
 <script>
+import { balanceTx } from "@/api/wallet-api";
+import { sessionAPI } from "@/pages/session/api";
 
 export default {
+  setup() {
+    const { return_, returnTx, getOrderData, getReturnable } = sessionAPI();
 
+    return {
+      return_, returnTx, getOrderData, getReturnable
+    }
+
+  },
+
+  methods: {
+    async returnTransaction(slotId) {
+      await this.return_({
+        order_id: this.getOrderData.id
+      }).then((res) => balanceTx(res.response.payload.transaction))
+        .then((hash) => this.returnTx({ tx_hash: hash, order_id: slotId }))
+        .then(() =>
+          this.$toast.add({
+            severity: "success",
+            summary: "Successful",
+            detail: "Transaction sent to the network.",
+            life: 5000,
+          })
+        )
+        .catch((err) => {
+          if (err.response?.errors) {
+            return this.$toast.add({
+              severity: "error",
+              summary: "Error Message",
+              detail: err.response.errors[0].message,
+              life: 5000,
+            })
+          }
+
+          this.$toast.add({
+            severity: "error",
+            summary: "Error Message",
+            detail: "Transaction Failed",
+            life: 5000,
+          })
+        });
+    },
+
+  }
 };
 </script>
 

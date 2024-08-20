@@ -1,3 +1,4 @@
 export default () => ({
-    orderData: null
+    orderData: null,
+    returnable: false
 });

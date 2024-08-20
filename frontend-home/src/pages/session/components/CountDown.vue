@@ -15,7 +15,7 @@ import { sessionAPI } from "@/pages/session/api";
 
 export default {
     setup() {
-        const { getOrderData } = sessionAPI();
+        const { getOrderData, returnable } = sessionAPI();
 
         const hours = ref(0);
         const minutes = ref(0);
@@ -26,6 +26,7 @@ export default {
 
             if (timeLeft <= 0) {
                 clearInterval(intervalId);
+                returnable(true)
                 return;
             }
 
