@@ -106,7 +106,7 @@ export default {
   min-height: 100vh;
   padding: 2rem 11%;
   margin-top: 64px;
-  background: var(--base-b);
+  background: var(--primary-a);
 }
 
 .session-body-right {
