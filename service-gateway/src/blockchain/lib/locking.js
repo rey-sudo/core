@@ -78,9 +78,9 @@ const stateMachineInput = Data.Enum([
   Data.Literal("Received"),
 ]);
 
-const shippingRange = 2 * 60 * 60 * 1000;
+const shippingRange = 1 * 60 * 60 * 1000;
 
-const lockUntil = Date.now() + 1800000;
+const lockUntil = Date.now() + shippingRange;
 
 const rangeParam = BigInt(lockUntil);
 

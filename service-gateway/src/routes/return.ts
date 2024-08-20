@@ -5,12 +5,12 @@ import { userMiddleware } from "../utils/user";
 import { provider } from "../blockchain";
 import { BadRequestError } from "../errors";
 import { MarketplaceStatemachine } from "../blockchain/plutus";
-import { redisDB } from "../db/redis";
 import { _ } from "../utils/pino";
+import { unixToSlot } from "../utils/blockchain";
 
-const lockingMiddlewares: any = [userMiddleware];
+const returnMiddlewares: any = [userMiddleware];
 
-const lockingHandler = async (req: Request, res: Response) => {
+const returnHandler = async (req: Request, res: Response) => {
   const params = req.body;
 
   const BUYER = req.userData;
@@ -32,14 +32,6 @@ const lockingHandler = async (req: Request, res: Response) => {
     const ORDER = orders[0];
 
     /////////////////////
-
-    const isLocked = await redisDB.client.get(ORDER.id);
-
-    console.log(isLocked);
-
-    if (isLocked === "locked") {
-      throw new Error("LOCKED");
-    }
 
     const externalWallet = Core.addressFromBech32(
       BUYER.address,
@@ -89,20 +81,9 @@ const lockingHandler = async (req: Request, res: Response) => {
       Data.Literal("Received"),
     ]);
 
-    const SHIPPING_RANGE = "1";
+    const returnInput = "Return";
 
-    const lockUntil = Date.now() + parseInt(SHIPPING_RANGE) * 60 * 60 * 1000;
-
-    const rangeParam = BigInt(lockUntil);
-
-    const lockingInput = {
-      Locking: {
-        buyer_param: BUYER.pubkeyhash,
-        range_param: rangeParam,
-      },
-    };
-
-    const stateMachineRedeemer = Data.to(lockingInput, stateMachineInput);
+    const stateMachineRedeemer = Data.to(returnInput, stateMachineInput);
 
     const stateMachineScript = new MarketplaceStatemachine(threadTokenPolicyId);
 
@@ -110,7 +91,7 @@ const lockingHandler = async (req: Request, res: Response) => {
 
     const productCollateral = BigInt(ORDER.contract_collateral);
 
-    const threadTokenAsset = makeValue(productPrice + productCollateral, [
+    const threadTokenAsset = makeValue(productCollateral, [
       threadTokenUnit,
       1n,
     ]);
@@ -118,12 +99,12 @@ const lockingHandler = async (req: Request, res: Response) => {
     const minFee = 1n * 1_000_000n;
 
     const data = {
-      state: 1n,
+      state: 0n,
       seller: ORDER.seller_pubkeyhash,
       collateral: productCollateral,
       price: productPrice,
-      buyer: BUYER.pubkeyhash,
-      range: rangeParam
+      buyer: null,
+      range: null,
     };
 
     const Datum = Data.Object({
@@ -132,29 +113,27 @@ const lockingHandler = async (req: Request, res: Response) => {
       collateral: Data.Integer(),
       price: Data.Integer(),
       buyer: Data.Nullable(Data.Bytes()),
-      range: Data.Nullable(Data.Integer())
+      range: Data.Nullable(Data.Integer()),
     });
 
-    const lockingDatum = Data.to(data, Datum);
+    const returnDatum = Data.to(data, Datum);
+
+    const laterTime = Date.now() + 1 * 60 * 60 * 1000;
 
     const tx = await blaze
       .newTransaction()
       .addInput(threadTokenUtxos[0], stateMachineRedeemer)
-      .lockAssets(stateMachineAddress, threadTokenAsset, lockingDatum)
+      .lockAssets(stateMachineAddress, threadTokenAsset, returnDatum)
+      .payLovelace(externalWallet, productPrice)
       .provideScript(stateMachineScript)
       .addRequiredSigner(Core.Ed25519KeyHashHex(BUYER.pubkeyhash))
+      .setValidFrom(unixToSlot(Core.SLOT_CONFIG_NETWORK.Preprod, Date.now()))
+      .setValidUntil(unixToSlot(Core.SLOT_CONFIG_NETWORK.Preprod, laterTime))
       .setChangeAddress(externalWallet)
       .setMinimumFee(minFee)
       .complete();
 
     const transaction = tx.toCbor();
-
-    console.log(transaction);
-
-    await redisDB.client.set(ORDER.id, "locked", {
-      EX: 10,
-      NX: true,
-    });
 
     await connection.commit();
 
@@ -175,4 +154,4 @@ const lockingHandler = async (req: Request, res: Response) => {
   }
 };
 
-export { lockingHandler, lockingMiddlewares };
+export { returnHandler, returnMiddlewares };
