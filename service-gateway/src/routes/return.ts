@@ -31,7 +31,7 @@ const returnHandler = async (req: Request, res: Response) => {
 
     const ORDER = orders[0];
 
-    if (ORDER.contract_range <= Date.now()) {
+    if (ORDER.contract_range > Date.now()) {
       throw new Error("SHIPPING_RANGE");
     }
 
