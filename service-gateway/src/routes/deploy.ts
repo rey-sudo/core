@@ -88,6 +88,7 @@ const deployHandler = async (req: Request, res: Response) => {
       collateral: Data.Integer(),
       price: Data.Integer(),
       buyer: Data.Nullable(Data.Bytes()),
+      range: Data.Nullable(Data.Integer())
     });
 
     type Datum = Static<typeof Datum>;
@@ -98,6 +99,7 @@ const deployHandler = async (req: Request, res: Response) => {
       collateral: BigInt(ORDER.contract_collateral),
       price: BigInt(ORDER.contract_price),
       buyer: null,
+      range: null
     };
 
     const stateMachineDatum = Data.to(data, Datum);

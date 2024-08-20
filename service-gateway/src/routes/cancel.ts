@@ -67,7 +67,13 @@ const cancelHandler = async (req: Request, res: Response) => {
 
     const stateMachineInput = Data.Enum([
       Data.Literal("Cancel"),
-      Data.Object({ Locking: Data.Object({ buyer_param: Data.Bytes() }) }),
+      Data.Object({
+        Locking: Data.Object({
+          buyer_param: Data.Bytes(),
+          range_param: Data.Integer(),
+        }),
+      }),
+      Data.Literal("Return"),
       Data.Literal("Shipping"),
       Data.Literal("Received"),
     ]);
@@ -95,6 +101,7 @@ const cancelHandler = async (req: Request, res: Response) => {
       collateral: productCollateral,
       price: productPrice,
       buyer: null,
+      range: null
     };
 
     const Datum = Data.Object({
@@ -103,6 +110,7 @@ const cancelHandler = async (req: Request, res: Response) => {
       collateral: Data.Integer(),
       price: Data.Integer(),
       buyer: Data.Nullable(Data.Bytes()),
+      range: Data.Nullable(Data.Integer())
     });
 
     const cancelDatum = Data.to(data, Datum);
