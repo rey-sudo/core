@@ -7,6 +7,12 @@
         Paid
       </span>
     </Button>
+
+    <Button class="cancel">
+      <span>
+        Return
+      </span>
+    </Button>
   </div>
 </template>
 
@@ -36,15 +42,22 @@ export default {
   border-radius: 4px;
   cursor: pointer;
   margin-top: 1rem;
+  display: flex;
+  align-items: center
 }
 
 .locking button.actived {
   background: var(--green-a);
   border: 1px solid var(--green-a);
   pointer-events: none;
-  display: flex;
-  align-items: center
+
 }
+
+.locking button.cancel {
+  background: var(--red-a);
+  border: 1px solid var(--red-a);
+}
+
 
 .subtitle {
   font-size: var(--text-size-c);
