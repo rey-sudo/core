@@ -8,7 +8,7 @@
       </span>
     </Button>
 
-    <Button class="cancel" v-if="getReturnable" @click="returnTransaction">
+    <Button class="cancel" :class="{ invalid: !getReturnable }" @click="returnTransaction">
       <span>
         Return
       </span>
@@ -100,8 +100,14 @@ export default {
 .locking button.cancel {
   background: var(--red-a);
   border: 1px solid var(--red-a);
+  cursor: pointer;
 }
 
+
+.locking button.invalid {
+  pointer-events: none;
+  opacity: 0.5;
+}
 
 .subtitle {
   font-size: var(--text-size-c);

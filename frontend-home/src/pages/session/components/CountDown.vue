@@ -23,7 +23,7 @@ export default {
 
         const updateCountdown = (target) => {
             const timeLeft = target - Date.now();
-
+           
             if (timeLeft <= 0) {
                 clearInterval(intervalId);
                 returnable(true)
