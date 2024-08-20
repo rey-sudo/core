@@ -40,6 +40,10 @@ spec:
               value: redis://service-gateway-redis:6379                                                                                  
             - name: TOKEN_EXPIRATION
               value: "7d"
+            - name: SHIPPING_TIME
+              value: "1"
+            - name: LOCKING_TX_MS
+              value: "900000"                            
             - name: CORS_DOMAINS
               value: "https://pairfy.dev,http://pairfy.dev,http://localhost:8080,http://localhost:8081,https://pairfy.dev,https://dashboard.pairfy.dev"                           
           resources:

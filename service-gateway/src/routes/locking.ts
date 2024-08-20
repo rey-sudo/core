@@ -93,15 +93,13 @@ const lockingHandler = async (req: Request, res: Response) => {
       Data.Literal("Shipping"),
       Data.Literal("Received"),
     ]);
-    ////
-    const SHIPPING_RANGE = "32";
 
-    const LOCKING_TX_RANGE = "900000";
-    ////
-    const shippingRange = parseInt(SHIPPING_RANGE) * 60 * 60 * 1000;
+    const lockTxMs = parseInt(process.env.LOCKING_TX_MS!);
+
+    const shippingRange = parseInt(process.env.SHIPPING_TIME!) * 60 * 60 * 1000;
 
     const rangeParam = BigInt(
-      Date.now() + shippingRange + parseInt(LOCKING_TX_RANGE),
+      Date.now() + shippingRange + lockTxMs,
     );
 
     const lockingInput = {
@@ -146,7 +144,7 @@ const lockingHandler = async (req: Request, res: Response) => {
 
     const lockingDatum = Data.to(data, Datum);
 
-    const txValidUntil = Date.now() + parseInt(LOCKING_TX_RANGE);
+    const txValidUntil = Date.now() + lockTxMs;
 
     const tx = await blaze
       .newTransaction()

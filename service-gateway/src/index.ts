@@ -41,6 +41,15 @@ const main = async () => {
       throw new Error("REDIS_URI error");
     }
 
+    if (!process.env.SHIPPING_TIME) {
+      throw new Error("SHIPPING_TIME error");
+    }
+
+    if (!process.env.LOCKING_TX_MS) {
+      throw new Error("LOCKING_TX_MS error");
+    }
+
+
     DB.connect({
       host: "mysql",
       port: 3306,
