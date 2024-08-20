@@ -6,6 +6,7 @@
         <span>{{ minuteDigits[0] }}</span>
         <span>{{ minuteDigits[1] }}</span>
     </div>
+    <div class="note">Time to send the package.</div>
 </template>
 
 <script>
@@ -76,5 +77,10 @@ export default {
 
 .countdown div {
     margin: 0 0.5rem;
+}
+
+.note {
+    padding: 1rem;
+    font-size: var(--text-size-c);
 }
 </style>

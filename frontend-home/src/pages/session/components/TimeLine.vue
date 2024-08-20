@@ -41,9 +41,6 @@
 
 
     <CountDown />
-
-
-    <div class="timeline-note">Range to send the packet</div>
   </div>
 </template>
 
@@ -162,10 +159,6 @@ export default {
   font-weight: 500;
 }
 
-.timeline-note {
-  padding: 1rem;
-  font-size: var(--text-size-c);
-}
 
 .checker {
   margin-right: 1rem;
