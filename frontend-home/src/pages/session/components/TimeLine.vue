@@ -40,7 +40,7 @@
     </div>
 
 
-    <CountDown />
+    <CountDown/>
   </div>
 </template>
 

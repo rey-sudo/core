@@ -19,11 +19,11 @@ export default {
 
         const hours = ref(0);
         const minutes = ref(0);
-        const targetUnixTime = getOrderData.value.contract_range;
+        const targetUnixTime = getOrderData.value.status === 'shipping' ? 0 : getOrderData.value.contract_range;
 
         const updateCountdown = (target) => {
             const timeLeft = target - Date.now();
-           
+
             if (timeLeft <= 0) {
                 clearInterval(intervalId);
                 returnable(true)

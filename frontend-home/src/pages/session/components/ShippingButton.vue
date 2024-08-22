@@ -2,7 +2,9 @@
   <div class="shipping">
     <div class="subtitle">Press the button when you send the package.</div>
 
-    <Button @click="shippingTransaction"> Shipped </Button>
+    <Button :class="{ disabled: getOrderData.status === 'shipping' }" @click="shippingTransaction"> Shipped </Button>
+
+    <Button class="appeal" @click="shippingTransaction">Appeal</Button>
   </div>
 </template>
 
@@ -92,15 +94,19 @@ export default {
   margin-top: 1rem;
 }
 
-.shipping button.actived {
-  background: var(--primary-c);
-  border: 1px solid var(--primary-c);
-  pointer-events: none;
-}
-
 .subtitle {
   font-size: var(--text-size-b);
   text-align: left;
   margin-top: 0.5rem;
+}
+
+.shipping button.appeal {
+  background: var(--red-a);
+  border: 1px solid var(--red-a);
+}
+
+.shipping button.disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }
 </style>

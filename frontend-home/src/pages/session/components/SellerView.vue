@@ -75,7 +75,10 @@
           getOrderData.status === 'canceled'
         " />
 
-        <shippingButton v-if="getOrderData.status === 'locking'" />
+        <shippingButton v-if="
+          getOrderData.status === 'locking' ||
+          getOrderData.status === 'shipping'
+        " />
       </div>
     </div>
   </div>
