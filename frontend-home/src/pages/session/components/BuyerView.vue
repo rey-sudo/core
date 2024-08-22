@@ -70,7 +70,10 @@
       <div class="summary-body">
         <div class="summary-title">Action</div>
         <LockingButton v-if="getOrderData.status === 'locking'" />
-        <ReceivedButton v-if="getOrderData.status === 'delivered'" />
+        <ReceivedButton v-if="
+          getOrderData.status === 'shipping' ||
+          getOrderData.status === 'delivered'
+        " />
       </div>
     </div>
   </div>

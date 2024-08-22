@@ -1,6 +1,6 @@
 <template>
   <div class="locking">
-    <div class="subtitle">Press the button when you make the delivery.</div>
+    <div class="subtitle">Press the button when you receive the product.</div>
 
     <Button class="actived"> Delivered </Button>
   </div>
