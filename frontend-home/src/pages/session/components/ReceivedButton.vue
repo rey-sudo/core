@@ -2,7 +2,9 @@
   <div class="locking">
     <div class="subtitle">Press the button when you receive the product.</div>
 
-    <Button class="actived"> Delivered </Button>
+    <Button>Received</Button>
+
+    <Button class="appeal">Appeal</Button>
   </div>
 </template>
 
@@ -37,7 +39,7 @@ export default {
   },
 
   methods: {
-    
+
   },
 };
 </script>
@@ -62,10 +64,9 @@ export default {
   margin-top: 1rem;
 }
 
-.locking button.actived {
-  background: var(--primary-c);
-  border: 1px solid var(--primary-c);
-  pointer-events: none;
+.locking button.appeal {
+  background: var(--red-a);
+  border: 1px solid var(--red-a);
 }
 
 .subtitle {
