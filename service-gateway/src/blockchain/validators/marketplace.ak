@@ -2,7 +2,6 @@ use aiken/dict
 use aiken/hash.{Blake2b_224, Hash}
 use aiken/interval
 use aiken/list
-use aiken/string
 use aiken/transaction.{OutputReference, ScriptContext, Spend, Transaction, InlineDatum } as tx
 use aiken/transaction.{Input, NoDatum, Output, TransactionId}
 use aiken/transaction/credential.{Address, ScriptCredential, VerificationKey}
@@ -114,11 +113,7 @@ validator(threadtoken: value.PolicyId) {
 
             let must_be_policy = list.has(value.policies(sm_output.value), threadtoken)
 
-            let spending_lovelace = value.lovelace_of(sm_output.value)
-
-            trace string.from_int(spending_lovelace)
-
-            let must_be_price = spending_lovelace >= price
+            let must_be_price = value.lovelace_of(sm_output.value) >= price
 
             let new_data: Data = StateMachineDatum {
               state : 1,
@@ -160,9 +155,7 @@ validator(threadtoken: value.PolicyId) {
                              
             let must_be_policy = list.has(value.policies(sm_output.value), threadtoken)
 
-            let spending_lovelace = value.lovelace_of(sm_output.value)
-
-            let must_be_collateral = spending_lovelace == collateral
+            let must_be_collateral = value.lovelace_of(sm_output.value) == collateral
 
             let new_data: Data = StateMachineDatum {
               state : 0,
@@ -180,8 +173,37 @@ validator(threadtoken: value.PolicyId) {
             must_be_state? && must_be_signed? && must_be_time? && must_be_policy? && must_be_collateral? && must_be_datum?
           }
 
-          (StateMachineDatum { state, .. }, Shipping) -> {
-            state == 1
+          (StateMachineDatum { state, seller, collateral, price, buyer, range }, Shipping) -> {
+            let must_be_state = state == 1
+
+            let must_be_signed =
+            list.has(context.transaction.extra_signatories, seller)
+
+            expect Some(sm_input) = 
+            list.find(context.transaction.inputs, fn(input) { input.output_reference == utxo_ref })
+                                       
+            expect Some(sm_output) = 
+            list.find(context.transaction.outputs, fn(output) { output.address == sm_input.output.address })
+                           
+            let must_be_policy = list.has(value.policies(sm_output.value), threadtoken)
+
+            let must_be_value = value.lovelace_of(sm_output.value) == price + collateral           
+
+            let new_data: Data = StateMachineDatum {
+              state : 2,
+              seller : seller,
+              collateral : collateral,
+              price: price,
+              buyer: buyer,
+              range: range
+            }
+                  
+            let new_datum = InlineDatum(new_data)
+                  
+            let must_be_datum = new_datum == sm_output.datum     
+
+            must_be_state? && must_be_signed? && must_be_policy? && must_be_value? && must_be_datum?
+
           }
 
           (StateMachineDatum { state, .. }, Received) -> {

@@ -14,7 +14,7 @@ const provider = new Blockfrost({
 });
 
 const externalWallet = Core.addressFromBech32(
-  "addr_test1qppygdhzm0t7nnlclmds3dy0wc3du870dpy48juu0xxuu2aefdfvc4e0785y7vfhwlmsn3rn26mzvv9md0mhnkpjlc4s0jshh4"
+  "addr_test1qrg0fvp99s79f58vy8lxqrz3fzwmn4w9xnc54lpjy74847v04wk5sd4fhk5jur50npqse22mjn4we4r4l7uxfpdggrcsf7cf5y"
 );
 
 const stateMachineAddress = Core.addressFromBech32(
@@ -78,22 +78,9 @@ const stateMachineInput = Data.Enum([
   Data.Literal("Received"),
 ]);
 
-const shippingRange = 1 * 60 * 60 * 1000;
+const cancelInput = "Shipping";
 
-const txValidationTime = 900000;
-
-const lockUntil = Date.now() + shippingRange + txValidationTime;
-
-const rangeParam = BigInt(lockUntil);
-
-const lockingInput = {
-  Locking: {
-    buyer_param: "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b",
-    range_param: rangeParam,
-  },
-};
-
-const stateMachineRedeemer = Data.to(lockingInput, stateMachineInput);
+const stateMachineRedeemer = Data.to(cancelInput, stateMachineInput);
 
 const stateMachineScript = cborToScript(
   applyParamsToScript(
@@ -108,20 +95,21 @@ const productPrice = 50n * 1_000_000n;
 
 const productCollateral = 25n * 1_000_000n;
 
-const threadTokenAsset = makeValue(
-  productPrice + productCollateral,
-  ...[[threadTokenUnit, 1n]]
-);
+const threadTokenAsset = makeValue(productPrice + productCollateral, ...[[threadTokenUnit, 1n]]);
 
 const minFee = 1n * 1_000_000n;
 
+const lockUntil = 1724344714914
+
+const rangeParam = BigInt(lockUntil);
+
 const data = {
-  state: 1n,
+  state: 2n,
   seller: "d0f4b0252c3c54d0ec21fe600c51489db9d5c534f14afc3227aa7af9",
   collateral: productCollateral,
   price: productPrice,
   buyer: "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b",
-  range: rangeParam,
+  range: rangeParam
 };
 
 const Datum = Data.Object({
@@ -133,48 +121,18 @@ const Datum = Data.Object({
   range: Data.Nullable(Data.Integer()),
 });
 
-const lockingDatum = Data.to(data, Datum);
+const shippingDatum = Data.to(data, Datum);
 
-const txValidUntil = Date.now() + txValidationTime;
+const tx = await blaze
+  .newTransaction()
+  .addInput(threadTokenUtxos[0], stateMachineRedeemer)
+  .lockAssets(stateMachineAddress, threadTokenAsset, shippingDatum)
+  .provideScript(stateMachineScript)
+  .addRequiredSigner("d0f4b0252c3c54d0ec21fe600c51489db9d5c534f14afc3227aa7af9")
+  .setChangeAddress(externalWallet)
+  .setMinimumFee(minFee)
+  .complete();
 
-try {
-  const tx = await blaze
-    .newTransaction()
-    .addInput(threadTokenUtxos[0], stateMachineRedeemer)
-    .lockAssets(stateMachineAddress, threadTokenAsset, lockingDatum)
-    .provideScript(stateMachineScript)
-    .addRequiredSigner(
-      "424436e2dbd7e9cff8fedb08b48f7622de1fcf684953cb9c798dce2b"
-    )
-    .setValidFrom(unixToSlot(Core.SLOT_CONFIG_NETWORK.Preprod, Date.now()))
-    .setValidUntil(unixToSlot(Core.SLOT_CONFIG_NETWORK.Preprod, txValidUntil))
-    .setChangeAddress(externalWallet)
-    .setMinimumFee(minFee)
-    .complete();
+const cbor = tx.toCbor();
 
-  const cbor = tx.toCbor();
-  console.log("Tx: ", cbor);
-} catch (err) {
-  console.error(err);
-}
-
-console.log("LockUntil: ", lockUntil);
-
-console.log("Range param: ", rangeParam);
-
-function toUnixTime(config, slot) {
-  const { zeroSlot, slotLength, zeroTime } = config;
-  const deltaSlot = slot - zeroSlot;
-  const halfSlotLength = Math.floor(0.5 * slotLength);
-  const msAfterZeroSlot = deltaSlot * slotLength + halfSlotLength;
-  return zeroTime + msAfterZeroSlot;
-}
-
-function unixToSlot(config, unixTime) {
-  const { zeroSlot, slotLength, zeroTime } = config;
-  const timePassed = unixTime - zeroTime;
-  const slotsPassed = Math.floor(timePassed / slotLength);
-  return Core.Slot(zeroSlot + slotsPassed);
-}
-
-const mySlot = unixToSlot(Core.SLOT_CONFIG_NETWORK.Preprod, Date.now());
+console.log(cbor);
