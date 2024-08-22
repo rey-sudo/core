@@ -1,5 +1,6 @@
 export * from "./create-order";
 export * from "./deploy";
+export * from "./shipping";
 export * from "./return";
 export * from "./return-tx";
 export * from "./cancel";
