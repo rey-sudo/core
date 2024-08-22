@@ -88,7 +88,6 @@ export default {
   justify-content: center;
   font-weight: 600;
   color: var(--text-w);
-  margin-right: 1rem;
   border-radius: 4px;
   cursor: pointer;
   margin-top: 1rem;
