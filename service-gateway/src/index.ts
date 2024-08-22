@@ -136,6 +136,18 @@ const main = async () => {
       route.returnTxHandler,
     );
 
+    app.post(
+      "/api/gateway/shipping",
+      route.shippingMiddlewares,
+      route.shippingHandler,
+    );
+
+    app.post(
+      "/api/gateway/shipping-tx",
+      route.shippingTxMiddlewares,
+      route.shippingTxHandler,
+    );
+
     app.get(
       "/api/gateway/get-orders",
       route.getOrdersMiddlewares,
