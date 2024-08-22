@@ -72,8 +72,8 @@ export default {
       },
       {
         status: "Shipping",
-        text: "N/A",
-        data: "",
+        text: shortFormat(getOrderData.value.contract_2_tx, 20),
+        data: getOrderData.value.contract_2_tx,
       },
       {
         status: "Received",

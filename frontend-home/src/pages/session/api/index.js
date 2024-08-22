@@ -25,15 +25,23 @@ const sessionAPI = () => {
   const cancelTx = async (params) =>
     await store.dispatch("session/cancelTx", params);
 
+  const shipping = async (params) =>
+    await store.dispatch("session/shipping", params);
+
+  const shippingTx = async (params) =>
+    await store.dispatch("session/shippingTx", params);
+
   const returnable = async (params) =>
     await store.dispatch("session/returnable", params);
-    
+
   return {
     getOrder,
     deploy,
     deployTx,
     cancel,
     cancelTx,
+    shipping,
+    shippingTx,
     return_,
     returnTx,
     returnable,

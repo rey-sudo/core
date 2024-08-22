@@ -75,7 +75,7 @@
           getOrderData.status === 'canceled'
         " />
 
-        <ShippedButton v-if="getOrderData.status === 'locking'" />
+        <shippingButton v-if="getOrderData.status === 'locking'" />
       </div>
     </div>
   </div>
@@ -84,12 +84,12 @@
 <script>
 import { sessionAPI } from "@/pages/session/api";
 import WaitingButton from "./WaitingButton.vue";
-import ShippedButton from "./ShippedButton.vue";
+import shippingButton from "./ShippingButton.vue";
 
 export default {
   components: {
     WaitingButton,
-    ShippedButton,
+    shippingButton,
   },
   setup() {
     const { getOrderData } = sessionAPI();
