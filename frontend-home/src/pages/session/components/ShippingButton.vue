@@ -107,5 +107,6 @@ export default {
 .shipping button.disabled {
   pointer-events: none;
   opacity: 0.5;
+  display: none;
 }
 </style>
