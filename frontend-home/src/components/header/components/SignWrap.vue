@@ -40,7 +40,13 @@
         >
           <img src="@/assets/eternl.png" alt="eternl" />
         </div>
-        <div class="grid-item"></div>
+        <div
+        @click="selectWallet('lace')"
+        class="grid-item"
+        :class="{ active: enabledWallet === 'lace' }"
+      >
+        <span>lace</span>
+      </div>
         <div class="grid-item"></div>
         <div class="grid-item"></div>
         <div class="grid-item"></div>
