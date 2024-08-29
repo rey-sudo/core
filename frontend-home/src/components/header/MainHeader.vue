@@ -200,7 +200,7 @@ export default {
 }
 
 .header .header-left {
-  flex-basis: 20%;
+  flex-basis: 25%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -218,7 +218,7 @@ export default {
 }
 
 .header .header-center {
-  flex-basis: 60%;
+  flex-basis: 50%;
   width: auto;
   display: flex;
   align-items: center;
@@ -230,7 +230,7 @@ export default {
   cursor: text;
   display: flex;
   align-items: center;
-  border-radius: 4px;
+  border-radius: 6px;
   width: 100%;
   color: var(--text-a);
   font-size: var(--text-size-b);
@@ -274,7 +274,7 @@ export default {
 }
 
 .header .header-right {
-  flex-basis: 20%;
+  flex-basis: 25%;
   display: flex;
   justify-content: flex-end;
 }

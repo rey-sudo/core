@@ -11,7 +11,7 @@ import {
 
 const provider = new Blockfrost({
   network: "cardano-preprod",
-  projectId: "preprodex26NYImZOT84XAA67qhyHyA7TT6PCGI",
+  projectId: "preprodkWGZGJyPVdkWvaCkGzqJRY2R2BM4Gopt",
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -90,7 +90,7 @@ const validatorsWithParams = (tokenName, utxoRef) => {
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 const externalWallet = Core.addressFromBech32(
-  "addr_test1qpqzsucnvps0v44cpqk8j74gqhkgwznckkw4yq4rt5szf0wzyv3wg0ry38rw8a86dey7j2mxfp72j298ygcxzawstrlsk6d79p"
+  "addr_test1qrg0fvp99s79f58vy8lxqrz3fzwmn4w9xnc54lpjy74847v04wk5sd4fhk5jur50npqse22mjn4we4r4l7uxfpdggrcsf7cf5y"
 );
 
 const wallet = new ColdWallet(externalWallet, Core.NetworkId.Testnet, provider);
@@ -128,7 +128,7 @@ const productPrice = 50n * 1_000_000n;
 
 const data = {
   state: 0n,
-  seller: "402873136060f656b8082c797aa805ec870a78b59d5202a35d2024bd",
+  seller: "d0f4b0252c3c54d0ec21fe600c51489db9d5c534f14afc3227aa7af9",
   collateral: productCollateral,
   price: productPrice,
   buyer: null,
@@ -171,7 +171,7 @@ const tx = await blaze
     threadTokenAsset,
     stateMachineDatum
   )
-  .addRequiredSigner("402873136060f656b8082c797aa805ec870a78b59d5202a35d2024bd")
+  .addRequiredSigner("d0f4b0252c3c54d0ec21fe600c51489db9d5c534f14afc3227aa7af9")
   .setChangeAddress(externalWallet)
   .setMinimumFee(minFee)
   .complete();
