@@ -12,7 +12,6 @@
   "license": "ISC",
   "dependencies": {
     "@blaze-cardano/sdk": "^0.1.16",
-    "@lucid-evolution/lucid": "^0.3.16",
-    "@lucid-evolution/provider": "^0.1.45"
+    "@lucid-evolution/lucid": "^0.3.19"
   }
 }
