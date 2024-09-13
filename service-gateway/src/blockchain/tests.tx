@@ -1,0 +1,175 @@
+test locking() {
+  let own_ref =
+    OutputReference {
+      transaction_id: TransactionId {
+        hash: #"ee220ba9258ef159bb44f0d3522b840a80475eac2df7176f2c513d59a2ead71f",
+      },
+      output_index: 0,
+    }
+  let script_purpose = Spend(own_ref)
+  let threadtoken = #"99999999999999999999999999999999999999999999999999999999"
+  let token_name = #"02"
+  let own_val_hash = #"88888888888888888888888888888888888888888888888888888888"
+  let input_utxo =
+    Input {
+      output_reference: own_ref,
+      output: Output {
+        address: Address {
+          payment_credential: Script(own_val_hash),
+          stake_credential: None,
+        },
+        value: assets.add(
+          assets.from_lovelace(2_000_000),
+          threadtoken,
+          token_name,
+          1,
+        ),
+        datum: NoDatum,
+        reference_script: None,
+      },
+    }
+  
+  let new_buyer = #"77777777777777777777777777777777777777777777777777777777"  
+  let new_data: Data = StateMachineDatum {
+      state : 1,
+      seller : #"00000000000000000000000000000000000000000000000000000000",
+      collateral : 25000000,
+      price: 50000000,
+      buyer: Some(new_buyer),
+      range: Some(1672843961000)
+  }  
+  let new_datum = InlineDatum(new_data)
+  let output =
+    Output {
+      address: Address {
+        payment_credential: Script(own_val_hash),
+        stake_credential: None,
+      },
+      value: assets.add(
+        assets.from_lovelace(50_000_000),
+        threadtoken,
+        token_name,
+        1,
+      ),
+      datum: new_datum,
+      reference_script: None,
+    }
+  let redeemer = Locking {  buyer_param: new_buyer,  range_param: 1672843961000  }
+  let old_datum =
+    StateMachineDatum {
+      state: 0,
+      seller: #"00000000000000000000000000000000000000000000000000000000",
+      collateral: 25000000,
+      price: 50000000,
+      buyer: None,
+      range: None
+    }
+  let tx =
+    Transaction {
+      inputs: [input_utxo],
+      reference_inputs: [],
+      outputs: [output],
+      fee: value.zero(),
+      mint: value.zero() |> value.to_minted_value(),
+      certificates: [],
+      withdrawals: [],
+      validity_range: interval.everything(),
+      extra_signatories: [new_buyer],
+      redeemers: [],
+      datums: dict.new(),
+      id: TransactionId {
+        hash: #"0000000000000000000000000000000000000000000000000000000000000000",
+      },
+    }
+  let ctx = ScriptContext { purpose: script_purpose, transaction: tx }
+  statemachine(threadtoken, old_datum, redeemer, ctx)
+}
+
+
+test return() {
+  let own_ref =
+    OutputReference {
+      transaction_id: TransactionId {
+        hash: #"ee220ba9258ef159bb44f0d3522b840a80475eac2df7176f2c513d59a2ead71f",
+      },
+      output_index: 0,
+    }
+  let script_purpose = Spend(own_ref)
+  let threadtoken = #"99999999999999999999999999999999999999999999999999999999"
+  let token_name = #"02"
+  let own_val_hash = #"88888888888888888888888888888888888888888888888888888888"
+  let range_param = 1672843961000
+  let input_utxo =
+    Input {
+      output_reference: own_ref,
+      output: Output {
+        address: Address {
+          payment_credential: Script(own_val_hash),
+          stake_credential: None,
+        },
+        value: assets.add(
+          assets.from_lovelace(2_000_000),
+          threadtoken,
+          token_name,
+          1,
+        ),
+        datum: NoDatum,
+        reference_script: None,
+      },
+    }
+  
+  let new_buyer = #"77777777777777777777777777777777777777777777777777777777"  
+  let new_data: Data = StateMachineDatum {
+      state : 0,
+      seller : #"00000000000000000000000000000000000000000000000000000000",
+      collateral : 25000000,
+      price: 50000000,
+      buyer: None,
+      range: None
+  }  
+  let new_datum = InlineDatum(new_data)
+  let output =
+    Output {
+      address: Address {
+        payment_credential: Script(own_val_hash),
+        stake_credential: None,
+      },
+      value: assets.add(
+        assets.from_lovelace(25_000_000),
+        threadtoken,
+        token_name,
+        1,
+      ),
+      datum: new_datum,
+      reference_script: None,
+    }
+  let redeemer = Return
+  let old_datum =
+    StateMachineDatum {
+      state: 1,
+      seller: #"00000000000000000000000000000000000000000000000000000000",
+      collateral: 25000000,
+      price: 50000000,
+      buyer: Some(new_buyer),
+      range: Some(range_param)
+    }
+  let tx =
+    Transaction {
+      inputs: [input_utxo],
+      reference_inputs: [],
+      outputs: [output],
+      fee: value.zero(),
+      mint: value.zero() |> value.to_minted_value(),
+      certificates: [],
+      withdrawals: [],
+      validity_range: interval.after(range_param),
+      extra_signatories: [new_buyer],
+      redeemers: [],
+      datums: dict.new(),
+      id: TransactionId {
+        hash: #"0000000000000000000000000000000000000000000000000000000000000000",
+      },
+    }
+  let ctx = ScriptContext { purpose: script_purpose, transaction: tx }
+  statemachine(threadtoken, old_datum, redeemer, ctx)
+}

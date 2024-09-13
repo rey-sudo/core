@@ -6,7 +6,7 @@ import { MarketplaceStatemachine, MarketplaceThreadtoken } from "./plutus";
 
 const provider = new Blockfrost({
     network: "cardano-preprod",
-    projectId: "preprodex26NYImZOT84XAA67qhyHyA7TT6PCGI",
+    projectId: "preprodkWGZGJyPVdkWvaCkGzqJRY2R2BM4Gopt",
 });
 
 const validatorsWithParams = (tokenName: any, utxoRef: any) => {

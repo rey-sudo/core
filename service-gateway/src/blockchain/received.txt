@@ -138,3 +138,37 @@
   let ctx = ScriptContext { purpose: script_purpose, transaction: tx }
   statemachine(threadtoken, old_datum, redeemer, ctx)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

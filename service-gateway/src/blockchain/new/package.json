@@ -1,0 +1,16 @@
+{
+  "name": "new",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.4",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@blaze-cardano/sdk": "^0.1.31"
+  }
+}

@@ -22,7 +22,7 @@ const lucid = await Lucid(
 
 const getValidators = () => {
   const threadToken = blueprint.validators.find(
-    (v) => v.title === "marketplace.threadtoken"
+    (v) => v.title === "marketplace.threadtoken.mint"
   );
 
   if (!threadToken) {
@@ -30,7 +30,7 @@ const getValidators = () => {
   }
 
   const stateMachine = blueprint.validators.find(
-    (v) => v.title === "marketplace.statemachine"
+    (v) => v.title === "marketplace.statemachine.spend"
   );
 
   if (!stateMachine) {
@@ -39,11 +39,11 @@ const getValidators = () => {
 
   return {
     threadToken: {
-      type: "PlutusV2",
+      type: "PlutusV3",
       script: applyDoubleCborEncoding(threadToken.compiledCode),
     },
     stateMachine: {
-      type: "PlutusV2",
+      type: "PlutusV3",
       script: applyDoubleCborEncoding(stateMachine.compiledCode),
     },
   };
@@ -58,7 +58,7 @@ const validatorWithParams = (tokenName, outRef) => {
   ]);
 
   const threadTokenPolicyId = validatorToScriptHash({
-    type: "PlutusV2",
+    type: "PlutusV3",
     script: threadToken,
   });
 
@@ -67,18 +67,18 @@ const validatorWithParams = (tokenName, outRef) => {
   ]);
 
   const stateMachineAddress = validatorToAddress("Preprod", {
-    type: "PlutusV2",
+    type: "PlutusV3",
     script: stateMachine,
   });
 
   return {
     threadToken: {
-      type: "PlutusV2",
+      type: "PlutusV3",
       script: threadToken,
     },
     threadTokenPolicyId,
     stateMachine: {
-      type: "PlutusV2",
+      type: "PlutusV3",
       script: stateMachine,
     },
     stateMachineAddress,

@@ -1,21 +1,17 @@
-name = "pairfy/marketplace"
-version = "0.0.0"
-compiler = "v1.0.29-alpha"
-plutus = "v2"
-license = "Apache-2.0"
-description = "Aiken contracts for project 'pairfy/marketplace'"
+name = "rey-sudo/marketplace"
+version = "1.0.0"
+compiler = "v1.1.0"
+plutus = "v3"
+description = "A next-level DeFi platform"
 
 [repository]
-user = "pairfy"
-project = "marketplace"
+user = "aiken-lang"
+project = "stdlib"
 platform = "github"
 
 [[dependencies]]
 name = "aiken-lang/stdlib"
-version = "1.9.0"
+version = "v2"
 source = "github"
 
-[[dependencies]]
-name = "aiken-lang/fuzz"
-version = "v1"
-source = "github"
+[config]
