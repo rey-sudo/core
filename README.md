@@ -1,10 +1,10 @@
-# Pairfy marketplace
+# Adabuy marketplace
 
-Pairfy is an e-commerce protocol that uses smart contracts for the process of selling and buying physical products on Cardano using the ADA cryptocurrency.
+Adabuy is an e-commerce protocol that uses smart contracts for the process of selling and buying physical products on Cardano using the ADA cryptocurrency.
 
 ### Introduction
 
-Pairfy aims to allow the community to sell physical products and be purchased with ADA by the same community using a **plutus** P2P exchange system based on blind mediators and trust rating.
+Adabuy aims to allow the community to sell physical products and be purchased with ADA by the same community using a **plutus** P2P exchange system based on blind mediators and trust rating.
 
 In a successful P2P negotiation the seller delivers the product and the buyer pays the price of the product in this case the trade ends naturally. The problem arises when one of the participants does not fulfill their obligations such as when the seller does not deliver the product but argues that he does. Using physical blockchain infrastructure, i.e. hardware connected to oracles it is possible to determine if the product was actually delivered. The problem with this is that many shipping companies do not have blockchain infrastructure so humans inevitably participate throughout the product delivery process.
 
@@ -60,7 +60,7 @@ Install kubernetes local cluster
 Clone this repository
 
 ```
-git clone https://github.com/pairfy/marketplace.git
+git clone https://github.com/rey-sudo/core.git
 ```
 
 Install skaffold dev
