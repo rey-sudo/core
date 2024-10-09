@@ -27,18 +27,24 @@
      inkscape:document-units="px"
      showgrid="false"
      inkscape:zoom="0.38583845"
-     inkscape:cx="469.10825"
+     inkscape:cx="467.81237"
      inkscape:cy="804.74095"
-     inkscape:window-width="1495"
-     inkscape:window-height="773"
-     inkscape:window-x="2150"
-     inkscape:window-y="102"
-     inkscape:window-maximized="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="3840"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
      inkscape:showpageshadow="2"
      inkscape:deskcolor="#d1d1d1" />
   <defs
      id="defs5719">
+    <rect
+       x="-329.02549"
+       y="579.22476"
+       width="1460.6975"
+       height="830.25853"
+       id="rect4" />
     <rect
        x="137.4771"
        y="756.99355"
@@ -53,17 +59,42 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:238.528px;line-height:0;font-family:Manrope;-inkscape-font-specification:Manrope;letter-spacing:-11.181px;display:inline;fill:#ffe000;stroke:#ff9a00;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke fill markers"
-       x="154.60855"
-       y="869.40533"
+       x="144.96501"
+       y="846.52808"
        id="text2"><tspan
          sodipodi:role="line"
          id="tspan2"
-         x="154.60855"
-         y="869.40533"
+         x="144.96501"
+         y="846.52808"
          style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-size:238.528px;font-family:Manrope;-inkscape-font-specification:'Manrope Ultra-Bold';fill:#ececec;fill-opacity:1;stroke:none;stroke-width:0">αdαbuy</tspan></text>
     <text
        xml:space="preserve"
        id="text29993"
-       style="fill:black;fill-opacity:1;line-height:1.25;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:40px;white-space:pre;shape-inside:url(#rect29995)" />
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect29995);display:inline;fill:#000000;fill-opacity:1;stroke:none" />
+    <text
+       xml:space="preserve"
+       style="font-weight:800;font-size:32px;line-height:0;font-family:Manrope;-inkscape-font-specification:'Manrope Ultra-Bold';letter-spacing:-1px;fill:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       x="463.73871"
+       y="1378.2314"
+       id="text1"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         x="463.73871"
+         y="1378.2314" /></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:800;font-size:85.3333px;line-height:0;font-family:Manrope;-inkscape-font-specification:'Manrope Ultra-Bold';letter-spacing:-1px;fill:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill markers"
+       x="247.39096"
+       y="1125.0033"
+       id="text3"><tspan
+         sodipodi:role="line"
+         id="tspan3"
+         x="247.39096"
+         y="1125.0033"
+         style="font-size:85.3333px;fill:#f2f2f2">whitepaper V1</tspan></text>
+    <text
+       xml:space="preserve"
+       id="text4"
+       style="fill:#f2f2f2;paint-order:stroke fill markers;-inkscape-font-specification:'Manrope Ultra-Bold';font-family:Manrope;font-size:85.33333333px;line-height:0;letter-spacing:-1px;stroke-width:0;stroke-linejoin:round;stroke-linecap:round;font-weight:800;white-space:pre;shape-inside:url(#rect4)" />
   </g>
 </svg>
