@@ -45,7 +45,7 @@
         class="grid-item"
         :class="{ active: enabledWallet === 'lace' }"
       >
-        <span>lace</span>
+        <span>    <img src="@/assets/lace.svg" alt="lace" /></span> 
       </div>
         <div class="grid-item"></div>
         <div class="grid-item"></div>
