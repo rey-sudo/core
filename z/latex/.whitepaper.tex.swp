@@ -100,7 +100,7 @@ The negotiation session is a 4-stage synchronous process \emph{Waiting}, \emph{L
 
 \begin{figure}[ht]
   \centering
-figure
+  \includegraphics[width=0.88\textwidth, keepaspectratio]{1.png}
   \caption{Script deployment}
   \label{fig:mi_imagen}
 \end{figure}
@@ -124,7 +124,7 @@ In the background for each activated order individual scripts are deployed on th
 
 \begin{figure}[ht]
   \centering
-figure
+  \includegraphics[width=0.88\textwidth, keepaspectratio]{2.png}
   \caption{Session locked}
   \label{fig:locking}
 \end{figure}
@@ -148,8 +148,8 @@ Legal certainty is declared by the mediators and refers to the absence of reason
 
 \begin{figure}[ht]
   \centering
-figure
-  \caption{Delivery confirmed by seller}  
+  \includegraphics[width=0.88\textwidth, keepaspectratio]{3.png}
+  \caption{The package has been sent.}  
   \label{fig:delivered}
 \end{figure}
 
@@ -163,8 +163,8 @@ At this stage both the buyer and the system are notified that the product is en 
 
 \begin{figure}[ht]
   \centering
-figure
-  \caption{Delivery confirmed by buyer}
+  \includegraphics[width=0.88\textwidth, keepaspectratio]{4.png}
+  \caption{The package has been received.}
   \label{fig:delivered}
 \end{figure}
 
